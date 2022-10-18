@@ -1,0 +1,40 @@
+[gd_scene load_steps=17 format=3 uid="uid://bkcod7sa3ojvk"]
+
+[ext_resource type="PackedScene" uid="uid://dt8l8m3ucts72" path="res://Player/FPSCharacter_BasicMoving.tscn" id="1_l3h5t"]
+[ext_resource type="Script" path="res://Player/FPSCharacter_WalkingEffects.cs" id="2_87w52"]
+[ext_resource type="AudioStream" uid="uid://bis1a4lsh3ja2" path="res://Audio_sfx/footsteps_basic/458319__dwoboyle__footsteps-tile-23.wav" id="3_2idnw"]
+[ext_resource type="AudioStream" uid="uid://byegyiket2nug" path="res://Audio_sfx/footsteps_basic/458339__dwoboyle__footsteps-tile-14.wav" id="4_lkw0d"]
+[ext_resource type="AudioStream" uid="uid://dbe3b7d6axwxn" path="res://Audio_sfx/footsteps_basic/458341__dwoboyle__footsteps-tile-12.wav" id="5_yqv32"]
+[ext_resource type="AudioStream" uid="uid://dc03hp5kkho47" path="res://Audio_sfx/footsteps_basic/458349__dwoboyle__footsteps-tile-19.wav" id="6_u04x1"]
+[ext_resource type="AudioStream" uid="uid://dufe3vlndhwqu" path="res://Audio_sfx/footsteps_basic/458348__dwoboyle__footsteps-tile-20.wav" id="7_iq6yt"]
+[ext_resource type="AudioStream" uid="uid://cm64k75csj3aa" path="res://Audio_sfx/footsteps_basic/458345__dwoboyle__footsteps-tile-16.wav" id="8_u0tpo"]
+[ext_resource type="AudioStream" uid="uid://denfrlkrbtd8p" path="res://Audio_sfx/jump_basic/458277__dwoboyle__footsteps-tile-jump-04-from.wav" id="9_beu4j"]
+[ext_resource type="AudioStream" uid="uid://di4iqx0icnvn6" path="res://Audio_sfx/jump_basic/458279__dwoboyle__footsteps-tile-jump-02-from.wav" id="10_vqnb6"]
+[ext_resource type="AudioStream" uid="uid://cnpckgpyhu8d8" path="res://Audio_sfx/jump_basic/458281__dwoboyle__footsteps-tile-jump-01-from.wav" id="11_ijw6f"]
+[ext_resource type="AudioStream" uid="uid://cvmrp75sk7rms" path="res://Audio_sfx/jump_basic/458283__dwoboyle__footsteps-tile-jump-06-from.wav" id="12_v6cot"]
+[ext_resource type="AudioStream" uid="uid://5f4nst6h6sbt" path="res://Audio_sfx/landing_basic/landing-on-the-ground-1.wav" id="13_7qy38"]
+[ext_resource type="AudioStream" uid="uid://2ds6dv0qv07b" path="res://Audio_sfx/landing_basic/landing-on-the-ground-2.wav" id="14_2c5tf"]
+[ext_resource type="AudioStream" uid="uid://cxvc7scm222al" path="res://Audio_sfx/landing_basic/landing-on-the-ground-3.wav" id="15_oihje"]
+[ext_resource type="AudioStream" uid="uid://b5h56d5noym1s" path="res://Audio_sfx/landing_basic/landing-on-the-ground-4.wav" id="16_3a03j"]
+
+[node name="FPSCharacter_WalkingEffects" instance=ExtResource("1_l3h5t")]
+script = ExtResource("2_87w52")
+FootStepLength = 1.5
+WalkCameraLerpHeight = 0.15
+RunCameraLerpHeight = 0.25
+lerpFootstepSpeedModifier = 1.0
+LandCameraLerpHeight = -0.4
+LandCameraLerpRotation = -0.1
+lerpLandingSpeedModifier = 3.0
+FootstepSounds = [ExtResource("3_2idnw"), ExtResource("4_lkw0d"), ExtResource("5_yqv32"), ExtResource("6_u04x1"), ExtResource("7_iq6yt"), ExtResource("8_u0tpo")]
+JumpingSounds = [ExtResource("9_beu4j"), ExtResource("10_vqnb6"), ExtResource("11_ijw6f"), ExtResource("12_v6cot")]
+LandingSounds = [ExtResource("13_7qy38"), ExtResource("14_2c5tf"), ExtResource("15_oihje"), ExtResource("16_3a03j")]
+
+[node name="AudioStreamPlayer_Footsteps" type="AudioStreamPlayer" parent="." index="5"]
+stream = ExtResource("4_lkw0d")
+volume_db = -20.466
+
+[node name="AudioStreamPlayer_JumpLand" type="AudioStreamPlayer" parent="." index="6"]
+stream = ExtResource("12_v6cot")
+volume_db = -13.0
+pitch_scale = 0.5

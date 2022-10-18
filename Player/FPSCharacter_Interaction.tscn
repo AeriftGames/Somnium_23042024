@@ -1,0 +1,49 @@
+[gd_scene load_steps=4 format=3 uid="uid://7ceuit2plrn6"]
+
+[ext_resource type="PackedScene" uid="uid://bkcod7sa3ojvk" path="res://Player/FPSCharacter_WalkingEffects.tscn" id="1_bh87d"]
+[ext_resource type="Script" path="res://Player/FPSCharacter_Interaction.cs" id="2_hgl5e"]
+[ext_resource type="Script" path="res://Player/BasicHud.cs" id="3_etf4n"]
+
+[node name="FPSCharacter_Interaction" instance=ExtResource("1_bh87d")]
+script = ExtResource("2_hgl5e")
+LengthInteractRay = 5.0
+
+[node name="BasicHud" type="Control" parent="." index="7"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_etf4n")
+
+[node name="Crosshair" type="ColorRect" parent="BasicHud" index="0"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1.0
+offset_top = -1.0
+offset_right = 1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="UseLabel" type="Label" parent="BasicHud/Crosshair" index="0"]
+custom_minimum_size = Vector2i(30, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = 3.335
+offset_right = 20.0
+offset_bottom = 29.335
+grow_horizontal = 2
+grow_vertical = 2
+text = "use"
+horizontal_alignment = 1
