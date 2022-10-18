@@ -396,4 +396,4 @@ autoplay = true
 [node name="FPSCharacter_Interaction" parent="." instance=ExtResource("8_o7cw6")]
 
 [node name="InteractiveItem_test" parent="." instance=ExtResource("8_6nvq8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.1, 0.3, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6, 0.3, 0)
