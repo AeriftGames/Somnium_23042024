@@ -636,7 +636,7 @@ shape = SubResource("BoxShape3D_swdwo")
 [node name="Timer" type="Timer" parent="enter"]
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.7933, -2.77556e-17, 0.608831, 0.0048242, 0.999969, -0.00628588, -0.608812, 0.00792371, 0.793275, 0.70635, 0.254256, 1.30277)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.279264, 1.35212)
 current = true
 
 [node name="KeyPress" type="AudioStreamPlayer3D" parent="."]

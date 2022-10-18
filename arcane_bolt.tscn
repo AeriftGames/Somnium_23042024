@@ -1,0 +1,58 @@
+[gd_scene load_steps=10 format=3 uid="uid://xdk4e5fjkuw5"]
+
+[ext_resource type="Texture2D" uid="uid://cjtukdkhib83a" path="res://Particles/spark_02.png" id="1_yqaaf"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_vdulc"]
+radius = 0.33
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3kqse"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+blend_mode = 3
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_yqaaf")
+detail_enabled = true
+detail_blend_mode = 1
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id="Gradient_b6wln"]
+offsets = PackedFloat32Array(0, 0.70098, 0.990196)
+colors = PackedColorArray(0.308647, 0.0759335, 0.175561, 1, 0.961715, 0.276611, 0.654751, 1, 0.752932, 0.17486, 0.492077, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_jrf7w"]
+gradient = SubResource("Gradient_b6wln")
+
+[sub_resource type="Curve" id="Curve_1wt0i"]
+_data = [Vector2(0, 0.645455), 0.0, 0.0, 0, 0, Vector2(0.334802, 1), 0.0, 0.0, 0, 0, Vector2(0.647577, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.818182), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_yojmf"]
+curve = SubResource("Curve_1wt0i")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_xrbs2"]
+emission_shape = 1
+emission_sphere_radius = 0.2
+gravity = Vector3(0, 0, 0)
+angular_velocity_max = 15.0
+angle_max = 360.0
+scale_curve = SubResource("CurveTexture_yojmf")
+color_ramp = SubResource("GradientTexture1D_jrf7w")
+
+[sub_resource type="QuadMesh" id="QuadMesh_lu4cr"]
+
+[node name="ArcaneBolt" type="RigidBody3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_vdulc")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+material_override = SubResource("StandardMaterial3D_3kqse")
+amount = 90
+lifetime = 2.0
+process_material = SubResource("ParticleProcessMaterial_xrbs2")
+draw_pass_1 = SubResource("QuadMesh_lu4cr")
