@@ -400,4 +400,4 @@ autoplay = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6, 0.3, 0)
 
 [node name="ArcaneBolt" parent="." instance=ExtResource("9_3m2qi")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.28458, 0.644596, 1.67729)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.28458, 0.841607, 1.5551)
