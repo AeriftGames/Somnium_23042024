@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class interactive_item_test : MeshInstance3D
+public partial class interactive_item_test : Node3D
 {
 	[Export] public string ObjectName = "item";
 	[Export] public string UseActionName = "use";
@@ -17,15 +17,14 @@ public partial class interactive_item_test : MeshInstance3D
 	public void UseAction(FPSCharacter_Interaction player)
 	{
 		GD.Print("Use Action by: " + player.Name);
+		GD.Print("Destroying this item");
+		QueueFree();
 	}
 
-    public string GetObjectName()
-    {
-        return Name;
-    }
+    public string GetObjectName() { return Name;}
 
     public string GetUseActionName()
-    {
-        return UseActionName;
-    }
+	{
+		return UseActionName;
+	}
 }
