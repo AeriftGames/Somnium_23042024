@@ -13,11 +13,12 @@ config_version=5
 config/name="My Fps Prototype"
 run/main_scene="res://world_interior.tscn"
 config/features=PackedStringArray("4.0", "C#")
+run/max_fps=144
 config/icon="res://icon.svg"
 
 [debug]
 
-settings/fps/force_fps=144
+settings/stdout/print_fps=true
 
 [display]
 
@@ -85,7 +86,3 @@ mouseClickLeft={
 [physics]
 
 common/physics_ticks_per_second=144
-
-[rendering]
-
-anti_aliasing/quality/screen_space_aa=1

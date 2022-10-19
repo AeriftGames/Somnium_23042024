@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://bbg6odc45xtqe"]
+[gd_scene load_steps=11 format=3 uid="uid://bbg6odc45xtqe"]
 
 [ext_resource type="Texture2D" uid="uid://660jcc1vju43" path="res://Textures/brick_pavement_0108_02_s.jpg" id="1_umi3w"]
 [ext_resource type="PackedScene" uid="uid://5jdptnn2hcm3" path="res://MeshWall.tscn" id="1_w0dgt"]
 [ext_resource type="Texture2D" uid="uid://bybrpbyf1euit" path="res://Textures/NormalMap (3).png" id="2_8lae3"]
 [ext_resource type="PackedScene" uid="uid://bkcod7sa3ojvk" path="res://Player/FPSCharacter_WalkingEffects.tscn" id="4_lg6kk"]
+[ext_resource type="PackedScene" uid="uid://b3gid5w26phmh" path="res://test.tscn" id="5_sou2s"]
 
 [sub_resource type="Sky" id="Sky_fi2v8"]
 
@@ -218,3 +219,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.5, -2.5)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -2.5)
 
 [node name="BasicFps_WalkingEffects" parent="." instance=ExtResource("4_lg6kk")]
+
+[node name="NodeA" parent="." instance=ExtResource("5_sou2s")]

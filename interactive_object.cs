@@ -4,9 +4,11 @@ using System;
 public partial class interactive_object : Node3D
 {
 	public bool isPlayerInRange = false;
+	Node3D parent = null;
 
 	public override void _Ready()
 	{
+		parent = (Node3D)GetParent();
 	}
 
 	public override void _Process(double delta)
@@ -38,17 +40,20 @@ public partial class interactive_object : Node3D
 
 	public void Use(FPSCharacter_Interaction player)
 	{
-		if (GetParent() == null) return;
-		GetParent().Call("UseAction",player);
+		parent.Call("UseAction",player);
 	}
 
 	public string GetUseActionName()
 	{
-		return "test";
-	}
+        Variant a = GetParent().Call("GetUseActionName");
+        string b = a.AsString();
+        a.Dispose();
+		return b;
+    }
 
 	public string GetInteractiveObjectName()
 	{
-		return "InteractiveName";
-	}
+		string text = "";
+        return text;
+    }
 }

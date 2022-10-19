@@ -8,36 +8,39 @@ using System;
 */
 public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
 {
+	BasicHud basicHud = null;
+
 	[Export] public float LengthInteractRay = 5.0f;
 
 	public override void _Ready()
 	{
 		base._Ready();
-	}
+
+		basicHud = GetNode<BasicHud>("BasicHud");
+        basicHud.SetUseVisible(false);
+    }
 
 	public override void _Process(double delta)
 	{
 		base._Process(delta);
-
-		if(Input.IsActionJustPressed("UseAction"))
-		{
-			//
-		}
 	}
 
 	public override void _PhysicsProcess(double delta)
 	{
 		base._PhysicsProcess(delta);
 
-		interactive_object hit_interactive_object = DetectInteractiveObjectWithCameraRay();
-		if (hit_interactive_object != null)
-		{
-			if(hit_interactive_object.GetIsActive())
-			{
-				// input USE
-			}
-		}
+        basicHud.SetUseVisible(false);
+        bool useNow = Input.IsActionJustPressed("UseAction");
 
+        interactive_object hit_interactive_object = DetectInteractiveObjectWithCameraRay();
+		if (hit_interactive_object == null) return;
+
+		basicHud.SetUseLabelText(hit_interactive_object.GetUseActionName());
+        basicHud.SetUseVisible(true);
+
+        if (useNow)
+			hit_interactive_object.Use(this);
+		
     }
 
     public interactive_object DetectInteractiveObjectWithCameraRay()
@@ -46,6 +49,7 @@ public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
 		if (GetFPSCharacterCamera() == null) return null;
 
         PhysicsDirectSpaceState3D directSpace = GetWorld3d().DirectSpaceState;
+		if (directSpace == null) return null;
 
         PhysicsRayQueryParameters3D rayParam = new PhysicsRayQueryParameters3D();
 		rayParam.From = GetFPSCharacterCamera().GlobalPosition;
@@ -55,16 +59,20 @@ public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
         var rayResult = directSpace.IntersectRay(rayParam);
         if (rayResult.Count > 0)
 		{
-			Node3D HitCollider = (Node3D)rayResult["collider"];
-            if(HitCollider.GetParent() != null)
-			{
-				Type type = HitCollider.GetParent().GetType();
-				if(type == typeof(interactive_object))
-				{
-					result = (interactive_object)HitCollider.GetParent();
-				}
-            }
+			Node HitCollider = (Node)rayResult["collider"];
+			if (HitCollider == null) return null;
 
+			if (HitCollider.GetParent() == null) return null;
+
+			/*
+			Type type = HitCollider.GetParent().GetType();
+			if (type != typeof(interactive_object)) return null;
+			*/
+
+			if(HitCollider.GetParent().IsInGroup("interactive_object"))
+			{
+                result = (interactive_object)HitCollider.GetParent();
+            }
 		}
 
 		return result;
