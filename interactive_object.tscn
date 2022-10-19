@@ -8,7 +8,7 @@ size = Vector3(0.4, 0.6, 0.4)
 [sub_resource type="SphereShape3D" id="SphereShape3D_d42n3"]
 radius = 2.5
 
-[node name="interactive_object" type="Node3D"]
+[node name="interactive_object" type="Node3D" groups=["interactive_object"]]
 script = ExtResource("1_5uuqp")
 metadata/_edit_lock_ = true
 
@@ -18,9 +18,13 @@ metadata/_edit_lock_ = true
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
 shape = SubResource("BoxShape3D_daxt8")
 
-[node name="interactive_object_area3D" type="Area3D" parent="."]
+[node name="interactive_object_area3D" type="Area3D" parent="StaticBody3D"]
+monitorable = false
 metadata/_edit_lock_ = true
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="interactive_object_area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D/interactive_object_area3D"]
 shape = SubResource("SphereShape3D_d42n3")
 metadata/_edit_lock_ = true
+
+[connection signal="body_entered" from="StaticBody3D/interactive_object_area3D" to="." method="_on_interactive_object_area_3d_body_entered"]
+[connection signal="body_exited" from="StaticBody3D/interactive_object_area3D" to="." method="_on_interactive_object_area_3d_body_exited"]

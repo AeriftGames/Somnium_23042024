@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://qase4d0utusv"]
+[gd_scene load_steps=39 format=3 uid="uid://qase4d0utusv"]
 
 [ext_resource type="Texture2D" uid="uid://660jcc1vju43" path="res://Textures/brick_pavement_0108_02_s.jpg" id="1_suwmc"]
 [ext_resource type="Texture2D" uid="uid://bybrpbyf1euit" path="res://Textures/NormalMap (3).png" id="2_wsh6a"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://c7y5vxughktex" path="res://wine_barrel.tscn" id="5_ttrj3"]
 [ext_resource type="PackedScene" uid="uid://cpopellpkveg5" path="res://interactive_item_test.tscn" id="8_6nvq8"]
 [ext_resource type="PackedScene" uid="uid://7ceuit2plrn6" path="res://Player/FPSCharacter_Interaction.tscn" id="8_o7cw6"]
+[ext_resource type="PackedScene" uid="uid://b3gid5w26phmh" path="res://test.tscn" id="9_s6w5a"]
 
 [sub_resource type="Environment" id="Environment_vig0a"]
 background_mode = 1
@@ -396,4 +397,7 @@ autoplay = true
 [node name="FPSCharacter_Interaction" parent="." instance=ExtResource("8_o7cw6")]
 
 [node name="InteractiveItem_test" parent="." instance=ExtResource("8_6nvq8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6, 0.3, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0.3, 0)
+UseActionName = "pick?"
+
+[node name="NodeA" parent="." instance=ExtResource("9_s6w5a")]

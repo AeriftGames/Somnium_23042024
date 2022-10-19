@@ -14,4 +14,9 @@ public partial class BasicHud : Control
 	{
 		UseLabel.Visible = newVisible;
 	}
+
+	public void SetUseLabelText(string newText)
+	{
+		UseLabel.Text = newText;
+	}
 }
