@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="My Fps Prototype"
-run/main_scene="res://world_interior.tscn"
+run/main_scene="res://levels/world_interior.tscn"
 config/features=PackedStringArray("4.0", "C#")
 run/max_fps=144
 config/icon="res://icon.svg"

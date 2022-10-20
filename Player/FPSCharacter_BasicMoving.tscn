@@ -1,6 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://dt8l8m3ucts72"]
+[gd_scene load_steps=4 format=3 uid="uid://dhm8txujxj2hn"]
 
-[ext_resource type="Script" path="res://Player/FPSCharacter_BasicMoving.cs" id="1_bgtca"]
+[ext_resource type="Script" path="res://player/FPSCharacter_BasicMoving.cs" id="1_sks4r"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0a8eu"]
 radius = 0.4
@@ -12,7 +12,7 @@ height = 1.0
 
 [node name="FPSCharacter_BasicMoving" type="CharacterBody3D"]
 floor_block_on_wall = false
-script = ExtResource("1_bgtca")
+script = ExtResource("1_sks4r")
 metadata/_edit_lock_ = true
 
 [node name="CharacterCollisionStand" type="CollisionShape3D" parent="."]

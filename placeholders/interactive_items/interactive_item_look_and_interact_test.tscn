@@ -1,0 +1,69 @@
+[gd_scene load_steps=9 format=3 uid="uid://dp7dmsp410av7"]
+
+[ext_resource type="PackedScene" uid="uid://dbnevtbu1g7uy" path="res://core_systems/interactive_system/interactive_object.tscn" id="1_57x35"]
+[ext_resource type="Script" path="res://placeholders/interactive_items/interactive_item_look_and_interact_test.cs" id="1_omfce"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_nb882"]
+size = Vector3(0.5, 0.8, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_usxb4"]
+albedo_color = Color(0.760784, 0.439216, 0, 1)
+metallic = 0.48
+roughness = 0.21
+
+[sub_resource type="BoxMesh" id="BoxMesh_juo8f"]
+material = SubResource("StandardMaterial3D_usxb4")
+size = Vector3(0.5, 0.8, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t1que"]
+albedo_color = Color(0, 0.54902, 0.815686, 1)
+metallic = 0.48
+roughness = 0.21
+
+[sub_resource type="BoxMesh" id="BoxMesh_uon7j"]
+material = SubResource("StandardMaterial3D_t1que")
+size = Vector3(0.6, 0.1, 0.6)
+
+[sub_resource type="BoxMesh" id="BoxMesh_n3inp"]
+material = SubResource("StandardMaterial3D_t1que")
+size = Vector3(0.15, 0.15, 0.15)
+
+[node name="interactive_item_look_and_interact_test" type="Node3D"]
+script = ExtResource("1_omfce")
+
+[node name="interactive_object" parent="." instance=ExtResource("1_57x35")]
+
+[node name="CollisionShape3D" parent="interactive_object/StaticBody3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
+shape = SubResource("BoxShape3D_nb882")
+
+[node name="Mesh_test" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
+mesh = SubResource("BoxMesh_juo8f")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Mesh_test"]
+mesh = SubResource("BoxMesh_uon7j")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Mesh_test"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35, 0)
+mesh = SubResource("BoxMesh_uon7j")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Mesh_test"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.35, 0)
+mesh = SubResource("BoxMesh_uon7j")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="Mesh_test"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.175, 0.2)
+mesh = SubResource("BoxMesh_n3inp")
+skeleton = NodePath("../..")
+
+[node name="TargetCamPos" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 1.3)
+
+[node name="TargetCamLook" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65, 0)
+
+[editable path="interactive_object"]

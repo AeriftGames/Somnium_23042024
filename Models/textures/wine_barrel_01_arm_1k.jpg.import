@@ -3,8 +3,8 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://d0rpu31cnljlk"
-path.s3tc="res://.godot/imported/wine_barrel_01_arm_1k.jpg-53c4eb143b0787c7402e101471f30c21.s3tc.ctex"
-path.etc2="res://.godot/imported/wine_barrel_01_arm_1k.jpg-53c4eb143b0787c7402e101471f30c21.etc2.ctex"
+path.s3tc="res://.godot/imported/wine_barrel_01_arm_1k.jpg-30e621ea118537327667ef4e5f71ffd2.s3tc.ctex"
+path.etc2="res://.godot/imported/wine_barrel_01_arm_1k.jpg-30e621ea118537327667ef4e5f71ffd2.etc2.ctex"
 metadata={
 "imported_formats": ["s3tc", "etc2"],
 "vram_texture": true
@@ -12,8 +12,8 @@ metadata={
 
 [deps]
 
-source_file="res://Models/textures/wine_barrel_01_arm_1k.jpg"
-dest_files=["res://.godot/imported/wine_barrel_01_arm_1k.jpg-53c4eb143b0787c7402e101471f30c21.s3tc.ctex", "res://.godot/imported/wine_barrel_01_arm_1k.jpg-53c4eb143b0787c7402e101471f30c21.etc2.ctex"]
+source_file="res://models/textures/wine_barrel_01_arm_1k.jpg"
+dest_files=["res://.godot/imported/wine_barrel_01_arm_1k.jpg-30e621ea118537327667ef4e5f71ffd2.s3tc.ctex", "res://.godot/imported/wine_barrel_01_arm_1k.jpg-30e621ea118537327667ef4e5f71ffd2.etc2.ctex"]
 
 [params]
 

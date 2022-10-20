@@ -3,8 +3,8 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cuovukpdoti1o"
-path.s3tc="res://.godot/imported/grid_texture_normal.jpg-719f31586470b6700eac65f7509e79b1.s3tc.ctex"
-path.etc2="res://.godot/imported/grid_texture_normal.jpg-719f31586470b6700eac65f7509e79b1.etc2.ctex"
+path.s3tc="res://.godot/imported/grid_texture_normal.jpg-8211ce80375dff3db24b100718655f2e.s3tc.ctex"
+path.etc2="res://.godot/imported/grid_texture_normal.jpg-8211ce80375dff3db24b100718655f2e.etc2.ctex"
 metadata={
 "imported_formats": ["s3tc", "etc2"],
 "vram_texture": true
@@ -12,8 +12,8 @@ metadata={
 
 [deps]
 
-source_file="res://Textures/grid_texture_normal.jpg"
-dest_files=["res://.godot/imported/grid_texture_normal.jpg-719f31586470b6700eac65f7509e79b1.s3tc.ctex", "res://.godot/imported/grid_texture_normal.jpg-719f31586470b6700eac65f7509e79b1.etc2.ctex"]
+source_file="res://textures/grid_texture_normal.jpg"
+dest_files=["res://.godot/imported/grid_texture_normal.jpg-8211ce80375dff3db24b100718655f2e.s3tc.ctex", "res://.godot/imported/grid_texture_normal.jpg-8211ce80375dff3db24b100718655f2e.etc2.ctex"]
 
 [params]
 

@@ -3,8 +3,8 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cag4tjmkvagg"
-path.s3tc="res://.godot/imported/blood_decal_test_normal.png-0f998c8d6a667c30570f6e6c7285fe45.s3tc.ctex"
-path.etc2="res://.godot/imported/blood_decal_test_normal.png-0f998c8d6a667c30570f6e6c7285fe45.etc2.ctex"
+path.s3tc="res://.godot/imported/blood_decal_test_normal.png-c9c927c4c9c5b785cb509e710ff1cea1.s3tc.ctex"
+path.etc2="res://.godot/imported/blood_decal_test_normal.png-c9c927c4c9c5b785cb509e710ff1cea1.etc2.ctex"
 metadata={
 "imported_formats": ["s3tc", "etc2"],
 "vram_texture": true
@@ -12,8 +12,8 @@ metadata={
 
 [deps]
 
-source_file="res://Textures/blood_decal_test_normal.png"
-dest_files=["res://.godot/imported/blood_decal_test_normal.png-0f998c8d6a667c30570f6e6c7285fe45.s3tc.ctex", "res://.godot/imported/blood_decal_test_normal.png-0f998c8d6a667c30570f6e6c7285fe45.etc2.ctex"]
+source_file="res://textures/blood_decal_test_normal.png"
+dest_files=["res://.godot/imported/blood_decal_test_normal.png-c9c927c4c9c5b785cb509e710ff1cea1.s3tc.ctex", "res://.godot/imported/blood_decal_test_normal.png-c9c927c4c9c5b785cb509e710ff1cea1.etc2.ctex"]
 
 [params]
 

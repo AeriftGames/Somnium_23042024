@@ -1,11 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://7ceuit2plrn6"]
+[gd_scene load_steps=4 format=3 uid="uid://8x5qdxf7a8nq"]
 
-[ext_resource type="PackedScene" uid="uid://bkcod7sa3ojvk" path="res://Player/FPSCharacter_WalkingEffects.tscn" id="1_bh87d"]
-[ext_resource type="Script" path="res://Player/FPSCharacter_Interaction.cs" id="2_hgl5e"]
-[ext_resource type="Script" path="res://Player/BasicHud.cs" id="3_etf4n"]
+[ext_resource type="PackedScene" uid="uid://2b8vuef2k4is" path="res://player/FPSCharacter_WalkingEffects.tscn" id="1_0ipjt"]
+[ext_resource type="Script" path="res://player/FPSCharacter_Interaction.cs" id="2_fmih3"]
+[ext_resource type="Script" path="res://player/BasicHud.cs" id="3_etvvy"]
 
-[node name="FPSCharacter_Interaction" instance=ExtResource("1_bh87d")]
-script = ExtResource("2_hgl5e")
+[node name="FPSCharacter_Interaction" instance=ExtResource("1_0ipjt")]
+script = ExtResource("2_fmih3")
 LengthInteractRay = 5.0
 
 [node name="BasicHud" type="Control" parent="." index="7"]
@@ -15,7 +15,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("3_etf4n")
+script = ExtResource("3_etvvy")
 
 [node name="Crosshair" type="ColorRect" parent="BasicHud" index="0"]
 anchors_preset = 8

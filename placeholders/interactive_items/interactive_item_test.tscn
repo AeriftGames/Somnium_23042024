@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://xfouxhhlpltn"]
+
+[ext_resource type="Script" path="res://placeholders/interactive_items/interactive_item_test.cs" id="1_pgaii"]
+[ext_resource type="PackedScene" uid="uid://dbnevtbu1g7uy" path="res://core_systems/interactive_system/interactive_object.tscn" id="2_0kbaf"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_vvr5l"]
+size = Vector3(0.4, 0.6, 0.4)
+
+[node name="InteractiveItem_test" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+script = ExtResource("1_pgaii")
+UseActionName = "pick"
+
+[node name="interactive_object" parent="." instance=ExtResource("2_0kbaf")]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_vvr5l")

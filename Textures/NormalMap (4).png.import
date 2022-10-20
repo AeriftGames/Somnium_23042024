@@ -3,8 +3,8 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://catixnuvp0vwb"
-path.s3tc="res://.godot/imported/NormalMap (4).png-e42ffb8070b956ada1a5bfb16c9fd92f.s3tc.ctex"
-path.etc2="res://.godot/imported/NormalMap (4).png-e42ffb8070b956ada1a5bfb16c9fd92f.etc2.ctex"
+path.s3tc="res://.godot/imported/NormalMap (4).png-b5552e22ca81d7a05ab6efe576ddcd62.s3tc.ctex"
+path.etc2="res://.godot/imported/NormalMap (4).png-b5552e22ca81d7a05ab6efe576ddcd62.etc2.ctex"
 metadata={
 "imported_formats": ["s3tc", "etc2"],
 "vram_texture": true
@@ -12,8 +12,8 @@ metadata={
 
 [deps]
 
-source_file="res://Textures/NormalMap (4).png"
-dest_files=["res://.godot/imported/NormalMap (4).png-e42ffb8070b956ada1a5bfb16c9fd92f.s3tc.ctex", "res://.godot/imported/NormalMap (4).png-e42ffb8070b956ada1a5bfb16c9fd92f.etc2.ctex"]
+source_file="res://textures/NormalMap (4).png"
+dest_files=["res://.godot/imported/NormalMap (4).png-b5552e22ca81d7a05ab6efe576ddcd62.s3tc.ctex", "res://.godot/imported/NormalMap (4).png-b5552e22ca81d7a05ab6efe576ddcd62.etc2.ctex"]
 
 [params]
 

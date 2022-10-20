@@ -32,12 +32,17 @@ public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
         basicHud.SetUseVisible(false);
         bool useNow = Input.IsActionJustPressed("UseAction");
 
+		// otestujeme zdali existuje interactive_object, pokud ano otestujeme zdali je aktivni v range
+		// pokud neco z toho neni pravda vyskocime z funkce
         interactive_object hit_interactive_object = DetectInteractiveObjectWithCameraRay();
 		if (hit_interactive_object == null) return;
+		if (hit_interactive_object.GetIsActive() == false) return;
 
+		// pokud tedy mame pred sebou aktivni interactive_object, vypiseme jeho moznou akci v hudu
 		basicHud.SetUseLabelText(hit_interactive_object.GetUseActionName());
         basicHud.SetUseVisible(true);
 
+		// chceme interactive_object pouzit?
         if (useNow)
 			hit_interactive_object.Use(this);
 		
@@ -77,4 +82,10 @@ public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
 
 		return result;
     }
+
+	public void DisableInputsAndCameraMoveLookTarget(Vector3 targetPos,Vector3 targetLook)
+	{
+		GD.Print("New Cam targetPos:" + targetPos);
+		GD.Print("New Cam targetLook" + targetLook);
+	}
 }

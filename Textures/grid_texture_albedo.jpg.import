@@ -3,8 +3,8 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://upj3hb74fgs7"
-path.s3tc="res://.godot/imported/grid_texture_albedo.jpg-c3b8b22e801b4b1bdd0458713fa5ead7.s3tc.ctex"
-path.etc2="res://.godot/imported/grid_texture_albedo.jpg-c3b8b22e801b4b1bdd0458713fa5ead7.etc2.ctex"
+path.s3tc="res://.godot/imported/grid_texture_albedo.jpg-d1880500215d82ecbba6e13052d52376.s3tc.ctex"
+path.etc2="res://.godot/imported/grid_texture_albedo.jpg-d1880500215d82ecbba6e13052d52376.etc2.ctex"
 metadata={
 "imported_formats": ["s3tc", "etc2"],
 "vram_texture": true
@@ -12,8 +12,8 @@ metadata={
 
 [deps]
 
-source_file="res://Textures/grid_texture_albedo.jpg"
-dest_files=["res://.godot/imported/grid_texture_albedo.jpg-c3b8b22e801b4b1bdd0458713fa5ead7.s3tc.ctex", "res://.godot/imported/grid_texture_albedo.jpg-c3b8b22e801b4b1bdd0458713fa5ead7.etc2.ctex"]
+source_file="res://textures/grid_texture_albedo.jpg"
+dest_files=["res://.godot/imported/grid_texture_albedo.jpg-d1880500215d82ecbba6e13052d52376.s3tc.ctex", "res://.godot/imported/grid_texture_albedo.jpg-d1880500215d82ecbba6e13052d52376.etc2.ctex"]
 
 [params]
 

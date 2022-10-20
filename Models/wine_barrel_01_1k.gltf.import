@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://cxe6cvnayta84"
-path="res://.godot/imported/wine_barrel_01_1k.gltf-15f678a4acc92ddec4c6f8dd0657c7a1.scn"
+path="res://.godot/imported/wine_barrel_01_1k.gltf-fcceb09bed2af54be279073eef79e91f.scn"
 
 [deps]
 
-source_file="res://Models/wine_barrel_01_1k.gltf"
-dest_files=["res://.godot/imported/wine_barrel_01_1k.gltf-15f678a4acc92ddec4c6f8dd0657c7a1.scn"]
+source_file="res://models/wine_barrel_01_1k.gltf"
+dest_files=["res://.godot/imported/wine_barrel_01_1k.gltf-fcceb09bed2af54be279073eef79e91f.scn"]
 
 [params]
 

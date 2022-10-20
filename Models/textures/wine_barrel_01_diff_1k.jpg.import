@@ -3,8 +3,8 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bkxy3xjsynm11"
-path.s3tc="res://.godot/imported/wine_barrel_01_diff_1k.jpg-1b3d967838ca1f00a07fd90c2af4e659.s3tc.ctex"
-path.etc2="res://.godot/imported/wine_barrel_01_diff_1k.jpg-1b3d967838ca1f00a07fd90c2af4e659.etc2.ctex"
+path.s3tc="res://.godot/imported/wine_barrel_01_diff_1k.jpg-8d1de91baf14c3a3991ee1063db0bf18.s3tc.ctex"
+path.etc2="res://.godot/imported/wine_barrel_01_diff_1k.jpg-8d1de91baf14c3a3991ee1063db0bf18.etc2.ctex"
 metadata={
 "imported_formats": ["s3tc", "etc2"],
 "vram_texture": true
@@ -12,8 +12,8 @@ metadata={
 
 [deps]
 
-source_file="res://Models/textures/wine_barrel_01_diff_1k.jpg"
-dest_files=["res://.godot/imported/wine_barrel_01_diff_1k.jpg-1b3d967838ca1f00a07fd90c2af4e659.s3tc.ctex", "res://.godot/imported/wine_barrel_01_diff_1k.jpg-1b3d967838ca1f00a07fd90c2af4e659.etc2.ctex"]
+source_file="res://models/textures/wine_barrel_01_diff_1k.jpg"
+dest_files=["res://.godot/imported/wine_barrel_01_diff_1k.jpg-8d1de91baf14c3a3991ee1063db0bf18.s3tc.ctex", "res://.godot/imported/wine_barrel_01_diff_1k.jpg-8d1de91baf14c3a3991ee1063db0bf18.etc2.ctex"]
 
 [params]
 
