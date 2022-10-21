@@ -21,8 +21,9 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
     protected Node3D HeadMain = null;
     protected Node3D HeadGimbalA = null;
     protected Node3D HeadGimbalB = null;
-
+    protected Node3D HeadHolderCamera = null;
     private Camera3D Camera = null;
+
     private CollisionShape3D CharacterCollisionStand = null;
     private CollisionShape3D CharacterCollisionCrunch = null;
     private Node3D HeadStandPosition = null;
@@ -72,7 +73,8 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
 		HeadMain = GetNode<Node3D>("HeadMain");
         HeadGimbalA = GetNode<Node3D>("HeadMain/HeadGimbalA");
         HeadGimbalB = GetNode<Node3D>("HeadMain/HeadGimbalA/HeadGimbalB");
-        Camera = GetNode<Camera3D>("HeadMain/HeadGimbalA/HeadGimbalB/CharacterCamera");
+        HeadHolderCamera = GetNode<Node3D>("HeadMain/HeadGimbalA/HeadGimbalB/HeadHolderCamera");
+        Camera = GetNode<Camera3D>("HeadMain/HeadGimbalA/HeadGimbalB/HeadHolderCamera/CharacterCamera");
         CharacterCollisionStand = GetNode<CollisionShape3D>("CharacterCollisionStand");
         CharacterCollisionCrunch = GetNode<CollisionShape3D>("CharacterCollisionCrunch");
         HeadStandPosition = GetNode<Node3D>("HeadStandPos");
@@ -392,6 +394,11 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
             Input.MouseMode = Input.MouseModeEnum.Captured;
         else
             Input.MouseMode = Input.MouseModeEnum.Visible;
+    }
+
+    public bool IsInputEnable()
+    {
+        return _isInputEnable;
     }
 
     // Event when character hit the floor = landed

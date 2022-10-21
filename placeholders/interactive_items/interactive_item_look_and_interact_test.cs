@@ -8,6 +8,9 @@ public partial class interactive_item_look_and_interact_test : Node3D
 
     Node3D TargetCamPos;
     Node3D TargetCamLook;
+    bool isNowInteract = false;
+
+    FPSCharacter_Interaction interactPlayer = null;
 
     public override void _Ready()
 	{
@@ -18,15 +21,27 @@ public partial class interactive_item_look_and_interact_test : Node3D
 
 	public override void _Process(double delta)
 	{
+        if (!isNowInteract) return;
+
+        if (Input.IsActionJustPressed("Jump"))
+        {
+            interactPlayer.Call("EnableInputsAndCameraToNormal");
+            interactPlayer = null;
+            isNowInteract = false;
+        }
 	}
 
     public void UseAction(FPSCharacter_Interaction player)
     {
-        GD.Print("Object: " + ObjectName + " UseAction!");
-
         if (player == null) return;
-
-        player.Call("DisableInputsAndCameraMoveLookTarget",TargetCamPos.GlobalPosition, TargetCamLook.GlobalPosition);
+        interactPlayer = player;
+        
+        if(!isNowInteract)
+        {
+            player.Call("DisableInputsAndCameraMoveLookTarget",
+                TargetCamPos.GlobalPosition, TargetCamLook.GlobalPosition);
+            isNowInteract = true;
+        }
     }
 
     public string GetInteractiveObjectName()

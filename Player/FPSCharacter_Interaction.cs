@@ -12,7 +12,9 @@ public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
 
 	[Export] public float LengthInteractRay = 5.0f;
 
-	public override void _Ready()
+	Vector3 tempCamRot = Vector3.Zero;
+
+    public override void _Ready()
 	{
 		base._Ready();
 
@@ -30,6 +32,8 @@ public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
 		base._PhysicsProcess(delta);
 
         basicHud.SetUseVisible(false);
+
+		if (IsInputEnable() == false) return;
         bool useNow = Input.IsActionJustPressed("UseAction");
 
 		// otestujeme zdali existuje interactive_object, pokud ano otestujeme zdali je aktivni v range
@@ -45,7 +49,6 @@ public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
 		// chceme interactive_object pouzit?
         if (useNow)
 			hit_interactive_object.Use(this);
-		
     }
 
     public interactive_object DetectInteractiveObjectWithCameraRay()
@@ -85,7 +88,19 @@ public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
 
 	public void DisableInputsAndCameraMoveLookTarget(Vector3 targetPos,Vector3 targetLook)
 	{
-		GD.Print("New Cam targetPos:" + targetPos);
-		GD.Print("New Cam targetLook" + targetLook);
-	}
+		// INSTANT
+		SetInputEnable(false);
+        tempCamRot = GetFPSCharacterCamera().Rotation;
+        GetFPSCharacterCamera().GlobalPosition = targetPos;
+        GetFPSCharacterCamera().LookAt(targetLook);
+		
+    }
+
+	public void EnableInputsAndCameraToNormal()
+	{
+		//INSTANT
+        GetFPSCharacterCamera().Position = new Vector3(0.0f,0.0f,0.0f);
+        GetFPSCharacterCamera().Rotation = tempCamRot;
+        SetInputEnable(true);
+    }
 }
