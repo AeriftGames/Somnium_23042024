@@ -89,12 +89,15 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
     // Hadle inout for mouse
 	public override void _Input(InputEvent @event)
 	{
-		if(@event is InputEventMouseMotion)
-		{
-			InputEventMouseMotion mouseEventMotion = @event as InputEventMouseMotion;
-			_MouseMotion = mouseEventMotion.Relative;
-		}
-	}
+        if (@event is InputEventMouseMotion && IsInputEnable())
+        {
+            InputEventMouseMotion mouseEventMotion = @event as InputEventMouseMotion;
+            _MouseMotion = mouseEventMotion.Relative;
+        }
+        else
+            _MouseMotion = new Vector2(0,0);
+
+    }
 
     // Update Physical updated process
 	public override void _PhysicsProcess(double delta)

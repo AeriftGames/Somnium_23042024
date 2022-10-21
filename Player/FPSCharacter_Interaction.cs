@@ -13,6 +13,16 @@ public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
 	[Export] public float LengthInteractRay = 5.0f;
 
 	Vector3 tempCamRot = Vector3.Zero;
+	Vector3 tempTargetLook = Vector3.Zero;
+
+	Vector3 tempDirectionTo = Vector3.Zero;
+	Vector3 tempDistanceTo = Vector3.Zero;
+	Vector3 tempHitPosition = Vector3.Zero;
+
+	// LERPOBJECT INTERACT
+	LerpObject.LerpVector3 LerpCameraPosToInteract = new LerpObject.LerpVector3();
+    LerpObject.LerpVector3 LerpCameraLookToInteract = new LerpObject.LerpVector3();
+	bool isActualOnLerpToNormal = false;
 
     public override void _Ready()
 	{
@@ -25,7 +35,34 @@ public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
 	public override void _Process(double delta)
 	{
 		base._Process(delta);
-	}
+
+		// UPDATE LERPOBJECT INTERACT
+		if(LerpCameraPosToInteract.IsEnableUpdate())
+            GetFPSCharacterCamera().GlobalPosition = LerpCameraPosToInteract.Update(delta);
+
+		if (LerpCameraLookToInteract.IsEnableUpdate())
+			GetFPSCharacterCamera().LookAtFromPosition(GetFPSCharacterCamera().GlobalPosition,
+				LerpCameraLookToInteract.GetTarget());
+
+		// kamera je na ceste zpet k normalu
+		if(isActualOnLerpToNormal)
+		{
+			// jsme jiz tesne v cili ?
+			if(LerpCameraPosToInteract.GetLengthToTarget() < 0.01f)
+			{
+				// vyresetujeme parametry, povolime input a prerusime update lerpu
+                GetFPSCharacterCamera().Position = new Vector3(0.0f, 0.0f, 0.0f);
+                GetFPSCharacterCamera().Rotation = tempCamRot;
+
+                SetInputEnable(true);
+                LerpCameraPosToInteract.EnableUpdate(false);
+                LerpCameraLookToInteract.EnableUpdate(false);
+				isActualOnLerpToNormal = false;
+            }
+
+		}
+
+    }
 
 	public override void _PhysicsProcess(double delta)
 	{
@@ -80,6 +117,7 @@ public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
 			if(HitCollider.GetParent().IsInGroup("interactive_object"))
 			{
                 result = (interactive_object)HitCollider.GetParent();
+				tempHitPosition = (Vector3)rayResult["position"];
             }
 		}
 
@@ -88,19 +126,44 @@ public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
 
 	public void DisableInputsAndCameraMoveLookTarget(Vector3 targetPos,Vector3 targetLook)
 	{
+        /*
 		// INSTANT
 		SetInputEnable(false);
         tempCamRot = GetFPSCharacterCamera().Rotation;
         GetFPSCharacterCamera().GlobalPosition = targetPos;
         GetFPSCharacterCamera().LookAt(targetLook);
-		
+		//
+		*/
+
+		// LERPOBJECT START INTERACT
+        SetInputEnable(false);
+		tempCamRot = GetFPSCharacterCamera().Rotation;
+		//tempTargetLook = targetLook;
+        LerpCameraPosToInteract.SetAllParam(GetFPSCharacterCamera().GlobalPosition,
+			targetPos, 10f, true);
+
+		LerpCameraLookToInteract.SetAllParam(GetFPSCharacterCamera().Transform.basis.z*0.1f,
+			targetLook,
+			1.0f, true);
     }
 
 	public void EnableInputsAndCameraToNormal()
 	{
-		//INSTANT
+        /*
+		// INSTANT
         GetFPSCharacterCamera().Position = new Vector3(0.0f,0.0f,0.0f);
         GetFPSCharacterCamera().Rotation = tempCamRot;
         SetInputEnable(true);
+		//
+		*/
+
+        // LERPOBJECT END INTERACT
+        // !!! tip na mozne zlepseni: lerpovat mezi tempHitPosition a targetLook od interactive_objectu !!!
+        isActualOnLerpToNormal = true;
+        LerpCameraPosToInteract.SetTarget(HeadHolderCamera.GlobalPosition);
+		LerpCameraLookToInteract.SetTarget(tempHitPosition);
+		
+		// pak, az budeme chtit staci vyresetovat lokalni pozice kamery a rotaci kamery na puvodni
+		// zde resime v Process
     }
 }
