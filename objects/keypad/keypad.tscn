@@ -1,7 +1,8 @@
-[gd_scene load_steps=56 format=3 uid="uid://ukqaj32a10wx"]
+[gd_scene load_steps=57 format=3 uid="uid://ukqaj32a10wx"]
 
 [ext_resource type="Script" path="res://objects/keypad/keypad.gd" id="1_0s4jh"]
 [ext_resource type="Script" path="res://objects/keypad/Key_template.gd" id="2_ao2e4"]
+[ext_resource type="PackedScene" uid="uid://dbnevtbu1g7uy" path="res://core_systems/interactive_system/interactive_object.tscn" id="2_u6oxn"]
 [ext_resource type="AudioStream" uid="uid://cpd08svjhq7e2" path="res://objects/keypad/button.mp3" id="3_7b6ss"]
 [ext_resource type="AudioStream" uid="uid://7k0fhrehxqib" path="res://objects/keypad/error.wav" id="4_dfo6j"]
 [ext_resource type="AudioStream" uid="uid://dercmwsiuu3vd" path="res://objects/keypad/ok.wav" id="5_8v6mq"]
@@ -465,6 +466,11 @@ size = Vector3(2, 2, 1)
 [node name="keypad" type="Node3D"]
 script = ExtResource("1_0s4jh")
 
+[node name="interactive_object" parent="." instance=ExtResource("2_u6oxn")]
+
+[node name="CollisionShape3D" parent="interactive_object/StaticBody3D" index="0"]
+transform = Transform3D(2.17599, 0, 0, 0, 2.0731, 0, 0, 0, 1, 0, 0.199888, 0)
+
 [node name="Keypad" type="MeshInstance3D" parent="."]
 mesh = SubResource("ArrayMesh_ty0gr")
 skeleton = NodePath("")
@@ -635,10 +641,6 @@ shape = SubResource("BoxShape3D_swdwo")
 
 [node name="Timer" type="Timer" parent="enter"]
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.279264, 1.35212)
-current = true
-
 [node name="KeyPress" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("3_7b6ss")
 
@@ -647,6 +649,12 @@ stream = ExtResource("4_dfo6j")
 
 [node name="OK" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("5_8v6mq")
+
+[node name="CameraPos" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.269, 1.637)
+
+[node name="CameraLook" type="Node3D" parent="."]
+transform = Transform3D(0.999973, 0.00740013, 0, -0.00740013, 0.999973, 0, 0, 0, 1, 0, 0.268587, 0.167)
 
 [connection signal="timeout" from="1/Timer" to="1" method="_on_timer_timeout"]
 [connection signal="input_event" from="1/Area3D" to="1" method="_on_area_3d_input_event"]
@@ -672,3 +680,5 @@ stream = ExtResource("5_8v6mq")
 [connection signal="timeout" from="0/Timer" to="0" method="_on_timer_timeout"]
 [connection signal="input_event" from="enter/Area3D" to="enter" method="_on_area_3d_input_event"]
 [connection signal="timeout" from="enter/Timer" to="enter" method="_on_timer_timeout"]
+
+[editable path="interactive_object"]

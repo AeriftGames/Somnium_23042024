@@ -1,6 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://8bxac6xtng7p"]
+[gd_scene load_steps=8 format=3 uid="uid://8bxac6xtng7p"]
 
-[ext_resource type="PackedScene" uid="uid://dhm8txujxj2hn" path="res://player/FPSCharacter_BasicMoving.tscn" id="1_qtxtr"]
+[ext_resource type="PackedScene" uid="uid://xdk4e5fjkuw5" path="res://objects/arcane_bolt/arcane_bolt.tscn" id="1_6of0u"]
+[ext_resource type="PackedScene" uid="uid://dp7dmsp410av7" path="res://placeholders/interactive_items/interactive_item_look_and_interact_test.tscn" id="1_k71b7"]
+[ext_resource type="PackedScene" uid="uid://ukqaj32a10wx" path="res://objects/keypad/keypad.tscn" id="2_ppssv"]
+[ext_resource type="PackedScene" uid="uid://8x5qdxf7a8nq" path="res://player/FPSCharacter_Interaction.tscn" id="2_vaxip"]
 
 [sub_resource type="Environment" id="Environment_74cfi"]
 background_mode = 1
@@ -18,6 +21,9 @@ volumetric_fog_enabled = true
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_rpkr5"]
 
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_1e60n"]
+data = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, -1, 0, -1, 1, 0, -1)
+
 [node name="Test_level_meteor" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -29,9 +35,32 @@ environment = SubResource("Environment_74cfi")
 transform = Transform3D(2.41703, 0, 0, 0, 1, 0, 0, 0, 4.30888, 0, 0, 0)
 mesh = SubResource("PlaneMesh_rpkr5")
 
+[node name="StaticBody3D" type="StaticBody3D" parent="Geometry/MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.70629e-05, 0.00701368, -0.00045267)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Geometry/MeshInstance3D/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_1e60n")
+
+[node name="ArcaneBolt" parent="Geometry" instance=ExtResource("1_6of0u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.547044, -2.75698)
+
 [node name="Lights" type="Node3D" parent="."]
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Lights"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.28409, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.61997, 0)
 
-[node name="FPSCharacter_BasicMoving" parent="." instance=ExtResource("1_qtxtr")]
+[node name="Items" type="Node3D" parent="."]
+
+[node name="interactive_item_look_and_interact_test" parent="Items" instance=ExtResource("1_k71b7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.15674, 0.516555, -3.49647)
+
+[node name="keypad" parent="Items" instance=ExtResource("2_ppssv")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 1.50229, 1.27573, -1.6935)
+combination = 9955
+
+[node name="keypad2" parent="Items" instance=ExtResource("2_ppssv")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0.461219, 1.27573, -1.6935)
+combination = 9955
+
+[node name="FPSCharacter_Interaction" parent="." instance=ExtResource("2_vaxip")]
+transform = Transform3D(0.972395, 0, 0, 0, 1, 0, 0, 0, 1, 1.51441, 0.864323, -0.284087)

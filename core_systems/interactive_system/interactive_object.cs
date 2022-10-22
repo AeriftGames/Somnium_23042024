@@ -17,19 +17,19 @@ public partial class interactive_object : Node3D
 	{
 		if (body.IsClass("CharacterBody3D"))
 		{
-            GD.Print("Player is entered to area");
-            isPlayerInRange = true;
-        }
+			GD.Print("Player is entered to area");
+			isPlayerInRange = true;
+		}
 	}
 
 	public void _on_interactive_object_area_3d_body_exited(Node3D body)
 	{
-        if (body.IsClass("CharacterBody3D"))
-        {
-            GD.Print("Player is exited area");
-            isPlayerInRange = false;
-        }
-    }
+		if (body.IsClass("CharacterBody3D"))
+		{
+			GD.Print("Player is exited area");
+			isPlayerInRange = false;
+		}
+	}
 
 	public bool GetIsActive()
 	{
@@ -47,13 +47,13 @@ public partial class interactive_object : Node3D
 	{
 		string result = msgObject.LoadStringDataFromGDNow("msg_get_use_action_text");
 		return result;
-    }
+	}
 
 	public string GetInteractiveObjectName()
 	{
-        string result = msgObject.LoadStringDataFromGDNow("msg_get_interactive_object_name");
-        return result;
-    }
+		string result = msgObject.LoadStringDataFromGDNow("msg_get_interactive_object_name");
+		return result;
+	}
 
 	public void message_update()
 	{
