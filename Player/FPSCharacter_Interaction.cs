@@ -5,6 +5,12 @@ using System;
  * *** FPSCharacter_Interaction(0.0) ***
  * 
  * - this class is inheret from FPSCharacter_WalkingEffects and handle interaction with world
+ * - TODO 1: pri aktivaci interaction_object_look se musi hrac napred zastavit a byt na zemi, 
+ *   teprve pote spustit lerp
+ *   (je to z duvodu nacterni rotace kamery pro plynule opetovne nastaveni do puvodniho stavu)
+ * - TODO 2: zlepsit vraceni do puvodniho stavu tim ze budeme lerpovat mezi
+ *   temp_hitPosition a targetLook(interact_object_look)
+ * - TODO 3: predelat komunikaci s MessageObject
 */
 public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
 {

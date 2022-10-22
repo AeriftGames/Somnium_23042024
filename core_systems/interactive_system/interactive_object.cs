@@ -3,11 +3,14 @@ using System;
 
 public partial class interactive_object : Node3D
 {
+	// komunikacni objekt
+	public MessageObject msgObject;
+
 	private bool isPlayerInRange = false;
 
 	public override void _Ready()
 	{
-
+		msgObject = new MessageObject(this,GetParent());
 	}
 
 	public void _on_interactive_object_area_3d_body_entered(Node3D body)
@@ -35,22 +38,29 @@ public partial class interactive_object : Node3D
 
 	public void Use(FPSCharacter_Interaction player)
 	{
-        GetParent().Call("UseAction",player);
+		// nastavime node data jako playera a posleme zpravu o use_action dal
+		msgObject.SetNodeData(player);
+		msgObject.SendMessageToGDNow("msg_use_action");
 	}
 
 	public string GetUseActionName()
 	{
-        Variant variant = GetParent().Call("GetUseActionName");
-        string result = variant.AsString();
-        variant.Dispose();
+		string result = msgObject.LoadStringDataFromGDNow("msg_get_use_action_text");
 		return result;
     }
 
 	public string GetInteractiveObjectName()
 	{
-        Variant variant = GetParent().Call("GetInteractiveObjectName");
-        string result = variant.AsString();
-        variant.Dispose();
+        string result = msgObject.LoadStringDataFromGDNow("msg_get_interactive_object_name");
         return result;
     }
+
+	public void message_update()
+	{
+		string msg = msgObject.GetMessage();
+		switch (msg)
+		{
+			default: break;
+		}
+	}
 }

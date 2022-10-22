@@ -9,7 +9,6 @@ size = Vector3(0.4, 0.6, 0.4)
 [node name="InteractiveItem_test" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
 script = ExtResource("1_pgaii")
-UseActionName = "pick"
 
 [node name="interactive_object" parent="." instance=ExtResource("2_0kbaf")]
 
