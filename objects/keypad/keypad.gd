@@ -100,5 +100,3 @@ func message_update():
 	if msg == "msg_use_action":
 		passed_object = node_interact.msgObject.GetNodeData()
 		self._used()
-	
-	
