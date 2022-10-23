@@ -32,19 +32,19 @@ func _clear_log():
 
 ## Used for calling creation of the INFO log.
 func info(node: Object, text: String):
-	if CustomSettings.logging_level == "INFO" or CustomSettings.logging_level == "WARNING" or CustomSettings.logging_level == "ERROR" or autoload_complete == false:
+	if CustomSettings.logging_level == "INFO" or autoload_complete == false:
 		_create_msg("INFO", node, text)
 
 
 ## Used for calling creation of the WARNING log.
 func warning(node: Object, text: String):
-	if CustomSettings.logging_level == "WARNING" or CustomSettings.logging_level == "ERROR" or autoload_complete == false:
+	if CustomSettings.logging_level == "WARNING" or CustomSettings.logging_level == "INFO" or autoload_complete == false:
 		_create_msg("WARNING", node, text)
 
 
 ## Used for calling creation of the ERROR log.
 func error(node: Object, text: String):
-	if CustomSettings.logging_level == "ERROR" or autoload_complete == false:
+	if CustomSettings.logging_level == "ERROR" or CustomSettings.logging_level == "WARNING" or CustomSettings.logging_level == "INFO" or autoload_complete == false:
 		_create_msg("ERROR", node, text)
 
 

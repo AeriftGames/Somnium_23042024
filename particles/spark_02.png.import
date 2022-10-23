@@ -3,8 +3,8 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cjtukdkhib83a"
-path.s3tc="res://.godot/imported/spark_02.png-fca5f4e64be9d9d841b6e3728cc5f002.s3tc.ctex"
-path.etc2="res://.godot/imported/spark_02.png-fca5f4e64be9d9d841b6e3728cc5f002.etc2.ctex"
+path.s3tc="res://.godot/imported/spark_02.png-3fd91ef4bd2236627ba8eaddcbacbac6.s3tc.ctex"
+path.etc2="res://.godot/imported/spark_02.png-3fd91ef4bd2236627ba8eaddcbacbac6.etc2.ctex"
 metadata={
 "imported_formats": ["s3tc", "etc2"],
 "vram_texture": true
@@ -12,8 +12,8 @@ metadata={
 
 [deps]
 
-source_file="res://Particles/spark_02.png"
-dest_files=["res://.godot/imported/spark_02.png-fca5f4e64be9d9d841b6e3728cc5f002.s3tc.ctex", "res://.godot/imported/spark_02.png-fca5f4e64be9d9d841b6e3728cc5f002.etc2.ctex"]
+source_file="res://particles/spark_02.png"
+dest_files=["res://.godot/imported/spark_02.png-3fd91ef4bd2236627ba8eaddcbacbac6.s3tc.ctex", "res://.godot/imported/spark_02.png-3fd91ef4bd2236627ba8eaddcbacbac6.etc2.ctex"]
 
 [params]
 
