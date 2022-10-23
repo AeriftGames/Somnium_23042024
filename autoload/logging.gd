@@ -13,11 +13,13 @@ class_name logging
 ## to true after last Autoload script loads.
 var autoload_complete: bool = false
 
+var GameMaster
 
 func _ready():
 	_clear_log()
 	_initial_log()
 	Logging.info(self, "Debugger loaded")
+	GameMaster = get_tree().root.get_node("GameMaster")
 
 
 ## Used for clearing the log file. Used only when logging_clear_file = true in
@@ -83,3 +85,13 @@ func _create_log(msg: String, prnt: bool = true):
 		content += msg + "\r"
 		var filew = FileAccess.open("res://log/log.txt", FileAccess.WRITE)
 		filew.store_string(content)
+
+func message_update():
+	var msg = GameMaster.msgObject.GetMessage()
+	if(msg == "msg_new_logging_from_csharp"):
+		if(GameMaster.msgObject.GetIntData() == 0):
+			_create_msg("INFO",GameMaster.msgObject.GetNodeData(),GameMaster.msgObject.GetStringData())
+		elif(GameMaster.msgObject.GetIntData() == 1):
+			_create_msg("WARNING",GameMaster.msgObject.GetNodeData(),GameMaster.msgObject.GetStringData())
+		elif(GameMaster.msgObject.GetIntData() == 2):
+			_create_msg("ERROR",GameMaster.msgObject.GetNodeData(),GameMaster.msgObject.GetStringData())

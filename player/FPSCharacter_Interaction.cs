@@ -42,8 +42,10 @@ public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
 	{
 		base._Process(delta);
 
-		// UPDATE LERPOBJECT INTERACT
-		if(LerpCameraPosToInteract.IsEnableUpdate())
+		GameMaster.GM.Log.WriteLog(this,LogSystem.ELogMsgType.WARNING,"dasdasdasfgdsgefhdfgsdgsd");
+
+        // UPDATE LERPOBJECT INTERACT
+        if (LerpCameraPosToInteract.IsEnableUpdate())
 			GetFPSCharacterCamera().GlobalPosition = LerpCameraPosToInteract.Update(delta);
 
 		if (LerpCameraLookToInteract.IsEnableUpdate())
@@ -65,7 +67,6 @@ public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
 				LerpCameraLookToInteract.EnableUpdate(false);
 				isActualOnLerpToNormal = false;
 			}
-
 		}
 
 	}
