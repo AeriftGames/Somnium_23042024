@@ -13,11 +13,13 @@ class_name logging
 ## to true after last Autoload script loads.
 var autoload_complete: bool = false
 
+var GameMaster
 
 func _ready():
 	_clear_log()
 	_initial_log()
 	Logging.info(self, "Debugger loaded")
+	GameMaster = get_tree().root.get_node("GameMaster")
 
 
 ## Used for clearing the log file. Used only when logging_clear_file = true in
@@ -36,13 +38,13 @@ func info(node: Object, text: String):
 
 ## Used for calling creation of the WARNING log.
 func warning(node: Object, text: String):
-	if CustomSettings.logging_level == "WARNING" or autoload_complete == false:
+	if CustomSettings.logging_level == "WARNING" or CustomSettings.logging_level == "INFO" or autoload_complete == false:
 		_create_msg("WARNING", node, text)
 
 
 ## Used for calling creation of the ERROR log.
 func error(node: Object, text: String):
-	if CustomSettings.logging_level == "ERROR" or autoload_complete == false:
+	if CustomSettings.logging_level == "ERROR" or CustomSettings.logging_level == "WARNING" or CustomSettings.logging_level == "INFO" or autoload_complete == false:
 		_create_msg("ERROR", node, text)
 
 
@@ -83,3 +85,13 @@ func _create_log(msg: String, prnt: bool = true):
 		content += msg + "\r"
 		var filew = FileAccess.open("res://log/log.txt", FileAccess.WRITE)
 		filew.store_string(content)
+
+func message_update():
+	var msg = GameMaster.msgObject.GetMessage()
+	if(msg == "msg_new_logging_from_csharp"):
+		if(GameMaster.msgObject.GetIntData() == 0):
+			info(GameMaster.msgObject.GetNodeData(),GameMaster.msgObject.GetStringData())
+		elif(GameMaster.msgObject.GetIntData() == 1):
+			warning(GameMaster.msgObject.GetNodeData(),GameMaster.msgObject.GetStringData())
+		elif(GameMaster.msgObject.GetIntData() == 2):
+			error(GameMaster.msgObject.GetNodeData(),GameMaster.msgObject.GetStringData())

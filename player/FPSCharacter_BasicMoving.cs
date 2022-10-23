@@ -309,7 +309,10 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
     // Crunch<->Stand toggle
     public void CrunchToggle()
     {
-        switch(_ActualCharacterPosture)
+        // TEST
+        GameMaster.GM.Log.WriteLog(this, LogSystem.ELogMsgType.ERROR, "crunch toggle");
+
+        switch (_ActualCharacterPosture)
         {
             case ECharacterPosture.Stand: { ChangeCharacterPosture(ECharacterPosture.Crunch); break; }
             case ECharacterPosture.Crunch: 

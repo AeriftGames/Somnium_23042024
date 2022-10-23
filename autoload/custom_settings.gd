@@ -27,10 +27,13 @@ var logging_clear_file: bool
 ## Include datetime with each log
 var logging_include_datetime: bool
 
+var GameMaster
+
 
 func _ready():
 	Logging.info(self, "Settings loaded")
 	_load()
+	GameMaster = get_tree().root.get_node("GameMaster")
 
 
 func _load():
@@ -68,3 +71,8 @@ func _get_values():
 	logging_file_log = cfg.get_value("logging", "file_log")
 	logging_clear_file = cfg.get_value("logging", "clear_file")
 	logging_include_datetime = cfg.get_value("logging", "include_datetime")
+
+func message_update():
+	var msg = GameMaster.msgObject.GetMessage()
+	if(msg == "msg_get_kaen_debug_bool"):
+		GameMaster.msgObject.SetBoolData(debug_kaen)

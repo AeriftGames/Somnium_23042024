@@ -4,12 +4,18 @@ using System;
 /*	obousmerny Komunikacni kanal pro predavani zprav i argumentu z Csharp do GDscriptu a naopak
 	- vola funkci message_update v communicationGDObjectu = pouzivame pro okamzite predani zpravy
 	- ve chvili kdy v communicationGDObjectu
+
+    - isMultiCommunication je defaultne false a pouziva se tak kdyz komunikujeme jen s jednim GDObjectem.
+      Ve chvili kdy chceme komunikovat s vice objekty, je potreba prepnout isMultiCommunication na true a 
+      to pak nedovoli pouziti zadne message ani jakehokoliv funkce load, pouze SendMessageToGDNow_ToObject
+      a teto funkci musime v argumentu rict kteremu objektu posilame zpravu. Pristup k datum je normalne zachovan.
 */
 public partial class MessageObject: Godot.Object
 {
 	// s kym si predavame zpravy
 	private Node nodeSelf = null;
 	private Node communicationGDObject = null;
+    private bool isMulticommunication = false;
 
 	// hlavni message - udava co chceme
 	private string message = "msg_nothing";
@@ -24,20 +30,37 @@ public partial class MessageObject: Godot.Object
 	private Node nodeData = null;
 
 	// Constructor, kde musime pridat s jakym nodem budeme komunikovat
-	public MessageObject(Node newNodeSelf,Node newCommunicationGDObject)
+	public MessageObject(Node newNodeSelf,Node newCommunicationGDObject, bool newIsMulticommunication = false)
 	{
+        // ochrana proti null newCommunicationGDObject
 		if (newCommunicationGDObject == null)
-			GD.Print("pri konstrukci MessageObject se parametr newCommnucationGDObject == null");
+			GD.Print(GetStringForPrintLogError() + 
+                "pri konstrukci se parametr newCommnucationGDObject == null");
 		else
 			communicationGDObject = newCommunicationGDObject;
 
+        // ochrana proti null newNodeSelf
 		if (newNodeSelf == null)
-			GD.Print("pri konstrukci MessageObject se parametre newNodeSelf == null");
+			GD.Print("pri konstrukci MessageObject se parametr newNodeSelf == null");
 		else
 			nodeSelf = newNodeSelf;
 
+        // nastaveni multicommunication
+        isMulticommunication = newIsMulticommunication;
+
+        // Reset all data pro jistotu
 		ResetAllData();
 	}
+
+    public bool GetIsMultiCommunication()
+    {
+        return isMulticommunication;
+    }
+
+    private string GetStringForPrintLogError()
+    {
+        return nodeSelf + ": " + " [MessageObject]: ";
+    }
 
     private void SetMessage(string newMessage)
 	{
@@ -46,8 +69,13 @@ public partial class MessageObject: Godot.Object
 
 	public void SendMessageToGDNow(string newMessage)
 	{
+        // pokud je multicommunication zapnuta, muze se pouzit jen SendMessageToGDNow_ToObject()
+        if (isMulticommunication == true)
+            GD.Print(GetStringForPrintLogError() + 
+                "nelze pouzit SendMessage pri multicommunication");
+
         // Posle zpravu z CS do GD objektu
-		SetMessage(newMessage);
+        SetMessage(newMessage);
         communicationGDObject.Call("message_update");
     }
 
@@ -57,6 +85,27 @@ public partial class MessageObject: Godot.Object
 		SetMessage(newMessage);
 		nodeSelf.Call("message_update");
 	}
+
+    // !!! experimentalni !!!
+    public void SendMessageToGDNow_ToObject(string newMessage,Node newCommunicationGDObject)
+    {
+        if (newCommunicationGDObject == null)
+            GD.Print(GetStringForPrintLogError() +
+                "pri SendMessageToGDNow_ToObject je newCommunicationGDObject == null");
+        else
+            communicationGDObject = newCommunicationGDObject;
+
+        // pokud je multicommunication zapnuta, muze se pouzit jen SendMessageToGDNow_ToObject()
+        if (isMulticommunication == true)
+        {
+            // Posle zpravu z CS do GD objektu
+            SetMessage(newMessage);
+            communicationGDObject.Call("message_update");
+        }
+        else
+            GD.Print(GetStringForPrintLogError() + 
+                "Nelze pouzit SendMessageToGDNow_ToObject pri multicommunication = false");
+    }
 
 	public void SetMessageNothing()
 	{
@@ -108,6 +157,9 @@ public partial class MessageObject: Godot.Object
     // FOR BIT EASE (CS GET FROM GD) PARAMETER
     public bool LoadBoolDataFromGDNow(string newMessage)
     {
+        if (isMulticommunication == true)
+            GD.Print(GetStringForPrintLogError() + "nespravne pouziti pri multicommunication");
+
         SendMessageToGDNow(newMessage);
         bool tempData = GetBoolData();
         return tempData;
@@ -115,6 +167,9 @@ public partial class MessageObject: Godot.Object
 
     public int LoadIntDataFromGDNow(string newMessage)
     {
+        if (isMulticommunication == true)
+            GD.Print(GetStringForPrintLogError() + "nespravne pouziti pri multicommunication");
+
         SendMessageToGDNow(newMessage);
         int tempData = GetIntData();
         return tempData;
@@ -122,6 +177,9 @@ public partial class MessageObject: Godot.Object
 
     public float LoadFloatDataFromGDNow(string newMessage)
     {
+        if (isMulticommunication == true)
+            GD.Print(GetStringForPrintLogError() + "nespravne pouziti pri multicommunication");
+
         SendMessageToGDNow(newMessage);
         float tempData = GetFloatData();
         return tempData;
@@ -129,6 +187,9 @@ public partial class MessageObject: Godot.Object
 
     public string LoadStringDataFromGDNow(string newMessage)
     {
+        if (isMulticommunication == true)
+            GD.Print(GetStringForPrintLogError() + "nespravne pouziti pri multicommunication");
+
         SendMessageToGDNow(newMessage);
         string tempData = GetStringData();
         return tempData;
@@ -136,6 +197,9 @@ public partial class MessageObject: Godot.Object
 
     public Vector2 LoadVector2DataFromGDNow(string newMessage)
     {
+        if (isMulticommunication == true)
+            GD.Print(GetStringForPrintLogError() + "nespravne pouziti pri multicommunication");
+
         SendMessageToGDNow(newMessage);
         Vector2 tempData = GetVector2Data();
         return tempData;
@@ -143,6 +207,9 @@ public partial class MessageObject: Godot.Object
 
     public Vector3 LoadVector3DataFromGDNow(string newMessage)
     {
+        if (isMulticommunication == true)
+            GD.Print(GetStringForPrintLogError() + "nespravne pouziti pri multicommunication");
+
         SendMessageToGDNow(newMessage);
         Vector3 tempData = GetVector3Data();
         return tempData;
@@ -150,6 +217,9 @@ public partial class MessageObject: Godot.Object
 
     public Node LoadNodeDataFromGDNow(string newMessage)
     {
+        if (isMulticommunication == true)
+            GD.Print(GetStringForPrintLogError() + "nespravne pouziti pri multicommunication");
+
         SendMessageToGDNow(newMessage);
         Node tempData = GetNodeData();
         return tempData;

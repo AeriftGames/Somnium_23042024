@@ -35,8 +35,8 @@ config/icon="res://icon.svg"
 [autoload]
 
 Logging="*res://autoload/logging.gd"
-GameMaster="*res://core_systems/game_master.tscn"
 CustomSettings="*res://autoload/custom_settings.gd"
+GameMaster="*res://core_systems/GameMaster.tscn"
 LastSingleton="*res://autoload/last_singleton.gd"
 
 [debug]
