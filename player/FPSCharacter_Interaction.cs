@@ -42,7 +42,11 @@ public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
 	{
 		base._Process(delta);
 
-		GameMaster.GM.Log.WriteLog(this,LogSystem.ELogMsgType.WARNING,"dasdasdasfgdsgefhdfgsdgsd");
+
+		// TEST
+		GameMaster.GM.Log.WriteLog(this,LogSystem.ELogMsgType.INFO,"dasdasdasfgdsgefhdfgsdgsd");
+        GameMaster.GM.Log.WriteLog(this, LogSystem.ELogMsgType.WARNING, "dasdasdasfgdsgefhdfgsdgsd");
+        GameMaster.GM.Log.WriteLog(this, LogSystem.ELogMsgType.ERROR, "dasdasdasfgdsgefhdfgsdgsd");
 
         // UPDATE LERPOBJECT INTERACT
         if (LerpCameraPosToInteract.IsEnableUpdate())

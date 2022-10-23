@@ -90,8 +90,8 @@ func message_update():
 	var msg = GameMaster.msgObject.GetMessage()
 	if(msg == "msg_new_logging_from_csharp"):
 		if(GameMaster.msgObject.GetIntData() == 0):
-			_create_msg("INFO",GameMaster.msgObject.GetNodeData(),GameMaster.msgObject.GetStringData())
+			info(GameMaster.msgObject.GetNodeData(),GameMaster.msgObject.GetStringData())
 		elif(GameMaster.msgObject.GetIntData() == 1):
-			_create_msg("WARNING",GameMaster.msgObject.GetNodeData(),GameMaster.msgObject.GetStringData())
+			warning(GameMaster.msgObject.GetNodeData(),GameMaster.msgObject.GetStringData())
 		elif(GameMaster.msgObject.GetIntData() == 2):
-			_create_msg("ERROR",GameMaster.msgObject.GetNodeData(),GameMaster.msgObject.GetStringData())
+			error(GameMaster.msgObject.GetNodeData(),GameMaster.msgObject.GetStringData())
