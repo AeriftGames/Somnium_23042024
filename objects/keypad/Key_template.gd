@@ -19,14 +19,15 @@ func _on_area_3d_input_event(camera, event, position, normal, shape_idx):
 		pass
 	elif pressed != true:
 		if Input.is_action_pressed("mouseClickLeft"):
+			if CustomSettings.debug_oalar == true:
+				var msg = "Key %s pressed" % [self.name]
+				Logging.info(self, msg)
 			pressed = true
 			self.set_position(Vector3(pos.x,pos.y,0.085))
 			self.get_parent()._play_sound()
 			$Timer.start(0.1)
 			get_parent().input(self.name)
-			if Settings.debug_oalar == true:
-				var msg = "Key %s pressed" % [self.name]
-				Logging.info(self, msg)
+			
 
 
 func _on_timer_timeout():

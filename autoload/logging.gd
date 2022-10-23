@@ -22,35 +22,35 @@ func _ready():
 ## Used for clearing the log file. Used only when Settings.logging_clear_file
 ## = true
 func _clear_log():
-	if Settings.logging_clear_file == true or autoload_complete == false:
+	if CustomSettings.logging_clear_file == true or autoload_complete == false:
 		var filew = FileAccess.open("res://log/log.txt", FileAccess.WRITE)
 		filew.store_string("")
 
 ## Used for calling creation of the INFO log.
 func info(node: Object, text: String):
-	if Settings.logging_level == "INFO" or autoload_complete == false:
+	if CustomSettings.logging_level == "INFO" or autoload_complete == false:
 		_create_msg("INFO", node, text)
 	
 ## Used for calling creation of the WARNING log.
 func warning(node: Object, text: String):
-	if Settings.logging_level == "WARNING" or autoload_complete == false:
+	if CustomSettings.logging_level == "WARNING" or autoload_complete == false:
 		_create_msg("WARNING", node, text)
 	
 ## Used for calling creation of the ERROR log.
 func error(node: Object, text: String):
-	if Settings.logging_level == "ERROR" or autoload_complete == false:
+	if CustomSettings.logging_level == "ERROR" or autoload_complete == false:
 		_create_msg("ERROR", node, text)
 
 
 func _create_msg(level: String, node: Object, text: String):
 	var msg: String
 	var datetime: String = str(Time.get_datetime_string_from_system())
-	if Settings.logging_include_instances == true or autoload_complete == false:
-		if Settings.logging_include_datetime == true or autoload_complete == false:
+	if CustomSettings.logging_include_instances == true or autoload_complete == false:
+		if CustomSettings.logging_include_datetime == true or autoload_complete == false:
 			msg = "%s %s: %s (%s): %s" % [level, datetime, node.name, node, text]
 		msg = "%s: %s (%s): %s" % [level, node.name, node, text]
 	else: # Needs imrpoving TODO
-		if Settings.logging_include_datetime == true or autoload_complete == false:
+		if CustomSettings.logging_include_datetime == true or autoload_complete == false:
 			msg = "%s %s: %s: %s" % [level, datetime, node.name, text]
 		msg = "%s: %s: %s" % [level, node.name, text]
 	_create_log(msg)
@@ -72,7 +72,7 @@ func _initial_log():
 func _create_log(msg: String, prnt: bool = true):
 	if prnt == true:
 		print(msg)
-	if Settings.logging_file_log == true or autoload_complete == false:
+	if CustomSettings.logging_file_log == true or autoload_complete == false:
 		var filer = FileAccess.open("res://log/log.txt", FileAccess.READ)
 		var content = filer.get_as_text()
 		content += msg + "\r"
