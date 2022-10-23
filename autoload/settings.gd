@@ -12,6 +12,7 @@ var logging_level: String
 var logging_include_instances: bool
 var logging_file_log: bool
 var logging_clear_file: bool
+var logging_include_datetime: bool
 
 func _ready():
 	Logging.info(self, "Settings loaded")
@@ -52,3 +53,4 @@ func _get_values():
 	logging_include_instances = cfg.get_value("logging", "include_instances")
 	logging_file_log = cfg.get_value("logging", "file_log")
 	logging_clear_file = cfg.get_value("logging", "clear_file")
+	logging_include_datetime = cfg.get_value("logging", "include_datetime")
