@@ -8,6 +8,22 @@
 
 config_version=5
 
+_global_script_classes=[{
+"base": "Node",
+"class": &"custom_settings",
+"language": &"GDScript",
+"path": "res://autoload/settings.gd"
+}, {
+"base": "Node",
+"class": &"logging",
+"language": &"GDScript",
+"path": "res://autoload/logging.gd"
+}]
+_global_script_class_icons={
+"custom_settings": "",
+"logging": ""
+}
+
 [application]
 
 config/name="Somnium"

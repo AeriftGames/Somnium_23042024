@@ -1,4 +1,5 @@
 extends Node
+class_name custom_settings
 # This script is used for loading settings.cfg file.
 
 # Script variables

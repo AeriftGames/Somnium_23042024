@@ -1,7 +1,16 @@
 extends Node
+class_name logging
 
-var debug_level: String
-#var debug_levels : Array = ["INFO", "WARNING", "ERROR"]
+## Used as a Autoload for logging purposes
+##
+## Autoloaded script used for logging. It can create both 
+## [method @GlobalScope.Print] logs and logs on FileSystem. Configuration for
+## this script is taken from [custom_settings] and settings.gd. For best resultst
+## his script should always be on the first place in Autoload order.
+
+## Because of potentional need for some Autoload modules to use this logging
+## script it is using autoload_complete property. This property get's changed
+## to true after last Autoload script loads.
 var autoload_complete: bool = false
 
 
@@ -10,23 +19,24 @@ func _ready():
 	_initial_log()
 	Logging.info(self, "Debugger loaded")
 
-
+## Used for clearing the log file. Used only when Settings.logging_clear_file
+## = true
 func _clear_log():
 	if Settings.logging_clear_file == true or autoload_complete == false:
 		var filew = FileAccess.open("res://log/log.txt", FileAccess.WRITE)
 		filew.store_string("")
 
-
+## Used for calling creation of the INFO log.
 func info(node: Object, text: String):
 	if Settings.logging_level == "INFO" or autoload_complete == false:
 		_create_msg("INFO", node, text)
 	
-	
+## Used for calling creation of the WARNING log.
 func warning(node: Object, text: String):
 	if Settings.logging_level == "WARNING" or autoload_complete == false:
 		_create_msg("WARNING", node, text)
 	
-	
+## Used for calling creation of the ERROR log.
 func error(node: Object, text: String):
 	if Settings.logging_level == "ERROR" or autoload_complete == false:
 		_create_msg("ERROR", node, text)
