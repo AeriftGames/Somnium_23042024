@@ -1,10 +1,11 @@
-[gd_scene load_steps=46 format=3 uid="uid://dfafsmmyuynkp"]
+[gd_scene load_steps=47 format=3 uid="uid://dfafsmmyuynkp"]
 
 [ext_resource type="Texture2D" uid="uid://660jcc1vju43" path="res://textures/brick_pavement_0108_02_s.jpg" id="1_uebcf"]
 [ext_resource type="Texture2D" uid="uid://bybrpbyf1euit" path="res://textures/NormalMap (3).png" id="2_18fqb"]
 [ext_resource type="Material" path="res://textures/mat1.tres" id="3_6mmgv"]
 [ext_resource type="Texture2D" uid="uid://0n0dx7ov4qi6" path="res://textures/blood_decal_test.png" id="4_6bpl4"]
 [ext_resource type="PackedScene" path="res://placeholders/wine_barrel.tscn" id="5_ttrj3"]
+[ext_resource type="PackedScene" uid="uid://gtfs2t3l23nj" path="res://placeholders/interactive_items/interactive_item_rotation_test.tscn" id="6_5ry0k"]
 [ext_resource type="PackedScene" uid="uid://8x5qdxf7a8nq" path="res://player/FPSCharacter_Interaction.tscn" id="7_33yod"]
 [ext_resource type="PackedScene" uid="uid://xfouxhhlpltn" path="res://placeholders/interactive_items/interactive_item_test.tscn" id="8_6nvq8"]
 [ext_resource type="AudioStream" uid="uid://bis1a4lsh3ja2" path="res://audio/audio_streams/footsteps_basic/458319__dwoboyle__footsteps-tile-23.wav" id="8_8c5gp"]
@@ -406,6 +407,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0.3, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.25, 0, 7)
 WalkCameraLerpHeight = 0.25
 FootstepSounds = [ExtResource("8_8c5gp"), ExtResource("9_go0p4"), ExtResource("10_lkhsu"), ExtResource("11_3ob5k"), ExtResource("12_8gv6v"), ExtResource("13_ajg50"), ExtResource("14_g6g8d")]
+JumpVelocity = 10.0
+MoveSpeedInStand = 10.0
 
 [node name="interactive_item_look_and_interact_test" parent="." instance=ExtResource("8_g3ca3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0, -5)
@@ -415,3 +418,6 @@ transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 
 
 [node name="keypad" parent="." instance=ExtResource("9_svrf2")]
 transform = Transform3D(0.00122522, 0, 0.199996, 0, 0.2, 0, -0.199996, 0, 0.00122522, -0.396393, 1.93683, 1.46403)
+
+[node name="InteractiveItem_test2" parent="." instance=ExtResource("6_5ry0k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.48244, 0.927482, 0)
