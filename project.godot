@@ -18,8 +18,8 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-GameMaster="*res://core_systems/game_master.tscn"
 Logging="*res://autoload/logging.gd"
+GameMaster="*res://core_systems/game_master.tscn"
 Settings="*res://autoload/settings.gd"
 LastSingleton="*res://autoload/last_singleton.gd"
 

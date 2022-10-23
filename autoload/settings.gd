@@ -10,6 +10,8 @@ var debug_oalar: bool
 var debug_kaen: bool
 var logging_level: String
 var logging_include_instances: bool
+var logging_file_log: bool
+var logging_clear_file: bool
 
 func _ready():
 	Logging.info(self, "Settings loaded")
@@ -48,3 +50,5 @@ func _get_values():
 	debug_kaen = cfg.get_value("debug", "debug_kaen")
 	logging_level = cfg.get_value("logging", "logging_level")
 	logging_include_instances = cfg.get_value("logging", "include_instances")
+	logging_file_log = cfg.get_value("logging", "file_log")
+	logging_clear_file = cfg.get_value("logging", "clear_file")
