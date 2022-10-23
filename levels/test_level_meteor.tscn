@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://8bxac6xtng7p"]
+[gd_scene load_steps=9 format=3 uid="uid://x7j68lk3hfa8"]
 
 [ext_resource type="PackedScene" uid="uid://xdk4e5fjkuw5" path="res://objects/arcane_bolt/arcane_bolt.tscn" id="1_6of0u"]
 [ext_resource type="PackedScene" uid="uid://dp7dmsp410av7" path="res://placeholders/interactive_items/interactive_item_look_and_interact_test.tscn" id="1_k71b7"]
@@ -24,6 +24,8 @@ volumetric_fog_enabled = true
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_1e60n"]
 data = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, -1, 0, -1, 1, 0, -1)
 
+[sub_resource type="PlaneMesh" id="PlaneMesh_ng15g"]
+
 [node name="Test_level_meteor" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -44,6 +46,10 @@ shape = SubResource("ConcavePolygonShape3D_1e60n")
 [node name="ArcaneBolt" parent="Geometry" instance=ExtResource("1_6of0u")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.547044, -2.75698)
 
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Geometry"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 2.29596, 0.769446, 3.1809)
+mesh = SubResource("PlaneMesh_ng15g")
+
 [node name="Lights" type="Node3D" parent="."]
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Lights"]
@@ -63,4 +69,4 @@ transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0.461219, 1.27573, -1.6
 combination = 9955
 
 [node name="FPSCharacter_Interaction" parent="." instance=ExtResource("2_vaxip")]
-transform = Transform3D(0.972395, 0, 0, 0, 1, 0, 0, 0, 1, 1.51441, 0.864323, -0.284087)
+transform = Transform3D(0.972395, 0, 0, 0, 1, 0, 0, 0, 1, 0.549325, 1.13743, 2.68104)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://dfafsmmyuynkp"]
+[gd_scene load_steps=39 format=3 uid="uid://dfafsmmyuynkp"]
 
 [ext_resource type="Texture2D" uid="uid://660jcc1vju43" path="res://textures/brick_pavement_0108_02_s.jpg" id="1_uebcf"]
 [ext_resource type="Texture2D" uid="uid://bybrpbyf1euit" path="res://textures/NormalMap (3).png" id="2_18fqb"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://8x5qdxf7a8nq" path="res://player/FPSCharacter_Interaction.tscn" id="7_33yod"]
 [ext_resource type="PackedScene" uid="uid://xfouxhhlpltn" path="res://placeholders/interactive_items/interactive_item_test.tscn" id="8_6nvq8"]
 [ext_resource type="PackedScene" uid="uid://dp7dmsp410av7" path="res://placeholders/interactive_items/interactive_item_look_and_interact_test.tscn" id="8_g3ca3"]
+[ext_resource type="PackedScene" uid="uid://ukqaj32a10wx" path="res://objects/keypad/keypad.tscn" id="9_svrf2"]
 
 [sub_resource type="Environment" id="Environment_vig0a"]
 background_mode = 1
@@ -402,3 +403,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0, -5)
 
 [node name="interactive_item_look_and_interact_test2" parent="." instance=ExtResource("8_g3ca3")]
 transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, -9.68575e-08, 1.25, -2.5)
+
+[node name="keypad" parent="." instance=ExtResource("9_svrf2")]
+transform = Transform3D(0.00122522, 0, 0.199996, 0, 0.2, 0, -0.199996, 0, 0.00122522, -0.396393, 1.93683, 1.46403)

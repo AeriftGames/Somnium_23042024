@@ -24,6 +24,8 @@ func _on_area_3d_input_event(camera, event, position, normal, shape_idx):
 			self.get_parent()._play_sound()
 			$Timer.start(0.1)
 			get_parent().input(self.name)
+			if Settings.debug_oalar == true:
+				Logging.info(self, "Key pressed")
 
 
 func _on_timer_timeout():
