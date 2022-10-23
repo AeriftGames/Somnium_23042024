@@ -19,23 +19,27 @@ func _ready():
 	_initial_log()
 	Logging.info(self, "Debugger loaded")
 
+
 ## Used for clearing the log file. Used only when logging_clear_file = true in
 ## [custom_settings]
 func _clear_log():
 	if CustomSettings.logging_clear_file == true or autoload_complete == false:
 		var filew = FileAccess.open("res://log/log.txt", FileAccess.WRITE)
 		filew.store_string("")
+		
 
 ## Used for calling creation of the INFO log.
 func info(node: Object, text: String):
 	if CustomSettings.logging_level == "INFO" or autoload_complete == false:
 		_create_msg("INFO", node, text)
-	
+
+
 ## Used for calling creation of the WARNING log.
 func warning(node: Object, text: String):
 	if CustomSettings.logging_level == "WARNING" or autoload_complete == false:
 		_create_msg("WARNING", node, text)
-	
+
+
 ## Used for calling creation of the ERROR log.
 func error(node: Object, text: String):
 	if CustomSettings.logging_level == "ERROR" or autoload_complete == false:
@@ -68,6 +72,7 @@ func _initial_log():
 	_create_log("UID - %s" % [uid], false)
 	_create_log("CPU name: %s, CPU count: %s" % [cpu_name, cpu_count], false)
 	_create_log("--------------------------------", false)
+
 
 func _create_log(msg: String, prnt: bool = true):
 	if prnt == true:
