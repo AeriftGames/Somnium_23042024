@@ -25,10 +25,6 @@ func _ready():
 	pass # Replace with function body.
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-
 func _play_sound():
 	$KeyPress.play()
 	
@@ -38,16 +34,21 @@ func _used():
 		isNowInteract = true
 		passed_object.DisableInputsAndCameraMoveLookTarget(camera_pos.get_global_position(), camera_look.get_global_position())
 		$interactive_object/StaticBody3D/CollisionShape3D.disabled = true
+		if Settings.debug_oalar == true:
+				Logging.info(self, "Keypad used")
 		
 func _input(event):
 	if event.is_action_pressed("Jump") and isNowInteract == true:
 		_used_quit()
+		
 		
 func _used_quit():
 		passed_object.EnableInputsAndCameraToNormal()
 		$interactive_object/StaticBody3D/CollisionShape3D.disabled = false
 		passed_object = null
 		isNowInteract = false
+		if Settings.debug_oalar == true:
+				Logging.info(self, "Keypad used")
 
 func input(key):
 	if key == "clear":
@@ -81,10 +82,14 @@ func _enter():
 		$KeypadText.text = "OK"
 		locked = true
 		$OK.play()
+		if Settings.debug_oalar == true:
+				Logging.info(self, "Correct combination entered")
 	else:
 		$KeypadText.text = "ERROR"
 		special_state = true
 		$Error.play()
+		if Settings.debug_oalar == true:
+				Logging.info(self, "Incorrect combination entered")
 		
 func message_update():
 	var msg:String = node_interact.msgObject.GetMessage()
