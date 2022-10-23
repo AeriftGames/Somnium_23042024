@@ -19,8 +19,8 @@ func _ready():
 	_initial_log()
 	Logging.info(self, "Debugger loaded")
 
-## Used for clearing the log file. Used only when Settings.logging_clear_file
-## = true
+## Used for clearing the log file. Used only when logging_clear_file = true in
+## [custom_settings]
 func _clear_log():
 	if CustomSettings.logging_clear_file == true or autoload_complete == false:
 		var filew = FileAccess.open("res://log/log.txt", FileAccess.WRITE)

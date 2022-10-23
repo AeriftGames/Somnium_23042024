@@ -1,19 +1,32 @@
 extends Node
 class_name custom_settings
-# This script is used for loading settings.cfg file.
+## Used for loading settings.cfg file.
+##
+## Universal loader for script.ini located in [b]"res://autoload/settings.cfg"
+##[/b]. It is included in Autoloader so it can be accessed any time
 
 # Script variables
+## Used for loading config file
 var cfg = ConfigFile.new()
+## Used for checking errors when loading Config File
 var e = cfg.load("res://autoload/settings.cfg")
 
 # Config variables
+## Checked whenever Oalar wants to log something
 var debug_oalar: bool
+## Checked whenever Oalar wants to log something
 var debug_kaen: bool
+## Logging level used in [logging]. Levels are: INFO, WARNING, ERROR.
 var logging_level: String
+## Includes unique node names in logs.
 var logging_include_instances: bool
+## Logging to file log.
 var logging_file_log: bool
+## Clearing log file before each run.
 var logging_clear_file: bool
+## Include datetime with each log
 var logging_include_datetime: bool
+
 
 func _ready():
 	Logging.info(self, "Settings loaded")
