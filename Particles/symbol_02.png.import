@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dk30jof8k8abu"
-path="res://.godot/imported/symbol_02.png-988f838bb1355025266e7d0ebf6c8d68.ctex"
+path="res://.godot/imported/symbol_02.png-8c90f2ae27b0d9dde84c973750b81515.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://particles/symbol_02.png"
-dest_files=["res://.godot/imported/symbol_02.png-988f838bb1355025266e7d0ebf6c8d68.ctex"]
+source_file="res://Particles/symbol_02.png"
+dest_files=["res://.godot/imported/symbol_02.png-8c90f2ae27b0d9dde84c973750b81515.ctex"]
 
 [params]
 
