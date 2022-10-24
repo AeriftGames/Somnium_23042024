@@ -309,9 +309,6 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
     // Crunch<->Stand toggle
     public void CrunchToggle()
     {
-        // TEST
-        GameMaster.GM.Log.WriteLog(this, LogSystem.ELogMsgType.ERROR, "crunch toggle");
-
         switch (_ActualCharacterPosture)
         {
             case ECharacterPosture.Stand: { ChangeCharacterPosture(ECharacterPosture.Crunch); break; }
@@ -402,6 +399,14 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
             Input.MouseMode = Input.MouseModeEnum.Visible;
     }
 
+    public void SetMouseVisible(bool newMouseVisible)
+    {
+        if(newMouseVisible)
+            Input.MouseMode = Input.MouseModeEnum.Visible;
+        else
+            Input.MouseMode = Input.MouseModeEnum.Hidden;
+    }
+
     public bool IsInputEnable()
     {
         return _isInputEnable;
@@ -410,18 +415,18 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
     // Event when character hit the floor = landed
     public virtual void Landing()
     {
-        GD.Print("Character landing on ground");
+        //GameMaster.GM.Log.WriteLog(this, LogSystem.ELogMsgType.INFO, "character landing");
         _isFalling = false;
     }
 
     public virtual void Jumping()
     {
-        GD.Print("Jumped");
+        //GameMaster.GM.Log.WriteLog(this, LogSystem.ELogMsgType.INFO, "character jumped");
     }
 
     public virtual void MovingStopped()
     {
-        GD.Print("MovingStopped");
+        //GameMaster.GM.Log.WriteLog(this, LogSystem.ELogMsgType.INFO, "character moving stoped");
     }
 
     public Camera3D GetFPSCharacterCamera()

@@ -94,7 +94,7 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
 
     public void FinishLandingEffect()
     {
-        GD.Print("finish landing");
+        //GameMaster.GM.Log.WriteLog(this, LogSystem.ELogMsgType.INFO, "finish landing effect");
         lerpHeadLandY = 0.0f;
         lerpHeadLandRotX = 0.0f;
     }
