@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://dfafsmmyuynkp"]
+[gd_scene load_steps=48 format=3 uid="uid://dfafsmmyuynkp"]
 
 [ext_resource type="Texture2D" uid="uid://660jcc1vju43" path="res://textures/brick_pavement_0108_02_s.jpg" id="1_uebcf"]
 [ext_resource type="Texture2D" uid="uid://bybrpbyf1euit" path="res://textures/NormalMap (3).png" id="2_18fqb"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://0n0dx7ov4qi6" path="res://textures/blood_decal_test.png" id="4_6bpl4"]
 [ext_resource type="PackedScene" path="res://placeholders/wine_barrel.tscn" id="5_ttrj3"]
 [ext_resource type="PackedScene" uid="uid://gtfs2t3l23nj" path="res://placeholders/interactive_items/interactive_item_rotation_test.tscn" id="6_5ry0k"]
+[ext_resource type="PackedScene" uid="uid://b5j5fsa38hgon" path="res://paper_test.tscn" id="6_p6ur7"]
 [ext_resource type="PackedScene" uid="uid://8x5qdxf7a8nq" path="res://player/FPSCharacter_Interaction.tscn" id="7_33yod"]
 [ext_resource type="PackedScene" uid="uid://xfouxhhlpltn" path="res://placeholders/interactive_items/interactive_item_test.tscn" id="8_6nvq8"]
 [ext_resource type="AudioStream" uid="uid://bis1a4lsh3ja2" path="res://audio/audio_streams/footsteps_basic/458319__dwoboyle__footsteps-tile-23.wav" id="8_8c5gp"]
@@ -315,7 +316,7 @@ mesh = SubResource("BoxMesh_84wwh")
 shape = SubResource("ConcavePolygonShape3D_r8lw3")
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="LevelGeometry"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0.5, -9)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, -0.0189879, -9)
 material_override = ExtResource("3_6mmgv")
 mesh = SubResource("BoxMesh_84wwh")
 
@@ -390,9 +391,19 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.6, 0, -9.6)
 [node name="wine_barrel6" parent="LevelGeometry" instance=ExtResource("5_ttrj3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.6, 0, -8.6)
 
+[node name="PaperTest" parent="LevelGeometry" instance=ExtResource("6_p6ur7")]
+transform = Transform3D(0.199951, -0.00440485, 0, 0.00440485, 0.199951, 0, 0, 0, 0.2, -0.740919, 0.999903, -8.34489)
+
 [node name="OmniLight3d" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 2, 0)
-light_energy = 0.343
+light_energy = 0.4
+shadow_enabled = true
+omni_range = 44.822
+omni_attenuation = 1.18921
+
+[node name="OmniLight3d2" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.98321, 3.70711, -9.17286)
+light_energy = 0.4
 shadow_enabled = true
 omni_range = 44.822
 omni_attenuation = 1.18921
