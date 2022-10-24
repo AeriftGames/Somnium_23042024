@@ -84,6 +84,9 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
 
         _HeadMainLerpTarget = HeadStandPosition.Position;
         _ActualMoveSpeed = MoveSpeedInStand;
+
+        // pro dostupnost na hrace skrze gamemastera
+        GameMaster.GM.FpsCharacter = this;
     }
 
     // Hadle inout for mouse

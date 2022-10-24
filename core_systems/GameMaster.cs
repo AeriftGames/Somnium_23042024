@@ -13,6 +13,9 @@ public partial class GameMaster : Node
     public Node GDNode_CustomSettings;
     public Node GDNode_Logging;
 
+    //
+    public FPSCharacter_BasicMoving FpsCharacter = null;
+
     public override void _Ready()
     {
         GD.Print("GameMaster loaded");
@@ -32,6 +35,11 @@ public partial class GameMaster : Node
         Log.WriteLog(this, LogSystem.ELogMsgType.INFO, "blablasfldaslfaslf");
         Log.WriteLog(this, LogSystem.ELogMsgType.WARNING, "blablasfldaslfaslf");
         Log.WriteLog(this, LogSystem.ELogMsgType.ERROR, "blablasfldaslfaslf");
+    }
+
+    public FPSCharacter_BasicMoving GetFPSCharacter()
+    {
+        return FpsCharacter;
     }
 
     public override void _Process(double delta)
