@@ -398,6 +398,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0.3, 0)
 [node name="FPSCharacter_Interaction" parent="." instance=ExtResource("7_33yod")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.25, 0, 7)
 wall_min_slide_angle = 0.0
+WalkCameraLerpHeight = 0.25
+FootstepSounds = null
+JumpingSounds = null
+LandingSounds = null
 
 [node name="interactive_item_look_and_interact_test" parent="." instance=ExtResource("8_g3ca3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0, -5)

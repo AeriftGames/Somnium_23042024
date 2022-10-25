@@ -4,17 +4,18 @@ using System.Diagnostics;
 
 public partial class GameMaster : Node
 {
+    // CORE
     public static GameMaster GM;
     public MessageObject msgObject;
 
+    // LOG
     public LogSystem Log;
-
-    // nodes v autoloadu se kterymi chceme komunikovat prostrednictvim msgObject
     public Node GDNode_CustomSettings;
     public Node GDNode_Logging;
 
-    //
-    public FPSCharacter_BasicMoving FpsCharacter = null;
+    // POINTERS
+    private DebugHud _debugHud = null;
+    private FPSCharacter_BasicMoving _fpsCharacter = null;
 
     public override void _Ready()
     {
@@ -30,17 +31,16 @@ public partial class GameMaster : Node
 
         // vytvoreni csharp logging systemu
         Log = new LogSystem(this);
-
-        // Test
-        Log.WriteLog(this, LogSystem.ELogMsgType.INFO, "blablasfldaslfaslf");
-        Log.WriteLog(this, LogSystem.ELogMsgType.WARNING, "blablasfldaslfaslf");
-        Log.WriteLog(this, LogSystem.ELogMsgType.ERROR, "blablasfldaslfaslf");
     }
 
-    public FPSCharacter_BasicMoving GetFPSCharacter()
-    {
-        return FpsCharacter;
-    }
+    // Set/Get FPS Character
+    public void SetFPSCharacter(FPSCharacter_BasicMoving newFpsCharater) { _fpsCharacter = newFpsCharater; }
+    public FPSCharacter_BasicMoving GetFPSCharacter() { return _fpsCharacter; }
+
+    // Set/Get Debug Hud
+    public void SetDebugHud(DebugHud newDebugHud) { _debugHud = newDebugHud; }
+    public DebugHud GetDebugHud() { return _debugHud; }
+
 
     public override void _Process(double delta)
     {

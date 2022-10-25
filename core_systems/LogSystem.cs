@@ -17,6 +17,7 @@ public partial class LogSystem : Godot.Object
 		return gm.msgObject.GetBoolData();
     }
 
+	// Hlavni public funkce pro napsani logu
     public void WriteLog(Node newSenderNode,ELogMsgType newLogMessageType,string newText)
 	{
 		// !!!!!!!! Pokud je debug kaen vypnuty, nepokracujeme dal a vyskocime z funkce !!!!!!!!!

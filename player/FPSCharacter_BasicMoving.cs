@@ -70,7 +70,10 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
 
 	public override void _Ready()
 	{
-		HeadMain = GetNode<Node3D>("HeadMain");
+        // pro dostupnost skrze gamemastera
+        GameMaster.GM.SetFPSCharacter(this);
+
+        HeadMain = GetNode<Node3D>("HeadMain");
         HeadGimbalA = GetNode<Node3D>("HeadMain/HeadGimbalA");
         HeadGimbalB = GetNode<Node3D>("HeadMain/HeadGimbalA/HeadGimbalB");
         HeadHolderCamera = GetNode<Node3D>("HeadMain/HeadGimbalA/HeadGimbalB/HeadHolderCamera");
@@ -84,9 +87,6 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
 
         _HeadMainLerpTarget = HeadStandPosition.Position;
         _ActualMoveSpeed = MoveSpeedInStand;
-
-        // pro dostupnost na hrace skrze gamemastera
-        GameMaster.GM.FpsCharacter = this;
     }
 
     // Hadle inout for mouse

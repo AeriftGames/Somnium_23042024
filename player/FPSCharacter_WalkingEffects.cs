@@ -38,8 +38,9 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
     [Export] public AudioStream[] JumpingSounds;
     [Export] public AudioStream[] LandingSounds;
 
-    private float _ActualMovementSpeed = 0.0f;
-    private Vector3 _LastPosition = Vector3.Zero;
+    public float ActualMovementSpeed = 0.0f;
+    public Vector3 LastPosition = Vector3.Zero;
+
     private Vector3 _LastHalfFootStepPosition = Vector3.Zero;
     private int lastIDFootstepSound = -1;
 
@@ -70,7 +71,16 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
     {
         base._Process(delta);
 
+        // Calculate actual movement speed 
+        ActualMovementSpeed = GlobalPosition.DistanceTo(LastPosition) * 20000.0f * (float)delta;
+        LastPosition = GlobalPosition;
+
+        GameMaster.GM.GetDebugHud().CustomLabelUpdateText(0,this,"MoveSpeed: " + ActualMovementSpeed);
+
+        GameMaster.GM.Log.WriteLog(this,LogSystem.ELogMsgType.INFO,"MoveSpeed: " + ActualMovementSpeed);
+
         CalculateFootSteps((float)delta);
+
         UpdateWalkHeadBobbing((float)delta);
         UpdateLandingHeadBobbing((float)delta);
     }
@@ -112,9 +122,6 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
 
         float lastHalfFootStepDistance = 0.0f;
 
-        // Calculate actual movement speed
-        _ActualMovementSpeed = GlobalPosition.DistanceTo(_LastPosition) * 40000.0f * delta;
-
         if (IsOnFloor())
             lastHalfFootStepDistance = GlobalPosition.DistanceTo(_LastHalfFootStepPosition);
         if (lastHalfFootStepDistance >= halfFootStepLength)
@@ -135,9 +142,6 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
             _LastHalfFootStepPosition = GlobalPosition;
             //GD.Print("new footstep");
         }
-
-        //Update LastPosition with actual position
-        _LastPosition = GlobalPosition;
     }
 
     private void UpdateWalkHeadBobbing(float delta)
@@ -160,7 +164,7 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
         }
 
         // if actualmove is smaller than testing value, centered headlerpY and speedUP lerp to normal 
-        if (_ActualMovementSpeed <= 0.2f)
+        if (ActualMovementSpeed <= 0.2f)
         {
             lerpHeadWalkY = 0.0f;
             lerpFootstepSpeedModifier = 3.0f;
