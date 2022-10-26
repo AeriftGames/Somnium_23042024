@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cc73mshammsxa"
-path="res://.godot/imported/scratch_01.png-003d0d72ebef835c7779180d20f215e4.ctex"
+path="res://.godot/imported/scratch_01.png-77d93a0c0f08a21fd0640207f82db5f6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Particles/scratch_01.png"
-dest_files=["res://.godot/imported/scratch_01.png-003d0d72ebef835c7779180d20f215e4.ctex"]
+source_file="res://particles/scratch_01.png"
+dest_files=["res://.godot/imported/scratch_01.png-77d93a0c0f08a21fd0640207f82db5f6.ctex"]
 
 [params]
 
