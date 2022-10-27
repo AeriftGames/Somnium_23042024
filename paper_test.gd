@@ -13,6 +13,8 @@ var camera_look
 
 var tween
 
+var player
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	node_interact = $interactive_object
@@ -32,6 +34,7 @@ func _process(delta):
 	
 	
 func _used(delta):
+	
 	if (Input.is_action_just_pressed("Rotate")):
 		rotating = true
 		prev_mouse_position = get_viewport().get_mouse_position()
@@ -48,7 +51,7 @@ func _used2():
 	tween = create_tween()
 	tween.tween_property(self, "position", Vector3(-0.741, 1.322, -8.345), 1)
 	tween.tween_property(self, "rotation", Vector3(90, 0, 0), 1)
-	$Timer.start(3)
+	#$Timer.start(3)
 	#passed_object.DisableInputsAndCameraMoveLookTarget(camera_pos.get_global_position(), camera_look.get_global_position())
 	#tween.tween_property(self, "scale", Vector3(1, 1, 1), 1.5)
 	#tween.tween_property(self, "position", Vector3(0, 1.5, 0), 1)
@@ -76,8 +79,10 @@ func message_update():
 		#passed_object.SetInputEnable(false)
 		isNowInteract = true
 		self._used2()
+		self.get_node("/root/WorldInterior/FPSCharacter_Interaction/BasicHud/Item_inspect").show_inspect(true)
 
 
 func _on_timer_timeout():
-	passed_object.DisableInputsAndCameraMoveLookTarget(camera_pos.get_global_position(), camera_look.get_global_position())
+	pass
+	#passed_object.DisableInputsAndCameraMoveLookTarget(cameras_pos.get_global_position(), camera_look.get_global_position())
 	

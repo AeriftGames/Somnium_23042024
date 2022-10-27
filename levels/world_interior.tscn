@@ -385,7 +385,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.6, 0, -9.6)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.6, 0, -8.6)
 
 [node name="PaperTest" parent="LevelGeometry" instance=ExtResource("6_p6ur7")]
-transform = Transform3D(0.199951, -0.00440485, 0, 0.00440485, 0.199951, 0, 0, 0, 0.2, -0.740919, 0.989991, -8.34489)
+transform = Transform3D(0.199951, -0.00440485, 0, 0.00440485, 0.199951, 0, 0, 0, 0.2, 4.47862, 0.989991, 2.48536)
 
 [node name="OmniLight3d" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 2, 0)

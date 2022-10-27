@@ -49,5 +49,6 @@ text = "use"
 horizontal_alignment = 1
 
 [node name="Item_inspect" parent="BasicHud" index="1" instance=ExtResource("4_x8cti")]
+visible = false
 grow_horizontal = 2
 grow_vertical = 2
