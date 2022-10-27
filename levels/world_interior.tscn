@@ -6,11 +6,11 @@
 [ext_resource type="Texture2D" uid="uid://0n0dx7ov4qi6" path="res://textures/blood_decal_test.png" id="4_6bpl4"]
 [ext_resource type="PackedScene" path="res://placeholders/wine_barrel.tscn" id="5_ttrj3"]
 [ext_resource type="PackedScene" uid="uid://gtfs2t3l23nj" path="res://placeholders/interactive_items/interactive_item_rotation_test.tscn" id="6_5ry0k"]
-[ext_resource type="PackedScene" uid="uid://b5j5fsa38hgon" path="res://paper_test.tscn" id="6_p6ur7"]
 [ext_resource type="PackedScene" uid="uid://8x5qdxf7a8nq" path="res://player/FPSCharacter_Interaction.tscn" id="7_33yod"]
 [ext_resource type="PackedScene" uid="uid://xfouxhhlpltn" path="res://placeholders/interactive_items/interactive_item_test.tscn" id="8_6nvq8"]
 [ext_resource type="PackedScene" uid="uid://dp7dmsp410av7" path="res://placeholders/interactive_items/interactive_item_look_and_interact_test.tscn" id="8_g3ca3"]
 [ext_resource type="PackedScene" uid="uid://ukqaj32a10wx" path="res://objects/keypad/keypad.tscn" id="9_svrf2"]
+[ext_resource type="PackedScene" uid="uid://bnxkfp8glv26e" path="res://paper_test_2.tscn" id="12_jiwiy"]
 
 [sub_resource type="Environment" id="Environment_vig0a"]
 background_mode = 1
@@ -384,11 +384,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.6, 0, -9.6)
 [node name="wine_barrel6" parent="LevelGeometry" instance=ExtResource("5_ttrj3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.6, 0, -8.6)
 
-[node name="PaperTest" parent="LevelGeometry" instance=ExtResource("6_p6ur7")]
-transform = Transform3D(0.199951, -0.00440485, 0, 0.00440485, 0.199951, 0, 0, 0, 0.2, 4.47862, 0.989991, 2.48536)
-
 [node name="OmniLight3d" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 2, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 2, 2.17526)
 light_energy = 0.4
 shadow_enabled = true
 omni_range = 44.822
@@ -434,3 +431,6 @@ transform = Transform3D(0.00122522, 0, 0.199996, 0, 0.2, 0, -0.199996, 0, 0.0012
 
 [node name="InteractiveItem_test2" parent="." instance=ExtResource("6_5ry0k")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.48244, 0.927482, 0)
+
+[node name="paper_test_2" parent="." instance=ExtResource("12_jiwiy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.94757, 0.0495754, 1.50865)

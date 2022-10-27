@@ -9,6 +9,9 @@
 script = ExtResource("2_fmih3")
 LengthInteractRay = 5.0
 
+[node name="CharacterCamera" parent="HeadMain/HeadGimbalA/HeadGimbalB/HeadHolderCamera" index="0"]
+current = true
+
 [node name="BasicHud" type="Control" parent="." index="7"]
 layout_mode = 3
 anchors_preset = 15
@@ -50,5 +53,3 @@ horizontal_alignment = 1
 
 [node name="Item_inspect" parent="BasicHud" index="1" instance=ExtResource("4_x8cti")]
 visible = false
-grow_horizontal = 2
-grow_vertical = 2

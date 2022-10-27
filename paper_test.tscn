@@ -12,20 +12,15 @@ albedo_texture = ExtResource("1_kwo4j")
 [sub_resource type="PlaneMesh" id="PlaneMesh_nq60j"]
 material = SubResource("StandardMaterial3D_4altp")
 
-[node name="PaperTest" type="MeshInstance3D"]
-transform = Transform3D(1, 0, 0, 0, 0.137859, -0.990452, 0, 0.990452, 0.137859, 0, 1.07158, 0)
+[node name="Node3D" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, -6.39488e-14, 0, 6.39488e-14, 1, -0.077279, 1.04923, 1.33807)
+
+[node name="PaperTest" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.07158, 0)
 material_override = SubResource("StandardMaterial3D_jpqal")
 mesh = SubResource("PlaneMesh_nq60j")
 script = ExtResource("2_gqav7")
 
-[node name="interactive_object" parent="." instance=ExtResource("3_kq8od")]
-
-[node name="camera_pos" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.93407, 0)
-
-[node name="camera_look" type="Node3D" parent="."]
-
-[node name="Timer" type="Timer" parent="."]
-wait_time = 2.0
-
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[node name="interactive_object" parent="PaperTest" instance=ExtResource("3_kq8od")]

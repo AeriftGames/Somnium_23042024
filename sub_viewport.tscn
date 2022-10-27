@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://b03n7xry3kdf8"]
+
+[ext_resource type="Script" path="res://sub_viewport.gd" id="1_g7tox"]
+[ext_resource type="PackedScene" uid="uid://b5j5fsa38hgon" path="res://paper_test.tscn" id="1_l8r5f"]
+
+[node name="SubViewport" type="SubViewport"]
+script = ExtResource("1_g7tox")
+
+[node name="PaperTest" parent="." instance=ExtResource("1_l8r5f")]

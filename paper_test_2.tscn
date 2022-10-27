@@ -1,0 +1,17 @@
+[gd_scene load_steps=6 format=3 uid="uid://bnxkfp8glv26e"]
+
+[ext_resource type="Texture2D" uid="uid://chckuit0vqorf" path="res://papertest.png" id="1_0hmb8"]
+[ext_resource type="Script" path="res://paper_test_2.gd" id="1_0r87f"]
+[ext_resource type="PackedScene" uid="uid://dbnevtbu1g7uy" path="res://core_systems/interactive_system/interactive_object.tscn" id="2_pr4iv"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i4ny4"]
+albedo_texture = ExtResource("1_0hmb8")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_wftne"]
+
+[node name="paper_test_2" type="MeshInstance3D"]
+material_override = SubResource("StandardMaterial3D_i4ny4")
+mesh = SubResource("PlaneMesh_wftne")
+script = ExtResource("1_0r87f")
+
+[node name="interactive_object" parent="." instance=ExtResource("2_pr4iv")]
