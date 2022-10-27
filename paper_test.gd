@@ -19,7 +19,6 @@ func _ready():
 	camera_pos = $camera_pos
 	camera_look = $camera_look
 	#tween = create_tween()
-	print(tween)
 	#var x = self.set_scale(Vector3(1, 1, 1))
 	#self.scale = Vector3(1, 1, 1)
 	#print(x)
