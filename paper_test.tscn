@@ -15,10 +15,10 @@ material = SubResource("StandardMaterial3D_4altp")
 [node name="Node3D" type="Node3D"]
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, -6.39488e-14, 0, 6.39488e-14, 1, -0.077279, 1.04923, 1.33807)
+transform = Transform3D(1, 0, 0, 0, 1, -6.39488e-14, 0, 6.39488e-14, 1, 0, 0, 1.46845)
 
 [node name="PaperTest" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.07158, 0)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_jpqal")
 mesh = SubResource("PlaneMesh_nq60j")
 script = ExtResource("2_gqav7")
