@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://c6u5kj6ckrar1"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xju6y"]
+transparency = 1
+blend_mode = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.6, 0.6, 0.6, 0.235294)
+
+[sub_resource type="CurveTexture" id="CurveTexture_04i5x"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_f3bxw"]
+emission_shape = 1
+emission_sphere_radius = 10.0
+direction = Vector3(0, 0, 0)
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_max = 0.1
+scale_min = 0.01
+scale_max = 0.01
+scale_curve = SubResource("CurveTexture_04i5x")
+color = Color(0.576471, 0.576471, 0.576471, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_ppn2y"]
+
+[node name="dust_particle" type="GPUParticles3D"]
+material_override = SubResource("StandardMaterial3D_xju6y")
+amount = 500
+lifetime = 6.0
+process_material = SubResource("ParticleProcessMaterial_f3bxw")
+draw_pass_1 = SubResource("SphereMesh_ppn2y")

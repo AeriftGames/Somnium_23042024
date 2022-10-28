@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://dfafsmmyuynkp"]
+[gd_scene load_steps=42 format=3 uid="uid://dfafsmmyuynkp"]
 
 [ext_resource type="Texture2D" uid="uid://660jcc1vju43" path="res://textures/brick_pavement_0108_02_s.jpg" id="1_uebcf"]
 [ext_resource type="Texture2D" uid="uid://bybrpbyf1euit" path="res://textures/NormalMap (3).png" id="2_18fqb"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://xfouxhhlpltn" path="res://placeholders/interactive_items/interactive_item_test.tscn" id="8_6nvq8"]
 [ext_resource type="PackedScene" uid="uid://dp7dmsp410av7" path="res://placeholders/interactive_items/interactive_item_look_and_interact_test.tscn" id="8_g3ca3"]
 [ext_resource type="PackedScene" uid="uid://ukqaj32a10wx" path="res://objects/keypad/keypad.tscn" id="9_svrf2"]
+[ext_resource type="PackedScene" uid="uid://c6u5kj6ckrar1" path="res://dust_particle.tscn" id="12_0djyd"]
 [ext_resource type="PackedScene" uid="uid://bnxkfp8glv26e" path="res://paper_test_2.tscn" id="12_jiwiy"]
 
 [sub_resource type="Environment" id="Environment_vig0a"]
@@ -434,3 +435,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.48244, 0.927482, 0)
 
 [node name="paper_test_2" parent="." instance=ExtResource("12_jiwiy")]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -0.760106, 0.988304, -8.33813)
+
+[node name="dust_particle" parent="." instance=ExtResource("12_0djyd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.88398, 1.55768, -3.35371)
