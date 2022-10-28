@@ -8,15 +8,25 @@ var isNowInteract = true
 var passed_object
 var node_interact
 var player
-
+var tween
 
 func _ready():
 	player = self.get_node("/root/WorldInterior/FPSCharacter_Interaction/BasicHud/Item_inspect")
 	node_interact = $interactive_object
-
+	#tween = get_tree().create_tween()
+	tween = self.create_tween()
+	move()
+	
 
 func _process(delta):
 		_used(delta)
+
+
+func move():
+	print("ZZZZZZZZZZZ")
+	print(tween)
+	tween.tween_property(self, "position", Vector3(0, 0, 0), 1)
+	print(tween)
 
 	
 func _used(delta):
