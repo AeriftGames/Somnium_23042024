@@ -1,0 +1,25 @@
+{
+	"items": {
+		"read": {
+			"newspaper1": [{
+					"name": "Newspaper #7 novinky.cz",
+					"description": "Rusko nehodlá zaútočit na Ukrajině jadernými zbraněmi, uvedl ve čtvrtek ruský prezident Vladimir Putin. Podle něj by to nemělo ani politický ani vojenský smysl. Poznamenal ale také, že riziko použití jaderných zbraní existuje vždycky, dokud jsou.\n
+					„Nepotřebujeme to udělat. Nemělo by to žádný smysl, ani politický, ani vojenský,“ řekl Putin v debatním klubu Valdaj k možnému použití jaderných zbraní.\n
+					Pronesl ale také, že „dokud existují jaderné zbraně, vždy existuje nebezpečí jejich použití“.\n
+					Rusko opakovaně možný jaderný útok zmiňuje, aby odradilo spojence Ukrajiny, kterou napadla ruská invazní armáda, od dodávek vojenské pomoci.\n
+					Putin ale ve čtvrtek tvrdil, že Rusko „nikdy nemluvilo o použití jaderných zbraní“. Vždy šlo prý o reakci na slova západních politiků.\n
+					Proti Západu se ruský vládce v debatním klubu vymezoval opakovaně. V tradiční kremelské rétorice ho obviňoval z toho, že na Rusko vyvíjí čím dál větší tlak, aby se mu podvolilo, což se ale prý nestane.\n
+					Ve středu Rusko uspořádalo ohlášené cvičení svých jaderných sil. Generální tajemník Severoatlantické aliance Jens Stoltenberg poté zopakoval, že Rusko svým jaderným vyhrožováním NATO od další podpory Ukrajině neodradí.\n"
+				},
+				{
+					"value": "Open",
+					"onclick": "OpenDoc()"
+				},
+				{
+					"value": "Close",
+					"onclick": "CloseDoc()"
+				}
+			]
+		}
+	}
+}

@@ -414,7 +414,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.38295, 1.31275, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.34529, 1.31275, -0.0349188)
 
 [node name="FPSCharacter_Interaction" parent="." instance=ExtResource("7_33yod")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.25, 0, 7)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.656572, 0, -6.01898)
 WalkCameraLerpHeight = 0.25
 FootstepSounds = null
 JumpingSounds = null
