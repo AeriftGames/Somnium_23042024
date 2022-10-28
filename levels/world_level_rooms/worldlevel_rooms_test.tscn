@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dl47cp7l283rq"]
+[gd_scene load_steps=18 format=3 uid="uid://dl47cp7l283rq"]
 
 [ext_resource type="ArrayOccluder3D" uid="uid://c65wc0yeg3cak" path="res://levels/world_level_rooms/worldlevel_rooms_test.occ" id="1_fh8f2"]
 [ext_resource type="PackedScene" uid="uid://ck8mt4y4gfqmk" path="res://placeholders/modular_walls/ground_large.tscn" id="1_vcfbv"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://larq6fdfhjoe" path="res://placeholders/modular_walls/wall_doors_conic.tscn" id="7_n62yw"]
 [ext_resource type="Material" uid="uid://btskthdiqqlrw" path="res://placeholders/modular_walls/mat/mat_wall2.tres" id="8_5fvmk"]
 [ext_resource type="PackedScene" uid="uid://djv5rnm2dye1p" path="res://placeholders/modular_walls/wall_small_corner_3_sides.tscn" id="9_rsohx"]
+[ext_resource type="AudioStream" uid="uid://ngmb6mrvsbqc" path="res://audio/audio_streams/613738__punneedsounds__amb-ost1.mp3" id="11_28bu6"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_nrkwj"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -432,9 +433,9 @@ mesh = SubResource("PlaneMesh_h1tyu")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="LevelGeometry/Ceiling/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_op6nf")
 
-[node name="Lights" type="Node3D" parent="LevelGeometry"]
+[node name="Lights" type="Node3D" parent="."]
 
-[node name="OmniLight3D" type="OmniLight3D" parent="LevelGeometry/Lights"]
+[node name="OmniLight3D" type="OmniLight3D" parent="Lights"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, -1.5, 0)
 light_energy = 0.741
 light_indirect_energy = 10.638
@@ -444,12 +445,18 @@ shadow_enabled = true
 omni_range = 25.0
 omni_attenuation = 1.74111
 
-[node name="OmniLight3D2" type="OmniLight3D" parent="LevelGeometry/Lights"]
+[node name="OmniLight3D2" type="OmniLight3D" parent="Lights"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 2.2, 3)
 light_energy = 0.481
 light_indirect_energy = 7.319
 shadow_enabled = true
 omni_range = 22.85
 omni_attenuation = 1.74111
+
+[node name="AmbientAudio" type="Node3D" parent="."]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="AmbientAudio"]
+stream = ExtResource("11_28bu6")
+autoplay = true
 
 [node name="FPSCharacter_Interaction" parent="." instance=ExtResource("2_mfl62")]
