@@ -34,6 +34,9 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
     [Export] public float lerpLandingSpeedModifier = 3.0f;
 
     [ExportGroupAttribute("Audio Settings")]
+    [Export] public float FootstepsVolumeDB = -10.0f;
+    [Export] public float JumpingVolumeDB = 1.1f;
+    [Export] public float LandingVolumeDB = -6.0f;
     [Export] public AudioStream[] FootstepSounds;
     [Export] public AudioStream[] JumpingSounds;
     [Export] public AudioStream[] LandingSounds;
@@ -99,7 +102,7 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
     {
         base.Landing();
 
-        PlayRandomSound(AudioStreamPlayerJumpLand, LandingSounds, 0.5f);
+        PlayRandomSound(AudioStreamPlayerJumpLand, LandingSounds, LandingVolumeDB, 0.5f);
 
         lerpHeadLandY = LandCameraLerpHeight;
         lerpHeadLandRotX = LandCameraLerpRotation;
@@ -118,7 +121,7 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
     {
         base.Jumping();
 
-        PlayRandomSound(AudioStreamPlayerJumpLand, JumpingSounds, 1.0f);
+        PlayRandomSound(AudioStreamPlayerJumpLand, JumpingSounds, JumpingVolumeDB, 1.0f);
     }
 
     private void CalculateFootSteps(float delta)
@@ -141,7 +144,7 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
                 FootstepRight = !FootstepRight;
 
                 // Play footstep audio
-                PlayRandomSound(AudioStreamPlayerFootsteps, FootstepSounds, 1.0f);
+                PlayRandomSound(AudioStreamPlayerFootsteps, FootstepSounds, FootstepsVolumeDB, 1.0f);
             }
 
             _LastHalfFootStepPosition = GlobalPosition;
@@ -189,7 +192,7 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
             new Vector3(lerpHeadLandRotX, 0, 0), lerpLandingSpeedModifier * delta);
     }
 
-    private void PlayRandomSound(AudioStreamPlayer audioPlayer, AudioStream[] audioStreams, float pitch)
+    private void PlayRandomSound(AudioStreamPlayer audioPlayer, AudioStream[] audioStreams,float volumeDB, float pitch)
     {
         if (audioPlayer == null) return;
         if (audioStreams.Length < 1) return;
@@ -211,6 +214,7 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
         }
 
         // play sounds
+        audioPlayer.VolumeDb = volumeDB;
         audioPlayer.PitchScale = pitch;
         audioPlayer.Stream = audioStreams[id];
         audioPlayer.Play();

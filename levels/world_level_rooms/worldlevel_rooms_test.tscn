@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dl47cp7l283rq"]
+[gd_scene load_steps=22 format=3 uid="uid://dl47cp7l283rq"]
 
 [ext_resource type="ArrayOccluder3D" uid="uid://c65wc0yeg3cak" path="res://levels/world_level_rooms/worldlevel_rooms_test.occ" id="1_fh8f2"]
 [ext_resource type="PackedScene" uid="uid://ck8mt4y4gfqmk" path="res://placeholders/modular_walls/ground_large.tscn" id="1_vcfbv"]
@@ -12,6 +12,8 @@
 [ext_resource type="Material" uid="uid://btskthdiqqlrw" path="res://placeholders/modular_walls/mat/mat_wall2.tres" id="8_5fvmk"]
 [ext_resource type="PackedScene" uid="uid://djv5rnm2dye1p" path="res://placeholders/modular_walls/wall_small_corner_3_sides.tscn" id="9_rsohx"]
 [ext_resource type="AudioStream" uid="uid://ngmb6mrvsbqc" path="res://audio/audio_streams/613738__punneedsounds__amb-ost1.mp3" id="11_28bu6"]
+[ext_resource type="Texture2D" uid="uid://0n0dx7ov4qi6" path="res://textures/blood_decal_test.png" id="11_tv71u"]
+[ext_resource type="PackedScene" uid="uid://dhvnxdw5mvaro" path="res://placeholders/wine_barrel.tscn" id="13_5hv21"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_nrkwj"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -40,9 +42,16 @@ size = Vector2(25, 25)
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_op6nf"]
 data = PackedVector3Array(12.5, 0, 12.5, -12.5, 0, 12.5, 12.5, 0, -12.5, -12.5, 0, 12.5, -12.5, 0, -12.5, 12.5, 0, -12.5)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_ckjw8"]
+size = Vector3(1, 1, 1.598)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_thd4b"]
+size = Vector3(0.67, 1.05, 0.8)
+
 [node name="WorldLevel_ModularWalls" type="Node3D"]
 
 [node name="OcclusionCulling" type="OccluderInstance3D" parent="."]
+visible = false
 occluder = ExtResource("1_fh8f2")
 bake_simplification_distance = 0.01
 
@@ -433,6 +442,79 @@ mesh = SubResource("PlaneMesh_h1tyu")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="LevelGeometry/Ceiling/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_op6nf")
 
+[node name="Decals" type="Node3D" parent="LevelGeometry"]
+
+[node name="DecalBlood" type="Decal" parent="LevelGeometry/Decals"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, -2.5, 0)
+texture_albedo = ExtResource("11_tv71u")
+
+[node name="DecalBlood2" type="Decal" parent="LevelGeometry/Decals"]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 10, -2.5, 0)
+texture_albedo = ExtResource("11_tv71u")
+
+[node name="DecalBlood3" type="Decal" parent="LevelGeometry/Decals"]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 8.5, -2.5, 0)
+texture_albedo = ExtResource("11_tv71u")
+
+[node name="DecalBlood4" type="Decal" parent="LevelGeometry/Decals"]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 8, -2.5, 0)
+texture_albedo = ExtResource("11_tv71u")
+
+[node name="DecalBlood5" type="Decal" parent="LevelGeometry/Decals"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, -2.5, 0)
+texture_albedo = ExtResource("11_tv71u")
+
+[node name="DecalBlood6" type="Decal" parent="LevelGeometry/Decals"]
+transform = Transform3D(0.5, -0.707107, 0.5, 0.5, 0.707107, 0.5, -0.707107, 0, 0.707107, 14, -2.5, 0)
+texture_albedo = ExtResource("11_tv71u")
+
+[node name="DecalBlood9" type="Decal" parent="LevelGeometry/Decals"]
+transform = Transform3D(0.29995, -0.683013, 0.665976, 0.5, 0.707107, 0.5, -0.812422, 0.183013, 0.553603, 14, -1.5, -0.5)
+texture_albedo = ExtResource("11_tv71u")
+albedo_mix = 0.32
+
+[node name="DecalBlood10" type="Decal" parent="LevelGeometry/Decals"]
+transform = Transform3D(0.29995, -0.683013, 0.665976, 0.5, 0.707107, 0.5, -0.812422, 0.183013, 0.553603, 12, -2, -1.5)
+texture_albedo = ExtResource("11_tv71u")
+
+[node name="DecalBlood11" type="Decal" parent="LevelGeometry/Decals"]
+transform = Transform3D(0.231048, 0.0147546, 0.97283, 0.193145, -0.98068, -0.0309985, 0.953578, 0.19506, -0.229435, 12, -2, -1)
+texture_albedo = ExtResource("11_tv71u")
+
+[node name="DecalBlood12" type="Decal" parent="LevelGeometry/Decals"]
+transform = Transform3D(0.362372, 0.353553, -0.862372, 0.5, 0.707107, 0.5, 0.786566, -0.612372, 0.0794592, 12.5, -2, -2)
+texture_albedo = ExtResource("11_tv71u")
+albedo_mix = 0.52
+
+[node name="DecalBlood7" type="Decal" parent="LevelGeometry/Decals"]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 12.5, -2.5, 0)
+texture_albedo = ExtResource("11_tv71u")
+
+[node name="DecalBlood8" type="Decal" parent="LevelGeometry/Decals"]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 12, -2.5, 0)
+texture_albedo = ExtResource("11_tv71u")
+
+[node name="CollisionBlocks" type="Node3D" parent="LevelGeometry"]
+
+[node name="StaticBlock" type="StaticBody3D" parent="LevelGeometry/CollisionBlocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, -1.5, -1.5)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LevelGeometry/CollisionBlocks/StaticBlock"]
+shape = SubResource("BoxShape3D_ckjw8")
+
+[node name="StaticBlock2" type="StaticBody3D" parent="LevelGeometry/CollisionBlocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, -1.5, 2.3)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LevelGeometry/CollisionBlocks/StaticBlock2"]
+shape = SubResource("BoxShape3D_ckjw8")
+
+[node name="StaticBlock3" type="StaticBody3D" parent="LevelGeometry/CollisionBlocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0.5, -4.7)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LevelGeometry/CollisionBlocks/StaticBlock3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, -0.05, 0.65)
+shape = SubResource("BoxShape3D_thd4b")
+
 [node name="Lights" type="Node3D" parent="."]
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Lights"]
@@ -460,3 +542,21 @@ stream = ExtResource("11_28bu6")
 autoplay = true
 
 [node name="FPSCharacter_Interaction" parent="." instance=ExtResource("2_mfl62")]
+
+[node name="wine_barrel" parent="." instance=ExtResource("13_5hv21")]
+transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, 13.35, -2, 1.85)
+
+[node name="wine_barrel4" parent="." instance=ExtResource("13_5hv21")]
+transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, 13.4, 0, 3.95)
+
+[node name="wine_barrel6" parent="." instance=ExtResource("13_5hv21")]
+transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, 4.3, 0, -4)
+
+[node name="wine_barrel5" parent="." instance=ExtResource("13_5hv21")]
+transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, 13.4, 0.95, 3.95)
+
+[node name="wine_barrel2" parent="." instance=ExtResource("13_5hv21")]
+transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, 13.35, -2, -1.85)
+
+[node name="wine_barrel3" parent="." instance=ExtResource("13_5hv21")]
+transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, 13.35, -2, -1.05)
