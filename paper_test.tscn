@@ -1,11 +1,11 @@
 [gd_scene load_steps=7 format=3 uid="uid://b5j5fsa38hgon"]
 
-[ext_resource type="Texture2D" uid="uid://chckuit0vqorf" path="res://papertest.png" id="1_kwo4j"]
+[ext_resource type="Texture2D" uid="uid://d35fv342o2cvy" path="res://paper.png" id="1_6wy6a"]
 [ext_resource type="Script" path="res://paper_test.gd" id="2_gqav7"]
 [ext_resource type="PackedScene" uid="uid://dbnevtbu1g7uy" path="res://core_systems/interactive_system/interactive_object.tscn" id="3_kq8od"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jpqal"]
-albedo_texture = ExtResource("1_kwo4j")
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_csmp3"]
+albedo_texture = ExtResource("1_6wy6a")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4altp"]
 
@@ -15,11 +15,11 @@ material = SubResource("StandardMaterial3D_4altp")
 [node name="Node3D" type="Node3D"]
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, -6.39488e-14, 0, 6.39488e-14, 1, 0, 0, 1.46845)
+transform = Transform3D(1, 0, 0, 0, 1, -6.39488e-14, 0, 6.39488e-14, 1, 0, 0, 1.5)
 
 [node name="PaperTest" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
-material_override = SubResource("StandardMaterial3D_jpqal")
+material_override = SubResource("StandardMaterial3D_csmp3")
 mesh = SubResource("PlaneMesh_nq60j")
 script = ExtResource("2_gqav7")
 

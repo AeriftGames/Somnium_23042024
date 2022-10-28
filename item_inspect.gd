@@ -12,6 +12,7 @@ var player
 
 func _ready():
 	self.hide()
+	#$SubViewport.transparent_bg = true
 
 
 func _process(delta):

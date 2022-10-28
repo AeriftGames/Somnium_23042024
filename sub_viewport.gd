@@ -19,7 +19,7 @@ func _ready():
 func _process(delta):
 	_used(delta)
 
-	
+
 func _used(delta):
 	if (Input.is_action_just_pressed("Rotate")):
 		rotating = true

@@ -1,11 +1,11 @@
 [gd_scene load_steps=6 format=3 uid="uid://bnxkfp8glv26e"]
 
-[ext_resource type="Texture2D" uid="uid://chckuit0vqorf" path="res://papertest.png" id="1_0hmb8"]
 [ext_resource type="Script" path="res://paper_test_2.gd" id="1_0r87f"]
+[ext_resource type="Texture2D" uid="uid://d35fv342o2cvy" path="res://paper.png" id="1_1gv6g"]
 [ext_resource type="PackedScene" uid="uid://dbnevtbu1g7uy" path="res://core_systems/interactive_system/interactive_object.tscn" id="2_pr4iv"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i4ny4"]
-albedo_texture = ExtResource("1_0hmb8")
+albedo_texture = ExtResource("1_1gv6g")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_wftne"]
 
