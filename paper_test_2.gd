@@ -39,13 +39,12 @@ func _input(event):
 		_show_description()
 		print(camera)
 	elif event.is_action_pressed("MouseWheelUp") and isNowInteract == true:
-		camera.set_position(Vector3(0, 0, 2))
+		camera.set_position(Vector3(2, 0, 0))
 	elif event.is_action_pressed("MouseWheelDown") and isNowInteract == true:
-		camera.set_position(Vector3(0, 0, 3))
+		camera.set_position(Vector3(3, 0, 0))
 
 
 func _used():
-	#camera = self.get_node("/root/WorldInterior/FPSCharacter_Interaction/BasicHud/Item_inspect/SubViewport/PaperTest/Camera3D")
 	passed_object.SetInputEnable(false)
 	isNowInteract = true
 	player.show_inspect(true)
@@ -60,6 +59,8 @@ func _used_quit():
 	isNowInteract = false
 	item_name_label.text = ""
 	item_description_label.text = ""
+	showed_description = false
+	_show_description()
 
 
 func _show_description():
