@@ -3,8 +3,8 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cnk7i817otkcg"
-path.s3tc="res://.godot/imported/dust_particle.png-8476b572c1b86bf75c347d5f50202fad.s3tc.ctex"
-path.etc2="res://.godot/imported/dust_particle.png-8476b572c1b86bf75c347d5f50202fad.etc2.ctex"
+path.s3tc="res://.godot/imported/dust_particle.png-ddafa11f5ae6b4a27cf33964d3c592bb.s3tc.ctex"
+path.etc2="res://.godot/imported/dust_particle.png-ddafa11f5ae6b4a27cf33964d3c592bb.etc2.ctex"
 metadata={
 "imported_formats": ["s3tc", "etc2"],
 "vram_texture": true
@@ -12,8 +12,8 @@ metadata={
 
 [deps]
 
-source_file="res://dust_particle.png"
-dest_files=["res://.godot/imported/dust_particle.png-8476b572c1b86bf75c347d5f50202fad.s3tc.ctex", "res://.godot/imported/dust_particle.png-8476b572c1b86bf75c347d5f50202fad.etc2.ctex"]
+source_file="res://particles/images/dust_particle.png"
+dest_files=["res://.godot/imported/dust_particle.png-ddafa11f5ae6b4a27cf33964d3c592bb.s3tc.ctex", "res://.godot/imported/dust_particle.png-ddafa11f5ae6b4a27cf33964d3c592bb.etc2.ctex"]
 
 [params]
 

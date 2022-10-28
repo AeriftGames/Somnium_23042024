@@ -1,4 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://c6u5kj6ckrar1"]
+[gd_scene load_steps=6 format=3 uid="uid://c6u5kj6ckrar1"]
+
+[ext_resource type="Texture2D" uid="uid://cnk7i817otkcg" path="res://particles/images/dust_particle.png" id="1_hck1v"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xju6y"]
 transparency = 1
@@ -6,6 +8,7 @@ blend_mode = 1
 shading_mode = 0
 vertex_color_use_as_albedo = true
 albedo_color = Color(0.6, 0.6, 0.6, 0.235294)
+albedo_texture = ExtResource("1_hck1v")
 
 [sub_resource type="CurveTexture" id="CurveTexture_04i5x"]
 
