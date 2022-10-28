@@ -27,7 +27,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Somnium"
-run/main_scene="res://levels/world_interior.tscn"
+run/main_scene="res://levels/world_level_rooms/worldlevel_rooms_test.tscn"
 config/features=PackedStringArray("4.0")
 run/max_fps=144
 config/icon="res://icon.svg"
@@ -110,3 +110,9 @@ ToggleDebugHud={
 [physics]
 
 common/physics_ticks_per_second=144
+
+[rendering]
+
+occlusion_culling/occlusion_rays_per_thread=1024
+anti_aliasing/quality/screen_space_aa=1
+occlusion_culling/use_occlusion_culling=true

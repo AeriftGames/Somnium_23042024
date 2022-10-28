@@ -1,0 +1,52 @@
+[gd_scene load_steps=17 format=3 uid="uid://uftv8kadajkd"]
+
+[ext_resource type="PackedScene" uid="uid://clgsga4ty4mrp" path="res://placeholders/modular_walls/wall_normal.tscn" id="1_t1lo2"]
+[ext_resource type="PackedScene" uid="uid://0kvn14vfui6b" path="res://placeholders/modular_walls/wall_small.tscn" id="2_h78yk"]
+[ext_resource type="PackedScene" uid="uid://crjyudrh814yq" path="res://placeholders/modular_walls/wall_small_corner_simple_l.tscn" id="3_d4xpx"]
+[ext_resource type="PackedScene" uid="uid://djv5rnm2dye1p" path="res://placeholders/modular_walls/wall_small_corner_3_sides.tscn" id="4_jp06m"]
+[ext_resource type="PackedScene" uid="uid://dqg2k1yyygw3n" path="res://placeholders/modular_walls/wall_doors_normal.tscn" id="5_7y4av"]
+[ext_resource type="PackedScene" uid="uid://crnudh8bfmic5" path="res://placeholders/modular_walls/wall_small_corner_4_sides.tscn" id="6_nhg5j"]
+[ext_resource type="PackedScene" uid="uid://b7kr8jlclfgr8" path="res://placeholders/modular_walls/wall_small_corner_simple_end.tscn" id="7_3njjv"]
+[ext_resource type="PackedScene" uid="uid://dk1uu1iam0dha" path="res://placeholders/modular_walls/cube_hole_medium.tscn" id="8_7wwg0"]
+[ext_resource type="PackedScene" uid="uid://dc0mmunts8oay" path="res://placeholders/modular_walls/cube_hole_medium_wide.tscn" id="9_505u4"]
+[ext_resource type="PackedScene" uid="uid://d1nkc036kqahw" path="res://placeholders/modular_walls/cube_hole_big.tscn" id="10_fxgyt"]
+[ext_resource type="PackedScene" uid="uid://cqc5yj3p080jq" path="res://placeholders/modular_walls/cube_hole_big_deep.tscn" id="11_mb3dr"]
+[ext_resource type="PackedScene" uid="uid://bjbb1xoyn1a40" path="res://placeholders/modular_walls/ground_medium.tscn" id="12_4i5md"]
+[ext_resource type="PackedScene" uid="uid://bkieh0cucmnjq" path="res://placeholders/modular_walls/ground_small.tscn" id="13_mwlyu"]
+[ext_resource type="PackedScene" uid="uid://ck8mt4y4gfqmk" path="res://placeholders/modular_walls/ground_large.tscn" id="14_26n48"]
+[ext_resource type="PackedScene" uid="uid://ddkj4ce5vkuwl" path="res://placeholders/modular_walls/ground_very_large.tscn" id="15_um1kh"]
+[ext_resource type="PackedScene" uid="uid://larq6fdfhjoe" path="res://placeholders/modular_walls/wall_doors_conic.tscn" id="16_7exte"]
+
+[node name="walls_pack1a" type="Node3D"]
+
+[node name="wall_normal" parent="." instance=ExtResource("1_t1lo2")]
+
+[node name="wall_small" parent="." instance=ExtResource("2_h78yk")]
+
+[node name="wall_small_corner_simpleL" parent="." instance=ExtResource("3_d4xpx")]
+
+[node name="wall_small_corner_3Sides" parent="." instance=ExtResource("4_jp06m")]
+
+[node name="wall_doors_normal" parent="." instance=ExtResource("5_7y4av")]
+
+[node name="wall_small_corner_4Sides" parent="." instance=ExtResource("6_nhg5j")]
+
+[node name="wall_small_corner_simple_end" parent="." instance=ExtResource("7_3njjv")]
+
+[node name="cube_hole_medium" parent="." instance=ExtResource("8_7wwg0")]
+
+[node name="cube_hole_medium_wide" parent="." instance=ExtResource("9_505u4")]
+
+[node name="cube_hole_big" parent="." instance=ExtResource("10_fxgyt")]
+
+[node name="cube_hole_big_deep" parent="." instance=ExtResource("11_mb3dr")]
+
+[node name="ground_medium" parent="." instance=ExtResource("12_4i5md")]
+
+[node name="ground_small" parent="." instance=ExtResource("13_mwlyu")]
+
+[node name="ground_large" parent="." instance=ExtResource("14_26n48")]
+
+[node name="ground_very_large" parent="." instance=ExtResource("15_um1kh")]
+
+[node name="wall_doors_conic" parent="." instance=ExtResource("16_7exte")]

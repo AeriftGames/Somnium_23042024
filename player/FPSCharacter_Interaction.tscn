@@ -12,6 +12,7 @@ corner_radius_bottom_right = 25
 shadow_size = 3
 
 [node name="FPSCharacter_Interaction" instance=ExtResource("1_0ipjt")]
+wall_min_slide_angle = 0.0
 script = ExtResource("2_fmih3")
 LengthInteractRay = 5.0
 
@@ -26,6 +27,7 @@ mouse_filter = 1
 script = ExtResource("3_etvvy")
 
 [node name="DebugHud" type="Control" parent="BasicHud" index="0"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -151,6 +153,7 @@ offset_bottom = 336.0
 text = "CL(9)"
 
 [node name="OptionsPanel" type="Panel" parent="BasicHud/DebugHud" index="3"]
+visible = false
 custom_minimum_size = Vector2i(300, 170)
 layout_mode = 1
 anchors_preset = 2

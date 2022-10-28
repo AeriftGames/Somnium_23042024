@@ -75,9 +75,14 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
         ActualMovementSpeed = GlobalPosition.DistanceTo(LastPosition) * 20000.0f * (float)delta;
         LastPosition = GlobalPosition;
 
-        GameMaster.GM.GetDebugHud().CustomLabelUpdateText(0,this,"MoveSpeed: " + ActualMovementSpeed);
+        float a = Mathf.Snapped(ActualMovementSpeed, 0.1f);
 
-        GameMaster.GM.Log.WriteLog(this,LogSystem.ELogMsgType.INFO,"MoveSpeed: " + ActualMovementSpeed);
+        GameMaster.GM.GetDebugHud().CustomLabelUpdateText(0, this, "MoveSpeed: " + a);
+        GameMaster.GM.GetDebugHud().CustomLabelUpdateText(1, this, "Position: " + GlobalPosition);
+
+        /*
+        GameMaster.GM.Log.WriteLog(this, LogSystem.ELogMsgType.INFO, "MoveSpeed: " +
+            Mathf.Snapped(ActualMovementSpeed, 0.1f));*/
 
         CalculateFootSteps((float)delta);
 

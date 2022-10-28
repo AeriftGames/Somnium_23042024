@@ -1,6 +1,7 @@
 using Godot;
 using Godot.Collections;
 using System;
+using System.Threading;
 
 public partial class DebugHud : Control
 {
@@ -14,6 +15,8 @@ public partial class DebugHud : Control
 
 	CheckBox ShowFpsCheckBox = null;
 
+	bool isEnable = false;
+
     public override void _Ready()
 	{
         // pro dostupnost skrze gamemastera
@@ -26,31 +29,51 @@ public partial class DebugHud : Control
 		ShowFpsCheckBox = GetNode<CheckBox>("OptionsPanel/VBoxContainer/ShowFps_CheckBox");
 
 		InitAllCustomLabels();
-        OptionsPanel.Visible = false;
 
-		//
+        OptionsPanel.Visible = false;
         FPSLabel.Visible = true;
 		ShowFpsCheckBox.ButtonPressed = true;
-
         DebugEnabledLabel.Text = "F1 for edit debug hud";
 
-        // Create timer for specific loop update
+        // Create timer for specific loop update (fps)
         var callable_UpdateElements = new Callable(UpdateTimer);
         update_timer.Connect("timeout", callable_UpdateElements);
         update_timer.WaitTime = 0.2;
         update_timer.OneShot = false;
         AddChild(update_timer);
-		update_timer.Start();
+		update_timer.Stop();
+
+		// On Default = for default visble..
+		SetEnable(true);
     }
 
 	public override void _Process(double delta)
 	{
+		if (isEnable == false) return;
+
 		// vypne/zapne tento debug
 		if(Input.IsActionJustPressed("ToggleDebugHud"))
-			SetEnable(!isOptionsPanelEnabled);
+			SetOptionsEnable(!isOptionsPanelEnabled);
 	}
 
+	// Enable/Disahlbe DebugHud (on off include all updates)
 	public void SetEnable(bool newEnable)
+	{
+		Visible = newEnable;
+		isEnable = newEnable;
+
+		if(newEnable)
+		{
+            update_timer.Start();
+        }
+		else
+		{
+            update_timer.Stop();
+			SetOptionsEnable(false);
+        }
+    }
+
+	public void SetOptionsEnable(bool newEnable)
 	{
 		isOptionsPanelEnabled = newEnable;
 
@@ -104,6 +127,9 @@ public partial class DebugHud : Control
 
     public void CustomLabelUpdateText(int idCustomLabel, Node newCallNode, string newText)
     {
+
+		if (isEnable == false) return;
+
 		// Pokud nekdo vola update textu, zjistime jestli zadane id je v rozsahu
         if (idCustomLabel >= 0 && idCustomLabel < (CustomLabels.Length - 1))
         {
@@ -113,8 +139,8 @@ public partial class DebugHud : Control
         }
     }
 
-	// Nastavi viditelnost a zaroven i moznost updatu daneho labelu
-	public void SetCustomLabelUpdateAndVisible(int idCustomLabel, bool newUpdateAndVisble)
+    // Nastavi viditelnost a zaroven i moznost updatu daneho labelu
+    public void SetCustomLabelUpdateAndVisible(int idCustomLabel, bool newUpdateAndVisble)
 	{
 		CustomLabels[idCustomLabel].Visible = newUpdateAndVisble;
 
