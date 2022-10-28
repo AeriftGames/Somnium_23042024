@@ -10,3 +10,6 @@ script = ExtResource("1_g7tox")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.42563, 0, -0.0494044)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-0.106767, 0, 0.994284, 0, 1, 0, -0.994284, 0, -0.106767, 2.04175, 0, 0)

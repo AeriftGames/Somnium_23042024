@@ -37,6 +37,6 @@ func _used(delta):
 		rotating = false
 	if rotating == true:
 		next_mouse_position = get_viewport().get_mouse_position()
-		$SubViewport.get_child(0).get_child(1).rotate_y((next_mouse_position.x - prev_mouse_position.x) * 1 * delta)
-		$SubViewport.get_child(0).get_child(1).rotate_z(-(next_mouse_position.y - prev_mouse_position.y) * 1 * delta)
+		$SubViewport.get_child(0).get_child(0).rotate_y((next_mouse_position.x - prev_mouse_position.x) * 1 * delta)
+		$SubViewport.get_child(0).get_child(0).rotate_z(-(next_mouse_position.y - prev_mouse_position.y) * 1 * delta)
 		prev_mouse_position = next_mouse_position

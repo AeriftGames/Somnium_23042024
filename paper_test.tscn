@@ -14,9 +14,6 @@ material = SubResource("StandardMaterial3D_4altp")
 
 [node name="PaperTest" type="Node3D"]
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 2, 0, 0)
-
 [node name="PaperTest" type="MeshInstance3D" parent="."]
 transform = Transform3D(-4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 0, -2.22501, 0)
 material_override = SubResource("StandardMaterial3D_csmp3")
