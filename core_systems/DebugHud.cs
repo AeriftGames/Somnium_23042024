@@ -152,4 +152,13 @@ public partial class DebugHud : Control
 	{
 		SetCustomLabelUpdateAndVisible(id,isPressed);
 	}
+
+    public void _on_enable_world_occlusion_culling_check_box_toggled(bool isPressed)
+	{
+		Node3D worldlevel_occluderculling = (Node3D)GetNode("/root/worldlevel/worldlevel_occluderculling");
+		worldlevel_occluderculling.Visible = isPressed;
+
+		GameMaster.GM.Log.WriteLog(this, LogSystem.ELogMsgType.INFO,
+			"worldlevel_occluderculling set visible to: " + isPressed);
+    }
 }
