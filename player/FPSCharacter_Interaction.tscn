@@ -71,6 +71,7 @@ offset_bottom = 649.0
 metadata/_edit_lock_ = true
 
 [node name="CLLabel0" type="Label" parent="BasicHud/DebugHud/CustomLabelsVBox" index="0"]
+visible = false
 custom_minimum_size = Vector2i(700, 30)
 layout_mode = 2
 offset_right = 944.0
@@ -213,110 +214,117 @@ offset_bottom = 30.0
 theme_override_font_sizes/font_size = 15
 text = "Show FPS"
 
-[node name="HSeparator" type="HSeparator" parent="BasicHud/DebugHud/OptionsPanel/VBoxContainer" index="1"]
-custom_minimum_size = Vector2i(250, 0)
+[node name="ShowPerformance_CheckBox" type="CheckBox" parent="BasicHud/DebugHud/OptionsPanel/VBoxContainer" index="1"]
 layout_mode = 2
 offset_top = 34.0
 offset_right = 276.0
-offset_bottom = 38.0
+offset_bottom = 64.0
+theme_override_font_sizes/font_size = 15
+text = "Show Performance"
+
+[node name="HSeparator" type="HSeparator" parent="BasicHud/DebugHud/OptionsPanel/VBoxContainer" index="2"]
+custom_minimum_size = Vector2i(250, 0)
+layout_mode = 2
+offset_top = 68.0
+offset_right = 276.0
+offset_bottom = 72.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="CustomLabelEnable_Checkbox0" type="CheckBox" parent="BasicHud/DebugHud/OptionsPanel/VBoxContainer" index="2"]
-layout_mode = 2
-offset_top = 42.0
-offset_right = 276.0
-offset_bottom = 72.0
-theme_override_font_sizes/font_size = 15
-button_pressed = true
-text = "CustomLabel 0"
-
-[node name="CustomLabelEnable_Checkbox1" type="CheckBox" parent="BasicHud/DebugHud/OptionsPanel/VBoxContainer" index="3"]
+[node name="CustomLabelEnable_Checkbox0" type="CheckBox" parent="BasicHud/DebugHud/OptionsPanel/VBoxContainer" index="3"]
 layout_mode = 2
 offset_top = 76.0
 offset_right = 276.0
 offset_bottom = 106.0
 theme_override_font_sizes/font_size = 15
-text = "CustomLabel 1"
+text = "CustomLabel 0"
 
-[node name="CustomLabelEnable_Checkbox2" type="CheckBox" parent="BasicHud/DebugHud/OptionsPanel/VBoxContainer" index="4"]
+[node name="CustomLabelEnable_Checkbox1" type="CheckBox" parent="BasicHud/DebugHud/OptionsPanel/VBoxContainer" index="4"]
 layout_mode = 2
 offset_top = 110.0
 offset_right = 276.0
 offset_bottom = 140.0
 theme_override_font_sizes/font_size = 15
-text = "CustomLabel 2"
+text = "CustomLabel 1"
 
-[node name="CustomLabelEnable_Checkbox3" type="CheckBox" parent="BasicHud/DebugHud/OptionsPanel/VBoxContainer" index="5"]
+[node name="CustomLabelEnable_Checkbox2" type="CheckBox" parent="BasicHud/DebugHud/OptionsPanel/VBoxContainer" index="5"]
 layout_mode = 2
 offset_top = 144.0
 offset_right = 276.0
 offset_bottom = 174.0
 theme_override_font_sizes/font_size = 15
-text = "CustomLabel 3"
+text = "CustomLabel 2"
 
-[node name="CustomLabelEnable_Checkbox4" type="CheckBox" parent="BasicHud/DebugHud/OptionsPanel/VBoxContainer" index="6"]
+[node name="CustomLabelEnable_Checkbox3" type="CheckBox" parent="BasicHud/DebugHud/OptionsPanel/VBoxContainer" index="6"]
 layout_mode = 2
 offset_top = 178.0
 offset_right = 276.0
 offset_bottom = 208.0
 theme_override_font_sizes/font_size = 15
-text = "CustomLabel 4"
+text = "CustomLabel 3"
 
-[node name="CustomLabelEnable_Checkbox5" type="CheckBox" parent="BasicHud/DebugHud/OptionsPanel/VBoxContainer" index="7"]
+[node name="CustomLabelEnable_Checkbox4" type="CheckBox" parent="BasicHud/DebugHud/OptionsPanel/VBoxContainer" index="7"]
 layout_mode = 2
 offset_top = 212.0
 offset_right = 276.0
 offset_bottom = 242.0
 theme_override_font_sizes/font_size = 15
-text = "CustomLabel 5"
+text = "CustomLabel 4"
 
-[node name="CustomLabelEnable_Checkbox6" type="CheckBox" parent="BasicHud/DebugHud/OptionsPanel/VBoxContainer" index="8"]
+[node name="CustomLabelEnable_Checkbox5" type="CheckBox" parent="BasicHud/DebugHud/OptionsPanel/VBoxContainer" index="8"]
 layout_mode = 2
 offset_top = 246.0
 offset_right = 276.0
 offset_bottom = 276.0
 theme_override_font_sizes/font_size = 15
-text = "CustomLabel 6"
+text = "CustomLabel 5"
 
-[node name="CustomLabelEnable_Checkbox7" type="CheckBox" parent="BasicHud/DebugHud/OptionsPanel/VBoxContainer" index="9"]
+[node name="CustomLabelEnable_Checkbox6" type="CheckBox" parent="BasicHud/DebugHud/OptionsPanel/VBoxContainer" index="9"]
 layout_mode = 2
 offset_top = 280.0
 offset_right = 276.0
 offset_bottom = 310.0
 theme_override_font_sizes/font_size = 15
-text = "CustomLabel 7"
+text = "CustomLabel 6"
 
-[node name="CustomLabelEnable_Checkbox8" type="CheckBox" parent="BasicHud/DebugHud/OptionsPanel/VBoxContainer" index="10"]
+[node name="CustomLabelEnable_Checkbox7" type="CheckBox" parent="BasicHud/DebugHud/OptionsPanel/VBoxContainer" index="10"]
 layout_mode = 2
 offset_top = 314.0
 offset_right = 276.0
 offset_bottom = 344.0
 theme_override_font_sizes/font_size = 15
-text = "CustomLabel 8"
+text = "CustomLabel 7"
 
-[node name="CustomLabelEnable_Checkbox9" type="CheckBox" parent="BasicHud/DebugHud/OptionsPanel/VBoxContainer" index="11"]
+[node name="CustomLabelEnable_Checkbox8" type="CheckBox" parent="BasicHud/DebugHud/OptionsPanel/VBoxContainer" index="11"]
 layout_mode = 2
 offset_top = 348.0
 offset_right = 276.0
 offset_bottom = 378.0
 theme_override_font_sizes/font_size = 15
-text = "CustomLabel 9"
+text = "CustomLabel 8"
 
-[node name="HSeparator2" type="HSeparator" parent="BasicHud/DebugHud/OptionsPanel/VBoxContainer" index="12"]
-custom_minimum_size = Vector2i(250, 0)
+[node name="CustomLabelEnable_Checkbox9" type="CheckBox" parent="BasicHud/DebugHud/OptionsPanel/VBoxContainer" index="12"]
 layout_mode = 2
 offset_top = 382.0
 offset_right = 276.0
-offset_bottom = 386.0
+offset_bottom = 412.0
+theme_override_font_sizes/font_size = 15
+text = "CustomLabel 9"
+
+[node name="HSeparator2" type="HSeparator" parent="BasicHud/DebugHud/OptionsPanel/VBoxContainer" index="13"]
+custom_minimum_size = Vector2i(250, 0)
+layout_mode = 2
+offset_top = 416.0
+offset_right = 276.0
+offset_bottom = 420.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="EnableWorldOcclusionCulling_CheckBox" type="CheckBox" parent="BasicHud/DebugHud/OptionsPanel/VBoxContainer" index="13"]
+[node name="EnableWorldOcclusionCulling_CheckBox" type="CheckBox" parent="BasicHud/DebugHud/OptionsPanel/VBoxContainer" index="14"]
 layout_mode = 2
-offset_top = 390.0
+offset_top = 424.0
 offset_right = 276.0
-offset_bottom = 420.0
+offset_bottom = 454.0
 theme_override_font_sizes/font_size = 15
 text = "Enable worldlevel occlusion cull"
 
@@ -336,6 +344,57 @@ grow_vertical = 0
 theme_override_font_sizes/font_size = 12
 text = "-F1 for hide-"
 horizontal_alignment = 1
+
+[node name="PerformancePanel" type="Panel" parent="BasicHud/DebugHud" index="4"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -278.0
+offset_top = 10.0
+offset_bottom = 145.0
+grow_horizontal = 0
+mouse_filter = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="BasicHud/DebugHud/PerformancePanel" index="0"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DrawCallsLabel" type="Label" parent="BasicHud/DebugHud/PerformancePanel/VBoxContainer" index="0"]
+custom_minimum_size = Vector2i(250, 30)
+layout_mode = 2
+offset_right = 278.0
+offset_bottom = 30.0
+text = "draw calls: "
+
+[node name="ObjectsLabel" type="Label" parent="BasicHud/DebugHud/PerformancePanel/VBoxContainer" index="1"]
+custom_minimum_size = Vector2i(250, 30)
+layout_mode = 2
+offset_top = 34.0
+offset_right = 278.0
+offset_bottom = 64.0
+text = "objects:"
+
+[node name="PrimitivesLabel" type="Label" parent="BasicHud/DebugHud/PerformancePanel/VBoxContainer" index="2"]
+custom_minimum_size = Vector2i(250, 30)
+layout_mode = 2
+offset_top = 68.0
+offset_right = 278.0
+offset_bottom = 98.0
+text = "primitives:"
+
+[node name="VideoMemoryLabel" type="Label" parent="BasicHud/DebugHud/PerformancePanel/VBoxContainer" index="3"]
+custom_minimum_size = Vector2i(250, 30)
+layout_mode = 2
+offset_top = 102.0
+offset_right = 278.0
+offset_bottom = 132.0
+text = "video memory used:"
 
 [node name="Crosshair" type="ColorRect" parent="BasicHud" index="1"]
 layout_mode = 1
@@ -368,7 +427,8 @@ grow_vertical = 2
 text = "use"
 horizontal_alignment = 1
 
-[connection signal="pressed" from="BasicHud/DebugHud/OptionsPanel/VBoxContainer/ShowFps_CheckBox" to="BasicHud/DebugHud" method="_on_show_fps_check_box_pressed"]
+[connection signal="toggled" from="BasicHud/DebugHud/OptionsPanel/VBoxContainer/ShowFps_CheckBox" to="BasicHud/DebugHud" method="_on_show_fps_check_box_toggled"]
+[connection signal="toggled" from="BasicHud/DebugHud/OptionsPanel/VBoxContainer/ShowPerformance_CheckBox" to="BasicHud/DebugHud" method="_on_show_performance_check_box_toggled"]
 [connection signal="toggled" from="BasicHud/DebugHud/OptionsPanel/VBoxContainer/CustomLabelEnable_Checkbox0" to="BasicHud/DebugHud" method="_on_custom_label_enable_checkbox_toggled" binds= [0]]
 [connection signal="toggled" from="BasicHud/DebugHud/OptionsPanel/VBoxContainer/CustomLabelEnable_Checkbox1" to="BasicHud/DebugHud" method="_on_custom_label_enable_checkbox_toggled" binds= [1]]
 [connection signal="toggled" from="BasicHud/DebugHud/OptionsPanel/VBoxContainer/CustomLabelEnable_Checkbox2" to="BasicHud/DebugHud" method="_on_custom_label_enable_checkbox_toggled" binds= [2]]

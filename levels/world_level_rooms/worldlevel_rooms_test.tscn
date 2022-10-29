@@ -54,6 +54,7 @@ size = Vector3(0.67, 1.05, 0.8)
 [node name="worldlevel" type="Node3D"]
 
 [node name="worldlevel_occluderculling" type="OccluderInstance3D" parent="."]
+visible = false
 occluder = SubResource("ArrayOccluder3D_84774")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]

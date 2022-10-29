@@ -9,6 +9,7 @@ public partial class DebugHud : Control
 	Label DebugEnabledLabel = null;
 	Label FPSLabel = null;
 	Label[] CustomLabels = new Label[10];
+	Panel PerformancePanel = null;
 
 	bool isOptionsPanelEnabled = false;
     Godot.Timer update_timer = new Godot.Timer();
@@ -25,12 +26,14 @@ public partial class DebugHud : Control
         OptionsPanel = GetNode<Panel>("OptionsPanel");
         DebugEnabledLabel = GetNode<Label>("DebugEnabledLabel");
         FPSLabel = GetNode<Label>("FPSLabel");
+		PerformancePanel = GetNode<Panel>("PerformancePanel");
 
 		ShowFpsCheckBox = GetNode<CheckBox>("OptionsPanel/VBoxContainer/ShowFps_CheckBox");
 
 		InitAllCustomLabels();
 
         OptionsPanel.Visible = false;
+		PerformancePanel.Visible = false;
         FPSLabel.Visible = true;
 		ShowFpsCheckBox.ButtonPressed = true;
         DebugEnabledLabel.Text = "F1 for edit debug hud";
@@ -95,23 +98,32 @@ public partial class DebugHud : Control
         }
 	}
 
+	// je spousten podle timeru
 	private void UpdateTimer()
 	{
-        FPSLabel.Text = "FPS: " + Engine.GetFramesPerSecond().ToString();
-    }
+		if(FPSLabel.Visible)
+			FPSLabel.Text = "FPS: " + Engine.GetFramesPerSecond().ToString();
 
-    // Prepnuti checkboxu show fps
-    public void _on_show_fps_check_box_pressed()
-	{
-		if(ShowFpsCheckBox.ButtonPressed)
+		// pokud je performancePanel visible tak updatujeme labely
+		if(PerformancePanel.Visible)
 		{
-			FPSLabel.Visible = true;
-		}
-		else
-		{
-            FPSLabel.Visible = false;
+			// draw calls
+			GetNode<Label>("PerformancePanel/VBoxContainer/DrawCallsLabel").Text =
+				"draw calls: " + Performance.GetMonitor(Performance.Monitor.RenderTotalDrawCallsInFrame);
+
+            // draw objects
+            GetNode<Label>("PerformancePanel/VBoxContainer/ObjectsLabel").Text =
+                "objects: " + Performance.GetMonitor(Performance.Monitor.RenderTotalObjectsInFrame);
+
+            // draw primitives
+            GetNode<Label>("PerformancePanel/VBoxContainer/PrimitivesLabel").Text =
+                "primitives: " + Performance.GetMonitor(Performance.Monitor.RenderTotalPrimitivesInFrame);
+
+            // draw primitives
+            GetNode<Label>("PerformancePanel/VBoxContainer/VideoMemoryLabel").Text =
+                "video memory used: " + Performance.GetMonitor(Performance.Monitor.RenderVideoMemUsed);
         }
-	}
+    }
 
 	public void InitAllCustomLabels()
 	{
@@ -148,7 +160,14 @@ public partial class DebugHud : Control
 			"CustomLabel[" + idCustomLabel + "] set visible " + newUpdateAndVisble);
     }
 	// *** SIGNAL FROM ALL CHECKBOXES(CUSTOM LABELS) IN OPTIONSPANEL ***
-	public void _on_custom_label_enable_checkbox_toggled(bool isPressed, int id)
+
+	public void _on_show_fps_check_box_toggled(bool isPressed)
+	{
+		FPSLabel.Visible = isPressed;
+	}
+
+
+    public void _on_custom_label_enable_checkbox_toggled(bool isPressed, int id)
 	{
 		SetCustomLabelUpdateAndVisible(id,isPressed);
 	}
@@ -161,4 +180,9 @@ public partial class DebugHud : Control
 		GameMaster.GM.Log.WriteLog(this, LogSystem.ELogMsgType.INFO,
 			"worldlevel_occluderculling set visible to: " + isPressed);
     }
+
+	public void _on_show_performance_check_box_toggled(bool isPressed)
+	{
+		PerformancePanel.Visible = isPressed;
+	}
 }
