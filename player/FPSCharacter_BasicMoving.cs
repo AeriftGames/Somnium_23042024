@@ -22,7 +22,8 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
     protected Node3D HeadGimbalA = null;
     protected Node3D HeadGimbalB = null;
     protected Node3D HeadHolderCamera = null;
-    private Camera3D Camera = null;
+
+    [Export] public ObjectCamera objectCamera;
 
     private CollisionShape3D CharacterCollisionStand = null;
     private CollisionShape3D CharacterCollisionCrunch = null;
@@ -56,9 +57,6 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
     [Export] public float CrunchLerpSpeed = 5.0f;
     [Export] public float LandingLimitMoveVelocity = 1.5f;
 
-    private Vector2 _MouseMotion = new Vector2(0f, 0f);
-    private Vector2 _LookVelocity = new Vector2(0f, 0f);
-
     private float _Gravity = ProjectSettings.GetSetting("physics/3d/default_gravity").AsSingle();
     private float _ActualMoveSpeed;
     protected bool _isSprint = false;
@@ -67,6 +65,8 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
     private Vector3 _HeadMainLerpTarget;    // uses for crunch<->stand move lerp camera
     private bool _isInputEnable = true;
     private bool _isLastLanding = false;
+
+    private LerpObject.LerpVector3 LerpObject_ObjectCameraPos = new LerpObject.LerpVector3();
 
 	public override void _Ready()
 	{
@@ -77,7 +77,6 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
         HeadGimbalA = GetNode<Node3D>("HeadMain/HeadGimbalA");
         HeadGimbalB = GetNode<Node3D>("HeadMain/HeadGimbalA/HeadGimbalB");
         HeadHolderCamera = GetNode<Node3D>("HeadMain/HeadGimbalA/HeadGimbalB/HeadHolderCamera");
-        Camera = GetNode<Camera3D>("HeadMain/HeadGimbalA/HeadGimbalB/HeadHolderCamera/CharacterCamera");
         CharacterCollisionStand = GetNode<CollisionShape3D>("CharacterCollisionStand");
         CharacterCollisionCrunch = GetNode<CollisionShape3D>("CharacterCollisionCrunch");
         HeadStandPosition = GetNode<Node3D>("HeadStandPos");
@@ -87,19 +86,9 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
 
         _HeadMainLerpTarget = HeadStandPosition.Position;
         _ActualMoveSpeed = MoveSpeedInStand;
-    }
 
-    // Hadle inout for mouse
-	public override void _Input(InputEvent @event)
-	{
-        if (@event is InputEventMouseMotion && IsInputEnable())
-        {
-            InputEventMouseMotion mouseEventMotion = @event as InputEventMouseMotion;
-            _MouseMotion = mouseEventMotion.Relative;
-        }
-        else
-            _MouseMotion = new Vector2(0,0);
-
+        //
+        objectCamera.SetCharacterOwner(this);
     }
 
     // Update Physical updated process
@@ -127,8 +116,11 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
     // Update Visual updated process
 	public override void _Process(double delta)
 	{
-        if(_isInputEnable)
-		    UpdateCameraLook(_MouseMotion, delta);
+        // new lerp object camera pos
+        LerpObject_ObjectCameraPos.SetAllParam(objectCamera.GlobalPosition,
+            HeadHolderCamera.GlobalPosition, 15.0f, true);
+
+       objectCamera.GlobalPosition = LerpObject_ObjectCameraPos.Update(delta);
     }
 
     // Update velocity for fly move and return this velocity
@@ -136,7 +128,7 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
     {
         // Get input actions and calculate direction
         Vector2 inputDir = Input.GetVector("moveLeft", "moveRight", "moveForward", "moveBackward");
-        Vector3 direction = (Camera.GlobalTransform.basis * new Vector3(inputDir.x, 0, inputDir.y)).Normalized();
+        Vector3 direction = (GetFPSCharacterCamera().GlobalTransform.basis * new Vector3(inputDir.x, 0, inputDir.y)).Normalized();
 
         // Get actual character velocity
         Vector3 velocity = Velocity;
@@ -170,7 +162,7 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
 
         // Get input actions and calculate direction
         Vector2 inputDir = Input.GetVector("moveLeft", "moveRight", "moveForward", "moveBackward");
-        Vector3 direction = (HeadMain.Transform.basis * new Vector3(inputDir.x, 0, inputDir.y)).Normalized();
+        Vector3 direction = (objectCamera.NodeRotY.Transform.basis * new Vector3(inputDir.x, 0, inputDir.y)).Normalized();
 
         // Get actual character velocity
         Vector3 velocity = Velocity;
@@ -256,29 +248,6 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
         HeadMain.Position = HeadMain.Position.Lerp(_HeadMainLerpTarget, CrunchLerpSpeed * (float)delta);
 
         return velocity;
-    }
-
-    // Update CameraLook from mouse input and calculating rotation head and camera
-    public void UpdateCameraLook(Vector2 newMouseMotion, double delta)
-	{
-		// Lerping mouse motion for smooth look
-        _LookVelocity.x = Mathf.Lerp(_LookVelocity.x, newMouseMotion.x * MouseSensitivity, (float)delta * MouseSmooth);
-        _LookVelocity.y = Mathf.Lerp(_LookVelocity.y, newMouseMotion.y * MouseSensitivity, (float)delta * MouseSmooth);
-
-        // Set new rotates
-        HeadMain.RotateY(-Mathf.DegToRad(_LookVelocity.x));
-        Camera.RotateX(-Mathf.DegToRad(_LookVelocity.y));
-
-		// Set clamp camera vertical look
-        Vector3 cameraRot = Camera.Rotation;
-        cameraRot.x = Mathf.Clamp(cameraRot.x,
-			Mathf.DegToRad(CameraVerticalLookMin),
-			Mathf.DegToRad(CameraVerticalLookMax));
-
-        Camera.Rotation = cameraRot;
-
-		// Reset MouseMotion
-        _MouseMotion = Vector2.Zero;
     }
 
     // Change character posture like stand,crunch.. its also change player movement speed
@@ -434,6 +403,6 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
 
     public Camera3D GetFPSCharacterCamera()
     {
-        return Camera;
+        return objectCamera.Camera;
     }
 }

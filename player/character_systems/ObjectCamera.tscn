@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://c6ki47gved626"]
+
+[ext_resource type="Script" path="res://player/character_systems/ObjectCamera.cs" id="1_uvf2j"]
+
+[node name="ObjectCamera" type="Node3D"]
+script = ExtResource("1_uvf2j")
+
+[node name="NodeRotY" type="Node3D" parent="."]
+
+[node name="NodeRotX" type="Node3D" parent="NodeRotY"]
+
+[node name="Camera" type="Camera3D" parent="NodeRotY/NodeRotX"]
+fov = 60.0

@@ -1,13 +1,13 @@
-[gd_scene load_steps=39 format=3 uid="uid://dfafsmmyuynkp"]
+[gd_scene load_steps=39 format=3 uid="uid://cicfjijhrbsoq"]
 
 [ext_resource type="Texture2D" uid="uid://660jcc1vju43" path="res://textures/brick_pavement_0108_02_s.jpg" id="1_uebcf"]
 [ext_resource type="Texture2D" uid="uid://bybrpbyf1euit" path="res://textures/NormalMap (3).png" id="2_18fqb"]
 [ext_resource type="Material" path="res://textures/mat1.tres" id="3_6mmgv"]
 [ext_resource type="Texture2D" uid="uid://0n0dx7ov4qi6" path="res://textures/blood_decal_test.png" id="4_6bpl4"]
-[ext_resource type="PackedScene" path="res://placeholders/wine_barrel.tscn" id="5_ttrj3"]
-[ext_resource type="PackedScene" uid="uid://8x5qdxf7a8nq" path="res://player/FPSCharacter_Interaction.tscn" id="7_33yod"]
+[ext_resource type="PackedScene" uid="uid://dhvnxdw5mvaro" path="res://placeholders/wine_barrel.tscn" id="5_ttrj3"]
 [ext_resource type="PackedScene" uid="uid://xfouxhhlpltn" path="res://placeholders/interactive_items/interactive_item_test.tscn" id="8_6nvq8"]
 [ext_resource type="PackedScene" uid="uid://dp7dmsp410av7" path="res://placeholders/interactive_items/interactive_item_look_and_interact_test.tscn" id="8_g3ca3"]
+[ext_resource type="PackedScene" uid="uid://bet3idvc4fg0n" path="res://placeholders/PlayerStart.tscn" id="9_eg1wv"]
 [ext_resource type="PackedScene" uid="uid://ukqaj32a10wx" path="res://objects/keypad/keypad.tscn" id="9_svrf2"]
 
 [sub_resource type="Environment" id="Environment_vig0a"]
@@ -121,7 +121,7 @@ data = PackedVector3Array(-1, 1, 1, 1, 1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, -
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_pyl4x"]
 data = PackedVector3Array(-1, 1, 1, 1, 1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, -1, 1, 1, 1, -1, -1, 1, -1, 1, -1, -1, -1, 1, -1, -1, -1, -1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, 1, 1, 1, -1, 1, -1, -1, 1, -1, 1, -1, 1, -1, -1, 1, 1, -1, -1, -1, -1, 1, 1, -1, -1, 1, -1, -1, -1, 1, 1, 1, -1, 1, 1, 1, 1, -1, -1, 1, 1, -1, 1, -1, 1, 1, -1, -1, -1, 1, 1, -1, 1, -1, -1, -1, 1, -1, 1, 1, -1, -1, -1, -1, -1)
 
-[node name="WorldInterior" type="Node3D"]
+[node name="worldlevel" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_vig0a")
@@ -395,14 +395,6 @@ autoplay = true
 [node name="InteractiveItem_test" parent="." instance=ExtResource("8_6nvq8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0.3, 0)
 
-[node name="FPSCharacter_Interaction" parent="." instance=ExtResource("7_33yod")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.25, 0, 7)
-wall_min_slide_angle = 0.0
-WalkCameraLerpHeight = 0.25
-FootstepSounds = null
-JumpingSounds = null
-LandingSounds = null
-
 [node name="interactive_item_look_and_interact_test" parent="." instance=ExtResource("8_g3ca3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0, -5)
 
@@ -411,3 +403,6 @@ transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 
 
 [node name="keypad" parent="." instance=ExtResource("9_svrf2")]
 transform = Transform3D(0.00122522, 0, 0.199996, 0, 0.2, 0, -0.199996, 0, 0.00122522, -0.396393, 1.93683, 1.46403)
+
+[node name="PlayerStart" parent="." instance=ExtResource("9_eg1wv")]
+transform = Transform3D(0.831954, 0, 0.554844, 0, 1, 0, -0.554844, 0, 0.831954, 4.77526, 0, 7.33963)

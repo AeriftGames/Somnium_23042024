@@ -16,6 +16,8 @@ wall_min_slide_angle = 0.0
 script = ExtResource("2_fmih3")
 LengthInteractRay = 5.0
 
+[node name="HeadCameraSlot" type="Node3D" parent="HeadMain/HeadGimbalA/HeadGimbalB/HeadHolderCamera" index="0"]
+
 [node name="AudioStreamPlayer_Footsteps" parent="." index="5"]
 volume_db = -6.0
 
