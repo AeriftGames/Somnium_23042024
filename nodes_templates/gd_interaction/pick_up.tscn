@@ -10,6 +10,7 @@ transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
 script = ExtResource("2_ok0to")
 
 [node name="interactive_object" parent="." index="1" instance=ExtResource("2_4eabf")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
 
 [node name="Hide" type="Timer" parent="." index="2"]
 

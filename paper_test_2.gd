@@ -19,7 +19,6 @@ var showed_description: bool = false
 var camera
 var sfx
 var paper_test
-#var tween
 
 
 func _ready():
@@ -31,7 +30,8 @@ func _ready():
 	camera = self.get_node("/root/WorldInterior/FPSCharacter_Interaction/BasicHud/Item_inspect/SubViewport/PaperTest/Camera3D")
 	paper_test = self.get_node("/root/WorldInterior/FPSCharacter_Interaction/BasicHud/Item_inspect/SubViewport/PaperTest/PaperTest")
 	sfx = $AudioStreamPlayer
-	#tween = get_tree().create_tween()
+
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.FPSCharacter_Interaction/BasicHud/Item_inspect/SubViewport
 func _process(delta):
 	pass
@@ -42,7 +42,6 @@ func _input(event):
 		_used_quit()
 	elif event.is_action_pressed("ShowText") and isNowInteract == true:
 		_show_description()
-		print(camera)
 	elif event.is_action_pressed("MouseWheelUp") and isNowInteract == true:
 		camera.set_position(Vector3(2, 0, 0))
 	elif event.is_action_pressed("MouseWheelDown") and isNowInteract == true:
@@ -61,7 +60,7 @@ func _used():
 
 func _used_quit():
 	player.show_inspect(false)
-	passed_object.SetInputEnable(true)
+	passed_object.aSetInputEnable(true)
 	passed_object = null
 	isNowInteract = false
 	item_name_label.text = ""

@@ -418,9 +418,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.34529, 1.31275, -0.0349188)
 [node name="FPSCharacter_Interaction" parent="." instance=ExtResource("7_33yod")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.656572, 0, -6.01898)
 WalkCameraLerpHeight = 0.25
-FootstepSounds = null
-JumpingSounds = null
-LandingSounds = null
 
 [node name="interactive_item_look_and_interact_test" parent="." instance=ExtResource("8_g3ca3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.870129, 1.0679, -9.21486)
@@ -438,7 +435,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.48244, 0.927482, 0)
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -0.760106, 0.988304, -8.33813)
 
 [node name="dust_particle" parent="." instance=ExtResource("12_5x4yu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.66087, 3.14646, -4.04857)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.66087, 1.0867, -4.04857)
 
 [node name="battery" parent="." instance=ExtResource("13_kjeas")]
-transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 6.69481, 0.31818, 1.75745)
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 2.2476, 0.350409, 2.39141)
