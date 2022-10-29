@@ -17,10 +17,13 @@ var item_interaction_name: String = "Pick up"
 var item_interaction: String
 ## Tween used for anymating pickup anymation
 var tween_position: Tween
+## Node used for the item logic (add health, battery, ...)
+var use_node: Node
 
 
 func _ready():
 	node_interact = $interactive_object
+	use_node = $use
 	item_interaction = item_interaction_name + " " + item_name
 
 ## Logic of the item being used
@@ -45,9 +48,9 @@ func message_update():
 		self._used()
 
 
-func _on_despawn_timeout():
+func _on_hide_timeout():
 	self.hide()
 
 
 func _on_audio_stream_player_finished():
-	self.queue_free()
+	self.queue_free()\

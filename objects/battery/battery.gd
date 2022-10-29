@@ -17,10 +17,13 @@ var item_interaction_name: String = "Pick up"
 var item_interaction: String
 ## Tween used for anymating pickup anymation
 var tween_position: Tween
+## Node used for the item logic (add health, battery, ...)
+var use_node: Node
 
 
 func _ready():
 	node_interact = $interactive_object
+	use_node = $use
 	item_interaction = item_interaction_name + " " + item_name
 
 ## Logic of the item being used
