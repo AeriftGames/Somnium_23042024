@@ -12,7 +12,6 @@ using System.Threading;
  * - walking headbob lerping effects and sounds of footsteps
  * - landing camera lerp effect
  * - jumping sound effect
- * TODO - fix landing sound precision play time - OK
  * TODO - fix small amount walking/stop no sound - it is weird some times
  * TODO - fix (change) volume,pitch etc footsteps and velocity bobhead when player moves crouched
  * TODO - fix landing/inAir/falling/onGround detect system
@@ -27,22 +26,28 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
     [Export] public float WalkCameraLerpHeight = 0.25f;
     [Export] public float RunCameraLerpHeight = 0.25f;
     [Export] public float lerpFootstepSpeedModifier = 1.0f;
+    [Export] public AudioStream[] FootstepSounds;
+    [Export] public float FootstepsVolumeDB = -10.0f;
 
     [ExportGroupAttribute("Landing Settings")]
     [Export] public float LandCameraLerpHeight = -0.4f;
     [Export] public float LandCameraLerpRotation = -0.1f;
     [Export] public float lerpLandingSpeedModifier = 3.0f;
 
-    [ExportGroupAttribute("Audio Settings")]
-    [Export] public float FootstepsVolumeDB = -10.0f;
-    [Export] public float JumpingVolumeDB = 1.1f;
+    [Export] public float MiniHeightForLandingEffect = 0.3f;
+    [Export] public float SmallHeightForLandingEffect = 1.2f;
+    [Export] public float MediumHeightForLandingEffect = 2.0f;
+    [Export] public float HighHeightForLandingEffect = 3.0f;    // For death is more than high
+    [Export] public AudioStream[] miniHeightLandingSounds;
+    [Export] public AudioStream[] smallHeightLandingSounds;
+    [Export] public AudioStream[] mediumHeightLandingSounds;
+    [Export] public AudioStream[] highHeightLandingSounds;
+    [Export] public AudioStream[] deathHeightLandingSounds;
     [Export] public float LandingVolumeDB = -6.0f;
-    [Export] public AudioStream[] FootstepSounds;
-    [Export] public AudioStream[] JumpingSounds;
-    [Export] public AudioStream[] LandingSounds;
 
-    public float ActualMovementSpeed = 0.0f;
-    public Vector3 LastPosition = Vector3.Zero;
+    [ExportGroupAttribute("Jumping Settings")]
+    [Export] public AudioStream[] JumpingSounds;
+    [Export] public float JumpingVolumeDB = 1.1f;
 
     private Vector3 _LastHalfFootStepPosition = Vector3.Zero;
     private int lastIDFootstepSound = -1;
@@ -74,10 +79,6 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
     {
         base._Process(delta);
 
-        // Calculate actual movement speed 
-        ActualMovementSpeed = GlobalPosition.DistanceTo(LastPosition) * 20000.0f * (float)delta;
-        LastPosition = GlobalPosition;
-
         float a = Mathf.Snapped(ActualMovementSpeed, 0.1f);
 
         GameMaster.GM.GetDebugHud().CustomLabelUpdateText(0, this, "MoveSpeed: " + a);
@@ -98,16 +99,16 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
         base._PhysicsProcess(delta);
     }
 
-    public override void Landing()
+    public override void EventLanding()
     {
-        base.Landing();
-
-        PlayRandomSound(AudioStreamPlayerJumpLand, LandingSounds, LandingVolumeDB, 0.5f);
+        base.EventLanding();
+        /*
+        PlayRandomSound(AudioStreamPlayerJumpLand, smallHeightLandingSounds, LandingVolumeDB, 0.5f);
 
         lerpHeadLandY = LandCameraLerpHeight;
         lerpHeadLandRotX = LandCameraLerpRotation;
         landing_timer.Start();
-
+        */
     }
 
     public void FinishLandingEffect()
@@ -117,9 +118,9 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
         lerpHeadLandRotX = 0.0f;
     }
 
-    public override void Jumping()
+    public override void EventJumping()
     {
-        base.Jumping();
+        base.EventJumping();
 
         PlayRandomSound(AudioStreamPlayerJumpLand, JumpingSounds, JumpingVolumeDB, 1.0f);
     }
@@ -188,7 +189,7 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
         HeadGimbalB.Position = HeadGimbalB.Position.Lerp(
             new Vector3(0, lerpHeadLandY, 0), lerpLandingSpeedModifier * delta);
 
-        HeadGimbalB.Rotation = HeadGimbalB.Rotation.Lerp(
+        objectCamera.GimbalLand.Rotation = objectCamera.GimbalLand.Rotation.Lerp(
             new Vector3(lerpHeadLandRotX, 0, 0), lerpLandingSpeedModifier * delta);
     }
 
@@ -218,5 +219,71 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
         audioPlayer.PitchScale = pitch;
         audioPlayer.Stream = audioStreams[id];
         audioPlayer.Play();
+    }
+
+    // EVENT from basic movement character
+    public override void EventLandingEffect(float heightfall)
+    {
+        base.EventLandingEffect(heightfall);
+
+        float lerpHeight = -0.4f;
+        float lerpRot = -0.1f;
+        float speedmod = 3.0f;
+
+        if (heightfall < 0.15f)
+        {
+            // very mini
+            GameMaster.GM.Log.WriteLog(this, LogSystem.ELogMsgType.INFO, "(very mini) noticable land effect");
+            PlayRandomSound(AudioStreamPlayerJumpLand, miniHeightLandingSounds, LandingVolumeDB - 8, 0.7f);
+            lerpHeight = -0.1f;
+            lerpRot = -0.025f;
+
+        }
+        else if (heightfall <= MiniHeightForLandingEffect)
+        {
+            // mini land
+            GameMaster.GM.Log.WriteLog(this, LogSystem.ELogMsgType.INFO, "(mini land)" + "height from start falling: " + heightfall + " m");
+            PlayRandomSound(AudioStreamPlayerJumpLand, miniHeightLandingSounds, LandingVolumeDB - 1, 0.5f);
+            lerpHeight = -0.2f;
+            lerpRot = -0.05f;   
+        }
+        else if (heightfall <= SmallHeightForLandingEffect)
+        {
+            // small land
+            GameMaster.GM.Log.WriteLog(this, LogSystem.ELogMsgType.INFO, "(small land)" + "height from start falling: " + heightfall + " m");
+            PlayRandomSound(AudioStreamPlayerJumpLand, smallHeightLandingSounds, LandingVolumeDB, 0.5f);
+            lerpHeight = -0.4f;
+            lerpRot = -0.1f;
+        }
+        else if (heightfall <= MediumHeightForLandingEffect)
+        {
+            // medium land
+            GameMaster.GM.Log.WriteLog(this, LogSystem.ELogMsgType.INFO, "(medium land)" + "height from start falling: " + heightfall + " m");
+            PlayRandomSound(AudioStreamPlayerJumpLand, mediumHeightLandingSounds, LandingVolumeDB, 0.5f);
+            lerpHeight = -0.65f;
+            lerpRot = -0.2f;
+        }
+        else if (heightfall <= HighHeightForLandingEffect)
+        {
+            // high land
+            GameMaster.GM.Log.WriteLog(this, LogSystem.ELogMsgType.INFO, "(high land)" + "height from start falling: " + heightfall + " m");
+            PlayRandomSound(AudioStreamPlayerJumpLand, mediumHeightLandingSounds, LandingVolumeDB+3, 0.6f);
+            lerpHeight = -0.8f;
+            lerpRot = -0.4f;
+        }
+        else if (heightfall > HighHeightForLandingEffect)
+        {
+            // death land
+            GameMaster.GM.Log.WriteLog(this, LogSystem.ELogMsgType.INFO, "(death land)" + "height from start falling: " + heightfall + " m");
+            PlayRandomSound(AudioStreamPlayerJumpLand, deathHeightLandingSounds, LandingVolumeDB, 0.5f);
+            lerpHeight = -1.2f;
+            lerpRot = -0.6f;
+        }
+
+        lerpHeadLandY = lerpHeight;
+        lerpHeadLandRotX = lerpRot;
+
+        // Start timer to normal
+        landing_timer.Start();
     }
 }

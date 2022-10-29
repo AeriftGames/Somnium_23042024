@@ -30,8 +30,8 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
     private Node3D HeadStandPosition = null;
     private Node3D HeadCrunchPosition = null;
 
-    public enum ECharacterMode{FlyMode,WalkMode}
-    public enum ECharacterPosture{Stand,Crunch}
+    public enum ECharacterMode { FlyMode, WalkMode }
+    public enum ECharacterPosture { Stand, Crunch }
 
     [ExportGroupAttribute("Movement Settings")]
     [Export] public ECharacterMode CharacterMode = ECharacterMode.WalkMode;
@@ -44,32 +44,43 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
     [Export] public float MoveSpeedInSprint = 5.0f;
     [Export] public float MoveSpeedInFall = 1.5f;
     [Export] public float AccelerateSmoothStep = 7f;
-	[Export] public float DeccelerateSmoothStep = 7f;
+    [Export] public float DeccelerateSmoothStep = 7f;
     [Export] public float DeccelerateInFallSmoothStep = 1.0f;
 
     [ExportGroupAttribute("Looking Settings")]
     [Export] public float MouseSensitivity = 0.3f;
-	[Export] public float MouseSmooth = 20f;
-	[Export,] public float CameraVerticalLookMin = -80f;
+    [Export] public float MouseSmooth = 20f;
+    [Export] public float CameraVerticalLookMin = -80f;
     [Export] public float CameraVerticalLookMax = 80f;
+    [Export] public float LerpSpeedPosObjectCamera = 15.0f;
 
     [ExportGroupAttribute("Others Settings")]
     [Export] public float CrunchLerpSpeed = 5.0f;
     [Export] public float LandingLimitMoveVelocity = 1.5f;
 
     private float _Gravity = ProjectSettings.GetSetting("physics/3d/default_gravity").AsSingle();
-    private float _ActualMoveSpeed;
+    private float _ActualSetMoveSpeed;
     protected bool _isSprint = false;
     private bool _isFalling = false;
     private ECharacterPosture _ActualCharacterPosture = ECharacterPosture.Stand;
     private Vector3 _HeadMainLerpTarget;    // uses for crunch<->stand move lerp camera
     private bool _isInputEnable = true;
-    private bool _isLastLanding = false;
+
+    private bool isFallingStart = false;
 
     private LerpObject.LerpVector3 LerpObject_ObjectCameraPos = new LerpObject.LerpVector3();
 
-	public override void _Ready()
-	{
+    public float ActualMovementSpeed = 0.0f;
+    public Vector3 LastPosition = Vector3.Zero;
+
+    // for detect amount damage from fall
+    private float lastYPosFallingStart = 0.0f;
+    private float lastYPosFallingEnd = 0.0f;
+    private float lastYVelocity = 0.0f;
+    float heightfallingtest = 0.0f;
+
+    public override void _Ready()
+    {
         // pro dostupnost skrze gamemastera
         GameMaster.GM.SetFPSCharacter(this);
 
@@ -85,16 +96,16 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
         SetInputEnable(true);
 
         _HeadMainLerpTarget = HeadStandPosition.Position;
-        _ActualMoveSpeed = MoveSpeedInStand;
+        _ActualSetMoveSpeed = MoveSpeedInStand;
 
         //
         objectCamera.SetCharacterOwner(this);
     }
 
     // Update Physical updated process
-	public override void _PhysicsProcess(double delta)
-	{
-        switch(CharacterMode)
+    public override void _PhysicsProcess(double delta)
+    {
+        switch (CharacterMode)
         {
             case ECharacterMode.FlyMode:
                 {
@@ -104,7 +115,7 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
                     break;
                 }
             case ECharacterMode.WalkMode:
-                { 
+                {
                     // Applying velocity for walk move
                     Velocity = UpdateVelocityWalkMove(delta);
                     MoveAndSlide();
@@ -114,13 +125,20 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
     }
 
     // Update Visual updated process
-	public override void _Process(double delta)
-	{
+    public override void _Process(double delta)
+    {
         // new lerp object camera pos
         LerpObject_ObjectCameraPos.SetAllParam(objectCamera.GlobalPosition,
-            HeadHolderCamera.GlobalPosition, 15.0f, true);
+            HeadHolderCamera.GlobalPosition, LerpSpeedPosObjectCamera, true);
 
-       objectCamera.GlobalPosition = LerpObject_ObjectCameraPos.Update(delta);
+        objectCamera.GlobalPosition = LerpObject_ObjectCameraPos.Update(delta);
+
+        // Calculate actual movement speed 
+        ActualMovementSpeed = GlobalPosition.DistanceTo(LastPosition) * 20000.0f * (float)delta;
+        heightfallingtest = GlobalPosition.y - LastPosition.y;
+
+
+        LastPosition = GlobalPosition;
     }
 
     // Update velocity for fly move and return this velocity
@@ -134,7 +152,7 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
         Vector3 velocity = Velocity;
 
         // Is any input ?
-        if (_isInputEnable && 
+        if (_isInputEnable &&
             (direction != Vector3.Zero || Input.IsActionPressed("Jump") || Input.IsActionPressed("Crunch")))
         {
             // Up ?
@@ -145,7 +163,7 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
             if (Input.IsActionPressed("Crunch"))
                 direction.y = direction.y - 1.0f;
 
-            velocity = velocity.Lerp(direction * _ActualMoveSpeed, AccelerateSmoothStep * (float)delta);
+            velocity = velocity.Lerp(direction * _ActualSetMoveSpeed, AccelerateSmoothStep * (float)delta);
         }
         // Is not any input ?
         else
@@ -174,15 +192,21 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
             // Is character grounded ?
             if (IsOnFloor())
             {
-                // Is Sprint now? change speed move
-                if (_ActualCharacterPosture == ECharacterPosture.Stand && _isSprint)
-                    _ActualMoveSpeed = MoveSpeedInSprint;
-                else if (_ActualCharacterPosture == ECharacterPosture.Crunch)
-                    _ActualMoveSpeed = MoveSpeedInCrunch;
-                else
-                    _ActualMoveSpeed = MoveSpeedInStand;
 
-                velocity = velocity.Lerp(direction * _ActualMoveSpeed, AccelerateSmoothStep * (float)delta);
+                if(_ActualCharacterPosture == ECharacterPosture.Stand && _isSprint && !IsOnWall())
+                {
+                    _ActualSetMoveSpeed = MoveSpeedInSprint;
+                }
+                else if (_ActualCharacterPosture == ECharacterPosture.Crunch)
+                {
+                    _ActualSetMoveSpeed = MoveSpeedInCrunch;
+                }
+                else
+                {
+                    _ActualSetMoveSpeed = MoveSpeedInStand;
+                }
+
+                velocity = velocity.Lerp(direction * _ActualSetMoveSpeed, AccelerateSmoothStep * (float)delta);
             }
             else
             {
@@ -190,14 +214,14 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
                 {
                     // add additional move velocity and set limit length for final velocity
                     velocity += (direction * MoveSpeedInFall) * (float)delta;
-                    velocity = velocity.LimitLength(_ActualMoveSpeed);
+                    velocity = velocity.LimitLength(_ActualSetMoveSpeed);
                 }
             }
         }
         // Is not any input ?
         else
         {
-           // Is character on ground ?
+            // Is character on ground ?
             if (IsOnFloor())
             {
                 velocity = velocity.Lerp(Vector3.Zero, DeccelerateSmoothStep * (float)delta);
@@ -208,17 +232,27 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
             }
         }
 
-        // Function of Landing
-        if(!IsOnFloor())
+        GameMaster.GM.GetDebugHud().CustomLabelUpdateText(2, this, "heightest = " + heightfallingtest);
+
+        // Function of Falling and Landing
+        if (!IsOnFloor())
         {
+            // actul state of falling is true
             _isFalling = true;
+
+            // calculate start fall down
+            if (heightfallingtest < -0.001f && isFallingStart == false)
+            {
+                // Do once effect for startFalling
+                EventStartFalling();
+            }
         }
-        else if(IsOnFloor() && _isFalling)
+        else if (IsOnFloor() && _isFalling)
         {
-            Landing();
+            EventLanding();
             velocity = velocity.LimitLength(LandingLimitMoveVelocity);  // zmensi aktualni velocity
         }
-
+        
         // We set last gravity velocity back
         velocity.y = Velocity.y;
 
@@ -231,7 +265,7 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
             IsOnFloor() && Input.IsActionJustPressed("Jump"))
         {
             velocity.y = JumpVelocity;
-            Jumping();  // override for add effects
+            EventJumping();  // override for add effects
         }
 
         // Apply crunch
@@ -253,14 +287,14 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
     // Change character posture like stand,crunch.. its also change player movement speed
     public void ChangeCharacterPosture(ECharacterPosture newCharacterPosture)
     {
-        switch(newCharacterPosture)
+        switch (newCharacterPosture)
         {
             case ECharacterPosture.Crunch:
                 {
                     CharacterCollisionStand.Disabled = true;
                     CharacterCollisionCrunch.Disabled = false;
                     _HeadMainLerpTarget = HeadCrunchPosition.Position;
-                    _ActualMoveSpeed = MoveSpeedInCrunch;
+                    _ActualSetMoveSpeed = MoveSpeedInCrunch;
 
                     _ActualCharacterPosture = ECharacterPosture.Crunch;
                     break;
@@ -270,7 +304,7 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
                     CharacterCollisionStand.Disabled = false;
                     CharacterCollisionCrunch.Disabled = true;
                     _HeadMainLerpTarget = HeadStandPosition.Position;
-                    _ActualMoveSpeed = MoveSpeedInStand;
+                    _ActualSetMoveSpeed = MoveSpeedInStand;
 
                     _ActualCharacterPosture = ECharacterPosture.Stand;
                     break;
@@ -284,11 +318,11 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
         switch (_ActualCharacterPosture)
         {
             case ECharacterPosture.Stand: { ChangeCharacterPosture(ECharacterPosture.Crunch); break; }
-            case ECharacterPosture.Crunch: 
-                { 
-                    if(CheckCanStandFromCrunch())
-                        ChangeCharacterPosture(ECharacterPosture.Stand); 
-                    break; 
+            case ECharacterPosture.Crunch:
+                {
+                    if (CheckCanStandFromCrunch())
+                        ChangeCharacterPosture(ECharacterPosture.Stand);
+                    break;
                 }
         }
     }
@@ -354,7 +388,7 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
         rayParam.To = to;
 
         var rayResult = directSpace.IntersectRay(rayParam);
-        if(rayResult.Count > 0)
+        if (rayResult.Count > 0)
             isHit = true;
 
         return isHit;
@@ -365,7 +399,7 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
     {
         _isInputEnable = newEnable;
 
-        if(_isInputEnable)
+        if (_isInputEnable)
             Input.MouseMode = Input.MouseModeEnum.Captured;
         else
             Input.MouseMode = Input.MouseModeEnum.Visible;
@@ -373,7 +407,7 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
 
     public void SetMouseVisible(bool newMouseVisible)
     {
-        if(newMouseVisible)
+        if (newMouseVisible)
             Input.MouseMode = Input.MouseModeEnum.Visible;
         else
             Input.MouseMode = Input.MouseModeEnum.Hidden;
@@ -384,23 +418,56 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
         return _isInputEnable;
     }
 
-    // Event when character hit the floor = landed
-    public virtual void Landing()
+    // Event when character start falling
+    public virtual void EventStartFalling()
     {
-        //GameMaster.GM.Log.WriteLog(this, LogSystem.ELogMsgType.INFO, "character landing");
-        _isFalling = false;
+        // for do once effect, we just need this function like event
+        isFallingStart = true;
+
+        // save actual y pos of character
+        lastYPosFallingStart = GlobalPosition.y;
+        //GD.Print("start falling y= " + lastYPosFallingStart);
     }
 
-    public virtual void Jumping()
+    // Event when character hit the floor = landed
+    public virtual void EventLanding()
+    {
+        //GameMaster.GM.Log.WriteLog(this, LogSystem.ELogMsgType.INFO, "character landing");
+
+        // actual state of falling is false
+        _isFalling = false;
+
+        // for reset do once effect = after landing, we need check next startFalling
+        isFallingStart = false;
+
+        // save actual y pos of character
+        lastYPosFallingEnd = GlobalPosition.y;
+
+        // execute landing effect event with param of fall height
+        EventLandingEffect(lastYPosFallingStart - lastYPosFallingEnd);
+
+        // calculate height of falling
+        //GameMaster.GM.Log.WriteLog(this,LogSystem.ELogMsgType.INFO, "height from start falling: " + (lastYPosFallingStart - lastYPosFallingEnd) +" m");
+
+    }
+
+    public virtual void EventLandingEffect(float heightfall)
+    {
+        // virtual
+    }
+
+    // Event when character press jump
+    public virtual void EventJumping()
     {
         //GameMaster.GM.Log.WriteLog(this, LogSystem.ELogMsgType.INFO, "character jumped");
     }
 
-    public virtual void MovingStopped()
+    public virtual void EventMovingStopped()
     {
         //GameMaster.GM.Log.WriteLog(this, LogSystem.ELogMsgType.INFO, "character moving stoped");
     }
 
+    // Return by linked ObjectCamera->Camera
     public Camera3D GetFPSCharacterCamera()
     {
         return objectCamera.Camera;

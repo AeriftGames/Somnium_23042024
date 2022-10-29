@@ -12,9 +12,9 @@ corner_radius_bottom_right = 25
 shadow_size = 3
 
 [node name="FPSCharacter_Interaction" instance=ExtResource("1_0ipjt")]
-wall_min_slide_angle = 0.0
 script = ExtResource("2_fmih3")
 LengthInteractRay = 5.0
+MoveSpeedInSprint = 4.5
 
 [node name="HeadCameraSlot" type="Node3D" parent="HeadMain/HeadGimbalA/HeadGimbalB/HeadHolderCamera" index="0"]
 

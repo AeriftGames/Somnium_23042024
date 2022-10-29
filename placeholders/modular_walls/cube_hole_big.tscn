@@ -1,4 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://d1nkc036kqahw"]
+[gd_scene load_steps=5 format=3 uid="uid://d1nkc036kqahw"]
+
+[ext_resource type="Material" uid="uid://btskthdiqqlrw" path="res://placeholders/modular_walls/mat/mat_wall2.tres" id="1_3xyrk"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ficpl"]
 
@@ -31,6 +33,6 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_hf0h1")
 
 [node name="cube_hole_big" type="MeshInstance3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, -2, 11)
+material_override = ExtResource("1_3xyrk")
 mesh = SubResource("ArrayMesh_uw08y")
 skeleton = NodePath("")

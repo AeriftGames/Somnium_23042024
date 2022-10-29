@@ -1,25 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://dhvnxdw5mvaro"]
+[gd_scene load_steps=2 format=3 uid="uid://dhvnxdw5mvaro"]
 
 [ext_resource type="PackedScene" uid="uid://cxe6cvnayta84" path="res://models/wine_barrel_01_1k.gltf" id="1_e7k1m"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_juug3"]
-size = Vector3(0.6, 0.9, 0.6)
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_c2tl3"]
-top_radius = 0.37
-bottom_radius = 0.37
-height = 0.9
-
 [node name="wine_barrel" instance=ExtResource("1_e7k1m")]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
-
-[node name="StaticBody3D" type="StaticBody3D" parent="wine_barrel_01" index="0"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="wine_barrel_01/StaticBody3D" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.433, 0)
-shape = SubResource("BoxShape3D_juug3")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="wine_barrel_01/StaticBody3D" index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.433334, 0)
-visible = false
-mesh = SubResource("CylinderMesh_c2tl3")

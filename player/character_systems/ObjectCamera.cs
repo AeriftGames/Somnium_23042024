@@ -3,6 +3,7 @@ using System;
 
 public partial class ObjectCamera : Node3D
 {
+    public Node3D GimbalLand = null;
 	public Node3D NodeRotY = null;
 	public Node3D NodeRotX = null;
 	public Camera3D Camera = null;
@@ -15,8 +16,9 @@ public partial class ObjectCamera : Node3D
     public override void _Ready()
 	{
 		NodeRotY = GetNode<Node3D>("NodeRotY");
-        NodeRotX = GetNode<Node3D>("NodeRotY/NodeRotX");
-		Camera = GetNode<Camera3D>("NodeRotY/NodeRotX/Camera");
+        GimbalLand = GetNode<Node3D>("NodeRotY/GimbalLand");
+        NodeRotX = GetNode<Node3D>("NodeRotY/GimbalLand/NodeRotX");
+		Camera = GetNode<Camera3D>("NodeRotY/GimbalLand/NodeRotX/Camera");
     }
 
     public void SetCharacterOwner(FPSCharacter_BasicMoving newFPSCharacter_BasicMoving)

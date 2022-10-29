@@ -1,4 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://ddkj4ce5vkuwl"]
+[gd_scene load_steps=5 format=3 uid="uid://ddkj4ce5vkuwl"]
+
+[ext_resource type="Material" uid="uid://d08tc1iusbqxj" path="res://placeholders/modular_walls/mat/mat_ground1.tres" id="1_37swu"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vwyk3"]
 
@@ -31,6 +33,7 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_pqgbn")
 
 [node name="ground_very_large" type="MeshInstance3D"]
-transform = Transform3D(4, 0, 0, 0, 1, 0, 0, 0, 4, -12, 0, -3)
+transform = Transform3D(4, 0, 0, 0, 1, 0, 0, 0, 4, 0, 0, 0)
+material_override = ExtResource("1_37swu")
 mesh = SubResource("ArrayMesh_nkgws")
 skeleton = NodePath("")

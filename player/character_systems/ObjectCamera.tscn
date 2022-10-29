@@ -7,7 +7,9 @@ script = ExtResource("1_uvf2j")
 
 [node name="NodeRotY" type="Node3D" parent="."]
 
-[node name="NodeRotX" type="Node3D" parent="NodeRotY"]
+[node name="GimbalLand" type="Node3D" parent="NodeRotY"]
 
-[node name="Camera" type="Camera3D" parent="NodeRotY/NodeRotX"]
+[node name="NodeRotX" type="Node3D" parent="NodeRotY/GimbalLand"]
+
+[node name="Camera" type="Camera3D" parent="NodeRotY/GimbalLand/NodeRotX"]
 fov = 60.0

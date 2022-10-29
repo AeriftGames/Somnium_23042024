@@ -1,4 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://dqg2k1yyygw3n"]
+[gd_scene load_steps=5 format=3 uid="uid://dqg2k1yyygw3n"]
+
+[ext_resource type="Material" uid="uid://btskthdiqqlrw" path="res://placeholders/modular_walls/mat/mat_wall2.tres" id="1_r8w8i"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uv5wo"]
 resource_name = "Material.005"
@@ -38,6 +40,7 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_33tfg")
 
 [node name="wall_doors_normal" type="MeshInstance3D"]
-transform = Transform3D(0, 0, 0.5, 0, 0.5, 0, -0.5, 0, 0, 11, 0, -5)
+transform = Transform3D(0, 0, 0.5, 0, 0.5, 0, -0.5, 0, 0, 0, 0, 0)
+material_override = ExtResource("1_r8w8i")
 mesh = SubResource("ArrayMesh_2jatk")
 skeleton = NodePath("")

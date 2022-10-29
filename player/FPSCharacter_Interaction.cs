@@ -10,7 +10,7 @@ using System;
  *   (je to z duvodu nacterni rotace kamery pro plynule opetovne nastaveni do puvodniho stavu)
  * - TODO 2: zlepsit vraceni do puvodniho stavu tim ze budeme lerpovat mezi
  *   temp_hitPosition a targetLook(interact_object_look)
- * - TODO 3: predelat komunikaci s MessageObject
+ * - TODO 3: predelat komunikaci s MessageObject - hotovo
 */
 public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
 {
