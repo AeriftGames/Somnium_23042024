@@ -12,7 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://ukqaj32a10wx" path="res://objects/keypad/keypad.tscn" id="9_svrf2"]
 [ext_resource type="PackedScene" uid="uid://c6u5kj6ckrar1" path="res://particles/dust/dust_particle.tscn" id="12_5x4yu"]
 [ext_resource type="PackedScene" uid="uid://bnxkfp8glv26e" path="res://paper_test_2.tscn" id="12_jiwiy"]
-[ext_resource type="PackedScene" uid="uid://dfji0pojyyvv2" path="res://objects/battery/battery.tscn" id="13_kjeas"]
+[ext_resource type="PackedScene" uid="uid://cokykrpxx7lmy" path="res://objects/battery/battery.tscn" id="13_kjeas"]
 
 [sub_resource type="Environment" id="Environment_vig0a"]
 background_mode = 1
