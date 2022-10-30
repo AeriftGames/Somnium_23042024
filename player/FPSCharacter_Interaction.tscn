@@ -13,6 +13,7 @@ corner_radius_bottom_right = 25
 shadow_size = 3
 
 [node name="FPSCharacter_Interaction" instance=ExtResource("1_0ipjt")]
+wall_min_slide_angle = 0.0
 floor_block_on_wall = false
 script = ExtResource("2_fmih3")
 LengthInteractRay = 5.0

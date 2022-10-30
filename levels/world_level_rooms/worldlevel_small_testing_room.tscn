@@ -1,0 +1,47 @@
+[gd_scene load_steps=7 format=3 uid="uid://c85livdfrox85"]
+
+[ext_resource type="PackedScene" uid="uid://bet3idvc4fg0n" path="res://placeholders/PlayerStart.tscn" id="1_hjsnn"]
+[ext_resource type="PackedScene" uid="uid://ck8mt4y4gfqmk" path="res://placeholders/modular_walls/ground_large.tscn" id="1_yg8dd"]
+
+[sub_resource type="BoxOccluder3D" id="BoxOccluder3D_ewcal"]
+size = Vector3(10, 5, 10)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_w3cwh"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_rxtxe"]
+sky_material = SubResource("ProceduralSkyMaterial_w3cwh")
+
+[sub_resource type="Environment" id="Environment_p3qlj"]
+background_mode = 2
+sky = SubResource("Sky_rxtxe")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="worldlevel" type="Node3D"]
+
+[node name="worldlevel_occluderculling" type="OccluderInstance3D" parent="."]
+visible = false
+occluder = SubResource("BoxOccluder3D_ewcal")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_p3qlj")
+
+[node name="LevelGeometry" type="Node3D" parent="."]
+
+[node name="Grounds" type="Node3D" parent="LevelGeometry"]
+
+[node name="ground_large" parent="LevelGeometry/Grounds" instance=ExtResource("1_yg8dd")]
+transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 2, -2, 0, 2)
+
+[node name="ground_large2" parent="LevelGeometry/Grounds" instance=ExtResource("1_yg8dd")]
+transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 2, 2, 0, 2)
+
+[node name="ground_large3" parent="LevelGeometry/Grounds" instance=ExtResource("1_yg8dd")]
+transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 2, -2, 0, -2)
+
+[node name="ground_large4" parent="LevelGeometry/Grounds" instance=ExtResource("1_yg8dd")]
+transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 2, 2, 0, -2)
+
+[node name="PlayerStart" parent="." instance=ExtResource("1_hjsnn")]
