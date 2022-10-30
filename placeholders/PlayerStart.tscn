@@ -4,6 +4,7 @@
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xbqnk"]
 transparency = 1
+depth_draw_mode = 1
 albedo_color = Color(0, 0.482353, 0.882353, 1)
 emission_enabled = true
 emission = Color(0.584314, 0.556863, 0.556863, 1)
@@ -42,6 +43,7 @@ shadow_mesh = SubResource("ArrayMesh_7pxg4")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1yxtf"]
 transparency = 1
+depth_draw_mode = 1
 albedo_color = Color(0, 0.454902, 0.121569, 1)
 emission_enabled = true
 emission = Color(0.156863, 0.411765, 0, 1)
@@ -54,6 +56,7 @@ height = 1.75
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1562q"]
 transparency = 1
+depth_draw_mode = 1
 metallic = 0.59
 emission_enabled = true
 emission = Color(0.619608, 0.619608, 0.619608, 1)
