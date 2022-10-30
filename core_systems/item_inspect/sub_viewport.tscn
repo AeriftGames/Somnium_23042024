@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://dgv2v2fyp45be"]
+[gd_scene load_steps=3 format=3 uid="uid://dgv2v2fyp45be"]
 
 [ext_resource type="Script" path="res://core_systems/item_inspect/sub_viewport.gd" id="1_4juct"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cmq6y"]
 
 [node name="SubViewport" type="SubViewport"]
 script = ExtResource("1_4juct")
@@ -10,3 +12,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.42563, 0, -0.0494044)
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 2.04175, 0, 0)
+
+[node name="Area3D" type="Area3D" parent="Camera3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Camera3D/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.09997e-08, 0, -0.937963)
+shape = SubResource("BoxShape3D_cmq6y")
+
+[connection signal="area_entered" from="Camera3D/Area3D" to="." method="_on_area_3d_area_entered"]
+[connection signal="area_exited" from="Camera3D/Area3D" to="." method="_on_area_3d_area_exited"]

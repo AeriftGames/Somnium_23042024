@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://cv0necdqssj52"]
+[gd_scene load_steps=23 format=3 uid="uid://cv0necdqssj52"]
 
 [ext_resource type="ArrayOccluder3D" uid="uid://c65wc0yeg3cak" path="res://levels/world_level_rooms/worldlevel_rooms_test.occ" id="1_48aky"]
 [ext_resource type="PackedScene" uid="uid://ck8mt4y4gfqmk" path="res://placeholders/modular_walls/ground_large.tscn" id="1_vcfbv"]
@@ -15,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://0n0dx7ov4qi6" path="res://textures/blood_decal_test.png" id="11_tv71u"]
 [ext_resource type="PackedScene" uid="uid://dhvnxdw5mvaro" path="res://placeholders/wine_barrel.tscn" id="13_5hv21"]
 [ext_resource type="PackedScene" uid="uid://bet3idvc4fg0n" path="res://placeholders/PlayerStart.tscn" id="15_t3a5n"]
+[ext_resource type="PackedScene" uid="uid://dvxuahjqkihcc" path="res://objects/read/paper_test/paper_test.tscn" id="16_vb32x"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_nrkwj"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -501,3 +502,6 @@ autoplay = true
 
 [node name="PlayerStart" parent="." instance=ExtResource("15_t3a5n")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
+
+[node name="paper_test" parent="." instance=ExtResource("16_vb32x")]
+transform = Transform3D(-8.74228e-09, 0.2, -8.74228e-09, 4.23516e-23, -8.74228e-09, -0.2, -0.2, -8.74228e-09, 3.82137e-16, -3.8958, 1.3912, 0)

@@ -11,6 +11,7 @@ var item_description_label
 var active_item
 var description_active = false
 var spawn_animation_finished = false
+var facing_front_text = true
 
 
 func _ready():
@@ -63,6 +64,15 @@ func _used(delta):
 			prev_mouse_position = next_mouse_position
 
 
+func look_changed(state):
+	facing_front_text = state
+	if state:
+		$VBoxContainer/Label2.show()
+	else:
+		$VBoxContainer/Label2.hide()
+		_show_description(false)
+
+
 func _input(event):
 	if event.is_action_pressed("Jump") and isNowInteract:
 		active_item._used_quit()
@@ -70,7 +80,7 @@ func _input(event):
 		inspect_node.queue_free()
 		self.hide()
 		_show_description(false)
-	elif event.is_action_pressed("ShowText") and isNowInteract:
+	elif event.is_action_pressed("ShowText") and isNowInteract and facing_front_text:
 		_show_description(true)
 
 
