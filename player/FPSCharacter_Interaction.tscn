@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://2b8vuef2k4is" path="res://player/FPSCharacter_WalkingEffects.tscn" id="1_0ipjt"]
 [ext_resource type="Script" path="res://player/FPSCharacter_Interaction.cs" id="2_fmih3"]
 [ext_resource type="Script" path="res://player/BasicHud.cs" id="3_etvvy"]
-[ext_resource type="PackedScene" uid="uid://bmii8b54bsw0f" path="res://item_inspect.tscn" id="4_x8cti"]
+[ext_resource type="PackedScene" uid="uid://dpec40kmo28h7" path="res://core_systems/item_inspect/item_inspect.tscn" id="4_vhnc3"]
 
 [node name="FPSCharacter_Interaction" instance=ExtResource("1_0ipjt")]
 script = ExtResource("2_fmih3")
@@ -23,6 +23,7 @@ mouse_filter = 1
 script = ExtResource("3_etvvy")
 
 [node name="Crosshair" type="ColorRect" parent="BasicHud" index="0"]
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -37,6 +38,7 @@ grow_vertical = 2
 
 [node name="UseLabel" type="Label" parent="BasicHud/Crosshair" index="0"]
 custom_minimum_size = Vector2i(30, 0)
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -51,5 +53,6 @@ grow_vertical = 2
 text = "use"
 horizontal_alignment = 1
 
-[node name="Item_inspect" parent="BasicHud" index="1" instance=ExtResource("4_x8cti")]
+[node name="Item_inspect" parent="BasicHud" index="1" instance=ExtResource("4_vhnc3")]
 visible = false
+layout_mode = 1

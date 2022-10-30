@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://bmii8b54bsw0f"]
+[gd_scene load_steps=5 format=3 uid="uid://fpjkcaij44dx"]
 
-[ext_resource type="Script" path="res://item_inspect.gd" id="1_8ri8g"]
-[ext_resource type="Texture2D" uid="uid://0tpcivmy2wha" path="res://icon_old.svg" id="2_xy6r7"]
-[ext_resource type="PackedScene" uid="uid://b03n7xry3kdf8" path="res://sub_viewport.tscn" id="3_6pt8o"]
+[ext_resource type="Script" path="res://core_systems/item_inspect/item_inspect.gd" id="1_hw15o"]
+[ext_resource type="Texture2D" uid="uid://0tpcivmy2wha" path="res://icon_old.svg" id="2_lnswo"]
+[ext_resource type="PackedScene" uid="uid://dgv2v2fyp45be" path="res://core_systems/item_inspect/sub_viewport.tscn" id="3_swgh1"]
+
+[sub_resource type="AudioStreamWAV" id="AudioStreamWAV_u28qa"]
 
 [node name="Item_inspect" type="Control"]
 layout_mode = 3
@@ -11,7 +13,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_8ri8g")
+script = ExtResource("1_hw15o")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 self_modulate = Color(0.529412, 0.529412, 0.529412, 0.694118)
@@ -25,7 +27,7 @@ color = Color(0, 0, 0, 1)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(947, 524)
-texture = ExtResource("2_xy6r7")
+texture = ExtResource("2_lnswo")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -65,7 +67,8 @@ grow_horizontal = 0
 grow_vertical = 0
 text = "Press Space to exit"
 
-[node name="SubViewport" parent="." instance=ExtResource("3_6pt8o")]
+[node name="SubViewport" parent="." instance=ExtResource("3_swgh1")]
+own_world_3d = true
 transparent_bg = true
 size = Vector2i(1024, 1024)
 size_2d_override = Vector2i(1024, 1024)
@@ -88,7 +91,7 @@ anchor_bottom = 0.5
 offset_left = 575.0
 offset_top = 97.0
 offset_right = 1288.0
-offset_bottom = 971.0
+offset_bottom = 873.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.0941176, 0.0941176, 0.0941176, 0.686275)
@@ -130,3 +133,10 @@ text = "Rusko nehodlá zaútočit na Ukrajině jadernými zbraněmi, uvedl ve č
 					Proti Západu se ruský vládce v debatním klubu vymezoval opakovaně. V tradiční kremelské rétorice ho obviňoval z toho, že na Rusko vyvíjí čím dál větší tlak, aby se mu podvolilo, což se ale prý nestane.\\n
 					Ve středu Rusko uspořádalo ohlášené cvičení svých jaderných sil. Generální tajemník Severoatlantické aliance Jens Stoltenberg poté zopakoval, že Rusko svým jaderným vyhrožováním NATO od další podpory Ukrajině neodradí.\\n"
 autowrap_mode = 1
+
+[node name="spawn_animation" type="Timer" parent="."]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamWAV_u28qa")
+
+[connection signal="timeout" from="spawn_animation" to="." method="_on_spawn_animation_timeout"]

@@ -1,0 +1,27 @@
+[gd_scene load_steps=8 format=3 uid="uid://dvxuahjqkihcc"]
+
+[ext_resource type="Texture2D" uid="uid://d35fv342o2cvy" path="res://paper.png" id="1_0vt6f"]
+[ext_resource type="Script" path="res://objects/read/paper_test/paper_test.gd" id="1_gwpmt"]
+[ext_resource type="Script" path="res://objects/read/paper_test/use.gd" id="3_m1dby"]
+[ext_resource type="PackedScene" uid="uid://dbnevtbu1g7uy" path="res://core_systems/interactive_system/interactive_object.tscn" id="4_0fuf0"]
+[ext_resource type="AudioStream" uid="uid://c3kenhnlcm2ck" path="res://objects/read/paper_test/page_flip.wav" id="5_uq6ln"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kgfha"]
+albedo_texture = ExtResource("1_0vt6f")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_1vtxc"]
+
+[node name="paper_test" type="Node3D"]
+script = ExtResource("1_gwpmt")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_kgfha")
+mesh = SubResource("PlaneMesh_1vtxc")
+
+[node name="use" type="Node3D" parent="."]
+script = ExtResource("3_m1dby")
+
+[node name="interactive_object" parent="." instance=ExtResource("4_0fuf0")]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_uq6ln")

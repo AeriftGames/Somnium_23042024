@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://660jcc1vju43" path="res://textures/brick_pavement_0108_02_s.jpg" id="1_uebcf"]
 [ext_resource type="Texture2D" uid="uid://bybrpbyf1euit" path="res://textures/NormalMap (3).png" id="2_18fqb"]
-[ext_resource type="Material" path="res://textures/mat1.tres" id="3_6mmgv"]
+[ext_resource type="Material" uid="uid://bc2lnxshiuvtk" path="res://textures/mat1.tres" id="3_6mmgv"]
 [ext_resource type="Texture2D" uid="uid://0n0dx7ov4qi6" path="res://textures/blood_decal_test.png" id="4_6bpl4"]
 [ext_resource type="PackedScene" path="res://placeholders/wine_barrel.tscn" id="5_ttrj3"]
 [ext_resource type="PackedScene" uid="uid://gtfs2t3l23nj" path="res://placeholders/interactive_items/interactive_item_rotation_test.tscn" id="6_5ry0k"]
@@ -11,8 +11,8 @@
 [ext_resource type="PackedScene" uid="uid://dp7dmsp410av7" path="res://placeholders/interactive_items/interactive_item_look_and_interact_test.tscn" id="8_g3ca3"]
 [ext_resource type="PackedScene" uid="uid://ukqaj32a10wx" path="res://objects/keypad/keypad.tscn" id="9_svrf2"]
 [ext_resource type="PackedScene" uid="uid://c6u5kj6ckrar1" path="res://particles/dust/dust_particle.tscn" id="12_5x4yu"]
-[ext_resource type="PackedScene" uid="uid://bnxkfp8glv26e" path="res://paper_test_2.tscn" id="12_jiwiy"]
 [ext_resource type="PackedScene" uid="uid://cokykrpxx7lmy" path="res://objects/battery/battery.tscn" id="13_kjeas"]
+[ext_resource type="PackedScene" uid="uid://dvxuahjqkihcc" path="res://objects/read/paper_test/paper_test.tscn" id="14_53uc0"]
 
 [sub_resource type="Environment" id="Environment_vig0a"]
 background_mode = 1
@@ -431,11 +431,11 @@ transform = Transform3D(0.00122522, 0, 0.199996, 0, 0.2, 0, -0.199996, 0, 0.0012
 [node name="InteractiveItem_test2" parent="." instance=ExtResource("6_5ry0k")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.48244, 0.927482, 0)
 
-[node name="paper_test_2" parent="." instance=ExtResource("12_jiwiy")]
-transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -0.760106, 0.988304, -8.33813)
-
 [node name="dust_particle" parent="." instance=ExtResource("12_5x4yu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.66087, 1.0867, -4.04857)
 
 [node name="battery" parent="." instance=ExtResource("13_kjeas")]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 2.2476, 0.350409, 2.39141)
+
+[node name="paper_test" parent="." instance=ExtResource("14_53uc0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.35447, 0.994989, -9.0155)
