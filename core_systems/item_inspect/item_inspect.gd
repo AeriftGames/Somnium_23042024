@@ -16,8 +16,6 @@ var spawn_animation_finished = false
 func _ready():
 	self.hide()
 	$Control.hide()
-	item_name_label = self.get_node("/root/WorldInterior/FPSCharacter_Interaction/BasicHud/Item_inspect/Control/item_name")
-	item_description_label = self.get_node("/root/WorldInterior/FPSCharacter_Interaction/BasicHud/Item_inspect/Control/item_description")
 
 
 func _process(delta):
@@ -36,8 +34,9 @@ func inspect(state, item):
 		$spawn_animation.start(0.4)
 
 
-
 func _show_description(state = false):
+	item_name_label = self.get_node("/root/worldlevel/FPSCharacter_Interaction/Item_inspect/Control/item_name")
+	item_description_label = self.get_node("/root/worldlevel/FPSCharacter_Interaction/Item_inspect/Control/item_description")
 	if description_active == false and state == true:
 		description_active = true
 		$Control.show()
@@ -65,13 +64,13 @@ func _used(delta):
 
 
 func _input(event):
-	if event.is_action_pressed("Jump"):
+	if event.is_action_pressed("Jump") and isNowInteract:
 		active_item._used_quit()
 		isNowInteract = false
 		inspect_node.queue_free()
 		self.hide()
 		_show_description(false)
-	elif event.is_action_pressed("ShowText"):
+	elif event.is_action_pressed("ShowText") and isNowInteract:
 		_show_description(true)
 
 

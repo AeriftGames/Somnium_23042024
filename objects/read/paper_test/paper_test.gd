@@ -35,12 +35,12 @@ var sfx = load("res://objects/read/paper_test/page_flip.wav")
 func _ready():
 	node_interact = $interactive_object
 	item_interaction = item_interaction_name + " " + item_name
-	player_inspect = self.get_node("/root/WorldInterior/FPSCharacter_Interaction/BasicHud/Item_inspect")
 	inspect_node = load("res://objects/read/paper_test/paper_test_view.tscn")
 
 ## Logic of the item being used
 func _used():
 	if isNowInteract == false:
+		player_inspect = self.get_node("/root/worldlevel/FPSCharacter_Interaction/Item_inspect")
 		$AudioStreamPlayer.play()
 		isNowInteract = true
 		passed_object.SetInputEnable(false)

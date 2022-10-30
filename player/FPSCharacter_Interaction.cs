@@ -36,7 +36,7 @@ public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
 
 		basicHud = GetNode<BasicHud>("BasicHud");
 		basicHud.SetUseVisible(false);
-    }
+	}
 
 	public override void _Process(double delta)
 	{
