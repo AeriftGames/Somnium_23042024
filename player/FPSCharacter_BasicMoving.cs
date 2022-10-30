@@ -193,7 +193,7 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
             if (IsOnFloor())
             {
 
-                if(_ActualCharacterPosture == ECharacterPosture.Stand && _isSprint && !IsOnWall())
+                if(_ActualCharacterPosture == ECharacterPosture.Stand && _isSprint)
                 {
                     _ActualSetMoveSpeed = MoveSpeedInSprint;
                 }
@@ -234,15 +234,13 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
 
         GameMaster.GM.GetDebugHud().CustomLabelUpdateText(2, this, "heightest = " + heightfallingtest);
 
-        // Function of Falling and Landing
+        // Function of Falling and StartFalling
         if (!IsOnFloor())
         {
-            // actul state of falling is true
-            _isFalling = true;
-
             // calculate start fall down
-            if (heightfallingtest < -0.001f && isFallingStart == false)
+            if (heightfallingtest < 0.01f && isFallingStart == false)
             {
+                _isFalling = true;
                 // Do once effect for startFalling
                 EventStartFalling();
             }
@@ -442,7 +440,6 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
 
         // save actual y pos of character
         lastYPosFallingEnd = GlobalPosition.y;
-
         // execute landing effect event with param of fall height
         EventLandingEffect(lastYPosFallingStart - lastYPosFallingEnd);
 
