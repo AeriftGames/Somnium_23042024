@@ -18,7 +18,12 @@ floor_block_on_wall = false
 script = ExtResource("2_fmih3")
 LengthInteractRay = 5.0
 
-[node name="HeadCameraSlot" type="Node3D" parent="HeadMain/HeadGimbalA/HeadGimbalB/HeadHolderCamera" index="0"]
+[node name="HolderHands" type="Node3D" parent="HeadMain/HeadGimbalA/HeadGimbalB/HeadHolderCamera" index="0"]
+
+[node name="OmniLight3D" type="OmniLight3D" parent="HeadMain" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+omni_range = 0.7
+omni_attenuation = 2.34253
 
 [node name="AudioStreamPlayer_Footsteps" parent="." index="5"]
 volume_db = -6.0

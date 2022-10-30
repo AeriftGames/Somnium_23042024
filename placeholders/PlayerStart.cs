@@ -53,8 +53,12 @@ public partial class PlayerStart : Node3D
 					var characterInteraction_Instance = (FPSCharacter_Interaction)GD.Load<PackedScene>(
                         "res://player/FPSCharacter_Interaction.tscn").Instantiate();
 
+					var objectHands_instance = (ObjectHands)GD.Load<PackedScene>(
+						"res://player/character_systems/ObjectHands.tscn").Instantiate();
+
                     // Initial settings - link objectCamera to character
                     characterInteraction_Instance.objectCamera = objectCamera_Instance;
+					characterInteraction_Instance.objectHands = objectHands_instance;
 
                     // Spawn to worldlevel node
                     Node level = GetNode("/root/worldlevel");
@@ -69,20 +73,27 @@ public partial class PlayerStart : Node3D
                         // Add childs to worldlevel node (Spawn)
                         level.AddChild(objectCamera_Instance);
                         level.AddChild(characterInteraction_Instance);
+						level.AddChild(objectHands_instance);
 
-						// Set Positions for objectCamera and character as Player Start GlobalPosition
+						// Set Positions for objectCamera,character and objectHands as Player Start GlobalPosition
 						objectCamera_Instance.GlobalPosition = GlobalPosition;
 						characterInteraction_Instance.GlobalPosition = GlobalPosition;
+						objectHands_instance.GlobalPosition = GlobalPosition;
 
 						// Set new rotation for objectCamera.NodeRotY (look rotation horizontal)
 						Vector3 newRotation = objectCamera_Instance.NodeRotY.Rotation;
-						newRotation.y = Rotation.y;
+						newRotation.y = GlobalRotation.y;
 						objectCamera_Instance.NodeRotY.Rotation = newRotation;
 
                         // Set new rotation for character just for case
                         newRotation = characterInteraction_Instance.GlobalRotation;
                         newRotation.y = GlobalRotation.y;
                         characterInteraction_Instance.GlobalRotation = newRotation;
+
+                        // Set new rotation for objectHands just for case
+                        newRotation = objectHands_instance.GlobalRotation;
+                        newRotation.y = GlobalRotation.y;
+                        objectHands_instance.GlobalRotation = newRotation;
                     }
 
                     break;

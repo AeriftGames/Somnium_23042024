@@ -1,10 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://c85livdfrox85"]
+[gd_scene load_steps=9 format=3 uid="uid://c85livdfrox85"]
 
 [ext_resource type="PackedScene" uid="uid://bet3idvc4fg0n" path="res://placeholders/PlayerStart.tscn" id="1_hjsnn"]
+[ext_resource type="ArrayOccluder3D" uid="uid://bhrbphbr8y7ve" path="res://levels/world_level_rooms/worldlevel_small_testing_room.occ" id="1_uha8i"]
 [ext_resource type="PackedScene" uid="uid://ck8mt4y4gfqmk" path="res://placeholders/modular_walls/ground_large.tscn" id="1_yg8dd"]
-
-[sub_resource type="BoxOccluder3D" id="BoxOccluder3D_ewcal"]
-size = Vector3(10, 5, 10)
+[ext_resource type="PackedScene" uid="uid://clgsga4ty4mrp" path="res://placeholders/modular_walls/wall_normal.tscn" id="2_wgvfl"]
+[ext_resource type="PackedScene" uid="uid://b6l080hrctdgf" path="res://objects/flashlight/flashlight.tscn" id="5_h3s8w"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_w3cwh"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -23,7 +23,7 @@ glow_enabled = true
 
 [node name="worldlevel_occluderculling" type="OccluderInstance3D" parent="."]
 visible = false
-occluder = SubResource("BoxOccluder3D_ewcal")
+occluder = ExtResource("1_uha8i")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_p3qlj")
@@ -38,10 +38,43 @@ transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 2, -2, 0, 2)
 [node name="ground_large2" parent="LevelGeometry/Grounds" instance=ExtResource("1_yg8dd")]
 transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 2, 2, 0, 2)
 
+[node name="ground_large5" parent="LevelGeometry/Grounds" instance=ExtResource("1_yg8dd")]
+transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 2, -2, 0, 6)
+
+[node name="ground_large6" parent="LevelGeometry/Grounds" instance=ExtResource("1_yg8dd")]
+transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 2, 2, 0, 6)
+
 [node name="ground_large3" parent="LevelGeometry/Grounds" instance=ExtResource("1_yg8dd")]
 transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 2, -2, 0, -2)
 
 [node name="ground_large4" parent="LevelGeometry/Grounds" instance=ExtResource("1_yg8dd")]
 transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 2, 2, 0, -2)
 
+[node name="Walls" type="Node3D" parent="LevelGeometry"]
+
+[node name="wall_normal" parent="LevelGeometry/Walls" instance=ExtResource("2_wgvfl")]
+transform = Transform3D(0, 0, 0.5, 0, 0.5, 0, -0.5, 0, 0, 1, 0, 4)
+
+[node name="wall_normal3" parent="LevelGeometry/Walls" instance=ExtResource("2_wgvfl")]
+transform = Transform3D(0, 0, 0.5, 0, 0.5, 0, -0.5, 0, 0, -3, 0, 4)
+
+[node name="wall_normal4" parent="LevelGeometry/Walls" instance=ExtResource("2_wgvfl")]
+transform = Transform3D(0, 0, 0.5, 0, 0.5, 0, -0.5, 0, 0, -1, 0, 4)
+
+[node name="wall_normal11" parent="LevelGeometry/Walls" instance=ExtResource("2_wgvfl")]
+transform = Transform3D(-0.5, 0, -2.18557e-08, 0, 0.5, 0, 2.18557e-08, 0, -0.5, 4, 0, 3)
+
+[node name="wall_normal12" parent="LevelGeometry/Walls" instance=ExtResource("2_wgvfl")]
+transform = Transform3D(-0.5, 0, -2.18557e-08, 0, 0.5, 0, 2.18557e-08, 0, -0.5, 4, 0, 1)
+
+[node name="wall_normal15" parent="LevelGeometry/Walls" instance=ExtResource("2_wgvfl")]
+transform = Transform3D(-0.5, 0, -2.18557e-08, 0, 0.5, 0, 2.18557e-08, 0, -0.5, -4, 0, 3)
+
+[node name="wall_normal16" parent="LevelGeometry/Walls" instance=ExtResource("2_wgvfl")]
+transform = Transform3D(-0.5, 0, -2.18557e-08, 0, 0.5, 0, 2.18557e-08, 0, -0.5, -4, 0, 1)
+
 [node name="PlayerStart" parent="." instance=ExtResource("1_hjsnn")]
+transform = Transform3D(0.258819, 0, 0.965926, 0, 1, 0, -0.965926, 0, 0.258819, 0, 0, -2.20432)
+
+[node name="flashlight" parent="." instance=ExtResource("5_h3s8w")]
+transform = Transform3D(0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, 0.2, 3.25)

@@ -30,20 +30,42 @@ public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
 	LerpObject.LerpVector3 LerpCameraLookToInteract = new LerpObject.LerpVector3();
 	bool isActualOnLerpToNormal = false;
 
+	// HANDS
+	public Node3D HolderHands = null;
+	public Node3D objectHands = null;
+
+
 	public override void _Ready()
 	{
 		base._Ready();
 
 		basicHud = GetNode<BasicHud>("BasicHud");
 		basicHud.SetUseVisible(false);
+
+		//
+		HolderHands = GetNode<Node3D>("HeadMain/HeadGimbalA/HeadGimbalB/HeadHolderCamera/HolderHands");
 	}
 
 	public override void _Process(double delta)
 	{
 		base._Process(delta);
 
-		// UPDATE LERPOBJECT INTERACT
-		if (LerpCameraPosToInteract.IsEnableUpdate())
+		// UPDATE HANDS
+		objectHands.GlobalPosition = 
+			objectHands.GlobalPosition.Lerp(objectCamera.Camera.GlobalPosition, 40 * (float)delta);
+		
+		Vector3 hands_rot = objectHands.GlobalRotation;
+		float hands_rotY = hands_rot.y;
+		float hands_rotX = hands_rot.x;
+		hands_rotY = Mathf.LerpAngle(hands_rotY,objectCamera.Camera.GlobalRotation.y, 30* (float)delta);
+		hands_rotX = Mathf.LerpAngle(hands_rotX, objectCamera.Camera.GlobalRotation.x, 30 * (float)delta);
+		hands_rot.y = hands_rotY;
+		hands_rot.x = hands_rotX;
+		objectHands.GlobalRotation = hands_rot;
+		
+
+        // UPDATE LERPOBJECT INTERACT
+        if (LerpCameraPosToInteract.IsEnableUpdate())
 			GetFPSCharacterCamera().GlobalPosition = LerpCameraPosToInteract.Update(delta);
 
 		if (LerpCameraLookToInteract.IsEnableUpdate())
