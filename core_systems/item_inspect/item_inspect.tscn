@@ -1,0 +1,142 @@
+[gd_scene load_steps=5 format=3 uid="uid://fpjkcaij44dx"]
+
+[ext_resource type="Script" path="res://core_systems/item_inspect/item_inspect.gd" id="1_hw15o"]
+[ext_resource type="Texture2D" uid="uid://0tpcivmy2wha" path="res://icon_old.svg" id="2_lnswo"]
+[ext_resource type="PackedScene" uid="uid://dgv2v2fyp45be" path="res://core_systems/item_inspect/sub_viewport.tscn" id="3_swgh1"]
+
+[sub_resource type="AudioStreamWAV" id="AudioStreamWAV_u28qa"]
+
+[node name="Item_inspect" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_hw15o")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+self_modulate = Color(0.529412, 0.529412, 0.529412, 0.694118)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(947, 524)
+texture = ExtResource("2_lnswo")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -151.0
+offset_top = -86.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+offset_right = 155.0
+offset_bottom = 26.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Hold R to rotate"
+
+[node name="Label2" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+offset_top = 30.0
+offset_right = 155.0
+offset_bottom = 56.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Press T to show text"
+
+[node name="Label3" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+offset_top = 60.0
+offset_right = 155.0
+offset_bottom = 86.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Press Space to exit"
+
+[node name="SubViewport" parent="." instance=ExtResource("3_swgh1")]
+own_world_3d = true
+transparent_bg = true
+size = Vector2i(1024, 1024)
+size_2d_override = Vector2i(1024, 1024)
+render_target_update_mode = 4
+
+[node name="Control" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ColorRect2" type="ColorRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 575.0
+offset_top = 97.0
+offset_right = 1288.0
+offset_bottom = 873.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0941176, 0.0941176, 0.0941176, 0.686275)
+
+[node name="item_name" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 851.5
+offset_top = 132.0
+offset_right = 1028.5
+offset_bottom = 184.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 35
+text = "dasdasdas"
+horizontal_alignment = 1
+
+[node name="item_description" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 610.0
+offset_top = 221.0
+offset_right = 1246.0
+offset_bottom = 819.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "Rusko nehodlá zaútočit na Ukrajině jadernými zbraněmi, uvedl ve čtvrtek ruský prezident Vladimir Putin. Podle něj by to nemělo ani politický ani vojenský smysl. Poznamenal ale také, že riziko použití jaderných zbraní existuje vždycky, dokud jsou.\\n
+					„Nepotřebujeme to udělat. Nemělo by to žádný smysl, ani politický, ani vojenský,“ řekl Putin v debatním klubu Valdaj k možnému použití jaderných zbraní.\\n
+					Pronesl ale také, že „dokud existují jaderné zbraně, vždy existuje nebezpečí jejich použití“.\\n
+					Rusko opakovaně možný jaderný útok zmiňuje, aby odradilo spojence Ukrajiny, kterou napadla ruská invazní armáda, od dodávek vojenské pomoci.\\n
+					Putin ale ve čtvrtek tvrdil, že Rusko „nikdy nemluvilo o použití jaderných zbraní“. Vždy šlo prý o reakci na slova západních politiků.\\n
+					Proti Západu se ruský vládce v debatním klubu vymezoval opakovaně. V tradiční kremelské rétorice ho obviňoval z toho, že na Rusko vyvíjí čím dál větší tlak, aby se mu podvolilo, což se ale prý nestane.\\n
+					Ve středu Rusko uspořádalo ohlášené cvičení svých jaderných sil. Generální tajemník Severoatlantické aliance Jens Stoltenberg poté zopakoval, že Rusko svým jaderným vyhrožováním NATO od další podpory Ukrajině neodradí.\\n"
+autowrap_mode = 1
+
+[node name="spawn_animation" type="Timer" parent="."]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamWAV_u28qa")
+
+[connection signal="timeout" from="spawn_animation" to="." method="_on_spawn_animation_timeout"]

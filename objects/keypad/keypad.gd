@@ -20,7 +20,6 @@ func _ready():
 	node_interact = $interactive_object
 	camera_pos = $CameraPos
 	camera_look = $CameraLook
-	print(camera_pos.get_global_position())
 	#$interactive_object/StaticBody3D/CollisionShape3D.disabled = true
 	pass # Replace with function body.
 

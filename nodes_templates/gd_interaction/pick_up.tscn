@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://da6mbjsja18er"]
+
+[ext_resource type="PackedScene" uid="uid://be02fl2yndhiq" path="res://objects/battery/battery.glb" id="1_g0iuq"]
+[ext_resource type="PackedScene" uid="uid://dbnevtbu1g7uy" path="res://core_systems/interactive_system/interactive_object.tscn" id="2_4eabf"]
+[ext_resource type="Script" path="res://nodes_templates/gd_interaction/pick_up.gd" id="2_ok0to"]
+[ext_resource type="AudioStream" uid="uid://dl0t67nmxyl05" path="res://objects/battery/pickup.wav" id="4_3cb4h"]
+
+[node name="battery" instance=ExtResource("1_g0iuq")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+script = ExtResource("2_ok0to")
+
+[node name="interactive_object" parent="." index="1" instance=ExtResource("2_4eabf")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
+
+[node name="Hide" type="Timer" parent="." index="2"]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="3"]
+stream = ExtResource("4_3cb4h")
+
+[connection signal="timeout" from="Hide" to="." method="_on_hide_timeout"]
+[connection signal="finished" from="AudioStreamPlayer" to="." method="_on_audio_stream_player_finished"]
