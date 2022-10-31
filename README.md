@@ -28,4 +28,4 @@ Hra je First Person horrorovka se zaměřením na napjatou atmosféru. Primárn�
 Pro přehlednost v rámci čtení, je odkaz na dokumentaci oddělen do [documentation.md](/docs/documentation.md).
 
 ## Story
-Pro přehlednost v rámci čtení, je odkaz na story oddělen do [/docs/story.md](/docs/story.md).
+Pro přehlednost v rámci čtení, je odkaz na story oddělen do [story.md](/docs/story.md).
