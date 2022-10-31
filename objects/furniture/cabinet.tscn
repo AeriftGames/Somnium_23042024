@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://d2ypynxp1n4ps"]
+
+[ext_resource type="PackedScene" uid="uid://blkld1f8kd8fg" path="res://objects/furniture/cabinet.glb" id="1_mek6m"]
+[ext_resource type="Texture2D" uid="uid://d0axphodwd5op" path="res://objects/furniture/cabinet.png" id="2_ds1v5"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w8gbi"]
+albedo_texture = ExtResource("2_ds1v5")
+
+[node name="cabinet" instance=ExtResource("1_mek6m")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+
+[node name="Closet" parent="." index="0"]
+material_override = SubResource("StandardMaterial3D_w8gbi")

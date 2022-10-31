@@ -32,9 +32,11 @@ func _ready():
 func _used():
 	var player_position = passed_object.get_global_position()
 	var player_height = player_position.y + 0.5
-	#$AudioStreamPlayer.play()
-	#$interactive_object/StaticBody3D/CollisionShape3D.disabled = true
-	#$Hide.start(0.1)
+	$AudioStreamPlayer.play()
+	$interactive_object/StaticBody3D/CollisionShape3D.disabled = true
+	tween_position = create_tween()
+	tween_position.tween_property(self, "position", Vector3(player_position.x, player_height, player_position.z), 0.1)
+	$Hide.start(0.1)
 	use_node.use()
 
 ## Special function required for interaction between GDScript and C#
@@ -54,4 +56,4 @@ func _on_hide_timeout():
 
 
 func _on_audio_stream_player_finished():
-	self.queue_free()
+	self.queue_free()\

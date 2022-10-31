@@ -81,6 +81,7 @@ func _enter():
 		$KeypadText.text = "OK"
 		locked = true
 		$OK.play()
+		_open()
 		if CustomSettings.debug_oalar == true:
 				Logging.info(self, "Correct combination entered")
 	else:
@@ -89,6 +90,12 @@ func _enter():
 		$Error.play()
 		if CustomSettings.debug_oalar == true:
 				Logging.info(self, "Incorrect combination entered")
+
+
+func _open():
+	var door = self.get_node("/root/worldlevel/bunker_door")
+	door.open()
+
 		
 func message_update():
 	var msg:String = node_interact.msgObject.GetMessage()

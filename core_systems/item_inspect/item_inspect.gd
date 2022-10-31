@@ -11,12 +11,13 @@ var item_description_label
 var active_item
 var description_active = false
 var spawn_animation_finished = false
-var facing_front_text = true
+var facing_front_text = false #TODO
 
 
 func _ready():
 	self.hide()
 	$Control.hide()
+	look_changed(true)
 
 
 func _process(delta):

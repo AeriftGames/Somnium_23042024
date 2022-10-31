@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://cq3ypp2ir6mew"]
+
+[ext_resource type="Script" path="res://objects/light/omni_light_3d_flashing.gd" id="1_us5vq"]
+
+[node name="OmniLight3DFlashing" type="OmniLight3D"]
+light_energy = 0.741
+light_indirect_energy = 10.638
+light_volumetric_fog_energy = 1.951
+light_specular = 0.759
+shadow_enabled = true
+omni_range = 25.0
+omni_attenuation = 1.74111
+script = ExtResource("1_us5vq")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

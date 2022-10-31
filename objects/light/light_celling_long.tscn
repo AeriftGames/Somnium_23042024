@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bys0s78vbryfp"]
+
+[ext_resource type="PackedScene" uid="uid://nwx61ibm26er" path="res://objects/light/light_celling_long.glb" id="1_uiqqa"]
+
+[node name="light_celling_long" instance=ExtResource("1_uiqqa")]
+
+[node name="Cube" parent="." index="0"]
+cast_shadow = 0

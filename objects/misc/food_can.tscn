@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cmc2d1am8ff6j"]
+
+[ext_resource type="PackedScene" uid="uid://cw2to46qw1m0c" path="res://objects/misc/food_can.glb" id="1_jyatf"]
+
+[node name="food_can" instance=ExtResource("1_jyatf")]
+transform = Transform3D(0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, 0, 0)

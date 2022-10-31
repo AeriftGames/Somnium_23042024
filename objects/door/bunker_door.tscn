@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://df3v88u2getl5"]
+
+[ext_resource type="PackedScene" uid="uid://cjwr3d65gw5cf" path="res://objects/door/bunker_door.glb" id="1_i3ea0"]
+[ext_resource type="Script" path="res://objects/door/bunker_door.gd" id="2_qdhq6"]
+
+[node name="bunker_door" instance=ExtResource("1_i3ea0")]
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0, 0)
+script = ExtResource("2_qdhq6")
+
+[node name="right_door" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0143037, 0)
+
+[node name="left_door" parent="." index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0143037, 0)

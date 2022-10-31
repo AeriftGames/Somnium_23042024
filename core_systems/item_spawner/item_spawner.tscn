@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://fboedkub5lhd"]
+
+[ext_resource type="Script" path="res://core_systems/item_spawner/item_spawner.gd" id="1_nactb"]
+
+[node name="item_spawner" type="Node"]
+script = ExtResource("1_nactb")

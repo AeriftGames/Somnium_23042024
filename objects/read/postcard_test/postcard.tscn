@@ -1,0 +1,12 @@
+[gd_scene load_steps=4 format=3 uid="uid://bo6yg2p0cf168"]
+
+[ext_resource type="PackedScene" uid="uid://du6b86ct1x1de" path="res://objects/read/postcard_test/postcard.glb" id="1_cdqif"]
+[ext_resource type="Script" path="res://objects/read/postcard_test/postcard.gd" id="2_lqtrj"]
+[ext_resource type="PackedScene" uid="uid://dbnevtbu1g7uy" path="res://core_systems/interactive_system/interactive_object.tscn" id="3_x3h5x"]
+
+[node name="postcard" instance=ExtResource("1_cdqif")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
+script = ExtResource("2_lqtrj")
+
+[node name="interactive_object" parent="." index="1" instance=ExtResource("3_x3h5x")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)

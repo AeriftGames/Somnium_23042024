@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://djuv0voeaxmos"]
+
+[ext_resource type="PackedScene" uid="uid://bce7c10udohau" path="res://objects/light/light_celling.glb" id="1_ly4wq"]
+
+[node name="light_celling" instance=ExtResource("1_ly4wq")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
+
+[node name="Cylinder" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.594892, 0)
+cast_shadow = 0

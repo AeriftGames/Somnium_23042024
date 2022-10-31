@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://ed06oymnfx7m"]
+
+[ext_resource type="PackedScene" uid="uid://cbtxg7ejvxmd2" path="res://objects/boxes/carry_box.glb" id="1_2gnby"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4k87e"]
+cull_mode = 2
+
+[node name="carry_box" instance=ExtResource("1_2gnby")]
+
+[node name="Cube" parent="." index="0"]
+material_override = SubResource("StandardMaterial3D_4k87e")
