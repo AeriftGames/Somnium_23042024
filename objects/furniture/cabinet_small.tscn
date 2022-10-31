@@ -16,7 +16,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 script = ExtResource("3_golcb")
 
 [node name="use" type="Node3D" parent="Drawer1" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 script = ExtResource("4_vdxj0")
 
 [node name="Timer" type="Timer" parent="Drawer1/use" index="0"]
@@ -34,7 +33,6 @@ transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 script = ExtResource("3_golcb")
 
 [node name="use" type="Node3D" parent="Drawer2" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 script = ExtResource("5_qblpa")
 
 [node name="Timer" type="Timer" parent="Drawer2/use" index="0"]
@@ -52,7 +50,6 @@ transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 script = ExtResource("3_golcb")
 
 [node name="use" type="Node3D" parent="Drawer3" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 script = ExtResource("6_awqfw")
 
 [node name="Timer" type="Timer" parent="Drawer3/use" index="0"]
@@ -70,7 +67,6 @@ transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 script = ExtResource("3_golcb")
 
 [node name="use" type="Node3D" parent="Drawer4" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 script = ExtResource("7_8vcwr")
 
 [node name="Timer" type="Timer" parent="Drawer4/use" index="0"]
