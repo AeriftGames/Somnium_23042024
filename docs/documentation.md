@@ -264,3 +264,9 @@ Jedná se o pomocný Autoload pro Logging. Jediné co tento autoload dělá je, 
 Logging.autoload_complete = true
 ```
 Pomocí této hodnoty logging pozná, že již proběhl veškerý loading. Po načtení se LastSingleton sám uvolní.
+
+### Databases
+Tato kapitola popisuje jednotlivé databáze využíté v projektu
+
+#### items
+items.json je databáze itemů určená k TODO
