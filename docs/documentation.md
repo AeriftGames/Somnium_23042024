@@ -38,6 +38,8 @@ Technická dokumentace k projektu **Somnium Prototype**
     + [logging](#logging)
     + [CustomSettings](#customsettings)
     + [LastSingleton](#lastsingleton)
+  * [Databases](#databases)
+    + [items](#items)
 
 
 *Pro rychlé vygenerování kapitol lze použít [https://ecotrust-canada.github.io/markdown-toc/](https://ecotrust-canada.github.io/markdown-toc/)*
@@ -265,8 +267,8 @@ Logging.autoload_complete = true
 ```
 Pomocí této hodnoty logging pozná, že již proběhl veškerý loading. Po načtení se LastSingleton sám uvolní.
 
-### Databases
+## Databases
 Tato kapitola popisuje jednotlivé databáze využíté v projektu
 
-#### items
+### items
 items.json je databáze itemů určená k TODO
