@@ -360,12 +360,12 @@ Hned poté co poslal zprávu **GD Script** skrze ```SendMessageToCSNow()``` se s
 		string msg = msgObject.GetMessage();
 		switch (msg)
 		{
-            case "msg_get_yourname":
-                {
-                    msgObject.SetStringData("Michael");
-                    break;
-                }
-        }
+            		case "msg_get_yourname":
+                	{
+                    		msgObject.SetStringData("Michael");
+                    		break;
+                	}
+        	}
 	}
 ```
 V tu chvíli kdy projede message_update se vrátí kód zpátky do **GD Scriptu** hned tam kde skončil po ```SendMessageToCSNow()```, takže následuje:
