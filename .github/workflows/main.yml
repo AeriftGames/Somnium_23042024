@@ -11,15 +11,17 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
+    name: Export Game
     steps:
       - uses: actions/checkout@v3
       - name: exportGame
-        uses: firebelley/godot-export@v4.2.0
+        uses: firebelley/godot-export@master
         with:
           godot_executable_download_url: https://downloads.tuxfamily.org/godotengine/4.0/beta3/Godot_v4.0-beta3_linux.x86_64.zip
           godot_export_templates_download_url: https://downloads.tuxfamily.org/godotengine/4.0/beta3/Godot_v4.0-beta3_export_templates.tpz
           relative_project_path: ./
           use_godot_4: true
+          use_preset_export_path: true
+          archive_output: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
