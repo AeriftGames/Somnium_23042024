@@ -283,9 +283,6 @@ public partial class NodeB_CS : Node3D
       // vytvoreni noveho MessageObjectu
       msgObject = new MessageObject(this,GetNode<Node3D>("/root/WorldScene/NodeA_GD"));
       
-      // Nacteni nodu s kterym chceme komunikovat
-      NodeA = GetNode<Node3D>("/root/WorldScene/NodeA_GD");
-
       // nastavime data(jako argument) a posilame NodeA_GD zpravu (msg/kontext)
       msgObject.SetStringData("hello");
       msgObject.SendMessageToGDNow("msg_write_text");
