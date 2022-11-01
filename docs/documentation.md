@@ -31,6 +31,9 @@ Technická dokumentace k projektu **Somnium Prototype**
       - [Ukázka vytvoření logu](#uk-zka-vytvo-en--logu)
       - [Ukázka logu](#uk-zka-logu)
     + [MessageObject](#messageobject)
+      - [Ukázka základního použití](#ukázka-základního-použití-messageobject)
+      - [Vyvětlení kroků v kódu](#vyvětlení-kroků-v-kódu)
+      - [Volatelné funkce msgObject](#volatelné-funkce-msgobject)
   * [Groups](#groups)
     + [template_group](#template-group)
   * [Collision layers](#collision-layers)
@@ -420,8 +423,9 @@ kde si vezmeme právě uloženou hodnotu string Michael.
 | ```LoadVector3DataFromCSNow()```         | ```string``` message                             | Stejný jako  ```SendMessageToCSNow()``` + ihned vrací očekávaná **Vector3** data|
 | ```LoadNodeDataFromCSNow()```         | ```string``` message                             | Stejný jako  ```SendMessageToCSNow()``` + ihned vrací očekávaná **Node** data|
 
-**tipy k funkcím**
+**Tipy k funkcím**
 - Pokud použijeme v konstruktoru MessageObject ```(optional)bool``` argument **mutliCommunication** = true, nemůžeme pak na tomhle MessageObjectu využívat zkrácených funkcí pro vracení dat jako je třeba: ```LoadVector3DataFromGDNow()```, můžeme používat pouze ```SendMessageToGDNow_ToObject()```, je to prevence nechtěné komunikaci se špatným communicationObject. Tudíž pokud víme že budeme komunikovat jen s jedním **GD Scriptem**.
+
 ## Groups
 Tato kapitola popisuje veškeré groups využité v projektu
 
