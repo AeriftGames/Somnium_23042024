@@ -351,7 +351,7 @@ func _ready():
 ```
 **CS SCRIPT** 
 
-Hned poté co poslal zprávu **GD Script** skrze ```SendMessageToCSNow()``` se spustí v **CS Scriptu** funkci ```message_update()``` kde si opět si přečteme zprávy. Pokud zpráva souhlasí, provedeme reakci zprávu, naplníme stringData textem nejakeho jmena.
+Hned poté co poslal zprávu **GD Script** skrze ```SendMessageToCSNow()``` se spustí v **CS Scriptu** funkci ```message_update()``` kde si opět si přečteme zprávy. Pokud zpráva souhlasí, provedeme reakci na zprávu, naplníme stringData textem nejakeho jmena.
 ```csharp
 // toto je funkce volana pouze z protejsiho komunikacniho objektu GD (neco jako hej mas zpravu, ted si ji precti)
 	public void message_update()
@@ -368,7 +368,7 @@ Hned poté co poslal zprávu **GD Script** skrze ```SendMessageToCSNow()``` se s
         	}
 	}
 ```
-V tu chvíli kdy projede message_update se vrátí kód zpátky do **GD Scriptu** hned tam kde skončil po ```SendMessageToCSNow()```, takže následuje:
+V tu chvíli kdy se dokončí funkce message_update se vrátí kód zpátky do **GD Scriptu** hned tam kde skončil po ```SendMessageToCSNow()```, takže následuje:
 ```python
 print(NodeB.msgObject.GetStringData())
 ```
