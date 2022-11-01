@@ -30,6 +30,7 @@ Technická dokumentace k projektu **Somnium Prototype**
         * [error(node: Object, text: String) -> void](#error-node--object--text--string-----void)
       - [Ukázka vytvoření logu](#uk-zka-vytvo-en--logu)
       - [Ukázka logu](#uk-zka-logu)
+    + [MessageObject](#messageobject)
   * [Groups](#groups)
     + [template_group](#template-group)
   * [Collision layers](#collision-layers)
@@ -234,6 +235,193 @@ INFO: enter (enter:<MeshInstance3D#39158023700>): Key enter pressed
 INFO: keypad (keypad:<Node3D#38285608416>): Incorrect combination entered
 ```
 
+### **MessageObject**
+Jedná se o classu která ulehčuje obejít nepříjemné chování Godot 4 (které nejspíš bude časem s novými verzemi Godot enginu vyřešeno) Aktuálně problém je v tom, že nemůžeme předat skrze argumenty ve funci jakákoliv data z **CSharp scriptu** do **GD scriptu** a naopak a to ani vracet funkcí nějaký datový typ. Godot totiž řeší veškeré datové konverze argumentů mezi jednotlivými ```Godot.Object``` přes svůj typ ```Variant```. Typ Variant umí pracovat s velkým počtem používaných typů a dělá tedy jejich konverzi (například int nebo string na Variant) Když se tedy například pokoušíme přenést skrze argumenty funkce data, začne se plnit neznámý buffer v cashe paměti (kterou využívá Variant) a to nejšpíš proto, že se po přenosu neuvolní data z této části paměti (neznámý buffer). Program se po chvílí přehlcuje a i engine přestává správně fungovat, **nastávají úniky paměti** a začíná padat jak náš program, tak samotný engine. Proto je tedy MessageObject, který slouží jako jiná cesta komunikace, než by jsme v tomto případě jinak nativně používali.
+
+#### **Ukázka základního použití MessageObject**
+Dejme tomu že máme takovou scénu v Godotu a chceme komunikovat mezi těmito nodes i s možností předávat si různá data:
+- WorldScene
+  - **NodeA_GD** (Node3D obsahující GD script)
+  - **NodeB_CS** (Node3D obsahující CS script)
+
+**NodeA_GD** (GD script)
+```python
+extends Node3D
+
+# objekt s kterym chceme komunikovat a ma v sobe msgObject
+var NodeB
+
+func _ready():
+    NodeB = get_node("/root/WorldScene/NodeB_CS")
+    # posle zpravu ktera z kontextu chce vratit string nejakeho jmena
+    NodeB.msgObject.SendMessageToCSNow("msg_get_yourname")
+    print(NodeB.msgObject.GetStringData())
+
+# toto je funkce volana pouze z protejsiho komunikacniho objektu CS (neco jako hej mas zpravu, ted si ji precti)
+func message_update():
+	# cteme a filtrujeme prichozi povahu message z NodeB_CS
+	var msg:String = NodeB.msgObject.GetMessage()
+	if(msg == "msg_write_text"):
+		print(NodeB.msgObject.GetStringData())
+```
+
+**NodeB_CS** (CS script)
+```csharp
+using Godot;
+using System;
+
+public partial class NodeB_CS : Node3D
+{
+  // nas MessageObject
+  public MessageObject msgObject;
+
+  // objekt s kterym chceme komunikovat
+  Node3D NodeA;
+
+	public override void _Ready()
+	{
+      // vytvoreni noveho MessageObjectu
+      msgObject = new MessageObject(this,GetNode<Node3D>("/root/WorldScene/NodeA_GD"));
+      
+      // Nacteni nodu s kterym chceme komunikovat
+      NodeA = GetNode<Node3D>("/root/WorldScene/NodeA_GD");
+
+      // nastavime data(jako argument) a posilame NodeA_GD zpravu (msg/kontext)
+      msgObject.SetStringData("hello");
+      msgObject.SendMessageToGDNow("msg_write_text");
+      // SendMessageToGDNow spusti v protejsim objektu s kterym komunikujeme funkci message_update
+	}
+
+	// toto je funkce volana pouze z protejsiho komunikacniho objektu GD (neco jako hej mas zpravu, ted si ji precti)
+	public void message_update()
+	{
+		// cteme a filtrujeme prichozi povahu message
+		string msg = msgObject.GetMessage();
+		switch (msg)
+		{
+            case "msg_get_yourname":
+                {
+                    msgObject.SetStringData("Michael");
+                    break;
+                }
+        }
+	}
+}
+```
+
+#### **Vyvětlení kroků v kódu:**
+Vytvoření ```msgObject``` musí být vždy na straně CS scriptu a kvůli domluvě by se měl tento objekt vždy jmenovat msgObject
+
+**CS SCRIPT**
+```csharp
+// Vytvorime novy message object ktery bude komunikovat s jinym objektem s GD scriptem
+// Prvni parametr je odkaz na tuhle instanci objektu
+// Druhy parametr je instance objektu s kterym chceme komunikovat
+msgObject = new MessageObject(this,GetNode<Node3D>("/root/WorldScene/NodeA_GD"));
+```
+Pošleme zprávu a text jako argument **(první se musi nastavit data co chceme předat a až poté poslat zprávu)**
+```csharp
+// nastavime data(jako argument) a posilame NodeA_GD zpravu (msg/kontext)
+msgObject.SetStringData("hello");
+msgObject.SendMessageToGDNow("msg_write_text");
+```
+v tu chvíli kde končí předchozí kód ```SendMessageToGDNow``` se přesune kód do GD scriptu a zavolá v něm ```message_update()```
+
+**GD SCRIPT**
+
+teď se spustí message_update, kde si objekt přečte zprávy
+```python
+# toto je funkce volana pouze z protejsiho komunikacniho objektu CS (neco jako hej mas zpravu, ted si ji precti)
+func message_update():
+	# cteme a filtrujeme prichozi povahu message z NodeB_CS
+	var msg:String = NodeB.msgObject.GetMessage()
+	if(msg == "msg_write_text"):
+		print(NodeB.msgObject.GetStringData())
+```
+přečteme si zprávu a pokud se shoduje, tak následným kódem zareagujeme (jelikož jsme v **CS Objektu** před odesláním zprávy nastavili ```SetStringData("hello")``` **viz výše**.) můžeme si poslední uložená data lehce převzít, je tam uložen string ```"hello"```, který pomocí printu vypíšeme
+```python
+if(msg == "msg_write_text"):
+    print(NodeB.msgObject.GetStringData())
+```
+**Veškerá komunikace funguje i obráceně** a je zanesena v ukázkovém kódu výše
+
+**GD SCRIPT** 
+
+Pošle zprávu ```SendMessageToCSNow()``` do **CS Scriptu** a bude chít přijímat data string
+```python
+func _ready():
+    NodeB = get_node("/root/WorldScene/NodeB_CS")
+    # posle zpravu druhemu objektu a ktera z kontextu chce vratit string nejakeho jmena
+    NodeB.msgObject.SendMessageToCSNow("msg_get_yourname")
+    print(NodeB.msgObject.GetStringData())
+```
+**CS SCRIPT** 
+
+Hned poté co poslal zprávu **GD Script** skrze ```SendMessageToCSNow()``` se spustí v **CS Scriptu** funkci ```message_update()``` kde si opět si přečteme zprávy. Pokud zpráva souhlasí, provedeme reakci zprávu, naplníme stringData textem nejakeho jmena.
+```csharp
+// toto je funkce volana pouze z protejsiho komunikacniho objektu GD (neco jako hej mas zpravu, ted si ji precti)
+	public void message_update()
+	{
+		// cteme a filtrujeme prichozi povahu message
+		string msg = msgObject.GetMessage();
+		switch (msg)
+		{
+            case "msg_get_yourname":
+                {
+                    msgObject.SetStringData("Michael");
+                    break;
+                }
+        }
+	}
+```
+V tu chvíli kdy projede message_update se vrátí kód zpátky do **GD Scriptu** hned tam kde skončil po ```SendMessageToCSNow()```, takže následuje:
+```python
+print(NodeB.msgObject.GetStringData())
+```
+kde si vezmeme právě uloženou hodnotu string Michael.
+
+### **Volatelné funkce msgObject**
+| Funkce      | Argumenty | Popis |
+| ----------- | ----------- | -----------|
+| ```MessageObject()```        | ```Node``` ownerObject, ```Node``` communicationObject, ```(optional)bool``` multiCommunication          | Konstruktor při vytváření objektu MessageObject,**(optional bool)** jen jestli budeme chtít komunikovat s více GD Scripty naráz|
+| ```SendMessageToGDNow()```   | ```string```                                        | Pošle zprávu z CS do GD objektu|
+| ```SendMessageToCSNow()```   | ```string```                                        | Pošle zprávu z GD do CS objektu|
+| ```GetMessage()```           |                                                                | Vrátí aktualní zprávu          |
+| ```ResetAllData()```         |                                                                | Zresetuje **včechna** data pro přenos informací|
+| ```GetIsMultiCommunication()```         |                                                                | vrací **true**, pokud je při konstrukci počítáno s komunikací s vícero GDScripty naráz|
+| ```SendMessageToGDNow_ToObject()```         | ```string``` message, ```Node``` newCommunicationGDObject        | Pošle zprávu z CS do GD objektu, který nově přiřadíme (jen pokud v konstruktoru MessageObject je argument **multiCommunication** = true)|
+| ```SetBoolData()```          | ```bool```                                         | Nastaví nová **bool** data pro přenos informace|
+| ```GetBoolData()```          |                                                                | Vrací aktuální **bool** data pro přenos informace|
+| ```SetIntData()```           | ```int```                                           | Nastaví nová **int** data pro přenos informace|
+| ```GetIntData()```           |                                                                | Vrací aktuální **int** data pro přenos informace|
+| ```SetFloatData()```         | ```float```                                       | Nastaví nová **float** data pro přenos informace|
+| ```GetFloatData()```         |                                                                | Vrací aktuální **float** data pro přenos informace|
+| ```SetStringData()```         | ```string```                                       | Nastaví nová **string** data pro přenos informace|
+| ```GetStringData()```         |                                                                | Vrací aktuální **string** data pro přenos informace|
+| ```SetVector2Data()```         | ```Vector2```                                       | Nastaví nová **Vector2** data pro přenos informace|
+| ```GetVector2Data()```         |                                                                | Vrací aktuální **Vector2** data pro přenos informace|
+| ```SetVector3Data()```         | ```Vector3```                                       | Nastaví nová **Vector3** data pro přenos informace|
+| ```GetVector3Data()```         |                                                                | Vrací aktuální **Vector3** data pro přenos informace|
+| ```SetNodeData()```         | ```Node```                                       | Nastaví nová **Node** data pro přenos informace|
+| ```GetNodeData()```         |                                                                | Vrací aktuální **Node** data pro přenos informace|
+| ```SetNodeData()```         | ```Node```                                       | Nastaví nová **Node** data pro přenos informace|
+| ```LoadBoolDataFromGDNow()```         | ```string``` messge                             | Stejný jako  ```SendMessageToGDNow()``` + ihned vrací očekávaná **bool** data|
+| ```LoadIntDataFromGDNow()```         | ```string``` message                             | Stejný jako  ```SendMessageToGDNow()``` + ihned vrací očekávaná **int** data|
+| ```LoadFloatDataFromGDNow()```         | ```string``` message                             | Stejný jako  ```SendMessageToGDNow()``` + ihned vrací očekávaná **float** data|
+| ```LoadStringDataFromGDNow()```         | ```string``` message                             | Stejný jako ```SendMessageToGDNow()``` + ihned vrací očekávaná **string** data|
+| ```LoadVector2DataFromGDNow()```         | ```string``` message                             | Stejný jako  ```SendMessageToGDNow()``` + ihned vrací očekávaná **Vector2** data|
+| ```LoadVector3DataFromGDNow()```         | ```string``` message                             | Stejný jako  ```SendMessageToGDNow()``` + ihned vrací očekávaná **Vector3** data|
+| ```LoadNodeDataFromGDNow()```         | ```string``` message                             | Stejný jako  ```SendMessageToGDNow()``` + ihned vrací očekávaná **Node** data|
+| ```LoadBoolDataFromCSNow()```         | ```string``` messge                             | Stejný jako  ```SendMessageToCSNow()``` + ihned vrací očekávaná **bool** data|
+| ```LoadIntDataFromCSNow()```         | ```string``` message                             | Stejný jako  ```SendMessageToCSNow()``` + ihned vrací očekávaná **int** data|
+| ```LoadFloatDataFromCSNow()```         | ```string``` message                             | Stejný jako  ```SendMessageToCSNow()``` + ihned vrací očekávaná **float** data|
+| ```LoadStringDataFromCSNow()```         | ```string``` message                             | Stejný jako  ```SendMessageToCSNow()``` + ihned vrací očekávaná **string** data|
+| ```LoadVector2DataFromCSNow()```         | ```string``` message                             | Stejný jako  ```SendMessageToCSNow()``` + ihned vrací očekávaná **Vector2** data|
+| ```LoadVector3DataFromCSNow()```         | ```string``` message                             | Stejný jako  ```SendMessageToCSNow()``` + ihned vrací očekávaná **Vector3** data|
+| ```LoadNodeDataFromCSNow()```         | ```string``` message                             | Stejný jako  ```SendMessageToCSNow()``` + ihned vrací očekávaná **Node** data|
+
+**tipy k funkcím**
+- Pokud použijeme v konstruktoru MessageObject ```(optional)bool``` argument **mutliCommunication** = true, nemůžeme pak na tomhle MessageObjectu využívat zkrácených funkcí pro vracení dat jako je třeba: ```LoadVector3DataFromGDNow()```, můžeme používat pouze ```SendMessageToGDNow_ToObject()```, je to prevence nechtěné komunikaci se špatným communicationObject. Tudíž pokud víme že budeme komunikovat jen s jedním **GD Scriptem**.
 ## Groups
 Tato kapitola popisuje veškeré groups využité v projektu
 
