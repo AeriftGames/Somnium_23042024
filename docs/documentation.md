@@ -274,10 +274,7 @@ public partial class NodeB_CS : Node3D
 {
   // nas MessageObject
   public MessageObject msgObject;
-
-  // objekt s kterym chceme komunikovat
-  Node3D NodeA;
-
+  
 	public override void _Ready()
 	{
       // vytvoreni noveho MessageObjectu
