@@ -1,8 +1,8 @@
 [gd_scene load_steps=8 format=3 uid="uid://bj5geey0opre6"]
 
 [ext_resource type="PackedScene" uid="uid://b5ujas828o1dp" path="res://objects/furniture/cabinet_small.glb" id="1_chlpe"]
+[ext_resource type="Script" path="res://core_systems/item_use/item_use.gd" id="2_vffnc"]
 [ext_resource type="PackedScene" uid="uid://dbnevtbu1g7uy" path="res://core_systems/interactive_system/interactive_object.tscn" id="3_5jerk"]
-[ext_resource type="Script" path="res://core_systems/item_pickup/item_pickup.gd" id="3_golcb"]
 [ext_resource type="Script" path="res://objects/furniture/use1.gd" id="4_vdxj0"]
 [ext_resource type="Script" path="res://objects/furniture/use2.gd" id="5_qblpa"]
 [ext_resource type="Script" path="res://objects/furniture/use3.gd" id="6_awqfw"]
@@ -12,11 +12,9 @@
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
 
 [node name="Drawer1" parent="." index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-script = ExtResource("3_golcb")
+script = ExtResource("2_vffnc")
 
 [node name="use" type="Node3D" parent="Drawer1" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 script = ExtResource("4_vdxj0")
 
 [node name="Timer" type="Timer" parent="Drawer1/use" index="0"]
@@ -31,10 +29,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 4, 0.999571, 0, 0)
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 
 [node name="Drawer2" parent="." index="2"]
-script = ExtResource("3_golcb")
+script = ExtResource("2_vffnc")
 
 [node name="use" type="Node3D" parent="Drawer2" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 script = ExtResource("5_qblpa")
 
 [node name="Timer" type="Timer" parent="Drawer2/use" index="0"]
@@ -49,10 +46,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 4, 0.999571, 0, 0)
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 
 [node name="Drawer3" parent="." index="3"]
-script = ExtResource("3_golcb")
+script = ExtResource("2_vffnc")
 
 [node name="use" type="Node3D" parent="Drawer3" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 script = ExtResource("6_awqfw")
 
 [node name="Timer" type="Timer" parent="Drawer3/use" index="0"]
@@ -67,10 +63,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 4, 0.999571, 0, 0)
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 
 [node name="Drawer4" parent="." index="4"]
-script = ExtResource("3_golcb")
+script = ExtResource("2_vffnc")
 
 [node name="use" type="Node3D" parent="Drawer4" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 script = ExtResource("7_8vcwr")
 
 [node name="Timer" type="Timer" parent="Drawer4/use" index="0"]
