@@ -278,14 +278,34 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
             // death land
             GameMaster.GM.Log.WriteLog(this, LogSystem.ELogMsgType.INFO, "(death land)" + "height from start falling: " + heightfall + " m");
             PlayRandomSound(AudioStreamPlayerJumpLand, deathHeightLandingSounds, LandingVolumeDB, 0.5f);
-            lerpHeight = -1.2f;
-            lerpRot = -0.6f;
+            lerpHeight = -1.0f;
+            lerpRot = -0.3f;
+            speedmod = 10.0f;
+
+            // call event dead
+            EventDead("fall from height: " + heightfall + " m");
+            lerpHeadLandY = lerpHeight;
+            lerpHeadLandRotX = lerpRot;
+            lerpLandingSpeedModifier = speedmod;
+            return;
         }
 
         lerpHeadLandY = lerpHeight;
         lerpHeadLandRotX = lerpRot;
+        lerpLandingSpeedModifier = speedmod;
 
         // Start timer to normal
         landing_timer.Start();
+    }
+
+    // EVENT Dead
+    public override void EventDead(string reasonDead)
+    {
+        base.EventDead(reasonDead);
+
+        GameMaster.GM.Log.WriteLog(this,LogSystem.ELogMsgType.INFO,"Your character dead becouse: " + reasonDead);
+
+        // DisableInputs for character
+        SetInputEnable(false);
     }
 }

@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://8x5qdxf7a8nq"]
+[gd_scene load_steps=8 format=3 uid="uid://8x5qdxf7a8nq"]
 
 [ext_resource type="PackedScene" uid="uid://2b8vuef2k4is" path="res://player/FPSCharacter_WalkingEffects.tscn" id="1_0ipjt"]
 [ext_resource type="Script" path="res://player/FPSCharacter_Interaction.cs" id="2_fmih3"]
+[ext_resource type="AudioStream" uid="uid://cbxo2phl7ufx1" path="res://audio/audio_streams/landing_basic/landing-on-the-ground_from_height-6.wav" id="3_1y2oa"]
 [ext_resource type="Script" path="res://player/BasicHud.cs" id="3_etvvy"]
 [ext_resource type="Script" path="res://core_systems/DebugHud.cs" id="4_75mlc"]
 [ext_resource type="PackedScene" uid="uid://fpjkcaij44dx" path="res://core_systems/item_inspect/item_inspect.tscn" id="5_iw50w"]
@@ -17,6 +18,7 @@ wall_min_slide_angle = 0.0
 floor_block_on_wall = false
 script = ExtResource("2_fmih3")
 LengthInteractRay = 5.0
+deathHeightLandingSounds = [ExtResource("3_1y2oa")]
 
 [node name="HolderHands" type="Node3D" parent="HeadMain/HeadGimbalA/HeadGimbalB/HeadHolderCamera" index="0"]
 

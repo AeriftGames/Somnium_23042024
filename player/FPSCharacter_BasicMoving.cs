@@ -464,6 +464,12 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
         //GameMaster.GM.Log.WriteLog(this, LogSystem.ELogMsgType.INFO, "character moving stoped");
     }
 
+    // Event when character become actual dead
+    public virtual void EventDead(string reasonDead)
+    {
+        //GameMaster.GM.Log.WriteLog(this, LogSystem.ELogMsgType.INFO, "character is dead");
+    }
+
     // Return by linked ObjectCamera->Camera
     public Camera3D GetFPSCharacterCamera()
     {
