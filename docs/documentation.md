@@ -277,13 +277,13 @@ public partial class NodeB_CS : Node3D
   
 	public override void _Ready()
 	{
-      // vytvoreni noveho MessageObjectu
-      msgObject = new MessageObject(this,GetNode<Node3D>("/root/WorldScene/NodeA_GD"));
+      	// vytvoreni noveho MessageObjectu
+     	 msgObject = new MessageObject(this,GetNode<Node3D>("/root/WorldScene/NodeA_GD"));
       
-      // nastavime data(jako argument) a posilame NodeA_GD zpravu (msg/kontext)
-      msgObject.SetStringData("hello");
-      msgObject.SendMessageToGDNow("msg_write_text");
-      // SendMessageToGDNow spusti v protejsim objektu s kterym komunikujeme funkci message_update
+      	// nastavime data(jako argument) a posilame NodeA_GD zpravu (msg/kontext)
+      	msgObject.SetStringData("hello");
+      	msgObject.SendMessageToGDNow("msg_write_text");
+      	// SendMessageToGDNow spusti v protejsim objektu s kterym komunikujeme funkci message_update
 	}
 
 	// toto je funkce volana pouze z protejsiho komunikacniho objektu GD (neco jako hej mas zpravu, ted si ji precti)
@@ -293,12 +293,12 @@ public partial class NodeB_CS : Node3D
 		string msg = msgObject.GetMessage();
 		switch (msg)
 		{
-            case "msg_get_yourname":
-                {
-                    msgObject.SetStringData("Michael");
-                    break;
-                }
-        }
+            		case "msg_get_yourname":
+                	{
+                    	msgObject.SetStringData("Michael");
+                    	break;
+                	}
+        	}
 	}
 }
 ```
