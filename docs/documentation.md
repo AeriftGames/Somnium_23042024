@@ -31,6 +31,7 @@ Technická dokumentace k projektu **Somnium Prototype**
       - [Ukázka vytvoření logu](#uk-zka-vytvo-en--logu)
       - [Ukázka logu](#uk-zka-logu)
     + [MessageObject](#messageobject)
+      - [Ukázka základního použití](#Uk-zka-z-kladn-ho-pou-it-)
   * [Groups](#groups)
     + [template_group](#template-group)
   * [Collision layers](#collision-layers)
