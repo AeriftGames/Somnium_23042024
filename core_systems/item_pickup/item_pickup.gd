@@ -43,7 +43,6 @@ var sfx_node: Node
 func _ready():
 	node_interact = node_interact_scene.instantiate()
 	self.add_child(node_interact)
-	use_node = $use
 	timer = Timer.new()
 	self.add_child(timer)
 	timer.timeout.connect(_on_Timer_timeout)
