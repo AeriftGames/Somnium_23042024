@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3]
+[gd_scene load_steps=40 format=3 uid="uid://d15arx0xhaab3"]
 
 [ext_resource type="ArrayOccluder3D" uid="uid://c65wc0yeg3cak" path="res://levels/world_level_rooms/worldlevel_rooms_test.occ" id="1_48aky"]
 [ext_resource type="PackedScene" uid="uid://ck8mt4y4gfqmk" path="res://placeholders/modular_walls/ground_large.tscn" id="1_vcfbv"]
@@ -28,8 +28,8 @@
 [ext_resource type="PackedScene" uid="uid://16d10e0sx2rr" path="res://objects/pipes/pipecurve.glb" id="27_ckge2"]
 [ext_resource type="PackedScene" uid="uid://d1fahaee5i3x6" path="res://objects/pipes/pipestraight.glb" id="28_bnr13"]
 [ext_resource type="PackedScene" uid="uid://bj5geey0opre6" path="res://objects/furniture/cabinet_small.tscn" id="29_ebuaj"]
-[ext_resource type="PackedScene" uid="uid://bxl1f16to2tuk" path="res://objects/door/door.tscn" id="29_rc6hx"]
-[ext_resource type="PackedScene" path="res://cabinet_new.tscn" id="30_vtat2"]
+[ext_resource type="PackedScene" path="res://objects/door/door.tscn" id="29_rc6hx"]
+[ext_resource type="PackedScene" path="res://objects/furniture/cabinet_new.tscn" id="30_vtat2"]
 [ext_resource type="PackedScene" uid="uid://cokykrpxx7lmy" path="res://objects/battery/battery.tscn" id="31_rjyuk"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_nrkwj"]
@@ -535,7 +535,7 @@ transform = Transform3D(-0.6, 0, -5.24536e-08, 0, 0.6, 0, 5.24536e-08, 0, -0.6, 
 transform = Transform3D(-0.6, 0, -5.24536e-08, 0, 0.6, 0, 5.24536e-08, 0, -0.6, -4.00621, -0.543687, 3.23242)
 
 [node name="cabinet_new" parent="." instance=ExtResource("30_vtat2")]
-transform = Transform3D(-0.4, 0, -3.49691e-08, 0, 0.4, 0, 3.49691e-08, 0, -0.4, -2.4996, 0.703549, -8.80008)
+transform = Transform3D(-0.4, 0, -3.49691e-08, 0, 0.4, 0, 3.49691e-08, 0, -0.4, -2.4996, 0.703549, -8.88343)
 
 [node name="postcard" parent="cabinet_new" instance=ExtResource("23_ua0lw")]
 transform = Transform3D(-1.42047e-08, -0.119817, -0.275034, 5.23736e-09, 0.275034, -0.119817, 0.3, -1.04747e-08, -1.09309e-08, 1.24636, 0.179191, 1.0084)

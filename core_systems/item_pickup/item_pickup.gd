@@ -4,33 +4,33 @@ extends Node3D
 ##
 ## A more detailes comment TODO
 
-
 ## Variable used for interacting with interactive_object required for interaction.
-var node_interact: Node
+@export var node_interact : Node
+## Item name used for displaying item name in interaction
+@export var item_name: String
+## Used for displaying action name when look at (Pick up, Use, ..)
+@export var item_interaction_name: String
+## Node used for the item logic (add health, battery, ...)
+@export var use_node: Node
+## TODO
+@export var pickup_speed: float = 0.2
+## TODO
+@export var sfx: AudioStreamWAV# = load("res://objects/battery/pickup.wav")
+
+
 ## The object hat inicialized interaction (should be player)
 var passed_object: Node
-## Item name used for displaying item name in interaction
-var item_name: String
-## Used for displaying action name when look at (Pick up, Use, ..)
-var item_interaction_name: String
 ## Combines interaction names and item name for final tooltip
 var item_interaction: String
 ## Tween used for anymating pickup anymation
 var tween_position: Tween
-## Node used for the item logic (add health, battery, ...)
-var use_node: Node
-## TODO
-var pickup_speed: float = 0.2
 ## TODO
 var timer: Node
-## TODO
-var sfx: Resource = load("res://objects/battery/pickup.wav")
 ## TODO
 var sfx_node: Node
 
 
 func _ready():
-	node_interact = $interactive_object
 	use_node = $use
 	timer = Timer.new()
 	self.add_child(timer)
@@ -40,8 +40,6 @@ func _ready():
 	sfx_node.stream = sfx
 	self.add_child(sfx_node)
 	sfx_node.finished.connect(_on_audio_stream_player_finished)
-	item_name = use_node.item_name
-	item_interaction_name = use_node.item_interaction_name
 	item_interaction = item_interaction_name + " " + item_name
 
 ## Logic of the item being used
@@ -56,7 +54,7 @@ func _used():
 	use_node.use()
 
 ## Special function required for interaction between GDScript and C#
-func message_update():
+func message_update() -> void:
 	var msg:String = node_interact.msgObject.GetMessage()
 	if msg == "msg_get_use_action_text":
 		node_interact.msgObject.SetStringData(item_interaction)
