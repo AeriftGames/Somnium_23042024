@@ -17,7 +17,6 @@ var facing_front_text = false #TODO
 func _ready():
 	self.hide()
 	$Control.hide()
-	look_changed(true)
 
 
 func _process(delta):
@@ -26,7 +25,7 @@ func _process(delta):
 	_used(delta)
 
 
-func inspect(state, item):
+func inspect(state: bool, item: Node, front: bool):
 	if state:
 		self.show()
 		var r = $SubViewport.create_view(item)
@@ -34,6 +33,7 @@ func inspect(state, item):
 		isNowInteract = true
 		active_item = item
 		$spawn_animation.start(0.4)
+		look_changed(front)
 
 
 func _show_description(state = false):
