@@ -32,7 +32,10 @@ public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
 
 	// HANDS
 	public Node3D HolderHands = null;
-	public Node3D objectHands = null;
+	public ObjectHands objectHands = null;
+
+	// Simple Flashlight
+	bool isFlashlightEnable = false;
 
 
 	public override void _Ready()
@@ -49,6 +52,10 @@ public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
 	public override void _Process(double delta)
 	{
 		base._Process(delta);
+
+		// Toggle Simple Flashlight
+		if(Input.IsActionJustPressed("ToggleFlashlight"))
+			ToggleSimpleFlashlight();
 
 		// UPDATE HANDS
 		objectHands.GlobalPosition = 
@@ -192,5 +199,25 @@ public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
 		
 		// pak, az budeme chtit staci vyresetovat lokalni pozice kamery a rotaci kamery na puvodni
 		// zde resime v Process
+	}
+
+	// Prozatimni reseni flashlight
+	public void ToggleSimpleFlashlight()
+	{
+		// Prepnout stav
+		isFlashlightEnable = !isFlashlightEnable;
+
+		if(isFlashlightEnable)
+		{
+			//ON
+			GameMaster.GM.Log.WriteLog(this,LogSystem.ELogMsgType.INFO,"Flaslight ON");
+			objectHands.objectFlashlight.Visible = true;
+		}
+		else
+		{
+            //OFF
+            GameMaster.GM.Log.WriteLog(this, LogSystem.ELogMsgType.INFO, "Flaslight OFF");
+            objectHands.objectFlashlight.Visible = false;
+        }
 	}
 }

@@ -21,6 +21,7 @@ mesh = SubResource("SphereMesh_2yisq")
 
 [node name="flashlight" parent="RightHand" instance=ExtResource("2_y6ntf")]
 transform = Transform3D(-2.18557e-09, 0, 0.05, 0, 0.05, 0, -0.05, 0, -2.18557e-09, 0, -0.1, 0.05)
+visible = false
 
 [node name="SpotLight3D" type="SpotLight3D" parent="RightHand/flashlight"]
 transform = Transform3D(-8.74228e-07, 0, -20, 0, 20, 0, 20, 0, -8.74228e-07, 7, 0, 3.8147e-06)
@@ -38,3 +39,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, -0.2, -0.3)
 visible = false
 mesh = SubResource("SphereMesh_2yisq")
 skeleton = NodePath("../../RightHand")
+
+[node name="ObjectFlashlight" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, -0.2, 0)
+visible = false
+
+[node name="SpotLight3D" type="SpotLight3D" parent="ObjectFlashlight"]
+light_energy = 2.6
+shadow_enabled = true
+spot_range = 15.0
+spot_attenuation = 2.18566
+spot_angle = 30.0
+spot_angle_attenuation = 2.04906
