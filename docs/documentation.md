@@ -2,47 +2,31 @@
 Technická dokumentace k projektu **Somnium Prototype**
 
 ## Seznam kapitol
+# Table of contents
+
 - [Documentation](#documentation)
-  * [Seznam kapitol](#seznam-kapitol)
-  * [Standardy projektu](#standardy-projektu)
-    + [Souborová struktura projektu](#souborov--struktura-projektu)
-    + [Jmenová konvence](#jmenov--konvence)
-      - [Pojmenování složek](#pojmenov-n--slo-ek)
-      - [Pojmenování scén a scriptů](#pojmenov-n--sc-n-a-script-)
-      - [Pojmenování složek](#pojmenov-n--slo-ek-1)
-      - [Pojmenování nodes v rámci scén](#pojmenov-n--nodes-v-r-mci-sc-n)
-  * [Herní mechanismy a jejich detailní popisy](#hern--mechanismy-a-jejich-detailn--popisy)
-    + [Ukázková herní mechanika](#uk-zkov--hern--mechanika)
-      - [Zprovoznění logiky](#zprovozn-n--logiky)
-      - [Volané funkce](#volan--funkce)
-        * [playerEntered(node: Object, text: String)](#playerentered-node--object--text--string-)
-      - [Volatelné funkce](#volateln--funkce)
-        * [myFunction(node: Object, text: String) -> void:](#myfunction-node--object--text--string-----void-)
-        * [returnString(text: String) -> String:](#returnstring-text--string-----string-)
-      - [Příklady](#p--klady)
-    + [Logging](#logging)
-      - [Logging level](#logging-level)
-      - [Config](#config)
-      - [Logování do souboru](#logov-n--do-souboru)
-      - [Volatelné funkce](#volateln--funkce-1)
-        * [info(node: Object, text: String) -> void](#info-node--object--text--string-----void)
-        * [warning(node: Object, text: String) -> void](#warning-node--object--text--string-----void)
-        * [error(node: Object, text: String) -> void](#error-node--object--text--string-----void)
-      - [Ukázka vytvoření logu](#uk-zka-vytvo-en--logu)
-      - [Ukázka logu](#uk-zka-logu)
-  * [Groups](#groups)
-    + [template_group](#template-group)
-  * [Collision layers](#collision-layers)
-    + [1. vrstva](#1-vrstva)
-  * [Autoload](#autoload)
-    + [logging](#logging)
-    + [CustomSettings](#customsettings)
-    + [LastSingleton](#lastsingleton)
-  * [Databases](#databases)
-    + [items](#items)
+  - [Seznam kapitol](#seznam-kapitol)
+  - [Standardy projektu](#standardy-projektu)
+    - [Souborová struktura projektu](#souborov-struktura-projektu)
+    - [Jmenová konvence](#jmenov-konvence)
+  - [Herní mechanismy a jejich detailní popisy](#hern-mechanismy-a-jejich-detailn-popisy)
+    - [Ukázková herní mechanika](#ukzkov-hern-mechanika)
+    - [Logging](#logging)
+    - [Logging2](#logging2)
+  - [Groups](#groups)
+    - [template_group](#template_group)
+  - [Collision layers](#collision-layers)
+    - [1. vrstva](#1-vrstva)
+  - [Autoload](#autoload)
+    - [logging](#logging)
+    - [CustomSettings](#customsettings)
+    - [LastSingleton](#lastsingleton)
+  - [Databases](#databases)
+    - [items](#items)
 
 
 *Pro rychlé vygenerování kapitol lze použít [https://ecotrust-canada.github.io/markdown-toc/](https://ecotrust-canada.github.io/markdown-toc/)*
+*Ještě další generator, kde je nastavit úroveň. Současné kapitoly jsou udělané na úroveň **3**. [https://luciopaiva.com/markdown-toc/](https://luciopaiva.com/markdown-toc/)
 
 ## Standardy projektu
 Tato kapitola obsahuje dohodnoté standardy, které zajišťují jednoduchou přehlednost pro všechny členy projektu
@@ -163,6 +147,7 @@ file_log = false
 clear_file = true
 ```
 Vysvětlení jednotlivých hodnot:
+
 | Klíč          | Hodnota        |  Typ          |
 | ------------- | ------------- | ------------- |
 | debug_oalar | Určeno pro rozdělení logování mezi Oalar a Kaen | bool |
@@ -233,6 +218,40 @@ INFO: 8 (8:<MeshInstance3D#38889588228>): Key 8 pressed
 INFO: enter (enter:<MeshInstance3D#39158023700>): Key enter pressed
 INFO: keypad (keypad:<Node3D#38285608416>): Incorrect combination entered
 ```
+
+### item_pickup
+Item_pickup je **core system** nacházející se v `core_systems\item_pickup`. Item_pickup slouží jako základ pro všechny
+itemy, které mají být zvednutelné (pick up) hráčem.
+
+#### Popis
+Systém je dělán tak, aby jej stačilo jen připojit k itemu, u kterého chceme povolit pick up. A následně nastavit
+proměnné pro doladění potřebného chování (popsáno v kapitole) [Jak použít](#Jak-použít). Většina proměnných má
+defaultní hodnotu, ale některé no. Pro správné fungování by mělo být všech not null.
+
+#### Jak použít
+Použití item_pickup je jednoduché. Stačí provést následující kroky:
+1. Vytvořit scénu, v které chceme logiku picku provést. Může jít například o scénu vytvořenou rovnou z *.glb* souboru
+pomocí `New Inherited scene` (pravé tlačítko myši na *.glb* soubor)
+2. K parenté této scény přiřadíme script nacházející se v `core_systems\item_pickup\item_pickup.gd`
+3. Po připojení odoznačíme parent a znovu označíme. Tím, se aktualizuje inspector, který bude obsahovat nové proměnné.
+Viz. obrázek:
+[Ukázka](https://github.com/AeriftGames/Somnium/blob/develop/docs/img/item_pickup_01.png)
+4. Zde **musíme** nastavit všechny proměnné. Bez nich nebude logika fungovat správně.
+
+| Variable              | Popis                                                                                                        | Typ         | Default value |
+|-----------------------|--------------------------------------------------------------------------------------------------------------|-------------|---------------|
+| item_interaction_name | Jméno typu akce, které se zobrazí hráči po najetí na item. Mělo by začínat velkým písmenem.                  | String      | Pickup        |
+| item_name             | Jméno itemu, které se zobrazí hráči po najetí na item. Mělo by začínat malým písmenem.                       | String      | item          |
+| use_node              | Node s připojeným scriptem, který **musí** obsahovat `use()` funkci. Tato funkce je zavolána po použití itemu. | Node        | *null*        |
+| pickup_speed          | Rychlost itemu, kterou letí směrem k hráči.                                                                  | float       | 0.2           |
+| pickup_height         | Výška, do které letí item (Vypočítáno z pozice playera). 0 je zem, na které hráč stojí.                      | float       | 0.8           |
+| hide_speed            | Rychlost, při které se item schová (aby simuloval osebrání objektu)                                          | float       | 0.1           |
+| sfx                   | Zvukový efekt, který se přehraje při sebrání itemu. Po dohrání zvuku dojde k `queue_free()`.                 | AudioStream | *null*        |
+
+5. Následně vytvoříme nový node, který bude obsahovat kód s logikou, která se provede po sebrání itemu. Tento node je 
+je potřeba vybrat v proměnné **use_node**
+6. Use node musí obsahovat funkcí use(), která je zavoláná po sebrání itemu.
+
 
 ## Groups
 Tato kapitola popisuje veškeré groups využité v projektu

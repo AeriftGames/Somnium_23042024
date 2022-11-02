@@ -553,10 +553,13 @@ transform = Transform3D(0.15, 0, 2.66454e-15, 0, 0.15, 0, -2.66454e-15, 0, 0.15,
 transform = Transform3D(0.15, 0, 2.66454e-15, 0, 0.15, 0, -2.66454e-15, 0, 0.15, 1.00348, 0.131817, -1.13212)
 
 [node name="battery" parent="cabinet_new" instance=ExtResource("31_rjyuk")]
-transform = Transform3D(0.1, 0, 1.77636e-15, 0, 0.1, 0, -1.77636e-15, 0, 0.1, 0.802648, 0, 0)
+transform = Transform3D(0.1, 0, 2.66454e-15, 0, 0.1, 0, -2.66454e-15, 0, 0.1, 1.53558, 0, 0)
 
 [node name="battery3" parent="cabinet_new" instance=ExtResource("31_rjyuk")]
 transform = Transform3D(0.1, -5.62691e-09, 2.05159e-09, 5.62691e-09, 0.0765326, -0.0643643, 2.05158e-09, 0.0643643, 0.0765326, 0.802648, 1.46512, 0.990042)
 
 [node name="battery2" parent="cabinet_new" instance=ExtResource("31_rjyuk")]
 transform = Transform3D(-0.00121298, 0.0999926, -8.84832e-09, -0.0999926, -0.00121298, -8.74164e-09, -8.84832e-09, 8.74163e-09, 0.1, 0.802648, 1.47781, 1.24188)
+
+[node name="battery" parent="." instance=ExtResource("31_rjyuk")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -4.69414, 0.290899, -11.5217)
