@@ -66,59 +66,6 @@ Tato kapitola obsahuje dohodnoté standardy, které zajišťují jednoduchou př
 # Herní mechanismy a jejich detailní popisy
 Tato kapitola obsahuje všechny důležité herní mechanismy
 
-## Ukázková herní mechanika
-Toto je ukázková herní mechanika. Díky této mechanice může hráč sebrat předmět do svého inventáře. Díky této mechanice lze provést: Tato kapitola by měla obsahovat detailní popis logiky.
-- toto
-- tohle taky
-  - dokonce i toto
-- a ještě tohle
-
-Obrázek ukazující tuto logiku v akci
-![Ukázka](https://github.com/AeriftGames/Somnium/blob/develop/docs/img/example_icon.png)
-
-### Zprovoznění logiky
-Toto je ukázková kapitola popisující jak zprovoznit tuto logiku na novém objektu. Pro její použití, je potřeba provést tyto kroky:
-1. Nainstacovat core scénu nacházející se v */core_systems/interaction/interaction.tscn*
-2. Tato scéna musí být child hlavního objektu, s kterým chceme interaktovat
-3. Hlavní objekt musí obsahovat script, který bude mít:
-
-Zde je ukázka snippetu kódu, který je důležité v dokumentaci ukázat. Blok kódu může obsahovat i zvýraznění syntaxe na základě určeného kódu.
-```python
-import AeriftGames
-
-def my_function(arg1, arg2):
-    result = arg1 + " " + arg2
-    return result
-
-x = "Hello"
-y = "World"
-hello_world = my_function(x, y)
-print(hello_world)
-```
-Výsledkem tohoto snippetu je:
-```
-Hello World
-```
-
-### Volané funkce
-Tato kapitola obsahuje veškeré volané funkce této mechaniky.
-
-#### playerEntered(node: Object, text: String)
-Tato funkce volá do každé **Area3D**, která zkoliduje s hráčem. Posílá informace o sobě formou **Node** a také posílá nějaký text typu **String**
-
-### Volatelné funkce
-Tato kapitola obsahuje veškeré volatelné (přijimatlné) funkce této mechaniky.
-
-#### myFunction(node: Object, text: String) -> void:
-Tato funkce dělá to, že něco dělá. Pro její zavolání je potřeba použít 2 argumenty. Prvním je **node**, který funkci zavolá. A druhý je **string**, který slouží k udělaní *nejaké funkce.*
-
-#### returnString(text: String) -> String:
-Tato funkce po zavolání vrátí string, který byl použit při jejím zavolání jako argument.
-Pro úspěšné zavolání funkce je potřeba poslat i jeden povinná argument typu **string**. Funkce následně tento string také vrátí.
-
-### Příklady
-Tato kapitola ukazuje nějaký příklad z praxe, jak je funkce využita.
-
 ## Logging
 Jedná se o logiku, která zlepšuje práci s logováním ať už do souboru, tak i formou printu. Logging je zároveň i **Autoload** nacházející se v `/autoload/logging.gd`. Lze tedy kdykoliv zavolat funkce loggingu pomocí `Logging.funkce()`
 Logging si načítá informace ze souboru
