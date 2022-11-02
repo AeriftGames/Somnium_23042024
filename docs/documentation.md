@@ -37,7 +37,8 @@ Technická dokumentace k projektu **Somnium Prototype**
   * [Groups](#groups)
     + [template_group](#template-group)
   * [Collision layers](#collision-layers)
-    + [1. vrstva](#1-vrstva)
+    + [1. vrstva](#1-vrstva-worldphysics_layer)
+    + [2. vrstva](#2-vrstva-interactive_layer)
   * [Autoload](#autoload)
     + [logging](#logging)
     + [CustomSettings](#customsettings)
@@ -435,8 +436,11 @@ Toto je ukázková group. Tuto skupinu obsahují všechny objekty, které budou 
 ## Collision layers
 Tato kapitola popisuje veškeré kolizní vrstvy v projektu.
 
-### 1. vrstva
-Tato vrstva je defaultní a řeší většinu kolizí.
+### 1. vrstva: **worldphysics_layer**
+Tato vrstva je defaultní a řeší základní kolizi 3D světa. V této vrstvě se nachází veškeré překážky, zdi, objekty se kterými chceme aby kolidoval hráč, ale také s nimiž by měl počítat třeba navmesh nepřátel.
+
+### 2. vrstva: **interactive_layer**
+Tato vrstva je zamýšlena výhradně pro detekci raycastem FPSCharacter na ```interactive_object``` (interakce hráče) a tato vrstva není detekována ani v kolizi s žádnou jinou kolizní vrstvou. Lze ji hitnout pouze raycastem a nemělo by v této vrstvě být nic jiného, ani by ji neměl nikdo detekovat.
 
 ## Autoload
 Tato kapitola popisuje všechny autoload.
