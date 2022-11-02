@@ -6,13 +6,14 @@ Technická dokumentace k projektu **Somnium Prototype**
 
 - [Documentation](#documentation)
   - [Seznam kapitol](#seznam-kapitol)
+- [Table of contents](#table-of-contents)
   - [Standardy projektu](#standardy-projektu)
     - [Souborová struktura projektu](#souborov-struktura-projektu)
     - [Jmenová konvence](#jmenov-konvence)
   - [Herní mechanismy a jejich detailní popisy](#hern-mechanismy-a-jejich-detailn-popisy)
     - [Ukázková herní mechanika](#ukzkov-hern-mechanika)
     - [Logging](#logging)
-    - [Logging2](#logging2)
+    - [item_pickup](#item_pickup)
   - [Groups](#groups)
     - [template_group](#template_group)
   - [Collision layers](#collision-layers)
@@ -23,7 +24,6 @@ Technická dokumentace k projektu **Somnium Prototype**
     - [LastSingleton](#lastsingleton)
   - [Databases](#databases)
     - [items](#items)
-
 
 *Pro rychlé vygenerování kapitol lze použít [https://ecotrust-canada.github.io/markdown-toc/](https://ecotrust-canada.github.io/markdown-toc/)*
 *Ještě další generator, kde je nastavit úroveň. Současné kapitoly jsou udělané na úroveň **3**. [https://luciopaiva.com/markdown-toc/](https://luciopaiva.com/markdown-toc/)
@@ -235,7 +235,7 @@ pomocí `New Inherited scene` (pravé tlačítko myši na *.glb* soubor)
 2. K parenté této scény přiřadíme script nacházející se v `core_systems\item_pickup\item_pickup.gd`
 3. Po připojení odoznačíme parent a znovu označíme. Tím, se aktualizuje inspector, který bude obsahovat nové proměnné.
 Viz. obrázek:
-[Ukázka](https://github.com/AeriftGames/Somnium/blob/develop/docs/img/item_pickup_01.png)
+![Ukázka](https://github.com/AeriftGames/Somnium/blob/develop/docs/img/item_pickup_01.png)
 4. Zde **musíme** nastavit všechny proměnné. Bez nich nebude logika fungovat správně.
 
 | Variable              | Popis                                                                                                        | Typ         | Default value |
