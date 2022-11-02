@@ -1,6 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://cbxicv0ueyhmf"]
+[gd_scene load_steps=3 format=3]
 
-[ext_resource type="PackedScene" uid="uid://3cn4mk28rgv4" path="res://cabinet_new.glb" id="1_te3jn"]
+[ext_resource type="PackedScene" uid="uid://3cn4mk28rgv4" path="res://objects/furniture/cabinet_new.glb" id="1_te3jn"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w2qjs"]
 cull_mode = 2

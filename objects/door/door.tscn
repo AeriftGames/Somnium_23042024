@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://bxl1f16to2tuk"]
+[gd_scene load_steps=5 format=3]
 
-[ext_resource type="PackedScene" uid="uid://t1ca3sj7e76i" path="res://door.glb" id="1_gfes1"]
-[ext_resource type="Script" path="res://door.gd" id="2_kioif"]
+[ext_resource type="PackedScene" uid="uid://t1ca3sj7e76i" path="res://objects/door/door.glb" id="1_gfes1"]
+[ext_resource type="Script" path="res://objects/door/door.gd" id="2_kioif"]
 [ext_resource type="PackedScene" uid="uid://dbnevtbu1g7uy" path="res://core_systems/interactive_system/interactive_object.tscn" id="3_i6745"]
-[ext_resource type="Script" path="res://use_door.gd" id="4_gp7nw"]
+[ext_resource type="Script" path="res://objects/door/use_door.gd" id="4_gp7nw"]
 
 [node name="door" instance=ExtResource("1_gfes1")]
 script = ExtResource("2_kioif")
