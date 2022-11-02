@@ -34,11 +34,15 @@ public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
 	public Node3D HolderHands = null;
 	public ObjectHands objectHands = null;
 
-	// Simple Flashlight
+	// Simple Flashlight toggle test
 	bool isFlashlightEnable = false;
+	AudioStreamPlayer AudioStreamPlayer_TestItem = null;
+    [ExportGroupAttribute("Simple Flashlight Settings")]
+    [Export] public AudioStream AudioFlashlight_On;
+    [Export] public AudioStream AudioFlashlight_Off;
 
 
-	public override void _Ready()
+    public override void _Ready()
 	{
 		base._Ready();
 
@@ -47,6 +51,9 @@ public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
 
 		//
 		HolderHands = GetNode<Node3D>("HeadMain/HeadGimbalA/HeadGimbalB/HeadHolderCamera/HolderHands");
+
+		// Simple Flashlight toggle test
+		AudioStreamPlayer_TestItem = GetNode<AudioStreamPlayer>("AudioStreamPlayer_TestItem");
 	}
 
 	public override void _Process(double delta)
@@ -212,12 +219,24 @@ public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
 			//ON
 			GameMaster.GM.Log.WriteLog(this,LogSystem.ELogMsgType.INFO,"Flaslight ON");
 			objectHands.objectFlashlight.Visible = true;
-		}
+
+			// Audio play
+			AudioStreamPlayer_TestItem.VolumeDb = -15f;
+			AudioStreamPlayer_TestItem.PitchScale = 0.9f;
+            AudioStreamPlayer_TestItem.Stream = AudioFlashlight_On;
+            AudioStreamPlayer_TestItem.Play();
+        }
 		else
 		{
             //OFF
             GameMaster.GM.Log.WriteLog(this, LogSystem.ELogMsgType.INFO, "Flaslight OFF");
             objectHands.objectFlashlight.Visible = false;
+
+            // Audio play
+            AudioStreamPlayer_TestItem.VolumeDb = -15f;
+            AudioStreamPlayer_TestItem.PitchScale = 0.9f;
+            AudioStreamPlayer_TestItem.Stream = AudioFlashlight_Off;
+            AudioStreamPlayer_TestItem.Play();
         }
 	}
 }
