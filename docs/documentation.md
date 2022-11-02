@@ -2,57 +2,71 @@
 Technická dokumentace k projektu **Somnium Prototype**
 
 ## Seznam kapitol
-# Table of contents
 
 - [Documentation](#documentation)
   - [Seznam kapitol](#seznam-kapitol)
-- [Table of contents](#table-of-contents)
-  - [Standardy projektu](#standardy-projektu)
-    - [Souborová struktura projektu](#souborov-struktura-projektu)
-    - [Jmenová konvence](#jmenov-konvence)
-  - [Herní mechanismy a jejich detailní popisy](#hern-mechanismy-a-jejich-detailn-popisy)
-    - [Ukázková herní mechanika](#ukzkov-hern-mechanika)
-    - [Logging](#logging)
-    - [item_pickup](#item_pickup)
-  - [Groups](#groups)
-    - [template_group](#template_group)
-  - [Collision layers](#collision-layers)
-    - [1. vrstva](#1-vrstva)
-  - [Autoload](#autoload)
-    - [logging](#logging)
-    - [CustomSettings](#customsettings)
-    - [LastSingleton](#lastsingleton)
-  - [Databases](#databases)
-    - [items](#items)
+- [Standardy projektu](#standardy-projektu)
+  - [Souborová struktura projektu](#souborov-struktura-projektu)
+  - [Jmenová konvence](#jmenov-konvence)
+    - [Pojmenování složek](#pojmenovn-sloek)
+    - [Pojmenování scén a scriptů](#pojmenovn-scn-a-script)
+    - [Pojmenování složek](#pojmenovn-sloek)
+    - [Pojmenování nodes v rámci scén](#pojmenovn-nodes-v-rmci-scn)
+- [Herní mechanismy a jejich detailní popisy](#hern-mechanismy-a-jejich-detailn-popisy)
+  - [Ukázková herní mechanika](#ukzkov-hern-mechanika)
+    - [Zprovoznění logiky](#zprovoznn-logiky)
+    - [Volané funkce](#volan-funkce)
+    - [Volatelné funkce](#volateln-funkce)
+    - [Příklady](#pklady)
+  - [Logging](#logging)
+    - [Logging level](#logging-level)
+    - [Config](#config)
+    - [Logování do souboru](#logovn-do-souboru)
+    - [Volatelné funkce](#volateln-funkce)
+    - [Ukázka vytvoření logu](#ukzka-vytvoen-logu)
+    - [Ukázka logu](#ukzka-logu)
+  - [item_pickup](#item_pickup)
+    - [Popis](#popis)
+    - [Jak použít](#jak-pout)
+- [Groups](#groups)
+  - [template_group](#template_group)
+- [Collision layers](#collision-layers)
+  - [1. vrstva](#1-vrstva)
+- [Autoload](#autoload)
+  - [logging](#logging)
+  - [CustomSettings](#customsettings)
+  - [LastSingleton](#lastsingleton)
+- [Databases](#databases)
+  - [items](#items)
 
 *Pro rychlé vygenerování kapitol lze použít [https://ecotrust-canada.github.io/markdown-toc/](https://ecotrust-canada.github.io/markdown-toc/)*
 *Ještě další generator, kde je nastavit úroveň. Současné kapitoly jsou udělané na úroveň **3**. [https://luciopaiva.com/markdown-toc/](https://luciopaiva.com/markdown-toc/)
 
-## Standardy projektu
+# Standardy projektu
 Tato kapitola obsahuje dohodnoté standardy, které zajišťují jednoduchou přehlednost pro všechny členy projektu
 
-### Souborová struktura projektu
+## Souborová struktura projektu
 **TODO** Zde bude popsána složková struktura projektu.
 
-### Jmenová konvence
+## Jmenová konvence
 **TODO** Tato kapitola obsahuje menší kapitoly jednotlivých jmennových konvencí.
 
-#### Pojmenování složek
+### Pojmenování složek
 **TODO**
 
-#### Pojmenování scén a scriptů
+### Pojmenování scén a scriptů
 **TODO**
 
-#### Pojmenování složek
+### Pojmenování složek
 **TODO**
 
-#### Pojmenování nodes v rámci scén
+### Pojmenování nodes v rámci scén
 **TODO**
 
-## Herní mechanismy a jejich detailní popisy
+# Herní mechanismy a jejich detailní popisy
 Tato kapitola obsahuje všechny důležité herní mechanismy
 
-### Ukázková herní mechanika
+## Ukázková herní mechanika
 Toto je ukázková herní mechanika. Díky této mechanice může hráč sebrat předmět do svého inventáře. Díky této mechanice lze provést: Tato kapitola by měla obsahovat detailní popis logiky.
 - toto
 - tohle taky
@@ -62,7 +76,7 @@ Toto je ukázková herní mechanika. Díky této mechanice může hráč sebrat 
 Obrázek ukazující tuto logiku v akci
 ![Ukázka](https://github.com/AeriftGames/Somnium/blob/develop/docs/img/example_icon.png)
 
-#### Zprovoznění logiky
+### Zprovoznění logiky
 Toto je ukázková kapitola popisující jak zprovoznit tuto logiku na novém objektu. Pro její použití, je potřeba provést tyto kroky:
 1. Nainstacovat core scénu nacházející se v */core_systems/interaction/interaction.tscn*
 2. Tato scéna musí být child hlavního objektu, s kterým chceme interaktovat
@@ -86,33 +100,33 @@ Výsledkem tohoto snippetu je:
 Hello World
 ```
 
-#### Volané funkce
+### Volané funkce
 Tato kapitola obsahuje veškeré volané funkce této mechaniky.
 
-##### playerEntered(node: Object, text: String)
+#### playerEntered(node: Object, text: String)
 Tato funkce volá do každé **Area3D**, která zkoliduje s hráčem. Posílá informace o sobě formou **Node** a také posílá nějaký text typu **String**
 
-#### Volatelné funkce
+### Volatelné funkce
 Tato kapitola obsahuje veškeré volatelné (přijimatlné) funkce této mechaniky.
 
-##### myFunction(node: Object, text: String) -> void:
+#### myFunction(node: Object, text: String) -> void:
 Tato funkce dělá to, že něco dělá. Pro její zavolání je potřeba použít 2 argumenty. Prvním je **node**, který funkci zavolá. A druhý je **string**, který slouží k udělaní *nejaké funkce.*
 
-##### returnString(text: String) -> String:
+#### returnString(text: String) -> String:
 Tato funkce po zavolání vrátí string, který byl použit při jejím zavolání jako argument.
 Pro úspěšné zavolání funkce je potřeba poslat i jeden povinná argument typu **string**. Funkce následně tento string také vrátí.
 
-#### Příklady
+### Příklady
 Tato kapitola ukazuje nějaký příklad z praxe, jak je funkce využita.
 
-### Logging
+## Logging
 Jedná se o logiku, která zlepšuje práci s logováním ať už do souboru, tak i formou printu. Logging je zároveň i **Autoload** nacházející se v `/autoload/logging.gd`. Lze tedy kdykoliv zavolat funkce loggingu pomocí `Logging.funkce()`
 Logging si načítá informace ze souboru
 `/autoload/settings.cfg`. 
 Základním principem je rozdělení logiky podle úrovně logu a kdo loguje.
 
 
-#### Logging level
+### Logging level
 Logging level lze nastavit pomocí hodnoty `logging_level` v configu.
 - **INFO**
 Tato úroveň znamená, že se bude logovat vše. Tzn. úroveň **INFO**, **WARNING** i **ERROR**.
@@ -124,7 +138,7 @@ Je určeno pro zalogování něčeho, co se ideálně němělo stát, a nebo ně
 V této úrovni se bude logovat pouze úroveň **ERROR**.
 Je určeno pro zalogování nějakého erroru, který nastal přímo během spuštěného projektu.
 
-#### Config
+### Config
 Config se nachází v `/autoload/settings.cfg`. Config je součástí *.gitignore*. 
 Config je načítán pomocí Autoloadu `custom_settings.gd`. Tzn. všechny hodnoty z configu jsou dostupné přes zavolání CustomSettings.
 ```python
@@ -158,34 +172,34 @@ Vysvětlení jednotlivých hodnot:
 | file_log   | Logování do souboru  | bool |
 | clear_file   | Vyčištění logovacího souboru při spuštění projektu  | bool |
 
-#### Logování do souboru
+### Logování do souboru
 Log do souboru se ukládá v `log/default_log.txt`. Tento soubor je součástí *.gitignore*. Oproti klasickému logu do printu sbírá soubor i základní informace o zařízení, které projekt spustilo. Jde například o věci typu: Operační systém, unikátní ID, CPU, ...
 
-#### Volatelné funkce
+### Volatelné funkce
 Logging obsahuje celkem 3 volatelné funkce. Každá z funkcí vyžaduje 2 parametry:
 `Object` - object, který log zavolal. Tzn. ve většině případů jde o *self*
 `String` - text, který se pod poslaným objectem zaloguje
 
-##### info(node: Object, text: String) -> void
+#### info(node: Object, text: String) -> void
 Vytvoří log úrovně **INFO**
 Požaduje:
 `Object` - object, který log zavolal. Tzn. ve většině případů jde o *self*
 `String` - text, který se pod poslaným objectem zaloguje
 Funkce nic nevrací.
 
-##### warning(node: Object, text: String) -> void
+#### warning(node: Object, text: String) -> void
 Vytvoří log úrovně **WARNING**
 `Object` - object, který log zavolal. Tzn. ve většině případů jde o *self*
 `String` - text, který se pod poslaným objectem zaloguje
 Funkce nic nevrací.
 
-##### error(node: Object, text: String) -> void
+#### error(node: Object, text: String) -> void
 Vytvoří log úrovně **ERROR**
 `Object` - object, který log zavolal. Tzn. ve většině případů jde o *self*
 `String` - text, který se pod poslaným objectem zaloguje
 Funkce nic nevrací.
 
-#### Ukázka vytvoření logu
+### Ukázka vytvoření logu
 V ukázce vytvoříme log typu **INFO**.
 ```python
 Logging.info(self, "Keypad used")
@@ -199,7 +213,7 @@ Výsledkem je vytvoření tohoto logu:
 INFO: keypad (keypad:<Node3D#38151390688>): Keypad used
 ```
 
-#### Ukázka logu
+### Ukázka logu
 Ukázka logu ze souboru:
 ```
 ----- HARDWARE INFORMATION -----
@@ -219,16 +233,16 @@ INFO: enter (enter:<MeshInstance3D#39158023700>): Key enter pressed
 INFO: keypad (keypad:<Node3D#38285608416>): Incorrect combination entered
 ```
 
-### item_pickup
+## item_pickup
 Item_pickup je **core system** nacházející se v `core_systems\item_pickup`. Item_pickup slouží jako základ pro všechny
 itemy, které mají být zvednutelné (pick up) hráčem.
 
-#### Popis
+### Popis
 Systém je dělán tak, aby jej stačilo jen připojit k itemu, u kterého chceme povolit pick up. A následně nastavit
 proměnné pro doladění potřebného chování (popsáno v kapitole) [Jak použít](#Jak-použít). Většina proměnných má
 defaultní hodnotu, ale některé no. Pro správné fungování by mělo být všech not null.
 
-#### Jak použít
+### Jak použít
 Použití item_pickup je jednoduché. Stačí provést následující kroky:
 1. Vytvořit scénu, v které chceme logiku picku provést. Může jít například o scénu vytvořenou rovnou z *.glb* souboru
 pomocí `New Inherited scene` (pravé tlačítko myši na *.glb* soubor)
@@ -253,41 +267,41 @@ je potřeba vybrat v proměnné **use_node**
 6. Use node musí obsahovat funkcí use(), která je zavoláná po sebrání itemu.
 
 
-## Groups
+# Groups
 Tato kapitola popisuje veškeré groups využité v projektu
 
-### template_group
+## template_group
 Toto je ukázková group. Tuto skupinu obsahují všechny objekty, které budou být moci interaktovány s hráčem.
 
-## Collision layers
+# Collision layers
 Tato kapitola popisuje veškeré kolizní vrstvy v projektu.
 
-### 1. vrstva
+## 1. vrstva
 Tato vrstva je defaultní a řeší většinu kolizí.
 
-## Autoload
+# Autoload
 Tato kapitola popisuje všechny autoload.
 
-### logging
+## logging
 Logging by měl být vždy na prvním místě v pořadí Autoloadů. Je to z důvodu toho, aby byl dostupný pro případné autoloady, které by chtěli logovat.
 Detailní popis funkčnosti loggingu je popsán [v této kapitole](#logging).
 
-### CustomSettings
+## CustomSettings
 Jedná se o autoload, který do svých proměnných ukládá veškeré hodnoty z [configu](#config). Lze si tedy šáhnout na jakoukoliv hodnotu z configu například pomocí:
 ```python
 if CustomSettings.debug_oalar == true:
     do_something()
 ```
 
-### LastSingleton
+## LastSingleton
 Jedná se o pomocný Autoload pro Logging. Jediné co tento autoload dělá je, že nastavít hodnotu 
 ```
 Logging.autoload_complete = true
 ```
 Pomocí této hodnoty logging pozná, že již proběhl veškerý loading. Po načtení se LastSingleton sám uvolní.
 
-## Databases
+# Databases
 Tato kapitola popisuje jednotlivé databáze využíté v projektu
 
-### items
+## items
 items.json je databáze itemů určená k TODO
