@@ -535,7 +535,7 @@ transform = Transform3D(-0.6, 0, -5.24536e-08, 0, 0.6, 0, 5.24536e-08, 0, -0.6, 
 transform = Transform3D(-0.6, 0, -5.24536e-08, 0, 0.6, 0, 5.24536e-08, 0, -0.6, -4.00621, -0.543687, 3.23242)
 
 [node name="cabinet_new" parent="." instance=ExtResource("30_vtat2")]
-transform = Transform3D(-0.4, 0, -3.49691e-08, 0, 0.4, 0, 3.49691e-08, 0, -0.4, -2.4996, 0.703549, -8.80008)
+transform = Transform3D(-0.4, 0, -3.49691e-08, 0, 0.4, 0, 3.49691e-08, 0, -0.4, -2.4996, 0.703549, -8.88343)
 
 [node name="postcard" parent="cabinet_new" instance=ExtResource("23_ua0lw")]
 transform = Transform3D(-1.42047e-08, -0.119817, -0.275034, 5.23736e-09, 0.275034, -0.119817, 0.3, -1.04747e-08, -1.09309e-08, 1.24636, 0.179191, 1.0084)
@@ -553,7 +553,7 @@ transform = Transform3D(0.15, 0, 2.66454e-15, 0, 0.15, 0, -2.66454e-15, 0, 0.15,
 transform = Transform3D(0.15, 0, 2.66454e-15, 0, 0.15, 0, -2.66454e-15, 0, 0.15, 1.00348, 0.131817, -1.13212)
 
 [node name="battery" parent="cabinet_new" instance=ExtResource("31_rjyuk")]
-transform = Transform3D(0.1, 0, 1.77636e-15, 0, 0.1, 0, -1.77636e-15, 0, 0.1, 0.802648, 0, 0)
+transform = Transform3D(0.1, 0, 2.66454e-15, 0, 0.1, 0, -2.66454e-15, 0, 0.1, 1.53558, 0, 0)
 
 [node name="battery3" parent="cabinet_new" instance=ExtResource("31_rjyuk")]
 transform = Transform3D(0.1, -5.62691e-09, 2.05159e-09, 5.62691e-09, 0.0765326, -0.0643643, 2.05158e-09, 0.0643643, 0.0765326, 0.802648, 1.46512, 0.990042)
@@ -561,5 +561,5 @@ transform = Transform3D(0.1, -5.62691e-09, 2.05159e-09, 5.62691e-09, 0.0765326, 
 [node name="battery2" parent="cabinet_new" instance=ExtResource("31_rjyuk")]
 transform = Transform3D(-0.00121298, 0.0999926, -8.84832e-09, -0.0999926, -0.00121298, -8.74164e-09, -8.84832e-09, 8.74163e-09, 0.1, 0.802648, 1.47781, 1.24188)
 
-[node name="paper_test" parent="cabinet_new" instance=ExtResource("16_vb32x")]
-transform = Transform3D(1, 0, 2.13163e-14, 0, 1, 0, -2.13163e-14, 0, 1, 1.68156, 0, -1.04081)
+[node name="battery" parent="." instance=ExtResource("31_rjyuk")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -4.69414, 0.290899, -11.5217)

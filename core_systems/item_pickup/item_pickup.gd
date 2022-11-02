@@ -4,33 +4,44 @@ extends Node3D
 ##
 ## A more detailes comment TODO
 
+## Used for displaying action name when look at (Pick up, Use, ..)
+## First letter should be upper case.
+@export var item_interaction_name: String = "Pickup"
+## Used for displaying item name in interaction (Battery, Ammo...)
+## First letter should be lower case.
+@export var item_name: String = "battery"
+## Node used for the item logic (add health, battery, ...)
+## This node needs to have use() function which is called after item is picked up.
+@export var use_node: Node
+## Speed (in seconds) of item animation while its towards player.
+@export var pickup_speed: float = 0.2
+## Height to which item is heading to. 0 is bottom of player's legs.
+@export var pickup_height: float = 0.8
+## Speed at which item hides itself (to simulate being picked up).
+@export var hide_speed: float = 0.1
+## Sound effect for pick up. After it finished playing the item will queue_free()
+@export var sfx: AudioStream
 
-## Variable used for interacting with interactive_object required for interaction.
+## Ineractive node scene used for interaction
+@onready var node_interact_scene = load("res://core_systems/interactive_system/interactive_object.tscn")
+
+## Ineractive node used for interaction
 var node_interact: Node
 ## The object hat inicialized interaction (should be player)
 var passed_object: Node
-## Item name used for displaying item name in interaction
-var item_name: String
-## Used for displaying action name when look at (Pick up, Use, ..)
-var item_interaction_name: String
 ## Combines interaction names and item name for final tooltip
 var item_interaction: String
 ## Tween used for anymating pickup anymation
 var tween_position: Tween
-## Node used for the item logic (add health, battery, ...)
-var use_node: Node
-## TODO
-var pickup_speed: float = 0.2
 ## TODO
 var timer: Node
-## TODO
-var sfx: Resource = load("res://objects/battery/pickup.wav")
 ## TODO
 var sfx_node: Node
 
 
 func _ready():
-	node_interact = $interactive_object
+	node_interact = node_interact_scene.instantiate()
+	self.add_child(node_interact)
 	use_node = $use
 	timer = Timer.new()
 	self.add_child(timer)
@@ -40,23 +51,21 @@ func _ready():
 	sfx_node.stream = sfx
 	self.add_child(sfx_node)
 	sfx_node.finished.connect(_on_audio_stream_player_finished)
-	item_name = use_node.item_name
-	item_interaction_name = use_node.item_interaction_name
 	item_interaction = item_interaction_name + " " + item_name
 
 ## Logic of the item being used
 func _used():
 	var player_position = passed_object.get_global_position()
-	var player_height = player_position.y + 0.8
+	var player_height = player_position.y + pickup_height
 	sfx_node.play()
 	$interactive_object/StaticBody3D/CollisionShape3D.disabled = true
-	timer.start(0.1)
+	timer.start(hide_speed)
 	tween_position = create_tween()
 	tween_position.tween_property(self, "global_position", Vector3(player_position.x, player_height, player_position.z), pickup_speed)
 	use_node.use()
 
 ## Special function required for interaction between GDScript and C#
-func message_update():
+func message_update() -> void:
 	var msg:String = node_interact.msgObject.GetMessage()
 	if msg == "msg_get_use_action_text":
 		node_interact.msgObject.SetStringData(item_interaction)
