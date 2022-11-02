@@ -38,12 +38,7 @@ func _used():
 		#$AudioStreamPlayer.play()
 		isNowInteract = true
 		passed_object.SetInputEnable(false)
-		player_inspect.inspect(true, self)
-
-## Trigged for leaving item interaction
-#func _input(event):
-	#if event.is_action_pressed("Jump") and isNowInteract == true:
-		#_used_quit()
+		player_inspect.inspect(true, self, false)
 
 ## Logic of the leaving interaction
 func _used_quit():

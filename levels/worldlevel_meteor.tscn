@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://d15arx0xhaab3"]
+[gd_scene load_steps=40 format=3 uid="uid://dxa60v0imq34d"]
 
 [ext_resource type="ArrayOccluder3D" uid="uid://c65wc0yeg3cak" path="res://levels/world_level_rooms/worldlevel_rooms_test.occ" id="1_48aky"]
 [ext_resource type="PackedScene" uid="uid://ck8mt4y4gfqmk" path="res://placeholders/modular_walls/ground_large.tscn" id="1_vcfbv"]
