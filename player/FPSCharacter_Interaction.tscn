@@ -1,10 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://8x5qdxf7a8nq"]
+[gd_scene load_steps=9 format=3 uid="uid://8x5qdxf7a8nq"]
 
 [ext_resource type="PackedScene" uid="uid://2b8vuef2k4is" path="res://player/FPSCharacter_WalkingEffects.tscn" id="1_0ipjt"]
 [ext_resource type="Script" path="res://player/FPSCharacter_Interaction.cs" id="2_fmih3"]
 [ext_resource type="Script" path="res://player/BasicHud.cs" id="3_etvvy"]
 [ext_resource type="Script" path="res://core_systems/DebugHud.cs" id="4_75mlc"]
 [ext_resource type="PackedScene" uid="uid://fpjkcaij44dx" path="res://core_systems/item_inspect/item_inspect.tscn" id="5_iw50w"]
+[ext_resource type="Script" path="res://ui/Report_issue.gd" id="6_nbvpx"]
+[ext_resource type="PackedScene" uid="uid://bctrg21138lx" path="res://ui/report_bug.tscn" id="7_oxteu"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xryx5"]
 bg_color = Color(0.156863, 0.164706, 0.188235, 0.913725)
@@ -334,6 +336,21 @@ offset_bottom = 454.0
 theme_override_font_sizes/font_size = 15
 text = "Enable worldlevel occlusion cull"
 
+[node name="HSeparator3" type="HSeparator" parent="DebugHud/OptionsPanel/VBoxContainer" index="15"]
+custom_minimum_size = Vector2i(250, 0)
+offset_top = 458.0
+offset_right = 276.0
+offset_bottom = 462.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Report_issue" type="Button" parent="DebugHud/OptionsPanel/VBoxContainer" index="16"]
+offset_top = 466.0
+offset_right = 276.0
+offset_bottom = 497.0
+text = "Report an issue"
+script = ExtResource("6_nbvpx")
+
 [node name="Label" type="Label" parent="DebugHud/OptionsPanel" index="2"]
 custom_minimum_size = Vector2i(150, 0)
 anchors_preset = 7
@@ -395,6 +412,9 @@ offset_right = 278.0
 offset_bottom = 132.0
 text = "video memory used:"
 
+[node name="report_bug" parent="." index="10" instance=ExtResource("7_oxteu")]
+visible = false
+
 [connection signal="toggled" from="DebugHud/OptionsPanel/VBoxContainer/ShowFps_CheckBox" to="DebugHud" method="_on_show_fps_check_box_toggled"]
 [connection signal="toggled" from="DebugHud/OptionsPanel/VBoxContainer/ShowPerformance_CheckBox" to="DebugHud" method="_on_show_performance_check_box_toggled"]
 [connection signal="toggled" from="DebugHud/OptionsPanel/VBoxContainer/CustomLabelEnable_Checkbox0" to="DebugHud" method="_on_custom_label_enable_checkbox_toggled" binds= [0]]
@@ -408,3 +428,4 @@ text = "video memory used:"
 [connection signal="toggled" from="DebugHud/OptionsPanel/VBoxContainer/CustomLabelEnable_Checkbox8" to="DebugHud" method="_on_custom_label_enable_checkbox_toggled" binds= [8]]
 [connection signal="toggled" from="DebugHud/OptionsPanel/VBoxContainer/CustomLabelEnable_Checkbox9" to="DebugHud" method="_on_custom_label_enable_checkbox_toggled" binds= [9]]
 [connection signal="toggled" from="DebugHud/OptionsPanel/VBoxContainer/EnableWorldOcclusionCulling_CheckBox" to="DebugHud" method="_on_enable_world_occlusion_culling_check_box_toggled"]
+[connection signal="pressed" from="DebugHud/OptionsPanel/VBoxContainer/Report_issue" to="DebugHud/OptionsPanel/VBoxContainer/Report_issue" method="_on_pressed"]

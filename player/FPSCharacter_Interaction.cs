@@ -64,8 +64,8 @@ public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
 		objectHands.GlobalRotation = hands_rot;
 		
 
-        // UPDATE LERPOBJECT INTERACT
-        if (LerpCameraPosToInteract.IsEnableUpdate())
+		// UPDATE LERPOBJECT INTERACT
+		if (LerpCameraPosToInteract.IsEnableUpdate())
 			GetFPSCharacterCamera().GlobalPosition = LerpCameraPosToInteract.Update(delta);
 
 		if (LerpCameraLookToInteract.IsEnableUpdate())
