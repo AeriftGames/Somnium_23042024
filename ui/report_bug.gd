@@ -1,6 +1,6 @@
 extends Control
 
-var url = "http://127.0.0.1:80/api/v1"
+var url = "http://194.182.83.73:5000/api/v1"
 var use_ssl = false
 
 var uid: String = str(OS.get_unique_id())
