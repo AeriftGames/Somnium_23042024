@@ -34,6 +34,10 @@ Technická dokumentace k projektu **Somnium Prototype**
       - [Ukázka základního použití](#ukázka-základního-použití-messageobject)
       - [Vyvětlení kroků v kódu](#vyvětlení-kroků-v-kódu)
       - [Volatelné funkce msgObject](#volatelné-funkce-msgobject)
+    + [FPSCharacter](#fpscharacter)
+      - [Volatelné funkce FPSCharacter](#volatelné-funkce-fpscharacter)
+    + [GameMaster](#gamemaster)
+      - [Volatelné funkce GameMaster](#volatelné-funkce-gamemaster)
   * [Groups](#groups)
     + [template_group](#template-group)
   * [Collision layers](#collision-layers)
@@ -427,6 +431,39 @@ kde si vezmeme právě uloženou hodnotu string Michael.
 **Tipy k funkcím**
 - Pokud použijeme v konstruktoru MessageObject ```(optional)bool``` argument **mutliCommunication** = true, nemůžeme pak na tomhle MessageObjectu využívat zkrácených funkcí pro vracení dat jako je třeba: ```LoadVector3DataFromGDNow()```, můžeme používat pouze ```SendMessageToGDNow_ToObject()```, je to prevence nechtěné komunikaci se špatným communicationObject.
 
+### **FPSCharacter**
+Do budoucna bude přidaný popis vlastností a funkcí FPSCharactera, prozatím zde budou alespoň **z venku volatelné funkce**
+
+
+#### **Volatelné funkce FPSCharacter**
+| Typ | Funkce | Popis funkce |
+|---|--------|-----------|
+|void|```SetInputEnable```( **bool** newEnable )                                                  |**Zapne/Vypne** veškeré ovládání charactera|
+|void|```SetMouseVisible```( **bool** newMouseVisible )                                           |**Zapne/Vypne** viditelnost kurzoru myši   |
+|bool|```IsInputEnable()```                                                                       |**Vrací true/false**, podle aktuálního stavu|
+|void|```DisableInputsAndCameraMoveLookTarget```( **Vector3** targetPos, **Vector3** targetLook ) |Vypne ovládání charactera, nechá hráčovo kameru dolerpovat na **targetPos** a dolerpuje look kamery na **targetLook**|
+|void|```EnableInputsAndCameraToNormal()```                                                       |Nechá hráčovo kameru dolerpovat do výchozího stavu a poté zapne ovládání charactera|
+
+### **GameMaster**
+Jedná se o **Singleton**, spuštěný z autoloadu. Lze využít jako takový univerzální prostředník v rámci herní instance i enginu.
+- Lze se jednoduše (do budoucna bezpečně) dostat na aktuální **instanci** hráče **FPSCharacter**
+- Lze se jednoduše dostat na instanci **BasicHud**, **DebugHud**
+- Lze se z **C#** strany dovolávat na ostatní **GDScript** objekty v autoloadu (například **Logging**, **CustomSettings**)
+- Do budoucna se počítá s rozšíření mnoha užitečných funkcí
+- z **C#** přistupujeme k **Instanci** GameMastera přes ```GameMaster.GM``` což je statická instance našeho GameMastera v Autoloadu
+- z GDScriptu přistupujeme k **Instanci** GameMastera přes **Node** v autoloadu se stejným názvem **GameMaster**, tudíž ```get_node("/root/GameMaster")``` a poté přístupu k **Instanci** přes ```.GM```
+- obsahuje LogSystem **Log** pro pro práci **(GD) Logging**
+
+#### **Volatelné funkce GameMaster**
+
+Volatelné skrze ```GameMaster.GM.```
+
+| Typ | Funkce | Popis funkce |
+|---|--------|-----------|
+|void|```SetFPSCharacter```( **FPSCharacter_basicMoving** newFPSCharacter )| Nastaví aktuální instanci **FPSCharacter** (provádíme ze strany FPSCharacter._Ready())|
+|FPSCharacter_BasicMoving|```GetFPSCharacter()```                          |**Vrátí** Instanci **FPSCharacter** (hráče) pro volání jeho funkcí|
+|void|```SetDebugHud```( **DebugHud** newDebugHud )|Nastaví aktuální instanci **DebugHud** (provádíme ze strany DebugHud._Ready())|
+|DebugHud|```GetDebugHud()```|Vrátí Instanci **DebugHud** pro volání jeho funkcí|
 ## Groups
 Tato kapitola popisuje veškeré groups využité v projektu
 
