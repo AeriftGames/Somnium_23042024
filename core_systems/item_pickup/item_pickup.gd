@@ -55,6 +55,7 @@ func _ready():
 
 ## Logic of the item being used
 func _used():
+	Logging.info(self, "Picked up %s" % [item_name])
 	var player_position = passed_object.get_global_position()
 	var player_height = player_position.y + pickup_height
 	sfx_node.play()
