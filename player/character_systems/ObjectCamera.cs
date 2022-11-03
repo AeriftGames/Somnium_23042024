@@ -13,12 +13,22 @@ public partial class ObjectCamera : Node3D
 
     FPSCharacter_BasicMoving ownerCharacter = null;
 
+    // lean
+    Node3D LerpPos_LeanCenter = null;
+    Node3D LerpPos_LeanLeft = null;
+    Node3D LerpPos_LeanRight = null;
+
     public override void _Ready()
 	{
 		NodeRotY = GetNode<Node3D>("NodeRotY");
         GimbalLand = GetNode<Node3D>("NodeRotY/GimbalLand");
         NodeRotX = GetNode<Node3D>("NodeRotY/GimbalLand/NodeRotX");
 		Camera = GetNode<Camera3D>("NodeRotY/GimbalLand/NodeRotX/Camera");
+
+        //lean
+        LerpPos_LeanCenter = GetNode<Node3D>("NodeRotY/GimbalLand/NodeRotX/LerpPos_LeanCenter");
+        LerpPos_LeanLeft = GetNode<Node3D>("NodeRotY/GimbalLand/NodeRotX/LerpPos_LeanLeft");
+        LerpPos_LeanRight = GetNode<Node3D>("NodeRotY/GimbalLand/NodeRotX/LerpPos_LeanRight");
     }
 
     public void SetCharacterOwner(FPSCharacter_BasicMoving newFPSCharacter_BasicMoving)
