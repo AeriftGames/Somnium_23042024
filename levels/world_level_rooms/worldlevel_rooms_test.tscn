@@ -525,6 +525,7 @@ mesh = SubResource("PlaneMesh_h1tyu")
 shape = SubResource("ConcavePolygonShape3D_op6nf")
 
 [node name="Decals" type="Node3D" parent="LevelGeometry"]
+visible = false
 
 [node name="DecalBlood" type="Decal" parent="LevelGeometry/Decals"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, -2.5, -2)

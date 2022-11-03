@@ -55,4 +55,46 @@ public partial class LerpObject
         }
     }
 
+    public class LerpFloat
+    {
+
+        private float Actual = 0.0f;
+        private float Target = 0.0f;
+        private float Speed = 1.0f;
+
+        private bool isEnableUpdate = false;
+
+        public float Update(double delta)
+        {
+            if (isEnableUpdate)
+            {
+                Actual = Mathf.Lerp(Actual, Target, Speed * (float)delta);
+            }
+
+            return Actual;
+        }
+
+        public void SetActual(float newActual) { Actual = newActual; }
+        public float GetActual() { return Actual; }
+        public void SetTarget(float newTarget) { Target = newTarget; }
+        public float GetTarget() { return Target; }
+        public void SetSpeed(float newSpeed) { Speed = newSpeed; }
+        public float GetSpeed() { return Speed; }
+        public void EnableUpdate(bool newEnable) { isEnableUpdate = newEnable; }
+        public bool IsEnableUpdate() { return isEnableUpdate; }
+
+        public void SetAllParam(float newActual, float newTarget, float newSpeed, bool newIsEnableUpdate)
+        {
+            Actual = newActual;
+            Target = newTarget;
+            Speed = newSpeed;
+            isEnableUpdate = newIsEnableUpdate;
+        }
+
+        public float GetLengthToTarget()
+        {
+            return Mathf.Abs(GetTarget() - GetActual());
+        }
+    }
+
 }

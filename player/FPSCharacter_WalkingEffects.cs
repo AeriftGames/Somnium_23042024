@@ -104,27 +104,31 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
     {
         // hrac pozaduje lean ?
 
-        if(Input.IsActionPressed("leanLeft"))
+        if(Input.IsActionPressed("leanLeft") && !Input.IsActionPressed("leanRight"))
+            objectCamera.SetActualLean(ObjectCamera.ELeanType.Left);
+        else if (Input.IsActionPressed("leanRight") && !Input.IsActionPressed("leanLeft"))
+            objectCamera.SetActualLean(ObjectCamera.ELeanType.Right);
+        else
+            objectCamera.SetActualLean(ObjectCamera.ELeanType.Center);
+        /*
+        if (Input.IsActionPressed("leanRight") && !Input.IsActionPressed("leanLeft"))
         {
-
+            objectCamera.SetActualLean(ObjectCamera.ELeanType.Right);
         }
-
-        if(Input.IsActionPressed("leanRight"))
-        {
-
-        }
-
+        else
+            objectCamera.SetActualLean(ObjectCamera.ELeanType.Center);*/
+        /*
         // hrac pozaduje opustit lean
 
-        if(Input.IsActionJustReleased("leanLeft"))
+        if (Input.IsActionJustReleased("leanLeft"))
         {
-
+            objectCamera.SetActualLean(ObjectCamera.ELeanType.Center);
         }
 
         if(Input.IsActionJustReleased("leanRight"))
         {
-
-        }
+            objectCamera.SetActualLean(ObjectCamera.ELeanType.Center);
+        }*/
     }
 
     public override void _PhysicsProcess(double delta)
