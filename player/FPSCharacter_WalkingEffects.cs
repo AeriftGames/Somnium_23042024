@@ -60,6 +60,8 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
     private float lerpHeadLandY = 0.0f;
     private float lerpHeadLandRotX = 0.0f;
 
+    // lean
+
     public override void _Ready()
     {
         base._Ready();
@@ -79,8 +81,10 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
     {
         base._Process(delta);
 
-        float a = Mathf.Snapped(ActualMovementSpeed, 0.1f);
+        UpdateInputsProcess((float) delta);
 
+        // SET CUSTOM LABEL MOVESPEED AND POSITION OF PLAYER
+        float a = Mathf.Snapped(ActualMovementSpeed, 0.1f);
         GameMaster.GM.GetDebugHud().CustomLabelUpdateText(0, this, "MoveSpeed: " + a);
         GameMaster.GM.GetDebugHud().CustomLabelUpdateText(1, this, "Position: " + GlobalPosition);
 
@@ -92,6 +96,35 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
 
         UpdateWalkHeadBobbing((float)delta);
         UpdateLandingHeadBobbing((float)delta);
+
+        UpdateLeaning((float)delta);
+    }
+
+    public void UpdateInputsProcess(double delta)
+    {
+        // hrac pozaduje lean ?
+
+        if(Input.IsActionPressed("leanLeft"))
+        {
+
+        }
+
+        if(Input.IsActionPressed("leanRight"))
+        {
+
+        }
+
+        // hrac pozaduje opustit lean
+
+        if(Input.IsActionJustReleased("leanLeft"))
+        {
+
+        }
+
+        if(Input.IsActionJustReleased("leanRight"))
+        {
+
+        }
     }
 
     public override void _PhysicsProcess(double delta)
@@ -307,5 +340,10 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
 
         // DisableInputs for character
         SetInputEnable(false);
+    }
+
+    public void UpdateLeaning(double delta)
+    {
+
     }
 }

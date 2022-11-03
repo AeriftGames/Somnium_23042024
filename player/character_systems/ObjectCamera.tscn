@@ -13,3 +13,11 @@ script = ExtResource("1_uvf2j")
 
 [node name="Camera" type="Camera3D" parent="NodeRotY/GimbalLand/NodeRotX"]
 fov = 60.0
+
+[node name="LerpPos_LeanCenter" type="Node3D" parent="NodeRotY/GimbalLand/NodeRotX"]
+
+[node name="LerpPos_LeanLeft" type="Node3D" parent="NodeRotY/GimbalLand/NodeRotX"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, -0.1, 0)
+
+[node name="LerpPos_LeanRight" type="Node3D" parent="NodeRotY/GimbalLand/NodeRotX"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, -0.1, 0)
