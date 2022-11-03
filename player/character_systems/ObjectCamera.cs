@@ -24,8 +24,10 @@ public partial class ObjectCamera : Node3D
 
     public enum ELeanType { Center, Left, Right };
     private ELeanType ActualLean = ELeanType.Center;
-    public float LeanRotMax = 35.0f;
-    public float LeanRotTarget = 0.0f;
+
+    Tween tweenLeanRot = null;
+    Tween tweenLeanPos = null;
+    float tweenSpeed = 0.5f;
 
     public override void _Ready()
 	{
@@ -39,10 +41,6 @@ public partial class ObjectCamera : Node3D
         LerpPos_LeanCenter = GetNode<Node3D>("NodeRotY/GimbalLand/NodeRotX/LerpPos_LeanCenter");
         LerpPos_LeanLeft = GetNode<Node3D>("NodeRotY/GimbalLand/NodeRotX/LerpPos_LeanLeft");
         LerpPos_LeanRight = GetNode<Node3D>("NodeRotY/GimbalLand/NodeRotX/LerpPos_LeanRight");
-        
-        LerpCameraLeanPos.SetAllParam(NodeLean.Position, LerpPos_LeanCenter.Position, 3.0f, true);
-        //LerpCameraLeanRot.SetAllParam(NodeLean.Rotation.z, a 1.0f, true);
-        
     }
 
     public void SetCharacterOwner(FPSCharacter_BasicMoving newFPSCharacter_BasicMoving)
@@ -54,13 +52,6 @@ public partial class ObjectCamera : Node3D
 	{
         if (ownerCharacter.IsInputEnable())
             UpdateCameraLook(_MouseMotion, delta);
-
-        //
-        NodeLean.Position = LerpCameraLeanPos.Update(delta);
-        
-        Vector3 tempRot = NodeLean.Rotation;
-        tempRot.z = Mathf.LerpAngle(tempRot.z, LeanRotTarget, 3 * (float)delta);
-        NodeLean.Rotation = tempRot;
     }
 
     // Hadle inout for mouse
@@ -107,20 +98,29 @@ public partial class ObjectCamera : Node3D
         {
             case ELeanType.Center:
                 {
-                    LerpCameraLeanPos.SetTarget(LerpPos_LeanCenter.Position);
-                    LeanRotTarget = 0.0f;
+                    tweenLeanRot = CreateTween();
+                    tweenLeanRot.TweenProperty(NodeLean, "rotation", LerpPos_LeanCenter.Rotation, tweenSpeed).SetEase(Tween.EaseType.OutIn);
+
+                    tweenLeanPos = CreateTween();
+                    tweenLeanPos.TweenProperty(NodeLean, "position", LerpPos_LeanCenter.Position, tweenSpeed).SetEase(Tween.EaseType.OutIn);
                     break;
                 }
             case ELeanType.Left:
                 {
-                    LerpCameraLeanPos.SetTarget(LerpPos_LeanLeft.Position);
-                    LeanRotTarget = 0.25f;
+                    tweenLeanRot = CreateTween();
+                    tweenLeanRot.TweenProperty(NodeLean, "rotation", LerpPos_LeanLeft.Rotation, tweenSpeed).SetEase(Tween.EaseType.OutIn);
+
+                    tweenLeanPos = CreateTween();
+                    tweenLeanPos.TweenProperty(NodeLean, "position", LerpPos_LeanLeft.Position, tweenSpeed).SetEase(Tween.EaseType.OutIn);
                     break;
                 }
             case ELeanType.Right:
                 {
-                    LerpCameraLeanPos.SetTarget(LerpPos_LeanRight.Position);
-                    LeanRotTarget = -0.25f;
+                    tweenLeanRot = CreateTween();
+                    tweenLeanRot.TweenProperty(NodeLean, "rotation", LerpPos_LeanRight.Rotation, tweenSpeed).SetEase(Tween.EaseType.OutIn);
+
+                    tweenLeanPos = CreateTween();
+                    tweenLeanPos.TweenProperty(NodeLean, "position", LerpPos_LeanRight.Position, tweenSpeed).SetEase(Tween.EaseType.OutIn);
                     break;
                 }
         }

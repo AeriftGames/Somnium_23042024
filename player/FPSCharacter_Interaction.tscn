@@ -21,7 +21,17 @@ script = ExtResource("2_fmih3")
 LengthInteractRay = 5.0
 AudioFlashlight_On = ExtResource("3_hi7iy")
 AudioFlashlight_Off = ExtResource("4_wmi65")
+FootStepLength = 1.5
+WalkCameraLerpHeight = 0.25
+FootstepSounds = null
+MediumHeightForLandingEffect = 2.0
+HighHeightForLandingEffect = 3.0
+miniHeightLandingSounds = null
+smallHeightLandingSounds = null
+mediumHeightLandingSounds = null
+highHeightLandingSounds = null
 deathHeightLandingSounds = [ExtResource("3_1y2oa")]
+JumpingSounds = null
 
 [node name="HolderHands" type="Node3D" parent="HeadMain/HeadGimbalA/HeadGimbalB/HeadHolderCamera" index="0"]
 
