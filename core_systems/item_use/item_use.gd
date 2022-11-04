@@ -37,7 +37,7 @@ var timer: Node
 var sfx_node: Node
 
 
-func _ready():
+func _ready() -> void:
 	node_interact = node_interact_scene.instantiate()
 	self.add_child(node_interact)
 	node_interact.position = get_parent().position
@@ -47,13 +47,13 @@ func _ready():
 	item_interaction = item_interaction_name + " " + item_name
 
 ## Logic of the item being used
-func _used():
+func _used() -> void:
 	var player_position = passed_object.get_global_position()
 	var player_height = player_position.y + 0.5
 	use_node.use()
 
 ## Special function required for interaction between GDScript and C#
-func message_update():
+func message_update() -> void:
 	var msg:String = node_interact.msgObject.GetMessage()
 	if msg == "msg_get_use_action_text":
 		node_interact.msgObject.SetStringData(item_interaction)

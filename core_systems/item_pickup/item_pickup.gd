@@ -40,7 +40,7 @@ var timer: Node
 var sfx_node: Node
 
 
-func _ready():
+func _ready() -> void:
 	node_interact = node_interact_scene.instantiate()
 	self.add_child(node_interact)
 	timer = Timer.new()
@@ -54,7 +54,7 @@ func _ready():
 	item_interaction = item_interaction_name + " " + item_name
 
 ## Logic of the item being used
-func _used():
+func _used() -> void:
 	Logging.info(self, "Picked up %s" % [item_name])
 	var player_position = passed_object.get_global_position()
 	var player_height = player_position.y + pickup_height
@@ -77,9 +77,9 @@ func message_update() -> void:
 		self._used()
 
 
-func _on_Timer_timeout():
+func _on_Timer_timeout() -> void:
 	self.hide()
 
 
-func _on_audio_stream_player_finished():
+func _on_audio_stream_player_finished() -> void:
 	self.queue_free()
