@@ -14,7 +14,7 @@ script = ExtResource("1_uvf2j")
 [node name="NodeLean" type="Node3D" parent="NodeRotY/GimbalLand/NodeRotX"]
 
 [node name="Camera" type="Camera3D" parent="NodeRotY/GimbalLand/NodeRotX/NodeLean"]
-fov = 60.0
+fov = 70.0
 
 [node name="LerpPos_LeanCenter" type="Node3D" parent="NodeRotY/GimbalLand/NodeRotX"]
 

@@ -52,6 +52,8 @@ public partial class ObjectCamera : Node3D
 	{
         if (ownerCharacter.IsInputEnable())
             UpdateCameraLook(_MouseMotion, delta);
+
+        RaycastTestForLean();
     }
 
     // Hadle inout for mouse
@@ -127,4 +129,60 @@ public partial class ObjectCamera : Node3D
     }
 
     public ELeanType GetActualLean() { return ActualLean; }
+
+    public void RaycastTestForLean()
+    {
+        float ray_length = 0.5f;
+
+        // do jedne strany
+        UniversalFunctions.HitResult leftRayHit1 = UniversalFunctions.IsSimpleRaycastHit(this,
+            NodeLean.GlobalPosition,
+            (NodeLean.GlobalPosition + new Vector3(0, 0, 0.0f)) -
+            NodeRotX.GlobalTransform.basis.x.Normalized() * ray_length);
+
+        // do druhe strany
+        UniversalFunctions.HitResult rightRayHit1 = UniversalFunctions.IsSimpleRaycastHit(this,
+            NodeLean.GlobalPosition,
+            (NodeLean.GlobalPosition + new Vector3(0, 0, 0.0f)) +
+            NodeRotX.GlobalTransform.basis.x.Normalized() * ray_length);
+
+
+        //
+        bool left;
+        if (leftRayHit1.isHit /*|| leftRayHit2.isHit || leftRayHit3.isHit*/)
+            left = true;
+        else
+            left = false;
+
+        bool right;
+        if (rightRayHit1.isHit /*|| rightRayHit2.isHit || rightRayHit3.isHit*/)
+            right = true;
+        else
+            right = false;
+
+        if(left)
+        {
+            float hit_length = NodeLean.GlobalPosition.DistanceTo(leftRayHit1.HitPosition);
+            GameMaster.GM.GetDebugHud().CustomLabelUpdateText(4, this, "leftRayHit: " + hit_length);
+            GD.Print(leftRayHit1.HitNode.Name);
+        }
+        else
+        {
+            GameMaster.GM.GetDebugHud().CustomLabelUpdateText(4, this, "leftRayHit: 0 ");
+        }
+
+        if(right)
+        {
+            float hit_length = NodeLean.GlobalPosition.DistanceTo(rightRayHit1.HitPosition);
+            GameMaster.GM.GetDebugHud().CustomLabelUpdateText(5, this, "rightRayHit: " + hit_length);
+            GD.Print(rightRayHit1.HitNode.Name);
+        }
+        else
+        {
+            GameMaster.GM.GetDebugHud().CustomLabelUpdateText(5, this, "rightRayHit: 0 ");
+        }
+        /*
+        GameMaster.GM.GetDebugHud().CustomLabelUpdateText(4, this, "leftRayHit: " + left);
+        GameMaster.GM.GetDebugHud().CustomLabelUpdateText(5, this, "rightRayHit: " + right);*/
+    }
 }

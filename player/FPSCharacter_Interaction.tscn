@@ -1,8 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://8x5qdxf7a8nq"]
+[gd_scene load_steps=9 format=3 uid="uid://8x5qdxf7a8nq"]
 
 [ext_resource type="PackedScene" uid="uid://2b8vuef2k4is" path="res://player/FPSCharacter_WalkingEffects.tscn" id="1_0ipjt"]
 [ext_resource type="Script" path="res://player/FPSCharacter_Interaction.cs" id="2_fmih3"]
-[ext_resource type="AudioStream" uid="uid://cbxo2phl7ufx1" path="res://audio/audio_streams/landing_basic/landing-on-the-ground_from_height-6.wav" id="3_1y2oa"]
 [ext_resource type="Script" path="res://player/BasicHud.cs" id="3_etvvy"]
 [ext_resource type="AudioStream" uid="uid://bq620yjstjdl" path="res://audio/audio_streams/flashlight/173420__lightyarn__flashlight-on.wav" id="3_hi7iy"]
 [ext_resource type="Script" path="res://core_systems/DebugHud.cs" id="4_75mlc"]
@@ -21,17 +20,9 @@ script = ExtResource("2_fmih3")
 LengthInteractRay = 5.0
 AudioFlashlight_On = ExtResource("3_hi7iy")
 AudioFlashlight_Off = ExtResource("4_wmi65")
-FootStepLength = 1.5
 WalkCameraLerpHeight = 0.25
-FootstepSounds = null
 MediumHeightForLandingEffect = 2.0
 HighHeightForLandingEffect = 3.0
-miniHeightLandingSounds = null
-smallHeightLandingSounds = null
-mediumHeightLandingSounds = null
-highHeightLandingSounds = null
-deathHeightLandingSounds = [ExtResource("3_1y2oa")]
-JumpingSounds = null
 
 [node name="HolderHands" type="Node3D" parent="HeadMain/HeadGimbalA/HeadGimbalB/HeadHolderCamera" index="0"]
 
