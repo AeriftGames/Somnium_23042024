@@ -1,4 +1,5 @@
-extends Control
+class_name item_inspect extends Control
+@icon("res://core_systems/item_pickup/item_pickup_icon.svg")
 
 var rotating: bool = false
 var prev_mouse_position
