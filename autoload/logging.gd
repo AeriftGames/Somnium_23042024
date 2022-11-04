@@ -1,5 +1,5 @@
-extends Node
-class_name logging
+class_name logging extends Node
+@icon("res://autoload/logging_icon.svg")
 
 ## Used as a Autoload for logging purposes
 ##

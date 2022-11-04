@@ -20,13 +20,6 @@ script = ExtResource("4_vdxj0")
 [node name="Timer" type="Timer" parent="Drawer1/use" index="0"]
 
 [node name="interactive_object" parent="Drawer1" index="1" instance=ExtResource("3_5jerk")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.01744, 0)
-
-[node name="CollisionShape3D" parent="Drawer1/interactive_object/StaticBody3D" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 4, 0.999571, 0, 0)
-
-[node name="interactive_object_area3D" parent="Drawer1/interactive_object/StaticBody3D" index="1"]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 
 [node name="Drawer2" parent="." index="2"]
 script = ExtResource("2_vffnc")
@@ -84,7 +77,6 @@ transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 [connection signal="timeout" from="Drawer3/use/Timer" to="Drawer3/use" method="_on_timer_timeout"]
 [connection signal="timeout" from="Drawer4/use/Timer" to="Drawer4/use" method="_on_timer_timeout"]
 
-[editable path="Drawer1/interactive_object"]
 [editable path="Drawer2/interactive_object"]
 [editable path="Drawer3/interactive_object"]
 [editable path="Drawer4/interactive_object"]

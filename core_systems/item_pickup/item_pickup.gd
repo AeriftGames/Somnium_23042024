@@ -1,4 +1,5 @@
-extends Node3D
+class_name item_pickup extends Node3D
+@icon("res://core_systems/item_pickup/item_pickup_icon.svg")
 
 ## A GDSCript template used for items that can be picked up.
 ##
@@ -39,10 +40,9 @@ var timer: Node
 var sfx_node: Node
 
 
-func _ready() -> void:
+func _ready():
 	node_interact = node_interact_scene.instantiate()
 	self.add_child(node_interact)
-	use_node = $use
 	timer = Timer.new()
 	self.add_child(timer)
 	timer.timeout.connect(_on_Timer_timeout)
@@ -54,10 +54,12 @@ func _ready() -> void:
 	item_interaction = item_interaction_name + " " + item_name
 
 ## Logic of the item being used
-func _used() -> void:
+func _used():
+	Logging.info(self, "Picked up %s" % [item_name])
 	var player_position = passed_object.get_global_position()
 	var player_height = player_position.y + pickup_height
 	sfx_node.play()
+	$interactive_object/StaticBody3D/CollisionShape3D.disabled = true
 	timer.start(hide_speed)
 	tween_position = create_tween()
 	tween_position.tween_property(self, "global_position", Vector3(player_position.x, player_height, player_position.z), pickup_speed)
@@ -75,9 +77,9 @@ func message_update() -> void:
 		self._used()
 
 
-func _on_Timer_timeout() -> void:
+func _on_Timer_timeout():
 	self.hide()
 
 
-func _on_audio_stream_player_finished() -> void:
+func _on_audio_stream_player_finished():
 	self.queue_free()

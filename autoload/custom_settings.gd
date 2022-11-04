@@ -1,5 +1,6 @@
-extends Node
-class_name custom_settings
+class_name custom_settings extends Node
+@icon("res://autoload/custom_settings_icon.svg")
+
 ## Used for loading settings.cfg file.
 ##
 ## Universal loader for script.ini located in [b]"res://autoload/settings.cfg"
