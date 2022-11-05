@@ -20,11 +20,11 @@ var isNowInteract: bool = false
 ## Combines interaction names and item name for final tooltip
 var item_interaction: String
 ## Node to display on subviewport
-@export var inspect_node: Resource
+var inspect_node: Resource
 ## Player node
 var player_inspect: Node
 ##
-var sfx = load("res://objects/read/paper_test/page_flip.wav")
+@export var sfx = load("res://objects/read/paper_test/page_flip.wav")
 
 
 func _ready():
