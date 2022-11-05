@@ -219,7 +219,6 @@ public partial class ObjectCamera : Node3D
         //percentage rozsah lean rot
         float percentage_rot_step = newMaxLeanRotZ / 100f;
         float per_rot_final = (percentage_pos * percentage_rot_step) * direction_x;
-        GD.Print(per_rot_final);
 
         // nastavime finalni vector
         returnedVector.z = per_rot_final;
