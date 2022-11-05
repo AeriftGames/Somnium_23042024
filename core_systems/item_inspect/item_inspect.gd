@@ -11,8 +11,8 @@ class_name item_inspect extends Node3D
 @export var item_interaction_name: String = "Inspect"
 ## TODO
 @export var item_inspect_description: String = "1235"
-## Node to display on subviewport
-#@export  var inspect_node_path: PackedScene
+## 
+@export var inspect_node: PackedScene
 ##
 @export var sfx = load("res://objects/read/paper_test/page_flip.wav")
 ## Variable used for interacting with interactive_object required for interaction.
@@ -25,15 +25,13 @@ var isNowInteract: bool = false
 var item_interaction: String
 ## Player node
 var player_inspect: Node
-## 
-@export var inspect_node: PackedScene
 
 
 func _ready():
+	print("INSPECT")
+	print(inspect_node)
 	node_interact = $interactive_object
 	item_interaction = item_interaction_name + " " + item_name
-	#inspect_node = load(inspect_node_path)
-
 
 ## Logic of the item being used
 func _used():

@@ -1,17 +1,17 @@
 extends Control
 
 var rotating: bool = false
-var prev_mouse_position
-var next_mouse_position
-var player
-var inspect_node
+var prev_mouse_position: Vector2
+var next_mouse_position: Vector2
+var player: Node
+var inspect_node: Node
 var isNowInteract = false
-var item_name_label
-var item_description_label
-var active_item
-var description_active = false
-var spawn_animation_finished = false
-var facing_front_text = false #TODO
+var item_name_label: Label
+var item_description_label: Label
+var active_item: Node
+var description_active: bool = false
+var spawn_animation_finished: bool = false
+var facing_front_text: bool = false #TODO
 
 
 func _ready():
