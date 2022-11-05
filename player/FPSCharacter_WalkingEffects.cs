@@ -51,9 +51,9 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
 
     [ExportGroupAttribute("Leaning Settings")]
     [Export] public float LeanMaxPositionDistanceX = 0.4f;
-    [Export] public float LeanMaxRotateDistanceZ = 15f;
+    [Export] public float LeanMaxRotateDistanceZ = 0.25f;
     [Export] public float LeanPositionTweenTime = 0.5f;
-    [Export] public float LeanRaycastsTestLength = 0.5f;
+    [Export] public float LeanRaycastsTestLength = 0.7f;
     [Export] public float LeanMinCameraDistanceFromWall = 0.15f;
 
     private Vector3 _LastHalfFootStepPosition = Vector3.Zero;

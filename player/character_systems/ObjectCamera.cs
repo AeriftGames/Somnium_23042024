@@ -127,7 +127,7 @@ public partial class ObjectCamera : Node3D
         // ktera prakticky snizuje puvodni maximalni rozsah leaningu.
 
         // pokud zadny kolizni bod neni, pouzijeme v pozadovanem smeru plny rozsah leaningu
-        // ve finale tedy vracime vypocitany novy bod leaningu
+        // ve finale tedy vracime vypocitany novy lokalni bod(pozici) leaningu
 
         Vector3 returnedVector = Vector3.Zero;
         float direction_x = 0;
@@ -140,7 +140,7 @@ public partial class ObjectCamera : Node3D
             case ELeanType.Center:
                 {
                     returnedVector = Vector3.Zero;
-                    break;
+                    return returnedVector;
                 }
             case ELeanType.Left:
                 {
@@ -158,51 +158,71 @@ public partial class ObjectCamera : Node3D
                 }
         }
 
-        if(newLeanType != ELeanType.Center)
-        {
-            UniversalFunctions.HitResult hitResult = UniversalFunctions.IsSimpleRaycastHit(this,
-                         NodeRotX.GlobalPosition,
-                         NodeRotX.GlobalPosition +
-                         NodeLean.GlobalTransform.basis.x.Normalized() * (ray_length * direction_x),
-                         1);
+        UniversalFunctions.HitResult hitResult = UniversalFunctions.IsSimpleRaycastHit(this,
+            NodeRotX.GlobalPosition,
+            NodeRotX.GlobalPosition + 
+            NodeLean.GlobalTransform.basis.x.Normalized() * (ray_length * direction_x), 1);
 
             if (hitResult.isHit)
             {
                 float hitLength = NodeRotX.GlobalPosition.DistanceTo(hitResult.HitPosition) -
                     leanMinCameraDistanceFromWall;
 
-                GameMaster.GM.GetDebugHud().CustomLabelUpdateText(4, this, "raycast for lean: " + hitLength);
+                if(hitLength < leanMaxPositionX)
+                {
+                    GameMaster.GM.GetDebugHud().CustomLabelUpdateText(4, this, "raycast for lean: " + hitLength);
 
-                returnedVector = LerpPos_LeanCenter.Position +
-                    (NodeRotX.Transform.basis.x.Normalized() * (hitLength * direction_x));
+                    returnedVector = LerpPos_LeanCenter.Position +
+                        (NodeRotX.Transform.basis.x.Normalized() * (hitLength * direction_x));
+                }
             }
-        }
 
         return returnedVector;
     }
 
-    private Vector3 CalculateLeanRotation(ELeanType newLeanType, Vector3 newActualLeanPos,float newMaxLeanPosX, float newMaxLeanRotZ)
+    private Vector3 CalculateLeanRotation(ELeanType newLeanType, Vector3 newActualLeanPos,
+        float newMaxLeanPosX, float newMaxLeanRotZ)
     {
+        // Vypocet lean rotace pomoci procentualniho rozsahu pozice z nehoz vypocteme procenualni rozsahu rotace
+        // na konc vracime novy vector jako novou lokalni rotaci leaningu
+
         Vector3 returnedVector = Vector3.Zero;
+        float direction_x = 0.0f;
 
         switch (newLeanType)
         {
             case ELeanType.Center:
                 {
                     returnedVector = Vector3.Zero;
-                    break;
+                    return returnedVector;
                 }
             case ELeanType.Left:
                 {
                     returnedVector.z = newMaxLeanRotZ;
+                    direction_x = 1;
                     break;
                 }
             case ELeanType.Right:
                 {
                     returnedVector.z = -newMaxLeanRotZ;
+                    direction_x = -1;
                     break;
                 }
         }
+
+        // aktualni distance lean
+        float testDistance = newMaxLeanPosX - (newMaxLeanPosX - Mathf.Abs(newActualLeanPos.x));
+
+        //percentage rozsah lean pos
+        float percentage_pos = testDistance / newMaxLeanPosX * 100f;
+        
+        //percentage rozsah lean rot
+        float percentage_rot_step = newMaxLeanRotZ / 100f;
+        float per_rot_final = (percentage_pos * percentage_rot_step) * direction_x;
+        GD.Print(per_rot_final);
+
+        // nastavime finalni vector
+        returnedVector.z = per_rot_final;
 
         return returnedVector;
     }

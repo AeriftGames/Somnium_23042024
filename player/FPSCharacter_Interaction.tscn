@@ -20,7 +20,10 @@ script = ExtResource("2_fmih3")
 LengthInteractRay = 5.0
 AudioFlashlight_On = ExtResource("3_hi7iy")
 AudioFlashlight_Off = ExtResource("4_wmi65")
+LeanMaxPositionDistanceX = 0.5
 LeanMaxRotateDistanceZ = 0.25
+LeanRaycastsTestLength = 0.8
+LeanMinCameraDistanceFromWall = 0.3
 
 [node name="HolderHands" type="Node3D" parent="HeadMain/HeadGimbalA/HeadGimbalB/HeadHolderCamera" index="0"]
 
