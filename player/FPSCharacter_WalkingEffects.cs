@@ -49,6 +49,12 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
     [Export] public AudioStream[] JumpingSounds;
     [Export] public float JumpingVolumeDB = 1.1f;
 
+    [ExportGroupAttribute("Leaning Settings")]
+    [Export] public float LeanPositionXMax = 0.4f;
+    [Export] public float LeanPositionTweenTime = 0.5f;
+    [Export] public float LeanRaycastsTestLength = 0.5f;
+    [Export] public float LeanMinCameraDistanceFromWall = 0.15f;
+
     private Vector3 _LastHalfFootStepPosition = Vector3.Zero;
     private int lastIDFootstepSound = -1;
 

@@ -19,15 +19,12 @@ public partial class ObjectCamera : Node3D
     Node3D LerpPos_LeanCenter = null;
     Node3D LerpPos_LeanLeft = null;
     Node3D LerpPos_LeanRight = null;
-    LerpObject.LerpVector3 LerpCameraLeanPos = new LerpObject.LerpVector3();
-    LerpObject.LerpFloat LerpCameraLeanRot = new LerpObject.LerpFloat();
 
     public enum ELeanType { Center, Left, Right };
     private ELeanType ActualLean = ELeanType.Center;
 
     Tween tweenLeanRot = null;
     Tween tweenLeanPos = null;
-    float tweenSpeed = 0.5f;
 
     public override void _Ready()
 	{
@@ -94,6 +91,9 @@ public partial class ObjectCamera : Node3D
 
     public void SetActualLean(ELeanType newLeanType)
     {
+        FPSCharacter_WalkingEffects characterWalkingEffects = (FPSCharacter_WalkingEffects)ownerCharacter;
+        if (characterWalkingEffects == null) return;
+
         Vector3 finalLeanPos = TestRaycastLeansAndReturnMaxDistance(newLeanType);
 
         switch (newLeanType)
@@ -105,7 +105,7 @@ public partial class ObjectCamera : Node3D
                     tweenLeanRot.TweenProperty(NodeLean, "rotation", LerpPos_LeanCenter.Rotation, tweenSpeed).SetEase(Tween.EaseType.OutIn);
                     */
                     tweenLeanPos = CreateTween();
-                    tweenLeanPos.TweenProperty(NodeLean, "position", finalLeanPos, tweenSpeed).SetEase(Tween.EaseType.OutIn);
+                    tweenLeanPos.TweenProperty(NodeLean, "position", finalLeanPos, characterWalkingEffects.LeanPositionTweenTime).SetEase(Tween.EaseType.OutIn);
                     
                     break;
                 }
@@ -115,7 +115,7 @@ public partial class ObjectCamera : Node3D
                     tweenLeanRot.TweenProperty(NodeLean, "rotation", LerpPos_LeanLeft.Rotation, tweenSpeed).SetEase(Tween.EaseType.OutIn);
                     */
                     tweenLeanPos = CreateTween();
-                    tweenLeanPos.TweenProperty(NodeLean, "position", finalLeanPos, tweenSpeed).SetEase(Tween.EaseType.OutIn);
+                    tweenLeanPos.TweenProperty(NodeLean, "position", finalLeanPos, characterWalkingEffects.LeanPositionTweenTime).SetEase(Tween.EaseType.OutIn);
                     
                     break;
                 }
@@ -125,7 +125,7 @@ public partial class ObjectCamera : Node3D
                     tweenLeanRot.TweenProperty(NodeLean, "rotation", LerpPos_LeanRight.Rotation, tweenSpeed).SetEase(Tween.EaseType.OutIn);
                     */
                     tweenLeanPos = CreateTween();
-                    tweenLeanPos.TweenProperty(NodeLean, "position", finalLeanPos, tweenSpeed).SetEase(Tween.EaseType.OutIn);
+                    tweenLeanPos.TweenProperty(NodeLean, "position", finalLeanPos, characterWalkingEffects.LeanPositionTweenTime).SetEase(Tween.EaseType.OutIn);
                     
                     break;
                 }
@@ -134,32 +134,34 @@ public partial class ObjectCamera : Node3D
 
     public ELeanType GetActualLean() { return ActualLean; }
 
-    public Vector3 TestRaycastLeansAndReturnMaxDistance(ELeanType newLeanType)
+    private Vector3 TestRaycastLeansAndReturnMaxDistance(ELeanType newLeanType)
     {
-        float ray_length = 0.5f;
-        float direction_x = 1.0f;
+        FPSCharacter_WalkingEffects characterWalkingEffects = (FPSCharacter_WalkingEffects)ownerCharacter;
+        if (characterWalkingEffects == null) return Vector3.Zero;
 
-        Vector3 returnedVector = LerpPos_LeanCenter.Position;
+        Vector3 returnedVector = Vector3.Zero;
+        float direction_x = 0;
+        float ray_length = characterWalkingEffects.LeanRaycastsTestLength;
 
         switch (newLeanType)
         {
             case ELeanType.Center:
                 {
-                    returnedVector = LerpPos_LeanCenter.Position;
+                    returnedVector = Vector3.Zero;
                     break;
                 }
             case ELeanType.Left:
                 {
                     // raycast smer po ose x doleva
                     direction_x = -1;
-                    returnedVector = LerpPos_LeanLeft.Position;
+                    returnedVector = new Vector3(characterWalkingEffects.LeanPositionXMax * direction_x, 0, 0);
                     break;
                 }
             case ELeanType.Right:
                 {
                     // raycast smer po ose x doprava
                     direction_x = 1;
-                    returnedVector = LerpPos_LeanRight.Position;
+                    returnedVector = new Vector3(characterWalkingEffects.LeanPositionXMax * direction_x, 0, 0);
                     break;
                 }
         }
@@ -167,19 +169,20 @@ public partial class ObjectCamera : Node3D
         if(newLeanType != ELeanType.Center)
         {
             UniversalFunctions.HitResult hitResult = UniversalFunctions.IsSimpleRaycastHit(this,
-                         NodeLean.GlobalPosition,
-                         NodeLean.GlobalPosition +
+                         NodeRotX.GlobalPosition,
+                         NodeRotX.GlobalPosition +
                          NodeLean.GlobalTransform.basis.x.Normalized() * (ray_length * direction_x),
                          1);
 
             if (hitResult.isHit)
             {
-                GameMaster.GM.Log.WriteLog(this, LogSystem.ELogMsgType.INFO, "hitPos: " + hitResult.HitPosition);
+                float hitLength = NodeRotX.GlobalPosition.DistanceTo(hitResult.HitPosition) -
+                    characterWalkingEffects.LeanMinCameraDistanceFromWall;
 
-                float hitLength = NodeLean.GlobalPosition.DistanceTo(hitResult.HitPosition);
                 GameMaster.GM.GetDebugHud().CustomLabelUpdateText(4, this, "raycast for lean: " + hitLength);
+
                 returnedVector = LerpPos_LeanCenter.Position +
-                    (NodeLean.Transform.basis.x.Normalized() * (hitLength * direction_x));
+                    (NodeRotX.Transform.basis.x.Normalized() * (hitLength * direction_x));
             }
         }
 
