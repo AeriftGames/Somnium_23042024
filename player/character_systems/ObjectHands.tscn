@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://dn27a5i64u011"]
+[gd_scene load_steps=5 format=3 uid="uid://dn27a5i64u011"]
 
 [ext_resource type="Script" path="res://player/character_systems/ObjectHands.cs" id="1_887yp"]
 [ext_resource type="PackedScene" uid="uid://b6l080hrctdgf" path="res://objects/flashlight/flashlight.tscn" id="2_y6ntf"]
+[ext_resource type="Texture2D" uid="uid://wfqgplnbjryn" path="res://textures/Cookie_tutorial_texture_flashlight.png" id="3_ftn8c"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_2yisq"]
 radius = 0.1
@@ -21,6 +22,7 @@ mesh = SubResource("SphereMesh_2yisq")
 
 [node name="flashlight" parent="RightHand" instance=ExtResource("2_y6ntf")]
 transform = Transform3D(-2.18557e-09, 0, 0.05, 0, 0.05, 0, -0.05, 0, -2.18557e-09, 0, -0.1, 0.05)
+visible = false
 
 [node name="SpotLight3D" type="SpotLight3D" parent="RightHand/flashlight"]
 transform = Transform3D(-8.74228e-07, 0, -20, 0, 20, 0, 20, 0, -8.74228e-07, 7, 0, 3.8147e-06)
@@ -38,3 +40,19 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, -0.2, -0.3)
 visible = false
 mesh = SubResource("SphereMesh_2yisq")
 skeleton = NodePath("../../RightHand")
+
+[node name="ObjectFlashlight" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, -0.2, 0)
+visible = false
+
+[node name="SpotLight3D" type="SpotLight3D" parent="ObjectFlashlight"]
+light_energy = 3.0
+light_indirect_energy = 0.538
+light_volumetric_fog_energy = 1.5
+light_projector = ExtResource("3_ftn8c")
+light_size = 0.15
+shadow_enabled = true
+spot_range = 16.0
+spot_attenuation = 1.83791
+spot_angle = 32.08
+spot_angle_attenuation = 1.84672

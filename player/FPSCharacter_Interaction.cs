@@ -32,10 +32,17 @@ public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
 
 	// HANDS
 	public Node3D HolderHands = null;
-	public Node3D objectHands = null;
+	public ObjectHands objectHands = null;
+
+	// Simple Flashlight toggle test
+	bool isFlashlightEnable = false;
+	AudioStreamPlayer AudioStreamPlayer_TestItem = null;
+    [ExportGroupAttribute("Simple Flashlight Settings")]
+    [Export] public AudioStream AudioFlashlight_On;
+    [Export] public AudioStream AudioFlashlight_Off;
 
 
-	public override void _Ready()
+    public override void _Ready()
 	{
 		base._Ready();
 
@@ -44,11 +51,18 @@ public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
 
 		//
 		HolderHands = GetNode<Node3D>("HeadMain/HeadGimbalA/HeadGimbalB/HeadHolderCamera/HolderHands");
+
+		// Simple Flashlight toggle test
+		AudioStreamPlayer_TestItem = GetNode<AudioStreamPlayer>("AudioStreamPlayer_TestItem");
 	}
 
 	public override void _Process(double delta)
 	{
 		base._Process(delta);
+
+		// Toggle Simple Flashlight
+		if(Input.IsActionJustPressed("ToggleFlashlight"))
+			ToggleSimpleFlashlight();
 
 		// UPDATE HANDS
 		objectHands.GlobalPosition = 
@@ -64,8 +78,8 @@ public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
 		objectHands.GlobalRotation = hands_rot;
 		
 
-        // UPDATE LERPOBJECT INTERACT
-        if (LerpCameraPosToInteract.IsEnableUpdate())
+		// UPDATE LERPOBJECT INTERACT
+		if (LerpCameraPosToInteract.IsEnableUpdate())
 			GetFPSCharacterCamera().GlobalPosition = LerpCameraPosToInteract.Update(delta);
 
 		if (LerpCameraLookToInteract.IsEnableUpdate())
@@ -192,5 +206,37 @@ public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
 		
 		// pak, az budeme chtit staci vyresetovat lokalni pozice kamery a rotaci kamery na puvodni
 		// zde resime v Process
+	}
+
+	// Prozatimni reseni flashlight
+	public void ToggleSimpleFlashlight()
+	{
+		// Prepnout stav
+		isFlashlightEnable = !isFlashlightEnable;
+
+		if(isFlashlightEnable)
+		{
+			//ON
+			GameMaster.GM.Log.WriteLog(this,LogSystem.ELogMsgType.INFO,"Flaslight ON");
+			objectHands.objectFlashlight.Visible = true;
+
+			// Audio play
+			AudioStreamPlayer_TestItem.VolumeDb = -15f;
+			AudioStreamPlayer_TestItem.PitchScale = 0.9f;
+            AudioStreamPlayer_TestItem.Stream = AudioFlashlight_On;
+            AudioStreamPlayer_TestItem.Play();
+        }
+		else
+		{
+            //OFF
+            GameMaster.GM.Log.WriteLog(this, LogSystem.ELogMsgType.INFO, "Flaslight OFF");
+            objectHands.objectFlashlight.Visible = false;
+
+            // Audio play
+            AudioStreamPlayer_TestItem.VolumeDb = -15f;
+            AudioStreamPlayer_TestItem.PitchScale = 0.9f;
+            AudioStreamPlayer_TestItem.Stream = AudioFlashlight_Off;
+            AudioStreamPlayer_TestItem.Play();
+        }
 	}
 }
