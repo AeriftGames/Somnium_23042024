@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://dxa60v0imq34d"]
+[gd_scene load_steps=39 format=3 uid="uid://dxa60v0imq34d"]
 
 [ext_resource type="ArrayOccluder3D" uid="uid://c65wc0yeg3cak" path="res://levels/world_level_rooms/worldlevel_rooms_test.occ" id="1_48aky"]
 [ext_resource type="PackedScene" uid="uid://ck8mt4y4gfqmk" path="res://placeholders/modular_walls/ground_large.tscn" id="1_vcfbv"]
@@ -12,7 +12,6 @@
 [ext_resource type="Texture2D" uid="uid://0n0dx7ov4qi6" path="res://textures/blood_decal_test.png" id="11_tv71u"]
 [ext_resource type="PackedScene" uid="uid://cq3ypp2ir6mew" path="res://objects/light/omni_light_3d_flashing.tscn" id="14_cmtqf"]
 [ext_resource type="PackedScene" uid="uid://bet3idvc4fg0n" path="res://placeholders/PlayerStart.tscn" id="15_t3a5n"]
-[ext_resource type="PackedScene" uid="uid://dvxuahjqkihcc" path="res://objects/read/paper_test/paper_test.tscn" id="16_vb32x"]
 [ext_resource type="PackedScene" uid="uid://fboedkub5lhd" path="res://core_systems/item_spawner/item_spawner.tscn" id="19_ao0g5"]
 [ext_resource type="PackedScene" uid="uid://ukqaj32a10wx" path="res://objects/keypad/keypad.tscn" id="19_mnkjc"]
 [ext_resource type="PackedScene" uid="uid://df3v88u2getl5" path="res://objects/door/bunker_door.tscn" id="20_qquad"]
@@ -404,11 +403,11 @@ autoplay = true
 [node name="PlayerStart" parent="." instance=ExtResource("15_t3a5n")]
 transform = Transform3D(0.996673, 0, -0.0815037, 0, 1, 0, 0.0815037, 0, 0.996673, -6.57843, 0.65216, -9.58071)
 
-[node name="paper_test" parent="." instance=ExtResource("16_vb32x")]
-transform = Transform3D(-8.74228e-09, 0.2, -8.74228e-09, 4.23516e-23, -8.74228e-09, -0.2, -0.2, -8.74228e-09, 3.82137e-16, -3.8958, 1.3912, 0)
-
 [node name="cabinet@postcard" parent="." instance=ExtResource("23_ua0lw")]
 transform = Transform3D(-1.31134e-08, -0.3, 1.31134e-08, 0, -1.31134e-08, -0.3, 0.3, -1.31134e-08, 5.73206e-16, 0.525343, 0.405757, 1.32762)
+item_name = "postcard_test"
+item_interaction_name = "Inspect"
+item_inspect_description = "1235"
 
 [node name="item_spawner" parent="." instance=ExtResource("19_ao0g5")]
 
@@ -451,6 +450,9 @@ transform = Transform3D(0.0347161, 0, 0.598995, 0, 0.6, 0, -0.598995, 0, 0.03471
 
 [node name="postcard" parent="." instance=ExtResource("23_ua0lw")]
 transform = Transform3D(9.16945e-05, -0.199984, 0.00256044, -0.00715722, -0.00256209, -0.199855, 0.199872, 2.28866e-10, -0.00715781, -3.01692, 0.762378, 1.31273)
+item_name = "postcard_test"
+item_interaction_name = "Inspect"
+item_inspect_description = "1235"
 
 [node name="vent_straight" parent="." instance=ExtResource("25_pssfx")]
 transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0.477541, 0.612235, 9.14516)
@@ -539,6 +541,9 @@ transform = Transform3D(-0.4, 0, -3.49691e-08, 0, 0.4, 0, 3.49691e-08, 0, -0.4, 
 
 [node name="postcard" parent="cabinet_new" instance=ExtResource("23_ua0lw")]
 transform = Transform3D(-1.42047e-08, -0.119817, -0.275034, 5.23736e-09, 0.275034, -0.119817, 0.3, -1.04747e-08, -1.09309e-08, 1.24636, 0.179191, 1.0084)
+item_name = "postcard_test"
+item_interaction_name = "Inspect"
+item_inspect_description = "1235"
 
 [node name="food_can" parent="cabinet_new" instance=ExtResource("26_usm0v")]
 transform = Transform3D(0.15, 0, 2.66454e-15, 0, 0.15, 0, -2.66454e-15, 0, 0.15, 1.00348, 0.0906687, 0.994547)

@@ -1,4 +1,4 @@
-class_name item_inspect extends Control
+class_name item_inspect_old extends Control
 @icon("res://core_systems/item_pickup/item_pickup_icon.svg")
 
 var rotating: bool = false

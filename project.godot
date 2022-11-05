@@ -14,8 +14,13 @@ _global_script_classes=[{
 "language": &"GDScript",
 "path": "res://autoload/custom_settings.gd"
 }, {
-"base": "Control",
+"base": "Node3D",
 "class": &"item_inspect",
+"language": &"GDScript",
+"path": "res://core_systems/item_inspect/test/item_inspect.gd"
+}, {
+"base": "Control",
+"class": &"item_inspect_old",
 "language": &"GDScript",
 "path": "res://core_systems/item_inspect/item_inspect.gd"
 }, {
@@ -36,7 +41,8 @@ _global_script_classes=[{
 }]
 _global_script_class_icons={
 "custom_settings": "res://autoload/custom_settings_icon.svg",
-"item_inspect": "res://core_systems/item_pickup/item_pickup_icon.svg",
+"item_inspect": "res://core_systems/item_inspect/item_inspect_icon.svg",
+"item_inspect_old": "res://core_systems/item_pickup/item_pickup_icon.svg",
 "item_pickup": "res://core_systems/item_pickup/item_pickup_icon.svg",
 "item_use": "res://core_systems/item_use/item_use_icon.svg",
 "logging": "res://autoload/logging_icon.svg"

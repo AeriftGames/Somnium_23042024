@@ -1,4 +1,5 @@
-extends Node3D
+class_name item_inspect extends Node3D
+@icon("res://core_systems/item_inspect/item_inspect_icon.svg")
 
 ## A GDSCript template used for items that can be TODO
 ##
