@@ -8,7 +8,6 @@ Technická dokumentace k projektu **Somnium Prototype**
   - [Souborová struktura projektu](#souborov-struktura-projektu)
   - [Jmenová konvence](#jmenov-konvence)
 - [Herní mechanismy a jejich detailní popisy](#hern-mechanismy-a-jejich-detailn-popisy)
-  - [Logging](#logging)
   - [MessageObject](#messageobject)
   - [FPSCharacter](#fpscharacter)
   - [GameMaster](#gamemaster)
