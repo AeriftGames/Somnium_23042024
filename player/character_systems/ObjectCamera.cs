@@ -100,29 +100,33 @@ public partial class ObjectCamera : Node3D
         {
             case ELeanType.Center:
                 {
-                    /*tweenLeanRot = CreateTween();
-                    tweenLeanRot.TweenProperty(NodeLean, "rotation", LerpPos_LeanCenter.Rotation, tweenSpeed).SetEase(Tween.EaseType.OutIn);*/
-
+                    /*
+                    tweenLeanRot = CreateTween();
+                    tweenLeanRot.TweenProperty(NodeLean, "rotation", LerpPos_LeanCenter.Rotation, tweenSpeed).SetEase(Tween.EaseType.OutIn);
+                    */
                     tweenLeanPos = CreateTween();
                     tweenLeanPos.TweenProperty(NodeLean, "position", finalLeanPos, tweenSpeed).SetEase(Tween.EaseType.OutIn);
+                    
                     break;
                 }
             case ELeanType.Left:
-                {
-                    /*tweenLeanRot = CreateTween();
-                    tweenLeanRot.TweenProperty(NodeLean, "rotation", LerpPos_LeanLeft.Rotation, tweenSpeed).SetEase(Tween.EaseType.OutIn);*/
-
+                {   /*
+                    tweenLeanRot = CreateTween();
+                    tweenLeanRot.TweenProperty(NodeLean, "rotation", LerpPos_LeanLeft.Rotation, tweenSpeed).SetEase(Tween.EaseType.OutIn);
+                    */
                     tweenLeanPos = CreateTween();
                     tweenLeanPos.TweenProperty(NodeLean, "position", finalLeanPos, tweenSpeed).SetEase(Tween.EaseType.OutIn);
+                    
                     break;
                 }
             case ELeanType.Right:
-                {
-                    /*tweenLeanRot = CreateTween();
-                    tweenLeanRot.TweenProperty(NodeLean, "rotation", LerpPos_LeanRight.Rotation, tweenSpeed).SetEase(Tween.EaseType.OutIn);*/
-
+                {   /*
+                    tweenLeanRot = CreateTween();
+                    tweenLeanRot.TweenProperty(NodeLean, "rotation", LerpPos_LeanRight.Rotation, tweenSpeed).SetEase(Tween.EaseType.OutIn);
+                    */
                     tweenLeanPos = CreateTween();
                     tweenLeanPos.TweenProperty(NodeLean, "position", finalLeanPos, tweenSpeed).SetEase(Tween.EaseType.OutIn);
+                    
                     break;
                 }
         }
@@ -133,54 +137,52 @@ public partial class ObjectCamera : Node3D
     public Vector3 TestRaycastLeansAndReturnMaxDistance(ELeanType newLeanType)
     {
         float ray_length = 0.5f;
+        float direction_x = 1.0f;
 
-        UniversalFunctions.HitResult hitResult;
-        hitResult.isHit = false;
-        hitResult.HitPosition = Vector3.Zero;
+        Vector3 returnedVector = LerpPos_LeanCenter.Position;
 
         switch (newLeanType)
         {
             case ELeanType.Center:
                 {
-                    return LerpPos_LeanCenter.Position;
+                    returnedVector = LerpPos_LeanCenter.Position;
+                    break;
                 }
             case ELeanType.Left:
                 {
-                    hitResult = UniversalFunctions.IsSimpleRaycastHit(this,
-                           NodeLean.GlobalPosition,
-                           NodeLean.GlobalPosition + (NodeLean.GlobalTransform.basis.x.Normalized() * -ray_length),
-                           1);
-
-                    if (hitResult.isHit)
-                    {
-                        GameMaster.GM.Log.WriteLog(this,LogSystem.ELogMsgType.INFO,"hitPos: " + hitResult.HitPosition);
-
-                        float hitLength = NodeLean.GlobalPosition.DistanceTo(hitResult.HitPosition);
-                        GameMaster.GM.GetDebugHud().CustomLabelUpdateText(4, this, "raycast for lean: " + hitLength);
-                        return (LerpPos_LeanCenter.Position + (NodeLean.Transform.basis.x.Normalized() * -hitLength));
-                    }
-                    else
-                        return LerpPos_LeanLeft.Position;
+                    // raycast smer po ose x doleva
+                    direction_x = -1;
+                    returnedVector = LerpPos_LeanLeft.Position;
+                    break;
                 }
             case ELeanType.Right:
                 {
-                    hitResult = UniversalFunctions.IsSimpleRaycastHit(this,
-                         NodeLean.GlobalPosition,
-                         NodeLean.GlobalPosition + (NodeLean.GlobalTransform.basis.x.Normalized() * ray_length),
-                         1);
-
-                    if (hitResult.isHit)
-                    {
-                        GameMaster.GM.Log.WriteLog(this, LogSystem.ELogMsgType.INFO, "hitPos: " + hitResult.HitPosition);
-
-                        float hitLength = NodeLean.GlobalPosition.DistanceTo(hitResult.HitPosition);
-                        GameMaster.GM.GetDebugHud().CustomLabelUpdateText(4, this, "raycast for lean: " + hitLength);
-                        return (LerpPos_LeanCenter.Position + (NodeLean.Transform.basis.x.Normalized() * hitLength));
-                    }
-                    else
-                        return LerpPos_LeanRight.Position;
+                    // raycast smer po ose x doprava
+                    direction_x = 1;
+                    returnedVector = LerpPos_LeanRight.Position;
+                    break;
                 }
         }
-        return LerpPos_LeanLeft.Position;
+
+        if(newLeanType != ELeanType.Center)
+        {
+            UniversalFunctions.HitResult hitResult = UniversalFunctions.IsSimpleRaycastHit(this,
+                         NodeLean.GlobalPosition,
+                         NodeLean.GlobalPosition +
+                         NodeLean.GlobalTransform.basis.x.Normalized() * (ray_length * direction_x),
+                         1);
+
+            if (hitResult.isHit)
+            {
+                GameMaster.GM.Log.WriteLog(this, LogSystem.ELogMsgType.INFO, "hitPos: " + hitResult.HitPosition);
+
+                float hitLength = NodeLean.GlobalPosition.DistanceTo(hitResult.HitPosition);
+                GameMaster.GM.GetDebugHud().CustomLabelUpdateText(4, this, "raycast for lean: " + hitLength);
+                returnedVector = LerpPos_LeanCenter.Position +
+                    (NodeLean.Transform.basis.x.Normalized() * (hitLength * direction_x));
+            }
+        }
+
+        return returnedVector;
     }
 }
