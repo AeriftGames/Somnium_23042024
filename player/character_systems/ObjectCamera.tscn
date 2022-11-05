@@ -23,3 +23,11 @@ transform = Transform3D(0.965926, -0.258819, 0, 0.258819, 0.965926, 0, 0, 0, 1, 
 
 [node name="LerpPos_LeanRight" type="Node3D" parent="NodeRotY/GimbalLand/NodeRotX"]
 transform = Transform3D(0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 0, 0, 1, 0.4, 0, 0)
+
+[node name="LeftFrontRayPos" type="Node3D" parent="NodeRotY/GimbalLand/NodeRotX"]
+
+[node name="LeftBackRayPos" type="Node3D" parent="NodeRotY/GimbalLand/NodeRotX"]
+
+[node name="RighFrontRayPos" type="Node3D" parent="NodeRotY/GimbalLand/NodeRotX"]
+
+[node name="RightBackRayPos" type="Node3D" parent="NodeRotY/GimbalLand/NodeRotX"]

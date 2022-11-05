@@ -48,6 +48,8 @@ LeanMaxRotateDistanceZ = 0.25
 LeanPositionTweenTime = 0.5
 LeanRaycastsTestLength = 0.8
 LeanMinCameraDistanceFromWall = 0.3
+LeanMultiRaycastDetect = true
+LeanMultiRaycastSteps = 0.15
 
 [node name="AudioStreamPlayer_Footsteps" type="AudioStreamPlayer" parent="." index="5"]
 stream = ExtResource("4_lkw0d")

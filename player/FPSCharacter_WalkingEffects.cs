@@ -55,6 +55,8 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
     [Export] public float LeanPositionTweenTime = 0.5f;
     [Export] public float LeanRaycastsTestLength = 0.8f;
     [Export] public float LeanMinCameraDistanceFromWall = 0.3f;
+    [Export] public bool LeanMultiRaycastDetect = true;
+    [Export] public float LeanMultiRaycastSteps = 0.15f;
 
     private Vector3 _LastHalfFootStepPosition = Vector3.Zero;
     private int lastIDFootstepSound = -1;

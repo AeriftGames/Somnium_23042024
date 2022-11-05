@@ -2,6 +2,7 @@ using Godot;
 using System;
 using System.Linq;
 using static Godot.TextServer;
+using static UniversalFunctions;
 
 public partial class ObjectCamera : Node3D
 {
@@ -99,7 +100,8 @@ public partial class ObjectCamera : Node3D
         // vypocet nove pozice pro aktualni leaning
         Vector3 finalLeanPos = CalculateLeanPositionWithRaycasts(newLeanType, 
             characterWalkingEffects.LeanRaycastsTestLength,characterWalkingEffects.LeanMaxPositionDistanceX,
-            characterWalkingEffects.LeanMinCameraDistanceFromWall);
+            characterWalkingEffects.LeanMinCameraDistanceFromWall,characterWalkingEffects.LeanMultiRaycastDetect,
+            characterWalkingEffects.LeanMultiRaycastSteps);
 
         // vypocet nove rotace
         Vector3 finalLeanRot = CalculateLeanRotation(newLeanType,finalLeanPos,
@@ -120,7 +122,7 @@ public partial class ObjectCamera : Node3D
     public ELeanType GetActualLean() { return ActualLean; }
 
     private Vector3 CalculateLeanPositionWithRaycasts(ELeanType newLeanType,float newRayLength,
-        float newLeanMaxPositionX,float newLeanMinDistanceFromWall)
+        float newLeanMaxPositionX,float newLeanMinDistanceFromWall, bool multiRaycast, float multiRaycastStep)
     {
         // provede raycasty detekci kolize v pozadovanem smeru pro vyklon,
         // pokud nejaky kolizni bod je nastavujeme podle vzdalenosti (center <-> collision_point) novou pozici,
@@ -128,6 +130,8 @@ public partial class ObjectCamera : Node3D
 
         // pokud zadny kolizni bod neni, pouzijeme v pozadovanem smeru plny rozsah leaningu
         // ve finale tedy vracime vypocitany novy lokalni bod(pozici) leaningu
+
+        // multiraycast je zalozeny na 3 raycastech z predniho, prostredniho (stejny jako v singleRaycast) a zadniho
 
         Vector3 returnedVector = Vector3.Zero;
         float direction_x = 0;
@@ -158,17 +162,21 @@ public partial class ObjectCamera : Node3D
                 }
         }
 
-        UniversalFunctions.HitResult hitResult = UniversalFunctions.IsSimpleRaycastHit(this,
-            NodeRotX.GlobalPosition,
-            NodeRotX.GlobalPosition + 
-            NodeLean.GlobalTransform.basis.x.Normalized() * (ray_length * direction_x), 1);
+        // detect by single raycast
+        if (multiRaycast == false)
+        {
+            // 1. main raycast
+            UniversalFunctions.HitResult hitResult = UniversalFunctions.IsSimpleRaycastHit(this,
+                NodeRotX.GlobalPosition,
+                NodeRotX.GlobalPosition +
+                NodeLean.GlobalTransform.basis.x.Normalized() * (ray_length * direction_x), 1);
 
             if (hitResult.isHit)
             {
                 float hitLength = NodeRotX.GlobalPosition.DistanceTo(hitResult.HitPosition) -
-                    leanMinCameraDistanceFromWall;
+                leanMinCameraDistanceFromWall;
 
-                if(hitLength < leanMaxPositionX)
+                if (hitLength < leanMaxPositionX)
                 {
                     GameMaster.GM.GetDebugHud().CustomLabelUpdateText(4, this, "raycast for lean: " + hitLength);
 
@@ -176,7 +184,66 @@ public partial class ObjectCamera : Node3D
                         (NodeRotX.Transform.basis.x.Normalized() * (hitLength * direction_x));
                 }
             }
+        }
+        else
+        {
+            // detect by multiraycast
 
+            // 1. main raycast
+            UniversalFunctions.HitResult hitResult = UniversalFunctions.IsSimpleRaycastHit(this,
+                NodeRotX.GlobalPosition,
+                NodeRotX.GlobalPosition +
+                NodeRotX.GlobalTransform.basis.x.Normalized() * (ray_length * direction_x), 1);
+
+            // 2. predni raycast
+            UniversalFunctions.HitResult hit2Result = UniversalFunctions.IsSimpleRaycastHit(this,
+                NodeRotX.GlobalPosition + (NodeRotX.GlobalTransform.basis.z.Normalized() * -multiRaycastStep),
+                NodeRotX.GlobalPosition + (NodeRotX.GlobalTransform.basis.z.Normalized() * -multiRaycastStep) +
+                NodeRotX.GlobalTransform.basis.x.Normalized() * ((ray_length) * direction_x), 1);
+
+            // 3. zadni raycast
+            UniversalFunctions.HitResult hit3Result = UniversalFunctions.IsSimpleRaycastHit(this,
+                NodeRotX.GlobalPosition + (NodeRotX.GlobalTransform.basis.z.Normalized() * multiRaycastStep),
+                NodeRotX.GlobalPosition + (NodeRotX.GlobalTransform.basis.z.Normalized() * multiRaycastStep) +
+                NodeRotX.GlobalTransform.basis.x.Normalized() * ((ray_length) * direction_x), 1);
+
+            if (hitResult.isHit || hit2Result.isHit || hit3Result.isHit)
+            {
+                float hitLength = NodeRotX.GlobalPosition.DistanceTo(hitResult.HitPosition) - 
+                    leanMinCameraDistanceFromWall;
+
+                float hit2Length = NodeRotX.GlobalPosition.DistanceTo(hit2Result.HitPosition) -
+                    leanMinCameraDistanceFromWall;
+
+                float hit3Length = NodeRotX.GlobalPosition.DistanceTo(hit3Result.HitPosition) -
+                    leanMinCameraDistanceFromWall;
+
+                float nejmensi = hitLength;
+                if(hitLength < hit2Length && hitLength < hit3Length)
+                {
+                    //hitLength je nejmensi
+                    nejmensi = hitLength;
+                }
+                else if (hit2Length < hitLength && hit2Length < hit3Length)
+                {
+                    //hit2Length je nejmensi
+                    nejmensi = hit2Length;
+                }
+                else if(hit3Length < hitLength && hit3Length < hit2Length)
+                {
+                    //hit3Length je nejmensi
+                    nejmensi = hit3Length;
+                }
+
+                if (nejmensi < leanMaxPositionX)
+                {
+                    GameMaster.GM.GetDebugHud().CustomLabelUpdateText(4, this, "raycast for lean: " + nejmensi);
+
+                    returnedVector = LerpPos_LeanCenter.Position +
+                        (NodeRotX.Transform.basis.x.Normalized() * (nejmensi * direction_x));
+                }
+            }
+        }
         return returnedVector;
     }
 
