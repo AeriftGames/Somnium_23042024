@@ -27,7 +27,7 @@
 [ext_resource type="PackedScene" uid="uid://cmc2d1am8ff6j" path="res://objects/misc/food_can.tscn" id="26_usm0v"]
 [ext_resource type="PackedScene" uid="uid://16d10e0sx2rr" path="res://objects/pipes/pipecurve.glb" id="27_ckge2"]
 [ext_resource type="PackedScene" uid="uid://d1fahaee5i3x6" path="res://objects/pipes/pipestraight.glb" id="28_bnr13"]
-[ext_resource type="PackedScene" uid="uid://bj5geey0opre6" path="res://objects/furniture/cabinet_small.tscn" id="29_ebuaj"]
+[ext_resource type="PackedScene" uid="uid://d5wc26cy4c6o" path="res://objects/furniture/cabinet_small.tscn" id="29_ebuaj"]
 [ext_resource type="PackedScene" path="res://objects/door/door.tscn" id="29_rc6hx"]
 [ext_resource type="PackedScene" path="res://objects/furniture/cabinet_new.tscn" id="30_vtat2"]
 [ext_resource type="PackedScene" uid="uid://cokykrpxx7lmy" path="res://objects/battery/battery.tscn" id="31_rjyuk"]

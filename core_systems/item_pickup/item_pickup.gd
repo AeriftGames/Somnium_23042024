@@ -59,7 +59,6 @@ func _used() -> void:
 	var player_position = passed_object.get_global_position()
 	var player_height = player_position.y + pickup_height
 	sfx_node.play()
-	$interactive_object/StaticBody3D/CollisionShape3D.disabled = true
 	timer.start(hide_speed)
 	tween_position = create_tween()
 	tween_position.tween_property(self, "global_position", Vector3(player_position.x, player_height, player_position.z), pickup_speed)

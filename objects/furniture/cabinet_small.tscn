@@ -1,85 +1,69 @@
-[gd_scene load_steps=8 format=3 uid="uid://bj5geey0opre6"]
+[gd_scene load_steps=5 format=3 uid="uid://d5wc26cy4c6o"]
 
 [ext_resource type="PackedScene" uid="uid://b5ujas828o1dp" path="res://objects/furniture/cabinet_small.glb" id="1_chlpe"]
 [ext_resource type="Script" path="res://core_systems/item_use/item_use.gd" id="2_vffnc"]
 [ext_resource type="PackedScene" uid="uid://dbnevtbu1g7uy" path="res://core_systems/interactive_system/interactive_object.tscn" id="3_5jerk"]
-[ext_resource type="Script" path="res://objects/furniture/use1.gd" id="4_vdxj0"]
-[ext_resource type="Script" path="res://objects/furniture/use2.gd" id="5_qblpa"]
-[ext_resource type="Script" path="res://objects/furniture/use3.gd" id="6_awqfw"]
-[ext_resource type="Script" path="res://objects/furniture/use4.gd" id="7_8vcwr"]
+[ext_resource type="Script" path="res://objects/furniture/cabinet_small_use.gd" id="3_tqkas"]
 
 [node name="cabinet_small" instance=ExtResource("1_chlpe")]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
 
-[node name="Cabinet" parent="." index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-
-[node name="Drawer1" parent="." index="1"]
+[node name="Drawer1" parent="." index="1" node_paths=PackedStringArray("use_node")]
 script = ExtResource("2_vffnc")
+use_node = NodePath("use")
 
 [node name="use" type="Node3D" parent="Drawer1" index="0"]
-script = ExtResource("4_vdxj0")
-
-[node name="Timer" type="Timer" parent="Drawer1/use" index="0"]
+script = ExtResource("3_tqkas")
 
 [node name="interactive_object" parent="Drawer1" index="1" instance=ExtResource("3_5jerk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6101, 2.25726, 0)
 
-[node name="Drawer2" parent="." index="2"]
+[node name="CollisionShape3D" parent="Drawer1/interactive_object/StaticBody3D" index="0"]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 4, 0.431566, 0, 0)
+
+[node name="Drawer2" parent="." index="2" node_paths=PackedStringArray("use_node")]
 script = ExtResource("2_vffnc")
+use_node = NodePath("use")
 
 [node name="use" type="Node3D" parent="Drawer2" index="0"]
-script = ExtResource("5_qblpa")
-
-[node name="Timer" type="Timer" parent="Drawer2/use" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+script = ExtResource("3_tqkas")
 
 [node name="interactive_object" parent="Drawer2" index="1" instance=ExtResource("3_5jerk")]
-transform = Transform3D(0.999999, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, 0, 1.13205, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6101, 1.25092, 0)
 
 [node name="CollisionShape3D" parent="Drawer2/interactive_object/StaticBody3D" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 4, 0.999571, 0, 0)
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 4, 0.431566, 0, 0)
 
-[node name="interactive_object_area3D" parent="Drawer2/interactive_object/StaticBody3D" index="1"]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
-
-[node name="Drawer3" parent="." index="3"]
+[node name="Drawer3" parent="." index="3" node_paths=PackedStringArray("use_node")]
 script = ExtResource("2_vffnc")
+use_node = NodePath("use")
 
 [node name="use" type="Node3D" parent="Drawer3" index="0"]
-script = ExtResource("6_awqfw")
-
-[node name="Timer" type="Timer" parent="Drawer3/use" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+script = ExtResource("3_tqkas")
 
 [node name="interactive_object" parent="Drawer3" index="1" instance=ExtResource("3_5jerk")]
-transform = Transform3D(0.999999, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, 0, 0.286167, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6101, 0.538569, 0)
 
 [node name="CollisionShape3D" parent="Drawer3/interactive_object/StaticBody3D" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 4, 0.999571, 0, 0)
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 4, 0.431566, 0, 0)
 
-[node name="interactive_object_area3D" parent="Drawer3/interactive_object/StaticBody3D" index="1"]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
-
-[node name="Drawer4" parent="." index="4"]
+[node name="Drawer4" parent="." index="4" node_paths=PackedStringArray("use_node")]
 script = ExtResource("2_vffnc")
+use_node = NodePath("use")
 
 [node name="use" type="Node3D" parent="Drawer4" index="0"]
-script = ExtResource("7_8vcwr")
-
-[node name="Timer" type="Timer" parent="Drawer4/use" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+script = ExtResource("3_tqkas")
 
 [node name="interactive_object" parent="Drawer4" index="1" instance=ExtResource("3_5jerk")]
-transform = Transform3D(0.999999, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, 0, -0.47079, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6101, -0.377053, 0)
 
 [node name="CollisionShape3D" parent="Drawer4/interactive_object/StaticBody3D" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 4, 0.999571, 0, 0)
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 4, 0.431566, 0, 0)
 
-[node name="interactive_object_area3D" parent="Drawer4/interactive_object/StaticBody3D" index="1"]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
-
-[connection signal="timeout" from="Drawer1/use/Timer" to="Drawer1/use" method="_on_timer_timeout"]
-[connection signal="timeout" from="Drawer2/use/Timer" to="Drawer1/use" method="_on_timer_timeout"]
-[connection signal="timeout" from="Drawer3/use/Timer" to="Drawer3/use" method="_on_timer_timeout"]
-[connection signal="timeout" from="Drawer4/use/Timer" to="Drawer4/use" method="_on_timer_timeout"]
-
+[editable path="Drawer1/interactive_object"]
 [editable path="Drawer2/interactive_object"]
 [editable path="Drawer3/interactive_object"]
 [editable path="Drawer4/interactive_object"]
