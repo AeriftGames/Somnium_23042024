@@ -1,89 +1,60 @@
-extends Control
+class_name item_inspect extends Node3D
+@icon("res://core_systems/item_inspect/item_inspect_icon.svg")
 
-var rotating: bool = false
-var prev_mouse_position
-var next_mouse_position
-var player
-var inspect_node
-var isNowInteract = false
-var item_name_label
-var item_description_label
-var active_item
-var description_active = false
-var spawn_animation_finished = false
-var facing_front_text = false #TODO
+## A GDSCript template used for items that can be TODO
+##
+## A more detailes comment TODO
+
+## Variable used for interacting with interactive_object required for interaction.
+var node_interact: Node
+## The object hat inicialized interaction (should be player)
+var passed_object: Node
+## Used for checking if item is being interacted at this moment
+var isNowInteract: bool = false
+## Item name used for displaying item name in interaction
+@export var item_name: String = "postcard_test"
+## Used for displaying action name when look at (Pick up, Use, ..)
+@export var item_interaction_name: String = "Inspect"
+## TODO
+@export var item_inspect_description: String = "1235"
+## Combines interaction names and item name for final tooltip
+var item_interaction: String
+## Node to display on subviewport
+var inspect_node: Resource
+## Player node
+var player_inspect: Node
+##
+@export var sfx = load("res://objects/read/paper_test/page_flip.wav")
 
 
 func _ready():
-	self.hide()
-	$Control.hide()
-	look_changed(true)
+	node_interact = $interactive_object
+	item_interaction = item_interaction_name + " " + item_name
+	inspect_node = load("res://objects/read/postcard_test/paper_test_view.tscn")
 
-
-func _process(delta):
-	var texture = $SubViewport.get_texture()
-	$Sprite2D.texture = texture
-	_used(delta)
-
-
-func inspect(state, item):
-	if state:
-		self.show()
-		var r = $SubViewport.create_view(item)
-		inspect_node = r
+## Logic of the item being used
+func _used():
+	if isNowInteract == false:
+		player_inspect = self.get_node("/root/worldlevel/FPSCharacter_Interaction/Item_inspect")
+		#$AudioStreamPlayer.play()
 		isNowInteract = true
-		active_item = item
-		$spawn_animation.start(0.4)
+		passed_object.SetInputEnable(false)
+		player_inspect.inspect(true, self, false)
 
+## Logic of the leaving interaction
+func _used_quit():
+	passed_object.SetInputEnable(true)
+	passed_object = null
+	isNowInteract = false
 
-func _show_description(state = false):
-	item_name_label = self.get_node("/root/worldlevel/FPSCharacter_Interaction/Item_inspect/Control/item_name")
-	item_description_label = self.get_node("/root/worldlevel/FPSCharacter_Interaction/Item_inspect/Control/item_description")
-	if description_active == false and state == true:
-		description_active = true
-		$Control.show()
-		item_name_label.text = active_item.item_name
-		item_description_label.text = active_item.item_inspect_description
-	else:
-		description_active = false
-		$Control.hide()
-		item_name_label.text = ""
-		item_description_label.text = ""
+## Special function required for interaction between GDScript and C#
+func message_update():
+	var msg:String = node_interact.msgObject.GetMessage()
+	if msg == "msg_get_use_action_text":
+		node_interact.msgObject.SetStringData(item_interaction)
+	if msg == "msg_get_interactive_object_name":
+		node_interact.msgObject.SetStringData("placeholder")
+	if msg == "msg_use_action":
+		passed_object = node_interact.msgObject.GetNodeData()
+		self._used()
 
-
-func _used(delta):
-	if spawn_animation_finished and isNowInteract:
-		if (Input.is_action_just_pressed("Rotate")):
-			rotating = true
-			prev_mouse_position = get_viewport().get_mouse_position()
-		if (Input.is_action_just_released("Rotate")):
-			rotating = false
-		if rotating == true:
-			next_mouse_position = get_viewport().get_mouse_position()
-			inspect_node.rotate_y((next_mouse_position.x - prev_mouse_position.x) * 1 * delta)
-			inspect_node.rotate_z(-(next_mouse_position.y - prev_mouse_position.y) * 1 * delta)
-			prev_mouse_position = next_mouse_position
-
-
-func look_changed(state):
-	facing_front_text = state
-	if state:
-		$VBoxContainer/Label2.show()
-	else:
-		$VBoxContainer/Label2.hide()
-		_show_description(false)
-
-
-func _input(event):
-	if event.is_action_pressed("Jump") and isNowInteract:
-		active_item._used_quit()
-		isNowInteract = false
-		inspect_node.queue_free()
-		self.hide()
-		_show_description(false)
-	elif event.is_action_pressed("ShowText") and isNowInteract and facing_front_text:
-		_show_description(true)
-
-
-func _on_spawn_animation_timeout():
-	spawn_animation_finished = true

@@ -2,8 +2,6 @@ extends SubViewport
 
 
 var tween_position: Tween
-var facing_front_text: bool = false
-
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

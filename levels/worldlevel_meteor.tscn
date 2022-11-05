@@ -1,6 +1,6 @@
-[gd_scene load_steps=38 format=3 uid="uid://dtgef503qnt2"]
+[gd_scene load_steps=39 format=3 uid="uid://dxa60v0imq34d"]
 
-[ext_resource type="ArrayOccluder3D" uid="uid://c65wc0yeg3cak" path="res://levels/world_level_rooms/worldlevel_rooms_test.occ" id="1_48aky"]  
+[ext_resource type="ArrayOccluder3D" uid="uid://c65wc0yeg3cak" path="res://levels/world_level_rooms/worldlevel_rooms_test.occ" id="1_48aky"]
 [ext_resource type="PackedScene" uid="uid://ck8mt4y4gfqmk" path="res://placeholders/modular_walls/ground_large.tscn" id="1_vcfbv"]
 [ext_resource type="PackedScene" uid="uid://clgsga4ty4mrp" path="res://placeholders/modular_walls/wall_normal.tscn" id="4_yawcu"]
 [ext_resource type="PackedScene" uid="uid://crjyudrh814yq" path="res://placeholders/modular_walls/wall_small_corner_simple_l.tscn" id="5_assn5"]
@@ -12,15 +12,13 @@
 [ext_resource type="Texture2D" uid="uid://0n0dx7ov4qi6" path="res://textures/blood_decal_test.png" id="11_tv71u"]
 [ext_resource type="PackedScene" uid="uid://cq3ypp2ir6mew" path="res://objects/light/omni_light_3d_flashing.tscn" id="14_cmtqf"]
 [ext_resource type="PackedScene" uid="uid://bet3idvc4fg0n" path="res://placeholders/PlayerStart.tscn" id="15_t3a5n"]
-[ext_resource type="PackedScene" uid="uid://dvxuahjqkihcc" path="res://objects/read/paper_test/paper_test.tscn" id="16_vb32x"]
-[ext_resource type="PackedScene" uid="uid://d2ypynxp1n4ps" path="res://objects/furniture/cabinet.tscn" id="18_h8riu"]
 [ext_resource type="PackedScene" uid="uid://fboedkub5lhd" path="res://core_systems/item_spawner/item_spawner.tscn" id="19_ao0g5"]
 [ext_resource type="PackedScene" uid="uid://ukqaj32a10wx" path="res://objects/keypad/keypad.tscn" id="19_mnkjc"]
 [ext_resource type="PackedScene" uid="uid://df3v88u2getl5" path="res://objects/door/bunker_door.tscn" id="20_qquad"]
 [ext_resource type="PackedScene" uid="uid://djuv0voeaxmos" path="res://objects/light/light_celling.tscn" id="21_7dcuu"]
 [ext_resource type="Texture2D" uid="uid://di51tk58naot7" path="res://placeholders/posters/20190607_soviet-space-program-propaganda-poster-28.jpg" id="21_m6yv4"]
 [ext_resource type="Texture2D" uid="uid://cbbhk2hgk83yv" path="res://placeholders/posters/soviet-space-program-propaganda-poster-1.jpg" id="22_rb3g8"]
-[ext_resource type="PackedScene" uid="uid://bo6yg2p0cf168" path="res://objects/read/postcard_test/postcard.tscn" id="23_ua0lw"]
+[ext_resource type="PackedScene" uid="uid://bv2lie0sokewl" path="res://objects/read/postcard_test/postcard.tscn" id="23_ua0lw"]
 [ext_resource type="PackedScene" uid="uid://c6u5kj6ckrar1" path="res://particles/dust/dust_particle.tscn" id="23_xvvhf"]
 [ext_resource type="PackedScene" uid="uid://b4aflmodj0wny" path="res://models/airvents/vent_turn.tscn" id="24_4cko2"]
 [ext_resource type="PackedScene" uid="uid://ed06oymnfx7m" path="res://objects/boxes/carry_box.tscn" id="25_3ywjd"]
@@ -28,7 +26,10 @@
 [ext_resource type="PackedScene" uid="uid://cmc2d1am8ff6j" path="res://objects/misc/food_can.tscn" id="26_usm0v"]
 [ext_resource type="PackedScene" uid="uid://16d10e0sx2rr" path="res://objects/pipes/pipecurve.glb" id="27_ckge2"]
 [ext_resource type="PackedScene" uid="uid://d1fahaee5i3x6" path="res://objects/pipes/pipestraight.glb" id="28_bnr13"]
-[ext_resource type="PackedScene" uid="uid://bj5geey0opre6" path="res://objects/furniture/cabinet_small.tscn" id="29_ebuaj"]
+[ext_resource type="PackedScene" uid="uid://d5wc26cy4c6o" path="res://objects/furniture/cabinet_small.tscn" id="29_ebuaj"]
+[ext_resource type="PackedScene" path="res://objects/door/door.tscn" id="29_rc6hx"]
+[ext_resource type="PackedScene" path="res://objects/furniture/cabinet_new.tscn" id="30_vtat2"]
+[ext_resource type="PackedScene" uid="uid://cokykrpxx7lmy" path="res://objects/battery/battery.tscn" id="31_rjyuk"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_nrkwj"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -402,13 +403,7 @@ autoplay = true
 [node name="PlayerStart" parent="." instance=ExtResource("15_t3a5n")]
 transform = Transform3D(0.996673, 0, -0.0815037, 0, 1, 0, 0.0815037, 0, 0.996673, -6.57843, 0.65216, -9.58071)
 
-[node name="paper_test" parent="." instance=ExtResource("16_vb32x")]
-transform = Transform3D(-8.74228e-09, 0.2, -8.74228e-09, 4.23516e-23, -8.74228e-09, -0.2, -0.2, -8.74228e-09, 3.82137e-16, -3.8958, 1.3912, 0)
-
-[node name="cabinet" parent="." instance=ExtResource("18_h8riu")]
-transform = Transform3D(-0.5, 0, 4.37114e-08, 0, 0.5, 0, -4.37114e-08, 0, -0.5, -2.68144, 0.53548, -8.71315)
-
-[node name="postcard" parent="cabinet" instance=ExtResource("23_ua0lw")]
+[node name="cabinet@postcard" parent="." instance=ExtResource("23_ua0lw")]
 transform = Transform3D(-1.31134e-08, -0.3, 1.31134e-08, 0, -1.31134e-08, -0.3, 0.3, -1.31134e-08, 5.73206e-16, 0.525343, 0.405757, 1.32762)
 
 [node name="item_spawner" parent="." instance=ExtResource("19_ao0g5")]
@@ -484,12 +479,6 @@ transform = Transform3D(0.549737, 0, 0, 0, -4.37114e-08, -0.707923, 0, 1, -3.094
 material_override = SubResource("StandardMaterial3D_0gllx")
 mesh = SubResource("PlaneMesh_ebwak")
 
-[node name="bunker_door2" parent="." instance=ExtResource("20_qquad")]
-transform = Transform3D(0, 0, 0.6, 0, 0.66, 0, -0.66, 0, 0, -3.5, 0.7, -5.1)
-
-[node name="bunker_door3" parent="." instance=ExtResource("20_qquad")]
-transform = Transform3D(0, 0, 0.6, 0, 0.66, 0, -0.66, 0, 0, -3.5, 0.7, 5)
-
 [node name="dust_particle" parent="." instance=ExtResource("23_xvvhf")]
 transform = Transform3D(0.9, 0, 0, 0, 0.3, 0, 0, 0, 0.5, 4, 1.6, 7)
 
@@ -508,6 +497,12 @@ transform = Transform3D(-0.0426496, 0.000148463, 0.198591, 0.00225565, 0.199996,
 [node name="food_can" parent="." instance=ExtResource("26_usm0v")]
 transform = Transform3D(0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, -6.68108, 1.18107, -11.4401)
 
+[node name="food_can2" parent="." instance=ExtResource("26_usm0v")]
+transform = Transform3D(0.00150774, -0.0499773, 0, 0.0499773, 0.00150774, 0, 0, 0, 0.05, -7.54703, 0.169198, -9.73218)
+
+[node name="food_can3" parent="." instance=ExtResource("26_usm0v")]
+transform = Transform3D(0.00136156, -0.045132, -0.0214767, 0.0499773, 0.00150774, 0, 0.000647624, -0.0214669, 0.0451525, -7.6102, 0.169198, -9.57414)
+
 [node name="pipecurve" parent="." instance=ExtResource("27_ckge2")]
 transform = Transform3D(-4.47035e-08, 0, 1, 0, 1, 0, -1, 0, -4.47035e-08, -7.41576, 2.46886, 0.756695)
 
@@ -525,3 +520,42 @@ transform = Transform3D(-1.31134e-08, 0, -0.3, 0, 0.3, 0, 0.3, 0, -1.31134e-08, 
 
 [node name="cabinet_small4" parent="." instance=ExtResource("29_ebuaj")]
 transform = Transform3D(-1.31134e-08, 0, -0.3, 0, 0.3, 0, 0.3, 0, -1.31134e-08, -7.521, 0.3, -11.535)
+
+[node name="wall_doors_conic6" parent="." instance=ExtResource("7_n62yw")]
+transform = Transform3D(0.5, 0, 6.55671e-08, 0, 0.5, 0, -6.55671e-08, 0, 0.5, -3.93232, 0, -5.59857)
+
+[node name="door2" parent="." instance=ExtResource("29_rc6hx")]
+transform = Transform3D(-0.6, 0, -5.24536e-08, 0, 0.6, 0, 5.24536e-08, 0, -0.6, -4.05786, -0.508816, -6.83804)
+
+[node name="door3" parent="." instance=ExtResource("29_rc6hx")]
+transform = Transform3D(-0.6, 0, -5.24536e-08, 0, 0.6, 0, 5.24536e-08, 0, -0.6, -4.00621, -0.543687, 3.23242)
+
+[node name="cabinet_new" parent="." instance=ExtResource("30_vtat2")]
+transform = Transform3D(-0.4, 0, -3.49691e-08, 0, 0.4, 0, 3.49691e-08, 0, -0.4, -2.4996, 0.703549, -8.88343)
+
+[node name="postcard" parent="cabinet_new" instance=ExtResource("23_ua0lw")]
+transform = Transform3D(-1.42047e-08, -0.119817, -0.275034, 5.23736e-09, 0.275034, -0.119817, 0.3, -1.04747e-08, -1.09309e-08, 1.24636, 0.179191, 1.0084)
+
+[node name="food_can" parent="cabinet_new" instance=ExtResource("26_usm0v")]
+transform = Transform3D(0.15, 0, 2.66454e-15, 0, 0.15, 0, -2.66454e-15, 0, 0.15, 1.00348, 0.0906687, 0.994547)
+
+[node name="food_can2" parent="cabinet_new" instance=ExtResource("26_usm0v")]
+transform = Transform3D(0.15, 0, 2.66454e-15, 0, 0.15, 0, -2.66454e-15, 0, 0.15, 1.00348, 0.0906687, 0.670708)
+
+[node name="food_can3" parent="cabinet_new" instance=ExtResource("26_usm0v")]
+transform = Transform3D(0.15, 0, 2.66454e-15, 0, 0.15, 0, -2.66454e-15, 0, 0.15, 1.00348, 0.398904, 0.85059)
+
+[node name="food_can4" parent="cabinet_new" instance=ExtResource("26_usm0v")]
+transform = Transform3D(0.15, 0, 2.66454e-15, 0, 0.15, 0, -2.66454e-15, 0, 0.15, 1.00348, 0.131817, -1.13212)
+
+[node name="battery" parent="cabinet_new" instance=ExtResource("31_rjyuk")]
+transform = Transform3D(0.1, 0, 2.66454e-15, 0, 0.1, 0, -2.66454e-15, 0, 0.1, 1.53558, 0, 0)
+
+[node name="battery3" parent="cabinet_new" instance=ExtResource("31_rjyuk")]
+transform = Transform3D(0.1, -5.62691e-09, 2.05159e-09, 5.62691e-09, 0.0765326, -0.0643643, 2.05158e-09, 0.0643643, 0.0765326, 0.802648, 1.46512, 0.990042)
+
+[node name="battery2" parent="cabinet_new" instance=ExtResource("31_rjyuk")]
+transform = Transform3D(-0.00121298, 0.0999926, -8.84832e-09, -0.0999926, -0.00121298, -8.74164e-09, -8.84832e-09, 8.74163e-09, 0.1, 0.802648, 1.47781, 1.24188)
+
+[node name="battery" parent="." instance=ExtResource("31_rjyuk")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -4.69414, 0.290899, -11.5217)

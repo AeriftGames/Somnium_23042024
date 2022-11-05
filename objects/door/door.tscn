@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="PackedScene" uid="uid://t1ca3sj7e76i" path="res://objects/door/door.glb" id="1_gfes1"]
+[ext_resource type="Script" path="res://objects/door/door.gd" id="2_kioif"]
+[ext_resource type="PackedScene" uid="uid://dbnevtbu1g7uy" path="res://core_systems/interactive_system/interactive_object.tscn" id="3_i6745"]
+[ext_resource type="Script" path="res://objects/door/use_door.gd" id="4_gp7nw"]
+
+[node name="door" instance=ExtResource("1_gfes1")]
+script = ExtResource("2_kioif")
+
+[node name="Cube" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.931006, -1.02651)
+
+[node name="Cylinder" parent="." index="1"]
+transform = Transform3D(0, 0.106955, 0, -0.106955, 0, 0, 0, 0, 0.106955, 0.139605, 1.55169, -1.92096)
+
+[node name="Cube001" parent="." index="2"]
+transform = Transform3D(0.200413, 0, 0, 0, 0.200413, 0, 0, 0, 0.200413, 0.0859855, 1.55152, -1.93616)
+
+[node name="interactive_object" parent="." index="3" instance=ExtResource("3_i6745")]
+
+[node name="use" type="Node3D" parent="." index="4"]
+script = ExtResource("4_gp7nw")
