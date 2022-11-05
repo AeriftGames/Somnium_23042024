@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Linq;
+using static Godot.TextServer;
 
 public partial class ObjectCamera : Node3D
 {
@@ -91,57 +92,48 @@ public partial class ObjectCamera : Node3D
 
     public void SetActualLean(ELeanType newLeanType)
     {
+        // ziskame dostupnost funkci(WalkingEffects) z naseho zakladniho charactera
         FPSCharacter_WalkingEffects characterWalkingEffects = (FPSCharacter_WalkingEffects)ownerCharacter;
         if (characterWalkingEffects == null) return;
 
-        Vector3 finalLeanPos = TestRaycastLeansAndReturnMaxDistance(newLeanType);
+        // vypocet nove pozice pro aktualni leaning
+        Vector3 finalLeanPos = CalculateLeanPositionWithRaycasts(newLeanType, 
+            characterWalkingEffects.LeanRaycastsTestLength,characterWalkingEffects.LeanMaxPositionDistanceX,
+            characterWalkingEffects.LeanMinCameraDistanceFromWall);
 
-        switch (newLeanType)
-        {
-            case ELeanType.Center:
-                {
-                    /*
-                    tweenLeanRot = CreateTween();
-                    tweenLeanRot.TweenProperty(NodeLean, "rotation", LerpPos_LeanCenter.Rotation, tweenSpeed).SetEase(Tween.EaseType.OutIn);
-                    */
-                    tweenLeanPos = CreateTween();
-                    tweenLeanPos.TweenProperty(NodeLean, "position", finalLeanPos, characterWalkingEffects.LeanPositionTweenTime).SetEase(Tween.EaseType.OutIn);
-                    
-                    break;
-                }
-            case ELeanType.Left:
-                {   /*
-                    tweenLeanRot = CreateTween();
-                    tweenLeanRot.TweenProperty(NodeLean, "rotation", LerpPos_LeanLeft.Rotation, tweenSpeed).SetEase(Tween.EaseType.OutIn);
-                    */
-                    tweenLeanPos = CreateTween();
-                    tweenLeanPos.TweenProperty(NodeLean, "position", finalLeanPos, characterWalkingEffects.LeanPositionTweenTime).SetEase(Tween.EaseType.OutIn);
-                    
-                    break;
-                }
-            case ELeanType.Right:
-                {   /*
-                    tweenLeanRot = CreateTween();
-                    tweenLeanRot.TweenProperty(NodeLean, "rotation", LerpPos_LeanRight.Rotation, tweenSpeed).SetEase(Tween.EaseType.OutIn);
-                    */
-                    tweenLeanPos = CreateTween();
-                    tweenLeanPos.TweenProperty(NodeLean, "position", finalLeanPos, characterWalkingEffects.LeanPositionTweenTime).SetEase(Tween.EaseType.OutIn);
-                    
-                    break;
-                }
-        }
+        // vypocet nove rotace
+        Vector3 finalLeanRot = CalculateLeanRotation(newLeanType,finalLeanPos,
+            characterWalkingEffects.LeanMaxPositionDistanceX,characterWalkingEffects.LeanMaxRotateDistanceZ);
+
+        // Rot
+        tweenLeanRot = CreateTween();
+        tweenLeanRot.TweenProperty(NodeLean, "rotation", finalLeanRot,
+            characterWalkingEffects.LeanPositionTweenTime).SetEase(Tween.EaseType.OutIn);
+        
+        // Pos
+        tweenLeanPos = CreateTween();
+        tweenLeanPos.TweenProperty(NodeLean, "position", finalLeanPos,
+            characterWalkingEffects.LeanPositionTweenTime).SetEase(Tween.EaseType.OutIn);
+    
     }
 
     public ELeanType GetActualLean() { return ActualLean; }
 
-    private Vector3 TestRaycastLeansAndReturnMaxDistance(ELeanType newLeanType)
+    private Vector3 CalculateLeanPositionWithRaycasts(ELeanType newLeanType,float newRayLength,
+        float newLeanMaxPositionX,float newLeanMinDistanceFromWall)
     {
-        FPSCharacter_WalkingEffects characterWalkingEffects = (FPSCharacter_WalkingEffects)ownerCharacter;
-        if (characterWalkingEffects == null) return Vector3.Zero;
+        // provede raycasty detekci kolize v pozadovanem smeru pro vyklon,
+        // pokud nejaky kolizni bod je nastavujeme podle vzdalenosti (center <-> collision_point) novou pozici,
+        // ktera prakticky snizuje puvodni maximalni rozsah leaningu.
+
+        // pokud zadny kolizni bod neni, pouzijeme v pozadovanem smeru plny rozsah leaningu
+        // ve finale tedy vracime vypocitany novy bod leaningu
 
         Vector3 returnedVector = Vector3.Zero;
         float direction_x = 0;
-        float ray_length = characterWalkingEffects.LeanRaycastsTestLength;
+        float ray_length = newRayLength;
+        float leanMaxPositionX = newLeanMaxPositionX;
+        float leanMinCameraDistanceFromWall = newLeanMinDistanceFromWall;
 
         switch (newLeanType)
         {
@@ -154,14 +146,14 @@ public partial class ObjectCamera : Node3D
                 {
                     // raycast smer po ose x doleva
                     direction_x = -1;
-                    returnedVector = new Vector3(characterWalkingEffects.LeanPositionXMax * direction_x, 0, 0);
+                    returnedVector = new Vector3(leanMaxPositionX * direction_x, 0, 0);
                     break;
                 }
             case ELeanType.Right:
                 {
                     // raycast smer po ose x doprava
                     direction_x = 1;
-                    returnedVector = new Vector3(characterWalkingEffects.LeanPositionXMax * direction_x, 0, 0);
+                    returnedVector = new Vector3(leanMaxPositionX * direction_x, 0, 0);
                     break;
                 }
         }
@@ -177,13 +169,39 @@ public partial class ObjectCamera : Node3D
             if (hitResult.isHit)
             {
                 float hitLength = NodeRotX.GlobalPosition.DistanceTo(hitResult.HitPosition) -
-                    characterWalkingEffects.LeanMinCameraDistanceFromWall;
+                    leanMinCameraDistanceFromWall;
 
                 GameMaster.GM.GetDebugHud().CustomLabelUpdateText(4, this, "raycast for lean: " + hitLength);
 
                 returnedVector = LerpPos_LeanCenter.Position +
                     (NodeRotX.Transform.basis.x.Normalized() * (hitLength * direction_x));
             }
+        }
+
+        return returnedVector;
+    }
+
+    private Vector3 CalculateLeanRotation(ELeanType newLeanType, Vector3 newActualLeanPos,float newMaxLeanPosX, float newMaxLeanRotZ)
+    {
+        Vector3 returnedVector = Vector3.Zero;
+
+        switch (newLeanType)
+        {
+            case ELeanType.Center:
+                {
+                    returnedVector = Vector3.Zero;
+                    break;
+                }
+            case ELeanType.Left:
+                {
+                    returnedVector.z = newMaxLeanRotZ;
+                    break;
+                }
+            case ELeanType.Right:
+                {
+                    returnedVector.z = -newMaxLeanRotZ;
+                    break;
+                }
         }
 
         return returnedVector;
