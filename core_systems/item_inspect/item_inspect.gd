@@ -20,17 +20,22 @@ var isNowInteract: bool = false
 ## Combines interaction names and item name for final tooltip
 var item_interaction: String
 ## Node to display on subviewport
-@export  var inspect_node: PackedScene
+@export  var inspect_node_path: String
 ## Player node
 var player_inspect: Node
 ##
 @export var sfx = load("res://objects/read/paper_test/page_flip.wav")
+var inspect_node
 
 
 func _ready():
 	node_interact = $interactive_object
 	item_interaction = item_interaction_name + " " + item_name
-	#inspect_node = load("res://objects/read/postcard_test/paper_test_view.tscn")
+	print("LOADING")
+	print(inspect_node)
+	inspect_node = load(inspect_node_path)
+	print(inspect_node)
+	print("LOADED")
 
 ## Logic of the item being used
 func _used():
