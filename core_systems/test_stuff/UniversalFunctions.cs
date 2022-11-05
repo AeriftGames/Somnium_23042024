@@ -11,7 +11,7 @@ public partial class UniversalFunctions
         public Node HitNode;
     }
 
-    static public HitResult IsSimpleRaycastHit(Node3D owner, Vector3 from, Vector3 to)
+    static public HitResult IsSimpleRaycastHit(Node3D owner, Vector3 from, Vector3 to, uint collisionMask)
     {
         HitResult result = new HitResult();
 
@@ -21,6 +21,7 @@ public partial class UniversalFunctions
             PhysicsRayQueryParameters3D rayParam = new PhysicsRayQueryParameters3D();
             rayParam.From = from;
             rayParam.To = to;
+            rayParam.CollisionMask = collisionMask;
 
             var rayResult = directSpace.IntersectRay(rayParam);
             if (rayResult.Count > 0)

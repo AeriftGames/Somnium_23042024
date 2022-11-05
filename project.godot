@@ -135,7 +135,8 @@ leanRight={
 [layer_names]
 
 3d_physics/layer_1="worldphysics_layer"
-3d_physics/layer_2="interactive_layer"
+3d_physics/layer_2="player_layer"
+3d_physics/layer_3="interactive_layer"
 
 [physics]
 

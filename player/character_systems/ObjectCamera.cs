@@ -52,8 +52,6 @@ public partial class ObjectCamera : Node3D
 	{
         if (ownerCharacter.IsInputEnable())
             UpdateCameraLook(_MouseMotion, delta);
-
-        RaycastTestForLean();
     }
 
     // Hadle inout for mouse
@@ -96,33 +94,35 @@ public partial class ObjectCamera : Node3D
 
     public void SetActualLean(ELeanType newLeanType)
     {
+        Vector3 finalLeanPos = TestRaycastLeansAndReturnMaxDistance(newLeanType);
+
         switch (newLeanType)
         {
             case ELeanType.Center:
                 {
-                    tweenLeanRot = CreateTween();
-                    tweenLeanRot.TweenProperty(NodeLean, "rotation", LerpPos_LeanCenter.Rotation, tweenSpeed).SetEase(Tween.EaseType.OutIn);
+                    /*tweenLeanRot = CreateTween();
+                    tweenLeanRot.TweenProperty(NodeLean, "rotation", LerpPos_LeanCenter.Rotation, tweenSpeed).SetEase(Tween.EaseType.OutIn);*/
 
                     tweenLeanPos = CreateTween();
-                    tweenLeanPos.TweenProperty(NodeLean, "position", LerpPos_LeanCenter.Position, tweenSpeed).SetEase(Tween.EaseType.OutIn);
+                    tweenLeanPos.TweenProperty(NodeLean, "position", finalLeanPos, tweenSpeed).SetEase(Tween.EaseType.OutIn);
                     break;
                 }
             case ELeanType.Left:
                 {
-                    tweenLeanRot = CreateTween();
-                    tweenLeanRot.TweenProperty(NodeLean, "rotation", LerpPos_LeanLeft.Rotation, tweenSpeed).SetEase(Tween.EaseType.OutIn);
+                    /*tweenLeanRot = CreateTween();
+                    tweenLeanRot.TweenProperty(NodeLean, "rotation", LerpPos_LeanLeft.Rotation, tweenSpeed).SetEase(Tween.EaseType.OutIn);*/
 
                     tweenLeanPos = CreateTween();
-                    tweenLeanPos.TweenProperty(NodeLean, "position", LerpPos_LeanLeft.Position, tweenSpeed).SetEase(Tween.EaseType.OutIn);
+                    tweenLeanPos.TweenProperty(NodeLean, "position", finalLeanPos, tweenSpeed).SetEase(Tween.EaseType.OutIn);
                     break;
                 }
             case ELeanType.Right:
                 {
-                    tweenLeanRot = CreateTween();
-                    tweenLeanRot.TweenProperty(NodeLean, "rotation", LerpPos_LeanRight.Rotation, tweenSpeed).SetEase(Tween.EaseType.OutIn);
+                    /*tweenLeanRot = CreateTween();
+                    tweenLeanRot.TweenProperty(NodeLean, "rotation", LerpPos_LeanRight.Rotation, tweenSpeed).SetEase(Tween.EaseType.OutIn);*/
 
                     tweenLeanPos = CreateTween();
-                    tweenLeanPos.TweenProperty(NodeLean, "position", LerpPos_LeanRight.Position, tweenSpeed).SetEase(Tween.EaseType.OutIn);
+                    tweenLeanPos.TweenProperty(NodeLean, "position", finalLeanPos, tweenSpeed).SetEase(Tween.EaseType.OutIn);
                     break;
                 }
         }
@@ -130,59 +130,57 @@ public partial class ObjectCamera : Node3D
 
     public ELeanType GetActualLean() { return ActualLean; }
 
-    public void RaycastTestForLean()
+    public Vector3 TestRaycastLeansAndReturnMaxDistance(ELeanType newLeanType)
     {
         float ray_length = 0.5f;
 
-        // do jedne strany
-        UniversalFunctions.HitResult leftRayHit1 = UniversalFunctions.IsSimpleRaycastHit(this,
-            NodeLean.GlobalPosition,
-            (NodeLean.GlobalPosition + new Vector3(0, 0, 0.0f)) -
-            NodeRotX.GlobalTransform.basis.x.Normalized() * ray_length);
+        UniversalFunctions.HitResult hitResult;
+        hitResult.isHit = false;
+        hitResult.HitPosition = Vector3.Zero;
 
-        // do druhe strany
-        UniversalFunctions.HitResult rightRayHit1 = UniversalFunctions.IsSimpleRaycastHit(this,
-            NodeLean.GlobalPosition,
-            (NodeLean.GlobalPosition + new Vector3(0, 0, 0.0f)) +
-            NodeRotX.GlobalTransform.basis.x.Normalized() * ray_length);
-
-
-        //
-        bool left;
-        if (leftRayHit1.isHit /*|| leftRayHit2.isHit || leftRayHit3.isHit*/)
-            left = true;
-        else
-            left = false;
-
-        bool right;
-        if (rightRayHit1.isHit /*|| rightRayHit2.isHit || rightRayHit3.isHit*/)
-            right = true;
-        else
-            right = false;
-
-        if(left)
+        switch (newLeanType)
         {
-            float hit_length = NodeLean.GlobalPosition.DistanceTo(leftRayHit1.HitPosition);
-            GameMaster.GM.GetDebugHud().CustomLabelUpdateText(4, this, "leftRayHit: " + hit_length);
-            GD.Print(leftRayHit1.HitNode.Name);
-        }
-        else
-        {
-            GameMaster.GM.GetDebugHud().CustomLabelUpdateText(4, this, "leftRayHit: 0 ");
-        }
+            case ELeanType.Center:
+                {
+                    return LerpPos_LeanCenter.Position;
+                }
+            case ELeanType.Left:
+                {
+                    hitResult = UniversalFunctions.IsSimpleRaycastHit(this,
+                           NodeLean.GlobalPosition,
+                           NodeLean.GlobalPosition + (NodeLean.GlobalTransform.basis.x.Normalized() * -ray_length),
+                           1);
 
-        if(right)
-        {
-            float hit_length = NodeLean.GlobalPosition.DistanceTo(rightRayHit1.HitPosition);
-            GameMaster.GM.GetDebugHud().CustomLabelUpdateText(5, this, "rightRayHit: " + hit_length);
-            GD.Print(rightRayHit1.HitNode.Name);
+                    if (hitResult.isHit)
+                    {
+                        GameMaster.GM.Log.WriteLog(this,LogSystem.ELogMsgType.INFO,"hitPos: " + hitResult.HitPosition);
+
+                        float hitLength = NodeLean.GlobalPosition.DistanceTo(hitResult.HitPosition);
+                        GameMaster.GM.GetDebugHud().CustomLabelUpdateText(4, this, "raycast for lean: " + hitLength);
+                        return (LerpPos_LeanCenter.Position + (NodeLean.Transform.basis.x.Normalized() * -hitLength));
+                    }
+                    else
+                        return LerpPos_LeanLeft.Position;
+                }
+            case ELeanType.Right:
+                {
+                    hitResult = UniversalFunctions.IsSimpleRaycastHit(this,
+                         NodeLean.GlobalPosition,
+                         NodeLean.GlobalPosition + (NodeLean.GlobalTransform.basis.x.Normalized() * ray_length),
+                         1);
+
+                    if (hitResult.isHit)
+                    {
+                        GameMaster.GM.Log.WriteLog(this, LogSystem.ELogMsgType.INFO, "hitPos: " + hitResult.HitPosition);
+
+                        float hitLength = NodeLean.GlobalPosition.DistanceTo(hitResult.HitPosition);
+                        GameMaster.GM.GetDebugHud().CustomLabelUpdateText(4, this, "raycast for lean: " + hitLength);
+                        return (LerpPos_LeanCenter.Position + (NodeLean.Transform.basis.x.Normalized() * hitLength));
+                    }
+                    else
+                        return LerpPos_LeanRight.Position;
+                }
         }
-        else
-        {
-            GameMaster.GM.GetDebugHud().CustomLabelUpdateText(5, this, "rightRayHit: 0 ");
-        }
-        /*
-        GameMaster.GM.GetDebugHud().CustomLabelUpdateText(4, this, "leftRayHit: " + left);
-        GameMaster.GM.GetDebugHud().CustomLabelUpdateText(5, this, "rightRayHit: " + right);*/
+        return LerpPos_LeanLeft.Position;
     }
 }
