@@ -3,13 +3,15 @@ using System;
 
 public partial class ObjectHands : Node3D
 {
-	// Called when the node enters the scene tree for the first time.
+	public Node3D objectFlashlight = null;
+
 	public override void _Ready()
 	{
+		objectFlashlight = GetNode<Node3D>("ObjectFlashlight");
 	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+
 	}
 }

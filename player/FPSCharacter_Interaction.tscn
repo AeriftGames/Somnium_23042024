@@ -3,7 +3,9 @@
 [ext_resource type="PackedScene" uid="uid://2b8vuef2k4is" path="res://player/FPSCharacter_WalkingEffects.tscn" id="1_0ipjt"]
 [ext_resource type="Script" path="res://player/FPSCharacter_Interaction.cs" id="2_fmih3"]
 [ext_resource type="Script" path="res://player/BasicHud.cs" id="3_etvvy"]
+[ext_resource type="AudioStream" uid="uid://bq620yjstjdl" path="res://audio/audio_streams/flashlight/173420__lightyarn__flashlight-on.wav" id="3_hi7iy"]
 [ext_resource type="Script" path="res://core_systems/DebugHud.cs" id="4_75mlc"]
+[ext_resource type="AudioStream" uid="uid://com3v7we27wvm" path="res://audio/audio_streams/flashlight/173419__lightyarn__flashlight-off.wav" id="4_wmi65"]
 [ext_resource type="PackedScene" uid="uid://fpjkcaij44dx" path="res://core_systems/item_inspect/item_inspect.tscn" id="5_iw50w"]
 [ext_resource type="Script" path="res://ui/Report_issue.gd" id="6_nbvpx"]
 [ext_resource type="PackedScene" uid="uid://bctrg21138lx" path="res://ui/report_bug.tscn" id="7_oxteu"]
@@ -16,16 +18,14 @@ shadow_size = 3
 
 [node name="FPSCharacter_Interaction" instance=ExtResource("1_0ipjt")]
 wall_min_slide_angle = 0.0
-floor_block_on_wall = false
 script = ExtResource("2_fmih3")
 LengthInteractRay = 5.0
+AudioFlashlight_On = ExtResource("3_hi7iy")
+AudioFlashlight_Off = ExtResource("4_wmi65")
+LeanMultiRaycastDetect = true
+LeanMultiRaycastSteps = 0.15
 
 [node name="HolderHands" type="Node3D" parent="HeadMain/HeadGimbalA/HeadGimbalB/HeadHolderCamera" index="0"]
-
-[node name="OmniLight3D" type="OmniLight3D" parent="HeadMain" index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-omni_range = 0.7
-omni_attenuation = 2.34253
 
 [node name="AudioStreamPlayer_Footsteps" parent="." index="5"]
 volume_db = -6.0
@@ -33,7 +33,9 @@ volume_db = -6.0
 [node name="AudioStreamPlayer_JumpLand" parent="." index="6"]
 volume_db = -3.0
 
-[node name="BasicHud" type="Control" parent="." index="7"]
+[node name="AudioStreamPlayer_TestItem" type="AudioStreamPlayer" parent="." index="7"]
+
+[node name="BasicHud" type="Control" parent="." index="8"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -74,9 +76,9 @@ grow_vertical = 2
 text = "use"
 horizontal_alignment = 1
 
-[node name="Item_inspect" parent="." index="8" instance=ExtResource("5_iw50w")]
+[node name="Item_inspect" parent="." index="9" instance=ExtResource("5_iw50w")]
 
-[node name="DebugHud" type="Control" parent="." index="9"]
+[node name="DebugHud" type="Control" parent="." index="10"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

@@ -11,5 +11,23 @@ script = ExtResource("1_uvf2j")
 
 [node name="NodeRotX" type="Node3D" parent="NodeRotY/GimbalLand"]
 
-[node name="Camera" type="Camera3D" parent="NodeRotY/GimbalLand/NodeRotX"]
-fov = 60.0
+[node name="NodeLean" type="Node3D" parent="NodeRotY/GimbalLand/NodeRotX"]
+
+[node name="Camera" type="Camera3D" parent="NodeRotY/GimbalLand/NodeRotX/NodeLean"]
+fov = 70.0
+
+[node name="LerpPos_LeanCenter" type="Node3D" parent="NodeRotY/GimbalLand/NodeRotX"]
+
+[node name="LerpPos_LeanLeft" type="Node3D" parent="NodeRotY/GimbalLand/NodeRotX"]
+transform = Transform3D(0.965926, -0.258819, 0, 0.258819, 0.965926, 0, 0, 0, 1, -0.4, 0, 0)
+
+[node name="LerpPos_LeanRight" type="Node3D" parent="NodeRotY/GimbalLand/NodeRotX"]
+transform = Transform3D(0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 0, 0, 1, 0.4, 0, 0)
+
+[node name="LeftFrontRayPos" type="Node3D" parent="NodeRotY/GimbalLand/NodeRotX"]
+
+[node name="LeftBackRayPos" type="Node3D" parent="NodeRotY/GimbalLand/NodeRotX"]
+
+[node name="RighFrontRayPos" type="Node3D" parent="NodeRotY/GimbalLand/NodeRotX"]
+
+[node name="RightBackRayPos" type="Node3D" parent="NodeRotY/GimbalLand/NodeRotX"]

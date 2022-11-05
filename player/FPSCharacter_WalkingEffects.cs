@@ -49,6 +49,15 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
     [Export] public AudioStream[] JumpingSounds;
     [Export] public float JumpingVolumeDB = 1.1f;
 
+    [ExportGroupAttribute("Leaning Settings")]
+    [Export] public float LeanMaxPositionDistanceX = 0.5f;
+    [Export] public float LeanMaxRotateDistanceZ = 0.25f;
+    [Export] public float LeanPositionTweenTime = 0.5f;
+    [Export] public float LeanRaycastsTestLength = 0.8f;
+    [Export] public float LeanMinCameraDistanceFromWall = 0.3f;
+    [Export] public bool LeanMultiRaycastDetect = true;
+    [Export] public float LeanMultiRaycastSteps = 0.15f;
+
     private Vector3 _LastHalfFootStepPosition = Vector3.Zero;
     private int lastIDFootstepSound = -1;
 
@@ -59,6 +68,8 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
     Godot.Timer landing_timer = new Godot.Timer();
     private float lerpHeadLandY = 0.0f;
     private float lerpHeadLandRotX = 0.0f;
+
+    // lean
 
     public override void _Ready()
     {
@@ -79,8 +90,10 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
     {
         base._Process(delta);
 
-        float a = Mathf.Snapped(ActualMovementSpeed, 0.1f);
+        UpdateInputsProcess((float) delta);
 
+        // SET CUSTOM LABEL MOVESPEED AND POSITION OF PLAYER
+        float a = Mathf.Snapped(ActualMovementSpeed, 0.1f);
         GameMaster.GM.GetDebugHud().CustomLabelUpdateText(0, this, "MoveSpeed: " + a);
         GameMaster.GM.GetDebugHud().CustomLabelUpdateText(1, this, "Position: " + GlobalPosition);
 
@@ -92,6 +105,39 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
 
         UpdateWalkHeadBobbing((float)delta);
         UpdateLandingHeadBobbing((float)delta);
+
+        UpdateLeaning((float)delta);
+    }
+
+    public void UpdateInputsProcess(double delta)
+    {
+        // hrac pozaduje lean ?
+
+        if(Input.IsActionPressed("leanLeft") && !Input.IsActionPressed("leanRight"))
+            objectCamera.SetActualLean(ObjectCamera.ELeanType.Left);
+        else if (Input.IsActionPressed("leanRight") && !Input.IsActionPressed("leanLeft"))
+            objectCamera.SetActualLean(ObjectCamera.ELeanType.Right);
+        else
+            objectCamera.SetActualLean(ObjectCamera.ELeanType.Center);
+        /*
+        if (Input.IsActionPressed("leanRight") && !Input.IsActionPressed("leanLeft"))
+        {
+            objectCamera.SetActualLean(ObjectCamera.ELeanType.Right);
+        }
+        else
+            objectCamera.SetActualLean(ObjectCamera.ELeanType.Center);*/
+        /*
+        // hrac pozaduje opustit lean
+
+        if (Input.IsActionJustReleased("leanLeft"))
+        {
+            objectCamera.SetActualLean(ObjectCamera.ELeanType.Center);
+        }
+
+        if(Input.IsActionJustReleased("leanRight"))
+        {
+            objectCamera.SetActualLean(ObjectCamera.ELeanType.Center);
+        }*/
     }
 
     public override void _PhysicsProcess(double delta)
@@ -278,14 +324,39 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
             // death land
             GameMaster.GM.Log.WriteLog(this, LogSystem.ELogMsgType.INFO, "(death land)" + "height from start falling: " + heightfall + " m");
             PlayRandomSound(AudioStreamPlayerJumpLand, deathHeightLandingSounds, LandingVolumeDB, 0.5f);
-            lerpHeight = -1.2f;
-            lerpRot = -0.6f;
+            lerpHeight = -1.0f;
+            lerpRot = -0.3f;
+            speedmod = 10.0f;
+
+            // call event dead
+            EventDead("fall from height: " + heightfall + " m");
+            lerpHeadLandY = lerpHeight;
+            lerpHeadLandRotX = lerpRot;
+            lerpLandingSpeedModifier = speedmod;
+            return;
         }
 
         lerpHeadLandY = lerpHeight;
         lerpHeadLandRotX = lerpRot;
+        lerpLandingSpeedModifier = speedmod;
 
         // Start timer to normal
         landing_timer.Start();
+    }
+
+    // EVENT Dead
+    public override void EventDead(string reasonDead)
+    {
+        base.EventDead(reasonDead);
+
+        GameMaster.GM.Log.WriteLog(this,LogSystem.ELogMsgType.INFO,"Your character dead becouse: " + reasonDead);
+
+        // DisableInputs for character
+        SetInputEnable(false);
+    }
+
+    public void UpdateLeaning(double delta)
+    {
+
     }
 }

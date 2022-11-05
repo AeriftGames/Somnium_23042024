@@ -43,6 +43,13 @@ deathHeightLandingSounds = [ExtResource("13_o8d88")]
 LandingVolumeDB = -6.0
 JumpingSounds = [ExtResource("9_beu4j"), ExtResource("10_vqnb6"), ExtResource("11_ijw6f"), ExtResource("12_v6cot")]
 JumpingVolumeDB = 1.1
+LeanMaxPositionDistanceX = 0.5
+LeanMaxRotateDistanceZ = 0.25
+LeanPositionTweenTime = 0.5
+LeanRaycastsTestLength = 0.8
+LeanMinCameraDistanceFromWall = 0.3
+LeanMultiRaycastDetect = true
+LeanMultiRaycastSteps = 0.15
 
 [node name="AudioStreamPlayer_Footsteps" type="AudioStreamPlayer" parent="." index="5"]
 stream = ExtResource("4_lkw0d")
