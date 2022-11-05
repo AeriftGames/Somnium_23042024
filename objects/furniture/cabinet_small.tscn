@@ -60,7 +60,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6101, -0.377053, 0)
 [node name="CollisionShape3D" parent="Drawer4/interactive_object/StaticBody3D" index="0"]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 4, 0.431566, 0, 0)
 
-[editable path="Drawer1/interactive_object"]
 [editable path="Drawer2/interactive_object"]
 [editable path="Drawer3/interactive_object"]
 [editable path="Drawer4/interactive_object"]
