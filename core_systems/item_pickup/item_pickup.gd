@@ -55,7 +55,8 @@ func _ready() -> void:
 
 ## Logic of the item being used
 func _used() -> void:
-	Logging.info(self, "Picked up %s" % [item_name])
+	if CustomSettings.debug_oalar:
+		Logging.info(self, "Picked up %s" % [item_name])
 	var player_position = passed_object.get_global_position()
 	var player_height = player_position.y + pickup_height
 	sfx_node.play()

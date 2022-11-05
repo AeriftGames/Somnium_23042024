@@ -38,6 +38,8 @@ func _ready() -> void:
 
 ## Logic of the item being used
 func _used() -> void:
+	if CustomSettings.debug_oalar:
+		Logging.info(self, "Used %s" % [item_name])
 	use_node.use()
 
 ## Special function required for interaction between GDScript and C#

@@ -8,6 +8,9 @@
 [node name="cabinet_small" instance=ExtResource("1_chlpe")]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
 
+[node name="Cabinet" parent="." index="0"]
+visible = false
+
 [node name="Drawer1" parent="." index="1" node_paths=PackedStringArray("use_node")]
 script = ExtResource("2_vffnc")
 use_node = NodePath("use")
