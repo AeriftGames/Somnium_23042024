@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://dxa60v0imq34d"]
+[gd_scene load_steps=39 format=3 uid="uid://dxa60v0imq34d"]
 
 [ext_resource type="ArrayOccluder3D" uid="uid://c65wc0yeg3cak" path="res://levels/world_level_rooms/worldlevel_rooms_test.occ" id="1_48aky"]
 [ext_resource type="PackedScene" uid="uid://ck8mt4y4gfqmk" path="res://placeholders/modular_walls/ground_large.tscn" id="1_vcfbv"]
@@ -12,14 +12,13 @@
 [ext_resource type="Texture2D" uid="uid://0n0dx7ov4qi6" path="res://textures/blood_decal_test.png" id="11_tv71u"]
 [ext_resource type="PackedScene" uid="uid://cq3ypp2ir6mew" path="res://objects/light/omni_light_3d_flashing.tscn" id="14_cmtqf"]
 [ext_resource type="PackedScene" uid="uid://bet3idvc4fg0n" path="res://placeholders/PlayerStart.tscn" id="15_t3a5n"]
-[ext_resource type="PackedScene" uid="uid://dvxuahjqkihcc" path="res://objects/read/paper_test/paper_test.tscn" id="16_vb32x"]
 [ext_resource type="PackedScene" uid="uid://fboedkub5lhd" path="res://core_systems/item_spawner/item_spawner.tscn" id="19_ao0g5"]
 [ext_resource type="PackedScene" uid="uid://ukqaj32a10wx" path="res://objects/keypad/keypad.tscn" id="19_mnkjc"]
 [ext_resource type="PackedScene" uid="uid://df3v88u2getl5" path="res://objects/door/bunker_door.tscn" id="20_qquad"]
 [ext_resource type="PackedScene" uid="uid://djuv0voeaxmos" path="res://objects/light/light_celling.tscn" id="21_7dcuu"]
 [ext_resource type="Texture2D" uid="uid://di51tk58naot7" path="res://placeholders/posters/20190607_soviet-space-program-propaganda-poster-28.jpg" id="21_m6yv4"]
 [ext_resource type="Texture2D" uid="uid://cbbhk2hgk83yv" path="res://placeholders/posters/soviet-space-program-propaganda-poster-1.jpg" id="22_rb3g8"]
-[ext_resource type="PackedScene" uid="uid://bo6yg2p0cf168" path="res://objects/read/postcard_test/postcard.tscn" id="23_ua0lw"]
+[ext_resource type="PackedScene" uid="uid://bv2lie0sokewl" path="res://objects/read/postcard_test/postcard.tscn" id="23_ua0lw"]
 [ext_resource type="PackedScene" uid="uid://c6u5kj6ckrar1" path="res://particles/dust/dust_particle.tscn" id="23_xvvhf"]
 [ext_resource type="PackedScene" uid="uid://b4aflmodj0wny" path="res://models/airvents/vent_turn.tscn" id="24_4cko2"]
 [ext_resource type="PackedScene" uid="uid://ed06oymnfx7m" path="res://objects/boxes/carry_box.tscn" id="25_3ywjd"]
@@ -27,7 +26,7 @@
 [ext_resource type="PackedScene" uid="uid://cmc2d1am8ff6j" path="res://objects/misc/food_can.tscn" id="26_usm0v"]
 [ext_resource type="PackedScene" uid="uid://16d10e0sx2rr" path="res://objects/pipes/pipecurve.glb" id="27_ckge2"]
 [ext_resource type="PackedScene" uid="uid://d1fahaee5i3x6" path="res://objects/pipes/pipestraight.glb" id="28_bnr13"]
-[ext_resource type="PackedScene" uid="uid://bj5geey0opre6" path="res://objects/furniture/cabinet_small.tscn" id="29_ebuaj"]
+[ext_resource type="PackedScene" uid="uid://d5wc26cy4c6o" path="res://objects/furniture/cabinet_small.tscn" id="29_ebuaj"]
 [ext_resource type="PackedScene" path="res://objects/door/door.tscn" id="29_rc6hx"]
 [ext_resource type="PackedScene" path="res://objects/furniture/cabinet_new.tscn" id="30_vtat2"]
 [ext_resource type="PackedScene" uid="uid://cokykrpxx7lmy" path="res://objects/battery/battery.tscn" id="31_rjyuk"]
@@ -403,9 +402,6 @@ autoplay = true
 
 [node name="PlayerStart" parent="." instance=ExtResource("15_t3a5n")]
 transform = Transform3D(0.996673, 0, -0.0815037, 0, 1, 0, 0.0815037, 0, 0.996673, -6.57843, 0.65216, -9.58071)
-
-[node name="paper_test" parent="." instance=ExtResource("16_vb32x")]
-transform = Transform3D(-8.74228e-09, 0.2, -8.74228e-09, 4.23516e-23, -8.74228e-09, -0.2, -0.2, -8.74228e-09, 3.82137e-16, -3.8958, 1.3912, 0)
 
 [node name="cabinet@postcard" parent="." instance=ExtResource("23_ua0lw")]
 transform = Transform3D(-1.31134e-08, -0.3, 1.31134e-08, 0, -1.31134e-08, -0.3, 0.3, -1.31134e-08, 5.73206e-16, 0.525343, 0.405757, 1.32762)
