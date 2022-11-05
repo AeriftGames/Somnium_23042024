@@ -7,7 +7,6 @@
 [node name="postcard" instance=ExtResource("1_cdqif")]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
 script = ExtResource("2_jr6ib")
-inspect_node_path = "res://objects/read/postcard_test/paper_test_view.tscn"
 
 [node name="interactive_object" parent="." index="1" instance=ExtResource("3_x3h5x")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)

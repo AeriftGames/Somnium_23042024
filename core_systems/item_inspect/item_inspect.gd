@@ -5,37 +5,35 @@ class_name item_inspect extends Node3D
 ##
 ## A more detailes comment TODO
 
-## Variable used for interacting with interactive_object required for interaction.
-var node_interact: Node
-## The object hat inicialized interaction (should be player)
-var passed_object: Node
-## Used for checking if item is being interacted at this moment
-var isNowInteract: bool = false
 ## Item name used for displaying item name in interaction
 @export var item_name: String = "postcard_test"
 ## Used for displaying action name when look at (Pick up, Use, ..)
 @export var item_interaction_name: String = "Inspect"
 ## TODO
 @export var item_inspect_description: String = "1235"
-## Combines interaction names and item name for final tooltip
-var item_interaction: String
 ## Node to display on subviewport
-@export  var inspect_node_path: String
-## Player node
-var player_inspect: Node
+#@export  var inspect_node_path: PackedScene
 ##
 @export var sfx = load("res://objects/read/paper_test/page_flip.wav")
-var inspect_node
+## Variable used for interacting with interactive_object required for interaction.
+var node_interact: Node
+## The object hat inicialized interaction (should be player)
+var passed_object: Node
+## Used for checking if item is being interacted at this moment
+var isNowInteract: bool = false
+## Combines interaction names and item name for final tooltip
+var item_interaction: String
+## Player node
+var player_inspect: Node
+## 
+@export var inspect_node: PackedScene
 
 
 func _ready():
 	node_interact = $interactive_object
 	item_interaction = item_interaction_name + " " + item_name
-	print("LOADING")
-	print(inspect_node)
-	inspect_node = load(inspect_node_path)
-	print(inspect_node)
-	print("LOADED")
+	#inspect_node = load(inspect_node_path)
+
 
 ## Logic of the item being used
 func _used():
