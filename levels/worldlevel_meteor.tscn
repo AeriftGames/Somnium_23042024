@@ -18,7 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://djuv0voeaxmos" path="res://objects/light/light_celling.tscn" id="21_7dcuu"]
 [ext_resource type="Texture2D" uid="uid://di51tk58naot7" path="res://placeholders/posters/20190607_soviet-space-program-propaganda-poster-28.jpg" id="21_m6yv4"]
 [ext_resource type="Texture2D" uid="uid://cbbhk2hgk83yv" path="res://placeholders/posters/soviet-space-program-propaganda-poster-1.jpg" id="22_rb3g8"]
-[ext_resource type="PackedScene" uid="uid://bo6yg2p0cf168" path="res://objects/read/postcard_test/postcard.tscn" id="23_ua0lw"]
+[ext_resource type="PackedScene" uid="uid://bv2lie0sokewl" path="res://objects/read/postcard_test/postcard.tscn" id="23_ua0lw"]
 [ext_resource type="PackedScene" uid="uid://c6u5kj6ckrar1" path="res://particles/dust/dust_particle.tscn" id="23_xvvhf"]
 [ext_resource type="PackedScene" uid="uid://b4aflmodj0wny" path="res://models/airvents/vent_turn.tscn" id="24_4cko2"]
 [ext_resource type="PackedScene" uid="uid://ed06oymnfx7m" path="res://objects/boxes/carry_box.tscn" id="25_3ywjd"]
@@ -405,9 +405,6 @@ transform = Transform3D(0.996673, 0, -0.0815037, 0, 1, 0, 0.0815037, 0, 0.996673
 
 [node name="cabinet@postcard" parent="." instance=ExtResource("23_ua0lw")]
 transform = Transform3D(-1.31134e-08, -0.3, 1.31134e-08, 0, -1.31134e-08, -0.3, 0.3, -1.31134e-08, 5.73206e-16, 0.525343, 0.405757, 1.32762)
-item_name = "postcard_test"
-item_interaction_name = "Inspect"
-item_inspect_description = "1235"
 
 [node name="item_spawner" parent="." instance=ExtResource("19_ao0g5")]
 
@@ -450,9 +447,6 @@ transform = Transform3D(0.0347161, 0, 0.598995, 0, 0.6, 0, -0.598995, 0, 0.03471
 
 [node name="postcard" parent="." instance=ExtResource("23_ua0lw")]
 transform = Transform3D(9.16945e-05, -0.199984, 0.00256044, -0.00715722, -0.00256209, -0.199855, 0.199872, 2.28866e-10, -0.00715781, -3.01692, 0.762378, 1.31273)
-item_name = "postcard_test"
-item_interaction_name = "Inspect"
-item_inspect_description = "1235"
 
 [node name="vent_straight" parent="." instance=ExtResource("25_pssfx")]
 transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0.477541, 0.612235, 9.14516)
@@ -541,9 +535,6 @@ transform = Transform3D(-0.4, 0, -3.49691e-08, 0, 0.4, 0, 3.49691e-08, 0, -0.4, 
 
 [node name="postcard" parent="cabinet_new" instance=ExtResource("23_ua0lw")]
 transform = Transform3D(-1.42047e-08, -0.119817, -0.275034, 5.23736e-09, 0.275034, -0.119817, 0.3, -1.04747e-08, -1.09309e-08, 1.24636, 0.179191, 1.0084)
-item_name = "postcard_test"
-item_interaction_name = "Inspect"
-item_inspect_description = "1235"
 
 [node name="food_can" parent="cabinet_new" instance=ExtResource("26_usm0v")]
 transform = Transform3D(0.15, 0, 2.66454e-15, 0, 0.15, 0, -2.66454e-15, 0, 0.15, 1.00348, 0.0906687, 0.994547)
