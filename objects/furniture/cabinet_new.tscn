@@ -1,12 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://pw2ww2bgkvd0"]
+[gd_scene load_steps=2 format=3 uid="uid://pw2ww2bgkvd0"]
 
 [ext_resource type="PackedScene" uid="uid://djdksj7c0wutt" path="res://objects/furniture/cabinet_new.glb" id="1_te3jn"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w2qjs"]
-cull_mode = 2
-
 [node name="cabinet_new" instance=ExtResource("1_te3jn")]
 transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
-
-[node name="Cube" parent="." index="0"]
-material_override = SubResource("StandardMaterial3D_w2qjs")

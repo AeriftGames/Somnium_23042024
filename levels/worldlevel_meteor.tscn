@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://yyesdv41daq6"]
+[gd_scene load_steps=41 format=3 uid="uid://yyesdv41daq6"]
 
 [ext_resource type="ArrayOccluder3D" uid="uid://c65wc0yeg3cak" path="res://levels/world_level_rooms/worldlevel_rooms_test.occ" id="1_48aky"]
 [ext_resource type="PackedScene" uid="uid://ck8mt4y4gfqmk" path="res://placeholders/modular_walls/ground_large.tscn" id="1_vcfbv"]
@@ -31,6 +31,7 @@
 [ext_resource type="PackedScene" path="res://objects/door/door.tscn" id="29_rc6hx"]
 [ext_resource type="PackedScene" uid="uid://pw2ww2bgkvd0" path="res://objects/furniture/cabinet_new.tscn" id="30_vtat2"]
 [ext_resource type="PackedScene" uid="uid://cokykrpxx7lmy" path="res://objects/battery/battery.tscn" id="31_rjyuk"]
+[ext_resource type="PackedScene" uid="uid://c7ohsu8vdlks6" path="res://objects/misc/food_can/food_can.tscn" id="32_am5io"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_nrkwj"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -515,3 +516,10 @@ transform = Transform3D(0.0809684, 0, -0.288867, 0, 0.3, 0, 0.288867, 0, 0.08096
 
 [node name="battery" parent="." instance=ExtResource("31_rjyuk")]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -4.69414, 0.290899, -11.5217)
+
+[node name="food_can" parent="." instance=ExtResource("32_am5io")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -6.85918, 1.2215, -11.5441)
+can_type = 0
+
+[node name="food_can2" parent="." instance=ExtResource("32_am5io")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -6.66987, 1.22431, -11.7039)
