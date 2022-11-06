@@ -13,6 +13,9 @@ public partial class GameMaster : Node
 	public Node GDNode_CustomSettings;
 	public Node GDNode_Logging;
 
+	// LEVEL LOADER
+	public CLevelLoader LevelLoader;
+
 	// POINTERS
 	private DebugHud _debugHud = null;
 	private FPSCharacter_BasicMoving _fpsCharacter = null;
@@ -31,6 +34,9 @@ public partial class GameMaster : Node
 
 		// vytvoreni csharp logging systemu
 		Log = new LogSystem(this);
+
+		// vytvoreni LevelLoaderu
+		LevelLoader = new CLevelLoader(this);
 	}
 
 	// Set/Get FPS Character

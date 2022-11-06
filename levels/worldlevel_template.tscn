@@ -1,10 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://x3cisuu2y483"]
 
 [ext_resource type="PackedScene" uid="uid://ck8mt4y4gfqmk" path="res://placeholders/modular_walls/ground_large.tscn" id="1_07008"]
+[ext_resource type="ArrayOccluder3D" uid="uid://dw8cg0tj6l0v0" path="res://levels/worldlevel_template/worldlevel_template.occ" id="1_j3u1e"]
 [ext_resource type="PackedScene" uid="uid://bet3idvc4fg0n" path="res://placeholders/PlayerStart.tscn" id="2_lxoha"]
-
-[sub_resource type="BoxOccluder3D" id="BoxOccluder3D_ewcal"]
-size = Vector3(10, 5, 10)
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_w3cwh"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -23,7 +21,7 @@ glow_enabled = true
 
 [node name="worldlevel_occluderculling" type="OccluderInstance3D" parent="."]
 visible = false
-occluder = SubResource("BoxOccluder3D_ewcal")
+occluder = ExtResource("1_j3u1e")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_p3qlj")

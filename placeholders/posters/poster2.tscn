@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://cill7wx53gakg"]
+
+[ext_resource type="Texture2D" uid="uid://cbbhk2hgk83yv" path="res://placeholders/posters/soviet-space-program-propaganda-poster-1.jpg" id="1_dub8t"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cmw4d"]
+albedo_texture = ExtResource("1_dub8t")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_inu8o"]
+
+[node name="poster1" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_cmw4d")
+mesh = SubResource("PlaneMesh_inu8o")

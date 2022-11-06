@@ -28,7 +28,7 @@ public partial class DebugHud : Control
         FPSLabel = GetNode<Label>("FPSLabel");
 		PerformancePanel = GetNode<Panel>("PerformancePanel");
 
-		ShowFpsCheckBox = GetNode<CheckBox>("OptionsPanel/VBoxContainer/ShowFps_CheckBox");
+		ShowFpsCheckBox = GetNode<CheckBox>("OptionsPanel//TabContainer/main/ShowFps_CheckBox");
 
 		InitAllCustomLabels();
 
@@ -48,6 +48,8 @@ public partial class DebugHud : Control
 
 		// On Default = for default visble..
 		SetEnable(true);
+
+		BuildLevelButtons();
     }
 
 	public override void _Process(double delta)
@@ -184,5 +186,22 @@ public partial class DebugHud : Control
 	public void _on_show_performance_check_box_toggled(bool isPressed)
 	{
 		PerformancePanel.Visible = isPressed;
+	}
+
+	public void BuildLevelButtons()
+	{
+		var allLevelsInfo = GameMaster.GM.LevelLoader.GetAllLevelsInfo();
+		foreach (var level in allLevelsInfo)
+		{
+            // Instance Button
+            level_button level_button_Instance = (level_button)GD.Load<PackedScene>(
+                "res://core_systems/level_button.tscn").Instantiate();
+
+			level_button_Instance.Text = level.name;
+			level_button_Instance.SetLevelPath(level.path);
+
+			VBoxContainer LevelButtonContainer = GetNode<VBoxContainer>("OptionsPanel/TabContainer/level");
+			LevelButtonContainer.AddChild(level_button_Instance);
+        }
 	}
 }

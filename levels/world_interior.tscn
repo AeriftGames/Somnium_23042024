@@ -1,8 +1,9 @@
-[gd_scene load_steps=39 format=3 uid="uid://cicfjijhrbsoq"]
+[gd_scene load_steps=40 format=3 uid="uid://cicfjijhrbsoq"]
 
+[ext_resource type="ArrayOccluder3D" uid="uid://bvuu4stocopv2" path="res://levels/world_interior/world_interior.occ" id="1_h3qem"]
 [ext_resource type="Texture2D" uid="uid://660jcc1vju43" path="res://textures/brick_pavement_0108_02_s.jpg" id="1_uebcf"]
 [ext_resource type="Texture2D" uid="uid://bybrpbyf1euit" path="res://textures/NormalMap (3).png" id="2_18fqb"]
-[ext_resource type="Material" path="res://textures/mat1.tres" id="3_6mmgv"]
+[ext_resource type="Material" uid="uid://bc2lnxshiuvtk" path="res://textures/mat1.tres" id="3_6mmgv"]
 [ext_resource type="Texture2D" uid="uid://0n0dx7ov4qi6" path="res://textures/blood_decal_test.png" id="4_6bpl4"]
 [ext_resource type="PackedScene" uid="uid://dhvnxdw5mvaro" path="res://placeholders/wine_barrel.tscn" id="5_ttrj3"]
 [ext_resource type="PackedScene" uid="uid://xfouxhhlpltn" path="res://placeholders/interactive_items/interactive_item_test.tscn" id="8_6nvq8"]
@@ -122,6 +123,11 @@ data = PackedVector3Array(-1, 1, 1, 1, 1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, -
 data = PackedVector3Array(-1, 1, 1, 1, 1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, -1, 1, 1, 1, -1, -1, 1, -1, 1, -1, -1, -1, 1, -1, -1, -1, -1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, 1, 1, 1, -1, 1, -1, -1, 1, -1, 1, -1, 1, -1, -1, 1, 1, -1, -1, -1, -1, 1, 1, -1, -1, 1, -1, -1, -1, 1, 1, 1, -1, 1, 1, 1, 1, -1, -1, 1, 1, -1, 1, -1, 1, 1, -1, -1, -1, 1, 1, -1, 1, -1, -1, -1, 1, -1, 1, 1, -1, -1, -1, -1, -1)
 
 [node name="worldlevel" type="Node3D"]
+
+[node name="worldlevel_occluderculling" type="OccluderInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.89176, 0, 0)
+visible = false
+occluder = ExtResource("1_h3qem")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_vig0a")

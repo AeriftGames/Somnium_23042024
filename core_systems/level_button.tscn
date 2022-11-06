@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://duu1bphfaxg2u"]
+
+[ext_resource type="Script" path="res://core_systems/level_button.cs" id="1_1782j"]
+
+[node name="level_button" type="Button"]
+custom_minimum_size = Vector2i(250, 30)
+offset_right = 8.0
+offset_bottom = 8.0
+text = "no level"
+script = ExtResource("1_1782j")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]
