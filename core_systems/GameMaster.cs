@@ -47,8 +47,20 @@ public partial class GameMaster : Node
 	public void SetDebugHud(DebugHud newDebugHud) { _debugHud = newDebugHud; }
 	public DebugHud GetDebugHud() { return _debugHud; }
 
+    public override void _UnhandledInput(InputEvent @event)
+    {
+		if (@event is InputEventKey eventKey)
+			if (eventKey.Pressed && eventKey.Keycode == Key.Escape)
+				QuitGame();
+    }
 
-	public override void _Process(double delta)
+	public void QuitGame()
+	{
+		Log.WriteLog(this,LogSystem.ELogMsgType.INFO,"Quit Game");
+		GetTree().Quit();
+	}
+
+    public override void _Process(double delta)
 	{
 	}
 
