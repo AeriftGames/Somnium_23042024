@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://dxa60v0imq34d"]
+[gd_scene load_steps=40 format=3 uid="uid://yyesdv41daq6"]
 
 [ext_resource type="ArrayOccluder3D" uid="uid://c65wc0yeg3cak" path="res://levels/world_level_rooms/worldlevel_rooms_test.occ" id="1_48aky"]
 [ext_resource type="PackedScene" uid="uid://ck8mt4y4gfqmk" path="res://placeholders/modular_walls/ground_large.tscn" id="1_vcfbv"]
@@ -25,7 +25,6 @@
 [ext_resource type="PackedScene" uid="uid://b4aflmodj0wny" path="res://models/airvents/vent_turn.tscn" id="24_4cko2"]
 [ext_resource type="PackedScene" uid="uid://ed06oymnfx7m" path="res://objects/boxes/carry_box.tscn" id="25_3ywjd"]
 [ext_resource type="PackedScene" uid="uid://d2y7pf5nl4ixp" path="res://models/airvents/vent_straight.tscn" id="25_pssfx"]
-[ext_resource type="PackedScene" uid="uid://cmc2d1am8ff6j" path="res://objects/misc/food_can.tscn" id="26_usm0v"]
 [ext_resource type="PackedScene" uid="uid://16d10e0sx2rr" path="res://objects/pipes/pipecurve.glb" id="27_ckge2"]
 [ext_resource type="PackedScene" uid="uid://d1fahaee5i3x6" path="res://objects/pipes/pipestraight.glb" id="28_bnr13"]
 [ext_resource type="PackedScene" uid="uid://d5wc26cy4c6o" path="res://objects/furniture/cabinet_small.tscn" id="29_ebuaj"]
@@ -475,15 +474,6 @@ transform = Transform3D(-1.57361e-08, 3.30872e-25, 0.2, 0.00225565, 0.199996, 5.
 [node name="carry_box4" parent="." instance=ExtResource("25_3ywjd")]
 transform = Transform3D(-0.0426496, 0.000148463, 0.198591, 0.00225565, 0.199996, 5.47764e-11, -0.357458, 0.00124431, -0.0236947, -7.60484, 0.611572, -9.00092)
 
-[node name="food_can" parent="." instance=ExtResource("26_usm0v")]
-transform = Transform3D(0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, -6.68108, 1.18107, -11.4401)
-
-[node name="food_can2" parent="." instance=ExtResource("26_usm0v")]
-transform = Transform3D(0.00150774, -0.0499773, 0, 0.0499773, 0.00150774, 0, 0, 0, 0.05, -7.54703, 0.169198, -9.73218)
-
-[node name="food_can3" parent="." instance=ExtResource("26_usm0v")]
-transform = Transform3D(0.00136156, -0.045132, -0.0214767, 0.0499773, 0.00150774, 0, 0.000647624, -0.0214669, 0.0451525, -7.6102, 0.169198, -9.57414)
-
 [node name="pipecurve" parent="." instance=ExtResource("27_ckge2")]
 transform = Transform3D(-4.47035e-08, 0, 1, 0, 1, 0, -1, 0, -4.47035e-08, -7.41576, 2.46886, 0.756695)
 
@@ -507,18 +497,6 @@ transform = Transform3D(-0.6, 0, -5.24536e-08, 0, 0.6, 0, 5.24536e-08, 0, -0.6, 
 
 [node name="cabinet_new" parent="." instance=ExtResource("30_vtat2")]
 transform = Transform3D(-0.4, 0, -3.49691e-08, 0, 0.4, 0, 3.49691e-08, 0, -0.4, -2.4996, 0.703549, -8.88343)
-
-[node name="food_can" parent="cabinet_new" instance=ExtResource("26_usm0v")]
-transform = Transform3D(0.15, 0, 2.66454e-15, 0, 0.15, 0, -2.66454e-15, 0, 0.15, 1.00348, 0.0906687, 0.994547)
-
-[node name="food_can2" parent="cabinet_new" instance=ExtResource("26_usm0v")]
-transform = Transform3D(0.15, 0, 2.66454e-15, 0, 0.15, 0, -2.66454e-15, 0, 0.15, 1.00348, 0.0906687, 0.670708)
-
-[node name="food_can3" parent="cabinet_new" instance=ExtResource("26_usm0v")]
-transform = Transform3D(0.15, 0, 2.66454e-15, 0, 0.15, 0, -2.66454e-15, 0, 0.15, 1.00348, 0.398904, 0.85059)
-
-[node name="food_can4" parent="cabinet_new" instance=ExtResource("26_usm0v")]
-transform = Transform3D(0.15, 0, 2.66454e-15, 0, 0.15, 0, -2.66454e-15, 0, 0.15, 1.00348, 0.131817, -1.13212)
 
 [node name="battery" parent="cabinet_new" instance=ExtResource("31_rjyuk")]
 transform = Transform3D(0.1, 0, 2.66454e-15, 0, 0.1, 0, -2.66454e-15, 0, 0.1, 1.53558, 0, 0)
