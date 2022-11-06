@@ -5,7 +5,7 @@
 [ext_resource type="Material" uid="uid://craiyuk3a1qh1" path="res://objects/misc/food_can/food_can_tunak.tres" id="3_47dnd"]
 
 [node name="food_can" instance=ExtResource("1_jyatf")]
-transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+transform = Transform3D(0.07, 0, 0, 0, 0.07, 0, 0, 0, 0.07, 0, 0, 0)
 script = ExtResource("2_3sjkv")
 can_type = 1
 
