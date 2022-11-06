@@ -188,7 +188,13 @@ public partial class DebugHud : Control
 		PerformancePanel.Visible = isPressed;
 	}
 
-	public void BuildLevelButtons()
+	public void _on_quit_game_button_pressed()
+	{
+		GameMaster.GM.QuitGame();
+	}
+
+
+    public void BuildLevelButtons()
 	{
 		var allLevelsInfo = GameMaster.GM.LevelLoader.GetAllLevelsInfo();
 		foreach (var level in allLevelsInfo)

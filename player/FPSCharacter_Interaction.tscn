@@ -383,13 +383,29 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -75.0
-offset_top = -20.0
+offset_top = -56.0
 offset_right = 75.0
+offset_bottom = -36.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_font_sizes/font_size = 12
 text = "-F1 for hide-"
 horizontal_alignment = 1
+
+[node name="QuitGameButton" type="Button" parent="DebugHud/OptionsPanel" index="3"]
+custom_minimum_size = Vector2i(200, 30)
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -100.0
+offset_top = -36.0
+offset_right = 100.0
+offset_bottom = -6.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Quit Game"
 
 [node name="PerformancePanel" type="Panel" parent="DebugHud" index="4"]
 self_modulate = Color(1, 1, 1, 0)
@@ -449,3 +465,4 @@ text = "video memory used:"
 [connection signal="toggled" from="DebugHud/OptionsPanel/TabContainer/main/CustomLabelEnable_Checkbox8" to="DebugHud" method="_on_custom_label_enable_checkbox_toggled" binds= [8]]
 [connection signal="toggled" from="DebugHud/OptionsPanel/TabContainer/main/CustomLabelEnable_Checkbox9" to="DebugHud" method="_on_custom_label_enable_checkbox_toggled" binds= [9]]
 [connection signal="toggled" from="DebugHud/OptionsPanel/TabContainer/main/EnableWorldOcclusionCulling_CheckBox" to="DebugHud" method="_on_enable_world_occlusion_culling_check_box_toggled"]
+[connection signal="pressed" from="DebugHud/OptionsPanel/QuitGameButton" to="DebugHud" method="_on_quit_game_button_pressed"]
