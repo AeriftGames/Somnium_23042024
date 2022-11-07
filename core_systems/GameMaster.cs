@@ -36,7 +36,7 @@ public partial class GameMaster : Node
 		Log = new LogSystem(this);
 
 		// vytvoreni LevelLoaderu
-		LevelLoader = new CLevelLoader(this);
+		LevelLoader = new CLevelLoader(this, true);
 	}
 
 	// Set/Get FPS Character

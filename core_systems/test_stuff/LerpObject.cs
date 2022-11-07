@@ -41,7 +41,7 @@ public partial class LerpObject
         public void EnableUpdate(bool newEnable) { isEnableUpdate = newEnable; }
         public bool IsEnableUpdate() { return isEnableUpdate; }
 
-        public void SetAllParam(Vector3 newActual, Vector3 newTarget, float newSpeed, bool newIsEnableUpdate)
+        public void SetAllParam(Vector3 newActual, Vector3 newTarget, float newSpeed, bool newIsEnableUpdate = false)
         {
             Actual = newActual;
             Target = newTarget;

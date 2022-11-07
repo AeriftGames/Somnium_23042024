@@ -17,6 +17,8 @@ public partial class ObjectCamera : Node3D
 
     FPSCharacter_BasicMoving ownerCharacter = null;
 
+    private LerpObject.LerpVector3 LerpObject_ObjectCameraPos = new LerpObject.LerpVector3();
+
     // lean
     Node3D LerpPos_LeanCenter = null;
     Node3D LerpPos_LeanLeft = null;
@@ -51,6 +53,12 @@ public partial class ObjectCamera : Node3D
 	{
         if (ownerCharacter.IsInputEnable())
             UpdateCameraLook(_MouseMotion, delta);
+
+        // new lerp object camera pos to player head
+        LerpObject_ObjectCameraPos.SetAllParam(GlobalPosition,
+            ownerCharacter.HeadHolderCamera.GlobalPosition, ownerCharacter.LerpSpeedPosObjectCamera, true);
+
+        GlobalPosition = LerpObject_ObjectCameraPos.Update(delta);
     }
 
     // Hadle inout for mouse
@@ -89,6 +97,12 @@ public partial class ObjectCamera : Node3D
 
         // Reset MouseMotion
         _MouseMotion = Vector2.Zero;
+    }
+
+    // Povoli ci zakaze lerp tohoto objektu k characteru hlavy
+    public void SetLerpToCharacterEnable(bool newEnable)
+    {
+        LerpObject_ObjectCameraPos.EnableUpdate(newEnable);
     }
 
     public void SetActualLean(ELeanType newLeanType)

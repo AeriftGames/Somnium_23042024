@@ -21,7 +21,7 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
     protected Node3D HeadMain = null;
     protected Node3D HeadGimbalA = null;
     protected Node3D HeadGimbalB = null;
-    protected Node3D HeadHolderCamera = null;
+    public Node3D HeadHolderCamera = null;
 
     [Export] public ObjectCamera objectCamera;
 
@@ -67,8 +67,6 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
     private bool _isInputEnable = true;
 
     private bool isFallingStart = false;
-
-    private LerpObject.LerpVector3 LerpObject_ObjectCameraPos = new LerpObject.LerpVector3();
 
     public float ActualMovementSpeed = 0.0f;
     public Vector3 LastPosition = Vector3.Zero;
@@ -127,12 +125,6 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
     // Update Visual updated process
     public override void _Process(double delta)
     {
-        // new lerp object camera pos
-        LerpObject_ObjectCameraPos.SetAllParam(objectCamera.GlobalPosition,
-            HeadHolderCamera.GlobalPosition, LerpSpeedPosObjectCamera, true);
-
-        objectCamera.GlobalPosition = LerpObject_ObjectCameraPos.Update(delta);
-
         // Calculate actual movement speed 
         ActualMovementSpeed = GlobalPosition.DistanceTo(LastPosition) * 20000.0f * (float)delta;
         heightfallingtest = GlobalPosition.y - LastPosition.y;
