@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://cv0necdqssj52"]
+[gd_scene load_steps=30 format=3 uid="uid://dquupqhaak8ua"]
 
 [ext_resource type="ArrayOccluder3D" uid="uid://c65wc0yeg3cak" path="res://levels/world_level_rooms/worldlevel_rooms_test.occ" id="1_m7esv"]
 [ext_resource type="PackedScene" uid="uid://ck8mt4y4gfqmk" path="res://placeholders/modular_walls/ground_large.tscn" id="2_lls1c"]
@@ -17,6 +17,8 @@
 [ext_resource type="PackedScene" uid="uid://bet3idvc4fg0n" path="res://placeholders/PlayerStart.tscn" id="15_xyew0"]
 [ext_resource type="PackedScene" uid="uid://cokykrpxx7lmy" path="res://objects/battery/battery.tscn" id="16_ggjm1"]
 [ext_resource type="PackedScene" uid="uid://c5x31aaf0q2i3" path="res://placeholders/posters/poster1.tscn" id="17_gb2md"]
+[ext_resource type="PackedScene" uid="uid://bsiu77aenm635" path="res://core_systems/all_this_shaders_need_compiled.tscn" id="18_v1d4h"]
+[ext_resource type="PackedScene" uid="uid://bmu0nsnb63m5i" path="res://objects/flashlight2/Flashlight.tscn" id="19_rkxrd"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_nrkwj"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -50,23 +52,23 @@ data = PackedVector3Array(12.5, 0, 12.5, -12.5, 0, 12.5, 12.5, 0, -12.5, -12.5, 
 custom_solver_bias = 0.05
 size = Vector3(1, 1.1, 1.598)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7p513"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i0yep"]
 emission_enabled = true
 emission = Color(1, 1, 1, 1)
 emission_energy_multiplier = 8.0
 
 [sub_resource type="BoxMesh" id="BoxMesh_00fdb"]
-material = SubResource("StandardMaterial3D_7p513")
+material = SubResource("StandardMaterial3D_i0yep")
 size = Vector3(0.2, 0.2, 1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jf1c4"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b8541"]
 albedo_color = Color(0.87451, 0.87451, 0.87451, 1)
 emission_enabled = true
 emission = Color(0.878431, 0.882353, 0.894118, 1)
 emission_energy_multiplier = 0.75
 
 [sub_resource type="BoxMesh" id="BoxMesh_djjw7"]
-material = SubResource("StandardMaterial3D_jf1c4")
+material = SubResource("StandardMaterial3D_b8541")
 size = Vector3(0.2, 0.2, 1)
 
 [node name="worldlevel" type="Node3D"]
@@ -637,12 +639,9 @@ stream = ExtResource("14_egw8q")
 autoplay = true
 
 [node name="PlayerStart" parent="." instance=ExtResource("15_xyew0")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
+transform = Transform3D(-0.76591, 0, 0.642948, 0, 1, 0, -0.642948, 0, -0.76591, 1.6831, 0, 0)
 
 [node name="InteractItems" type="Node3D" parent="."]
-
-[node name="battery" parent="InteractItems" instance=ExtResource("16_ggjm1")]
-transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 13.3431, -0.980052, -2.0533)
 
 [node name="battery3" parent="InteractItems" instance=ExtResource("16_ggjm1")]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -7.65028, 0.100339, -2.0533)
@@ -653,8 +652,11 @@ transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -7.37979, 0.100339, 9.8
 [node name="battery5" parent="InteractItems" instance=ExtResource("16_ggjm1")]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -5.29207, 0.100339, 9.83938)
 
-[node name="battery2" parent="InteractItems" instance=ExtResource("16_ggjm1")]
-transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 13.3431, -1.89309, -2.47519)
-
 [node name="poster1" parent="." instance=ExtResource("17_gb2md")]
 transform = Transform3D(-2.18557e-08, 0, -0.5, 0, 0.5, 0, 0.5, 0, -2.18557e-08, -4.15, 1.49825, 2.72628)
+
+[node name="AllThisShadersNeedCompiled" parent="." instance=ExtResource("18_v1d4h")]
+transform = Transform3D(-0.660605, 0, -0.750734, 0, 1, 0, 0.750734, 0, -0.660605, -21.0505, 8.99434e-05, 18.755)
+
+[node name="Flashlight" parent="." instance=ExtResource("19_rkxrd")]
+transform = Transform3D(-0.288029, 0, -0.957622, 0, 1, 0, 0.957622, 0, -0.288029, 0.409424, 0.244249, -3.91151)
