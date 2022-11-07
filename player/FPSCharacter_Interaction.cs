@@ -181,12 +181,16 @@ public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
 		tempCamRot = GetFPSCharacterCamera().Rotation;
 		//tempTargetLook = targetLook;
 		LerpCameraPosToInteract.SetAllParam(GetFPSCharacterCamera().GlobalPosition,
-			targetPos, 10f, true);
+			targetPos, 10f);
+		LerpCameraPosToInteract.EnableUpdate(true);
 
 		LerpCameraLookToInteract.SetAllParam(GetFPSCharacterCamera().Transform.basis.z*0.1f,
 			targetLook,
-			1.0f, true);
-	}
+			1.0f);
+		LerpCameraLookToInteract.EnableUpdate(true);
+
+
+    }
 
 	public void EnableInputsAndCameraToNormal()
 	{

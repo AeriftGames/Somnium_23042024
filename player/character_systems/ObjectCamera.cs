@@ -42,6 +42,9 @@ public partial class ObjectCamera : Node3D
         LerpPos_LeanCenter = GetNode<Node3D>("NodeRotY/GimbalLand/NodeRotX/LerpPos_LeanCenter");
         LerpPos_LeanLeft = GetNode<Node3D>("NodeRotY/GimbalLand/NodeRotX/LerpPos_LeanLeft");
         LerpPos_LeanRight = GetNode<Node3D>("NodeRotY/GimbalLand/NodeRotX/LerpPos_LeanRight");
+
+        //
+        LerpObject_ObjectCameraPos.EnableUpdate(true);
     }
 
     public void SetCharacterOwner(FPSCharacter_BasicMoving newFPSCharacter_BasicMoving)
@@ -56,7 +59,7 @@ public partial class ObjectCamera : Node3D
 
         // new lerp object camera pos to player head
         LerpObject_ObjectCameraPos.SetAllParam(GlobalPosition,
-            ownerCharacter.HeadHolderCamera.GlobalPosition, ownerCharacter.LerpSpeedPosObjectCamera, true);
+            ownerCharacter.HeadHolderCamera.GlobalPosition, ownerCharacter.LerpSpeedPosObjectCamera);
 
         GlobalPosition = LerpObject_ObjectCameraPos.Update(delta);
     }

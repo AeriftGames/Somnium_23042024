@@ -7,7 +7,7 @@ public partial class all_this_shaders_need_compiled : Node3D
     // if true = after shader compile = all visible to false and next timer(visible) cycle = queu free
     [Export] public bool needAllQueueFreeAfter = true;
 
-    [Export] public float TimerVisibleInSeconds = 1.0f;
+    [Export] public float TimerVisibleInSeconds = 1.25f;
     [Export] public float TimerToggleInSeconds = 0.5f;
 
     Node3D AllInteractiveItemsNeedToggle;
@@ -28,7 +28,7 @@ public partial class all_this_shaders_need_compiled : Node3D
         // Create timer for visible and queuefree
         var callable_func_visible = new Callable(DoneVisible);
         visible_timer.Connect("timeout", callable_func_visible);
-        visible_timer.WaitTime = 1;
+        visible_timer.WaitTime = TimerVisibleInSeconds;
         visible_timer.OneShot = true;
         AddChild(visible_timer);
         visible_timer.Start();
@@ -36,7 +36,7 @@ public partial class all_this_shaders_need_compiled : Node3D
         // Create timer for toggle enable and toggle disable
         var callable_func_toggle = new Callable(ToggleAllInteractiveItems);
         toggle_timer.Connect("timeout", callable_func_toggle);
-        toggle_timer.WaitTime = 0.5f;
+        toggle_timer.WaitTime = TimerToggleInSeconds;
         toggle_timer.OneShot = true;
         AddChild(toggle_timer);
         toggle_timer.Start();
@@ -47,7 +47,7 @@ public partial class all_this_shaders_need_compiled : Node3D
         if(!isAllUnvisible)
         {
             // first timer(visible) cycle
-            GD.Print("all preload shaders set unvisible");
+            GameMaster.GM.Log.WriteLog(GameMaster.GM, LogSystem.ELogMsgType.INFO, "PRECOMPLILE SHADER PROCESS - ALL SCENES CALL VISIBLE TO FALSE");
             Visible = false;
             isAllUnvisible = true;
             visible_timer.Start();
@@ -55,7 +55,9 @@ public partial class all_this_shaders_need_compiled : Node3D
         else
         {
             // second timer(visible) cycle
-            GD.Print("all preload shaders are queue free");
+            GameMaster.GM.Log.WriteLog(GameMaster.GM, LogSystem.ELogMsgType.INFO, "PRECOMPLILE SHADER PROCESS - ALL SCENES CALL QUEUEFREE");
+            GameMaster.GM.LevelLoader.EndPrecompileShaderProcess();
+
             QueueFree();
         }
     }
@@ -67,7 +69,7 @@ public partial class all_this_shaders_need_compiled : Node3D
         if(!wasFirstToggle)
         {
             // first timer(toggle) cycle
-            GD.Print("all interactive items toggle to enabled");
+            GameMaster.GM.Log.WriteLog(GameMaster.GM,LogSystem.ELogMsgType.INFO,"PRECOMPLILE SHADER PROCESS - ALL ITEMS(TOGGLED) TOGGLE FIRST");
             foreach (var item in a)
             {
                 item.Call("ToggleEnable");
@@ -78,7 +80,7 @@ public partial class all_this_shaders_need_compiled : Node3D
         else
         {
             // second timer(toggle) cycle
-            GD.Print("all interactive items toggle to disabled");
+            GameMaster.GM.Log.WriteLog(GameMaster.GM, LogSystem.ELogMsgType.INFO, "PRECOMPLILE SHADER PROCESS - ALL ITEMS(TOGGLED) TOGGLE SECOND");
             foreach (var item in a)
             {
                 item.Call("ToggleEnable");

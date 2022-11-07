@@ -29,13 +29,11 @@ public partial class Flashlight : Node3D
 
 		if(isEnable)
 		{
-			GD.Print("flashlight enabled");
 			spotlight.Visible = true;
 			meshLightInside.Visible = true;
 		}
 		else
 		{
-            GD.Print("flashlight disabled");
             spotlight.Visible = false;
             meshLightInside.Visible = false;
         }
