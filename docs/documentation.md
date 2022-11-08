@@ -303,8 +303,8 @@ Viz. obrázek:
 5. Následně vytvoříme nový node, který bude obsahovat kód s logikou, která se provede po sebrání itemu. Tento node je 
 je potřeba vybrat v proměnné **use_node**
 6. Use node musí obsahovat funkcí use(), která je zavoláná po sebrání itemu.
-
-
+7. Jako poslední připojíme pod nejvyšší node instanci core systému **interactive_object**, který se nachází v
+`core_systems\interactive_system`
 
 ## item_use
 item_use je **core_systém** nacházející se v `core_systems\item_use`. Slouží jako základ pro logiku aktivace/použití
