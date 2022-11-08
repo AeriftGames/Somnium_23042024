@@ -77,6 +77,8 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
     private float lastYVelocity = 0.0f;
     float heightfallingtest = 0.0f;
 
+    private Control allHuds = null;
+
     public override void _Ready()
     {
         // pro dostupnost skrze gamemastera
@@ -98,6 +100,8 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
 
         //
         objectCamera.SetCharacterOwner(this);
+
+        allHuds = GetNode<Control>("AllHuds");
     }
 
     // Update Physical updated process
@@ -466,5 +470,10 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
     public Camera3D GetFPSCharacterCamera()
     {
         return objectCamera.Camera;
+    }
+
+    public Control GetAllHudsControlNode()
+    {
+        return allHuds;
     }
 }
