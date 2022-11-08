@@ -18,6 +18,7 @@ public partial class GameMaster : Node
 
 	// POINTERS
 	private DebugHud _debugHud = null;
+	private LoadingHud loadingHud = null;
 	private FPSCharacter_BasicMoving _fpsCharacter = null;
 
 	public override void _Ready()
@@ -46,6 +47,10 @@ public partial class GameMaster : Node
 	// Set/Get Debug Hud
 	public void SetDebugHud(DebugHud newDebugHud) { _debugHud = newDebugHud; }
 	public DebugHud GetDebugHud() { return _debugHud; }
+
+	// Set/Get Loading Hud
+	public void SetLoadingHud(LoadingHud newLoadingHud) { loadingHud = newLoadingHud; }
+	public LoadingHud GetLoadingHud() { return loadingHud; }
 
     public override void _UnhandledInput(InputEvent @event)
     {

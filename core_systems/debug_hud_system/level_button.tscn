@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://duu1bphfaxg2u"]
+[gd_scene load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://core_systems/level_button.cs" id="1_1782j"]
+[ext_resource type="Script" path="res://core_systems/debug_hud_system/level_button.cs" id="1_1782j"]
 
 [node name="level_button" type="Button"]
 custom_minimum_size = Vector2i(250, 30)

@@ -201,9 +201,9 @@ public partial class DebugHud : Control
 		{
             // Instance Button
             level_button level_button_Instance = (level_button)GD.Load<PackedScene>(
-                "res://core_systems/level_button.tscn").Instantiate();
+                "res://core_systems/debug_hud_system/level_button.tscn").Instantiate();
 
-			level_button_Instance.Text = level.name;
+            level_button_Instance.Text = level.name;
 			level_button_Instance.SetLevelPath(level.path);
 
 			VBoxContainer LevelButtonContainer = GetNode<VBoxContainer>("OptionsPanel/TabContainer/level");

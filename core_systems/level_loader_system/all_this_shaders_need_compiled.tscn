@@ -1,6 +1,6 @@
-[gd_scene load_steps=36 format=3 uid="uid://cagf5kxv8qsei"]
+[gd_scene load_steps=36 format=3]
 
-[ext_resource type="Script" path="res://core_systems/all_this_shaders_need_compiled.cs" id="1_o15x1"]
+[ext_resource type="Script" path="res://core_systems/level_loader_system/all_this_shaders_need_compiled.cs" id="1_o15x1"]
 [ext_resource type="Material" uid="uid://d08tc1iusbqxj" path="res://placeholders/modular_walls/mat/mat_ground1.tres" id="2_2s5p8"]
 [ext_resource type="PackedScene" uid="uid://cokykrpxx7lmy" path="res://objects/battery/battery.tscn" id="2_g7xyl"]
 [ext_resource type="Material" uid="uid://b40a0nqkh83ss" path="res://placeholders/modular_walls/mat/mat_wall1.tres" id="3_s56f1"]

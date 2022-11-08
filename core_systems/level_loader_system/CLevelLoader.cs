@@ -69,7 +69,7 @@ public partial class CLevelLoader : Godot.Object
 
         // instancovat all_this_shaders scenu
         var all_this_shaders_need_precomp_Instance = (all_this_shaders_need_compiled)GD.Load<PackedScene>(
-            "res://core_systems/all_this_shaders_need_compiled.tscn").Instantiate();
+            "res://core_systems/level_loader_system/all_this_shaders_need_compiled.tscn").Instantiate();
         gm.GetTree().Root.AddChild(all_this_shaders_need_precomp_Instance);
         all_this_shaders_need_precomp_Instance.GlobalPosition = new Vector3(450,0,450);
 
