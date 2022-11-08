@@ -21,10 +21,18 @@ public partial class GameMaster : Node
 	private LoadingHud loadingHud = null;
 	private FPSCharacter_BasicMoving _fpsCharacter = null;
 
+	//
+	private Control blackScreen = null;
+
 	public override void _Ready()
 	{
 		GD.Print("GameMaster loaded");
 		GM = this;
+
+		blackScreen = GetNode<Control>("BlackScreen");
+
+		// zapnout cernou obrazovku
+		EnableBlackScreen(true);
 
 		// nacteme si objekty z autoloadu pro pristup do jejich gdscriptu
 		GDNode_CustomSettings = GetTree().Root.GetNode<Node>("CustomSettings");
@@ -51,6 +59,9 @@ public partial class GameMaster : Node
 	// Set/Get Loading Hud
 	public void SetLoadingHud(LoadingHud newLoadingHud) { loadingHud = newLoadingHud; }
 	public LoadingHud GetLoadingHud() { return loadingHud; }
+
+	// prekryje veskery hud a 3d svet cernou obrazovkou
+	public void EnableBlackScreen(bool newEnable){ blackScreen.Visible = newEnable; }
 
     public override void _UnhandledInput(InputEvent @event)
     {

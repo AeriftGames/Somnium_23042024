@@ -29,6 +29,9 @@ public partial class CLevelLoader : Godot.Object
 
     public void LoadNewWorldLevel(string newLevelScenePath, string newLevelName)
     {
+        // zapneme cernou obrazovku
+        gm.EnableBlackScreen(true);
+
         actualLevelName = newLevelName;
         gm.GetTree().ChangeSceneToFile(newLevelScenePath);
     }
@@ -81,9 +84,6 @@ public partial class CLevelLoader : Godot.Object
         gm.GetTree().Root.AddChild(all_this_shaders_need_precomp_Instance);
         all_this_shaders_need_precomp_Instance.GlobalPosition = new Vector3(450,0,450);
 
-        gm.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "END PRECOMPILE SHADER PROCESS...");
-        gm.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "GAME START...");
-
         // ted se spusti all_this_shader_need_compiled ready funkce a po par vterinach
         // co se dokonci jeji funkce zavola EndPrecompileShaderProcess tady dole.
     }
@@ -101,8 +101,14 @@ public partial class CLevelLoader : Godot.Object
         objectCamera.SetLerpToCharacterEnable(true);
         character_basic.SetInputEnable(true);
 
+        gm.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "END PRECOMPILE SHADER PROCESS...");
+        gm.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "GAME START...");
+
         // loading hud dokonci svoji ulohu a znici se
         loadingHud.LoadingIsComplete(false);
+
+        // vypneme cernou obrazovku
+        gm.EnableBlackScreen(false);
     }
 
     // instantiate a addchild loading hud to fpscharacter/allhuds and return it
@@ -115,6 +121,12 @@ public partial class CLevelLoader : Godot.Object
         gm.GetFPSCharacter().GetAllHudsControlNode().AddChild(loading_hud_Instance);
 
         return loading_hud_Instance;
+    }
+
+    public void SetNewInfoLevelCompilingShader(string newInfo, int process)
+    {
+        GameMaster.GM.Log.WriteLog(GameMaster.GM, LogSystem.ELogMsgType.INFO, newInfo);
+        loadingHud.SetShaderProcessValueText(process.ToString());
     }
 
 }

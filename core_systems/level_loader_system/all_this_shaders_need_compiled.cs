@@ -47,7 +47,7 @@ public partial class all_this_shaders_need_compiled : Node3D
         if(!isAllUnvisible)
         {
             // first timer(visible) cycle
-            GameMaster.GM.Log.WriteLog(GameMaster.GM, LogSystem.ELogMsgType.INFO, "PRECOMPLILE SHADER PROCESS - ALL SCENES CALL VISIBLE TO FALSE");
+            GameMaster.GM.LevelLoader.SetNewInfoLevelCompilingShader("PRECOMPLILE SHADER PROCESS - ALL SCENES CALL VISIBLE TO FALSE", 75);
             Visible = false;
             isAllUnvisible = true;
             visible_timer.Start();
@@ -55,7 +55,7 @@ public partial class all_this_shaders_need_compiled : Node3D
         else
         {
             // second timer(visible) cycle
-            GameMaster.GM.Log.WriteLog(GameMaster.GM, LogSystem.ELogMsgType.INFO, "PRECOMPLILE SHADER PROCESS - ALL SCENES CALL QUEUEFREE");
+            GameMaster.GM.LevelLoader.SetNewInfoLevelCompilingShader("PRECOMPLILE SHADER PROCESS - ALL SCENES CALL QUEUEFREE" , 100);
             GameMaster.GM.LevelLoader.EndPrecompileShaderProcess();
 
             QueueFree();
@@ -69,7 +69,7 @@ public partial class all_this_shaders_need_compiled : Node3D
         if(!wasFirstToggle)
         {
             // first timer(toggle) cycle
-            GameMaster.GM.Log.WriteLog(GameMaster.GM,LogSystem.ELogMsgType.INFO,"PRECOMPLILE SHADER PROCESS - ALL ITEMS(TOGGLED) TOGGLE FIRST");
+            GameMaster.GM.LevelLoader.SetNewInfoLevelCompilingShader("PRECOMPLILE SHADER PROCESS - ALL ITEMS(TOGGLED) TOGGLE FIRST", 25);
             foreach (var item in a)
             {
                 item.Call("ToggleEnable");
@@ -80,7 +80,7 @@ public partial class all_this_shaders_need_compiled : Node3D
         else
         {
             // second timer(toggle) cycle
-            GameMaster.GM.Log.WriteLog(GameMaster.GM, LogSystem.ELogMsgType.INFO, "PRECOMPLILE SHADER PROCESS - ALL ITEMS(TOGGLED) TOGGLE SECOND");
+            GameMaster.GM.LevelLoader.SetNewInfoLevelCompilingShader("PRECOMPLILE SHADER PROCESS - ALL ITEMS(TOGGLED) TOGGLE SECOND", 50);
             foreach (var item in a)
             {
                 item.Call("ToggleEnable");
