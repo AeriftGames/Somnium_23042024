@@ -28,8 +28,8 @@ var player_inspect: Node
 
 
 func _ready():
-	print("INSPECT")
-	print(inspect_node)
+	if sfx != null:
+		sfx = load("res://objects/read/paper_test/page_flip.wav")
 	node_interact = $interactive_object
 	item_interaction = item_interaction_name + " " + item_name
 
@@ -37,7 +37,7 @@ func _ready():
 func _used():
 	if isNowInteract == false:
 		player_inspect = self.get_node("/root/worldlevel/FPSCharacter_Interaction/Item_inspect")
-		#$AudioStreamPlayer.play()
+		$AudioStreamPlayer.play()
 		isNowInteract = true
 		passed_object.SetInputEnable(false)
 		player_inspect.inspect(true, self, false)
