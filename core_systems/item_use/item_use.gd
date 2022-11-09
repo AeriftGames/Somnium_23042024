@@ -33,6 +33,8 @@ var sfx_node: Node
 
 
 func _ready() -> void:
+	if sfx != null:
+		sfx = load("res://objects/read/paper_test/page_flip.wav")
 	node_interact = $interactive_object
 	item_interaction = item_interaction_name + " " + item_name
 
