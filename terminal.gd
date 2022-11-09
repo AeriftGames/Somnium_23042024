@@ -46,7 +46,7 @@ func _start() -> void:
 
 
 func submit(text: String) -> void:
-	text.to_lower()
+	text = text.to_lower()
 	var label = Label.new()
 	match text:
 		"help":
