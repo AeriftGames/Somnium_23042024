@@ -5,6 +5,7 @@ extends Control
 @export var password: String = "asdf"
 @export var started: bool = false
 @export var locked: bool = true
+@export var crt: bool = true
 
 @onready var scrollbar = $Panel/ScrollContainer.get_v_scroll_bar()
 
@@ -33,6 +34,8 @@ var boot: Array = ["...",
 func _ready() -> void:
 	default_text = "%s@%s:~$ " % [terminal_name, default_user]
 	_start()
+	if !crt:
+		$ColorRect.hide()
 
 
 func _start() -> void:
