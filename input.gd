@@ -10,3 +10,7 @@ func _ready() -> void:
 func _on_line_edit_text_submitted(new_text: String) -> void:
 	get_parent().get_parent().get_parent().get_parent().submit(new_text)
 	#self.queue_free()
+
+
+func _on_line_edit_text_changed(new_text):
+	$AudioStreamPlayer.play()

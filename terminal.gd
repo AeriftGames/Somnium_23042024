@@ -6,6 +6,8 @@ extends Control
 @export var started: bool = false
 @export var locked: bool = true
 @export var crt: bool = true
+@export var used: bool = true
+
 
 @onready var scrollbar = $Panel/ScrollContainer.get_v_scroll_bar()
 
@@ -36,6 +38,9 @@ func _ready() -> void:
 	_start()
 	if !crt:
 		$ColorRect.hide()
+	## Provizorni workaround pro zacatke interakce. TODO ODEBRAT
+	if used:
+		$AudioCRTStart.play()
 
 
 func _start() -> void:
@@ -147,3 +152,7 @@ func _clear() -> void:
 	var all_children = $Panel/ScrollContainer/VBoxContainer.get_children()
 	for x in all_children:
 		x.queue_free()
+
+
+func _on_audio_crt_start_finished():
+	$AudioCRTLoop.play()

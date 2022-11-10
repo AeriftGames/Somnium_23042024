@@ -425,7 +425,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.97863, 1.62449, 1.67029)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.97863, 1.62449, 1.27316)
 
 [node name="keypad" parent="." instance=ExtResource("19_mnkjc")]
-transform = Transform3D(0.0662913, 0, 0.9978, 0, 1, 0, -0.9978, 0, 0.0662913, -3.86628, 0.909265, -1.41272)
+transform = Transform3D(-0.0149122, 0, -0.199443, 0, 0.2, 0, 0.199443, 0, -0.0149122, -4.35793, 0.909265, -1.41272)
 
 [node name="bunker_door" parent="." instance=ExtResource("20_qquad")]
 transform = Transform3D(0.0347161, 0, 0.598995, 0, 0.6, 0, -0.598995, 0, 0.0347161, 5.06533, 0.607174, -0.646694)
