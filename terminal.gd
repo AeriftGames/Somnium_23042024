@@ -9,7 +9,7 @@ extends Control
 @export var used: bool = true
 
 
-@onready var scrollbar = $Panel/ScrollContainer.get_v_scroll_bar()
+@onready var scrollbar: ScrollBar = $Panel/ScrollContainer.get_v_scroll_bar()
 
 var default_text: String
 var input_node: PackedScene = load("res://input.tscn")
