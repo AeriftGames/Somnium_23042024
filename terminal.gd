@@ -64,9 +64,10 @@ func submit(text: String) -> void:
 			_spawn_label("List of available commands:
 			restart --- complete restart of this terminal
 			clear --- clears terminal
-			command3	--- hello world
+			programs --- lists all installed programs
 			
-			For confirmation use Y/YES and for decline use N/NO ")
+			To run a program use 'run PROGRAM_NAME'.
+			For confirmation use Y/YES and for decline use N/NO. ")
 			_spawn_input()
 		"restart":
 			_spawn_label("Are you sure? Y/N?")
@@ -80,7 +81,26 @@ func submit(text: String) -> void:
 			check_state(false)
 		"no":
 			check_state(false)
-		
+		"programs":
+			_spawn_label("List of installed programs:
+			mail, energy, secret
+			
+			To run a program use 'run PROGRAM_NAME' ")
+			_spawn_input()
+		"run":
+			_spawn_label("You need to specify program name")
+			_spawn_input()
+		"run mail":
+				_spawn_label("STARTING MAIL")
+				$Timer.start(0.9)
+				await $Timer.timeout
+				_spawn_label(".", false)
+				$Timer.start(0.9)
+				await $Timer.timeout
+				_spawn_label(".", false)
+				$Timer.start(0.9)
+				await $Timer.timeout
+				_spawn_label(".", false)
 		"clear":
 			_clear()
 			_spawn_input()

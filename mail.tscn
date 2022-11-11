@@ -1,0 +1,180 @@
+[gd_scene load_steps=6 format=3 uid="uid://b03fkm310bxbv"]
+
+[ext_resource type="Script" path="res://mail.gd" id="1_1vpmd"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v312h"]
+bg_color = Color(0.227451, 0.227451, 0.227451, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.670588, 0.419608, 0.156863, 1)
+corner_radius_top_left = 35
+corner_radius_top_right = 35
+corner_radius_bottom_right = 35
+corner_radius_bottom_left = 35
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_et47l"]
+bg_color = Color(0.294118, 0.294118, 0.294118, 1)
+border_width_right = 10
+border_color = Color(0.772549, 0.780392, 0.784314, 1)
+border_blend = true
+corner_radius_top_left = 35
+corner_radius_bottom_left = 35
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2twqg"]
+bg_color = Color(0.780392, 0.545098, 0.258824, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.862745, 0.223529, 0.0666667, 1)
+border_blend = true
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d6v4w"]
+bg_color = Color(0.956863, 0.364706, 0.513726, 1)
+
+[node name="Mail" type="Panel"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -497.0
+offset_top = -278.0
+offset_right = -487.0
+offset_bottom = -268.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_v312h")
+script = ExtResource("1_1vpmd")
+
+[node name="Panel" type="Panel" parent="."]
+visible = false
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 15.0
+offset_bottom = 5.0
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_et47l")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel"]
+visible = false
+offset_left = 10.0
+offset_top = 9.0
+offset_right = 296.0
+offset_bottom = 19.0
+horizontal_scroll_mode = 3
+vertical_scroll_mode = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/ScrollContainer"]
+offset_right = 270.0
+offset_bottom = 192.0
+
+[node name="Button" type="Button" parent="Panel/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2i(270, 45)
+offset_right = 270.0
+offset_bottom = 45.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_2twqg")
+text = "*URGENT* Read this!"
+alignment = 0
+
+[node name="Button2" type="Button" parent="Panel/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2i(270, 45)
+offset_top = 49.0
+offset_right = 270.0
+offset_bottom = 94.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_2twqg")
+text = "New password for door"
+alignment = 0
+
+[node name="Button3" type="Button" parent="Panel/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2i(270, 45)
+offset_top = 98.0
+offset_right = 270.0
+offset_bottom = 143.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_2twqg")
+text = "dsadsada"
+alignment = 0
+
+[node name="Button4" type="Button" parent="Panel/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2i(270, 45)
+offset_top = 147.0
+offset_right = 270.0
+offset_bottom = 192.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_2twqg")
+text = "dsadsada"
+alignment = 0
+
+[node name="ScrollContainer2" type="ScrollContainer" parent="Panel"]
+visible = false
+anchors_preset = -1
+anchor_left = 1.053
+anchor_top = 0.018
+anchor_right = 1.053
+anchor_bottom = 0.018
+offset_left = -0.059021
+offset_top = 0.153999
+offset_right = 651.941
+offset_bottom = 10.154
+grow_horizontal = 0
+horizontal_scroll_mode = 3
+vertical_scroll_mode = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/ScrollContainer2"]
+clip_contents = true
+offset_right = 640.0
+offset_bottom = 876.0
+
+[node name="Subject" type="Label" parent="Panel/ScrollContainer2/VBoxContainer"]
+clip_contents = true
+custom_minimum_size = Vector2i(640, 0)
+offset_right = 640.0
+offset_bottom = 52.0
+theme_override_colors/font_color = Color(0.803922, 0.443137, 0.0588235, 1)
+theme_override_font_sizes/font_size = 35
+text = "*URGENT* Read this!"
+clip_text = true
+
+[node name="HSeparator" type="HSeparator" parent="Panel/ScrollContainer2/VBoxContainer"]
+offset_top = 56.0
+offset_right = 640.0
+offset_bottom = 66.0
+theme_override_constants/separation = 10
+theme_override_styles/separator = SubResource("StyleBoxFlat_d6v4w")
+
+[node name="Message" type="Label" parent="Panel/ScrollContainer2/VBoxContainer"]
+clip_contents = true
+custom_minimum_size = Vector2i(640, 0)
+offset_top = 70.0
+offset_right = 640.0
+offset_bottom = 876.0
+theme_override_colors/font_color = Color(0.803922, 0.443137, 0.0588235, 1)
+text = "Video showed locals on the streets, flying Ukraine's national flag and chanting as Kyiv's troops arrived.
+
+Ukrainian President Volodymyr Zelensky said Kherson was \"our city\".
+
+Kherson was the only regional capital taken by Russia after February's invasion. The retreat has been seen as one of its biggest setbacks of the war.
+
+Moscow said 30,000 personnel had been taken out of the area - as well as around 5,000 pieces of military hardware, weaponry and other assets.
+
+An evening update from the Ukrainian side said troops had pushed as far forwards as the western bank of the Dnipro river.
+
+Images emerged on Friday showing that the main river crossing - the Antonivsky Bridge - had partially collapsed. It remains unclear how the damage was caused.
+
+The Russian troops who occupied Kherson are thought to be taking up new positions on the eastern side of the river.
+
+A Kherson resident described his \"overwhelming\" emotions as people emerged singing and dancing onto the streets.
+
+Alexei Sandakov revealed his full name to the BBC, having previously referred to himself only as \"Jimmy\". He said Kherson was \"free now. It's different. Everyone is crying since this morning\".
+
+He added that \"everybody wanted to embrace\" the arriving Ukrainian soldiers.
+
+The city's change of control followed a rapid Ukrainian counter-offensive in recent months, in which Kyiv said it had recaptured 41 settlements near Kherson."
+autowrap_mode = 1

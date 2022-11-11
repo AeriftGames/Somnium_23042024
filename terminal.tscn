@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://c7xaxe3rrq4j0"]
+[gd_scene load_steps=8 format=3 uid="uid://c7xaxe3rrq4j0"]
 
 [ext_resource type="Script" path="res://terminal.gd" id="1_45i5t"]
 [ext_resource type="Shader" path="res://terminal.gdshader" id="2_dnmio"]
 [ext_resource type="Theme" uid="uid://b4uqkii6sf5dj" path="res://ui/themes/terminal.tres" id="2_qe1e8"]
+[ext_resource type="PackedScene" uid="uid://b03fkm310bxbv" path="res://mail.tscn" id="3_hrnje"]
 [ext_resource type="AudioStream" uid="uid://bv7h54tf5nvg" path="res://crtstart.wav" id="4_voaok"]
 [ext_resource type="AudioStream" uid="uid://b3kuei7dkqhty" path="res://crt.ogg" id="5_1giw6"]
 
@@ -63,6 +64,9 @@ grow_vertical = 2
 layout_mode = 2
 
 [node name="Timer" type="Timer" parent="."]
+
+[node name="Mail" parent="." instance=ExtResource("3_hrnje")]
+layout_mode = 1
 
 [node name="ColorRect" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_iq6ul")
