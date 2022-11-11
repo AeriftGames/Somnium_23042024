@@ -28,7 +28,7 @@ Technická dokumentace k projektu **Somnium Prototype**
 # Standardy projektu
 Tato kapitola obsahuje dohodnoté standardy, které zajišťují jednoduchou přehlednost pro všechny členy projektu
 
-![Ukázka](https://github.com/AeriftGames/Somnium/blob/develop/docs/img/project_structure.png)
+![Ukázka](docs/img/project_structure.png)
 
 ## Souborová struktura projektu
 Základní logika struktury projektu je taková, že se snažíme vytvářet složku pro každou *featuru*. Tzn. pokud vytvořím
