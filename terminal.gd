@@ -3,6 +3,8 @@ extends Control
 @export var terminal_name: String = "TR-84637"
 @export var default_user: String = "admin"
 @export var password: String = "asdf"
+@export var login_attempts: int = 3
+@export var password_locked: bool = false
 @export var started: bool = false
 @export var locked: bool = true
 @export var crt: bool = true
@@ -109,8 +111,26 @@ func submit_password(submitted_password: String) -> void:
 		_spawn_label("Type help for list of available commands")
 		_spawn_input()
 	else:
-		_spawn_label("Wrong password")
-		_spawn_login()
+		if !password_locked:
+			if login_attempts > 1:
+				login_attempts -= 1
+				_spawn_label("Wrong password")
+				_spawn_label("Remanining attemps: " + str(login_attempts))
+				_spawn_login()
+			else:
+				_spawn_label("")
+				_spawn_label("Used all login attempts")
+				$Timer.start(1)
+				await $Timer.timeout
+				_spawn_label("_")
+				$Timer.start(1)
+				await $Timer.timeout
+				_spawn_label("_")
+				$Timer.start(1)
+				await $Timer.timeout
+				_spawn_label("LOCKING TERMINAL")
+		else:
+			pass
 
 
 func _process(delta) -> void:
