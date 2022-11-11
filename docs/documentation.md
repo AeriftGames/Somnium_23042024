@@ -7,23 +7,37 @@ Technická dokumentace k projektu **Somnium Prototype**
 - [Standardy projektu](#standardy-projektu)
   - [Souborová struktura projektu](#souborov-struktura-projektu)
   - [Jmenová konvence](#jmenov-konvence)
+    - [Pojmenování složek a souborů](#pojmenovn-sloek-a-soubor)
+    - [Pojmenování scén a scriptů](#pojmenovn-scn-a-script)
+    - [Standardy v rámci kódu](#standardy-v-rmci-kdu)
+    - [Pojmenování nodes v rámci scén](#pojmenovn-nodes-v-rmci-scn)
 - [Herní mechanismy a jejich detailní popisy](#hern-mechanismy-a-jejich-detailn-popisy)
-  - [MessageObject](#messageobject)
-  - [FPSCharacter](#fpscharacter)
-  - [GameMaster](#gamemaster)
+  - [**MessageObject**](#messageobject)
+    - [**Ukázka základního použití MessageObject**](#ukzka-zkladnho-pouit-messageobject)
+    - [**Vyvětlení kroků v kódu:**](#vyvtlen-krok-v-kdu)
+    - [**Volatelné funkce msgObject**](#volateln-funkce-msgobject)
+  - [**FPSCharacter**](#fpscharacter)
+    - [**Volatelné funkce FPSCharacter**](#volateln-funkce-fpscharacter)
+  - [**GameMaster**](#gamemaster)
+    - [**Volatelné funkce GameMaster**](#volateln-funkce-gamemaster)
   - [item_pickup](#item_pickup)
+    - [Popis](#popis)
+    - [Jak použít](#jak-pout)
 - [Groups](#groups)
   - [template_group](#template_group)
 - [Collision layers](#collision-layers)
+    - [1. vrstva: **worldphysics_layer**](#1-vrstva-worldphysics_layer)
+    - [2. vrstva: **interactive_layer**](#2-vrstva-interactive_layer)
 - [Autoload](#autoload)
   - [logging](#logging)
   - [CustomSettings](#customsettings)
   - [LastSingleton](#lastsingleton)
 - [Databases](#databases)
   - [items](#items)
-
-*Pro rychlé vygenerování kapitol lze použít [https://ecotrust-canada.github.io/markdown-toc/](https://ecotrust-canada.github.io/markdown-toc/)*
-*Ještě další generator, kde je nastavit úroveň. Současné kapitoly jsou udělané na úroveň **3**. [https://luciopaiva.com/markdown-toc/](https://luciopaiva.com/markdown-toc/)
+*Pro rychlé vygenerování kapitol lze použít 
+[https://ecotrust-canada.github.io/markdown-toc/](https://ecotrust-canada.github.io/markdown-toc/)*
+*Ještě další generator, kde je nastavit úroveň. Současné kapitoly jsou udělané na úroveň 
+**3**. [https://luciopaiva.com/markdown-toc/](https://luciopaiva.com/markdown-toc/)
 
 # Standardy projektu
 Tato kapitola obsahuje dohodnoté standardy, které zajišťují jednoduchou přehlednost pro všechny členy projektu
