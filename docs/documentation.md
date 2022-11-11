@@ -29,22 +29,69 @@ Technická dokumentace k projektu **Somnium Prototype**
 Tato kapitola obsahuje dohodnoté standardy, které zajišťují jednoduchou přehlednost pro všechny členy projektu
 
 ## Souborová struktura projektu
-**TODO** Zde bude popsána složková struktura projektu.
+Základní logika struktury projektu je taková, že se snažíme vytvářet složku pro každou *featuru*. Tzn. pokud vytvořím
+nový objekt, který se bude ve hře nacházet tak veškeré soubory jako:
+- scény objektu
+- scripty objektu
+- zvuky objektu
+- fonty objektu
+
+jsou uloženy do složky pojmenované po objektu. 
+
+Pokud dojde k vytvoření více typů podobného objektu, tak je dobré vytvořit další úroveň v rámci složek. Křásný příklad
+je item typu *nábytek*.
+Veškeré věci tohoto typu se nachází v `\objects\furniture`. A jsou následně rozděleny dále do dalších složek.
+
+Pokud chceme vytvořit něco, co se bude využívat na více místech, tak lze buď vymyslet nějaké společné místo, a nebo se
+bude soubor opakovat. Toto ještě tolik nenastalo, takže pevné pravidlo není. Napadají mě věci jako font. Ale prozatím
+je veškerý font v `\ui\`
 
 ## Jmenová konvence
-**TODO** Tato kapitola obsahuje menší kapitoly jednotlivých jmennových konvencí.
+Tato kapitola obsahuje menší kapitoly jednotlivých jmennových konvencí.
 
-### Pojmenování složek
-**TODO**
+### Pojmenování složek a souborů
+V názvu složek a souborů nepoužíváme české znaky a mezery.Využíváme **`snake_case`**
 
 ### Pojmenování scén a scriptů
-**TODO**
+V názvu scén a scritpů nepoužíváme české znaky a mezery.Využíváme **`snake_case`**
 
-### Pojmenování složek
-**TODO**
+### Standardy v rámci kódu
+Tato kapitola popisuje jednotlivé standardy v rámci scriptů u každého jazyka.
+#### GDSCRIPT
+- Funkce - snake_case
+- Classy - PascalCase
+- Variably - snake_case
+- Signaly - snake_case
+- Constanty - CONSTANT_CASE
+
+Snažíme se využívat *static typing* všude. Každá funkce by měla mít určeno zda něco vrací, jakého typu jsou její
+parametry apod...
+
+Požadí struktury scriptu je:
+01. tool
+02. class_name
+03. extends
+04. docs##
+
+05. signals
+06. enums
+07. constants
+08. exported variables
+09. public variables
+10. private variables
+11. onready variables
+
+12. optional built-in virtual _init method
+13. built-in virtual _ready method
+14. remaining built-in virtual methods
+15. public methods
+16. private methods
+
+#### CSHARP
+
 
 ### Pojmenování nodes v rámci scén
-**TODO**
+V rámci jednotlivých nodes využíváme **`PascalCase`**
 
 # Herní mechanismy a jejich detailní popisy
 Tato kapitola obsahuje všechny důležité herní mechanismy
