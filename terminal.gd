@@ -118,7 +118,12 @@ func submit_password(submitted_password: String) -> void:
 				_spawn_label("Remanining attemps: " + str(login_attempts))
 				_spawn_login()
 			else:
-				_spawn_label("")
+				_spawn_label("Wrong password")
+				$Timer.start(1)
+				await $Timer.timeout
+				_spawn_label("_")
+				$Timer.start(1)
+				await $Timer.timeout
 				_spawn_label("Used all login attempts")
 				$Timer.start(1)
 				await $Timer.timeout
