@@ -55,6 +55,7 @@ script = ExtResource("1_1vpmd")
 
 [node name="Panel" type="Panel" parent="."]
 visible = false
+layout_mode = 1
 anchors_preset = 9
 anchor_bottom = 1.0
 offset_left = 5.0
@@ -66,6 +67,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_et47l")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Panel"]
 visible = false
+layout_mode = 0
 offset_left = 10.0
 offset_top = 9.0
 offset_right = 296.0
@@ -74,11 +76,13 @@ horizontal_scroll_mode = 3
 vertical_scroll_mode = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel/ScrollContainer"]
+layout_mode = 2
 offset_right = 270.0
 offset_bottom = 192.0
 
 [node name="Button" type="Button" parent="Panel/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2i(270, 45)
+layout_mode = 2
 offset_right = 270.0
 offset_bottom = 45.0
 theme_override_styles/normal = SubResource("StyleBoxFlat_2twqg")
@@ -87,6 +91,7 @@ alignment = 0
 
 [node name="Button2" type="Button" parent="Panel/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2i(270, 45)
+layout_mode = 2
 offset_top = 49.0
 offset_right = 270.0
 offset_bottom = 94.0
@@ -96,6 +101,7 @@ alignment = 0
 
 [node name="Button3" type="Button" parent="Panel/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2i(270, 45)
+layout_mode = 2
 offset_top = 98.0
 offset_right = 270.0
 offset_bottom = 143.0
@@ -105,6 +111,7 @@ alignment = 0
 
 [node name="Button4" type="Button" parent="Panel/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2i(270, 45)
+layout_mode = 2
 offset_top = 147.0
 offset_right = 270.0
 offset_bottom = 192.0
@@ -114,6 +121,7 @@ alignment = 0
 
 [node name="ScrollContainer2" type="ScrollContainer" parent="Panel"]
 visible = false
+layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.053
 anchor_top = 0.018
@@ -129,12 +137,14 @@ vertical_scroll_mode = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel/ScrollContainer2"]
 clip_contents = true
+layout_mode = 2
 offset_right = 640.0
 offset_bottom = 876.0
 
 [node name="Subject" type="Label" parent="Panel/ScrollContainer2/VBoxContainer"]
 clip_contents = true
 custom_minimum_size = Vector2i(640, 0)
+layout_mode = 2
 offset_right = 640.0
 offset_bottom = 52.0
 theme_override_colors/font_color = Color(0.803922, 0.443137, 0.0588235, 1)
@@ -143,6 +153,7 @@ text = "*URGENT* Read this!"
 clip_text = true
 
 [node name="HSeparator" type="HSeparator" parent="Panel/ScrollContainer2/VBoxContainer"]
+layout_mode = 2
 offset_top = 56.0
 offset_right = 640.0
 offset_bottom = 66.0
@@ -152,6 +163,7 @@ theme_override_styles/separator = SubResource("StyleBoxFlat_d6v4w")
 [node name="Message" type="Label" parent="Panel/ScrollContainer2/VBoxContainer"]
 clip_contents = true
 custom_minimum_size = Vector2i(640, 0)
+layout_mode = 2
 offset_top = 70.0
 offset_right = 640.0
 offset_bottom = 876.0

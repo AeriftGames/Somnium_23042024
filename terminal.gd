@@ -35,6 +35,7 @@ var boot: Array = ["...",
 ""]
 var current_state: String
 var states: Array = ["restarting", "value2"]
+var mail_scene: PackedScene = load("res://mail.tscn")
 
 func _ready() -> void:
 	default_text = "%s@%s:~$ " % [terminal_name, default_user]
@@ -101,6 +102,8 @@ func submit(text: String) -> void:
 				$Timer.start(0.9)
 				await $Timer.timeout
 				_spawn_label(".", false)
+				var x = mail_scene.instantiate()
+				$Window.add_child(x)
 		"clear":
 			_clear()
 			_spawn_input()
