@@ -6,7 +6,7 @@ extends Control
 @export var started: bool = false
 @export var locked: bool = true
 @export var crt: bool = true
-@export var used: bool = true
+@export var used: bool = true ## TODO tato promenan bude pouzita pri zacatku interakce s objektem
 
 
 @onready var scrollbar: ScrollBar = $Panel/ScrollContainer.get_v_scroll_bar()
@@ -31,7 +31,8 @@ var boot: Array = ["...",
 "...",
 "BOOT COMPLETE",
 ""]
-
+var current_state: String
+var states: Array = ["restarting", "value2"]
 
 func _ready() -> void:
 	default_text = "%s@%s:~$ " % [terminal_name, default_user]
@@ -68,13 +69,35 @@ func submit(text: String) -> void:
 		"restart":
 			_spawn_label("Are you sure? Y/N?")
 			_spawn_input()
+			current_state = "restart"
 		"y":
-			_restart()
+			check_state(true)
+		"yes":
+			check_state(true)
+		"n":
+			check_state(false)
+		"no":
+			check_state(false)
+		
 		"clear":
 			_clear()
 			_spawn_input()
 		_:
 			_spawn_label("Unknown command")
+			_spawn_input()
+
+
+func check_state(confirmation: bool):
+	match current_state:
+		"restart":
+			current_state = ""
+			if confirmation:
+				_restart()
+			else:
+				_spawn_label("Aborting restart")
+				_spawn_input()
+		_:
+			_spawn_label("Nothing to confirm")
 			_spawn_input()
 
 
