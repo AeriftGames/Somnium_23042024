@@ -336,7 +336,7 @@ pomocí `New Inherited scene` (pravé tlačítko myši na *.glb* soubor)
 2. K parenté této scény přiřadíme script nacházející se v `core_systems\item_pickup\item_pickup.gd`
 3. Po připojení odoznačíme parent a znovu označíme. Tím, se aktualizuje inspector, který bude obsahovat nové proměnné.
 Viz. obrázek:
-![Ukázka](https://github.com/AeriftGames/Somnium/blob/develop/docs/img/item_pickup_01.PNG)
+![Ukázka](img/item_pickup_01.PNG)
 4. Zde **musíme** nastavit všechny proměnné. Bez nich nebude logika fungovat správně.
 
 | Variable              | Popis                                                                                                        | Typ         | Default value |
