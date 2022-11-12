@@ -36,6 +36,7 @@ var boot: Array = ["...",
 var current_state: String
 var states: Array = ["restarting", "value2"]
 var mail_scene: PackedScene = load("res://mail.tscn")
+var energy_scene: PackedScene = load("res://energy.tscn")
 
 func _ready() -> void:
 	default_text = "%s@%s:~$ " % [terminal_name, default_user]
@@ -104,7 +105,20 @@ func submit(text: String) -> void:
 				_spawn_label(".", false)
 				var x = mail_scene.instantiate()
 				$Window.add_child(x)
-				#_clear()
+				_hide_console(true)
+		"run energy":
+				_spawn_label("STARTING ENERGY")
+				$Timer.start(0.9)
+				await $Timer.timeout
+				_spawn_label(".", false)
+				$Timer.start(0.9)
+				await $Timer.timeout
+				_spawn_label(".", false)
+				$Timer.start(0.9)
+				await $Timer.timeout
+				_spawn_label(".", false)
+				var x = energy_scene.instantiate()
+				$Window.add_child(x)
 				_hide_console(true)
 		"clear":
 			_clear()
@@ -114,7 +128,7 @@ func submit(text: String) -> void:
 			_spawn_input()
 
 
-func check_state(confirmation: bool):
+func check_state(confirmation: bool) -> void:
 	match current_state:
 		"restart":
 			current_state = ""
@@ -231,8 +245,9 @@ func _hide_console(state: bool) -> void:
 	if state:
 		$Panel/ScrollContainer.hide()
 	else:
-		$Panel/ScrollContainer.show()	
+		$Panel/ScrollContainer.show()
+		_spawn_input()
 
 
-func _on_audio_crt_start_finished():
+func _on_audio_crt_start_finished() -> void:
 	$AudioCRTLoop.play()
