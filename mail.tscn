@@ -42,6 +42,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_v312h")
 script = ExtResource("1_1vpmd")
+messages = [null]
 
 [node name="Panel" type="Panel" parent="."]
 visible = false

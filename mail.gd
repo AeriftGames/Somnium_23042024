@@ -2,6 +2,8 @@ extends Panel
 
 var tween: Tween
 var tween2: Tween
+@export var messages: Array
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	tween = create_tween()
@@ -16,7 +18,7 @@ func test():
 	tween.tween_callback(self.test2b)
 	
 	
-func test2():
+func test2() -> void:
 	$Panel/ScrollContainer.show()
 	tween = create_tween()
 	tween.tween_property($Panel/ScrollContainer, "size", Vector2(286, 527), 1)
