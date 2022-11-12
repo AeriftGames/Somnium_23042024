@@ -12,3 +12,10 @@ transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
 
 [node name="Chemlight" parent="." index="0"]
 material_override = SubResource("StandardMaterial3D_vsih8")
+cast_shadow = 0
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." index="1"]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0.797908, 0)
+light_color = Color(0.345098, 1, 0, 1)
+light_energy = 0.3
+omni_range = 1.4
