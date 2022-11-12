@@ -10,10 +10,11 @@ using System;
  *   (je to z duvodu nacterni rotace kamery pro plynule opetovne nastaveni do puvodniho stavu)
  * - TODO 2: zlepsit vraceni do puvodniho stavu tim ze budeme lerpovat mezi
  *   temp_hitPosition a targetLook(interact_object_look)
- * - TODO 3: predelat komunikaci s MessageObject - hotovo
 */
 public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
 {
+	CharacterInteractiveSystem InteractiveSystem = null;
+
 	BasicHud basicHud = null;
 
 	[Export] public float LengthInteractRay = 5.0f;
@@ -46,10 +47,14 @@ public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
 	{
 		base._Ready();
 
-		basicHud = GetNode<BasicHud>("BasicHud");
-		basicHud.SetUseVisible(false);
+		// nacteni hudu
+        basicHud = GetNode<BasicHud>("BasicHud");
+        basicHud.SetUseVisible(false);
 
-		//
+        // vytvoreni grab system
+        InteractiveSystem = new CharacterInteractiveSystem(this,basicHud);
+
+		// hands
 		HolderHands = GetNode<Node3D>("HeadMain/HeadGimbalA/HeadGimbalB/HeadHolderCamera/HolderHands");
 
 		// Simple Flashlight toggle test
@@ -110,32 +115,24 @@ public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
 		base._PhysicsProcess(delta);
 
 		basicHud.SetUseVisible(false);
+		basicHud.SetHandGrabVisible(false);
 
-		if (IsInputEnable() == false) return;
-		bool useNow = Input.IsActionJustPressed("UseAction");
+		bool useNow = IsInputEnable() && Input.IsActionJustPressed("UseAction");
+		bool grabNow = IsInputEnable() && Input.IsActionPressed("mouseClickLeft");
 
-		// otestujeme zdali existuje interactive_object, pokud ano otestujeme zdali je aktivni v range
-		// pokud neco z toho neni pravda vyskocime z funkce
-		interactive_object hit_interactive_object = DetectInteractiveObjectWithCameraRay();
-		if (hit_interactive_object == null) return;
-		if (hit_interactive_object.GetIsActive() == false) return;
-
-		// pokud tedy mame pred sebou aktivni interactive_object, vypiseme jeho moznou akci v hudu
-		basicHud.SetUseLabelText(hit_interactive_object.GetUseActionName());
-		basicHud.SetUseVisible(true);
-
-		// chceme interactive_object pouzit?
-		if (useNow)
-			hit_interactive_object.Use(this);
+		DetectInteractiveObjectWithCameraRay();
+		InteractiveSystem.Update(useNow,grabNow,delta);
 	}
 
-	public interactive_object DetectInteractiveObjectWithCameraRay()
+	public bool DetectInteractiveObjectWithCameraRay()
 	{
-		interactive_object result = null;
-		if (GetFPSCharacterCamera() == null) return null;
+		bool result = false;
+        interactive_object interact_object = null;
+
+		if (GetFPSCharacterCamera() == null) return false;
 
 		PhysicsDirectSpaceState3D directSpace = GetWorld3d().DirectSpaceState;
-		if (directSpace == null) return null;
+		if (directSpace == null) return false;
 
 		PhysicsRayQueryParameters3D rayParam = new PhysicsRayQueryParameters3D();
 		rayParam.From = GetFPSCharacterCamera().GlobalPosition;
@@ -146,36 +143,23 @@ public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
 		if (rayResult.Count > 0)
 		{
 			Node HitCollider = (Node)rayResult["collider"];
-			if (HitCollider == null) return null;
-
-			if (HitCollider.GetParent() == null) return null;
-
-			/*
-			Type type = HitCollider.GetParent().GetType();
-			if (type != typeof(interactive_object)) return null;
-			*/
+			if (HitCollider == null) return false;
+			if (HitCollider.GetParent() == null) return false;
 
 			if(HitCollider.GetParent().IsInGroup("interactive_object"))
 			{
-				result = (interactive_object)HitCollider.GetParent();
+                interact_object = (interactive_object)HitCollider.GetParent();
 				tempHitPosition = (Vector3)rayResult["position"];
-			}
+            }
 		}
 
+		// Final
+		InteractiveSystem.SetActualInteractiveObject(interact_object);
 		return result;
 	}
 
 	public void DisableInputsAndCameraMoveLookTarget(Vector3 targetPos,Vector3 targetLook)
 	{
-		/*
-		// INSTANT
-		SetInputEnable(false);
-		tempCamRot = GetFPSCharacterCamera().Rotation;
-		GetFPSCharacterCamera().GlobalPosition = targetPos;
-		GetFPSCharacterCamera().LookAt(targetLook);
-		//
-		*/
-
 		// LERPOBJECT START INTERACT
 		SetInputEnable(false);
 		tempCamRot = GetFPSCharacterCamera().Rotation;
@@ -194,14 +178,6 @@ public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
 
 	public void EnableInputsAndCameraToNormal()
 	{
-		/*
-		// INSTANT
-		GetFPSCharacterCamera().Position = new Vector3(0.0f,0.0f,0.0f);
-		GetFPSCharacterCamera().Rotation = tempCamRot;
-		SetInputEnable(true);
-		//
-		*/
-
 		// LERPOBJECT END INTERACT
 		// !!! tip na mozne zlepseni: lerpovat mezi tempHitPosition a targetLook od interactive_objectu !!!
 		isActualOnLerpToNormal = true;

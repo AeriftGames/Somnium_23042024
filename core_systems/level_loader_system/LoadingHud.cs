@@ -1,6 +1,7 @@
 using Godot;
 using System;
 
+// TODO dodelat pridavny showPressAnyKeyToStart
 public partial class LoadingHud : Control
 {
 	Label nameOfLevelLabel = null;

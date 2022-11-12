@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dujwhuc122wh7"]
+[gd_scene load_steps=13 format=3 uid="uid://dujwhuc122wh7"]
 
 [ext_resource type="PackedScene" uid="uid://2b8vuef2k4is" path="res://player/FPSCharacter_WalkingEffects.tscn" id="1_0ipjt"]
 [ext_resource type="Script" path="res://player/FPSCharacter_Interaction.cs" id="2_fmih3"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://core_systems/debug_hud_system/DebugHud.cs" id="4_75mlc"]
 [ext_resource type="AudioStream" uid="uid://com3v7we27wvm" path="res://audio/audio_streams/flashlight/173419__lightyarn__flashlight-off.wav" id="4_wmi65"]
 [ext_resource type="PackedScene" uid="uid://duwf5mdtkjlre" path="res://core_systems/item_inspect/item_inspect.tscn" id="5_iw50w"]
+[ext_resource type="Texture2D" uid="uid://byineyv5wipjo" path="res://textures/cursor-hand-grab-svgrepo-com.png" id="6_fb16h"]
 [ext_resource type="PackedScene" uid="uid://bctrg21138lx" path="res://ui/report_bug.tscn" id="7_oxteu"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xryx5"]
@@ -39,6 +40,17 @@ script = ExtResource("2_fmih3")
 LengthInteractRay = 5.0
 AudioFlashlight_On = ExtResource("3_hi7iy")
 AudioFlashlight_Off = ExtResource("4_wmi65")
+FootStepLength = 1.25
+WalkCameraLerpHeight = 0.12
+lerpFootstepSpeedModifier = 2.0
+JumpVelocity = 4.3
+MoveSpeedInStand = 2.25
+MoveSpeedInCrunch = 1.4
+MoveSpeedInSprint = 4.1
+MoveSpeedInFall = 1.4
+AccelerateSmoothStep = 6.0
+DeccelerateSmoothStep = 6.0
+MouseSensitivity = 0.15
 
 [node name="HolderHands" type="Node3D" parent="HeadMain/HeadGimbalA/HeadGimbalB/HeadHolderCamera" index="0"]
 
@@ -89,7 +101,25 @@ grow_vertical = 2
 text = "use"
 horizontal_alignment = 1
 
+[node name="HandGrabTexture" type="TextureRect" parent="BasicHud" index="1"]
+self_modulate = Color(1, 1, 1, 0.470588)
+custom_minimum_size = Vector2i(50, 50)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -25.526
+offset_top = 13.753
+offset_right = 24.474
+offset_bottom = 63.753
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_fb16h")
+ignore_texture_size = true
+
 [node name="Item_inspect" parent="." index="9" instance=ExtResource("5_iw50w")]
+visible = false
 
 [node name="report_bug" parent="." index="10" instance=ExtResource("7_oxteu")]
 visible = false
@@ -451,6 +481,9 @@ offset_top = 102.0
 offset_right = 278.0
 offset_bottom = 132.0
 text = "video memory used:"
+
+[node name="AllHuds" parent="." index="12"]
+metadata/_edit_lock_ = true
 
 [connection signal="toggled" from="DebugHud/OptionsPanel/TabContainer/main/ShowFps_CheckBox" to="DebugHud" method="_on_show_fps_check_box_toggled"]
 [connection signal="toggled" from="DebugHud/OptionsPanel/TabContainer/main/ShowPerformance_CheckBox" to="DebugHud" method="_on_show_performance_check_box_toggled"]
