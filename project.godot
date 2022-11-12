@@ -9,6 +9,11 @@
 config_version=5
 
 _global_script_classes=[{
+"base": "Resource",
+"class": &"TerminalMessage",
+"language": &"GDScript",
+"path": "res://custom_resources/terminal_message.gd"
+}, {
 "base": "Node",
 "class": &"custom_settings",
 "language": &"GDScript",
@@ -35,6 +40,7 @@ _global_script_classes=[{
 "path": "res://autoload/logging.gd"
 }]
 _global_script_class_icons={
+"TerminalMessage": "",
 "custom_settings": "res://autoload/custom_settings_icon.svg",
 "item_inspect": "res://core_systems/item_inspect/item_inspect_icon.svg",
 "item_pickup": "res://core_systems/item_pickup/item_pickup_icon.svg",
