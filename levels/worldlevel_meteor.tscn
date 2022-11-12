@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://yyesdv41daq6"]
+[gd_scene load_steps=45 format=3 uid="uid://yyesdv41daq6"]
 
 [ext_resource type="ArrayOccluder3D" uid="uid://c65wc0yeg3cak" path="res://levels/world_level_rooms/worldlevel_rooms_test.occ" id="1_48aky"]
 [ext_resource type="PackedScene" uid="uid://ck8mt4y4gfqmk" path="res://placeholders/modular_walls/ground_large.tscn" id="1_vcfbv"]
@@ -34,6 +34,7 @@
 [ext_resource type="PackedScene" uid="uid://c7ohsu8vdlks6" path="res://objects/misc/food_can/food_can.tscn" id="32_am5io"]
 [ext_resource type="PackedScene" uid="uid://dhg3c333pnd8n" path="res://objects/battery/batery_new.tscn" id="33_ak0xq"]
 [ext_resource type="PackedScene" uid="uid://dsqqgpmcwgjvg" path="res://chemlight.tscn" id="34_pq7dj"]
+[ext_resource type="PackedScene" uid="uid://ci3c5vr7tdmlb" path="res://new_terminal.tscn" id="35_2estt"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_nrkwj"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -586,7 +587,7 @@ transform = Transform3D(0.00319561, -0.239953, 0.970779, -0.999911, -0.0133165, 
 transform = Transform3D(0.00187125, -0.140509, -0.990078, -0.999911, -0.0133165, -1.7254e-10, -0.0131844, 0.98999, -0.140521, -3.02996, 1.27126, -8.65296)
 
 [node name="chemlight" parent="." instance=ExtResource("34_pq7dj")]
-transform = Transform3D(-0.00919395, -0.0734581, 0.0672263, 0.0992258, -0.012419, 0, 0.00834886, 0.0667059, 0.0740312, 4.80034, 0.0753236, 7.96072)
+transform = Transform3D(-0.00919395, -0.0734581, 0.0672263, 0.0992258, -0.012419, 0, 0.00834886, 0.0667059, 0.0740312, 4.76283, 0.0874081, 7.69047)
 
 [node name="chemlight2" parent="." instance=ExtResource("34_pq7dj")]
 transform = Transform3D(0.00617212, 0.0493142, 0.0867757, 0.0992258, -0.012419, 5.51575e-10, 0.0107767, 0.0861039, -0.0496989, 4.7248, 0.0753236, 5.63029)
@@ -602,6 +603,9 @@ transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 6.15786, -3.1151, 0)
 
 [node name="Chemlight" parent="chemlight5" index="0"]
 material_override = SubResource("StandardMaterial3D_7vruh")
+
+[node name="new_terminal" parent="." instance=ExtResource("35_2estt")]
+transform = Transform3D(-1.74846e-08, 0, -0.4, 0, 0.4, 0, 0.4, 0, -1.74846e-08, -5.58529, 1.17097, -11.625)
 
 [editable path="LevelGeometry/Grounds/floor3"]
 [editable path="cabinet_small3"]
