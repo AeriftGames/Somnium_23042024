@@ -104,7 +104,8 @@ func submit(text: String) -> void:
 				_spawn_label(".", false)
 				var x = mail_scene.instantiate()
 				$Window.add_child(x)
-				_clear()
+				#_clear()
+				_hide_console(true)
 		"clear":
 			_clear()
 			_spawn_input()
@@ -224,6 +225,13 @@ func _clear() -> void:
 	var all_children = $Panel/ScrollContainer/VBoxContainer.get_children()
 	for x in all_children:
 		x.queue_free()
+
+
+func _hide_console(state: bool) -> void:
+	if state:
+		$Panel/ScrollContainer.hide()
+	else:
+		$Panel/ScrollContainer.show()	
 
 
 func _on_audio_crt_start_finished():

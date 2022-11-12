@@ -1,9 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://b03fkm310bxbv"]
+[gd_scene load_steps=8 format=3 uid="uid://dxon6kvmoel2r"]
 
 [ext_resource type="Script" path="res://mail.gd" id="1_1vpmd"]
-[ext_resource type="StyleBox" uid="uid://cgllaxng4ples" path="res://mail_button_normal.tres" id="2_m2h4c"]
-[ext_resource type="StyleBox" uid="uid://ccj3yrfxkcidx" path="res://mail_button_hover.tres" id="3_fmd4c"]
-[ext_resource type="StyleBox" uid="uid://p1itjw0d76ls" path="res://mail_button_pressed.tres" id="4_1w7bu"]
+[ext_resource type="Resource" uid="uid://c6gq3kfp4uhx7" path="res://custom_resources/message01.tres" id="2_ofik6"]
+[ext_resource type="Resource" path="res://custom_resources/message02.tres" id="3_ow2fe"]
+[ext_resource type="Resource" uid="uid://bkwmcax1wrx2y" path="res://custom_resources/message03.tres" id="4_8sqlw"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v312h"]
 bg_color = Color(0.227451, 0.227451, 0.227451, 1)
@@ -42,11 +42,10 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_v312h")
 script = ExtResource("1_1vpmd")
-messages = [null]
+messages = [ExtResource("2_ofik6"), ExtResource("3_ow2fe"), ExtResource("4_8sqlw")]
 
 [node name="Panel" type="Panel" parent="."]
 visible = false
-layout_mode = 1
 anchors_preset = 9
 anchor_bottom = 1.0
 offset_left = 5.0
@@ -58,7 +57,6 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_et47l")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Panel"]
 visible = false
-layout_mode = 0
 offset_left = 10.0
 offset_top = 9.0
 offset_right = 296.0
@@ -67,65 +65,9 @@ horizontal_scroll_mode = 3
 vertical_scroll_mode = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel/ScrollContainer"]
-layout_mode = 2
-offset_right = 270.0
-offset_bottom = 192.0
-
-[node name="Button" type="Button" parent="Panel/ScrollContainer/VBoxContainer"]
-custom_minimum_size = Vector2i(270, 45)
-layout_mode = 2
-offset_right = 270.0
-offset_bottom = 45.0
-focus_mode = 0
-theme_override_styles/normal = ExtResource("2_m2h4c")
-theme_override_styles/hover = ExtResource("3_fmd4c")
-theme_override_styles/pressed = ExtResource("4_1w7bu")
-toggle_mode = true
-text = "*URGENT* Read this!"
-alignment = 0
-
-[node name="Button2" type="Button" parent="Panel/ScrollContainer/VBoxContainer"]
-custom_minimum_size = Vector2i(270, 45)
-layout_mode = 2
-offset_right = 270.0
-offset_bottom = 45.0
-focus_mode = 0
-theme_override_styles/normal = ExtResource("2_m2h4c")
-theme_override_styles/hover = ExtResource("3_fmd4c")
-theme_override_styles/pressed = ExtResource("4_1w7bu")
-toggle_mode = true
-text = "New password for door"
-alignment = 0
-
-[node name="Button3" type="Button" parent="Panel/ScrollContainer/VBoxContainer"]
-custom_minimum_size = Vector2i(270, 45)
-layout_mode = 2
-offset_right = 270.0
-offset_bottom = 45.0
-focus_mode = 0
-theme_override_styles/normal = ExtResource("2_m2h4c")
-theme_override_styles/hover = ExtResource("3_fmd4c")
-theme_override_styles/pressed = ExtResource("4_1w7bu")
-toggle_mode = true
-text = "New password for door"
-alignment = 0
-
-[node name="Button4" type="Button" parent="Panel/ScrollContainer/VBoxContainer"]
-custom_minimum_size = Vector2i(270, 45)
-layout_mode = 2
-offset_right = 270.0
-offset_bottom = 45.0
-focus_mode = 0
-theme_override_styles/normal = ExtResource("2_m2h4c")
-theme_override_styles/hover = ExtResource("3_fmd4c")
-theme_override_styles/pressed = ExtResource("4_1w7bu")
-toggle_mode = true
-text = "New password for door"
-alignment = 0
 
 [node name="ScrollContainer2" type="ScrollContainer" parent="Panel"]
 visible = false
-layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.053
 anchor_top = 0.018
@@ -141,23 +83,19 @@ vertical_scroll_mode = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel/ScrollContainer2"]
 clip_contents = true
-layout_mode = 2
 offset_right = 640.0
-offset_bottom = 876.0
+offset_bottom = 90.0
 
 [node name="Subject" type="Label" parent="Panel/ScrollContainer2/VBoxContainer"]
 clip_contents = true
 custom_minimum_size = Vector2i(640, 0)
-layout_mode = 2
 offset_right = 640.0
 offset_bottom = 52.0
 theme_override_colors/font_color = Color(0.803922, 0.443137, 0.0588235, 1)
 theme_override_font_sizes/font_size = 35
-text = "*URGENT* Read this!"
-clip_text = true
+autowrap_mode = 2
 
 [node name="HSeparator" type="HSeparator" parent="Panel/ScrollContainer2/VBoxContainer"]
-layout_mode = 2
 offset_top = 56.0
 offset_right = 640.0
 offset_bottom = 66.0
@@ -167,30 +105,8 @@ theme_override_styles/separator = SubResource("StyleBoxFlat_d6v4w")
 [node name="Message" type="Label" parent="Panel/ScrollContainer2/VBoxContainer"]
 clip_contents = true
 custom_minimum_size = Vector2i(640, 0)
-layout_mode = 2
 offset_top = 70.0
 offset_right = 640.0
 offset_bottom = 876.0
-theme_override_colors/font_color = Color(0.803922, 0.443137, 0.0588235, 1)
-text = "Video showed locals on the streets, flying Ukraine's national flag and chanting as Kyiv's troops arrived.
-
-Ukrainian President Volodymyr Zelensky said Kherson was \"our city\".
-
-Kherson was the only regional capital taken by Russia after February's invasion. The retreat has been seen as one of its biggest setbacks of the war.
-
-Moscow said 30,000 personnel had been taken out of the area - as well as around 5,000 pieces of military hardware, weaponry and other assets.
-
-An evening update from the Ukrainian side said troops had pushed as far forwards as the western bank of the Dnipro river.
-
-Images emerged on Friday showing that the main river crossing - the Antonivsky Bridge - had partially collapsed. It remains unclear how the damage was caused.
-
-The Russian troops who occupied Kherson are thought to be taking up new positions on the eastern side of the river.
-
-A Kherson resident described his \"overwhelming\" emotions as people emerged singing and dancing onto the streets.
-
-Alexei Sandakov revealed his full name to the BBC, having previously referred to himself only as \"Jimmy\". He said Kherson was \"free now. It's different. Everyone is crying since this morning\".
-
-He added that \"everybody wanted to embrace\" the arriving Ukrainian soldiers.
-
-The city's change of control followed a rapid Ukrainian counter-offensive in recent months, in which Kyiv said it had recaptured 41 settlements near Kherson."
-autowrap_mode = 1
+theme_override_colors/font_color = Color(0.92549, 0.921569, 0.921569, 1)
+autowrap_mode = 2
