@@ -34,20 +34,6 @@ script = ExtResource("1_n7ich")
 total_energy = 7
 metadata/_edit_lock_ = true
 
-[node name="ExitButton" type="Button" parent="."]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -31.0
-offset_bottom = 31.0
-grow_horizontal = 0
-theme_override_styles/normal = ExtResource("5_1np8v")
-theme_override_styles/hover = ExtResource("5_1np8v")
-theme_override_styles/pressed = ExtResource("5_1np8v")
-theme_override_styles/disabled = ExtResource("5_1np8v")
-theme_override_styles/focus = ExtResource("5_1np8v")
-text = "X"
-
 [node name="CenterContainer" type="CenterContainer" parent="."]
 clip_contents = true
 offset_right = 991.0
@@ -109,5 +95,19 @@ offset_top = 7.0
 offset_right = 295.0
 offset_bottom = 33.0
 text = "0"
+
+[node name="ExitButton" type="Button" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -31.0
+offset_bottom = 31.0
+grow_horizontal = 0
+theme_override_styles/normal = ExtResource("5_1np8v")
+theme_override_styles/hover = ExtResource("5_1np8v")
+theme_override_styles/pressed = ExtResource("5_1np8v")
+theme_override_styles/disabled = ExtResource("5_1np8v")
+theme_override_styles/focus = ExtResource("5_1np8v")
+text = "X"
 
 [connection signal="pressed" from="ExitButton" to="." method="_on_exit_button_pressed"]

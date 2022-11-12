@@ -69,4 +69,3 @@ func _on_exit_button_pressed() -> void:
 	print("EXIT ENERGY")
 	get_parent().get_parent()._hide_console(false)
 	self.queue_free()
-
