@@ -104,6 +104,7 @@ func submit(text: String) -> void:
 				_spawn_label(".", false)
 				var x = mail_scene.instantiate()
 				$Window.add_child(x)
+				_clear()
 		"clear":
 			_clear()
 			_spawn_input()
