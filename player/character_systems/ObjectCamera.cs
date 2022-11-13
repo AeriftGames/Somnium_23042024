@@ -11,6 +11,8 @@ public partial class ObjectCamera : Node3D
 	public Node3D NodeRotX = null;
     public Node3D NodeLean = null;
 	public Camera3D Camera = null;
+    public Marker3D HandGrabPosition;
+    public Generic6DOFJoint3D HandGrabJoint = null;
 
     private Vector2 _MouseMotion = new Vector2(0f, 0f);
     private Vector2 _LookVelocity = new Vector2(0f, 0f);
@@ -37,6 +39,8 @@ public partial class ObjectCamera : Node3D
         NodeRotX = GetNode<Node3D>("NodeRotY/GimbalLand/NodeRotX");
         NodeLean = GetNode<Node3D>("NodeRotY/GimbalLand/NodeRotX/NodeLean");
 		Camera = GetNode<Camera3D>("NodeRotY/GimbalLand/NodeRotX/NodeLean/Camera");
+        HandGrabPosition = GetNode<Marker3D>("NodeRotY/GimbalLand/NodeRotX/NodeLean/Camera/HandGrabPosition");
+        HandGrabJoint = GetNode<Generic6DOFJoint3D>("NodeRotY/GimbalLand/NodeRotX/NodeLean/Camera/HandGrabJoint");
 
         //lean
         LerpPos_LeanCenter = GetNode<Node3D>("NodeRotY/GimbalLand/NodeRotX/LerpPos_LeanCenter");

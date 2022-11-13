@@ -8,6 +8,9 @@ public partial class physic_item_test : RigidBody3D
 
     interactive_object interactiveObject;
 
+    //
+    bool isGrab = false;
+
 	public override void _Ready()
 	{
         interactiveObject = GetNode<interactive_object>("interactive_object");
@@ -17,13 +20,22 @@ public partial class physic_item_test : RigidBody3D
 	{
 	}
 
+    public override void _PhysicsProcess(double delta)
+    {
+
+    }
+
     public void UseAction(FPSCharacter_Interaction character)
     {
     }
 
     public void ApplyGrab(bool newGrab,FPSCharacter_Interaction character)
     {
+        isGrab = newGrab;
+    }
 
+    public void GrabUpdate(double delta)
+    {
     }
 
     public void message_update()

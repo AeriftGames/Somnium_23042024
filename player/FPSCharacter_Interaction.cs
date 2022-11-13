@@ -122,6 +122,7 @@ public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
 
 		DetectInteractiveObjectWithCameraRay();
 		InteractiveSystem.Update(useNow,grabNow,delta);
+		InteractiveSystem.HandGrabbingUpdate(grabNow,delta);
 	}
 
 	public bool DetectInteractiveObjectWithCameraRay()
@@ -154,7 +155,7 @@ public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
 		}
 
 		// Final
-		InteractiveSystem.SetActualInteractiveObject(interact_object);
+		InteractiveSystem.SetActualInteractiveObject(interact_object,tempHitPosition);
 		return result;
 	}
 

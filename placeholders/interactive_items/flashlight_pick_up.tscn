@@ -1,11 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://bgamf75y02jrp"]
+[gd_scene load_steps=14 format=3 uid="uid://bgamf75y02jrp"]
 
 [ext_resource type="Script" path="res://core_systems/item_pickup/item_pickup.gd" id="1_ygntf"]
 [ext_resource type="Texture2D" uid="uid://db77x3xuiorcx" path="res://objects/flashlight2/Cylinder Metallic.png" id="2_ii3cb"]
 [ext_resource type="AudioStream" uid="uid://dl0t67nmxyl05" path="res://objects/battery/pickup.wav" id="2_iwlgm"]
 [ext_resource type="Texture2D" uid="uid://wfqgplnbjryn" path="res://textures/Cookie_tutorial_texture_flashlight.png" id="3_w3mpj"]
-[ext_resource type="PackedScene" uid="uid://dbnevtbu1g7uy" path="res://core_systems/interactive_system/interactive_object.tscn" id="4_dekmp"]
 [ext_resource type="Script" path="res://placeholders/interactive_items/UseFunc.cs" id="5_bsuoe"]
+[ext_resource type="Script" path="res://core_systems/interactive_system/interactive_object.cs" id="5_yy8lh"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fom45"]
 resource_name = "Material"
@@ -59,6 +59,12 @@ top_radius = 0.1
 bottom_radius = 0.1
 height = 0.01
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_fgswp"]
+size = Vector3(0.243, 0.218, 0.567)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_d42n3"]
+radius = 2.5
+
 [node name="Flashlight_pick_up" type="Node3D" node_paths=PackedStringArray("node_interact", "use_node")]
 script = ExtResource("1_ygntf")
 node_interact = NodePath("interactive_object")
@@ -85,7 +91,31 @@ shadow_enabled = true
 spot_range = 15.0
 spot_angle = 35.0
 
-[node name="interactive_object" parent="." instance=ExtResource("4_dekmp")]
+[node name="interactive_object" type="Node3D" parent="." groups=["interactive_object"]]
+script = ExtResource("5_yy8lh")
+metadata/_edit_lock_ = true
+
+[node name="StaticBody3D" type="StaticBody3D" parent="interactive_object"]
+collision_layer = 4
+collision_mask = 0
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="interactive_object/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0770097)
+shape = SubResource("BoxShape3D_fgswp")
+
+[node name="interactive_object_area3D" type="Area3D" parent="interactive_object/StaticBody3D"]
+collision_layer = 4
+collision_mask = 2
+monitorable = false
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="interactive_object/StaticBody3D/interactive_object_area3D"]
+shape = SubResource("SphereShape3D_d42n3")
+metadata/_edit_lock_ = true
 
 [node name="UseFunc" type="Node3D" parent="."]
 script = ExtResource("5_bsuoe")
+
+[connection signal="body_entered" from="interactive_object/StaticBody3D/interactive_object_area3D" to="interactive_object" method="_on_interactive_object_area_3d_body_entered"]
+[connection signal="body_exited" from="interactive_object/StaticBody3D/interactive_object_area3D" to="interactive_object" method="_on_interactive_object_area_3d_body_exited"]
