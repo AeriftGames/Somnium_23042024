@@ -13,6 +13,7 @@ public partial class ObjectCamera : Node3D
 	public Camera3D Camera = null;
     public Marker3D HandGrabPosition;
     public Generic6DOFJoint3D HandGrabJoint = null;
+    public StaticBody3D HandStaticBody = null;
 
     private Vector2 _MouseMotion = new Vector2(0f, 0f);
     private Vector2 _LookVelocity = new Vector2(0f, 0f);
@@ -32,6 +33,8 @@ public partial class ObjectCamera : Node3D
     Tween tweenLeanRot = null;
     Tween tweenLeanPos = null;
 
+    public bool IsCameraLookInputEnable = true;
+
     public override void _Ready()
 	{
 		NodeRotY = GetNode<Node3D>("NodeRotY");
@@ -41,6 +44,7 @@ public partial class ObjectCamera : Node3D
 		Camera = GetNode<Camera3D>("NodeRotY/GimbalLand/NodeRotX/NodeLean/Camera");
         HandGrabPosition = GetNode<Marker3D>("NodeRotY/GimbalLand/NodeRotX/NodeLean/Camera/HandGrabPosition");
         HandGrabJoint = GetNode<Generic6DOFJoint3D>("NodeRotY/GimbalLand/NodeRotX/NodeLean/Camera/HandGrabJoint");
+        HandStaticBody = GetNode<StaticBody3D>("NodeRotY/GimbalLand/NodeRotX/NodeLean/Camera/HandStaticBody");
 
         //lean
         LerpPos_LeanCenter = GetNode<Node3D>("NodeRotY/GimbalLand/NodeRotX/LerpPos_LeanCenter");
@@ -71,7 +75,7 @@ public partial class ObjectCamera : Node3D
     // Hadle inout for mouse
     public override void _Input(InputEvent @event)
     {
-        if (@event is InputEventMouseMotion && ownerCharacter.IsInputEnable())
+        if (@event is InputEventMouseMotion && ownerCharacter.IsInputEnable() && IsCameraLookInputEnable)
         {
             InputEventMouseMotion mouseEventMotion = @event as InputEventMouseMotion;
             _MouseMotion = mouseEventMotion.Relative;

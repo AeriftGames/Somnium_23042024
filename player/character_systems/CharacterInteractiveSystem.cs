@@ -15,6 +15,7 @@ public partial class CharacterInteractiveSystem : Godot.Object
     RigidBody3D pickedBody = null;
     bool isGrabbing = false;
     bool isCanNewGrab = true;
+    bool wantRotateNow = false;
 
     public struct SPhysicalGrabbedItemParams 
     {
@@ -36,6 +37,10 @@ public partial class CharacterInteractiveSystem : Godot.Object
 
     public void Update(bool newUseNow,bool newGrabNow, double delta)
     {
+        // default sets on start update
+        basicHud.SetUseVisible(false);
+        basicHud.SetHandGrabState(false, false);
+
         // neexistuje zadny novy objekt ?
         if (actualInteractiveObject == null)
         {
@@ -103,8 +108,11 @@ public partial class CharacterInteractiveSystem : Godot.Object
         }
     }
 
-    public void HandGrabbingUpdate(bool newGrabNow, bool newThrowObjectNow, double delta)
+    public void HandGrabbingUpdate(bool newGrabNow, bool newThrowObjectNow,bool newRotateGrabbedObject, double delta)
     {
+        wantRotateNow = false;
+        character.objectCamera.IsCameraLookInputEnable = true;
+
         // otestujeme zda je tento object nastaveny pro grab a zda aktualne nejaky objekt negrabujeme
         // pokd jsou podminky splneny, nastavime viditelnou normal hand
         if (actualInteractiveObject != null && newGrabNow == false)
@@ -149,6 +157,29 @@ public partial class CharacterInteractiveSystem : Godot.Object
         // pokud ho pusti, resetujeme moznost znovu grabbovat
         if (isCanNewGrab == false && newGrabNow == false)
             isCanNewGrab = true;
+
+        // Rotate Grabbed Object
+        if(isGrabbing && newGrabNow && pickedBody != null && newRotateGrabbedObject)
+        {
+            wantRotateNow = true;
+        }
+    }
+
+    public void UpdateGrabbedObjectRotate(InputEvent @event)
+    {
+        // Rotate Grabbed Object
+        if (pickedBody != null && wantRotateNow)
+        {
+            character.objectCamera.IsCameraLookInputEnable = false;
+
+            if (@event is InputEventMouseMotion && character.IsInputEnable())
+            {
+                InputEventMouseMotion mouseEventMotion = @event as InputEventMouseMotion;
+
+                character.objectCamera.HandStaticBody.RotateX(Mathf.DegToRad(mouseEventMotion.Relative.y * 0.3f));
+                character.objectCamera.HandStaticBody.RotateY(Mathf.DegToRad(mouseEventMotion.Relative.x * 0.3f));
+            }
+        }
     }
 
     public void StartGrabbing(RigidBody3D grabbedObject)

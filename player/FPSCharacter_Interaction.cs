@@ -42,6 +42,7 @@ public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
     [Export] public AudioStream AudioFlashlight_On;
     [Export] public AudioStream AudioFlashlight_Off;
 
+	public Vector2 _MouseMotionForRotation = new Vector2(0,0);
 
     public override void _Ready()
 	{
@@ -110,22 +111,28 @@ public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
 
 	}
 
-	public override void _PhysicsProcess(double delta)
+    public override void _Input(InputEvent @event)
+    {
+		base._Input(@event);
+
+		// RotateObject Update
+		InteractiveSystem.UpdateGrabbedObjectRotate(@event);
+    }
+
+    public override void _PhysicsProcess(double delta)
 	{
 		base._PhysicsProcess(delta);
-
-		basicHud.SetUseVisible(false);
-		basicHud.SetHandGrabState(false, false);
 
 		bool useNow = IsInputEnable() && Input.IsActionJustPressed("UseAction");
 		bool grabNow = IsInputEnable() && Input.IsActionPressed("mouseClickLeft");
 		bool throwObjectNow = IsInputEnable() && Input.IsActionJustPressed("throwObject");
+		bool rotateGrabbedObject = IsInputEnable() && Input.IsActionPressed("rotateGrabbedObject");
 
 		if(grabNow == false)
 			DetectInteractiveObjectWithCameraRay();
 
 		InteractiveSystem.Update(useNow,grabNow,delta);
-		InteractiveSystem.HandGrabbingUpdate(grabNow,throwObjectNow,delta);
+		InteractiveSystem.HandGrabbingUpdate(grabNow,throwObjectNow,rotateGrabbedObject,delta);
 	}
 
 	public bool DetectInteractiveObjectWithCameraRay()
@@ -222,5 +229,10 @@ public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
             AudioStreamPlayer_TestItem.Stream = AudioFlashlight_Off;
             AudioStreamPlayer_TestItem.Play();
         }
+	}
+
+	public CharacterInteractiveSystem GetInteractiveSystem()
+	{
+		return InteractiveSystem;
 	}
 }

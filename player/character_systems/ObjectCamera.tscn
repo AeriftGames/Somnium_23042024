@@ -20,12 +20,12 @@ fov = 70.0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.57377)
 
 [node name="HandGrabJoint" type="Generic6DOFJoint3D" parent="NodeRotY/GimbalLand/NodeRotX/NodeLean/Camera"]
-node_a = NodePath("../StaticBody3D")
+node_a = NodePath("../HandStaticBody")
 linear_limit_x/enabled = false
 linear_limit_y/enabled = false
 linear_limit_z/enabled = false
 
-[node name="StaticBody3D" type="StaticBody3D" parent="NodeRotY/GimbalLand/NodeRotX/NodeLean/Camera"]
+[node name="HandStaticBody" type="StaticBody3D" parent="NodeRotY/GimbalLand/NodeRotX/NodeLean/Camera"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.56259)
 
 [node name="LerpPos_LeanCenter" type="Node3D" parent="NodeRotY/GimbalLand/NodeRotX"]
