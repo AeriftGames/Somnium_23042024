@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dujwhuc122wh7"]
+[gd_scene load_steps=14 format=3 uid="uid://dujwhuc122wh7"]
 
 [ext_resource type="PackedScene" uid="uid://2b8vuef2k4is" path="res://player/FPSCharacter_WalkingEffects.tscn" id="1_0ipjt"]
 [ext_resource type="Script" path="res://player/FPSCharacter_Interaction.cs" id="2_fmih3"]
@@ -8,6 +8,7 @@
 [ext_resource type="AudioStream" uid="uid://com3v7we27wvm" path="res://audio/audio_streams/flashlight/173419__lightyarn__flashlight-off.wav" id="4_wmi65"]
 [ext_resource type="PackedScene" uid="uid://duwf5mdtkjlre" path="res://core_systems/item_inspect/item_inspect.tscn" id="5_iw50w"]
 [ext_resource type="Texture2D" uid="uid://byineyv5wipjo" path="res://textures/cursor-hand-grab-svgrepo-com.png" id="6_fb16h"]
+[ext_resource type="Texture2D" uid="uid://ci4to6fyojbqm" path="res://textures/wave-hand-svgrepo-com.png" id="7_bqbud"]
 [ext_resource type="PackedScene" uid="uid://bctrg21138lx" path="res://ui/report_bug.tscn" id="7_oxteu"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xryx5"]
@@ -73,6 +74,7 @@ mouse_filter = 1
 script = ExtResource("3_etvvy")
 
 [node name="Crosshair" type="ColorRect" parent="BasicHud" index="0"]
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -87,6 +89,7 @@ grow_vertical = 2
 
 [node name="UseLabel" type="Label" parent="BasicHud/Crosshair" index="0"]
 custom_minimum_size = Vector2i(30, 0)
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -101,9 +104,10 @@ grow_vertical = 2
 text = "use"
 horizontal_alignment = 1
 
-[node name="HandGrabTexture" type="TextureRect" parent="BasicHud" index="1"]
+[node name="HandGrabbedTexture" type="TextureRect" parent="BasicHud" index="1"]
 self_modulate = Color(1, 1, 1, 0.470588)
 custom_minimum_size = Vector2i(50, 50)
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -116,6 +120,24 @@ offset_bottom = 63.753
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("6_fb16h")
+ignore_texture_size = true
+
+[node name="HandCanGrabTexture" type="TextureRect" parent="BasicHud" index="2"]
+self_modulate = Color(1, 1, 1, 0.470588)
+custom_minimum_size = Vector2i(50, 50)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -25.526
+offset_top = 13.753
+offset_right = 24.474
+offset_bottom = 63.753
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_bqbud")
 ignore_texture_size = true
 
 [node name="Item_inspect" parent="." index="9" instance=ExtResource("5_iw50w")]
@@ -135,6 +157,7 @@ mouse_filter = 1
 script = ExtResource("4_75mlc")
 
 [node name="DebugEnabledLabel" type="Label" parent="DebugHud" index="0"]
+layout_mode = 0
 offset_left = 4.0
 offset_right = 204.0
 offset_bottom = 26.0
@@ -142,6 +165,7 @@ theme_override_font_sizes/font_size = 12
 text = "F1 for edit debug hud"
 
 [node name="FPSLabel" type="Label" parent="DebugHud" index="1"]
+layout_mode = 0
 offset_left = 3.0
 offset_top = 13.0
 offset_right = 142.0
@@ -151,6 +175,7 @@ text = "FPS: "
 
 [node name="CustomLabelsVBox" type="VBoxContainer" parent="DebugHud" index="2"]
 custom_minimum_size = Vector2i(700, 600)
+layout_mode = 0
 offset_left = 5.0
 offset_top = 49.0
 offset_right = 949.0
@@ -160,6 +185,7 @@ metadata/_edit_lock_ = true
 [node name="CLLabel0" type="Label" parent="DebugHud/CustomLabelsVBox" index="0"]
 visible = false
 custom_minimum_size = Vector2i(700, 30)
+layout_mode = 2
 offset_right = 944.0
 offset_bottom = 30.0
 text = "CL[0]"
@@ -167,6 +193,7 @@ text = "CL[0]"
 [node name="CLLabel1" type="Label" parent="DebugHud/CustomLabelsVBox" index="1"]
 visible = false
 custom_minimum_size = Vector2i(700, 30)
+layout_mode = 2
 offset_top = 34.0
 offset_right = 944.0
 offset_bottom = 64.0
@@ -175,6 +202,7 @@ text = "CL[1]"
 [node name="CLLabel2" type="Label" parent="DebugHud/CustomLabelsVBox" index="2"]
 visible = false
 custom_minimum_size = Vector2i(700, 30)
+layout_mode = 2
 offset_top = 68.0
 offset_right = 944.0
 offset_bottom = 98.0
@@ -184,6 +212,7 @@ max_lines_visible = 1
 [node name="CLLabel3" type="Label" parent="DebugHud/CustomLabelsVBox" index="3"]
 visible = false
 custom_minimum_size = Vector2i(700, 30)
+layout_mode = 2
 offset_top = 102.0
 offset_right = 944.0
 offset_bottom = 132.0
@@ -192,6 +221,7 @@ text = "CL(3)"
 [node name="CLLabel4" type="Label" parent="DebugHud/CustomLabelsVBox" index="4"]
 visible = false
 custom_minimum_size = Vector2i(700, 30)
+layout_mode = 2
 offset_top = 136.0
 offset_right = 944.0
 offset_bottom = 166.0
@@ -200,6 +230,7 @@ text = "CL(4)"
 [node name="CLLabel5" type="Label" parent="DebugHud/CustomLabelsVBox" index="5"]
 visible = false
 custom_minimum_size = Vector2i(700, 30)
+layout_mode = 2
 offset_top = 170.0
 offset_right = 944.0
 offset_bottom = 200.0
@@ -208,6 +239,7 @@ text = "CL(5)"
 [node name="CLLabel6" type="Label" parent="DebugHud/CustomLabelsVBox" index="6"]
 visible = false
 custom_minimum_size = Vector2i(700, 30)
+layout_mode = 2
 offset_top = 204.0
 offset_right = 944.0
 offset_bottom = 234.0
@@ -216,6 +248,7 @@ text = "CL(6)"
 [node name="CLLabel7" type="Label" parent="DebugHud/CustomLabelsVBox" index="7"]
 visible = false
 custom_minimum_size = Vector2i(700, 30)
+layout_mode = 2
 offset_top = 238.0
 offset_right = 944.0
 offset_bottom = 268.0
@@ -224,6 +257,7 @@ text = "CL(7)"
 [node name="CLLabel8" type="Label" parent="DebugHud/CustomLabelsVBox" index="8"]
 visible = false
 custom_minimum_size = Vector2i(700, 30)
+layout_mode = 2
 offset_top = 272.0
 offset_right = 944.0
 offset_bottom = 302.0
@@ -232,6 +266,7 @@ text = "CL(8)"
 [node name="CLLabel9" type="Label" parent="DebugHud/CustomLabelsVBox" index="9"]
 visible = false
 custom_minimum_size = Vector2i(700, 30)
+layout_mode = 2
 offset_top = 306.0
 offset_right = 944.0
 offset_bottom = 336.0
@@ -239,6 +274,7 @@ text = "CL(9)"
 
 [node name="OptionsPanel" type="Panel" parent="DebugHud" index="3"]
 custom_minimum_size = Vector2i(300, 170)
+layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
@@ -248,6 +284,7 @@ grow_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_xryx5")
 
 [node name="NadpisLabel" type="Label" parent="DebugHud/OptionsPanel" index="0"]
+layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 23.0
@@ -257,6 +294,7 @@ horizontal_alignment = 1
 metadata/_edit_lock_ = true
 
 [node name="ColorRect" type="ColorRect" parent="DebugHud/OptionsPanel/NadpisLabel" index="0"]
+layout_mode = 0
 offset_top = 40.0
 offset_right = 298.0
 offset_bottom = 46.0
@@ -264,6 +302,7 @@ color = Color(0.654902, 0.235294, 0, 1)
 
 [node name="TabContainer" type="TabContainer" parent="DebugHud/OptionsPanel" index="1"]
 self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -275,6 +314,7 @@ theme_override_styles/tab_selected = SubResource("StyleBoxFlat_2d7rl")
 theme_override_styles/tab_unselected = SubResource("StyleBoxFlat_yi35b")
 
 [node name="main" type="VBoxContainer" parent="DebugHud/OptionsPanel/TabContainer" index="1"]
+layout_mode = 2
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -283,12 +323,14 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="ShowFps_CheckBox" type="CheckBox" parent="DebugHud/OptionsPanel/TabContainer/main" index="0"]
+layout_mode = 2
 offset_right = 300.0
 offset_bottom = 30.0
 theme_override_font_sizes/font_size = 15
 text = "Show FPS"
 
 [node name="ShowPerformance_CheckBox" type="CheckBox" parent="DebugHud/OptionsPanel/TabContainer/main" index="1"]
+layout_mode = 2
 offset_top = 34.0
 offset_right = 300.0
 offset_bottom = 64.0
@@ -297,6 +339,7 @@ text = "Show Performance"
 
 [node name="HSeparator" type="HSeparator" parent="DebugHud/OptionsPanel/TabContainer/main" index="2"]
 custom_minimum_size = Vector2i(250, 0)
+layout_mode = 2
 offset_top = 68.0
 offset_right = 300.0
 offset_bottom = 72.0
@@ -304,6 +347,7 @@ grow_horizontal = 2
 grow_vertical = 0
 
 [node name="CustomLabelEnable_Checkbox0" type="CheckBox" parent="DebugHud/OptionsPanel/TabContainer/main" index="3"]
+layout_mode = 2
 offset_top = 76.0
 offset_right = 300.0
 offset_bottom = 106.0
@@ -311,6 +355,7 @@ theme_override_font_sizes/font_size = 15
 text = "CustomLabel 0"
 
 [node name="CustomLabelEnable_Checkbox1" type="CheckBox" parent="DebugHud/OptionsPanel/TabContainer/main" index="4"]
+layout_mode = 2
 offset_top = 110.0
 offset_right = 300.0
 offset_bottom = 140.0
@@ -318,6 +363,7 @@ theme_override_font_sizes/font_size = 15
 text = "CustomLabel 1"
 
 [node name="CustomLabelEnable_Checkbox2" type="CheckBox" parent="DebugHud/OptionsPanel/TabContainer/main" index="5"]
+layout_mode = 2
 offset_top = 144.0
 offset_right = 300.0
 offset_bottom = 174.0
@@ -325,6 +371,7 @@ theme_override_font_sizes/font_size = 15
 text = "CustomLabel 2"
 
 [node name="CustomLabelEnable_Checkbox3" type="CheckBox" parent="DebugHud/OptionsPanel/TabContainer/main" index="6"]
+layout_mode = 2
 offset_top = 178.0
 offset_right = 300.0
 offset_bottom = 208.0
@@ -332,6 +379,7 @@ theme_override_font_sizes/font_size = 15
 text = "CustomLabel 3"
 
 [node name="CustomLabelEnable_Checkbox4" type="CheckBox" parent="DebugHud/OptionsPanel/TabContainer/main" index="7"]
+layout_mode = 2
 offset_top = 212.0
 offset_right = 300.0
 offset_bottom = 242.0
@@ -339,6 +387,7 @@ theme_override_font_sizes/font_size = 15
 text = "CustomLabel 4"
 
 [node name="CustomLabelEnable_Checkbox5" type="CheckBox" parent="DebugHud/OptionsPanel/TabContainer/main" index="8"]
+layout_mode = 2
 offset_top = 246.0
 offset_right = 300.0
 offset_bottom = 276.0
@@ -346,6 +395,7 @@ theme_override_font_sizes/font_size = 15
 text = "CustomLabel 5"
 
 [node name="CustomLabelEnable_Checkbox6" type="CheckBox" parent="DebugHud/OptionsPanel/TabContainer/main" index="9"]
+layout_mode = 2
 offset_top = 280.0
 offset_right = 300.0
 offset_bottom = 310.0
@@ -353,6 +403,7 @@ theme_override_font_sizes/font_size = 15
 text = "CustomLabel 6"
 
 [node name="CustomLabelEnable_Checkbox7" type="CheckBox" parent="DebugHud/OptionsPanel/TabContainer/main" index="10"]
+layout_mode = 2
 offset_top = 314.0
 offset_right = 300.0
 offset_bottom = 344.0
@@ -360,6 +411,7 @@ theme_override_font_sizes/font_size = 15
 text = "CustomLabel 7"
 
 [node name="CustomLabelEnable_Checkbox8" type="CheckBox" parent="DebugHud/OptionsPanel/TabContainer/main" index="11"]
+layout_mode = 2
 offset_top = 348.0
 offset_right = 300.0
 offset_bottom = 378.0
@@ -367,6 +419,7 @@ theme_override_font_sizes/font_size = 15
 text = "CustomLabel 8"
 
 [node name="CustomLabelEnable_Checkbox9" type="CheckBox" parent="DebugHud/OptionsPanel/TabContainer/main" index="12"]
+layout_mode = 2
 offset_top = 382.0
 offset_right = 300.0
 offset_bottom = 412.0
@@ -375,6 +428,7 @@ text = "CustomLabel 9"
 
 [node name="HSeparator2" type="HSeparator" parent="DebugHud/OptionsPanel/TabContainer/main" index="13"]
 custom_minimum_size = Vector2i(250, 0)
+layout_mode = 2
 offset_top = 416.0
 offset_right = 300.0
 offset_bottom = 420.0
@@ -382,6 +436,7 @@ grow_horizontal = 2
 grow_vertical = 0
 
 [node name="EnableWorldOcclusionCulling_CheckBox" type="CheckBox" parent="DebugHud/OptionsPanel/TabContainer/main" index="14"]
+layout_mode = 2
 offset_top = 424.0
 offset_right = 300.0
 offset_bottom = 454.0
@@ -390,6 +445,7 @@ text = "Enable worldlevel occlusion cull"
 
 [node name="HSeparator3" type="HSeparator" parent="DebugHud/OptionsPanel/TabContainer/main" index="15"]
 custom_minimum_size = Vector2i(250, 0)
+layout_mode = 2
 offset_top = 458.0
 offset_right = 300.0
 offset_bottom = 462.0
@@ -398,6 +454,7 @@ grow_vertical = 0
 
 [node name="level" type="VBoxContainer" parent="DebugHud/OptionsPanel/TabContainer" index="2"]
 visible = false
+layout_mode = 2
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -407,6 +464,7 @@ grow_vertical = 2
 
 [node name="Label" type="Label" parent="DebugHud/OptionsPanel" index="2"]
 custom_minimum_size = Vector2i(150, 0)
+layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -424,6 +482,7 @@ horizontal_alignment = 1
 
 [node name="QuitGameButton" type="Button" parent="DebugHud/OptionsPanel" index="3"]
 custom_minimum_size = Vector2i(200, 30)
+layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -439,6 +498,7 @@ text = "Quit Game"
 
 [node name="PerformancePanel" type="Panel" parent="DebugHud" index="4"]
 self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -449,6 +509,7 @@ grow_horizontal = 0
 mouse_filter = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="DebugHud/PerformancePanel" index="0"]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -457,12 +518,14 @@ grow_vertical = 2
 
 [node name="DrawCallsLabel" type="Label" parent="DebugHud/PerformancePanel/VBoxContainer" index="0"]
 custom_minimum_size = Vector2i(250, 30)
+layout_mode = 2
 offset_right = 278.0
 offset_bottom = 30.0
 text = "draw calls: "
 
 [node name="ObjectsLabel" type="Label" parent="DebugHud/PerformancePanel/VBoxContainer" index="1"]
 custom_minimum_size = Vector2i(250, 30)
+layout_mode = 2
 offset_top = 34.0
 offset_right = 278.0
 offset_bottom = 64.0
@@ -470,6 +533,7 @@ text = "objects:"
 
 [node name="PrimitivesLabel" type="Label" parent="DebugHud/PerformancePanel/VBoxContainer" index="2"]
 custom_minimum_size = Vector2i(250, 30)
+layout_mode = 2
 offset_top = 68.0
 offset_right = 278.0
 offset_bottom = 98.0
@@ -477,6 +541,7 @@ text = "primitives:"
 
 [node name="VideoMemoryLabel" type="Label" parent="DebugHud/PerformancePanel/VBoxContainer" index="3"]
 custom_minimum_size = Vector2i(250, 30)
+layout_mode = 2
 offset_top = 102.0
 offset_right = 278.0
 offset_bottom = 132.0

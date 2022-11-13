@@ -115,7 +115,7 @@ public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
 		base._PhysicsProcess(delta);
 
 		basicHud.SetUseVisible(false);
-		basicHud.SetHandGrabVisible(false);
+		basicHud.SetHandGrabState(false, false);
 
 		bool useNow = IsInputEnable() && Input.IsActionJustPressed("UseAction");
 		bool grabNow = IsInputEnable() && Input.IsActionPressed("mouseClickLeft");

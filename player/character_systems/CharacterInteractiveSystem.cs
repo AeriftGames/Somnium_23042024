@@ -15,6 +15,18 @@ public partial class CharacterInteractiveSystem : Godot.Object
     RigidBody3D pickedBody = null;
     bool isGrabbing = false;
 
+    public struct SPhysicalGrabbedItemParams 
+    {
+        public Vector3 inertia;
+        public float angularDamp;
+        public float linearDamp;
+        public float friction;
+        public float bounce;
+        public float mass;
+    }
+
+    SPhysicalGrabbedItemParams lastGrabbedItemOriginalParams;
+
     public CharacterInteractiveSystem(FPSCharacter_Interaction newCharacterOwner, BasicHud newBasichud)
     {
         character = newCharacterOwner;
@@ -51,17 +63,6 @@ public partial class CharacterInteractiveSystem : Godot.Object
 
     public void SetActualInteractiveObject(Node newInteractiveObject, Vector3 hitPosition)
     {
-        /*
-        if(actualInteractiveObject != newInteractiveObject)
-        {
-            interactive_object interactiveObject = (interactive_object)actualInteractiveObject;
-            if(interactiveObject.InteractiveLevel == interactive_object.EInteractiveLevel.OnlyGrab ||
-                interactiveObject.InteractiveLevel == interactive_object.EInteractiveLevel.UseAndGrab)
-            {
-
-            }
-        }
-        */
         actualInteractiveObject = newInteractiveObject;
     }
 
@@ -103,10 +104,20 @@ public partial class CharacterInteractiveSystem : Godot.Object
 
     public void HandGrabbingUpdate(bool grabNow, double delta)
     {
-        basicHud.SetHandGrabVisible(false);
+
+        if(actualInteractiveObject != null && grabNow == false)
+        {
+            interactive_object interactiveObject = (interactive_object)actualInteractiveObject;
+            if(interactiveObject.InteractiveLevel == interactive_object.EInteractiveLevel.OnlyGrab ||
+                interactiveObject.InteractiveLevel == interactive_object.EInteractiveLevel.UseAndGrab)
+            {
+                basicHud.SetHandGrabState(true, false);
+            }
+        }
+
         if (isGrabbing && grabNow && pickedBody != null)
         {
-            basicHud.SetHandGrabVisible(true);
+            basicHud.SetHandGrabState(true,true);
             // grabbing
             Vector3 a = pickedBody.GlobalTransform.origin;
             Vector3 b = character.objectCamera.HandGrabPosition.GlobalPosition;
@@ -125,17 +136,21 @@ public partial class CharacterInteractiveSystem : Godot.Object
         isGrabbing = true;
 
         if (pickedBody != grabbedObject && pickedBody != null)
-            SetRigidBodyParamForGrab(pickedBody,false);
+        {
+            SetRigidBodyParamForGrab(pickedBody, false);
+        }
 
-        pickedBody = grabbedObject;
-
-        if(pickedBody != null)
+        // novy objekt
+        if(pickedBody == null && grabbedObject != null)
+        {
+            pickedBody = grabbedObject;
             SetRigidBodyParamForGrab(pickedBody, true);
+        }
 
     }
     public void StopGrabbing()
     {
-        basicHud.SetHandGrabVisible(false);
+        basicHud.SetHandGrabState(false, false);
 
         SetRigidBodyParamForGrab(pickedBody, false);
 
@@ -148,25 +163,34 @@ public partial class CharacterInteractiveSystem : Godot.Object
     {
         if(newGrab)
         {
-            // grab
+            // ulozime si originalni fyzikalni data
+            lastGrabbedItemOriginalParams.inertia = grabbedObject.Inertia;
+            lastGrabbedItemOriginalParams.angularDamp = grabbedObject.AngularDamp;
+            lastGrabbedItemOriginalParams.linearDamp = grabbedObject.LinearDamp;
+            lastGrabbedItemOriginalParams.friction = grabbedObject.PhysicsMaterialOverride.Friction;
+            lastGrabbedItemOriginalParams.bounce = grabbedObject.PhysicsMaterialOverride.Bounce;
+            lastGrabbedItemOriginalParams.mass = grabbedObject.Mass;
+
+            // grab for rotation
             character.objectCamera.HandGrabJoint.NodeB = grabbedObject.GetPath();
 
+            // nastavime nova fyzikalni data pro grab
             grabbedObject.Inertia = new Vector3(0.5f, 0.5f, 0.5f);
             grabbedObject.AngularDamp = 3.0f;
             grabbedObject.LinearDamp = 1;
-            grabbedObject.PhysicsMaterialOverride.Friction = 0.0f;
+            grabbedObject.PhysicsMaterialOverride.Friction = 0.15f;
             grabbedObject.PhysicsMaterialOverride.Bounce = 0.0f;
             grabbedObject.Mass = 1.0f;
         }
         else
         {
-            // normal
-            grabbedObject.Inertia = new Vector3(0.5f, 0.5f, 0.5f);
-            grabbedObject.AngularDamp = 0.2f;
-            grabbedObject.LinearDamp = 0.2f;
-            grabbedObject.PhysicsMaterialOverride.Friction = 0.8f;
-            grabbedObject.PhysicsMaterialOverride.Bounce = 0.1f;
-            grabbedObject.Mass = 1.0f;
+            // pri opusteni grab, nahrajeme objektu puvodni data
+            grabbedObject.Inertia = lastGrabbedItemOriginalParams.inertia;
+            grabbedObject.AngularDamp = lastGrabbedItemOriginalParams.angularDamp;
+            grabbedObject.LinearDamp = lastGrabbedItemOriginalParams.linearDamp;
+            grabbedObject.PhysicsMaterialOverride.Friction = lastGrabbedItemOriginalParams.friction;
+            grabbedObject.PhysicsMaterialOverride.Bounce = lastGrabbedItemOriginalParams.bounce;
+            grabbedObject.Mass = lastGrabbedItemOriginalParams.mass;
         }
     }
 }

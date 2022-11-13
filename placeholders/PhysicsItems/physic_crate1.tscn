@@ -31,22 +31,22 @@ _surfaces = [{
 size = Vector3(0.515, 0.018, 0.294)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_o5o27"]
-size = Vector3(0.5, 0.1, 0.01)
+size = Vector3(0.5, 0.106943, 0.01)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_5qemw"]
-size = Vector3(0.5, 0.1, 0.01)
+size = Vector3(0.5, 0.110946, 0.01)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_psf8y"]
-size = Vector3(0.023, 0.174, 0.289)
+size = Vector3(0.023, 0.181348, 0.289)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6u1xu"]
-size = Vector3(0.023, 0.174, 0.289)
+size = Vector3(0.023, 0.182597, 0.289)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_d42n3"]
 radius = 2.5
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_51f0j"]
-size = Vector3(0.509, 0.184, 0.307)
+size = Vector3(0.519777, 0.122257, 0.303531)
 
 [node name="PhysicItem_test" type="RigidBody3D"]
 collision_layer = 9
@@ -66,23 +66,23 @@ PhysicEffectsAudioStream = [ExtResource("2_i8ff8")]
 mesh = SubResource("ArrayMesh_0nrtm")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00945059, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00331323, 0)
 shape = SubResource("BoxShape3D_pxcv8")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0638454, 0.14256)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0492509, 0.14256)
 shape = SubResource("BoxShape3D_o5o27")
 
 [node name="CollisionShape3D3" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0638454, -0.141316)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0503839, -0.141316)
 shape = SubResource("BoxShape3D_5qemw")
 
 [node name="CollisionShape3D4" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.23809, 0.0935286, -0.000260392)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.23809, 0.0856933, -0.000260392)
 shape = SubResource("BoxShape3D_psf8y")
 
 [node name="CollisionShape3D5" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.237391, 0.0935286, -0.000260392)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.237391, 0.0860322, -0.000260392)
 shape = SubResource("BoxShape3D_6u1xu")
 
 [node name="interactive_object" type="Node3D" parent="." groups=["interactive_object"]]
@@ -107,7 +107,7 @@ shape = SubResource("SphereShape3D_d42n3")
 metadata/_edit_lock_ = true
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="interactive_object/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.090963, 0.000888787)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0523628, 0.000888787)
 shape = SubResource("BoxShape3D_51f0j")
 
 [node name="AudioPlayer_PhysicEffects" type="AudioStreamPlayer3D" parent="."]
