@@ -14,6 +14,7 @@ public partial class CharacterInteractiveSystem : Godot.Object
     Node actualInteractiveObject = null;
     RigidBody3D pickedBody = null;
     bool isGrabbing = false;
+    bool isCanNewGrab = true;
 
     public struct SPhysicalGrabbedItemParams 
     {
@@ -97,15 +98,16 @@ public partial class CharacterInteractiveSystem : Godot.Object
         if(newInteractiveObject.InteractiveLevel == interactive_object.EInteractiveLevel.OnlyGrab ||
             newInteractiveObject.InteractiveLevel == interactive_object.EInteractiveLevel.UseAndGrab)
         {
-            if(newGrabNow)
+            if(newGrabNow && isCanNewGrab)
                 StartGrabbing((RigidBody3D)actualInteractiveObject.GetParent());
         }
     }
 
-    public void HandGrabbingUpdate(bool grabNow, double delta)
+    public void HandGrabbingUpdate(bool newGrabNow, bool newThrowObjectNow, double delta)
     {
-
-        if(actualInteractiveObject != null && grabNow == false)
+        // otestujeme zda je tento object nastaveny pro grab a zda aktualne nejaky objekt negrabujeme
+        // pokd jsou podminky splneny, nastavime viditelnou normal hand
+        if (actualInteractiveObject != null && newGrabNow == false)
         {
             interactive_object interactiveObject = (interactive_object)actualInteractiveObject;
             if(interactiveObject.InteractiveLevel == interactive_object.EInteractiveLevel.OnlyGrab ||
@@ -115,7 +117,9 @@ public partial class CharacterInteractiveSystem : Godot.Object
             }
         }
 
-        if (isGrabbing && grabNow && pickedBody != null)
+        // pokud jsme aktualne ve stavu grabbing, stale prichazi input pro grab tak
+        // updatujeme vvvvvvvvvvvpozice objektu pro grabbing
+        if (isCanNewGrab && isGrabbing && newGrabNow && pickedBody != null)
         {
             basicHud.SetHandGrabState(true,true);
             // grabbing
@@ -124,11 +128,27 @@ public partial class CharacterInteractiveSystem : Godot.Object
 
             pickedBody.LinearVelocity = (b - a) * 4;
         }
-        else if(isGrabbing && grabNow == false)
+        else if(isGrabbing && newGrabNow == false)
         {
             // zahazujeme objekt
             StopGrabbing();
+            pickedBody = null;
         }
+
+        // Throw impulse
+        if (isGrabbing && newGrabNow && pickedBody != null && newThrowObjectNow)
+        {
+            StopGrabbing();
+            pickedBody.ApplyCentralImpulse(character.GetFPSCharacterCamera().
+                GlobalTransform.basis.z.Normalized() * -6.0f);
+            isCanNewGrab = false;
+            pickedBody = null;
+        }
+
+        // Reset pro novy grab, napriklad po hodu, donuti hrace pustit tlacitko pro grab, i kdyby na jeden frame
+        // pokud ho pusti, resetujeme moznost znovu grabbovat
+        if (isCanNewGrab == false && newGrabNow == false)
+            isCanNewGrab = true;
     }
 
     public void StartGrabbing(RigidBody3D grabbedObject)
@@ -151,11 +171,8 @@ public partial class CharacterInteractiveSystem : Godot.Object
     public void StopGrabbing()
     {
         basicHud.SetHandGrabState(false, false);
-
         SetRigidBodyParamForGrab(pickedBody, false);
-
         isGrabbing = false;
-        pickedBody = null;
         character.objectCamera.HandGrabJoint.NodeB = character.objectCamera.HandGrabJoint.GetPath();
     }
 
