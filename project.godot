@@ -163,6 +163,10 @@ testFlashlight={
 3d_physics/layer_3="interactive_layer"
 3d_physics/layer_4="physics_items"
 
+[physics]
+
+3d/solver/solver_iterations=32
+
 [rendering]
 
 driver/threads/thread_model=0
