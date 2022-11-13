@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Data;
+using System.Linq.Expressions;
 
 // propojit s basichud
 // zprovoznit puvodni hud texty
@@ -50,6 +51,17 @@ public partial class CharacterInteractiveSystem : Godot.Object
 
     public void SetActualInteractiveObject(Node newInteractiveObject, Vector3 hitPosition)
     {
+        /*
+        if(actualInteractiveObject != newInteractiveObject)
+        {
+            interactive_object interactiveObject = (interactive_object)actualInteractiveObject;
+            if(interactiveObject.InteractiveLevel == interactive_object.EInteractiveLevel.OnlyGrab ||
+                interactiveObject.InteractiveLevel == interactive_object.EInteractiveLevel.UseAndGrab)
+            {
+
+            }
+        }
+        */
         actualInteractiveObject = newInteractiveObject;
     }
 
@@ -99,7 +111,7 @@ public partial class CharacterInteractiveSystem : Godot.Object
             Vector3 a = pickedBody.GlobalTransform.origin;
             Vector3 b = character.objectCamera.HandGrabPosition.GlobalPosition;
 
-            pickedBody.LinearVelocity = (b - a) * 10;
+            pickedBody.LinearVelocity = (b - a) * 4;
         }
         else if(isGrabbing && grabNow == false)
         {
@@ -111,20 +123,50 @@ public partial class CharacterInteractiveSystem : Godot.Object
     public void StartGrabbing(RigidBody3D grabbedObject)
     {
         isGrabbing = true;
-        pickedBody = grabbedObject;
-        character.objectCamera.HandGrabJoint.NodeB = pickedBody.GetPath();
 
-        pickedBody.PhysicsMaterialOverride.Friction = 0.0f;
-        pickedBody.PhysicsMaterialOverride.Bounce = 0.0f;
+        if (pickedBody != grabbedObject && pickedBody != null)
+            SetRigidBodyParamForGrab(pickedBody,false);
+
+        pickedBody = grabbedObject;
+
+        if(pickedBody != null)
+            SetRigidBodyParamForGrab(pickedBody, true);
+
     }
     public void StopGrabbing()
     {
         basicHud.SetHandGrabVisible(false);
-        pickedBody.PhysicsMaterialOverride.Friction = 0.8f;
-        pickedBody.PhysicsMaterialOverride.Bounce = 0.25f;
+
+        SetRigidBodyParamForGrab(pickedBody, false);
 
         isGrabbing = false;
         pickedBody = null;
         character.objectCamera.HandGrabJoint.NodeB = character.objectCamera.HandGrabJoint.GetPath();
+    }
+
+    public void SetRigidBodyParamForGrab(RigidBody3D grabbedObject, bool newGrab)
+    {
+        if(newGrab)
+        {
+            // grab
+            character.objectCamera.HandGrabJoint.NodeB = grabbedObject.GetPath();
+
+            grabbedObject.Inertia = new Vector3(0.5f, 0.5f, 0.5f);
+            grabbedObject.AngularDamp = 3.0f;
+            grabbedObject.LinearDamp = 1;
+            grabbedObject.PhysicsMaterialOverride.Friction = 0.0f;
+            grabbedObject.PhysicsMaterialOverride.Bounce = 0.0f;
+            grabbedObject.Mass = 1.0f;
+        }
+        else
+        {
+            // normal
+            grabbedObject.Inertia = new Vector3(0.5f, 0.5f, 0.5f);
+            grabbedObject.AngularDamp = 0.2f;
+            grabbedObject.LinearDamp = 0.2f;
+            grabbedObject.PhysicsMaterialOverride.Friction = 0.8f;
+            grabbedObject.PhysicsMaterialOverride.Bounce = 0.1f;
+            grabbedObject.Mass = 1.0f;
+        }
     }
 }

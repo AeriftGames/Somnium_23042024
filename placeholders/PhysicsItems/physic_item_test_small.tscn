@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://x5o6n083ax2a"]
+[gd_scene load_steps=9 format=3 uid="uid://dgse04gq5at0"]
 
 [ext_resource type="Script" path="res://placeholders/PhysicsItems/physic_item_test.cs" id="1_8fm2c"]
 [ext_resource type="Script" path="res://core_systems/interactive_system/interactive_object.cs" id="2_ccmec"]
@@ -7,14 +7,14 @@
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_l84ni"]
 friction = 0.8
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_gdsnn"]
-size = Vector3(0.25, 0.25, 0.25)
+[sub_resource type="BoxShape3D" id="BoxShape3D_gm6kx"]
+size = Vector3(0.125, 0.125, 0.125)
 
 [sub_resource type="BoxMesh" id="BoxMesh_p2lha"]
-size = Vector3(0.25, 0.25, 0.25)
+size = Vector3(0.125, 0.125, 0.125)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_3ehv4"]
-size = Vector3(0.254, 0.254, 0.254)
+[sub_resource type="BoxShape3D" id="BoxShape3D_lqjlt"]
+size = Vector3(0.127, 0.127, 0.127)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_d42n3"]
 radius = 2.5
@@ -33,7 +33,7 @@ UseActionText = ""
 PhysicEffectsAudioStream = [ExtResource("2_i8ff8")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("BoxShape3D_gdsnn")
+shape = SubResource("BoxShape3D_gm6kx")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_p2lha")
@@ -50,7 +50,7 @@ collision_mask = 0
 metadata/_edit_lock_ = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="interactive_object/StaticBody3D"]
-shape = SubResource("BoxShape3D_3ehv4")
+shape = SubResource("BoxShape3D_lqjlt")
 
 [node name="interactive_object_area3D" type="Area3D" parent="interactive_object/StaticBody3D"]
 collision_layer = 4

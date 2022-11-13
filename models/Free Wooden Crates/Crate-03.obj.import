@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cc33ykiotan8d"
+path="res://.godot/imported/Crate-03.obj-92ccecb7d3837f290763fb4a3a15b3ff.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Crate-03.obj-92ccecb7d3837f290763fb4a3a15b3ff.mesh"]
+
+source_file="res://models/Free Wooden Crates/Crate-03.obj"
+dest_files=["res://.godot/imported/Crate-03.obj-92ccecb7d3837f290763fb4a3a15b3ff.mesh", "res://.godot/imported/Crate-03.obj-92ccecb7d3837f290763fb4a3a15b3ff.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

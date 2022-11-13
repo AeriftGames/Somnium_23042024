@@ -120,7 +120,9 @@ public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
 		bool useNow = IsInputEnable() && Input.IsActionJustPressed("UseAction");
 		bool grabNow = IsInputEnable() && Input.IsActionPressed("mouseClickLeft");
 
-		DetectInteractiveObjectWithCameraRay();
+		if(grabNow == false)
+			DetectInteractiveObjectWithCameraRay();
+
 		InteractiveSystem.Update(useNow,grabNow,delta);
 		InteractiveSystem.HandGrabbingUpdate(grabNow,delta);
 	}

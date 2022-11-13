@@ -6,6 +6,8 @@ public partial class physic_item_test : RigidBody3D
     [Export] string UseActionText = "no action";
     [Export] string ObjectName = "box";
 
+    [Export] public AudioStream[] PhysicEffectsAudioStream;
+
     interactive_object interactiveObject;
 
     //
@@ -37,6 +39,12 @@ public partial class physic_item_test : RigidBody3D
     public void GrabUpdate(double delta)
     {
     }
+    /*
+    public void _on_body_shape_entered()
+    {
+
+    }
+    */
 
     public void message_update()
     {
