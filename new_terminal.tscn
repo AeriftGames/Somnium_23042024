@@ -25,8 +25,4 @@ texture = SubResource("ViewportTexture_16ggq")
 [node name="OmniLight3D" type="OmniLight3D" parent="." index="3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.58452, 2.51939, 2.16399)
 
-[node name="Camera3D" type="Camera3D" parent="." index="4"]
-transform = Transform3D(-0.0792246, 0, 0.996857, 0, 1, 0, -0.996857, 0, -0.0792246, 1.72098, 0.248463, 0)
-current = true
-
 [editable path="Test"]
