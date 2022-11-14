@@ -6,6 +6,8 @@ var tween2: Tween
 var messages_dict: Dictionary
 var button: PackedScene = load("res://terminal_mail_button.tscn")
 var selected_message: TerminalMessage
+var children_messages
+var children_selected: bool = false
 
 
 # Called when the node enters the scene tree for the first time.
@@ -15,6 +17,7 @@ func _ready() -> void:
 	tween = create_tween()
 	tween.tween_property(self, "size", Vector2(994, 556), 1.1)
 	tween.tween_callback(self.test)
+	children_messages = $Panel/ScrollContainer/VBoxContainer.get_children()
 
 
 func _shrink_and_hide() -> void:
@@ -64,7 +67,14 @@ func _connect_signals() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta) -> void:
-	pass
+	children_selected = false
+	var x = $Panel/ScrollContainer/VBoxContainer.get_children()
+	for c in children_messages:
+			if c.button_pressed:
+				children_selected = true
+	if !children_selected:
+		$Panel/ScrollContainer2/VBoxContainer/Subject.text = ""
+		$Panel/ScrollContainer2/VBoxContainer/Message.text = ""
 
 
 func _on_button_pressed(button, state) -> void:

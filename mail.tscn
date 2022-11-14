@@ -46,6 +46,7 @@ script = ExtResource("1_1vpmd")
 messages = [ExtResource("2_ofik6"), ExtResource("3_ow2fe"), ExtResource("4_8sqlw")]
 
 [node name="Panel" type="Panel" parent="."]
+layout_mode = 1
 anchors_preset = 9
 anchor_bottom = 1.0
 offset_left = 5.0
@@ -57,6 +58,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_et47l")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Panel"]
 custom_minimum_size = Vector2i(286, 527)
+layout_mode = 0
 offset_left = 10.0
 offset_top = 9.0
 offset_right = 296.0
@@ -65,9 +67,11 @@ horizontal_scroll_mode = 3
 vertical_scroll_mode = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel/ScrollContainer"]
+layout_mode = 2
 
 [node name="ScrollContainer2" type="ScrollContainer" parent="Panel"]
 custom_minimum_size = Vector2i(652, 524)
+layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.053
 anchor_top = 0.018
@@ -79,16 +83,17 @@ offset_right = 651.941
 offset_bottom = 10.154
 grow_horizontal = 0
 horizontal_scroll_mode = 3
-vertical_scroll_mode = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel/ScrollContainer2"]
 clip_contents = true
+layout_mode = 2
 offset_right = 640.0
 offset_bottom = 90.0
 
 [node name="Subject" type="Label" parent="Panel/ScrollContainer2/VBoxContainer"]
 clip_contents = true
 custom_minimum_size = Vector2i(640, 0)
+layout_mode = 2
 offset_right = 640.0
 offset_bottom = 49.0
 theme_override_colors/font_color = Color(0.803922, 0.443137, 0.0588235, 1)
@@ -96,6 +101,7 @@ theme_override_font_sizes/font_size = 35
 autowrap_mode = 2
 
 [node name="HSeparator" type="HSeparator" parent="Panel/ScrollContainer2/VBoxContainer"]
+layout_mode = 2
 offset_top = 53.0
 offset_right = 640.0
 offset_bottom = 63.0
@@ -105,6 +111,7 @@ theme_override_styles/separator = SubResource("StyleBoxFlat_d6v4w")
 [node name="Message" type="Label" parent="Panel/ScrollContainer2/VBoxContainer"]
 clip_contents = true
 custom_minimum_size = Vector2i(640, 0)
+layout_mode = 2
 offset_top = 67.0
 offset_right = 640.0
 offset_bottom = 90.0
@@ -112,6 +119,7 @@ theme_override_colors/font_color = Color(0.92549, 0.921569, 0.921569, 1)
 autowrap_mode = 2
 
 [node name="ExitButton" type="Button" parent="."]
+layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
