@@ -15,9 +15,15 @@ public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
 {
 	CharacterInteractiveSystem InteractiveSystem = null;
 
-	BasicHud basicHud = null;
+    [ExportGroupAttribute("InteractiveSystem Settings")]
+    [Export] public float LengthInteractRay = 5.0f;
+	[Export] public bool CanUse = true;
+    [Export] public bool CanGrabObject = true;
+    [Export] public bool CanThrowObject = true;
+    [Export] public bool CanRotateObject = true;
+    [Export] public bool CanMoveFarOrNearObject = true;
 
-	[Export] public float LengthInteractRay = 5.0f;
+    BasicHud basicHud = null;
 
 	Vector3 tempCamRot = Vector3.Zero;
 	Vector3 tempTargetLook = Vector3.Zero;
@@ -41,8 +47,6 @@ public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
     [ExportGroupAttribute("Simple Flashlight Settings")]
     [Export] public AudioStream AudioFlashlight_On;
     [Export] public AudioStream AudioFlashlight_Off;
-
-	public Vector2 _MouseMotionForRotation = new Vector2(0,0);
 
     public override void _Ready()
 	{
@@ -123,12 +127,12 @@ public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
 	{
 		base._PhysicsProcess(delta);
 
-		bool useNow = IsInputEnable() && Input.IsActionJustPressed("UseAction");
-		bool grabNow = IsInputEnable() && Input.IsActionPressed("mouseClickLeft");
-		bool throwObjectNow = IsInputEnable() && Input.IsActionJustPressed("throwObject");
-		bool rotateGrabbedObject = IsInputEnable() && Input.IsActionPressed("rotateGrabbedObject");
-		bool moveFarGrabbedObject = IsInputEnable() && Input.IsActionJustReleased("moveFarGrabbedObject");
-        bool moveNearGrabbedObject = IsInputEnable() && Input.IsActionJustReleased("moveNearGrabbedObject");
+		bool useNow = IsInputEnable() && CanUse && Input.IsActionJustPressed("UseAction");
+		bool grabNow = IsInputEnable() && CanGrabObject && Input.IsActionPressed("mouseClickLeft");
+		bool throwObjectNow = IsInputEnable() && CanThrowObject && Input.IsActionJustPressed("throwObject");
+		bool rotateGrabbedObject = IsInputEnable() && CanRotateObject && Input.IsActionPressed("rotateGrabbedObject");
+		bool moveFarGrabbedObject = IsInputEnable() && CanMoveFarOrNearObject && Input.IsActionJustReleased("moveFarGrabbedObject");
+        bool moveNearGrabbedObject = IsInputEnable() && CanMoveFarOrNearObject && Input.IsActionJustReleased("moveNearGrabbedObject");
 
         if (grabNow == false)
 			DetectInteractiveObjectWithCameraRay();
