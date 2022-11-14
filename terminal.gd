@@ -93,33 +93,36 @@ func submit(text: String) -> void:
 			_spawn_label("You need to specify program name")
 			_spawn_input()
 		"run mail":
-				_spawn_label("STARTING MAIL")
-				$Timer.start(0.9)
-				await $Timer.timeout
-				_spawn_label(".", false)
-				$Timer.start(0.9)
-				await $Timer.timeout
-				_spawn_label(".", false)
-				$Timer.start(0.9)
-				await $Timer.timeout
-				_spawn_label(".", false)
-				var x = mail_scene.instantiate()
-				$Window.add_child(x)
-				_hide_console(true)
+			_spawn_label("STARTING MAIL")
+			$Timer.start(0.9)
+			await $Timer.timeout
+			_spawn_label(".", false)
+			$Timer.start(0.9)
+			await $Timer.timeout
+			_spawn_label(".", false)
+			$Timer.start(0.9)
+			await $Timer.timeout
+			_spawn_label(".", false)
+			var x = mail_scene.instantiate()
+			$Window.add_child(x)
+			_hide_console(true)
 		"run energy":
-				_spawn_label("STARTING ENERGY")
-				$Timer.start(0.9)
-				await $Timer.timeout
-				_spawn_label(".", false)
-				$Timer.start(0.9)
-				await $Timer.timeout
-				_spawn_label(".", false)
-				$Timer.start(0.9)
-				await $Timer.timeout
-				_spawn_label(".", false)
-				var x = energy_scene.instantiate()
-				$Window.add_child(x)
-				_hide_console(true)
+			_spawn_label("STARTING ENERGY")
+			$Timer.start(0.9)
+			await $Timer.timeout
+			_spawn_label(".", false)
+			$Timer.start(0.9)
+			await $Timer.timeout
+			_spawn_label(".", false)
+			$Timer.start(0.9)
+			await $Timer.timeout
+			_spawn_label(".", false)
+			var x = energy_scene.instantiate()
+			$Window.add_child(x)
+			_hide_console(true)
+		"run secret":
+			_spawn_label("SECRET NOT YET IMPLEMENTED")
+			_spawn_input()
 		"clear":
 			_clear()
 			_spawn_input()
