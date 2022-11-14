@@ -211,18 +211,18 @@ public partial class CharacterInteractiveSystem : Godot.Object
     {
         isGrabbing = true;
 
-        if (pickedBody != grabbedObject && pickedBody != null)
-        {
-            SetRigidBodyParamForGrab(pickedBody, false);
-        }
-
-        // novy objekt
+        // chceme zacit grabovat s novym objektem ?
         if(pickedBody == null && grabbedObject != null)
         {
+            // Set to original handGrabPosition
+            Vector3 actualPosition = character.objectCamera.GetHandGrabMarker().Position;
+            actualPosition.z = -character.MoveFarOrNearObjectOriginal;
+            character.objectCamera.GetHandGrabMarker().Position = actualPosition;
+
+            // Nastavi nas novy Rigidbody object a nastavi mu pozadovane fyzikalni parametry pro grab
             pickedBody = grabbedObject;
             SetRigidBodyParamForGrab(pickedBody, true);
         }
-
     }
     public void StopGrabbing()
     {
