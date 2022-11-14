@@ -44,7 +44,8 @@ public partial class ObjectCamera : Node3D
 		Camera = GetNode<Camera3D>("NodeRotY/GimbalLand/NodeRotX/NodeLean/Camera");
         HandGrabPosition = GetNode<Marker3D>("NodeRotY/GimbalLand/NodeRotX/NodeLean/Camera/HandGrabPosition");
         HandGrabJoint = GetNode<Generic6DOFJoint3D>("NodeRotY/GimbalLand/NodeRotX/NodeLean/Camera/HandGrabJoint");
-        HandStaticBody = GetNode<StaticBody3D>("NodeRotY/GimbalLand/NodeRotX/NodeLean/Camera/HandStaticBody");
+        HandStaticBody = GetNode<StaticBody3D>("NodeRotY/GimbalLand/NodeRotX/" +
+            "NodeLean/Camera/HandGrabPosition/HandStaticBody");
 
         //lean
         LerpPos_LeanCenter = GetNode<Node3D>("NodeRotY/GimbalLand/NodeRotX/LerpPos_LeanCenter");
@@ -316,5 +317,10 @@ public partial class ObjectCamera : Node3D
         returnedVector.z = per_rot_final;
 
         return returnedVector;
+    }
+
+    public Marker3D GetHandGrabPosition()
+    {
+        return HandGrabPosition;
     }
 }

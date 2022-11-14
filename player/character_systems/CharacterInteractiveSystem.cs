@@ -108,7 +108,8 @@ public partial class CharacterInteractiveSystem : Godot.Object
         }
     }
 
-    public void HandGrabbingUpdate(bool newGrabNow, bool newThrowObjectNow,bool newRotateGrabbedObject, double delta)
+    public void HandGrabbingUpdate(bool newGrabNow, bool newThrowObjectNow,bool newRotateGrabbedObject,
+        bool newMoveFarGrabbedObject,bool newMoveNearGrabbedObject, double delta)
     {
         wantRotateNow = false;
         character.objectCamera.IsCameraLookInputEnable = true;
@@ -163,6 +164,21 @@ public partial class CharacterInteractiveSystem : Godot.Object
         {
             wantRotateNow = true;
         }
+
+        // Move Far/Near Grabbed Object
+        if(isGrabbing && newGrabNow && pickedBody != null && (newMoveFarGrabbedObject || newMoveNearGrabbedObject))
+        {
+            Vector3 actualPosition = character.objectCamera.GetHandGrabPosition().Position;
+
+            if (newMoveFarGrabbedObject)
+                actualPosition.z -= 0.1f;
+
+            if(newMoveNearGrabbedObject)
+                actualPosition.z += 0.1f;
+
+            actualPosition.z = Mathf.Clamp(actualPosition.z, -2.0f, -1.0f);
+            character.objectCamera.GetHandGrabPosition().Position = actualPosition;
+        }
     }
 
     public void UpdateGrabbedObjectRotate(InputEvent @event)
@@ -205,6 +221,11 @@ public partial class CharacterInteractiveSystem : Godot.Object
         SetRigidBodyParamForGrab(pickedBody, false);
         isGrabbing = false;
         character.objectCamera.HandGrabJoint.NodeB = character.objectCamera.HandGrabJoint.GetPath();
+
+        // Set to original handGrabPosition
+        Vector3 actualPosition = character.objectCamera.GetHandGrabPosition().Position;
+        actualPosition.z = -1.5f;
+        character.objectCamera.GetHandGrabPosition().Position = actualPosition;
     }
 
     public void SetRigidBodyParamForGrab(RigidBody3D grabbedObject, bool newGrab)

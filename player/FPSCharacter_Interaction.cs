@@ -127,12 +127,15 @@ public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
 		bool grabNow = IsInputEnable() && Input.IsActionPressed("mouseClickLeft");
 		bool throwObjectNow = IsInputEnable() && Input.IsActionJustPressed("throwObject");
 		bool rotateGrabbedObject = IsInputEnable() && Input.IsActionPressed("rotateGrabbedObject");
+		bool moveFarGrabbedObject = IsInputEnable() && Input.IsActionJustReleased("moveFarGrabbedObject");
+        bool moveNearGrabbedObject = IsInputEnable() && Input.IsActionJustReleased("moveNearGrabbedObject");
 
-		if(grabNow == false)
+        if (grabNow == false)
 			DetectInteractiveObjectWithCameraRay();
 
 		InteractiveSystem.Update(useNow,grabNow,delta);
-		InteractiveSystem.HandGrabbingUpdate(grabNow,throwObjectNow,rotateGrabbedObject,delta);
+		InteractiveSystem.HandGrabbingUpdate(
+			grabNow,throwObjectNow,rotateGrabbedObject,moveFarGrabbedObject,moveNearGrabbedObject,delta);
 	}
 
 	public bool DetectInteractiveObjectWithCameraRay()
