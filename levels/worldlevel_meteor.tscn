@@ -1,6 +1,7 @@
-[gd_scene load_steps=45 format=3 uid="uid://yyesdv41daq6"]
+[gd_scene load_steps=46 format=3 uid="uid://yyesdv41daq6"]
 
 [ext_resource type="ArrayOccluder3D" uid="uid://c65wc0yeg3cak" path="res://levels/world_level_rooms/worldlevel_rooms_test.occ" id="1_48aky"]
+[ext_resource type="Script" path="res://levels/worldlevel_meteor.gd" id="1_0375g"]
 [ext_resource type="PackedScene" uid="uid://ck8mt4y4gfqmk" path="res://placeholders/modular_walls/ground_large.tscn" id="1_vcfbv"]
 [ext_resource type="PackedScene" uid="uid://cduja0j6irmwy" path="res://floor.tscn" id="3_4u6ac"]
 [ext_resource type="PackedScene" uid="uid://clgsga4ty4mrp" path="res://placeholders/modular_walls/wall_normal.tscn" id="4_yawcu"]
@@ -75,6 +76,7 @@ emission_energy_multiplier = 4.22
 emission_operator = 1
 
 [node name="worldlevel" type="Node3D"]
+script = ExtResource("1_0375g")
 
 [node name="worldlevel_occluderculling" type="OccluderInstance3D" parent="."]
 visible = false
@@ -605,7 +607,7 @@ transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 6.15786, -3.1151, 0)
 material_override = SubResource("StandardMaterial3D_7vruh")
 
 [node name="new_terminal" parent="." instance=ExtResource("35_2estt")]
-transform = Transform3D(-1.74846e-08, 0, -0.4, 0, 0.4, 0, 0.4, 0, -1.74846e-08, -5.58529, 1.17097, -11.625)
+transform = Transform3D(-0.0531028, 0, 0.998589, 0, 1, 0, -0.998589, 0, -0.0531028, -6.40109, 0.759721, 0)
 
 [editable path="LevelGeometry/Grounds/floor3"]
 [editable path="cabinet_small3"]
