@@ -16,12 +16,19 @@ public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
 	CharacterInteractiveSystem InteractiveSystem = null;
 
     [ExportGroupAttribute("InteractiveSystem Settings")]
-    [Export] public float LengthInteractRay = 5.0f;
 	[Export] public bool CanUse = true;
     [Export] public bool CanGrabObject = true;
     [Export] public bool CanThrowObject = true;
     [Export] public bool CanRotateObject = true;
     [Export] public bool CanMoveFarOrNearObject = true;
+    [Export] public float LengthInteractRay = 5.0f;
+    [Export] public float GrabObjectPullPower = 4.0f;
+    [Export] public float ThrowObjectPower = 6.0f;
+    [Export] public float MoveFarOrNearObjectStep = 0.1f;
+    [Export] public float MoveFarOrNearObjectOriginal = 1.5f;
+	[Export] public float MoveFarOrNearObjectMin = 1.0f;
+    [Export] public float MoveFarOrNearObjectMax = 2.0f;
+    [Export] public float RotateObjectStep = 0.3f;
 
     BasicHud basicHud = null;
 
