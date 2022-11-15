@@ -49,21 +49,27 @@ public partial class CharacterInteractiveSystem : Godot.Object
             return;
         }
 
-        // zjistime o jaky typ se jedna
+        // cast to interactive_object
         interactive_object interactiveObject = (interactive_object)actualInteractiveObject;
-        switch(interactiveObject.InteractiveType)
+
+        // Neni pozadovano, nebo je pozadovano aby byl hrac v area objektu a opravdu v nem je ?
+        if (character.MustBeInInteractiveArea == false ||
+            (character.MustBeInInteractiveArea && interactiveObject.GetIsPlayerInRange()))
         {
-            case interactive_object.EInteractiveType.Static:
-                {
-                    UpdateStatic(interactiveObject,newUseNow, delta);
-                    break;
-                }
-            case interactive_object.EInteractiveType.Physic:
-                {
-                    UpdateStatic(interactiveObject, newUseNow, delta);
-                    UpdatePhysic(interactiveObject,newUseNow,newGrabNow,delta);
-                    break;
-                }
+            switch (interactiveObject.InteractiveType)
+            {
+                case interactive_object.EInteractiveType.Static:
+                    {
+                        UpdateStatic(interactiveObject, newUseNow, delta);
+                        break;
+                    }
+                case interactive_object.EInteractiveType.Physic:
+                    {
+                        UpdateStatic(interactiveObject, newUseNow, delta);
+                        UpdatePhysic(interactiveObject, newUseNow, newGrabNow, delta);
+                        break;
+                    }
+            }
         }
     }
 
@@ -74,31 +80,32 @@ public partial class CharacterInteractiveSystem : Godot.Object
 
     public void UpdateStatic(interactive_object newInteractiveObject,bool newUseNow,double delta)
     {
-        // DISABLED ?
+        // OBJECT DISABLED ?
         if (newInteractiveObject.InteractiveLevel == interactive_object.EInteractiveLevel.Disable)
         {
             basicHud.SetUseLabelText("");
             basicHud.SetUseVisible(false);
         }
 
-        // UPDATE HUD
-        if(newInteractiveObject.InteractiveLevel == interactive_object.EInteractiveLevel.OnlyUse ||
+        //  FOR UPDATE HUD
+        if (newInteractiveObject.InteractiveLevel == interactive_object.EInteractiveLevel.OnlyUse ||
             newInteractiveObject.InteractiveLevel == interactive_object.EInteractiveLevel.UseAndGrab)
         {
             basicHud.SetUseLabelText(newInteractiveObject.GetUseActionName());
             basicHud.SetUseVisible(true);
         }
 
-        // UPDATE USE
+        // FOR UPDATE USE
         if (newInteractiveObject.InteractiveLevel == interactive_object.EInteractiveLevel.OnlyUse ||
             newInteractiveObject.InteractiveLevel == interactive_object.EInteractiveLevel.UseAndGrab)
         {
-            if(newUseNow)
+            if (newUseNow)
                 newInteractiveObject.Use(character);
         }
     }
     public void UpdatePhysic(interactive_object newInteractiveObject, bool newUseNow,bool newGrabNow, double delta)
     {
+        
         // Update Grab
         if(newInteractiveObject.InteractiveLevel == interactive_object.EInteractiveLevel.OnlyGrab ||
             newInteractiveObject.InteractiveLevel == interactive_object.EInteractiveLevel.UseAndGrab)
@@ -108,8 +115,8 @@ public partial class CharacterInteractiveSystem : Godot.Object
         }
     }
 
-    public void HandGrabbingUpdate(bool newGrabNow, bool newThrowObjectNow,bool newRotateGrabbedObject,
-        bool newMoveFarGrabbedObject,bool newMoveNearGrabbedObject, double delta)
+    public void HandGrabbingUpdate(bool newGrabNow, bool newThrowObjectNow, bool newRotateGrabbedObject,
+        bool newMoveFarGrabbedObject, bool newMoveNearGrabbedObject, double delta)
     {
         // default sets on start this update
         wantRotateNow = false;
@@ -117,13 +124,31 @@ public partial class CharacterInteractiveSystem : Godot.Object
 
         // otestujeme zda je tento object nastaveny pro grab a zda aktualne nejaky objekt negrabujeme
         // pokd jsou podminky splneny, nastavime viditelnou normal hand
-        if (actualInteractiveObject != null && newGrabNow == false)
+        if (actualInteractiveObject != null)
         {
             interactive_object interactiveObject = (interactive_object)actualInteractiveObject;
-            if(interactiveObject.InteractiveLevel == interactive_object.EInteractiveLevel.OnlyGrab ||
+            if (interactiveObject.InteractiveLevel == interactive_object.EInteractiveLevel.OnlyGrab ||
                 interactiveObject.InteractiveLevel == interactive_object.EInteractiveLevel.UseAndGrab)
             {
-                basicHud.SetHandGrabState(true, false);
+                // Neni pozadovano, nebo je pozadovano aby byl hrac v area objektu a opravdu v nem je ?
+                if (character.MustBeInInteractiveArea == false ||
+                    (character.MustBeInInteractiveArea && interactiveObject.GetIsPlayerInRange()))
+                {
+                    if(newGrabNow == false)
+                        basicHud.SetHandGrabState(true, false);
+                }
+                // Je pozadovano a hrac neni v aree ? *** prozatimni reseni na upusteni objektu v dalce !!! ***
+                else if(character.MustBeInInteractiveArea && !interactiveObject.GetIsPlayerInRange() && newGrabNow)
+                {
+                    if(pickedBody != null)
+                    {
+                        isCanNewGrab = false;
+                        StopGrabbing();
+                    }
+
+                    pickedBody = null;
+                }
+                
             }
         }
 
@@ -131,14 +156,14 @@ public partial class CharacterInteractiveSystem : Godot.Object
         // updatujeme pozice objektu pro grabbing
         if (isCanNewGrab && isGrabbing && newGrabNow && pickedBody != null)
         {
-            basicHud.SetHandGrabState(true,true);
+            basicHud.SetHandGrabState(true, true);
             // grabbing
             Vector3 pickedBodyGlobalPositon = pickedBody.GlobalTransform.origin;
             Vector3 HandGrabGlobalPosition = character.objectCamera.HandGrabMarker.GlobalPosition;
 
             pickedBody.LinearVelocity = (HandGrabGlobalPosition - pickedBodyGlobalPositon) * character.GrabObjectPullPower;
         }
-        else if(isGrabbing && newGrabNow == false)
+        else if (isGrabbing && newGrabNow == false)
         {
             // zahazujeme objekt
             StopGrabbing();
@@ -163,20 +188,20 @@ public partial class CharacterInteractiveSystem : Godot.Object
             isCanNewGrab = true;
 
         // Rotate Grabbed Object
-        if(isGrabbing && newGrabNow && pickedBody != null && newRotateGrabbedObject)
+        if (isGrabbing && newGrabNow && pickedBody != null && newRotateGrabbedObject)
         {
             wantRotateNow = true;
         }
 
         // Move Far/Near Grabbed Object
-        if(isGrabbing && newGrabNow && pickedBody != null && (newMoveFarGrabbedObject || newMoveNearGrabbedObject))
+        if (isGrabbing && newGrabNow && pickedBody != null && (newMoveFarGrabbedObject || newMoveNearGrabbedObject))
         {
             Vector3 actualPosition = character.objectCamera.GetHandGrabMarker().Position;
 
             if (newMoveFarGrabbedObject)
                 actualPosition.z -= character.MoveFarOrNearObjectStep;
 
-            if(newMoveNearGrabbedObject)
+            if (newMoveNearGrabbedObject)
                 actualPosition.z += character.MoveFarOrNearObjectStep;
 
             actualPosition.z = Mathf.Clamp(actualPosition.z,
