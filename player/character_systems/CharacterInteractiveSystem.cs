@@ -253,9 +253,9 @@ public partial class CharacterInteractiveSystem : Godot.Object
             character.objectCamera.HandGrabJoint.NodeB = grabbedObject.GetPath();
 
             // nastavime nova fyzikalni data pro grab
-            grabbedObject.Inertia = new Vector3(0.5f, 0.5f, 0.5f);
-            grabbedObject.AngularDamp = 3.0f;
-            grabbedObject.LinearDamp = 1;
+            grabbedObject.Inertia = character.RBPhysicInGrab_Inertia;
+            grabbedObject.AngularDamp = character.RBPhysicInGrab_AngularDamp;
+            grabbedObject.LinearDamp = character.RBPhysicInGrab_LinearDamp;
             grabbedObject.PhysicsMaterialOverride.Friction = 0.15f;
             grabbedObject.PhysicsMaterialOverride.Bounce = 0.0f;
             grabbedObject.Mass = 1.0f;

@@ -10,12 +10,16 @@ public partial class physic_item_test : RigidBody3D
 
     interactive_object interactiveObject;
 
+    [Export] public bool DisableCollisionToPlayer = true;
+
     //
     bool isGrab = false;
 
 	public override void _Ready()
 	{
         interactiveObject = GetNode<interactive_object>("interactive_object");
+
+        SetDisableCollisionToPlayer(DisableCollisionToPlayer);
 	}
 
 	public override void _Process(double delta)
@@ -39,12 +43,39 @@ public partial class physic_item_test : RigidBody3D
     public void GrabUpdate(double delta)
     {
     }
-    /*
-    public void _on_body_shape_entered()
-    {
 
+    public void SetDisableCollisionToPlayer(bool newDisableCollisionToPlayer)
+    {
+        DisableCollisionToPlayer = newDisableCollisionToPlayer;
+
+        if (newDisableCollisionToPlayer)
+        {
+            // layer pro physica objekty
+            SetCollisionLayerValue(1, false);
+            SetCollisionLayerValue(2, false);
+            SetCollisionLayerValue(3, false);
+            SetCollisionLayerValue(4, true);
+            // maska se statickym svetem a s physical objekty
+            SetCollisionMaskValue(1, true);
+            SetCollisionMaskValue(2, false);
+            SetCollisionMaskValue(3, false);
+            SetCollisionMaskValue(4, true);
+        }
+        else
+        {
+            // layer pro physica objekty
+            SetCollisionLayerValue(1, false);
+            SetCollisionLayerValue(2, false);
+            SetCollisionLayerValue(3, false);
+            SetCollisionLayerValue(4, true);
+            // maska se statickym svetem a s physical objekty
+            SetCollisionMaskValue(1, true);
+            SetCollisionMaskValue(2, true);
+            SetCollisionMaskValue(3, false);
+            SetCollisionMaskValue(4, true);
+        }
     }
-    */
+
 
     public void message_update()
     {

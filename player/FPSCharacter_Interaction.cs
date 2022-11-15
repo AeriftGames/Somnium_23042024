@@ -30,6 +30,14 @@ public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
     [Export] public float MoveFarOrNearObjectMax = 2.0f;
     [Export] public float RotateObjectStep = 0.3f;
 
+	[ExportGroupAttribute("InteractiveSystem: Rigidbody PhysicParams In Grab")]
+	[Export] public Vector3 RBPhysicInGrab_Inertia = new Vector3(0.5f,0.5f,0.5f);
+	[Export] public float RBPhysicInGrab_AngularDamp = 3.0f;
+    [Export] public float RBPhysicInGrab_LinearDamp = 1.0f;
+    [Export] public float RBPhysicInGrab_Friction = 0.15f;
+    [Export] public float RBPhysicInGrab_Bounce = 0.0f;
+    [Export] public float RBPhysicInGrab_Mass = 1.0f;
+
     BasicHud basicHud = null;
 
 	Vector3 tempCamRot = Vector3.Zero;
