@@ -21,6 +21,7 @@ public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
     [Export] public bool CanThrowObject = true;
     [Export] public bool CanRotateObject = true;
     [Export] public bool CanMoveFarOrNearObject = true;
+    [Export] public bool MustInInteractiveArea = true;
     [Export] public float LengthInteractRay = 5.0f;
     [Export] public float GrabObjectPullPower = 4.0f;
     [Export] public float ThrowObjectPower = 6.0f;

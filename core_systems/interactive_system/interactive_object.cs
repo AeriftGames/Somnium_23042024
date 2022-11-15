@@ -41,7 +41,7 @@ public partial class interactive_object : Node3D
 		}
 	}
 
-	public bool GetIsActive()
+	public bool GetIsPlayerInRange()
 	{
 		return isPlayerInRange;
 	}
@@ -61,13 +61,14 @@ public partial class interactive_object : Node3D
 	{
 		if (InteractiveLevel == EInteractiveLevel.Disable) return "";
 
-		string result = msgObject.LoadStringDataFromGDNow("msg_get_use_action_text");
+        string result = msgObject.LoadStringDataFromGDNow("msg_get_use_action_text");
 		return result;
 	}
 
 	public string GetInteractiveObjectName()
 	{
         if (InteractiveLevel == EInteractiveLevel.Disable) return "";
+		if (!isPlayerInRange) return "";
 
         string result = msgObject.LoadStringDataFromGDNow("msg_get_interactive_object_name");
 		return result;
