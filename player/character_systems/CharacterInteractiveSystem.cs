@@ -256,9 +256,9 @@ public partial class CharacterInteractiveSystem : Godot.Object
             grabbedObject.Inertia = character.RBPhysicInGrab_Inertia;
             grabbedObject.AngularDamp = character.RBPhysicInGrab_AngularDamp;
             grabbedObject.LinearDamp = character.RBPhysicInGrab_LinearDamp;
-            grabbedObject.PhysicsMaterialOverride.Friction = 0.15f;
-            grabbedObject.PhysicsMaterialOverride.Bounce = 0.0f;
-            grabbedObject.Mass = 1.0f;
+            grabbedObject.PhysicsMaterialOverride.Friction = character.RBPhysicInGrab_Friction;
+            grabbedObject.PhysicsMaterialOverride.Bounce = character.RBPhysicInGrab_Bounce;
+            grabbedObject.Mass = character.RBPhysicInGrab_Mass;
         }
         else
         {

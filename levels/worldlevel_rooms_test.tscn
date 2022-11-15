@@ -713,7 +713,6 @@ inertia = Vector3(1, 1, 1)
 physics_material_override = SubResource("PhysicsMaterial_kg0g6")
 linear_damp = 2.0
 angular_damp = 2.0
-DisableCollisionWithPlayer = false
 
 [node name="PhysicItem_test3" parent="PhysicsItems" instance=ExtResource("20_mdus6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0698133, 0, 5.10432)
@@ -721,7 +720,6 @@ collision_layer = 8
 collision_mask = 9
 mass = 15.0
 physics_material_override = SubResource("PhysicsMaterial_x703l")
-DisableCollisionWithPlayer = false
 
 [node name="PhysicItem_test4" parent="PhysicsItems" instance=ExtResource("20_mdus6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.094244, 0.604241, 5.10567)
@@ -730,7 +728,6 @@ collision_mask = 9
 mass = 15.0
 inertia = Vector3(1, 1, 1)
 physics_material_override = SubResource("PhysicsMaterial_vvlu0")
-DisableCollisionWithPlayer = false
 
 [node name="PhysicItem_test5" parent="PhysicsItems" instance=ExtResource("21_uemld")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.723547, 1.24732, 4.17562)
@@ -742,7 +739,6 @@ gravity_scale = 0.75
 continuous_cd = false
 max_contacts_reported = 10
 freeze = false
-DisableCollisionWithPlayer = false
 
 [node name="PhysicItem_test6" parent="PhysicsItems" instance=ExtResource("21_uemld")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.737791, 1.24732, 4.17562)
