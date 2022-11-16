@@ -79,7 +79,7 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
         AudioStreamPlayerJumpLand = GetNode<AudioStreamPlayer>("AudioStreamPlayer_JumpLand");
 
         // Create timer for landing effect
-        var callable_FisnishLandingEffect = new Callable(FinishLandingEffect);
+        var callable_FisnishLandingEffect = new Callable(this,"FinishLandingEffect");
         landing_timer.Connect("timeout", callable_FisnishLandingEffect);
         landing_timer.WaitTime = 0.3;
         landing_timer.OneShot = true;

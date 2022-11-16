@@ -22,7 +22,7 @@ public partial class PlayerStart : Node3D
 		EditorMesh.QueueFree();
 
         // Create timer for delaying spawn if start game
-        var callable_spawn = new Callable(SpawnNewPlayer);
+        var callable_spawn = new Callable(this,"SpawnNewPlayer");
         spawn_timer.Connect("timeout", callable_spawn);
         spawn_timer.WaitTime = 0.2;
         spawn_timer.OneShot = true;

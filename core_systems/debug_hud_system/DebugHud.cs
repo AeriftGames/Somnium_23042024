@@ -39,7 +39,7 @@ public partial class DebugHud : Control
         DebugEnabledLabel.Text = "F1 for edit debug hud";
 
         // Create timer for specific loop update (fps)
-        var callable_UpdateElements = new Callable(UpdateTimer);
+        var callable_UpdateElements = new Callable(this,"UpdateTimer");
         update_timer.Connect("timeout", callable_UpdateElements);
         update_timer.WaitTime = 0.2;
         update_timer.OneShot = false;

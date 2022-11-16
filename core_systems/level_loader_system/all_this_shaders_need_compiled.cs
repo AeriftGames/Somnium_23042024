@@ -26,7 +26,7 @@ public partial class all_this_shaders_need_compiled : Node3D
 		Visible = true;
 
         // Create timer for visible and queuefree
-        var callable_func_visible = new Callable(DoneVisible);
+        var callable_func_visible = new Callable(this,"DoneVisible");
         visible_timer.Connect("timeout", callable_func_visible);
         visible_timer.WaitTime = TimerVisibleInSeconds;
         visible_timer.OneShot = true;
@@ -34,7 +34,7 @@ public partial class all_this_shaders_need_compiled : Node3D
         visible_timer.Start();
 
         // Create timer for toggle enable and toggle disable
-        var callable_func_toggle = new Callable(ToggleAllInteractiveItems);
+        var callable_func_toggle = new Callable(this,"ToggleAllInteractiveItems");
         toggle_timer.Connect("timeout", callable_func_toggle);
         toggle_timer.WaitTime = TimerToggleInSeconds;
         toggle_timer.OneShot = true;
