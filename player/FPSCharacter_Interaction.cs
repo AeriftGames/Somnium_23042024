@@ -136,7 +136,7 @@ public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
 		base._Input(@event);
 
 		// RotateObject Update
-		InteractiveSystem.UpdateGrabbedObjectRotate(@event);
+		InteractiveSystem.UpdateGrabbedItemRotate(@event);
     }
 
     public override void _PhysicsProcess(double delta)

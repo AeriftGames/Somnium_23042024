@@ -33,7 +33,7 @@ public partial class ObjectCamera : Node3D
     Tween tweenLeanRot = null;
     Tween tweenLeanPos = null;
 
-    public bool IsCameraLookInputEnable = true;
+    private bool isCameraLookInputEnable = true;
 
     public override void _Ready()
 	{
@@ -76,7 +76,7 @@ public partial class ObjectCamera : Node3D
     // Hadle inout for mouse
     public override void _Input(InputEvent @event)
     {
-        if (@event is InputEventMouseMotion && ownerCharacter.IsInputEnable() && IsCameraLookInputEnable)
+        if (@event is InputEventMouseMotion && ownerCharacter.IsInputEnable() && isCameraLookInputEnable)
         {
             InputEventMouseMotion mouseEventMotion = @event as InputEventMouseMotion;
             _MouseMotion = mouseEventMotion.Relative;
@@ -322,5 +322,15 @@ public partial class ObjectCamera : Node3D
     public Marker3D GetHandGrabMarker()
     {
         return HandGrabMarker;
+    }
+
+    public void SetCameraLookInputEnable(bool newEnable)
+    {
+        isCameraLookInputEnable = newEnable;
+    }
+
+    public bool GetCameraLookInputEnable()
+    {
+        return isCameraLookInputEnable;
     }
 }

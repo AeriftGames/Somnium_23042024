@@ -5,9 +5,10 @@ public partial class interactive_object : Node3D
 {
 	// komunikacni objekt
 	public MessageObject msgObject;
+	[Export] public NodePath InteractiveObjectCommunicationWith = null;
 
 	public enum EInteractiveLevel { Disable, OnlyUse, OnlyPhysic, UseAndPhysic}
-	public enum EInteractivePhysicType { GrabItem, GrabJoint}
+	public enum EInteractivePhysicType { GrabItem, GrabJoint, GrabAction}
 
 	[Export] public EInteractiveLevel InteractiveLevel = EInteractiveLevel.OnlyUse;
 	[Export] public EInteractivePhysicType InteractivePhysicType = EInteractivePhysicType.GrabItem;
@@ -16,8 +17,13 @@ public partial class interactive_object : Node3D
 
 	public override void _Ready()
 	{
-		msgObject = new MessageObject(this,GetParent());
-	}
+		if(InteractiveObjectCommunicationWith == null)
+		{
+            msgObject = new MessageObject(this, GetParent());
+        }
+		else
+            msgObject = new MessageObject(this, GetNode(InteractiveObjectCommunicationWith));
+    }
 
 	public void _on_interactive_object_area_3d_body_entered(Node3D body)
 	{
@@ -68,17 +74,25 @@ public partial class interactive_object : Node3D
 	public string GetInteractiveObjectName()
 	{
         if (InteractiveLevel == EInteractiveLevel.Disable) return "";
-		if (!isPlayerInRange) return "";
 
         string result = msgObject.LoadStringDataFromGDNow("msg_get_interactive_object_name");
 		return result;
 	}
 
-    public void ApplyGrab(bool newGrab, FPSCharacter_Interaction character)
+    public void GrabActionStart(FPSCharacter_Interaction character)
     {
-        msgObject.SetBoolData(newGrab);
+        if (InteractiveLevel == EInteractiveLevel.Disable) return;
+
         msgObject.SetNodeData(character);
-        msgObject.SendMessageToGDNow("msg_apply_grab");
+        msgObject.SendMessageToGDNow("msg_grab_action_start");
+    }
+
+	public void GrabActionEnd(FPSCharacter_Interaction character)
+	{
+        if (InteractiveLevel == EInteractiveLevel.Disable) return;
+
+        msgObject.SetNodeData(character);
+        msgObject.SendMessageToGDNow("msg_grab_action_end");
     }
 
     public virtual void message_update()

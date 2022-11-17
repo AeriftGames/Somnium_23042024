@@ -107,7 +107,7 @@ transform = Transform3D(-0.5, 0, -2.18557e-08, 0, 0.5, 0, 2.18557e-08, 0, -0.5, 
 transform = Transform3D(-0.5, 0, -2.18557e-08, 0, 0.5, 0, 2.18557e-08, 0, -0.5, -4, 0, 3)
 
 [node name="PlayerStart" parent="." instance=ExtResource("3_8gbgc")]
-transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 2.5, 0, 2.72125)
+transform = Transform3D(0.866026, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866026, -1, 0, -1.77875)
 
 [node name="TestingStuff" type="Node3D" parent="."]
 

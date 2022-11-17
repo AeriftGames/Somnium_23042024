@@ -80,31 +80,31 @@ material = SubResource("StandardMaterial3D_b8541")
 size = Vector3(0.2, 0.2, 1)
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_3hmvy"]
-friction = 0.5
+friction = 0.3
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_kg0g6"]
-friction = 0.5
+friction = 0.3
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_x703l"]
-friction = 0.5
+friction = 0.3
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_vvlu0"]
-friction = 0.5
+friction = 0.3
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_telue"]
-friction = 0.5
+friction = 0.3
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_v6r0n"]
-friction = 0.5
+friction = 0.3
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_5o5j0"]
-friction = 0.5
+friction = 0.3
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_cw2e5"]
 friction = 0.5
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_klqjs"]
-friction = 0.5
+friction = 0.3
 
 [node name="worldlevel" type="Node3D"]
 
@@ -768,7 +768,7 @@ collision_layer = 8
 collision_mask = 9
 inertia = Vector3(0.01, 0.01, 0.01)
 physics_material_override = SubResource("PhysicsMaterial_cw2e5")
-gravity_scale = 0.75
+gravity_scale = 0.3
 linear_damp = 1.0
 angular_damp = 1.0
 

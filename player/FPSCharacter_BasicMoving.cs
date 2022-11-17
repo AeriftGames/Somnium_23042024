@@ -65,6 +65,7 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
     private ECharacterPosture _ActualCharacterPosture = ECharacterPosture.Stand;
     private Vector3 _HeadMainLerpTarget;    // uses for crunch<->stand move lerp camera
     private bool _isInputEnable = true;
+    private bool _isMoveInputEnable = true;
 
     private bool isFallingStart = false;
 
@@ -397,6 +398,14 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
             Input.MouseMode = Input.MouseModeEnum.Captured;
         else
             Input.MouseMode = Input.MouseModeEnum.Visible;
+
+        SetMoveInputEnable(_isInputEnable);
+        //objectCamera.IsCameraLookInputEnable(_isInputEnable);
+    }
+
+    public void SetMoveInputEnable(bool newEnable)
+    {
+        _isMoveInputEnable = newEnable;
     }
 
     public void SetMouseVisible(bool newMouseVisible)

@@ -13,6 +13,9 @@ public partial class CharacterInteractiveSystem : Godot.Object
     bool isCanNewGrab = true;
     bool wantRotateNow = false;
 
+    //only for joints
+    bool isFirstGrabAction = true;
+
     public struct SPhysicalGrabbedItemParams 
     {
         public Vector3 inertia;
@@ -71,7 +74,9 @@ public partial class CharacterInteractiveSystem : Godot.Object
 
     public void SetActualInteractiveObject(interactive_object newInteractiveObject, Vector3 hitPosition)
     {
-        actualInteractiveObject = newInteractiveObject;
+        // pokud nemame v grabu nejaky item, prepiseme interacatObject novym, ktery detekujeme jako prichozi
+        if(pickedBody == null)
+            actualInteractiveObject = newInteractiveObject;
     }
 
     public void UpdateForUse(interactive_object newInteractiveObject,bool newUseNow,double delta)
@@ -104,7 +109,7 @@ public partial class CharacterInteractiveSystem : Godot.Object
     {
         // default sets on start this update
         wantRotateNow = false;
-        character.objectCamera.IsCameraLookInputEnable = true;
+        character.objectCamera.SetCameraLookInputEnable(true);
 
         // neexistuje zadny interactive objekt ? = opustit update
         if (actualInteractiveObject == null)
@@ -119,22 +124,26 @@ public partial class CharacterInteractiveSystem : Godot.Object
                         newMoveFarGrabbedObject, newMoveNearGrabbedObject, delta);
                     break;
                 }
-            case interactive_object.EInteractivePhysicType.GrabJoint:
+            case interactive_object.EInteractivePhysicType.GrabAction:
                 {
-                    UpdatePhysic_GrabJoint(newGrabNow, newThrowObjectNow, newRotateGrabbedObject,
-                        newMoveFarGrabbedObject, newMoveNearGrabbedObject, delta);
+                    UpdatePhysic_GrabAction(newGrabNow, delta);
                     break;
                 }
         }
+
+        // Reset pro novy grab, napriklad po hodu, donuti hrace pustit tlacitko pro grab, i kdyby na jeden frame
+        // pokud ho pusti, resetujeme moznost znovu grabbovat
+        if (isCanNewGrab == false && newGrabNow == false)
+            isCanNewGrab = true;
     }
 
     // Update prichazejici z interaction character
-    public void UpdateGrabbedObjectRotate(InputEvent @event)
+    public void UpdateGrabbedItemRotate(InputEvent @event)
     {
         // Rotate Grabbed Object
         if (pickedBody != null && wantRotateNow)
         {
-            character.objectCamera.IsCameraLookInputEnable = false;
+            character.objectCamera.SetCameraLookInputEnable(false);
 
             if (@event is InputEventMouseMotion && character.IsInputEnable())
             {
@@ -191,16 +200,28 @@ public partial class CharacterInteractiveSystem : Godot.Object
             lastGrabbedItemOriginalParams.bounce = grabbedObject.PhysicsMaterialOverride.Bounce;
             lastGrabbedItemOriginalParams.mass = grabbedObject.Mass;
 
-            // grab for rotation
-            character.objectCamera.HandGrabJoint.NodeB = grabbedObject.GetPath();
+            // podle physic type
+            switch (actualInteractiveObject.InteractivePhysicType)
+            {
+                case interactive_object.EInteractivePhysicType.GrabItem:
+                    {
+                        // grab for rotation
+                        character.objectCamera.HandGrabJoint.NodeB = grabbedObject.GetPath();
 
-            // nastavime nova fyzikalni data pro grab
-            grabbedObject.Inertia = character.RBPhysicInGrab_Inertia;
-            grabbedObject.AngularDamp = character.RBPhysicInGrab_AngularDamp;
-            grabbedObject.LinearDamp = character.RBPhysicInGrab_LinearDamp;
-            grabbedObject.PhysicsMaterialOverride.Friction = character.RBPhysicInGrab_Friction;
-            grabbedObject.PhysicsMaterialOverride.Bounce = character.RBPhysicInGrab_Bounce;
-            grabbedObject.Mass = character.RBPhysicInGrab_Mass;
+                        // nastavime nova fyzikalni data pro grab
+                        grabbedObject.Inertia = character.RBPhysicInGrab_Inertia;
+                        grabbedObject.AngularDamp = character.RBPhysicInGrab_AngularDamp;
+                        grabbedObject.LinearDamp = character.RBPhysicInGrab_LinearDamp;
+                        grabbedObject.PhysicsMaterialOverride.Friction = character.RBPhysicInGrab_Friction;
+                        grabbedObject.PhysicsMaterialOverride.Bounce = character.RBPhysicInGrab_Bounce;
+                        grabbedObject.Mass = character.RBPhysicInGrab_Mass;
+                        break; 
+                    }
+                case interactive_object.EInteractivePhysicType.GrabAction:
+                    {
+                        break;
+                    }
+            }  
         }
         else
         {
@@ -273,11 +294,6 @@ public partial class CharacterInteractiveSystem : Godot.Object
             pickedBody = null;
         }
 
-        // Reset pro novy grab, napriklad po hodu, donuti hrace pustit tlacitko pro grab, i kdyby na jeden frame
-        // pokud ho pusti, resetujeme moznost znovu grabbovat
-        if (isCanNewGrab == false && newGrabNow == false)
-            isCanNewGrab = true;
-
         // Rotate Grabbed Object
         if (isGrabbing && newGrabNow && pickedBody != null && newRotateGrabbedObject)
         {
@@ -302,9 +318,59 @@ public partial class CharacterInteractiveSystem : Godot.Object
         }
     }
 
-    public void UpdatePhysic_GrabJoint(bool newGrabNow, bool newThrowObjectNow, bool newRotateGrabbedObject,
-        bool newMoveFarGrabbedObject, bool newMoveNearGrabbedObject, double delta)
+    public void UpdatePhysic_GrabAction(bool newGrabNow, double delta)
     {
+        // otestujeme zda je tento object nastaveny pro grab a zda aktualne nejaky objekt negrabujeme
+        // pokud jsou podminky splneny, nastavime viditelnou normal hand
+        if (actualInteractiveObject.InteractiveLevel == interactive_object.EInteractiveLevel.OnlyPhysic ||
+            actualInteractiveObject.InteractiveLevel == interactive_object.EInteractiveLevel.UseAndPhysic)
+        {
+            // Neni pozadovano, nebo je pozadovano aby byl hrac v area objektu a opravdu v nem je ?
+            if (character.MustBeInInteractiveArea == false ||
+                (character.MustBeInInteractiveArea && actualInteractiveObject.GetIsPlayerInRange()))
+            {
+                if (newGrabNow == false)
+                    basicHud.SetHandGrabState(true, false);
+            }
+            // Je pozadovano a hrac neni v aree ? *** prozatimni reseni na upusteni objektu v dalce !!! ***
+            else if (character.MustBeInInteractiveArea && !actualInteractiveObject.GetIsPlayerInRange() && newGrabNow)
+            {
+                if (pickedBody != null)
+                {
+                    isCanNewGrab = false;
+                    StopGrabbing();
 
+                    // povolime pristi do once funkci firstGrabAction
+                    isFirstGrabAction = true;
+                    actualInteractiveObject.GrabActionEnd(character);
+                }
+                pickedBody = null;
+            }
+        }
+
+        // pokud jsme aktualne ve stavu grabbing, stale prichazi input pro grab tak
+        // spustime funkci pro start grab action
+        if (isCanNewGrab && isGrabbing && newGrabNow && pickedBody != null)
+        {
+            // Do once - 1 update pri spusteni grabu jointu
+            if (isFirstGrabAction)
+            {
+                isFirstGrabAction = false;
+                actualInteractiveObject.GrabActionStart(character);
+            }
+
+            character.objectCamera.SetCameraLookInputEnable(false);
+            basicHud.SetHandGrabState(true, true);
+        }
+        else if (isGrabbing && newGrabNow == false)
+        {
+            // zastavime grab
+            StopGrabbing();
+            pickedBody = null;
+
+            // povolime pristi do once funkci firstGrabAction
+            isFirstGrabAction = true;
+            actualInteractiveObject.GrabActionEnd(character);
+        }
     }
 }
