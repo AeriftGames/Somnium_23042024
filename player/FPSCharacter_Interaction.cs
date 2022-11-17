@@ -153,9 +153,9 @@ public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
         if (grabNow == false)
 			DetectInteractiveObjectWithCameraRay();
 
-		InteractiveSystem.Update(useNow,grabNow,delta);
-		InteractiveSystem.HandGrabbingUpdate(
-			grabNow,throwObjectNow,rotateGrabbedObject,moveFarGrabbedObject,moveNearGrabbedObject,delta);
+		InteractiveSystem.BasicUpdate(useNow,grabNow,delta);
+		InteractiveSystem.InteractivePhysicsUpdate(grabNow,throwObjectNow,rotateGrabbedObject,
+			moveFarGrabbedObject,moveNearGrabbedObject,delta);
 	}
 
 	public bool DetectInteractiveObjectWithCameraRay()

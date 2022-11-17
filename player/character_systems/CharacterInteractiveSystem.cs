@@ -31,7 +31,7 @@ public partial class CharacterInteractiveSystem : Godot.Object
         basicHud = newBasichud;
     }
 
-    public void Update(bool newUseNow,bool newGrabNow, double delta)
+    public void BasicUpdate(bool newUseNow,bool newGrabNow, double delta)
     {
         // default sets on start this update
         basicHud.SetUseVisible(false);
@@ -99,7 +99,7 @@ public partial class CharacterInteractiveSystem : Godot.Object
         }
     }
 
-    public void HandGrabbingUpdate(bool newGrabNow, bool newThrowObjectNow, bool newRotateGrabbedObject,
+    public void InteractivePhysicsUpdate(bool newGrabNow, bool newThrowObjectNow, bool newRotateGrabbedObject,
         bool newMoveFarGrabbedObject, bool newMoveNearGrabbedObject, double delta)
     {
         // default sets on start this update
@@ -110,89 +110,21 @@ public partial class CharacterInteractiveSystem : Godot.Object
         if (actualInteractiveObject == null)
             return;
 
-        // otestujeme zda je tento object nastaveny pro grab a zda aktualne nejaky objekt negrabujeme
-        // pokud jsou podminky splneny, nastavime viditelnou normal hand
-       
-        if (actualInteractiveObject.InteractiveLevel == interactive_object.EInteractiveLevel.OnlyPhysic ||
-            actualInteractiveObject.InteractiveLevel == interactive_object.EInteractiveLevel.UseAndPhysic)
+        // Filter update podle typu physics interakce
+        switch (actualInteractiveObject.InteractivePhysicType)
         {
-            // Neni pozadovano, nebo je pozadovano aby byl hrac v area objektu a opravdu v nem je ?
-            if (character.MustBeInInteractiveArea == false ||
-                (character.MustBeInInteractiveArea && actualInteractiveObject.GetIsPlayerInRange()))
-            {
-                if(newGrabNow == false)
-                    basicHud.SetHandGrabState(true, false);
-            }
-            // Je pozadovano a hrac neni v aree ? *** prozatimni reseni na upusteni objektu v dalce !!! ***
-            else if(character.MustBeInInteractiveArea && !actualInteractiveObject.GetIsPlayerInRange() && newGrabNow)
-            {
-                if(pickedBody != null)
+            case interactive_object.EInteractivePhysicType.GrabItem:
                 {
-                    isCanNewGrab = false;
-                    StopGrabbing();
+                    UpdatePhysic_GrabItem(newGrabNow, newThrowObjectNow, newRotateGrabbedObject,
+                        newMoveFarGrabbedObject, newMoveNearGrabbedObject, delta);
+                    break;
                 }
-
-                pickedBody = null;
-            }
-        }
-        
-
-        // pokud jsme aktualne ve stavu grabbing, stale prichazi input pro grab tak
-        // updatujeme pozice objektu pro grabbing
-        if (isCanNewGrab && isGrabbing && newGrabNow && pickedBody != null)
-        {
-            basicHud.SetHandGrabState(true, true);
-            // grabbing
-            Vector3 pickedBodyGlobalPositon = pickedBody.GlobalTransform.origin;
-            Vector3 HandGrabGlobalPosition = character.objectCamera.HandGrabMarker.GlobalPosition;
-
-            pickedBody.LinearVelocity = (HandGrabGlobalPosition - pickedBodyGlobalPositon) * character.GrabObjectPullPower;
-        }
-        else if (isGrabbing && newGrabNow == false)
-        {
-            // zahazujeme objekt
-            StopGrabbing();
-            pickedBody = null;
-        }
-
-        // Throw impulse
-        if (isGrabbing && newGrabNow && pickedBody != null && newThrowObjectNow)
-        {
-            StopGrabbing();
-
-            pickedBody.ApplyCentralImpulse(character.GetFPSCharacterCamera().
-                GlobalTransform.basis.z.Normalized() * -character.ThrowObjectPower);
-
-            isCanNewGrab = false;
-            pickedBody = null;
-        }
-
-        // Reset pro novy grab, napriklad po hodu, donuti hrace pustit tlacitko pro grab, i kdyby na jeden frame
-        // pokud ho pusti, resetujeme moznost znovu grabbovat
-        if (isCanNewGrab == false && newGrabNow == false)
-            isCanNewGrab = true;
-
-        // Rotate Grabbed Object
-        if (isGrabbing && newGrabNow && pickedBody != null && newRotateGrabbedObject)
-        {
-            wantRotateNow = true;
-        }
-
-        // Move Far/Near Grabbed Object
-        if (isGrabbing && newGrabNow && pickedBody != null && (newMoveFarGrabbedObject || newMoveNearGrabbedObject))
-        {
-            Vector3 actualPosition = character.objectCamera.GetHandGrabMarker().Position;
-
-            if (newMoveFarGrabbedObject)
-                actualPosition.z -= character.MoveFarOrNearObjectStep;
-
-            if (newMoveNearGrabbedObject)
-                actualPosition.z += character.MoveFarOrNearObjectStep;
-
-            actualPosition.z = Mathf.Clamp(actualPosition.z,
-                -character.MoveFarOrNearObjectMax, -character.MoveFarOrNearObjectMin);
-
-            character.objectCamera.GetHandGrabMarker().Position = actualPosition;
+            case interactive_object.EInteractivePhysicType.GrabJoint:
+                {
+                    UpdatePhysic_GrabJoint(newGrabNow, newThrowObjectNow, newRotateGrabbedObject,
+                        newMoveFarGrabbedObject, newMoveNearGrabbedObject, delta);
+                    break;
+                }
         }
     }
 
@@ -282,12 +214,96 @@ public partial class CharacterInteractiveSystem : Godot.Object
         }
     }
 
-    public void UpdatePhysic_GrabItem()
+    public void UpdatePhysic_GrabItem(bool newGrabNow, bool newThrowObjectNow, bool newRotateGrabbedObject,
+        bool newMoveFarGrabbedObject, bool newMoveNearGrabbedObject, double delta)
     {
+        // otestujeme zda je tento object nastaveny pro grab a zda aktualne nejaky objekt negrabujeme
+        // pokud jsou podminky splneny, nastavime viditelnou normal hand
 
+        if (actualInteractiveObject.InteractiveLevel == interactive_object.EInteractiveLevel.OnlyPhysic ||
+            actualInteractiveObject.InteractiveLevel == interactive_object.EInteractiveLevel.UseAndPhysic)
+        {
+            // Neni pozadovano, nebo je pozadovano aby byl hrac v area objektu a opravdu v nem je ?
+            if (character.MustBeInInteractiveArea == false ||
+                (character.MustBeInInteractiveArea && actualInteractiveObject.GetIsPlayerInRange()))
+            {
+                if (newGrabNow == false)
+                    basicHud.SetHandGrabState(true, false);
+            }
+            // Je pozadovano a hrac neni v aree ? *** prozatimni reseni na upusteni objektu v dalce !!! ***
+            else if (character.MustBeInInteractiveArea && !actualInteractiveObject.GetIsPlayerInRange() && newGrabNow)
+            {
+                if (pickedBody != null)
+                {
+                    isCanNewGrab = false;
+                    StopGrabbing();
+                }
+
+                pickedBody = null;
+            }
+        }
+
+        // pokud jsme aktualne ve stavu grabbing, stale prichazi input pro grab tak
+        // updatujeme pozice objektu pro grabbing
+        if (isCanNewGrab && isGrabbing && newGrabNow && pickedBody != null)
+        {
+            basicHud.SetHandGrabState(true, true);
+            // grabbing
+            Vector3 pickedBodyGlobalPositon = pickedBody.GlobalTransform.origin;
+            Vector3 HandGrabGlobalPosition = character.objectCamera.HandGrabMarker.GlobalPosition;
+
+            pickedBody.LinearVelocity = (HandGrabGlobalPosition - pickedBodyGlobalPositon) * character.GrabObjectPullPower;
+        }
+        else if (isGrabbing && newGrabNow == false)
+        {
+            // zahazujeme objekt
+            StopGrabbing();
+            pickedBody = null;
+        }
+
+        // Throw impulse
+        if (isGrabbing && newGrabNow && pickedBody != null && newThrowObjectNow)
+        {
+            StopGrabbing();
+
+            pickedBody.ApplyCentralImpulse(character.GetFPSCharacterCamera().
+                GlobalTransform.basis.z.Normalized() * -character.ThrowObjectPower);
+
+            isCanNewGrab = false;
+            pickedBody = null;
+        }
+
+        // Reset pro novy grab, napriklad po hodu, donuti hrace pustit tlacitko pro grab, i kdyby na jeden frame
+        // pokud ho pusti, resetujeme moznost znovu grabbovat
+        if (isCanNewGrab == false && newGrabNow == false)
+            isCanNewGrab = true;
+
+        // Rotate Grabbed Object
+        if (isGrabbing && newGrabNow && pickedBody != null && newRotateGrabbedObject)
+        {
+            wantRotateNow = true;
+        }
+
+        // Move Far/Near Grabbed Object
+        if (isGrabbing && newGrabNow && pickedBody != null && (newMoveFarGrabbedObject || newMoveNearGrabbedObject))
+        {
+            Vector3 actualPosition = character.objectCamera.GetHandGrabMarker().Position;
+
+            if (newMoveFarGrabbedObject)
+                actualPosition.z -= character.MoveFarOrNearObjectStep;
+
+            if (newMoveNearGrabbedObject)
+                actualPosition.z += character.MoveFarOrNearObjectStep;
+
+            actualPosition.z = Mathf.Clamp(actualPosition.z,
+                -character.MoveFarOrNearObjectMax, -character.MoveFarOrNearObjectMin);
+
+            character.objectCamera.GetHandGrabMarker().Position = actualPosition;
+        }
     }
 
-    public void UpdatePhysic_GrabJoint()
+    public void UpdatePhysic_GrabJoint(bool newGrabNow, bool newThrowObjectNow, bool newRotateGrabbedObject,
+        bool newMoveFarGrabbedObject, bool newMoveNearGrabbedObject, double delta)
     {
 
     }
