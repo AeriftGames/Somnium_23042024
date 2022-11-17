@@ -7,7 +7,7 @@ public partial class CharacterInteractiveSystem : Godot.Object
 {
     FPSCharacter_Interaction character = null;
     BasicHud basicHud;
-    Node actualInteractiveObject = null;
+    interactive_object actualInteractiveObject = null;
     RigidBody3D pickedBody = null;
     bool isGrabbing = false;
     bool isCanNewGrab = true;
@@ -39,44 +39,37 @@ public partial class CharacterInteractiveSystem : Godot.Object
         basicHud.SetUseLabelText("");
         basicHud.SetUseVisible(false);
 
-        // neexistuje zadny novy objekt ?
+        // neexistuje zadny interactive objekt ? = opustit update
         if (actualInteractiveObject == null)
-        {
-            basicHud.SetUseLabelText("");
-            basicHud.SetUseVisible(false);
             return;
-        }
-
-        // cast to interactive_object
-        interactive_object interactiveObject = (interactive_object)actualInteractiveObject;
 
         // Neni pozadovano, nebo je pozadovano aby byl hrac v area objektu a opravdu v nem je ?
         if (character.MustBeInInteractiveArea == false ||
-            (character.MustBeInInteractiveArea && interactiveObject.GetIsPlayerInRange()))
+            (character.MustBeInInteractiveArea && actualInteractiveObject.GetIsPlayerInRange()))
         {
-            switch (interactiveObject.InteractiveLevel)
+            switch (actualInteractiveObject.InteractiveLevel)
             {
                 case interactive_object.EInteractiveLevel.OnlyUse:
                     {
-                        UpdateForUse(interactiveObject, newUseNow, delta);
+                        UpdateForUse(actualInteractiveObject, newUseNow, delta);
                         break;
                     }
                 case interactive_object.EInteractiveLevel.OnlyPhysic:
                     {
-                        UpdateForPhysic(interactiveObject, newUseNow, newGrabNow, delta);
+                        UpdateForPhysic(actualInteractiveObject, newUseNow, newGrabNow, delta);
                         break;
                     }
                 case interactive_object.EInteractiveLevel.UseAndPhysic:
                     {
-                        UpdateForUse(interactiveObject, newUseNow, delta);
-                        UpdateForPhysic(interactiveObject, newUseNow, newGrabNow, delta);
+                        UpdateForUse(actualInteractiveObject, newUseNow, delta);
+                        UpdateForPhysic(actualInteractiveObject, newUseNow, newGrabNow, delta);
                         break;
                     }
             }
         }
     }
 
-    public void SetActualInteractiveObject(Node newInteractiveObject, Vector3 hitPosition)
+    public void SetActualInteractiveObject(interactive_object newInteractiveObject, Vector3 hitPosition)
     {
         actualInteractiveObject = newInteractiveObject;
     }
@@ -113,35 +106,36 @@ public partial class CharacterInteractiveSystem : Godot.Object
         wantRotateNow = false;
         character.objectCamera.IsCameraLookInputEnable = true;
 
-        // otestujeme zda je tento object nastaveny pro grab a zda aktualne nejaky objekt negrabujeme
-        // pokd jsou podminky splneny, nastavime viditelnou normal hand
-        if (actualInteractiveObject != null)
-        {
-            interactive_object interactiveObject = (interactive_object)actualInteractiveObject;
-            if (interactiveObject.InteractiveLevel == interactive_object.EInteractiveLevel.OnlyPhysic ||
-                interactiveObject.InteractiveLevel == interactive_object.EInteractiveLevel.UseAndPhysic)
-            {
-                // Neni pozadovano, nebo je pozadovano aby byl hrac v area objektu a opravdu v nem je ?
-                if (character.MustBeInInteractiveArea == false ||
-                    (character.MustBeInInteractiveArea && interactiveObject.GetIsPlayerInRange()))
-                {
-                    if(newGrabNow == false)
-                        basicHud.SetHandGrabState(true, false);
-                }
-                // Je pozadovano a hrac neni v aree ? *** prozatimni reseni na upusteni objektu v dalce !!! ***
-                else if(character.MustBeInInteractiveArea && !interactiveObject.GetIsPlayerInRange() && newGrabNow)
-                {
-                    if(pickedBody != null)
-                    {
-                        isCanNewGrab = false;
-                        StopGrabbing();
-                    }
+        // neexistuje zadny interactive objekt ? = opustit update
+        if (actualInteractiveObject == null)
+            return;
 
-                    pickedBody = null;
+        // otestujeme zda je tento object nastaveny pro grab a zda aktualne nejaky objekt negrabujeme
+        // pokud jsou podminky splneny, nastavime viditelnou normal hand
+       
+        if (actualInteractiveObject.InteractiveLevel == interactive_object.EInteractiveLevel.OnlyPhysic ||
+            actualInteractiveObject.InteractiveLevel == interactive_object.EInteractiveLevel.UseAndPhysic)
+        {
+            // Neni pozadovano, nebo je pozadovano aby byl hrac v area objektu a opravdu v nem je ?
+            if (character.MustBeInInteractiveArea == false ||
+                (character.MustBeInInteractiveArea && actualInteractiveObject.GetIsPlayerInRange()))
+            {
+                if(newGrabNow == false)
+                    basicHud.SetHandGrabState(true, false);
+            }
+            // Je pozadovano a hrac neni v aree ? *** prozatimni reseni na upusteni objektu v dalce !!! ***
+            else if(character.MustBeInInteractiveArea && !actualInteractiveObject.GetIsPlayerInRange() && newGrabNow)
+            {
+                if(pickedBody != null)
+                {
+                    isCanNewGrab = false;
+                    StopGrabbing();
                 }
-                
+
+                pickedBody = null;
             }
         }
+        
 
         // pokud jsme aktualne ve stavu grabbing, stale prichazi input pro grab tak
         // updatujeme pozice objektu pro grabbing
