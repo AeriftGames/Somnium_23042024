@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_orflx")
-subject = "Joe Biden issues climate rallying cry to world leaders"
+subject = "Joeaaa Biden issues climate rallying cry to world leaders"
 message = "It is the duty and responsibility of every nation to act on climate, US President Joe Biden has said at the UN summit COP27.
 
 Mr Biden spoke in Egypt after US mid-term elections delivered better-than-expected results for the president.
@@ -28,3 +28,4 @@ He also pledged more money for poorer nations suffering from climate disasters, 
 \"Joe Biden comes to COP27 and makes new promises but his old promises have not even been fulfilled. I'd rather have one apple in my hand than the promise of five that never come,\" said Mohamed Adow, Power Shift Africa director.
 
 \"The inconvenient truth is that the United States is grossly underperforming on its international climate finance commitments,\" said president of World Resources Institute Ani Dasgupta."
+isused = false

@@ -37,7 +37,7 @@ func _ready():
 func _used():
 	if isNowInteract == false:
 		player_inspect = self.get_node("/root/worldlevel/FPSCharacter_Interaction/Item_inspect")
-		$AudioStreamPlayer.play()
+		#$AudioStreamPlayer.play()
 		isNowInteract = true
 		passed_object.SetInputEnable(false)
 		player_inspect.inspect(true, self, false)
