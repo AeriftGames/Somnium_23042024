@@ -3,10 +3,6 @@ using System;
 using System.Data;
 using System.Linq.Expressions;
 
-// propojit s basichud
-// zprovoznit puvodni hud texty
-// zprovoznit use a grab
-
 public partial class CharacterInteractiveSystem : Godot.Object
 {
     FPSCharacter_Interaction character = null;
@@ -40,6 +36,8 @@ public partial class CharacterInteractiveSystem : Godot.Object
         // default sets on start this update
         basicHud.SetUseVisible(false);
         basicHud.SetHandGrabState(false, false);
+        basicHud.SetUseLabelText("");
+        basicHud.SetUseVisible(false);
 
         // neexistuje zadny novy objekt ?
         if (actualInteractiveObject == null)
@@ -56,17 +54,22 @@ public partial class CharacterInteractiveSystem : Godot.Object
         if (character.MustBeInInteractiveArea == false ||
             (character.MustBeInInteractiveArea && interactiveObject.GetIsPlayerInRange()))
         {
-            switch (interactiveObject.InteractiveType)
+            switch (interactiveObject.InteractiveLevel)
             {
-                case interactive_object.EInteractiveType.Static:
+                case interactive_object.EInteractiveLevel.OnlyUse:
                     {
-                        UpdateStatic(interactiveObject, newUseNow, delta);
+                        UpdateForUse(interactiveObject, newUseNow, delta);
                         break;
                     }
-                case interactive_object.EInteractiveType.Physic:
+                case interactive_object.EInteractiveLevel.OnlyPhysic:
                     {
-                        UpdateStatic(interactiveObject, newUseNow, delta);
-                        UpdatePhysic(interactiveObject, newUseNow, newGrabNow, delta);
+                        UpdateForPhysic(interactiveObject, newUseNow, newGrabNow, delta);
+                        break;
+                    }
+                case interactive_object.EInteractiveLevel.UseAndPhysic:
+                    {
+                        UpdateForUse(interactiveObject, newUseNow, delta);
+                        UpdateForPhysic(interactiveObject, newUseNow, newGrabNow, delta);
                         break;
                     }
             }
@@ -78,37 +81,25 @@ public partial class CharacterInteractiveSystem : Godot.Object
         actualInteractiveObject = newInteractiveObject;
     }
 
-    public void UpdateStatic(interactive_object newInteractiveObject,bool newUseNow,double delta)
+    public void UpdateForUse(interactive_object newInteractiveObject,bool newUseNow,double delta)
     {
-        // OBJECT DISABLED ?
-        if (newInteractiveObject.InteractiveLevel == interactive_object.EInteractiveLevel.Disable)
-        {
-            basicHud.SetUseLabelText("");
-            basicHud.SetUseVisible(false);
-        }
-
-        //  FOR UPDATE HUD
+        //  Pokud mame pouzivame objekt pro USE - zobrazime text pro jeho akci
         if (newInteractiveObject.InteractiveLevel == interactive_object.EInteractiveLevel.OnlyUse ||
-            newInteractiveObject.InteractiveLevel == interactive_object.EInteractiveLevel.UseAndGrab)
+            newInteractiveObject.InteractiveLevel == interactive_object.EInteractiveLevel.UseAndPhysic)
         {
             basicHud.SetUseLabelText(newInteractiveObject.GetUseActionName());
             basicHud.SetUseVisible(true);
-        }
 
-        // FOR UPDATE USE
-        if (newInteractiveObject.InteractiveLevel == interactive_object.EInteractiveLevel.OnlyUse ||
-            newInteractiveObject.InteractiveLevel == interactive_object.EInteractiveLevel.UseAndGrab)
-        {
+            // Pokud je momentalne od hrace input zadost pro USE, pouzijeme vnitrni funkci objektu pro USE
             if (newUseNow)
                 newInteractiveObject.Use(character);
         }
     }
-    public void UpdatePhysic(interactive_object newInteractiveObject, bool newUseNow,bool newGrabNow, double delta)
+    public void UpdateForPhysic(interactive_object newInteractiveObject, bool newUseNow,bool newGrabNow, double delta)
     {
-        
-        // Update Grab
-        if(newInteractiveObject.InteractiveLevel == interactive_object.EInteractiveLevel.OnlyGrab ||
-            newInteractiveObject.InteractiveLevel == interactive_object.EInteractiveLevel.UseAndGrab)
+        // Je objekt oprabdu zalozeny pro physic update ? - UPDATE GRAB
+        if(newInteractiveObject.InteractiveLevel == interactive_object.EInteractiveLevel.OnlyPhysic ||
+            newInteractiveObject.InteractiveLevel == interactive_object.EInteractiveLevel.UseAndPhysic)
         {
             if(newGrabNow && isCanNewGrab)
                 StartGrabbing((RigidBody3D)actualInteractiveObject.GetParent());
@@ -127,8 +118,8 @@ public partial class CharacterInteractiveSystem : Godot.Object
         if (actualInteractiveObject != null)
         {
             interactive_object interactiveObject = (interactive_object)actualInteractiveObject;
-            if (interactiveObject.InteractiveLevel == interactive_object.EInteractiveLevel.OnlyGrab ||
-                interactiveObject.InteractiveLevel == interactive_object.EInteractiveLevel.UseAndGrab)
+            if (interactiveObject.InteractiveLevel == interactive_object.EInteractiveLevel.OnlyPhysic ||
+                interactiveObject.InteractiveLevel == interactive_object.EInteractiveLevel.UseAndPhysic)
             {
                 // Neni pozadovano, nebo je pozadovano aby byl hrac v area objektu a opravdu v nem je ?
                 if (character.MustBeInInteractiveArea == false ||
@@ -295,5 +286,15 @@ public partial class CharacterInteractiveSystem : Godot.Object
             grabbedObject.PhysicsMaterialOverride.Bounce = lastGrabbedItemOriginalParams.bounce;
             grabbedObject.Mass = lastGrabbedItemOriginalParams.mass;
         }
+    }
+
+    public void UpdatePhysic_GrabItem()
+    {
+
+    }
+
+    public void UpdatePhysic_GrabJoint()
+    {
+
     }
 }

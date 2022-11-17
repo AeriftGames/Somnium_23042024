@@ -29,7 +29,7 @@ contact_monitor = true
 linear_damp = 0.5
 angular_damp = 0.5
 script = ExtResource("1_8fm2c")
-UseActionText = ""
+UseActionText = "-pick-"
 PhysicEffectsAudioStream = [ExtResource("2_i8ff8")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -40,7 +40,6 @@ mesh = SubResource("BoxMesh_p2lha")
 
 [node name="interactive_object" type="Node3D" parent="." groups=["interactive_object"]]
 script = ExtResource("2_ccmec")
-InteractiveType = 1
 InteractiveLevel = 3
 metadata/_edit_lock_ = true
 

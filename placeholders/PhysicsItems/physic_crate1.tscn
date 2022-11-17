@@ -87,8 +87,7 @@ shape = SubResource("BoxShape3D_6u1xu")
 
 [node name="interactive_object" type="Node3D" parent="." groups=["interactive_object"]]
 script = ExtResource("2_ccmec")
-InteractiveType = 1
-InteractiveLevel = 3
+InteractiveLevel = 2
 metadata/_edit_lock_ = true
 
 [node name="StaticBody3D" type="StaticBody3D" parent="interactive_object"]

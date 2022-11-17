@@ -33,6 +33,7 @@ public partial class physic_item_test : RigidBody3D
 
     public void UseAction(FPSCharacter_Interaction character)
     {
+        GameMaster.GM.Log.WriteLog(this, LogSystem.ELogMsgType.INFO, "USE");
     }
 
     public void ApplyGrab(bool newGrab,FPSCharacter_Interaction character)

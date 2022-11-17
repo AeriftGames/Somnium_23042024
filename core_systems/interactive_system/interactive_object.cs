@@ -6,11 +6,11 @@ public partial class interactive_object : Node3D
 	// komunikacni objekt
 	public MessageObject msgObject;
 
-	public enum EInteractiveType { Static, Physic }
-	public enum EInteractiveLevel { Disable, OnlyUse, OnlyGrab, UseAndGrab }
+	public enum EInteractiveLevel { Disable, OnlyUse, OnlyPhysic, UseAndPhysic}
+	public enum EInteractivePhysicType { GrabItem, GrabJoint}
 
-	[Export] public EInteractiveType InteractiveType = EInteractiveType.Static;
-    [Export] public EInteractiveLevel InteractiveLevel = EInteractiveLevel.OnlyUse;
+	[Export] public EInteractiveLevel InteractiveLevel = EInteractiveLevel.OnlyUse;
+	[Export] public EInteractivePhysicType InteractivePhysicType = EInteractivePhysicType.GrabItem;
 
     private bool isPlayerInRange = false;
 
@@ -49,7 +49,7 @@ public partial class interactive_object : Node3D
 	public void Use(FPSCharacter_Interaction player)
 	{
 		if (InteractiveLevel == EInteractiveLevel.Disable) return;
-        if (InteractiveLevel == EInteractiveLevel.OnlyUse || InteractiveLevel == EInteractiveLevel.UseAndGrab)
+        if (InteractiveLevel == EInteractiveLevel.OnlyUse || InteractiveLevel == EInteractiveLevel.UseAndPhysic)
 		{
             // nastavime node data jako playera a posleme zpravu o use_action dal
             msgObject.SetNodeData(player);
