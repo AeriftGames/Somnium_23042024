@@ -1,11 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://cdjei6maw8136"]
+[gd_scene load_steps=15 format=3 uid="uid://cdjei6maw8136"]
 
 [ext_resource type="PackedScene" uid="uid://dbnevtbu1g7uy" path="res://core_systems/interactive_system/interactive_object.tscn" id="1_wnwe3"]
 [ext_resource type="Script" path="res://testing/wall_lever_test.cs" id="1_yoxc4"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_mknaj"]
 friction = 0.0
-absorbent = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_217we"]
 albedo_color = Color(0.270588, 0.101961, 0, 1)
@@ -22,10 +21,10 @@ albedo_color = Color(0.835294, 0, 0.105882, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_pg56o"]
 material = SubResource("StandardMaterial3D_fiehm")
-size = Vector3(0.055, 0.055, 0.4)
+size = Vector3(0.051, 0.052, 0.456)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_8rlo5"]
-size = Vector3(0.06, 0.059, 0.26)
+size = Vector3(0.307, 0.066, 0.064)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_jwop8"]
 radius = 1.6
@@ -35,13 +34,26 @@ albedo_color = Color(0.109804, 0.360784, 0.454902, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_8bnou"]
 material = SubResource("StandardMaterial3D_cjpoc")
-size = Vector3(0.2, 0.4, 0.1)
+size = Vector3(0.4, 0.4, 0.1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gh852"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ffgcc"]
+material = SubResource("StandardMaterial3D_gh852")
+size = Vector3(0.325, 0.262, 0.1)
 
 [node name="WallLever" type="Node3D"]
 script = ExtResource("1_yoxc4")
 
 [node name="LeverGrab" type="RigidBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0562809)
+collision_layer = 8
+axis_lock_linear_x = true
+axis_lock_linear_y = true
+axis_lock_linear_z = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
 mass = 10.0
 physics_material_override = SubResource("PhysicsMaterial_mknaj")
 can_sleep = false
@@ -49,7 +61,7 @@ linear_damp_mode = 1
 angular_damp_mode = 1
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="LeverGrab"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.126515, 0, 0.2)
 mesh = SubResource("BoxMesh_xw61y")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="LeverGrab/MeshInstance3D"]
@@ -57,8 +69,17 @@ mesh = SubResource("BoxMesh_xw61y")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="LeverGrab/MeshInstance3D/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_68ny6")
 
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="LeverGrab"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.123485, 0, 0.2)
+mesh = SubResource("BoxMesh_xw61y")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="LeverGrab/MeshInstance3D3"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LeverGrab/MeshInstance3D3/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_68ny6")
+
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="LeverGrab"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.65, 0, 0, 0.270483)
+transform = Transform3D(-4.37114e-08, 0, 0.65, 0, 1, 0, -1, 0, -2.84124e-08, -0.00439079, 0, 0.386686)
 mesh = SubResource("BoxMesh_pg56o")
 
 [node name="interactive_object" parent="LeverGrab" instance=ExtResource("1_wnwe3")]
@@ -67,24 +88,30 @@ InteractiveLevel = 2
 InteractivePhysicType = 2
 
 [node name="CollisionShape3D" parent="LeverGrab/interactive_object/StaticBody3D" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000155739, -0.000373986, 0.271217)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00279269, -0.000373986, 0.387109)
 shape = SubResource("BoxShape3D_8rlo5")
 
 [node name="CollisionShape3D" parent="LeverGrab/interactive_object/StaticBody3D/interactive_object_area3D" index="0"]
 shape = SubResource("SphereShape3D_jwop8")
 
 [node name="LeverStaticBody" type="StaticBody3D" parent="."]
+collision_layer = 8
+collision_mask = 8
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="LeverStaticBody"]
 mesh = SubResource("BoxMesh_8bnou")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="LeverStaticBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0114078)
+mesh = SubResource("BoxMesh_ffgcc")
 
 [node name="HingeJoint3D" type="HingeJoint3D" parent="."]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, -0.0085438)
 node_a = NodePath("../LeverStaticBody")
 node_b = NodePath("../LeverGrab")
 angular_limit/enable = true
-angular_limit/upper = 0.785398
-angular_limit/lower = -0.785398
+angular_limit/upper = 1.0472
+angular_limit/lower = -1.0472
 
 [node name="LocalPlayerInput" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5)
