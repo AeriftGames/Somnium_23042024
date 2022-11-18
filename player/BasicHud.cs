@@ -69,4 +69,9 @@ public partial class BasicHud : Control
             handCanGrabTexture.Visible = false;
         }
 	}
+
+	public void SetHandGrabActionPosition(Vector3 newGlobalPosition)
+	{
+
+	}
 }

@@ -258,4 +258,9 @@ public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
 	{
 		return InteractiveSystem;
 	}
+
+	public BasicHud GetBasicHud()
+	{
+		return basicHud;
+	}
 }

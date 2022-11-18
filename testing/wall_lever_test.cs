@@ -25,6 +25,14 @@ public partial class wall_lever_test : Node3D
     private bool isReachTop = false;
     private Vector2 motionMouse = Vector2.Zero;
 
+    public enum EReachPointEnd{Work,Bottom,Top}
+    public EReachPointEnd EActualPoint;
+
+
+    //LIGHTS
+    MeshInstance3D GreenLight = null;
+    MeshInstance3D RedLight = null;
+
     public override void _Ready()
     {
         interactiveObject = GetNode<interactive_object>("LeverGrab/interactive_object");
@@ -32,7 +40,11 @@ public partial class wall_lever_test : Node3D
         leverGrab = GetNode<RigidBody3D>("LeverGrab");
         hingeJoint3D = GetNode<HingeJoint3D>("HingeJoint3D");
 
-        SetReachPositionFreeze(false);
+        //LIGHTS
+        GreenLight = GetNode<MeshInstance3D>("LeverStaticBody/MeshInstance3D/MeshInstanceGreen");
+        RedLight = GetNode<MeshInstance3D>("LeverStaticBody/MeshInstance3D/MeshInstanceRed");
+
+        TestLight(true);
     }
     public override void _Input(InputEvent @event)
     {
@@ -50,26 +62,29 @@ public partial class wall_lever_test : Node3D
         // pokud jsme v GrabAction
         if (isActionUpdate)
         {
-            // Pohyb mysi
-            leverGrab.RotateX(Mathf.DegToRad(motionMouse.y * mouse_motion_speed));
+            var newVel = new Vector3(0, motionMouse.y * mouse_motion_speed, 0);
+            leverGrab.LinearVelocity = -newVel;
 
-            // Vypocet pro detekci horniho konecneho bodu a spodniho konecneho bodu
-            float actual_rot = Mathf.RadToDeg(leverGrab.Rotation.x);
-
-            if (actual_rot >= max-1.0f)
-                DetectReachEndPoint(false);
-            else if (actual_rot <= min+1.0f)
-                DetectReachEndPoint(true);
-            else
+            switch(CalculateReaches())
             {
-                // normalni chod
-                leverGrab.Freeze = false;
-                leverGrab.Sleeping = false;
-                isInReach = false;
+                case EReachPointEnd.Top: 
+                    {
+                        TestLight(true);
+                        break; 
+                    }
+                case EReachPointEnd.Bottom:
+                    {
+                        TestLight(false);
+                        break;
+                    }
+                case EReachPointEnd.Work:
+                    {
 
-                // FOR DO ONCE
-                isAlreadyReached = false;
+                        break;
+                    }
             }
+
+
         }
         else
         {
@@ -77,16 +92,30 @@ public partial class wall_lever_test : Node3D
             {
                 // Vypocet pro detekci horniho konecneho bodu a spodniho konecneho bodu
                 float actual_rot = Mathf.RadToDeg(leverGrab.Rotation.x);
-
-                if (actual_rot >= max - 1.0f)
-                    DetectReachEndPoint(false);
-                else if (actual_rot <= min + 1.0f)
-                    DetectReachEndPoint(true);
             }
         }
 
         // Reset for zero
         motionMouse = Vector2.Zero;
+    }
+
+    public EReachPointEnd CalculateReaches()
+    {
+        // Vypocet pro detekci horniho konecneho bodu a spodniho konecneho bodu
+        float actual_rot = Mathf.RadToDeg(leverGrab.Rotation.x);
+
+        if(actual_rot >= max-1)
+        {
+            return EReachPointEnd.Bottom;
+        }
+        else if(actual_rot <= min+1)
+        {
+            return EReachPointEnd.Top;
+        }
+        else
+        {
+            return EReachPointEnd.Work;
+        }
     }
 
     public void DetectReachEndPoint(bool newTop)
@@ -157,15 +186,31 @@ public partial class wall_lever_test : Node3D
 
     public void ActionEnd()
     {
-        // Vypocet pro detekci horniho konecneho bodu a spodniho konecneho bodu
-        float actual_rot = Mathf.RadToDeg(leverGrab.Rotation.x);
 
-        //Spustime motor tim smerem podle toho kde se aktualne nachazi paka
+    }
 
-        if (actual_rot >= center_value)
-            SetMotorToPosition(true);
-        else if (actual_rot <= center_value - 0.0001f)
-            SetMotorToPosition(false);
+    public void TestLight(bool newEnable)
+    {
+        if(newEnable)
+        {
+            //GREEN
+            if (GreenLight == null || RedLight == null) return;
+            GreenLight.Visible = true;
+            RedLight.Visible = false;
+
+        }
+        else
+        {
+            //RED
+            if (GreenLight == null || RedLight == null) return;
+            GreenLight.Visible = false;
+            RedLight.Visible = true;
+        }
+    }
+
+    public void UpdateHud(float delta)
+    {
+       //interactCharacter.GetBasicHud()
     }
 
     public virtual void message_update()

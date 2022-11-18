@@ -194,6 +194,7 @@ testBottom={
 
 [physics]
 
+common/physics_ticks_per_second=144
 3d/time_before_sleep=1.0
 3d/solver/solver_iterations=32
 
