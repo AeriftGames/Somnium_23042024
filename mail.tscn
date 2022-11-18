@@ -56,7 +56,7 @@ grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_et47l")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Panel"]
-custom_minimum_size = Vector2i(286, 527)
+custom_minimum_size = Vector2(286, 527)
 offset_left = 10.0
 offset_top = 9.0
 offset_right = 296.0
@@ -67,7 +67,7 @@ vertical_scroll_mode = 3
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel/ScrollContainer"]
 
 [node name="ScrollContainer2" type="ScrollContainer" parent="Panel"]
-custom_minimum_size = Vector2i(652, 524)
+custom_minimum_size = Vector2(652, 524)
 anchors_preset = -1
 anchor_left = 1.053
 anchor_top = 0.018
@@ -87,7 +87,7 @@ offset_bottom = 90.0
 
 [node name="Subject" type="Label" parent="Panel/ScrollContainer2/VBoxContainer"]
 clip_contents = true
-custom_minimum_size = Vector2i(640, 0)
+custom_minimum_size = Vector2(640, 0)
 offset_right = 640.0
 offset_bottom = 49.0
 theme_override_colors/font_color = Color(0.803922, 0.443137, 0.0588235, 1)
@@ -103,7 +103,7 @@ theme_override_styles/separator = SubResource("StyleBoxFlat_d6v4w")
 
 [node name="Message" type="Label" parent="Panel/ScrollContainer2/VBoxContainer"]
 clip_contents = true
-custom_minimum_size = Vector2i(640, 0)
+custom_minimum_size = Vector2(640, 0)
 offset_top = 67.0
 offset_right = 640.0
 offset_bottom = 90.0

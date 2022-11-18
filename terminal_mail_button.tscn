@@ -7,7 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://bg6wf4kvqhspm" path="res://terminal_button.wav" id="5_5tf6g"]
 
 [node name="TerminalMailButton" type="Button"]
-custom_minimum_size = Vector2i(270, 45)
+custom_minimum_size = Vector2(270, 45)
 offset_right = 270.0
 offset_bottom = 45.0
 focus_mode = 0

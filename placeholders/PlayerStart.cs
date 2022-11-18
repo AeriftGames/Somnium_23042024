@@ -12,33 +12,33 @@ public partial class PlayerStart : Node3D
 	public Node3D EditorMesh = null;
 
 	// spawn delay timer
-    Godot.Timer spawn_timer = new Godot.Timer();
+	Godot.Timer spawn_timer = new Godot.Timer();
 
-    public override void _Ready()
+	public override void _Ready()
 	{
 		// Po Startu zneviditelnime a nechame objekt znicit (chceme videt jen v editoru)
 		EditorMesh = GetNode<Node3D>("EditorMesh");
 		EditorMesh.Visible = false;
 		EditorMesh.QueueFree();
 
-        // Create timer for delaying spawn if start game
-        var callable_spawn = new Callable(SpawnNewPlayer);
-        spawn_timer.Connect("timeout", callable_spawn);
-        spawn_timer.WaitTime = 0.2;
-        spawn_timer.OneShot = true;
-        AddChild(spawn_timer);
+		// Create timer for delaying spawn if start game
+		var callable_spawn = new Callable(this,"SpawnNewPlayer");
+		spawn_timer.Connect("timeout", callable_spawn);
+		spawn_timer.WaitTime = 0.2;
+		spawn_timer.OneShot = true;
+		AddChild(spawn_timer);
 		spawn_timer.Start();
-    }
+	}
 
 	public void SpawnNewPlayer()
 	{
-        SpawnPlayerByType(SpawnCharacterType);
-    }
+		SpawnPlayerByType(SpawnCharacterType);
+	}
 
 	public void SpawnPlayerByType(EPlayerCharacterType newPlayerCharacterType)
 	{
 
-        switch (newPlayerCharacterType)
+		switch (newPlayerCharacterType)
 		{
 			case EPlayerCharacterType.WalkingEffects:
 				{
@@ -48,31 +48,31 @@ public partial class PlayerStart : Node3D
 				{
 					// Instance from scenefile and cast to specific class
 					var objectCamera_Instance = (ObjectCamera)GD.Load<PackedScene>(
-                        "res://player/character_systems/ObjectCamera.tscn").Instantiate();
+						"res://player/character_systems/ObjectCamera.tscn").Instantiate();
 
 					var characterInteraction_Instance = (FPSCharacter_Interaction)GD.Load<PackedScene>(
-                        "res://player/FPSCharacter_Interaction.tscn").Instantiate();
+						"res://player/FPSCharacter_Interaction.tscn").Instantiate();
 
 					var objectHands_instance = (ObjectHands)GD.Load<PackedScene>(
 						"res://player/character_systems/ObjectHands.tscn").Instantiate();
 
-                    // Initial settings - link objectCamera to character
-                    characterInteraction_Instance.objectCamera = objectCamera_Instance;
+					// Initial settings - link objectCamera to character
+					characterInteraction_Instance.objectCamera = objectCamera_Instance;
 					characterInteraction_Instance.objectHands = objectHands_instance;
 
-                    // Spawn to worldlevel node
-                    Node level = GetNode("/root/worldlevel");
-                    if (level == null)
+					// Spawn to worldlevel node
+					Node level = GetNode("/root/worldlevel");
+					if (level == null)
 					{
 						// If worldlevel for spawn dont finded
-                        GameMaster.GM.Log.WriteLog(this, LogSystem.ELogMsgType.ERROR,
-                            "Not find /root/worldlevel for spawn player");
-                    }
+						GameMaster.GM.Log.WriteLog(this, LogSystem.ELogMsgType.ERROR,
+							"Not find /root/worldlevel for spawn player");
+					}
 					else
 					{
-                        // Add childs to worldlevel node (Spawn)
-                        level.AddChild(objectCamera_Instance);
-                        level.AddChild(characterInteraction_Instance);
+						// Add childs to worldlevel node (Spawn)
+						level.AddChild(objectCamera_Instance);
+						level.AddChild(characterInteraction_Instance);
 						level.AddChild(objectHands_instance);
 
 						// Set Positions for objectCamera,character and objectHands as Player Start GlobalPosition
@@ -85,18 +85,18 @@ public partial class PlayerStart : Node3D
 						newRotation.y = GlobalRotation.y;
 						objectCamera_Instance.NodeRotY.Rotation = newRotation;
 
-                        // Set new rotation for character just for case
-                        newRotation = characterInteraction_Instance.GlobalRotation;
-                        newRotation.y = GlobalRotation.y;
-                        characterInteraction_Instance.GlobalRotation = newRotation;
+						// Set new rotation for character just for case
+						newRotation = characterInteraction_Instance.GlobalRotation;
+						newRotation.y = GlobalRotation.y;
+						characterInteraction_Instance.GlobalRotation = newRotation;
 
-                        // Set new rotation for objectHands just for case
-                        newRotation = objectHands_instance.GlobalRotation;
-                        newRotation.y = GlobalRotation.y;
-                        objectHands_instance.GlobalRotation = newRotation;
-                    }
+						// Set new rotation for objectHands just for case
+						newRotation = objectHands_instance.GlobalRotation;
+						newRotation.y = GlobalRotation.y;
+						objectHands_instance.GlobalRotation = newRotation;
+					}
 
-                    break;
+					break;
 				}
 			default:
 				break;
