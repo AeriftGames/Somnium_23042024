@@ -3,20 +3,27 @@ using System;
 
 public partial class wall_lever_test : Node3D
 {
-    public interactive_object interactiveObject = null;
-    public FPSCharacter_Interaction interactCharacter = null;
-
-    RigidBody3D leverGrab = null;
-    HingeJoint3D hingeJoint3D = null;
-
-    bool isActionUpdate = false;
-
-    //
-    Vector2 motionMouse = Vector2.Zero;
     [Export] public float MotorPower = 3.0f;
-    float max = 60.0f;
-    float min = -60.0f;
-    bool isReach = false;
+    [Export] public float max = 60.0f;
+    [Export] public float center_value = 0.0f;
+    [Export] public float min = -60.0f;
+    [Export] public float motor_max_impulse = 1.0f;
+    [Export] public float mouse_motion_speed = 0.2f;
+
+    [Signal]
+    public delegate void LeverReachEndEventHandler(bool newTop);
+
+    private interactive_object interactiveObject = null;
+    private FPSCharacter_Interaction interactCharacter = null;
+
+    private RigidBody3D leverGrab = null;
+    private HingeJoint3D hingeJoint3D = null;
+
+    private bool isActionUpdate = false;
+    private bool isAlreadyReached = false;
+    private bool isInReach = false;
+    private bool isReachTop = false;
+    private Vector2 motionMouse = Vector2.Zero;
 
     public override void _Ready()
     {
@@ -25,7 +32,7 @@ public partial class wall_lever_test : Node3D
         leverGrab = GetNode<RigidBody3D>("LeverGrab");
         hingeJoint3D = GetNode<HingeJoint3D>("HingeJoint3D");
 
-        SetReachPositionFreeze(true);
+        SetReachPositionFreeze(false);
     }
     public override void _Input(InputEvent @event)
     {
@@ -43,18 +50,8 @@ public partial class wall_lever_test : Node3D
         // pokud jsme v GrabAction
         if (isActionUpdate)
         {
-            if (Input.IsActionJustPressed("testTop"))
-            {
-                SetActualPositon(true);
-            }
-
-            if (Input.IsActionJustPressed("testBottom"))
-            {
-                SetActualPositon(false);
-            }
-
             // Pohyb mysi
-            leverGrab.RotateX(Mathf.DegToRad(motionMouse.y * 0.2f));
+            leverGrab.RotateX(Mathf.DegToRad(motionMouse.y * mouse_motion_speed));
 
             // Vypocet pro detekci horniho konecneho bodu a spodniho konecneho bodu
             float actual_rot = Mathf.RadToDeg(leverGrab.Rotation.x);
@@ -68,12 +65,15 @@ public partial class wall_lever_test : Node3D
                 // normalni chod
                 leverGrab.Freeze = false;
                 leverGrab.Sleeping = false;
-                isReach = false;
+                isInReach = false;
+
+                // FOR DO ONCE
+                isAlreadyReached = false;
             }
         }
         else
         {
-            if(!isReach)
+            if(!isInReach)
             {
                 // Vypocet pro detekci horniho konecneho bodu a spodniho konecneho bodu
                 float actual_rot = Mathf.RadToDeg(leverGrab.Rotation.x);
@@ -92,43 +92,41 @@ public partial class wall_lever_test : Node3D
     public void DetectReachEndPoint(bool newTop)
     {
         SetReachPositionFreeze(newTop);
-        isReach = true;
-    }
-
-    public void SetActualPositon(bool newTop)
-    {
-        if (newTop)
-        {
-            Vector3 oldRot = leverGrab.Rotation;
-            oldRot.x = Mathf.DegToRad(min);
-            leverGrab.Rotation = oldRot;
-        }
-        else
-        {
-            Vector3 oldRot = leverGrab.Rotation;
-            oldRot.x = Mathf.DegToRad(max);
-            leverGrab.Rotation = oldRot;
-        }
+        isInReach = true;
     }
 
     public void SetReachPositionFreeze(bool newTop)
     {
+        // FOR DO ONCE
+
         if (newTop)
         {
             Vector3 oldRot = leverGrab.Rotation;
             oldRot.x = Mathf.DegToRad(min);
             leverGrab.Rotation = oldRot;
+
+            isReachTop = true;
         }
         else
         {
             Vector3 oldRot = leverGrab.Rotation;
             oldRot.x = Mathf.DegToRad(max);
             leverGrab.Rotation = oldRot;
+
+            isReachTop = false;
         }
 
         leverGrab.CanSleep = true;
         leverGrab.Sleeping = true;
         leverGrab.Freeze = true;
+
+        if (isAlreadyReached) return;
+
+        // EmitSignal
+        EmitSignal(SignalName.LeverReachEnd, newTop);
+
+        // FOR DO ONCE
+        isAlreadyReached = true;
     }
 
     public void SetMotorToPosition(bool newTop)
@@ -136,13 +134,13 @@ public partial class wall_lever_test : Node3D
         if (newTop)
         {
             hingeJoint3D.SetParam(HingeJoint3D.Param.MotorTargetVelocity, 1.0f * MotorPower);
-            hingeJoint3D.SetParam(HingeJoint3D.Param.MotorMaxImpulse, 1.0f);
+            hingeJoint3D.SetParam(HingeJoint3D.Param.MotorMaxImpulse, motor_max_impulse);
             hingeJoint3D.SetFlag(HingeJoint3D.Flag.EnableMotor, true);
         }
         else
         {
             hingeJoint3D.SetParam(HingeJoint3D.Param.MotorTargetVelocity, -1.0f * MotorPower);
-            hingeJoint3D.SetParam(HingeJoint3D.Param.MotorMaxImpulse, 1.0f);
+            hingeJoint3D.SetParam(HingeJoint3D.Param.MotorMaxImpulse, motor_max_impulse);
             hingeJoint3D.SetFlag(HingeJoint3D.Flag.EnableMotor, true);
         }
     }
@@ -164,9 +162,9 @@ public partial class wall_lever_test : Node3D
 
         //Spustime motor tim smerem podle toho kde se aktualne nachazi paka
 
-        if (actual_rot >= 0.0f)
+        if (actual_rot >= center_value)
             SetMotorToPosition(true);
-        else if (actual_rot <= -0.0001f)
+        else if (actual_rot <= center_value - 0.0001f)
             SetMotorToPosition(false);
     }
 

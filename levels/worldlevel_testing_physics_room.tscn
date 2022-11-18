@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://btdppk2oiecmq"]
+[gd_scene load_steps=12 format=3 uid="uid://btdppk2oiecmq"]
 
 [ext_resource type="ArrayOccluder3D" uid="uid://d25pcacpuv734" path="res://levels/worldlevel_testing_physics_room/worldlevel_testing_physics_room.occ" id="1_3ep4w"]
 [ext_resource type="PackedScene" uid="uid://ck8mt4y4gfqmk" path="res://placeholders/modular_walls/ground_large.tscn" id="2_nsr8b"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://crjyudrh814yq" path="res://placeholders/modular_walls/wall_small_corner_simple_l.tscn" id="5_7brdq"]
 [ext_resource type="PackedScene" uid="uid://0kvn14vfui6b" path="res://placeholders/modular_walls/wall_small.tscn" id="6_fsfcx"]
 [ext_resource type="PackedScene" uid="uid://cdjei6maw8136" path="res://testing/wall_lever_test.tscn" id="7_pssvi"]
+[ext_resource type="PackedScene" uid="uid://pa3nqo6vnipn" path="res://testing/test_light.tscn" id="8_t4ks3"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_w3cwh"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -122,3 +123,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1.1, -3.85)
 
 [node name="WallLeverTest4" parent="TestingStuff" instance=ExtResource("7_pssvi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 1.1, -3.85)
+
+[node name="TestLight" parent="TestingStuff" instance=ExtResource("8_t4ks3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 2, -3)
+
+[connection signal="LeverReachEnd" from="TestingStuff/WallLeverTest" to="TestingStuff/TestLight" method="_on_wall_lever_test_lever_reach_end"]
