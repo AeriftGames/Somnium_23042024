@@ -3,9 +3,19 @@ using System;
 
 public partial class drawer_test : Node3D
 {
+    public enum EGrabMoveType { Set, Add }
+
+    [ExportGroupAttribute("Drawer: only onready set param")]
+    [Export] public Vector3 drawerInertia = new Vector3(0.01f, 0.01f, 0.01f);
+    [Export] public float drawerLinearDamp = 4.0f;
+    [Export] public float drawerAngularDamp = 4.0f;
 	[Export] public float linearLimitZ = -0.5f;
-	[Export] public float mouseMotionSpeed = 0.2f;
-    [Export] public float linearVelocityLimit = 1.6f;
+    [Export] public float drawerMass = 20.0f;
+
+    [ExportGroupAttribute("Drawer: set param")]
+    [Export] public float mouseMotionSpeed = 0.003f;
+    [Export] public float linearVelocityLimit = 2.0f;
+    [Export] public EGrabMoveType grabMoveType = EGrabMoveType.Add;
 
 	private interactive_object interactiveObject = null;
 	private FPSCharacter_Interaction interactCharacter = null;
@@ -15,6 +25,8 @@ public partial class drawer_test : Node3D
     private RigidBody3D drawerGrab = null;
 	private Generic6DOFJoint3D genericJoint = null;
 
+    bool mouseUpdated = false;
+
 	public override void _Ready()
 	{
 		interactiveObject = GetNode<interactive_object>("DrawerGrab/interactive_object");
@@ -22,8 +34,11 @@ public partial class drawer_test : Node3D
 		drawerGrab = GetNode<RigidBody3D>("DrawerGrab");
 		genericJoint = GetNode<Generic6DOFJoint3D>("GenericJoint");
 
+        drawerGrab.Inertia = drawerInertia;
+        drawerGrab.LinearDamp = drawerLinearDamp;
+        drawerGrab.AngularDamp = drawerAngularDamp;
 		genericJoint.SetParamZ(Generic6DOFJoint3D.Param.LinearLowerLimit,linearLimitZ);
-
+        drawerGrab.Mass = drawerMass;
 	}
 
     public override void _Input(InputEvent @event)
@@ -34,6 +49,7 @@ public partial class drawer_test : Node3D
         {
             InputEventMouseMotion mouseEventMotion = @event as InputEventMouseMotion;
             motionMouse = mouseEventMotion.Relative;
+            mouseUpdated = true;
         }
     }
 
@@ -47,6 +63,7 @@ public partial class drawer_test : Node3D
 
         // Reset for zero
         motionMouse = Vector2.Zero;
+        mouseUpdated = false;
     }
 
     public void UpdateDrawer(double delta)
@@ -54,11 +71,24 @@ public partial class drawer_test : Node3D
         // nastavime velocity podle motion mouse
         var newVel = drawerGrab.GlobalTransform.basis.z.Normalized() * motionMouse.y * mouseMotionSpeed;
 
-        // nastavime maximalni limit rychlosti - rigidbody linear velocity
-        if (Mathf.Abs(newVel.Length()) > linearVelocityLimit)
-            newVel = newVel.LimitLength(linearVelocityLimit);
+        switch (grabMoveType) 
+        {
+            case EGrabMoveType.Set: 
+                {
+                    drawerGrab.LinearVelocity = newVel;
+                    break;
+                }
+            case EGrabMoveType.Add:
+                {
+                    if (mouseUpdated)
+                        drawerGrab.LinearVelocity += newVel;
+                    break;
+                }
+        }
 
-        drawerGrab.LinearVelocity = newVel;
+        // pokud je linear velocity vyysi nez pozadovany limit, nastavime hodnotu z limitu
+        if (Mathf.Abs(drawerGrab.LinearVelocity.Length()) > linearVelocityLimit)
+            drawerGrab.LinearVelocity = drawerGrab.LinearVelocity.LimitLength(linearVelocityLimit);
     }
 
     public void ActionStart()

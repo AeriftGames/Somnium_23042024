@@ -52,11 +52,13 @@ size = Vector3(0.1, 0.1, 0.1)
 
 [node name="Drawer_test" type="Node3D"]
 script = ExtResource("1_cny7p")
-mouseMotionSpeed = 0.05
+drawerAngularDamp = 3.0
+drawerMass = 15.0
 
 [node name="DrawerGrab" type="RigidBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.01)
 collision_layer = 8
+collision_mask = 8
 mass = 20.0
 inertia = Vector3(0.01, 0.01, 0.01)
 physics_material_override = SubResource("PhysicsMaterial_0x6da")
@@ -141,6 +143,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.01)
 node_a = NodePath("../DrawerGrab")
 node_b = NodePath("../DrawerStaticBody")
 linear_limit_z/lower_distance = -0.5
-linear_limit_z/softness = 0.2
 
 [editable path="DrawerGrab/interactive_object"]
