@@ -1,7 +1,8 @@
-[gd_scene load_steps=25 format=3 uid="uid://cdjei6maw8136"]
+[gd_scene load_steps=26 format=3 uid="uid://cdjei6maw8136"]
 
 [ext_resource type="PackedScene" uid="uid://dbnevtbu1g7uy" path="res://core_systems/interactive_system/interactive_object.tscn" id="1_wnwe3"]
 [ext_resource type="Script" path="res://testing/wall_lever_test.cs" id="1_yoxc4"]
+[ext_resource type="AudioStream" uid="uid://bwfqwkln8o1c7" path="res://testing/waveform__click.wav" id="3_mkg6n"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_mknaj"]
 friction = 0.0
@@ -188,5 +189,8 @@ angular_limit/lower = -1.0472
 
 [node name="LocalPlayerInput" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5)
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_mkg6n")
 
 [editable path="LeverGrab/interactive_object"]

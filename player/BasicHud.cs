@@ -70,8 +70,8 @@ public partial class BasicHud : Control
         }
 	}
 
-	public void SetHandGrabActionPosition(Vector3 newGlobalPosition)
+	public TextureRect GetHandGrabbedTextureRect()
 	{
-
+		return handGrabbedTexture;
 	}
 }

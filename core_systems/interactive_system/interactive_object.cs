@@ -14,15 +14,19 @@ public partial class interactive_object : Node3D
 	[Export] public EInteractivePhysicType InteractivePhysicType = EInteractivePhysicType.GrabItem;
 
     private bool isPlayerInRange = false;
+	private CollisionShape3D interactiveCollisionShape = null;
 
-	public override void _Ready()
+    public override void _Ready()
 	{
-		if(InteractiveObjectCommunicationWith == null)
+        if (InteractiveObjectCommunicationWith == null)
 		{
             msgObject = new MessageObject(this, GetParent());
         }
 		else
             msgObject = new MessageObject(this, GetNode(InteractiveObjectCommunicationWith));
+
+		if (GetNode<CollisionShape3D>("StaticBody3D/CollisionShape3D") != null)
+			interactiveCollisionShape = GetNode<CollisionShape3D>("StaticBody3D/CollisionShape3D");
     }
 
 	public void _on_interactive_object_area_3d_body_entered(Node3D body)
@@ -93,6 +97,11 @@ public partial class interactive_object : Node3D
 
         msgObject.SetNodeData(character);
         msgObject.SendMessageToGDNow("msg_grab_action_end");
+    }
+
+	public Vector3 GetCollisionShapeGlobalPosition()
+	{
+		return interactiveCollisionShape.GlobalPosition;
     }
 
     public virtual void message_update()

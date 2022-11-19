@@ -105,7 +105,7 @@ metadata/_edit_lock_ = true
 shape = SubResource("SphereShape3D_d42n3")
 metadata/_edit_lock_ = true
 
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="interactive_object/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="interactive_object/StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0523628, 0.000888787)
 shape = SubResource("BoxShape3D_51f0j")
 

@@ -20,18 +20,17 @@ public partial class wall_lever_test : Node3D
     private HingeJoint3D hingeJoint3D = null;
 
     private bool isActionUpdate = false;
-    private bool isAlreadyReached = false;
-    private bool isInReach = false;
-    private bool isReachTop = false;
     private Vector2 motionMouse = Vector2.Zero;
 
     public enum EReachPointEnd{Work,Bottom,Top}
-    public EReachPointEnd EActualPoint;
+    private bool onceIsReachPoint = false;
 
-
-    //LIGHTS
+    //LIGHTS TEST
     MeshInstance3D GreenLight = null;
     MeshInstance3D RedLight = null;
+
+    //SOUND TEST
+    AudioStreamPlayer3D audioStreamPlayer = null;
 
     public override void _Ready()
     {
@@ -44,7 +43,10 @@ public partial class wall_lever_test : Node3D
         GreenLight = GetNode<MeshInstance3D>("LeverStaticBody/MeshInstance3D/MeshInstanceGreen");
         RedLight = GetNode<MeshInstance3D>("LeverStaticBody/MeshInstance3D/MeshInstanceRed");
 
-        TestLight(true);
+        //SOUND
+        audioStreamPlayer = GetNode<AudioStreamPlayer3D>("AudioStreamPlayer3D");
+
+        SetReachNow(EReachPointEnd.Bottom);
     }
     public override void _Input(InputEvent @event)
     {
@@ -59,40 +61,10 @@ public partial class wall_lever_test : Node3D
 
     public override void _Process(double delta)
     {
-        // pokud jsme v GrabAction
+        // pokud jsme v GrabAction pustime update
         if (isActionUpdate)
         {
-            var newVel = new Vector3(0, motionMouse.y * mouse_motion_speed, 0);
-            leverGrab.LinearVelocity = -newVel;
-
-            switch(CalculateReaches())
-            {
-                case EReachPointEnd.Top: 
-                    {
-                        TestLight(true);
-                        break; 
-                    }
-                case EReachPointEnd.Bottom:
-                    {
-                        TestLight(false);
-                        break;
-                    }
-                case EReachPointEnd.Work:
-                    {
-
-                        break;
-                    }
-            }
-
-
-        }
-        else
-        {
-            if(!isInReach)
-            {
-                // Vypocet pro detekci horniho konecneho bodu a spodniho konecneho bodu
-                float actual_rot = Mathf.RadToDeg(leverGrab.Rotation.x);
-            }
+            UpdateLever(delta);
         }
 
         // Reset for zero
@@ -118,44 +90,69 @@ public partial class wall_lever_test : Node3D
         }
     }
 
-    public void DetectReachEndPoint(bool newTop)
+    public void SetReachNow(EReachPointEnd newReachPoint)
     {
-        SetReachPositionFreeze(newTop);
-        isInReach = true;
+        switch(newReachPoint)
+        {
+            case EReachPointEnd.Top:
+                {
+                    var newRot = leverGrab.Rotation;
+                    newRot.x = Mathf.DegToRad(min - 3);
+                    leverGrab.Rotation = newRot;
+                    UpdateLever(0);
+                    break; 
+                }
+            case EReachPointEnd.Bottom:
+                {
+                    var newRot = leverGrab.Rotation;
+                    newRot.x = Mathf.DegToRad(max + 3);
+                    leverGrab.Rotation = newRot;
+                    UpdateLever(0);
+                    break;
+                }
+            case EReachPointEnd.Work: 
+                {
+                    var newRot = leverGrab.Rotation;
+                    newRot.x = Mathf.DegToRad(center_value);
+                    leverGrab.Rotation = newRot;
+                    UpdateLever(0);
+                    break;
+                }
+        }
     }
 
-    public void SetReachPositionFreeze(bool newTop)
+    public void UpdateLever(double delta)
     {
-        // FOR DO ONCE
+        // nastavime velocity podle motion mouse
+        var newVel = new Vector3(0, motionMouse.y * mouse_motion_speed, 0);
+        leverGrab.LinearVelocity = -newVel;
 
-        if (newTop)
+        switch (CalculateReaches())
         {
-            Vector3 oldRot = leverGrab.Rotation;
-            oldRot.x = Mathf.DegToRad(min);
-            leverGrab.Rotation = oldRot;
+            case EReachPointEnd.Top:
+                {
+                    if (onceIsReachPoint) return;
 
-            isReachTop = true;
+                    TestLight(true);
+                    PlaySound(true);
+                    onceIsReachPoint = true;
+                    break;
+                }
+            case EReachPointEnd.Bottom:
+                {
+                    if (onceIsReachPoint) return;
+
+                    TestLight(false);
+                    PlaySound(true);
+                    onceIsReachPoint = true;
+                    break;
+                }
+            case EReachPointEnd.Work:
+                {
+                    onceIsReachPoint = false;
+                    break;
+                }
         }
-        else
-        {
-            Vector3 oldRot = leverGrab.Rotation;
-            oldRot.x = Mathf.DegToRad(max);
-            leverGrab.Rotation = oldRot;
-
-            isReachTop = false;
-        }
-
-        leverGrab.CanSleep = true;
-        leverGrab.Sleeping = true;
-        leverGrab.Freeze = true;
-
-        if (isAlreadyReached) return;
-
-        // EmitSignal
-        EmitSignal(SignalName.LeverReachEnd, newTop);
-
-        // FOR DO ONCE
-        isAlreadyReached = true;
     }
 
     public void SetMotorToPosition(bool newTop)
@@ -208,9 +205,9 @@ public partial class wall_lever_test : Node3D
         }
     }
 
-    public void UpdateHud(float delta)
+    public void PlaySound(bool newTop)
     {
-       //interactCharacter.GetBasicHud()
+        audioStreamPlayer.Play();
     }
 
     public virtual void message_update()

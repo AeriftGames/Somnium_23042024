@@ -13,8 +13,9 @@ public partial class CharacterInteractiveSystem : Godot.Object
     bool isCanNewGrab = true;
     bool wantRotateNow = false;
 
-    //only for joints
+    //only for GrabActions
     bool isFirstGrabAction = true;
+    Vector2 originalHandGrabbedTex = Vector2.Zero;
 
     public struct SPhysicalGrabbedItemParams 
     {
@@ -357,13 +358,24 @@ public partial class CharacterInteractiveSystem : Godot.Object
             {
                 isFirstGrabAction = false;
                 actualInteractiveObject.GrabActionStart(character);
+
+                // BASIC HUD - ulozime si originalni pozici hand grabbed tex
+                originalHandGrabbedTex = basicHud.GetHandGrabbedTextureRect().Position;
             }
 
             character.objectCamera.SetCameraLookInputEnable(false);
             basicHud.SetHandGrabState(true, true);
+
+            // BASIC HUD - UPDATE POZICE HANDGRABEDTEX
+            TextureRect handGrabbedTex = basicHud.GetHandGrabbedTextureRect();
+            Vector2 pos = character.objectCamera.Camera.UnprojectPosition(actualInteractiveObject.GetCollisionShapeGlobalPosition());
+            handGrabbedTex.Position = pos;
         }
         else if (isGrabbing && newGrabNow == false)
         {
+            // BASIC HUD - vratime originalni pozici pro hand grabbed tex
+            basicHud.GetHandGrabbedTextureRect().Position = originalHandGrabbedTex;
+
             // zastavime grab
             StopGrabbing();
             pickedBody = null;
