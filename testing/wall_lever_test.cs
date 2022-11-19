@@ -7,6 +7,7 @@ public partial class wall_lever_test : Node3D
     [Export] public float max = 60.0f;
     [Export] public float center_value = 0.0f;
     [Export] public float min = -60.0f;
+    [Export] public float tolerance_to_detect_reach = 2.0f;
     [Export] public float motor_max_impulse = 1.0f;
     [Export] public float mouse_motion_speed = 0.2f;
 
@@ -46,6 +47,10 @@ public partial class wall_lever_test : Node3D
         //SOUND
         audioStreamPlayer = GetNode<AudioStreamPlayer3D>("AudioStreamPlayer3D");
 
+        //Initial Settings
+        hingeJoint3D.SetParam(HingeJoint3D.Param.LimitUpper, Mathf.DegToRad(max));
+        hingeJoint3D.SetParam(HingeJoint3D.Param.LimitLower, Mathf.DegToRad(min));
+
         SetReachNow(EReachPointEnd.Bottom);
     }
     public override void _Input(InputEvent @event)
@@ -76,11 +81,11 @@ public partial class wall_lever_test : Node3D
         // Vypocet pro detekci horniho konecneho bodu a spodniho konecneho bodu
         float actual_rot = Mathf.RadToDeg(leverGrab.Rotation.x);
 
-        if(actual_rot >= max-1)
+        if(actual_rot >= max - tolerance_to_detect_reach)
         {
             return EReachPointEnd.Bottom;
         }
-        else if(actual_rot <= min+1)
+        else if(actual_rot <= min + tolerance_to_detect_reach)
         {
             return EReachPointEnd.Top;
         }
@@ -135,6 +140,7 @@ public partial class wall_lever_test : Node3D
 
                     TestLight(true);
                     PlaySound(true);
+                    EmitSignal(SignalName.LeverReachEnd, true);
                     onceIsReachPoint = true;
                     break;
                 }
@@ -144,6 +150,7 @@ public partial class wall_lever_test : Node3D
 
                     TestLight(false);
                     PlaySound(true);
+                    EmitSignal(SignalName.LeverReachEnd, false);
                     onceIsReachPoint = true;
                     break;
                 }

@@ -361,6 +361,7 @@ public partial class CharacterInteractiveSystem : Godot.Object
 
                 // BASIC HUD - ulozime si originalni pozici hand grabbed tex
                 originalHandGrabbedTex = basicHud.GetHandGrabbedTextureRect().Position;
+                basicHud.SetCrosshairVisible(false);
             }
 
             character.objectCamera.SetCameraLookInputEnable(false);
@@ -375,6 +376,7 @@ public partial class CharacterInteractiveSystem : Godot.Object
         {
             // BASIC HUD - vratime originalni pozici pro hand grabbed tex
             basicHud.GetHandGrabbedTextureRect().Position = originalHandGrabbedTex;
+            basicHud.SetCrosshairVisible(true);
 
             // zastavime grab
             StopGrabbing();

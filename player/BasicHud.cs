@@ -3,18 +3,30 @@ using System;
 
 public partial class BasicHud : Control
 {
+	ColorRect Crosshair = null;
 	Label UseLabel = null;
 	TextureRect handGrabbedTexture = null;
     TextureRect handCanGrabTexture = null;
 
     public override void _Ready()
 	{
-		UseLabel = GetNode<Label>("Crosshair/UseLabel");
+		Crosshair = GetNode<ColorRect>("Crosshair");
+		UseLabel = GetNode<Label>("UseLabel");
 		handGrabbedTexture = GetNode<TextureRect>("HandGrabbedTexture");
         handCanGrabTexture = GetNode<TextureRect>("HandCanGrabTexture");
 
 		// visible = false , grabbed = false
 		SetHandGrabState(false,false);
+	}
+
+	public void SetCrosshairVisible(bool newVisible)
+	{
+		Crosshair.Visible = newVisible;
+	}
+
+	public bool GetCrosshairVisible()
+	{
+		return Crosshair.Visible;
 	}
 
 	public void SetUseVisible(bool newVisible)
