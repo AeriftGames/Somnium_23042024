@@ -3,13 +3,13 @@ using System;
 
 public partial class wall_lever_test : Node3D
 {
-    [Export] public float MotorPower = 3.0f;
-    [Export] public float max = 60.0f;
-    [Export] public float center_value = 0.0f;
-    [Export] public float min = -60.0f;
-    [Export] public float tolerance_to_detect_reach = 2.0f;
-    [Export] public float motor_max_impulse = 1.0f;
-    [Export] public float mouse_motion_speed = 0.2f;
+    [Export] public float upperReachEnd = 60.0f;
+    [Export] public float centerReachNeutral = 0.0f;
+    [Export] public float lowerReachEnd = -60.0f;
+    [Export] public float toleranceDetectReach = 2.0f;
+    [Export] public float mouseMotionSpeed = 0.2f;
+    [Export] public float motorPower = 3.0f;
+    [Export] public float motorMaxImpulse = 1.0f;
 
     [Signal]
     public delegate void LeverReachEndEventHandler(bool newTop);
@@ -48,8 +48,8 @@ public partial class wall_lever_test : Node3D
         audioStreamPlayer = GetNode<AudioStreamPlayer3D>("AudioStreamPlayer3D");
 
         //Initial Settings
-        hingeJoint3D.SetParam(HingeJoint3D.Param.LimitUpper, Mathf.DegToRad(max));
-        hingeJoint3D.SetParam(HingeJoint3D.Param.LimitLower, Mathf.DegToRad(min));
+        hingeJoint3D.SetParam(HingeJoint3D.Param.LimitUpper, Mathf.DegToRad(upperReachEnd));
+        hingeJoint3D.SetParam(HingeJoint3D.Param.LimitLower, Mathf.DegToRad(lowerReachEnd));
 
         SetReachNow(EReachPointEnd.Bottom);
     }
@@ -81,11 +81,11 @@ public partial class wall_lever_test : Node3D
         // Vypocet pro detekci horniho konecneho bodu a spodniho konecneho bodu
         float actual_rot = Mathf.RadToDeg(leverGrab.Rotation.x);
 
-        if(actual_rot >= max - tolerance_to_detect_reach)
+        if(actual_rot >= upperReachEnd - toleranceDetectReach)
         {
             return EReachPointEnd.Bottom;
         }
-        else if(actual_rot <= min + tolerance_to_detect_reach)
+        else if(actual_rot <= lowerReachEnd + toleranceDetectReach)
         {
             return EReachPointEnd.Top;
         }
@@ -102,7 +102,7 @@ public partial class wall_lever_test : Node3D
             case EReachPointEnd.Top:
                 {
                     var newRot = leverGrab.Rotation;
-                    newRot.x = Mathf.DegToRad(min - 3);
+                    newRot.x = Mathf.DegToRad(lowerReachEnd - 3);
                     leverGrab.Rotation = newRot;
                     UpdateLever(0);
                     break; 
@@ -110,7 +110,7 @@ public partial class wall_lever_test : Node3D
             case EReachPointEnd.Bottom:
                 {
                     var newRot = leverGrab.Rotation;
-                    newRot.x = Mathf.DegToRad(max + 3);
+                    newRot.x = Mathf.DegToRad(upperReachEnd + 3);
                     leverGrab.Rotation = newRot;
                     UpdateLever(0);
                     break;
@@ -118,7 +118,7 @@ public partial class wall_lever_test : Node3D
             case EReachPointEnd.Work: 
                 {
                     var newRot = leverGrab.Rotation;
-                    newRot.x = Mathf.DegToRad(center_value);
+                    newRot.x = Mathf.DegToRad(centerReachNeutral);
                     leverGrab.Rotation = newRot;
                     UpdateLever(0);
                     break;
@@ -129,7 +129,7 @@ public partial class wall_lever_test : Node3D
     public void UpdateLever(double delta)
     {
         // nastavime velocity podle motion mouse
-        var newVel = new Vector3(0, motionMouse.y * mouse_motion_speed, 0);
+        var newVel = new Vector3(0, motionMouse.y * mouseMotionSpeed, 0);
         leverGrab.LinearVelocity = -newVel;
 
         switch (CalculateReaches())
@@ -166,14 +166,14 @@ public partial class wall_lever_test : Node3D
     {
         if (newTop)
         {
-            hingeJoint3D.SetParam(HingeJoint3D.Param.MotorTargetVelocity, 1.0f * MotorPower);
-            hingeJoint3D.SetParam(HingeJoint3D.Param.MotorMaxImpulse, motor_max_impulse);
+            hingeJoint3D.SetParam(HingeJoint3D.Param.MotorTargetVelocity, 1.0f * motorPower);
+            hingeJoint3D.SetParam(HingeJoint3D.Param.MotorMaxImpulse, motorMaxImpulse);
             hingeJoint3D.SetFlag(HingeJoint3D.Flag.EnableMotor, true);
         }
         else
         {
-            hingeJoint3D.SetParam(HingeJoint3D.Param.MotorTargetVelocity, -1.0f * MotorPower);
-            hingeJoint3D.SetParam(HingeJoint3D.Param.MotorMaxImpulse, motor_max_impulse);
+            hingeJoint3D.SetParam(HingeJoint3D.Param.MotorTargetVelocity, -1.0f * motorPower);
+            hingeJoint3D.SetParam(HingeJoint3D.Param.MotorMaxImpulse, motorMaxImpulse);
             hingeJoint3D.SetFlag(HingeJoint3D.Flag.EnableMotor, true);
         }
     }
