@@ -5,6 +5,7 @@ public partial class drawer_test : Node3D
 {
 	[Export] public float linearLimitZ = -0.5f;
 	[Export] public float mouseMotionSpeed = 0.2f;
+    [Export] public float linearVelocityLimit = 1.6f;
 
 	private interactive_object interactiveObject = null;
 	private FPSCharacter_Interaction interactCharacter = null;
@@ -51,8 +52,12 @@ public partial class drawer_test : Node3D
     public void UpdateDrawer(double delta)
     {
         // nastavime velocity podle motion mouse
-        //var newVel = new Vector3(0, 0, motionMouse.y * mouseMotionSpeed);
         var newVel = drawerGrab.GlobalTransform.basis.z.Normalized() * motionMouse.y * mouseMotionSpeed;
+
+        // nastavime maximalni limit rychlosti - rigidbody linear velocity
+        if (Mathf.Abs(newVel.Length()) > linearVelocityLimit)
+            newVel = newVel.LimitLength(linearVelocityLimit);
+
         drawerGrab.LinearVelocity = newVel;
     }
 
