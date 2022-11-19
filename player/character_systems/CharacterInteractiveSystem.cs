@@ -16,6 +16,7 @@ public partial class CharacterInteractiveSystem : Godot.Object
     //only for GrabActions
     bool isFirstGrabAction = true;
     Vector2 originalHandGrabbedTex = Vector2.Zero;
+    Vector3 hit_offset = Vector3.Zero;
 
     public struct SPhysicalGrabbedItemParams 
     {
@@ -77,7 +78,12 @@ public partial class CharacterInteractiveSystem : Godot.Object
     {
         // pokud nemame v grabu nejaky item, prepiseme interacatObject novym, ktery detekujeme jako prichozi
         if(pickedBody == null)
+        {
             actualInteractiveObject = newInteractiveObject;
+
+            if(actualInteractiveObject != null)
+                hit_offset = actualInteractiveObject.GetCollisionShapeGlobalPosition() - hitPosition;
+        }
     }
 
     public void UpdateForUse(interactive_object newInteractiveObject,bool newUseNow,double delta)
@@ -369,7 +375,17 @@ public partial class CharacterInteractiveSystem : Godot.Object
 
             // BASIC HUD - UPDATE POZICE HANDGRABEDTEX
             TextureRect handGrabbedTex = basicHud.GetHandGrabbedTextureRect();
-            Vector2 pos = character.objectCamera.Camera.UnprojectPosition(actualInteractiveObject.GetCollisionShapeGlobalPosition());
+            Vector2 pos = Vector2.Zero;
+            if (character.useOffsetHandGrabPosition == false)
+            {
+                pos = character.objectCamera.Camera.UnprojectPosition(
+                    actualInteractiveObject.GetCollisionShapeGlobalPosition());
+            }
+            else
+            { 
+                pos = character.objectCamera.Camera.UnprojectPosition(
+                    actualInteractiveObject.GetCollisionShapeGlobalPosition() - hit_offset);
+            }
             handGrabbedTex.Position = pos;
         }
         else if (isGrabbing && newGrabNow == false)
