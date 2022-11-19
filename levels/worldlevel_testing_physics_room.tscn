@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://btdppk2oiecmq"]
+[gd_scene load_steps=19 format=3 uid="uid://ca8dltvbt4bdg"]
 
 [ext_resource type="ArrayOccluder3D" uid="uid://d25pcacpuv734" path="res://levels/worldlevel_testing_physics_room/worldlevel_testing_physics_room.occ" id="1_3ep4w"]
 [ext_resource type="PackedScene" uid="uid://ck8mt4y4gfqmk" path="res://placeholders/modular_walls/ground_large.tscn" id="2_nsr8b"]
@@ -9,9 +9,9 @@
 [ext_resource type="PackedScene" uid="uid://cdjei6maw8136" path="res://testing/wall_lever_test.tscn" id="7_pssvi"]
 [ext_resource type="PackedScene" uid="uid://pa3nqo6vnipn" path="res://testing/test_light.tscn" id="8_t4ks3"]
 [ext_resource type="PackedScene" uid="uid://ttxrafhid6rv" path="res://placeholders/PhysicsItems/physic_crate.tscn" id="9_hcax0"]
-[ext_resource type="PackedScene" uid="uid://dmc77doec46va" path="res://testing/drawer_test.tscn" id="9_urls4"]
 [ext_resource type="PackedScene" uid="uid://x5o6n083ax2a" path="res://placeholders/PhysicsItems/physic_item_test.tscn" id="10_18ehc"]
 [ext_resource type="PackedScene" uid="uid://dgse04gq5at0" path="res://placeholders/PhysicsItems/physic_item_test_small.tscn" id="10_frolm"]
+[ext_resource type="PackedScene" uid="uid://bs3ek0h3v12dc" path="res://testing/drawer_table.tscn" id="11_sgvvf"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_w3cwh"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -141,33 +141,6 @@ transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 
 [node name="TestLight" parent="TestingStuff" instance=ExtResource("8_t4ks3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 2, -3)
 
-[node name="Drawer_test" parent="TestingStuff" instance=ExtResource("9_urls4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.12858, 0.62853, -3.37425)
-
-[node name="Drawer_test2" parent="TestingStuff" instance=ExtResource("9_urls4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.12858, 0.38876, -3.37425)
-
-[node name="Drawer_test3" parent="TestingStuff" instance=ExtResource("9_urls4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.12858, 0.143441, -3.37425)
-
-[node name="Drawer_test4" parent="TestingStuff" instance=ExtResource("9_urls4")]
-transform = Transform3D(-0.597331, 0, 0.801995, 0, 1, 0, -0.801995, 0, -0.597331, -2.89686, 0.62853, 0.149651)
-
-[node name="Drawer_test5" parent="TestingStuff" instance=ExtResource("9_urls4")]
-transform = Transform3D(-0.597331, 0, 0.801995, 0, 1, 0, -0.801995, 0, -0.597331, -2.89686, 0.38876, 0.149651)
-
-[node name="Drawer_test6" parent="TestingStuff" instance=ExtResource("9_urls4")]
-transform = Transform3D(-0.597331, 0, 0.801995, 0, 1, 0, -0.801995, 0, -0.597331, -2.89686, 0.143441, 0.149651)
-
-[node name="Drawer_test7" parent="TestingStuff" instance=ExtResource("9_urls4")]
-transform = Transform3D(-0.0485534, 0, 0.998821, 0, 1, 0, -0.998821, 0, -0.0485534, -3.54423, 0.62853, 2.23107)
-
-[node name="Drawer_test8" parent="TestingStuff" instance=ExtResource("9_urls4")]
-transform = Transform3D(-0.0485534, 0, 0.998821, 0, 1, 0, -0.998821, 0, -0.0485534, -3.54423, 0.38876, 2.23107)
-
-[node name="Drawer_test9" parent="TestingStuff" instance=ExtResource("9_urls4")]
-transform = Transform3D(-0.0485534, 0, 0.998821, 0, 1, 0, -0.998821, 0, -0.0485534, -3.54423, 0.143441, 2.23107)
-
 [node name="PhysicItem_test" parent="TestingStuff" instance=ExtResource("10_frolm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.52235, 0.630756, 0.181416)
 collision_layer = 9
@@ -210,5 +183,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.49007, 0, 0.33338)
 [node name="PhysicItem_test2" parent="." instance=ExtResource("10_18ehc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.20824, 0.44683, 1.33327)
 collision_mask = 9
+
+[node name="DrawerTable" parent="." instance=ExtResource("11_sgvvf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.51753, -1.19209e-07, -3.42754)
 
 [connection signal="LeverReachEnd" from="TestingStuff/WallLeverTest" to="TestingStuff/TestLight" method="_on_wall_lever_test_lever_reach_end"]

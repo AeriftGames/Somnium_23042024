@@ -1,15 +1,20 @@
-[gd_scene load_steps=18 format=3 uid="uid://dmc77doec46va"]
+[gd_scene load_steps=19 format=3 uid="uid://dmc77doec46va"]
 
 [ext_resource type="PackedScene" uid="uid://dbnevtbu1g7uy" path="res://core_systems/interactive_system/interactive_object.tscn" id="1_8s8yx"]
 [ext_resource type="Script" path="res://testing/drawer_test.cs" id="1_cny7p"]
+[ext_resource type="Texture2D" uid="uid://bybrpbyf1euit" path="res://textures/NormalMap (3).png" id="2_mm7ir"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_0x6da"]
 friction = 0.8
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pf73c"]
-albedo_color = Color(0.419608, 0.419608, 0.419608, 1)
+albedo_color = Color(0.266667, 0.192157, 0.156863, 1)
 metallic = 0.23
 roughness = 0.59
+normal_enabled = true
+normal_scale = 0.6
+normal_texture = ExtResource("2_mm7ir")
+uv1_triplanar = true
 
 [sub_resource type="BoxMesh" id="BoxMesh_c2rvp"]
 size = Vector3(0.75, 0.02, 0.6)
@@ -143,5 +148,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.01)
 node_a = NodePath("../DrawerGrab")
 node_b = NodePath("../DrawerStaticBody")
 linear_limit_z/lower_distance = -0.5
+linear_spring_z/enabled = true
 
 [editable path="DrawerGrab/interactive_object"]
