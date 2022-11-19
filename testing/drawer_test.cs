@@ -51,7 +51,8 @@ public partial class drawer_test : Node3D
     public void UpdateDrawer(double delta)
     {
         // nastavime velocity podle motion mouse
-        var newVel = new Vector3(0, 0, motionMouse.y * mouseMotionSpeed);
+        //var newVel = new Vector3(0, 0, motionMouse.y * mouseMotionSpeed);
+        var newVel = drawerGrab.GlobalTransform.basis.z.Normalized() * motionMouse.y * mouseMotionSpeed;
         drawerGrab.LinearVelocity = newVel;
     }
 
