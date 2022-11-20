@@ -194,7 +194,6 @@ testBottom={
 
 [physics]
 
-3d/run_on_separate_thread=true
 3d/time_before_sleep=0.75
 3d/solver/solver_iterations=32
 
