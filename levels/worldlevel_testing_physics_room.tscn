@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://ca8dltvbt4bdg"]
+[gd_scene load_steps=20 format=3 uid="uid://ca8dltvbt4bdg"]
 
 [ext_resource type="ArrayOccluder3D" uid="uid://d25pcacpuv734" path="res://levels/worldlevel_testing_physics_room/worldlevel_testing_physics_room.occ" id="1_3ep4w"]
 [ext_resource type="PackedScene" uid="uid://ck8mt4y4gfqmk" path="res://placeholders/modular_walls/ground_large.tscn" id="2_nsr8b"]
@@ -13,6 +13,9 @@
 [ext_resource type="PackedScene" uid="uid://dgse04gq5at0" path="res://placeholders/PhysicsItems/physic_item_test_small.tscn" id="10_frolm"]
 [ext_resource type="PackedScene" uid="uid://bs3ek0h3v12dc" path="res://testing/drawer_table.tscn" id="11_sgvvf"]
 [ext_resource type="PackedScene" uid="uid://ipic8k4uwyqr" path="res://testing/wardrobe_small.tscn" id="13_5c36d"]
+[ext_resource type="PackedScene" uid="uid://c2w2nvkxq02ya" path="res://testing/wardrobe_rdoor_small.tscn" id="14_yfxhm"]
+[ext_resource type="PackedScene" uid="uid://b45rb5ghdemou" path="res://testing/wardrobe_ldoor_small.tscn" id="15_rltmb"]
+[ext_resource type="PackedScene" uid="uid://dhp8eikuuybmf" path="res://testing/wardrobe_big.tscn" id="16_7ebsw"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_w3cwh"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -185,8 +188,12 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -3.428
 [node name="Wardrobe_small" parent="." instance=ExtResource("13_5c36d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.379273, 0, -3.09789)
 
+[node name="Wardrobe_rdoor_small" parent="Wardrobe_small" instance=ExtResource("14_yfxhm")]
+
 [node name="Wardrobe_small2" parent="." instance=ExtResource("13_5c36d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.965078, 0, -3.09789)
+
+[node name="Wardrobe_rdoor_small" parent="Wardrobe_small2" instance=ExtResource("15_rltmb")]
 
 [node name="Wardrobe_small3" parent="." instance=ExtResource("13_5c36d")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -3.15594, 0, 3.4634)
@@ -194,10 +201,7 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -3.155
 [node name="Wardrobe_small4" parent="." instance=ExtResource("13_5c36d")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -3.17003, 0, 2.88769)
 
-[node name="Wardrobe_small5" parent="." instance=ExtResource("13_5c36d")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -3.17003, 0, 2.31924)
-
-[node name="Wardrobe_small6" parent="." instance=ExtResource("13_5c36d")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -3.17003, 0, 1.74713)
+[node name="Wardrobe_big" parent="." instance=ExtResource("16_7ebsw")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -3.18401, -2.38419e-07, 1.93824)
 
 [connection signal="LeverReachEnd" from="TestingStuff/WallLeverTest" to="TestingStuff/TestLight" method="_on_wall_lever_test_lever_reach_end"]
