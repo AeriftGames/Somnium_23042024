@@ -31,9 +31,6 @@ public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
     [Export] public float MoveFarOrNearObjectMax = 2.0f;
     [Export] public float RotateObjectStep = 0.3f;
 
-    [ExportGroupAttribute("InteractiveSystem: Grab Action")]
-    [Export] public bool useOffsetHandGrabPosition = false;
-
     [ExportGroupAttribute("InteractiveSystem: Rigidbody PhysicParams In Grab")]
 	[Export] public Vector3 RBPhysicInGrab_Inertia = new Vector3(0.5f,0.5f,0.5f);
 	[Export] public float RBPhysicInGrab_AngularDamp = 3.0f;

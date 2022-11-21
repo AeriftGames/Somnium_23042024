@@ -1,7 +1,7 @@
-[gd_scene load_steps=24 format=3 uid="uid://ipic8k4uwyqr"]
+[gd_scene load_steps=24 format=3 uid="uid://dhp8eikuuybmf"]
 
-[ext_resource type="PackedScene" uid="uid://dbnevtbu1g7uy" path="res://core_systems/interactive_system/interactive_object.tscn" id="1_7mjd6"]
-[ext_resource type="Script" path="res://testing/wardrobe_small.cs" id="1_k4t62"]
+[ext_resource type="Script" path="res://testing/wardrobe_small.cs" id="1_2yh1k"]
+[ext_resource type="PackedScene" uid="uid://dbnevtbu1g7uy" path="res://core_systems/interactive_system/interactive_object.tscn" id="2_ck8b7"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_16gir"]
 albedo_color = Color(0.513726, 0.529412, 0.533333, 1)
@@ -69,7 +69,7 @@ radius = 2.5
 size = Vector3(0.1, 0.1, 0.1)
 
 [node name="Wardrobe_small" type="Node3D"]
-script = ExtResource("1_k4t62")
+script = ExtResource("1_2yh1k")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -0.493768)
@@ -155,6 +155,10 @@ transform = Transform3D(0.99999, 0, 0.00446803, 0, 1, 0, -0.00446803, 0, 0.99999
 material_override = SubResource("StandardMaterial3D_16gir")
 mesh = SubResource("BoxMesh_r8wum")
 
+[node name="MeshInstance3D" type="MeshInstance3D" parent="WardrobeDoorGrab/MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, -0.0757625, 0.0148191)
+mesh = SubResource("BoxMesh_cnoq8")
+
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="WardrobeDoorGrab/MeshInstance3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 0.0358756, 0.0148191)
 mesh = SubResource("BoxMesh_cnoq8")
@@ -171,11 +175,10 @@ mesh = SubResource("BoxMesh_3lb0e")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00126386, 1.10201, -0.0273833)
 shape = SubResource("ConvexPolygonShape3D_j64gr")
 
-[node name="interactive_object" parent="WardrobeDoorGrab" instance=ExtResource("1_7mjd6")]
+[node name="interactive_object" parent="WardrobeDoorGrab" instance=ExtResource("2_ck8b7")]
 InteractiveObjectCommunicationWith = NodePath("../..")
 InteractiveLevel = 2
 InteractivePhysicType = 2
-InteractCenterPath = NodePath("../MeshInstance3D/MeshInstance3D2")
 
 [node name="CollisionShape3D" parent="WardrobeDoorGrab/interactive_object/StaticBody3D" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.09954, -0.0269449)

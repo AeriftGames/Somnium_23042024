@@ -12,12 +12,15 @@ public partial class interactive_object : Node3D
 
 	[Export] public EInteractiveLevel InteractiveLevel = EInteractiveLevel.OnlyUse;
 	[Export] public EInteractivePhysicType InteractivePhysicType = EInteractivePhysicType.GrabItem;
+	[Export] public NodePath InteractCenterPath = null;
+	[Export] public bool UseOffsetHitInteract = false;
 
     private bool isPlayerInRange = false;
-	private CollisionShape3D interactiveCollisionShape = null;
+	private Node3D interactCenterNode = null;
 
     public override void _Ready()
 	{
+		// pokud nemame nastaveny interact object jinak, pracujeme s parentem
         if (InteractiveObjectCommunicationWith == null)
 		{
             msgObject = new MessageObject(this, GetParent());
@@ -25,8 +28,14 @@ public partial class interactive_object : Node3D
 		else
             msgObject = new MessageObject(this, GetNode(InteractiveObjectCommunicationWith));
 
-		if (GetNode<CollisionShape3D>("StaticBody3D/CollisionShape3D") != null)
-			interactiveCollisionShape = GetNode<CollisionShape3D>("StaticBody3D/CollisionShape3D");
+		// pokud nemame nastaveny interactCenterPath, pracujeme s nasim collisionShapem
+		if(InteractCenterPath == null)
+		{
+            if (GetNode<CollisionShape3D>("StaticBody3D/CollisionShape3D") != null)
+                interactCenterNode = GetNode<CollisionShape3D>("StaticBody3D/CollisionShape3D");
+        }
+		else
+            interactCenterNode = GetNode<Node3D>(InteractCenterPath);
     }
 
 	public void _on_interactive_object_area_3d_body_entered(Node3D body)
@@ -99,9 +108,9 @@ public partial class interactive_object : Node3D
         msgObject.SendMessageToGDNow("msg_grab_action_end");
     }
 
-	public Vector3 GetCollisionShapeGlobalPosition()
+	public Vector3 GetInteractCenterGlobalPosition()
 	{
-		return interactiveCollisionShape.GlobalPosition;
+		return interactCenterNode.GlobalPosition;
     }
 
     public virtual void message_update()

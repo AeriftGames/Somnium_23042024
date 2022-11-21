@@ -82,7 +82,7 @@ public partial class CharacterInteractiveSystem : Godot.Object
             actualInteractiveObject = newInteractiveObject;
 
             if(actualInteractiveObject != null)
-                hit_offset = actualInteractiveObject.GetCollisionShapeGlobalPosition() - hitPosition;
+                hit_offset = actualInteractiveObject.GetInteractCenterGlobalPosition() - hitPosition;
         }
     }
 
@@ -376,15 +376,15 @@ public partial class CharacterInteractiveSystem : Godot.Object
             // BASIC HUD - UPDATE POZICE HANDGRABEDTEX
             TextureRect handGrabbedTex = basicHud.GetHandGrabbedTextureRect();
             Vector2 pos = Vector2.Zero;
-            if (character.useOffsetHandGrabPosition == false)
+            if (actualInteractiveObject.UseOffsetHitInteract == false)
             {
                 pos = character.objectCamera.Camera.UnprojectPosition(
-                    actualInteractiveObject.GetCollisionShapeGlobalPosition());
+                    actualInteractiveObject.GetInteractCenterGlobalPosition());
             }
             else
             { 
                 pos = character.objectCamera.Camera.UnprojectPosition(
-                    actualInteractiveObject.GetCollisionShapeGlobalPosition() - hit_offset);
+                    actualInteractiveObject.GetInteractCenterGlobalPosition() - hit_offset);
             }
             handGrabbedTex.Position = pos;
         }

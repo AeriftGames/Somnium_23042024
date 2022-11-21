@@ -52,7 +52,6 @@ MoveFarOrNearObjectOriginal = 1.5
 MoveFarOrNearObjectMin = 1.0
 MoveFarOrNearObjectMax = 2.0
 RotateObjectStep = 0.3
-useOffsetHandGrabPosition = true
 RBPhysicInGrab_Inertia = Vector3(0.5, 0.5, 0.5)
 RBPhysicInGrab_AngularDamp = 3.0
 RBPhysicInGrab_LinearDamp = 1.0

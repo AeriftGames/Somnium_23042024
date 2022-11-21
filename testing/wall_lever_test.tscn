@@ -124,6 +124,7 @@ mesh = SubResource("CapsuleMesh_tl0ur")
 InteractiveObjectCommunicationWith = NodePath("../..")
 InteractiveLevel = 2
 InteractivePhysicType = 2
+UseOffsetHitInteract = true
 
 [node name="CollisionShape3D" parent="LeverGrab/interactive_object/StaticBody3D" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00112033, -0.000373986, 0.168148)
