@@ -72,6 +72,7 @@ MoveSpeedInFall = 1.4
 AccelerateSmoothStep = 6.0
 DeccelerateSmoothStep = 6.0
 MouseSensitivity = 0.15
+MouseSmooth = 15.0
 
 [node name="HolderHands" type="Node3D" parent="HeadMain/HeadGimbalA/HeadGimbalB/HeadHolderCamera" index="0"]
 

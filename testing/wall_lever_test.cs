@@ -3,28 +3,33 @@ using System;
 
 public partial class wall_lever_test : Node3D
 {
+    public enum EGrabMoveType { Set, Add }
+
     [Export] public float upperReachEnd = 60.0f;
     [Export] public float centerReachNeutral = 0.0f;
     [Export] public float lowerReachEnd = -60.0f;
     [Export] public float toleranceDetectReach = 2.0f;
-    [Export] public float mouseMotionSpeed = 0.2f;
+    [Export] public float mouseMotionSpeed = 0.01f;
     [Export] public float motorPower = 3.0f;
     [Export] public float motorMaxImpulse = 1.0f;
+    [Export] public float linearVelocityLimit = 15.0f;
+    [Export] public EGrabMoveType grabMoveType = EGrabMoveType.Add;
 
     [Signal]
     public delegate void LeverReachEndEventHandler(bool newTop);
 
-    private interactive_object interactiveObject = null;
-    private FPSCharacter_Interaction interactCharacter = null;
+    protected interactive_object interactiveObject = null;
+    protected FPSCharacter_Interaction interactCharacter = null;
 
-    private RigidBody3D leverGrab = null;
+    protected RigidBody3D leverGrab = null;
     private HingeJoint3D hingeJoint3D = null;
 
-    private bool isActionUpdate = false;
-    private Vector2 motionMouse = Vector2.Zero;
+    protected bool isActionUpdate = false;
+    protected Vector2 motionMouse = Vector2.Zero;
+    protected bool mouseUpdated = false;
 
     public enum EReachPointEnd{Work,Bottom,Top}
-    private bool onceIsReachPoint = false;
+    protected bool onceIsReachPoint = false;
 
     //LIGHTS TEST
     MeshInstance3D GreenLight = null;
@@ -61,6 +66,7 @@ public partial class wall_lever_test : Node3D
         {
             InputEventMouseMotion mouseEventMotion = @event as InputEventMouseMotion;
             motionMouse = mouseEventMotion.Relative;
+            mouseUpdated = true;
         }
     }
 
@@ -74,9 +80,10 @@ public partial class wall_lever_test : Node3D
 
         // Reset for zero
         motionMouse = Vector2.Zero;
+        mouseUpdated = false;
     }
 
-    public EReachPointEnd CalculateReaches()
+    public virtual EReachPointEnd CalculateReaches()
     {
         // Vypocet pro detekci horniho konecneho bodu a spodniho konecneho bodu
         float actual_rot = Mathf.RadToDeg(leverGrab.Rotation.x);
@@ -95,7 +102,7 @@ public partial class wall_lever_test : Node3D
         }
     }
 
-    public void SetReachNow(EReachPointEnd newReachPoint)
+    public virtual void SetReachNow(EReachPointEnd newReachPoint)
     {
         switch(newReachPoint)
         {
@@ -126,11 +133,30 @@ public partial class wall_lever_test : Node3D
         }
     }
 
-    public void UpdateLever(double delta)
+    public virtual void UpdateLever(double delta)
     {
-        // nastavime velocity podle motion mouse
-        var newVel = new Vector3(0, motionMouse.y * mouseMotionSpeed, 0);
-        leverGrab.LinearVelocity = -newVel;
+        var newVel = -GlobalTransform.basis.y.Normalized() * motionMouse.y * mouseMotionSpeed;
+
+        switch (grabMoveType)
+        {
+            case EGrabMoveType.Set:
+                {
+                    leverGrab.LinearVelocity = newVel;
+                    break;
+                }
+            case EGrabMoveType.Add:
+                {
+                    if (mouseUpdated)
+                        leverGrab.LinearVelocity += newVel;
+                    break;
+                }
+        }
+
+        // pokud je linear velocity vyysi nez pozadovany limit, nastavime hodnotu z limitu
+        if (Mathf.Abs(leverGrab.LinearVelocity.Length()) > linearVelocityLimit)
+            leverGrab.LinearVelocity = leverGrab.LinearVelocity.LimitLength(linearVelocityLimit);
+
+        // vypocteme aktualni uhel a z nej vratime enum ktery rozhodne co se stane
 
         switch (CalculateReaches())
         {

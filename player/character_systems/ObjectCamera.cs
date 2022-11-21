@@ -63,6 +63,12 @@ public partial class ObjectCamera : Node3D
 
 	public override void _Process(double delta)
 	{
+    }
+
+    public override void _PhysicsProcess(double delta)
+    {
+        base._PhysicsProcess(delta);
+
         if (ownerCharacter.IsInputEnable())
             UpdateCameraLook(_MouseMotion, delta);
 
@@ -71,6 +77,8 @@ public partial class ObjectCamera : Node3D
             ownerCharacter.HeadHolderCamera.GlobalPosition, ownerCharacter.LerpSpeedPosObjectCamera);
 
         GlobalPosition = LerpObject_ObjectCameraPos.Update(delta);
+
+        _MouseMotion = new Vector2(0, 0);
     }
 
     // Hadle inout for mouse
@@ -81,8 +89,6 @@ public partial class ObjectCamera : Node3D
             InputEventMouseMotion mouseEventMotion = @event as InputEventMouseMotion;
             _MouseMotion = mouseEventMotion.Relative;
         }
-        else
-            _MouseMotion = new Vector2(0, 0);
     }
 
     // Update CameraLook from mouse input and calculating rotation nodeRotY and nodeRotX

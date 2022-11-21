@@ -1,9 +1,8 @@
-[gd_scene load_steps=37 format=3 uid="uid://dhp8eikuuybmf"]
+[gd_scene load_steps=34 format=3 uid="uid://dhp8eikuuybmf"]
 
 [ext_resource type="PackedScene" uid="uid://b45rb5ghdemou" path="res://testing/wardrobe_ldoor_small.tscn" id="1_pnqh4"]
 [ext_resource type="PackedScene" uid="uid://c2w2nvkxq02ya" path="res://testing/wardrobe_rdoor_small.tscn" id="2_v76wx"]
 [ext_resource type="Script" path="res://testing/drawer_test.cs" id="3_ukun6"]
-[ext_resource type="Texture2D" uid="uid://bybrpbyf1euit" path="res://textures/NormalMap (3).png" id="4_ppc84"]
 [ext_resource type="PackedScene" uid="uid://dbnevtbu1g7uy" path="res://core_systems/interactive_system/interactive_object.tscn" id="5_0ayi0"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_16gir"]
@@ -50,15 +49,6 @@ data = PackedVector3Array(-0.275, 0.01, 0.5, 0.275, 0.01, 0.5, -0.275, -0.01, 0.
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_0x6da"]
 friction = 0.8
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pf73c"]
-albedo_color = Color(0.266667, 0.192157, 0.156863, 1)
-metallic = 0.23
-roughness = 0.59
-normal_enabled = true
-normal_scale = 0.6
-normal_texture = ExtResource("4_ppc84")
-uv1_triplanar = true
-
 [sub_resource type="BoxMesh" id="BoxMesh_xewya"]
 size = Vector3(0.96, 0.02, 0.4)
 
@@ -89,14 +79,13 @@ size = Vector3(0.96, 0.2, 0.02)
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_j7v15"]
 points = PackedVector3Array(0.48, 0.1, 0.01, 0.48, 0.1, -0.01, -0.48, 0.1, 0.01, 0.48, -0.1, 0.01, 0.48, -0.1, -0.01, -0.48, 0.1, -0.01, -0.48, -0.1, 0.01, -0.48, -0.1, -0.01)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7brxh"]
-albedo_color = Color(0, 0.321569, 0.454902, 1)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i0np3"]
+albedo_color = Color(0.262745, 0.27451, 0.27451, 1)
+metallic = 0.24
+roughness = 0.0
 
 [sub_resource type="BoxMesh" id="BoxMesh_d4y4r"]
 size = Vector3(0.25, 0.046, 0.01)
-
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ug3at"]
-points = PackedVector3Array(0.125, 0.023, 0.005, 0.125, 0.023, -0.005, -0.125, 0.023, 0.005, 0.125, -0.023, 0.005, 0.125, -0.023, -0.005, -0.125, 0.023, -0.005, -0.125, -0.023, 0.005, -0.125, -0.023, -0.005)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_xkeml"]
 size = Vector3(0.965704, 0.211547, 0.0383622)
@@ -159,6 +148,26 @@ mesh = SubResource("BoxMesh_yvtyh")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D7/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_oind2")
 
+[node name="MeshInstance3D10" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.691791, -0.293768)
+material_override = SubResource("StandardMaterial3D_16gir")
+mesh = SubResource("BoxMesh_yvtyh")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D10"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D10/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_oind2")
+
+[node name="MeshInstance3D11" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.44198, -0.293768)
+material_override = SubResource("StandardMaterial3D_16gir")
+mesh = SubResource("BoxMesh_yvtyh")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D11"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D11/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_oind2")
+
 [node name="MeshInstance3D8" type="MeshInstance3D" parent="."]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.2, -0.293768)
 material_override = SubResource("StandardMaterial3D_16gir")
@@ -207,7 +216,7 @@ linear_damp = 5.0
 angular_damp = 5.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Drawer_test/DrawerGrab"]
-material_override = SubResource("StandardMaterial3D_pf73c")
+material_override = SubResource("StandardMaterial3D_16gir")
 mesh = SubResource("BoxMesh_xewya")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Drawer_test/DrawerGrab"]
@@ -215,7 +224,7 @@ shape = SubResource("ConvexPolygonShape3D_j54cv")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="Drawer_test/DrawerGrab"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.467432, 0.0945264, 0)
-material_override = SubResource("StandardMaterial3D_pf73c")
+material_override = SubResource("StandardMaterial3D_16gir")
 mesh = SubResource("BoxMesh_mhhpd")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="Drawer_test/DrawerGrab"]
@@ -224,7 +233,7 @@ shape = SubResource("ConvexPolygonShape3D_d6ubv")
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="Drawer_test/DrawerGrab"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.468974, 0.0945264, 0)
-material_override = SubResource("StandardMaterial3D_pf73c")
+material_override = SubResource("StandardMaterial3D_16gir")
 mesh = SubResource("BoxMesh_od2ho")
 
 [node name="CollisionShape3D3" type="CollisionShape3D" parent="Drawer_test/DrawerGrab"]
@@ -233,7 +242,7 @@ shape = SubResource("ConvexPolygonShape3D_rfdn4")
 
 [node name="MeshInstance3D4" type="MeshInstance3D" parent="Drawer_test/DrawerGrab"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000266165, 0.0941965, -0.189685)
-material_override = SubResource("StandardMaterial3D_pf73c")
+material_override = SubResource("StandardMaterial3D_16gir")
 mesh = SubResource("BoxMesh_4xki0")
 
 [node name="CollisionShape3D4" type="CollisionShape3D" parent="Drawer_test/DrawerGrab"]
@@ -242,7 +251,7 @@ shape = SubResource("ConvexPolygonShape3D_jxgd2")
 
 [node name="MeshInstance3D5" type="MeshInstance3D" parent="Drawer_test/DrawerGrab"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000266165, 0.0941965, 0.209149)
-material_override = SubResource("StandardMaterial3D_pf73c")
+material_override = SubResource("StandardMaterial3D_16gir")
 mesh = SubResource("BoxMesh_4r7fw")
 
 [node name="CollisionShape3D5" type="CollisionShape3D" parent="Drawer_test/DrawerGrab"]
@@ -251,12 +260,8 @@ shape = SubResource("ConvexPolygonShape3D_j7v15")
 
 [node name="MeshInstance3D6" type="MeshInstance3D" parent="Drawer_test/DrawerGrab"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.129992, 0.22852)
-material_override = SubResource("StandardMaterial3D_7brxh")
+material_override = SubResource("StandardMaterial3D_i0np3")
 mesh = SubResource("BoxMesh_d4y4r")
-
-[node name="CollisionShape3D6" type="CollisionShape3D" parent="Drawer_test/DrawerGrab"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.129992, 0.22852)
-shape = SubResource("ConvexPolygonShape3D_ug3at")
 
 [node name="interactive_object" parent="Drawer_test/DrawerGrab" instance=ExtResource("5_0ayi0")]
 InteractiveObjectCommunicationWith = NodePath("../..")
@@ -288,7 +293,7 @@ linear_limit_z/lower_distance = -0.5
 linear_spring_z/enabled = true
 
 [node name="Drawer_test2" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.458318, -0.282338)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.472659, -0.282338)
 script = ExtResource("3_ukun6")
 drawerInertia = Vector3(0, 0, 0)
 linearLimitZ = -0.35
@@ -309,7 +314,7 @@ linear_damp = 5.0
 angular_damp = 5.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Drawer_test2/DrawerGrab"]
-material_override = SubResource("StandardMaterial3D_pf73c")
+material_override = SubResource("StandardMaterial3D_16gir")
 mesh = SubResource("BoxMesh_xewya")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Drawer_test2/DrawerGrab"]
@@ -317,7 +322,7 @@ shape = SubResource("ConvexPolygonShape3D_j54cv")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="Drawer_test2/DrawerGrab"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.467432, 0.0945264, 0)
-material_override = SubResource("StandardMaterial3D_pf73c")
+material_override = SubResource("StandardMaterial3D_16gir")
 mesh = SubResource("BoxMesh_mhhpd")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="Drawer_test2/DrawerGrab"]
@@ -326,7 +331,7 @@ shape = SubResource("ConvexPolygonShape3D_d6ubv")
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="Drawer_test2/DrawerGrab"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.468974, 0.0945264, 0)
-material_override = SubResource("StandardMaterial3D_pf73c")
+material_override = SubResource("StandardMaterial3D_16gir")
 mesh = SubResource("BoxMesh_od2ho")
 
 [node name="CollisionShape3D3" type="CollisionShape3D" parent="Drawer_test2/DrawerGrab"]
@@ -335,7 +340,7 @@ shape = SubResource("ConvexPolygonShape3D_rfdn4")
 
 [node name="MeshInstance3D4" type="MeshInstance3D" parent="Drawer_test2/DrawerGrab"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000266165, 0.0941965, -0.189685)
-material_override = SubResource("StandardMaterial3D_pf73c")
+material_override = SubResource("StandardMaterial3D_16gir")
 mesh = SubResource("BoxMesh_4xki0")
 
 [node name="CollisionShape3D4" type="CollisionShape3D" parent="Drawer_test2/DrawerGrab"]
@@ -344,7 +349,7 @@ shape = SubResource("ConvexPolygonShape3D_jxgd2")
 
 [node name="MeshInstance3D5" type="MeshInstance3D" parent="Drawer_test2/DrawerGrab"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000266165, 0.0941965, 0.209149)
-material_override = SubResource("StandardMaterial3D_pf73c")
+material_override = SubResource("StandardMaterial3D_16gir")
 mesh = SubResource("BoxMesh_4r7fw")
 
 [node name="CollisionShape3D5" type="CollisionShape3D" parent="Drawer_test2/DrawerGrab"]
@@ -353,12 +358,8 @@ shape = SubResource("ConvexPolygonShape3D_j7v15")
 
 [node name="MeshInstance3D6" type="MeshInstance3D" parent="Drawer_test2/DrawerGrab"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.129992, 0.22852)
-material_override = SubResource("StandardMaterial3D_7brxh")
+material_override = SubResource("StandardMaterial3D_i0np3")
 mesh = SubResource("BoxMesh_d4y4r")
-
-[node name="CollisionShape3D6" type="CollisionShape3D" parent="Drawer_test2/DrawerGrab"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.129992, 0.22852)
-shape = SubResource("ConvexPolygonShape3D_ug3at")
 
 [node name="interactive_object" parent="Drawer_test2/DrawerGrab" instance=ExtResource("5_0ayi0")]
 InteractiveObjectCommunicationWith = NodePath("../..")
@@ -389,314 +390,5 @@ node_b = NodePath("../DrawerStaticBody")
 linear_limit_z/lower_distance = -0.5
 linear_spring_z/enabled = true
 
-[node name="Drawer_test3" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.688318, -0.282338)
-script = ExtResource("3_ukun6")
-drawerInertia = Vector3(0, 0, 0)
-linearLimitZ = -0.35
-drawerMass = 15.0
-
-[node name="DrawerGrab" type="RigidBody3D" parent="Drawer_test3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.01)
-collision_layer = 8
-collision_mask = 8
-mass = 20.0
-inertia = Vector3(0.01, 0.01, 0.01)
-physics_material_override = SubResource("PhysicsMaterial_0x6da")
-gravity_scale = 0.0
-continuous_cd = true
-max_contacts_reported = 2
-contact_monitor = true
-linear_damp = 5.0
-angular_damp = 5.0
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Drawer_test3/DrawerGrab"]
-material_override = SubResource("StandardMaterial3D_pf73c")
-mesh = SubResource("BoxMesh_xewya")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Drawer_test3/DrawerGrab"]
-shape = SubResource("ConvexPolygonShape3D_j54cv")
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="Drawer_test3/DrawerGrab"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.467432, 0.0945264, 0)
-material_override = SubResource("StandardMaterial3D_pf73c")
-mesh = SubResource("BoxMesh_mhhpd")
-
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="Drawer_test3/DrawerGrab"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.467432, 0.0945264, 0)
-shape = SubResource("ConvexPolygonShape3D_d6ubv")
-
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="Drawer_test3/DrawerGrab"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.468974, 0.0945264, 0)
-material_override = SubResource("StandardMaterial3D_pf73c")
-mesh = SubResource("BoxMesh_od2ho")
-
-[node name="CollisionShape3D3" type="CollisionShape3D" parent="Drawer_test3/DrawerGrab"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.468974, 0.0945264, 0)
-shape = SubResource("ConvexPolygonShape3D_rfdn4")
-
-[node name="MeshInstance3D4" type="MeshInstance3D" parent="Drawer_test3/DrawerGrab"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000266165, 0.0941965, -0.189685)
-material_override = SubResource("StandardMaterial3D_pf73c")
-mesh = SubResource("BoxMesh_4xki0")
-
-[node name="CollisionShape3D4" type="CollisionShape3D" parent="Drawer_test3/DrawerGrab"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000266165, 0.0941965, -0.189685)
-shape = SubResource("ConvexPolygonShape3D_jxgd2")
-
-[node name="MeshInstance3D5" type="MeshInstance3D" parent="Drawer_test3/DrawerGrab"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000266165, 0.0941965, 0.209149)
-material_override = SubResource("StandardMaterial3D_pf73c")
-mesh = SubResource("BoxMesh_4r7fw")
-
-[node name="CollisionShape3D5" type="CollisionShape3D" parent="Drawer_test3/DrawerGrab"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000266165, 0.0941965, 0.209149)
-shape = SubResource("ConvexPolygonShape3D_j7v15")
-
-[node name="MeshInstance3D6" type="MeshInstance3D" parent="Drawer_test3/DrawerGrab"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.129992, 0.22852)
-material_override = SubResource("StandardMaterial3D_7brxh")
-mesh = SubResource("BoxMesh_d4y4r")
-
-[node name="CollisionShape3D6" type="CollisionShape3D" parent="Drawer_test3/DrawerGrab"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.129992, 0.22852)
-shape = SubResource("ConvexPolygonShape3D_ug3at")
-
-[node name="interactive_object" parent="Drawer_test3/DrawerGrab" instance=ExtResource("5_0ayi0")]
-InteractiveObjectCommunicationWith = NodePath("../..")
-InteractiveLevel = 2
-InteractivePhysicType = 2
-UseOffsetHitInteract = true
-
-[node name="CollisionShape3D" parent="Drawer_test3/DrawerGrab/interactive_object/StaticBody3D" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0930549, 0.212845)
-shape = SubResource("BoxShape3D_xkeml")
-
-[node name="CollisionShape3D" parent="Drawer_test3/DrawerGrab/interactive_object/StaticBody3D/interactive_object_area3D" index="0"]
-shape = SubResource("SphereShape3D_70w3d")
-
-[node name="DrawerStaticBody" type="StaticBody3D" parent="Drawer_test3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.01)
-collision_layer = 0
-collision_mask = 0
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Drawer_test3/DrawerStaticBody"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.001)
-shape = SubResource("BoxShape3D_3cwxd")
-
-[node name="GenericJoint" type="Generic6DOFJoint3D" parent="Drawer_test3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.01)
-node_a = NodePath("../DrawerGrab")
-node_b = NodePath("../DrawerStaticBody")
-linear_limit_z/lower_distance = -0.5
-linear_spring_z/enabled = true
-
-[node name="Drawer_test4" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.912528, -0.282338)
-script = ExtResource("3_ukun6")
-drawerInertia = Vector3(0, 0, 0)
-linearLimitZ = -0.35
-drawerMass = 15.0
-
-[node name="DrawerGrab" type="RigidBody3D" parent="Drawer_test4"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.01)
-collision_layer = 8
-collision_mask = 8
-mass = 20.0
-inertia = Vector3(0.01, 0.01, 0.01)
-physics_material_override = SubResource("PhysicsMaterial_0x6da")
-gravity_scale = 0.0
-continuous_cd = true
-max_contacts_reported = 2
-contact_monitor = true
-linear_damp = 5.0
-angular_damp = 5.0
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Drawer_test4/DrawerGrab"]
-material_override = SubResource("StandardMaterial3D_pf73c")
-mesh = SubResource("BoxMesh_xewya")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Drawer_test4/DrawerGrab"]
-shape = SubResource("ConvexPolygonShape3D_j54cv")
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="Drawer_test4/DrawerGrab"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.467432, 0.0945264, 0)
-material_override = SubResource("StandardMaterial3D_pf73c")
-mesh = SubResource("BoxMesh_mhhpd")
-
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="Drawer_test4/DrawerGrab"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.467432, 0.0945264, 0)
-shape = SubResource("ConvexPolygonShape3D_d6ubv")
-
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="Drawer_test4/DrawerGrab"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.468974, 0.0945264, 0)
-material_override = SubResource("StandardMaterial3D_pf73c")
-mesh = SubResource("BoxMesh_od2ho")
-
-[node name="CollisionShape3D3" type="CollisionShape3D" parent="Drawer_test4/DrawerGrab"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.468974, 0.0945264, 0)
-shape = SubResource("ConvexPolygonShape3D_rfdn4")
-
-[node name="MeshInstance3D4" type="MeshInstance3D" parent="Drawer_test4/DrawerGrab"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000266165, 0.0941965, -0.189685)
-material_override = SubResource("StandardMaterial3D_pf73c")
-mesh = SubResource("BoxMesh_4xki0")
-
-[node name="CollisionShape3D4" type="CollisionShape3D" parent="Drawer_test4/DrawerGrab"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000266165, 0.0941965, -0.189685)
-shape = SubResource("ConvexPolygonShape3D_jxgd2")
-
-[node name="MeshInstance3D5" type="MeshInstance3D" parent="Drawer_test4/DrawerGrab"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000266165, 0.0941965, 0.209149)
-material_override = SubResource("StandardMaterial3D_pf73c")
-mesh = SubResource("BoxMesh_4r7fw")
-
-[node name="CollisionShape3D5" type="CollisionShape3D" parent="Drawer_test4/DrawerGrab"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000266165, 0.0941965, 0.209149)
-shape = SubResource("ConvexPolygonShape3D_j7v15")
-
-[node name="MeshInstance3D6" type="MeshInstance3D" parent="Drawer_test4/DrawerGrab"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.129992, 0.22852)
-material_override = SubResource("StandardMaterial3D_7brxh")
-mesh = SubResource("BoxMesh_d4y4r")
-
-[node name="CollisionShape3D6" type="CollisionShape3D" parent="Drawer_test4/DrawerGrab"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.129992, 0.22852)
-shape = SubResource("ConvexPolygonShape3D_ug3at")
-
-[node name="interactive_object" parent="Drawer_test4/DrawerGrab" instance=ExtResource("5_0ayi0")]
-InteractiveObjectCommunicationWith = NodePath("../..")
-InteractiveLevel = 2
-InteractivePhysicType = 2
-UseOffsetHitInteract = true
-
-[node name="CollisionShape3D" parent="Drawer_test4/DrawerGrab/interactive_object/StaticBody3D" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0930549, 0.212845)
-shape = SubResource("BoxShape3D_xkeml")
-
-[node name="CollisionShape3D" parent="Drawer_test4/DrawerGrab/interactive_object/StaticBody3D/interactive_object_area3D" index="0"]
-shape = SubResource("SphereShape3D_70w3d")
-
-[node name="DrawerStaticBody" type="StaticBody3D" parent="Drawer_test4"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.01)
-collision_layer = 0
-collision_mask = 0
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Drawer_test4/DrawerStaticBody"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.001)
-shape = SubResource("BoxShape3D_3cwxd")
-
-[node name="GenericJoint" type="Generic6DOFJoint3D" parent="Drawer_test4"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.01)
-node_a = NodePath("../DrawerGrab")
-node_b = NodePath("../DrawerStaticBody")
-linear_limit_z/lower_distance = -0.5
-linear_spring_z/enabled = true
-
-[node name="Drawer_test5" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.13638, -0.282338)
-script = ExtResource("3_ukun6")
-drawerInertia = Vector3(0, 0, 0)
-linearLimitZ = -0.35
-drawerMass = 15.0
-
-[node name="DrawerGrab" type="RigidBody3D" parent="Drawer_test5"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.01)
-collision_layer = 8
-collision_mask = 8
-mass = 20.0
-inertia = Vector3(0.01, 0.01, 0.01)
-physics_material_override = SubResource("PhysicsMaterial_0x6da")
-gravity_scale = 0.0
-continuous_cd = true
-max_contacts_reported = 2
-contact_monitor = true
-linear_damp = 5.0
-angular_damp = 5.0
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Drawer_test5/DrawerGrab"]
-material_override = SubResource("StandardMaterial3D_pf73c")
-mesh = SubResource("BoxMesh_xewya")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Drawer_test5/DrawerGrab"]
-shape = SubResource("ConvexPolygonShape3D_j54cv")
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="Drawer_test5/DrawerGrab"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.467432, 0.0945264, 0)
-material_override = SubResource("StandardMaterial3D_pf73c")
-mesh = SubResource("BoxMesh_mhhpd")
-
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="Drawer_test5/DrawerGrab"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.467432, 0.0945264, 0)
-shape = SubResource("ConvexPolygonShape3D_d6ubv")
-
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="Drawer_test5/DrawerGrab"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.468974, 0.0945264, 0)
-material_override = SubResource("StandardMaterial3D_pf73c")
-mesh = SubResource("BoxMesh_od2ho")
-
-[node name="CollisionShape3D3" type="CollisionShape3D" parent="Drawer_test5/DrawerGrab"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.468974, 0.0945264, 0)
-shape = SubResource("ConvexPolygonShape3D_rfdn4")
-
-[node name="MeshInstance3D4" type="MeshInstance3D" parent="Drawer_test5/DrawerGrab"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000266165, 0.0941965, -0.189685)
-material_override = SubResource("StandardMaterial3D_pf73c")
-mesh = SubResource("BoxMesh_4xki0")
-
-[node name="CollisionShape3D4" type="CollisionShape3D" parent="Drawer_test5/DrawerGrab"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000266165, 0.0941965, -0.189685)
-shape = SubResource("ConvexPolygonShape3D_jxgd2")
-
-[node name="MeshInstance3D5" type="MeshInstance3D" parent="Drawer_test5/DrawerGrab"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000266165, 0.0941965, 0.209149)
-material_override = SubResource("StandardMaterial3D_pf73c")
-mesh = SubResource("BoxMesh_4r7fw")
-
-[node name="CollisionShape3D5" type="CollisionShape3D" parent="Drawer_test5/DrawerGrab"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000266165, 0.0941965, 0.209149)
-shape = SubResource("ConvexPolygonShape3D_j7v15")
-
-[node name="MeshInstance3D6" type="MeshInstance3D" parent="Drawer_test5/DrawerGrab"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.129992, 0.22852)
-material_override = SubResource("StandardMaterial3D_7brxh")
-mesh = SubResource("BoxMesh_d4y4r")
-
-[node name="CollisionShape3D6" type="CollisionShape3D" parent="Drawer_test5/DrawerGrab"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.129992, 0.22852)
-shape = SubResource("ConvexPolygonShape3D_ug3at")
-
-[node name="interactive_object" parent="Drawer_test5/DrawerGrab" instance=ExtResource("5_0ayi0")]
-InteractiveObjectCommunicationWith = NodePath("../..")
-InteractiveLevel = 2
-InteractivePhysicType = 2
-UseOffsetHitInteract = true
-
-[node name="CollisionShape3D" parent="Drawer_test5/DrawerGrab/interactive_object/StaticBody3D" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0930549, 0.212845)
-shape = SubResource("BoxShape3D_xkeml")
-
-[node name="CollisionShape3D" parent="Drawer_test5/DrawerGrab/interactive_object/StaticBody3D/interactive_object_area3D" index="0"]
-shape = SubResource("SphereShape3D_70w3d")
-
-[node name="DrawerStaticBody" type="StaticBody3D" parent="Drawer_test5"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.01)
-collision_layer = 0
-collision_mask = 0
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Drawer_test5/DrawerStaticBody"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.001)
-shape = SubResource("BoxShape3D_3cwxd")
-
-[node name="GenericJoint" type="Generic6DOFJoint3D" parent="Drawer_test5"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.01)
-node_a = NodePath("../DrawerGrab")
-node_b = NodePath("../DrawerStaticBody")
-linear_limit_z/lower_distance = -0.5
-linear_spring_z/enabled = true
-
 [editable path="Drawer_test/DrawerGrab/interactive_object"]
 [editable path="Drawer_test2/DrawerGrab/interactive_object"]
-[editable path="Drawer_test3/DrawerGrab/interactive_object"]
-[editable path="Drawer_test4/DrawerGrab/interactive_object"]
-[editable path="Drawer_test5/DrawerGrab/interactive_object"]
