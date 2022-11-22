@@ -203,7 +203,16 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
                     _ActualSetMoveSpeed = MoveSpeedInStand;
                 }
 
-                velocity = velocity.Lerp(direction * _ActualSetMoveSpeed, AccelerateSmoothStep * (float)delta);
+                // New move Fix pro vyreseni bugu se zdi !
+                if (IsOnWall())
+                {
+                    var newDir = GetWallNormal().Slide(direction).Normalized();
+                    velocity = velocity.Lerp(newDir * _ActualSetMoveSpeed, AccelerateSmoothStep * (float)delta);
+                }
+                else
+                {
+                    velocity = velocity.Lerp(direction * _ActualSetMoveSpeed, AccelerateSmoothStep * (float)delta);
+                }
             }
             else
             {
@@ -229,7 +238,7 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
             }
         }
 
-        GameMaster.GM.GetDebugHud().CustomLabelUpdateText(2, this, "heightest = " + heightfallingtest);
+        GameMaster.GM.GetDebugHud().CustomLabelUpdateText(2, this, "velocity = " + direction);
 
         // Function of Falling and StartFalling
         if (!IsOnFloor())
