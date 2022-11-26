@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://yyesdv41daq6"]
+[gd_scene load_steps=46 format=3 uid="uid://yyesdv41daq6"]
 
 [ext_resource type="ArrayOccluder3D" uid="uid://c65wc0yeg3cak" path="res://levels/world_level_rooms/worldlevel_rooms_test.occ" id="1_48aky"]
 [ext_resource type="Script" path="res://levels/worldlevel_meteor.gd" id="1_0375g"]
@@ -36,6 +36,7 @@
 [ext_resource type="PackedScene" uid="uid://dhg3c333pnd8n" path="res://objects/battery/batery_new.tscn" id="33_ak0xq"]
 [ext_resource type="PackedScene" uid="uid://dsqqgpmcwgjvg" path="res://chemlight.tscn" id="34_pq7dj"]
 [ext_resource type="PackedScene" uid="uid://bc5qu7757hvys" path="res://sparks.tscn" id="36_1d2xu"]
+[ext_resource type="PackedScene" uid="uid://cmso6nb03kmgl" path="res://box2.glb" id="37_s7lcx"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_nrkwj"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -49,7 +50,6 @@ background_mode = 1
 sky = SubResource("Sky_a3ntq")
 tonemap_mode = 3
 ssao_enabled = true
-sdfgi_enabled = true
 sdfgi_use_occlusion = true
 sdfgi_read_sky_light = false
 fog_enabled = true
@@ -593,6 +593,10 @@ transform = Transform3D(0.0121326, 0.0969374, 0.0213525, 0.0992258, -0.012419, 1
 
 [node name="Sparks" parent="." instance=ExtResource("36_1d2xu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.98164, 0.95091, 0)
+visible = false
+
+[node name="box2" parent="." instance=ExtResource("37_s7lcx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.14548, 0.912764, 2.65053)
 
 [editable path="LevelGeometry/Grounds/floor3"]
 [editable path="cabinet_small3"]
