@@ -1,0 +1,169 @@
+[gd_scene load_steps=15 format=3 uid="uid://db106vi7q6idt"]
+
+[ext_resource type="PackedScene" uid="uid://ck8mt4y4gfqmk" path="res://placeholders/modular_walls/ground_large.tscn" id="2_yutu1"]
+[ext_resource type="PackedScene" uid="uid://bet3idvc4fg0n" path="res://placeholders/PlayerStart.tscn" id="3_17trl"]
+[ext_resource type="PackedScene" uid="uid://ipic8k4uwyqr" path="res://testing/wardrobe_small.tscn" id="4_quipm"]
+[ext_resource type="PackedScene" uid="uid://cfm6rrc0307u4" path="res://level_hall/room_hall_final_1.tscn" id="5_vx6ur"]
+[ext_resource type="PackedScene" uid="uid://c2w2nvkxq02ya" path="res://testing/wardrobe_rdoor_small.tscn" id="5_wm3dg"]
+[ext_resource type="PackedScene" uid="uid://cqkp3w71b6y6i" path="res://level_hall/floor_deckel.tscn" id="6_txd48"]
+[ext_resource type="AudioStream" uid="uid://c22q66lwj2uvk" path="res://audio/audio_streams/510485__lydmakeren__industrial-hall-ambience.wav" id="7_nu33b"]
+[ext_resource type="PackedScene" uid="uid://cmpasasuwv7ha" path="res://level_hall/lamp_2.tscn" id="8_fpdih"]
+[ext_resource type="PackedScene" uid="uid://co0crjynlni5o" path="res://level_hall/new_items/gas_tank_medium_03.tscn" id="9_kvofj"]
+[ext_resource type="PackedScene" uid="uid://bpjgjuxju42am" path="res://level_hall/new_items/gas_tank_small_02.tscn" id="10_mqmti"]
+
+[sub_resource type="BoxOccluder3D" id="BoxOccluder3D_lth2p"]
+size = Vector3(100, 100, 100)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_w3cwh"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_rxtxe"]
+sky_material = SubResource("ProceduralSkyMaterial_w3cwh")
+
+[sub_resource type="Environment" id="Environment_p3qlj"]
+background_color = Color(0.227451, 0.227451, 0.227451, 1)
+background_energy_multiplier = 0.2
+sky = SubResource("Sky_rxtxe")
+tonemap_mode = 3
+ssao_enabled = true
+ssao_radius = 2.24
+ssao_intensity = 4.41
+ssao_detail = 1.14
+ssao_horizon = 1.0
+ssil_enabled = true
+sdfgi_enabled = true
+sdfgi_use_occlusion = true
+sdfgi_energy = 2.0
+glow_enabled = true
+fog_enabled = true
+fog_light_energy = 0.1
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.035
+volumetric_fog_ambient_inject = 1.0
+
+[node name="worldlevel" type="Node3D"]
+
+[node name="worldlevel_occluderculling" type="OccluderInstance3D" parent="."]
+visible = false
+occluder = SubResource("BoxOccluder3D_lth2p")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_p3qlj")
+
+[node name="LevelGeometry" type="Node3D" parent="."]
+visible = false
+
+[node name="Grounds" type="Node3D" parent="LevelGeometry"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0751435, 0)
+
+[node name="ground_large" parent="LevelGeometry/Grounds" instance=ExtResource("2_yutu1")]
+transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 2, -2, 0, 2)
+
+[node name="ground_large2" parent="LevelGeometry/Grounds" instance=ExtResource("2_yutu1")]
+transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 2, 2, 0, 2)
+
+[node name="ground_large3" parent="LevelGeometry/Grounds" instance=ExtResource("2_yutu1")]
+transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 2, -2, 0, -2)
+
+[node name="PlayerStart" parent="." instance=ExtResource("3_17trl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.3181)
+
+[node name="room_hall_final1" parent="." instance=ExtResource("5_vx6ur")]
+transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 0, 0, 0)
+
+[node name="Stuff" type="Node3D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="floor_deckel001" parent="Stuff" instance=ExtResource("6_txd48")]
+transform = Transform3D(0.75, 0, 0, 0, 0.749263, 0.0332507, 0, -0.0332507, 0.749263, -1.31393, 0, -6.19125)
+
+[node name="floor_deckel002" parent="Stuff" instance=ExtResource("6_txd48")]
+transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, -1.31393, 0, -5.19125)
+
+[node name="floor_deckel003" parent="Stuff" instance=ExtResource("6_txd48")]
+transform = Transform3D(0.75, 0, 0, 0, 0.748828, 0.0419184, 0, -0.0419184, 0.748828, -1.31393, 0, -4.19125)
+
+[node name="floor_deckel005" parent="Stuff" instance=ExtResource("6_txd48")]
+transform = Transform3D(0.75, 0, 0, 0, 0.748898, -0.0406375, 0, 0.0406375, 0.748898, -1.31393, 0, -1.79125)
+
+[node name="floor_deckel006" parent="Stuff" instance=ExtResource("6_txd48")]
+transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, -1.31393, 0, -0.651681)
+
+[node name="floor_deckel007" parent="Stuff" instance=ExtResource("6_txd48")]
+transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, -1.31393, 0, 0.476605)
+
+[node name="floor_deckel008" parent="Stuff" instance=ExtResource("6_txd48")]
+transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, -1.31393, 0, 1.62304)
+
+[node name="floor_deckel011" parent="Stuff" instance=ExtResource("6_txd48")]
+transform = Transform3D(0.75, 0, 0, 0, 0.749898, 0.0123433, 0, -0.0123433, 0.749898, 1.31574, 0, 1.40608)
+
+[node name="floor_deckel012" parent="Stuff" instance=ExtResource("6_txd48")]
+transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 1.31574, 0, 0.260695)
+
+[node name="floor_deckel013" parent="Stuff" instance=ExtResource("6_txd48")]
+transform = Transform3D(0.194152, 0.724434, 0, -0.724434, 0.194152, 0, 0, 0, 0.75, 1.46087, -0.0589164, -0.878734)
+
+[node name="floor_deckel015" parent="Stuff" instance=ExtResource("6_txd48")]
+transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 1.31574, 0, -2.02726)
+
+[node name="floor_deckel016" parent="Stuff" instance=ExtResource("6_txd48")]
+transform = Transform3D(0.75, 0, 0, 0, 0.74796, 0.0552811, 0, -0.0552811, 0.74796, 1.31574, 0, -3.17687)
+
+[node name="floor_deckel017" parent="Stuff" instance=ExtResource("6_txd48")]
+transform = Transform3D(0.56982, -0.487653, 0, 0.487653, 0.56982, 0, 0, 0, 0.75, 1.40921, 0, -4.81402)
+
+[node name="floor_deckel009" parent="Stuff" instance=ExtResource("6_txd48")]
+transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, -1.31393, 0, 2.76871)
+
+[node name="floor_deckel010" parent="Stuff" instance=ExtResource("6_txd48")]
+transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, -1.31393, 0, 3.92358)
+
+[node name="floor_deckel004" parent="Stuff" instance=ExtResource("6_txd48")]
+transform = Transform3D(0.584487, 0, 0.469973, 0, 0.75, 0, -0.469973, 0, 0.584487, -1.19727, 0.0389515, -3.14879)
+
+[node name="Wardrobe_small" parent="Stuff" instance=ExtResource("4_quipm")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.932033, 0, 0.017866)
+
+[node name="Wardrobe_rdoor_small" parent="Stuff/Wardrobe_small" instance=ExtResource("5_wm3dg")]
+
+[node name="Wardrobe_small3" parent="Stuff" instance=ExtResource("4_quipm")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.932033, 0, -0.565501)
+
+[node name="Wardrobe_rdoor_small" parent="Stuff/Wardrobe_small3" instance=ExtResource("5_wm3dg")]
+
+[node name="Wardrobe_small2" parent="Stuff" instance=ExtResource("4_quipm")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.932033, 0, 0.6)
+
+[node name="Wardrobe_rdoor_small" parent="Stuff/Wardrobe_small2" instance=ExtResource("5_wm3dg")]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_nu33b")
+volume_db = -6.933
+autoplay = true
+
+[node name="lamp2" parent="." instance=ExtResource("8_fpdih")]
+transform = Transform3D(-0.999349, 0, -0.036068, 0, 1, 0, 0.036068, 0, -0.999349, 1.60238, 2.38847, -0.334514)
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="lamp2"]
+transform = Transform3D(-0.999349, -0.00908128, 0.0349061, 0, 0.967784, 0.251782, -0.036068, 0.251618, -0.967154, 0, 0, 0)
+light_energy = 0.5
+light_indirect_energy = 16.0
+light_volumetric_fog_energy = 1.5
+light_specular = 0.4
+shadow_enabled = true
+omni_range = 20.0
+metadata/_edit_lock_ = true
+
+[node name="gas_tank_medium_03_export" parent="." instance=ExtResource("9_kvofj")]
+transform = Transform3D(0.995726, -0.0923532, 0, 0.0923532, 0.995726, 0, 0, 0, 1, -1.2557, -1.78814e-07, 1.01942)
+
+[node name="gas_tank_medium_03_export2" parent="." instance=ExtResource("9_kvofj")]
+transform = Transform3D(0.995726, -0.0923532, 0, 0.0909921, 0.981051, 0.171052, -0.0157972, -0.170321, 0.985262, -3.49549, -1.78814e-07, 1.50518)
+
+[node name="gas_tank_medium_03_export3" parent="." instance=ExtResource("9_kvofj")]
+transform = Transform3D(0.0209628, 0.987583, -0.155693, 0.999775, -0.0212216, 0, -0.00330405, -0.155658, -0.987805, -2.7288, 0.128727, 1.46685)
+
+[node name="gas_tank_small_02" parent="." instance=ExtResource("10_mqmti")]
+transform = Transform3D(1.3, 0, 0, 0, 1.3, 0, 0, 0, 1.3, -0.982473, -0.00430283, 0.968383)

@@ -125,17 +125,18 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
                     break;
                 }
         }
-    }
 
-    // Update Visual updated process
-    public override void _Process(double delta)
-    {
         // Calculate actual movement speed 
         ActualMovementSpeed = GlobalPosition.DistanceTo(LastPosition) * 20000.0f * (float)delta;
         heightfallingtest = GlobalPosition.y - LastPosition.y;
 
 
         LastPosition = GlobalPosition;
+    }
+
+    // Update Visual updated process
+    public override void _Process(double delta)
+    {
     }
 
     // Update velocity for fly move and return this velocity
@@ -204,7 +205,7 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
                 }
 
                 // New move Fix pro vyreseni bugu se zdi !
-                if (IsOnWall())
+                if (IsOnWall() && inputDir.y != 0)
                 {
                     var newDir = GetWallNormal().Slide(direction).Normalized();
                     velocity = velocity.Lerp(newDir * _ActualSetMoveSpeed, AccelerateSmoothStep * (float)delta);

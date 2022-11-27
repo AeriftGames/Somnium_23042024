@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://co0crjynlni5o"]
+
+[ext_resource type="PackedScene" uid="uid://dbf2d8r8fsu" path="res://level_hall/new_items/gas_tank_medium_03_export.glb" id="1_pi1cs"]
+
+[node name="gas_tank_medium_03" instance=ExtResource("1_pi1cs")]

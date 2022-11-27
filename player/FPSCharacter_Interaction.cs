@@ -85,50 +85,6 @@ public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
 	public override void _Process(double delta)
 	{
 		base._Process(delta);
-
-		// Toggle Simple Flashlight
-		if(Input.IsActionJustPressed("ToggleFlashlight"))
-			ToggleSimpleFlashlight();
-
-		// UPDATE HANDS
-		objectHands.GlobalPosition = 
-			objectHands.GlobalPosition.Lerp(objectCamera.Camera.GlobalPosition, 40 * (float)delta);
-		
-		Vector3 hands_rot = objectHands.GlobalRotation;
-		float hands_rotY = hands_rot.y;
-		float hands_rotX = hands_rot.x;
-		hands_rotY = Mathf.LerpAngle(hands_rotY,objectCamera.Camera.GlobalRotation.y, 30* (float)delta);
-		hands_rotX = Mathf.LerpAngle(hands_rotX, objectCamera.Camera.GlobalRotation.x, 30 * (float)delta);
-		hands_rot.y = hands_rotY;
-		hands_rot.x = hands_rotX;
-		objectHands.GlobalRotation = hands_rot;
-		
-
-		// UPDATE LERPOBJECT INTERACT
-		if (LerpCameraPosToInteract.IsEnableUpdate())
-			GetFPSCharacterCamera().GlobalPosition = LerpCameraPosToInteract.Update(delta);
-
-		if (LerpCameraLookToInteract.IsEnableUpdate())
-			GetFPSCharacterCamera().LookAtFromPosition(GetFPSCharacterCamera().GlobalPosition,
-				LerpCameraLookToInteract.GetTarget());
-
-		// kamera je na ceste zpet k normalu
-		if(isActualOnLerpToNormal)
-		{
-			// jsme jiz tesne v cili ?
-			if(LerpCameraPosToInteract.GetLengthToTarget() < 0.01f)
-			{
-				// vyresetujeme parametry, povolime input a prerusime update lerpu
-				GetFPSCharacterCamera().Position = new Vector3(0.0f, 0.0f, 0.0f);
-				GetFPSCharacterCamera().Rotation = tempCamRot;
-
-				SetInputEnable(true);
-				LerpCameraPosToInteract.EnableUpdate(false);
-				LerpCameraLookToInteract.EnableUpdate(false);
-				isActualOnLerpToNormal = false;
-			}
-		}
-
 	}
 
     public override void _Input(InputEvent @event)
@@ -156,7 +112,51 @@ public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
 		InteractiveSystem.BasicUpdate(useNow,grabNow,delta);
 		InteractiveSystem.InteractivePhysicsUpdate(grabNow,throwObjectNow,rotateGrabbedObject,
 			moveFarGrabbedObject,moveNearGrabbedObject,delta);
-	}
+
+		// ---------------------------------------------------------------------------------
+        // Toggle Simple Flashlight
+        if (Input.IsActionJustPressed("ToggleFlashlight"))
+            ToggleSimpleFlashlight();
+
+        // UPDATE HANDS
+        objectHands.GlobalPosition =
+            objectHands.GlobalPosition.Lerp(objectCamera.Camera.GlobalPosition, 40 * (float)delta);
+
+        Vector3 hands_rot = objectHands.GlobalRotation;
+        float hands_rotY = hands_rot.y;
+        float hands_rotX = hands_rot.x;
+        hands_rotY = Mathf.LerpAngle(hands_rotY, objectCamera.Camera.GlobalRotation.y, 30 * (float)delta);
+        hands_rotX = Mathf.LerpAngle(hands_rotX, objectCamera.Camera.GlobalRotation.x, 30 * (float)delta);
+        hands_rot.y = hands_rotY;
+        hands_rot.x = hands_rotX;
+        objectHands.GlobalRotation = hands_rot;
+
+
+        // UPDATE LERPOBJECT INTERACT
+        if (LerpCameraPosToInteract.IsEnableUpdate())
+            GetFPSCharacterCamera().GlobalPosition = LerpCameraPosToInteract.Update(delta);
+
+        if (LerpCameraLookToInteract.IsEnableUpdate())
+            GetFPSCharacterCamera().LookAtFromPosition(GetFPSCharacterCamera().GlobalPosition,
+                LerpCameraLookToInteract.GetTarget());
+
+        // kamera je na ceste zpet k normalu
+        if (isActualOnLerpToNormal)
+        {
+            // jsme jiz tesne v cili ?
+            if (LerpCameraPosToInteract.GetLengthToTarget() < 0.01f)
+            {
+                // vyresetujeme parametry, povolime input a prerusime update lerpu
+                GetFPSCharacterCamera().Position = new Vector3(0.0f, 0.0f, 0.0f);
+                GetFPSCharacterCamera().Rotation = tempCamRot;
+
+                SetInputEnable(true);
+                LerpCameraPosToInteract.EnableUpdate(false);
+                LerpCameraLookToInteract.EnableUpdate(false);
+                isActualOnLerpToNormal = false;
+            }
+        }
+    }
 
 	public bool DetectInteractiveObjectWithCameraRay()
 	{
@@ -206,8 +206,6 @@ public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
 			targetLook,
 			1.0f);
 		LerpCameraLookToInteract.EnableUpdate(true);
-
-
     }
 
 	public void EnableInputsAndCameraToNormal()

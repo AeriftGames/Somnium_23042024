@@ -86,11 +86,28 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
         AddChild(landing_timer);
     }
 
+    public void UpdateInputsProcess(double delta)
+    {
+        // hrac pozaduje lean ?
+
+        if(Input.IsActionPressed("leanLeft") && !Input.IsActionPressed("leanRight"))
+            objectCamera.SetActualLean(ObjectCamera.ELeanType.Left);
+        else if (Input.IsActionPressed("leanRight") && !Input.IsActionPressed("leanLeft"))
+            objectCamera.SetActualLean(ObjectCamera.ELeanType.Right);
+        else
+            objectCamera.SetActualLean(ObjectCamera.ELeanType.Center);
+    }
+
     public override void _Process(double delta)
     {
         base._Process(delta);
+    }
 
-        UpdateInputsProcess((float) delta);
+    public override void _PhysicsProcess(double delta)
+    {
+        base._PhysicsProcess(delta);
+
+        UpdateInputsProcess((float)delta);
 
         // SET CUSTOM LABEL MOVESPEED AND POSITION OF PLAYER
         float a = Mathf.Snapped(ActualMovementSpeed, 0.1f);
@@ -107,42 +124,6 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
         UpdateLandingHeadBobbing((float)delta);
 
         UpdateLeaning((float)delta);
-    }
-
-    public void UpdateInputsProcess(double delta)
-    {
-        // hrac pozaduje lean ?
-
-        if(Input.IsActionPressed("leanLeft") && !Input.IsActionPressed("leanRight"))
-            objectCamera.SetActualLean(ObjectCamera.ELeanType.Left);
-        else if (Input.IsActionPressed("leanRight") && !Input.IsActionPressed("leanLeft"))
-            objectCamera.SetActualLean(ObjectCamera.ELeanType.Right);
-        else
-            objectCamera.SetActualLean(ObjectCamera.ELeanType.Center);
-        /*
-        if (Input.IsActionPressed("leanRight") && !Input.IsActionPressed("leanLeft"))
-        {
-            objectCamera.SetActualLean(ObjectCamera.ELeanType.Right);
-        }
-        else
-            objectCamera.SetActualLean(ObjectCamera.ELeanType.Center);*/
-        /*
-        // hrac pozaduje opustit lean
-
-        if (Input.IsActionJustReleased("leanLeft"))
-        {
-            objectCamera.SetActualLean(ObjectCamera.ELeanType.Center);
-        }
-
-        if(Input.IsActionJustReleased("leanRight"))
-        {
-            objectCamera.SetActualLean(ObjectCamera.ELeanType.Center);
-        }*/
-    }
-
-    public override void _PhysicsProcess(double delta)
-    {
-        base._PhysicsProcess(delta);
     }
 
     public override void EventLanding()
