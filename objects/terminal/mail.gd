@@ -4,7 +4,7 @@ var tween: Tween
 var tween2: Tween
 @export var messages: Array
 var messages_dict: Dictionary
-var button: PackedScene = load("res://terminal_mail_button.tscn")
+var button: PackedScene = load("res://objects/terminal/terminal_mail_button.tscn")
 var selected_message: TerminalMessage
 var children_messages
 var children_selected: bool = false
