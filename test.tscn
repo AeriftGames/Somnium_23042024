@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://beh0igojsem4y"]
+[gd_scene load_steps=2 format=3]
 
-[ext_resource type="PackedScene" uid="uid://c7xaxe3rrq4j0" path="res://terminal.tscn" id="1_eislg"]
+[ext_resource type="PackedScene" path="res://objects/terminal/terminal.tscn" id="1_eislg"]
 
 [node name="Test" type="Node3D"]
 

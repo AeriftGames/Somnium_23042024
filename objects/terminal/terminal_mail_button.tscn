@@ -1,10 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://crbusm7ext3ik"]
+[gd_scene load_steps=6 format=3]
 
 [ext_resource type="StyleBox" uid="uid://cgllaxng4ples" path="res://mail_button_normal.tres" id="1_agb74"]
 [ext_resource type="StyleBox" uid="uid://ccj3yrfxkcidx" path="res://mail_button_hover.tres" id="2_ldebi"]
 [ext_resource type="StyleBox" uid="uid://p1itjw0d76ls" path="res://mail_button_pressed.tres" id="3_wq0ke"]
-[ext_resource type="Script" path="res://terminal_mail_button.gd" id="4_ocw7o"]
-[ext_resource type="AudioStream" uid="uid://bg6wf4kvqhspm" path="res://terminal_button.wav" id="5_5tf6g"]
+[ext_resource type="Script" path="res://objects/terminal/terminal_mail_button.gd" id="4_ocw7o"]
+[ext_resource type="AudioStream" uid="uid://bg6wf4kvqhspm" path="res://objects/terminal/terminal_button.wav" id="5_5tf6g"]
 
 [node name="TerminalMailButton" type="Button"]
 custom_minimum_size = Vector2(270, 45)

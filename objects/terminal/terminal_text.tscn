@@ -1,7 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://b0lph2btbhr73"]
+[gd_scene load_steps=4 format=3]
 
-[ext_resource type="Texture2D" uid="uid://bdstdmc12c6nc" path="res://terminal_text.png" id="1_if3v6"]
-[ext_resource type="Shader" path="res://terminal_text.gdshader" id="2_106bn"]
+[ext_resource type="Texture2D" uid="uid://bdstdmc12c6nc" path="res://objects/terminal/terminal_text.png" id="1_if3v6"]
+[ext_resource type="Shader" path="res://objects/terminal/terminal_text.gdshader" id="2_106bn"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tfrum"]
 shader = ExtResource("2_106bn")

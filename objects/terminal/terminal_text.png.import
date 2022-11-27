@@ -3,8 +3,8 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bdstdmc12c6nc"
-path.s3tc="res://.godot/imported/terminal_text.png-c889de5a584e02d856755bc6a78d2efe.s3tc.ctex"
-path.etc2="res://.godot/imported/terminal_text.png-c889de5a584e02d856755bc6a78d2efe.etc2.ctex"
+path.s3tc="res://.godot/imported/terminal_text.png-24267e3e409a4f497f3248e4e92e6262.s3tc.ctex"
+path.etc2="res://.godot/imported/terminal_text.png-24267e3e409a4f497f3248e4e92e6262.etc2.ctex"
 metadata={
 "imported_formats": ["s3tc", "etc2"],
 "vram_texture": true
@@ -12,8 +12,8 @@ metadata={
 
 [deps]
 
-source_file="res://terminal_text.png"
-dest_files=["res://.godot/imported/terminal_text.png-c889de5a584e02d856755bc6a78d2efe.s3tc.ctex", "res://.godot/imported/terminal_text.png-c889de5a584e02d856755bc6a78d2efe.etc2.ctex"]
+source_file="res://objects/terminal/terminal_text.png"
+dest_files=["res://.godot/imported/terminal_text.png-24267e3e409a4f497f3248e4e92e6262.s3tc.ctex", "res://.godot/imported/terminal_text.png-24267e3e409a4f497f3248e4e92e6262.etc2.ctex"]
 
 [params]
 

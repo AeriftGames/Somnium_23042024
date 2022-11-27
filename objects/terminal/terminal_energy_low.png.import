@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://db6654tpre11r"
-path="res://.godot/imported/terminal_energy_high.png-13c30f6886e437ee38142604b8432c39.ctex"
+uid="uid://c1mif4upp7vls"
+path="res://.godot/imported/terminal_energy_low.png-2bda20530698f6e425e2345a883c4909.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://terminal_energy_high.png"
-dest_files=["res://.godot/imported/terminal_energy_high.png-13c30f6886e437ee38142604b8432c39.ctex"]
+source_file="res://objects/terminal/terminal_energy_low.png"
+dest_files=["res://.godot/imported/terminal_energy_low.png-2bda20530698f6e425e2345a883c4909.ctex"]
 
 [params]
 
