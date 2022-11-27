@@ -1,8 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://b4rlvisoc3le"]
+[gd_scene load_steps=5 format=3]
 
-[ext_resource type="Script" path="res://energy.gd" id="1_n7ich"]
-[ext_resource type="PackedScene" uid="uid://yfsuiht84q67" path="res://energy_node.tscn" id="3_lr28y"]
-[ext_resource type="StyleBox" uid="uid://b77fsed8qvjeb" path="res://mail_button_exit.tres" id="5_1np8v"]
+[ext_resource type="Script" path="res://objects/terminal/energy.gd" id="1_n7ich"]
+[ext_resource type="PackedScene" path="res://objects/terminal/energy_node.tscn" id="3_lr28y"]
+[ext_resource type="StyleBox" uid="uid://b77fsed8qvjeb" path="res://objects/terminal/mail_button_exit.tres" id="5_1np8v"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v312h"]
 bg_color = Color(0.227451, 0.227451, 0.227451, 1)

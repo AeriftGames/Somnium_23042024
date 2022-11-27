@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3]
 
-[ext_resource type="Script" path="res://energy_node.gd" id="1_l1bgl"]
+[ext_resource type="Script" path="res://objects/terminal/energy_node.gd" id="1_l1bgl"]
 [ext_resource type="Texture2D" uid="uid://ddyg63l0qcs1h" path="res://objects/terminal/terminal_energy_medium.tres" id="2_bu2ol"]
 [ext_resource type="AudioStream" uid="uid://bg6wf4kvqhspm" path="res://objects/terminal/terminal_button.wav" id="3_m4icq"]
 [ext_resource type="AudioStream" uid="uid://b0cd3474kbv6t" path="res://objects/terminal/terminal_error.ogg" id="4_ypee7"]

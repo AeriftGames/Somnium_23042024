@@ -1,10 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://cmiugpb60mnxe"]
+[gd_scene load_steps=9 format=3]
 
-[ext_resource type="Script" path="res://mail.gd" id="1_1vpmd"]
+[ext_resource type="Script" path="res://objects/terminal/mail.gd" id="1_1vpmd"]
 [ext_resource type="Resource" uid="uid://c6gq3kfp4uhx7" path="res://custom_resources/message01.tres" id="2_ofik6"]
 [ext_resource type="Resource" path="res://custom_resources/message02.tres" id="3_ow2fe"]
 [ext_resource type="Resource" uid="uid://bkwmcax1wrx2y" path="res://custom_resources/message03.tres" id="4_8sqlw"]
-[ext_resource type="StyleBox" uid="uid://b77fsed8qvjeb" path="res://mail_button_exit.tres" id="5_1np8v"]
+[ext_resource type="StyleBox" uid="uid://b77fsed8qvjeb" path="res://objects/terminal/mail_button_exit.tres" id="5_1np8v"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v312h"]
 bg_color = Color(0.227451, 0.227451, 0.227451, 1)

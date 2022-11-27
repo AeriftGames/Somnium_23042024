@@ -1,7 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://4rc2q4vlvaqy"]
+[gd_scene load_steps=8 format=3]
 
 [ext_resource type="Theme" uid="uid://b4uqkii6sf5dj" path="res://ui/themes/terminal.tres" id="1_37sbg"]
-[ext_resource type="Script" path="res://login.gd" id="1_rwnc4"]
+[ext_resource type="Script" path="res://objects/terminal/input.gd" id="1_wycqq"]
 [ext_resource type="FontFile" uid="uid://b8dfmydyw2bas" path="res://ui/fonts/9801-qMy5.ttf" id="2_euodr"]
 
 [sub_resource type="StyleBox" id="StyleBox_edgaw"]
@@ -25,13 +25,13 @@ packet_data = [[PackedByteArray(1, 118, 111, 114, 98, 105, 115, 0, 0, 0, 0, 2, 6
 granule_positions = PackedInt64Array(0, 0, 4032, 8192, 11584, 16704, 17735)
 sampling_rate = 44100.0
 
-[sub_resource type="AudioStreamOggVorbis" id="AudioStreamOggVorbis_1xq5y"]
+[sub_resource type="AudioStreamOggVorbis" id="AudioStreamOggVorbis_vrwh7"]
 packet_sequence = SubResource("OggPacketSequence_8s2tf")
 
 [node name="Input" type="HBoxContainer"]
 offset_right = 1845.0
 offset_bottom = 50.0
-script = ExtResource("1_rwnc4")
+script = ExtResource("1_wycqq")
 
 [node name="Label" type="Label" parent="."]
 custom_minimum_size = Vector2i(0, 50)
@@ -54,8 +54,6 @@ theme = ExtResource("1_37sbg")
 theme_override_fonts/font = ExtResource("2_euodr")
 theme_override_styles/normal = SubResource("StyleBox_edgaw")
 theme_override_styles/focus = SubResource("StyleBox_hxl32")
-secret = true
-secret_character = "-"
 context_menu_enabled = false
 virtual_keyboard_enabled = false
 shortcut_keys_enabled = false
@@ -66,7 +64,7 @@ caret_blink = true
 caret_mid_grapheme = false
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = SubResource("AudioStreamOggVorbis_1xq5y")
+stream = SubResource("AudioStreamOggVorbis_vrwh7")
 
 [connection signal="text_changed" from="LineEdit" to="." method="_on_line_edit_text_changed"]
 [connection signal="text_submitted" from="LineEdit" to="." method="_on_line_edit_text_submitted"]

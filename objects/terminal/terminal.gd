@@ -14,8 +14,8 @@ extends Control
 @onready var scrollbar: ScrollBar = $Panel/ScrollContainer.get_v_scroll_bar()
 
 var default_text: String
-var input_node: PackedScene = load("res://input.tscn")
-var login_node: PackedScene = load("res://login.tscn")
+var input_node: PackedScene = load("res://objects/terminal/input.tscn")
+var login_node: PackedScene = load("res://objects/terminal/login.tscn")
 var rng = RandomNumberGenerator.new()
 var latest_label: Node
 var boot: Array = ["...",
@@ -35,8 +35,8 @@ var boot: Array = ["...",
 ""]
 var current_state: String
 var states: Array = ["restarting", "value2"]
-var mail_scene: PackedScene = load("res://mail.tscn")
-var energy_scene: PackedScene = load("res://energy.tscn")
+var mail_scene: PackedScene = load("res://objects/terminal/mail.tscn")
+var energy_scene: PackedScene = load("res://objects/terminal/energy.tscn")
 
 func _ready() -> void:
 	default_text = "%s@%s:~$ " % [terminal_name, default_user]
