@@ -6,10 +6,10 @@ signal value_changed(button, state)
 @export var node_name: String
 @export_enum("no", "low", "medium", "high") var current_energy
 
-var no_energy = load("res://terminal_energy.tres")
-var low_energy = load("res://terminal_energy_low.tres")
-var medium_energy = load("res://terminal_energy_medium.tres")
-var high_energy = load("res://terminal_energy_high.tres")
+var no_energy = load("res://objects/terminal/terminal_energy.tres")
+var low_energy = load("res://objects/terminal/terminal_energy_low.tres")
+var medium_energy = load("res://objects/terminal/terminal_energy_medium.tres")
+var high_energy = load("res://objects/terminal/terminal_energy_high.tres")
 var current_enegy_label: String
 var maximum_energy: int = 3
 var locked: bool = false
