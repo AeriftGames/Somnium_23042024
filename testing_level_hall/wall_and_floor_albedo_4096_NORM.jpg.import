@@ -3,21 +3,19 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://ekk12y83nlva"
-path.s3tc="res://.godot/imported/wall_and_floor_albedo_4096_NORM.jpg-89eef9a3eede0a8d8570fdb0c8531455.s3tc.ctex"
-path.etc2="res://.godot/imported/wall_and_floor_albedo_4096_NORM.jpg-89eef9a3eede0a8d8570fdb0c8531455.etc2.ctex"
+path="res://.godot/imported/wall_and_floor_albedo_4096_NORM.jpg-89eef9a3eede0a8d8570fdb0c8531455.ctex"
 metadata={
-"imported_formats": ["s3tc", "etc2"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://testing_level_hall/wall_and_floor_albedo_4096_NORM.jpg"
-dest_files=["res://.godot/imported/wall_and_floor_albedo_4096_NORM.jpg-89eef9a3eede0a8d8570fdb0c8531455.s3tc.ctex", "res://.godot/imported/wall_and_floor_albedo_4096_NORM.jpg-89eef9a3eede0a8d8570fdb0c8531455.etc2.ctex"]
+dest_files=["res://.godot/imported/wall_and_floor_albedo_4096_NORM.jpg-89eef9a3eede0a8d8570fdb0c8531455.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/bptc_ldr=0

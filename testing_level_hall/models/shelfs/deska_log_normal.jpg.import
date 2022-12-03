@@ -3,21 +3,19 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://xlfl5p7uedmu"
-path.s3tc="res://.godot/imported/deska_log_normal.jpg-9c751d1dcedbbcf9d7382bcfa4d99f69.s3tc.ctex"
-path.etc2="res://.godot/imported/deska_log_normal.jpg-9c751d1dcedbbcf9d7382bcfa4d99f69.etc2.ctex"
+path="res://.godot/imported/deska_log_normal.jpg-9c751d1dcedbbcf9d7382bcfa4d99f69.ctex"
 metadata={
-"imported_formats": ["s3tc", "etc2"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://testing_level_hall/models/shelfs/deska_log_normal.jpg"
-dest_files=["res://.godot/imported/deska_log_normal.jpg-9c751d1dcedbbcf9d7382bcfa4d99f69.s3tc.ctex", "res://.godot/imported/deska_log_normal.jpg-9c751d1dcedbbcf9d7382bcfa4d99f69.etc2.ctex"]
+dest_files=["res://.godot/imported/deska_log_normal.jpg-9c751d1dcedbbcf9d7382bcfa4d99f69.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/bptc_ldr=0
