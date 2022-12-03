@@ -1,15 +1,14 @@
-[gd_scene load_steps=45 format=3 uid="uid://m1vofofujbhr"]
+[gd_scene load_steps=46 format=3 uid="uid://c43oig653gcvy"]
 
 [ext_resource type="ArrayOccluder3D" uid="uid://c65wc0yeg3cak" path="res://levels/world_level_rooms/worldlevel_rooms_test.occ" id="1_48aky"]
 [ext_resource type="Script" path="res://levels/worldlevel_meteor.gd" id="1_0375g"]
 [ext_resource type="PackedScene" uid="uid://ck8mt4y4gfqmk" path="res://placeholders/modular_walls/ground_large.tscn" id="1_vcfbv"]
-[ext_resource type="PackedScene" uid="uid://cduja0j6irmwy" path="res://floor.tscn" id="3_4u6ac"]
+[ext_resource type="PackedScene" path="res://testing_oalar/floor.tscn" id="3_4u6ac"]
 [ext_resource type="PackedScene" uid="uid://clgsga4ty4mrp" path="res://placeholders/modular_walls/wall_normal.tscn" id="4_yawcu"]
 [ext_resource type="PackedScene" uid="uid://crjyudrh814yq" path="res://placeholders/modular_walls/wall_small_corner_simple_l.tscn" id="5_assn5"]
 [ext_resource type="PackedScene" uid="uid://0kvn14vfui6b" path="res://placeholders/modular_walls/wall_small.tscn" id="6_hsgco"]
 [ext_resource type="PackedScene" uid="uid://larq6fdfhjoe" path="res://placeholders/modular_walls/wall_doors_conic.tscn" id="7_n62yw"]
 [ext_resource type="Material" uid="uid://btskthdiqqlrw" path="res://placeholders/modular_walls/mat/mat_wall2.tres" id="8_5fvmk"]
-[ext_resource type="PackedScene" uid="uid://d0lsv5mukf40p" path="res://wall.tscn" id="8_he6l8"]
 [ext_resource type="AudioStream" uid="uid://ngmb6mrvsbqc" path="res://audio/audio_streams/613738__punneedsounds__amb-ost1.mp3" id="11_28bu6"]
 [ext_resource type="PackedScene" uid="uid://bys0s78vbryfp" path="res://objects/light/light_celling_long.tscn" id="11_er6ue"]
 [ext_resource type="Texture2D" uid="uid://0n0dx7ov4qi6" path="res://textures/blood_decal_test.png" id="11_tv71u"]
@@ -34,8 +33,10 @@
 [ext_resource type="PackedScene" uid="uid://cokykrpxx7lmy" path="res://objects/battery/battery.tscn" id="31_rjyuk"]
 [ext_resource type="PackedScene" uid="uid://c7ohsu8vdlks6" path="res://objects/misc/food_can/food_can.tscn" id="32_am5io"]
 [ext_resource type="PackedScene" uid="uid://dhg3c333pnd8n" path="res://objects/battery/batery_new.tscn" id="33_ak0xq"]
-[ext_resource type="PackedScene" uid="uid://dsqqgpmcwgjvg" path="res://chemlight.tscn" id="34_pq7dj"]
-[ext_resource type="PackedScene" uid="uid://cmso6nb03kmgl" path="res://box2.glb" id="37_s7lcx"]
+[ext_resource type="PackedScene" uid="uid://dsqqgpmcwgjvg" path="res://testing_oalar/chemlight.tscn" id="34_pq7dj"]
+[ext_resource type="PackedScene" uid="uid://cmso6nb03kmgl" path="res://testing_oalar/box2.glb" id="37_s7lcx"]
+[ext_resource type="PackedScene" path="res://testing_oalar/poster.tscn" id="37_xticy"]
+[ext_resource type="PackedScene" uid="uid://bidh1jafqnmu2" path="res://testing_oalar/bunker.glb" id="38_fjt1y"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_nrkwj"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -246,15 +247,6 @@ transform = Transform3D(4.37114e-08, 0, -0.5, 0, 0.5, 0, 0.5, 0, 4.37114e-08, -3
 [node name="wall_small5" parent="LevelGeometry/Walls" instance=ExtResource("6_hsgco")]
 transform = Transform3D(4.37114e-08, 0, -0.5, 0, 0.5, 0, 0.5, 0, 4.37114e-08, -3, 0, -8)
 ignore_occlusion_culling = true
-
-[node name="wall" parent="LevelGeometry/Walls" instance=ExtResource("8_he6l8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.6, 1.8, -6.1)
-
-[node name="wall3" parent="LevelGeometry/Walls" instance=ExtResource("8_he6l8")]
-transform = Transform3D(2.98023e-08, 0, -1, 0, 1, 0, 1, 0, 2.98023e-08, -10, 1.8, -8.1)
-
-[node name="wall2" parent="LevelGeometry/Walls" instance=ExtResource("8_he6l8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.6, 1.8, -2.38136)
 
 [node name="Ceiling" type="Node3D" parent="LevelGeometry"]
 
@@ -592,6 +584,12 @@ transform = Transform3D(0.0121326, 0.0969374, 0.0213525, 0.0992258, -0.012419, 1
 
 [node name="box2" parent="." instance=ExtResource("37_s7lcx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.14548, 0.912764, 2.65053)
+
+[node name="poster" parent="." instance=ExtResource("37_xticy")]
+transform = Transform3D(-0.000185604, 0.998798, 0.0490063, 0.00378276, 0.0490067, -0.998791, -0.999993, 0, -0.00378731, -9.26157, 1.28378, 4.874)
+
+[node name="bunker" parent="." instance=ExtResource("38_fjt1y")]
+transform = Transform3D(-0.0206982, 0, 0.999786, 0, 1, 0, -0.999786, 0, -0.0206982, -9.61983, 1.48337, -1.75168)
 
 [editable path="LevelGeometry/Grounds/floor3"]
 [editable path="cabinet_small3"]

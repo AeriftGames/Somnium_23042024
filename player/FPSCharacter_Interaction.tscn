@@ -58,7 +58,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="UseLabel" type="Label" parent="BasicHud/Crosshair" index="0"]
-custom_minimum_size = Vector2i(30, 0)
+custom_minimum_size = Vector2(30, 0)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -105,7 +105,7 @@ theme_override_font_sizes/font_size = 25
 text = "FPS: "
 
 [node name="CustomLabelsVBox" type="VBoxContainer" parent="DebugHud" index="2"]
-custom_minimum_size = Vector2i(700, 600)
+custom_minimum_size = Vector2(700, 600)
 offset_left = 5.0
 offset_top = 49.0
 offset_right = 949.0
@@ -114,14 +114,14 @@ metadata/_edit_lock_ = true
 
 [node name="CLLabel0" type="Label" parent="DebugHud/CustomLabelsVBox" index="0"]
 visible = false
-custom_minimum_size = Vector2i(700, 30)
+custom_minimum_size = Vector2(700, 30)
 offset_right = 944.0
 offset_bottom = 30.0
 text = "CL[0]"
 
 [node name="CLLabel1" type="Label" parent="DebugHud/CustomLabelsVBox" index="1"]
 visible = false
-custom_minimum_size = Vector2i(700, 30)
+custom_minimum_size = Vector2(700, 30)
 offset_top = 34.0
 offset_right = 944.0
 offset_bottom = 64.0
@@ -129,7 +129,7 @@ text = "CL[1]"
 
 [node name="CLLabel2" type="Label" parent="DebugHud/CustomLabelsVBox" index="2"]
 visible = false
-custom_minimum_size = Vector2i(700, 30)
+custom_minimum_size = Vector2(700, 30)
 offset_top = 68.0
 offset_right = 944.0
 offset_bottom = 98.0
@@ -138,7 +138,7 @@ max_lines_visible = 1
 
 [node name="CLLabel3" type="Label" parent="DebugHud/CustomLabelsVBox" index="3"]
 visible = false
-custom_minimum_size = Vector2i(700, 30)
+custom_minimum_size = Vector2(700, 30)
 offset_top = 102.0
 offset_right = 944.0
 offset_bottom = 132.0
@@ -146,7 +146,7 @@ text = "CL(3)"
 
 [node name="CLLabel4" type="Label" parent="DebugHud/CustomLabelsVBox" index="4"]
 visible = false
-custom_minimum_size = Vector2i(700, 30)
+custom_minimum_size = Vector2(700, 30)
 offset_top = 136.0
 offset_right = 944.0
 offset_bottom = 166.0
@@ -154,7 +154,7 @@ text = "CL(4)"
 
 [node name="CLLabel5" type="Label" parent="DebugHud/CustomLabelsVBox" index="5"]
 visible = false
-custom_minimum_size = Vector2i(700, 30)
+custom_minimum_size = Vector2(700, 30)
 offset_top = 170.0
 offset_right = 944.0
 offset_bottom = 200.0
@@ -162,7 +162,7 @@ text = "CL(5)"
 
 [node name="CLLabel6" type="Label" parent="DebugHud/CustomLabelsVBox" index="6"]
 visible = false
-custom_minimum_size = Vector2i(700, 30)
+custom_minimum_size = Vector2(700, 30)
 offset_top = 204.0
 offset_right = 944.0
 offset_bottom = 234.0
@@ -170,7 +170,7 @@ text = "CL(6)"
 
 [node name="CLLabel7" type="Label" parent="DebugHud/CustomLabelsVBox" index="7"]
 visible = false
-custom_minimum_size = Vector2i(700, 30)
+custom_minimum_size = Vector2(700, 30)
 offset_top = 238.0
 offset_right = 944.0
 offset_bottom = 268.0
@@ -178,7 +178,7 @@ text = "CL(7)"
 
 [node name="CLLabel8" type="Label" parent="DebugHud/CustomLabelsVBox" index="8"]
 visible = false
-custom_minimum_size = Vector2i(700, 30)
+custom_minimum_size = Vector2(700, 30)
 offset_top = 272.0
 offset_right = 944.0
 offset_bottom = 302.0
@@ -186,14 +186,14 @@ text = "CL(8)"
 
 [node name="CLLabel9" type="Label" parent="DebugHud/CustomLabelsVBox" index="9"]
 visible = false
-custom_minimum_size = Vector2i(700, 30)
+custom_minimum_size = Vector2(700, 30)
 offset_top = 306.0
 offset_right = 944.0
 offset_bottom = 336.0
 text = "CL(9)"
 
 [node name="OptionsPanel" type="Panel" parent="DebugHud" index="3"]
-custom_minimum_size = Vector2i(300, 170)
+custom_minimum_size = Vector2(300, 170)
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
@@ -212,7 +212,7 @@ horizontal_alignment = 1
 metadata/_edit_lock_ = true
 
 [node name="HSeparator" type="HSeparator" parent="DebugHud/OptionsPanel/NadpisLabel" index="0"]
-custom_minimum_size = Vector2i(250, 0)
+custom_minimum_size = Vector2(250, 0)
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -249,7 +249,7 @@ theme_override_font_sizes/font_size = 15
 text = "Show Performance"
 
 [node name="HSeparator" type="HSeparator" parent="DebugHud/OptionsPanel/VBoxContainer" index="2"]
-custom_minimum_size = Vector2i(250, 0)
+custom_minimum_size = Vector2(250, 0)
 offset_top = 68.0
 offset_right = 276.0
 offset_bottom = 72.0
@@ -327,7 +327,7 @@ theme_override_font_sizes/font_size = 15
 text = "CustomLabel 9"
 
 [node name="HSeparator2" type="HSeparator" parent="DebugHud/OptionsPanel/VBoxContainer" index="13"]
-custom_minimum_size = Vector2i(250, 0)
+custom_minimum_size = Vector2(250, 0)
 offset_top = 416.0
 offset_right = 276.0
 offset_bottom = 420.0
@@ -342,7 +342,7 @@ theme_override_font_sizes/font_size = 15
 text = "Enable worldlevel occlusion cull"
 
 [node name="HSeparator3" type="HSeparator" parent="DebugHud/OptionsPanel/VBoxContainer" index="15"]
-custom_minimum_size = Vector2i(250, 0)
+custom_minimum_size = Vector2(250, 0)
 offset_top = 458.0
 offset_right = 276.0
 offset_bottom = 462.0
@@ -357,7 +357,7 @@ text = "Report an issue"
 script = ExtResource("6_nbvpx")
 
 [node name="Label" type="Label" parent="DebugHud/OptionsPanel" index="2"]
-custom_minimum_size = Vector2i(150, 0)
+custom_minimum_size = Vector2(150, 0)
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -391,27 +391,27 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="DrawCallsLabel" type="Label" parent="DebugHud/PerformancePanel/VBoxContainer" index="0"]
-custom_minimum_size = Vector2i(250, 30)
+custom_minimum_size = Vector2(250, 30)
 offset_right = 278.0
 offset_bottom = 30.0
 text = "draw calls: "
 
 [node name="ObjectsLabel" type="Label" parent="DebugHud/PerformancePanel/VBoxContainer" index="1"]
-custom_minimum_size = Vector2i(250, 30)
+custom_minimum_size = Vector2(250, 30)
 offset_top = 34.0
 offset_right = 278.0
 offset_bottom = 64.0
 text = "objects:"
 
 [node name="PrimitivesLabel" type="Label" parent="DebugHud/PerformancePanel/VBoxContainer" index="2"]
-custom_minimum_size = Vector2i(250, 30)
+custom_minimum_size = Vector2(250, 30)
 offset_top = 68.0
 offset_right = 278.0
 offset_bottom = 98.0
 text = "primitives:"
 
 [node name="VideoMemoryLabel" type="Label" parent="DebugHud/PerformancePanel/VBoxContainer" index="3"]
-custom_minimum_size = Vector2i(250, 30)
+custom_minimum_size = Vector2(250, 30)
 offset_top = 102.0
 offset_right = 278.0
 offset_bottom = 132.0
