@@ -1,0 +1,12 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://dukq5rl0gyqbj"]
+
+[ext_resource type="Texture2D" uid="uid://b3vivyilfgi5" path="res://level_hall/round_ceil_allround_color.jpg" id="1_nrcu5"]
+[ext_resource type="Texture2D" uid="uid://b7pihoupbke8" path="res://level_hall/round_ceil_allround_color_NORM.png" id="2_arvj5"]
+
+[resource]
+albedo_texture = ExtResource("1_nrcu5")
+metallic = 0.6
+metallic_specular = 0.01
+roughness = 0.4
+normal_enabled = true
+normal_texture = ExtResource("2_arvj5")
