@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="PackedScene" path="res://objects/terminal/terminal.tscn" id="1_eislg"]
+
+[node name="Test" type="Node3D"]
+
+[node name="SubViewport" type="SubViewport" parent="."]
+handle_input_locally = false
+
+[node name="terminal" parent="SubViewport" instance=ExtResource("1_eislg")]

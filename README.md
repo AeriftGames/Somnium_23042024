@@ -1,5 +1,5 @@
 # Somnium Prototype
-Herní prototyp vytvořený pomocí herního engine *Godot 4.**
+Herní prototyp vytvořený pomocí herního engine *Godot 4 beta 3.**
 
 <p align="center">
   <img src="https://github.com/AeriftGames/Somnium/blob/develop/docs/img/project_logo.png" alt="Ukázka"/>

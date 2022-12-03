@@ -1,0 +1,7 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://b4uqkii6sf5dj"]
+
+[ext_resource type="FontFile" uid="uid://b8dfmydyw2bas" path="res://ui/fonts/9801-qMy5.ttf" id="1_3a56i"]
+
+[resource]
+default_font = ExtResource("1_3a56i")
+default_font_size = 30

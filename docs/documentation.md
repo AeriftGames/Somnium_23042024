@@ -8,10 +8,11 @@ Technická dokumentace k projektu **Somnium Prototype**
   - [Souborová struktura projektu](#souborov-struktura-projektu)
   - [Jmenová konvence](#jmenov-konvence)
 - [Herní mechanismy a jejich detailní popisy](#hern-mechanismy-a-jejich-detailn-popisy)
-  - [MessageObject](#messageobject)
-  - [FPSCharacter](#fpscharacter)
-  - [GameMaster](#gamemaster)
+  - [**MessageObject**](#messageobject)
+  - [**FPSCharacter**](#fpscharacter)
+  - [**GameMaster**](#gamemaster)
   - [item_pickup](#item_pickup)
+  - [item_use](#item_use)
 - [Groups](#groups)
   - [template_group](#template_group)
 - [Collision layers](#collision-layers)
@@ -303,7 +304,39 @@ Viz. obrázek:
 5. Následně vytvoříme nový node, který bude obsahovat kód s logikou, která se provede po sebrání itemu. Tento node je 
 je potřeba vybrat v proměnné **use_node**
 6. Use node musí obsahovat funkcí use(), která je zavoláná po sebrání itemu.
+7. Jako poslední připojíme pod nejvyšší node instanci core systému **interactive_object**, který se nachází v
+`core_systems\interactive_system`
 
+## item_use
+item_use je **core_systém** nacházející se v `core_systems\item_use`. Slouží jako základ pro logiku aktivace/použití
+určité věci hráčem.
+
+### Popis
+Systém je dělán tak, aby jej stačilo jen připojit k itemu, u kterého chceme povolit pick up. A následně nastavit
+proměnné pro doladění potřebného chování (popsáno v kapitole) [Jak použít](#Jak-použít). Většina proměnných má
+defaultní hodnotu, ale některé no. Pro správné fungování by mělo být všech not null.
+
+### Jak použít
+Použití item_use je jednoduché. Stačí provést následující kroky:
+1. Vytvořit scénu, v které chceme logiku use provést. Může jít například o scénu vytvořenou rovnou z *.glb* souboru
+pomocí `New Inherited scene` (pravé tlačítko myši na *.glb* soubor)
+2. K parenté této scény přiřadíme script nacházející se v `core_systems\item_use\item_use.gd`
+3. Po připojení odoznačíme parent a znovu označíme. Tím, se aktualizuje inspector, který bude obsahovat nové proměnné.
+Viz. obrázek:
+![Ukázka](https://github.com/AeriftGames/Somnium/blob/develop/docs/img/item_pickup_01.PNG)
+4. Zde **musíme** nastavit všechny proměnné. Bez nich nebude logika fungovat správně.
+
+| Name                  | Description                                                                                                 | Type        | Default value |
+|-----------------------|-------------------------------------------------------------------------------------------------------------|-------------|---------------|
+| item_interaction_name | Jméno typu akce, které se zobrazí hráči po najetí na item. Mělo by začínat velkým písmenem.                 | String      | Open          |
+| item_name             | Jméno itemu, které se zobrazí hčáti po najetí na item. Mělo by začínat malým písmenem.                      | String      | drawer        |
+| use_node              | Node s připojeným scriptem, který **musí** obsahovat use() funkci. Tato funkce je zavolána po použití itemu | Node        | null          |
+| sfx                   | Zvukový efekt, který se přehraje při aktivaci itemu.                                                        | AudioStream | null          |
+
+5. Následně vytvoříme nový node, který bude obsahovat kód s logikou, která se provede po sebrání itemu. Tento node je je potřeba vybrat v proměnné use_node
+6. Use node musí obsahovat funkcí use(), která je zavoláná po sebrání itemu.
+7. Jako poslední připojíme pod nejvyšší node instanci core systému **interactive_object**, který se nachází v
+`core_systems\interactive_system`
 
 # Groups
 Tato kapitola popisuje veškeré groups využité v projektu

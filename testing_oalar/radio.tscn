@@ -1,0 +1,39 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://testing_oalar/radio.gd" id="1_cr8jf"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ht6yi"]
+
+[node name="Radio" type="Node3D"]
+script = ExtResource("1_cr8jf")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.3, 0, 0, 0)
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="CSGBox3D"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0.400343, 0.366836, 0.572674)
+
+[node name="Area3D" type="Area3D" parent="CSGBox3D/CSGSphere3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CSGBox3D/CSGSphere3D/Area3D"]
+shape = SubResource("SphereShape3D_ht6yi")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="CSGBox3D"]
+transform = Transform3D(0.06, 0, 0, 0, -8.74228e-09, -0.06, 0, 0.2, -2.62268e-09, -0.333551, 0, 0.642376)
+
+[node name="CSGCylinder3D4" type="CSGCylinder3D" parent="CSGBox3D/CSGCylinder3D"]
+transform = Transform3D(1, 0, 0, 0, -0.187518, -0.294678, 0, 3.2742, -0.187518, 0.154456, 0, -1.74806)
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="CSGBox3D"]
+transform = Transform3D(0.06, 0, 0, 0, -8.74228e-09, -0.06, 0, 0.2, -2.62268e-09, 0.258296, 0, 0.642376)
+
+[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="CSGBox3D/CSGCylinder3D2"]
+transform = Transform3D(1, 0, 0, 0, -0.187518, -0.294678, 0, 3.2742, -0.187518, 0, 0, -1.74807)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.07845)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 2)
+
+[connection signal="input_event" from="CSGBox3D/CSGSphere3D/Area3D" to="." method="_onoff_pressed"]

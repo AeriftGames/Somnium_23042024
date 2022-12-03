@@ -1,0 +1,99 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://objects/terminal/terminal.gd" id="1_45i5t"]
+[ext_resource type="Shader" path="res://objects/terminal/terminal.gdshader" id="2_dnmio"]
+[ext_resource type="Theme" uid="uid://b4uqkii6sf5dj" path="res://ui/themes/terminal.tres" id="2_qe1e8"]
+[ext_resource type="AudioStream" uid="uid://bv7h54tf5nvg" path="res://testing_oalar/crtstart.wav" id="4_voaok"]
+[ext_resource type="AudioStream" uid="uid://b3kuei7dkqhty" path="res://testing_oalar/crt.ogg" id="5_1giw6"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_iq6ul"]
+shader = ExtResource("2_dnmio")
+shader_parameter/aberration = 0.01
+shader_parameter/brightness = 1.4
+shader_parameter/clip_warp = false
+shader_parameter/discolor = true
+shader_parameter/distort_intensity = 0.017
+shader_parameter/grille_opacity = 0.0
+shader_parameter/noise_opacity = 0.4
+shader_parameter/noise_speed = 5.0
+shader_parameter/overlay = false
+shader_parameter/pixelate = true
+shader_parameter/resolution = Vector2(1920, 1080)
+shader_parameter/roll = true
+shader_parameter/roll_size = 4.0
+shader_parameter/roll_speed = 3.0
+shader_parameter/roll_variation = 1.8
+shader_parameter/scanlines_opacity = 0.156
+shader_parameter/scanlines_width = 0.093
+shader_parameter/static_noise_intensity = 0.06
+shader_parameter/vignette_intensity = 0.4
+shader_parameter/vignette_opacity = 0.5
+shader_parameter/warp_amount = 0.134
+
+[node name="terminal" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme = ExtResource("2_qe1e8")
+script = ExtResource("1_45i5t")
+password_locked = true
+started = true
+
+[node name="Panel" type="Panel" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 28.0
+offset_right = 28.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/ScrollContainer"]
+mouse_filter = 2
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="Window" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_iq6ul")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="AudioCRTStart" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_voaok")
+
+[node name="AudioCRTLoop" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_1giw6")
+
+[connection signal="finished" from="AudioCRTStart" to="." method="_on_audio_crt_start_finished"]

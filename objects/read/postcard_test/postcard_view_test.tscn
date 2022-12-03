@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://dndmpo7rgq1ls"]
+
+[ext_resource type="PackedScene" uid="uid://du6b86ct1x1de" path="res://objects/read/postcard_test/postcard.glb" id="1_byyqm"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_73ug3"]
+size = Vector3(1, 1, 1.03839)
+
+[node name="postcard_view_test" instance=ExtResource("1_byyqm")]
+
+[node name="postcard2" parent="." index="0"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
+
+[node name="Area3D" type="Area3D" parent="postcard2" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="postcard2/Area3D" index="0"]
+transform = Transform3D(-0.454835, 0, -4.05226e-07, 0, 0.624798, 0, 1.19289e-07, 0, -1.54508, 4.63215e-08, 0, 1.05971)
+shape = SubResource("BoxShape3D_73ug3")

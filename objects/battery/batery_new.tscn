@@ -1,0 +1,31 @@
+[gd_scene load_steps=8 format=3 uid="uid://dhg3c333pnd8n"]
+
+[ext_resource type="PackedScene" uid="uid://byqahiy2lfr15" path="res://objects/battery/batery_new.glb" id="1_34gfl"]
+[ext_resource type="Script" path="res://core_systems/item_pickup/item_pickup.gd" id="2_vk728"]
+[ext_resource type="Texture2D" uid="uid://brhwxushjmafu" path="res://objects/battery/Battery Metallic.png" id="3_6egco"]
+[ext_resource type="AudioStream" uid="uid://dl0t67nmxyl05" path="res://objects/battery/pickup.wav" id="3_iyy8h"]
+[ext_resource type="PackedScene" uid="uid://dbnevtbu1g7uy" path="res://core_systems/interactive_system/interactive_object.tscn" id="4_mdnoa"]
+[ext_resource type="Script" path="res://objects/battery/battery_use.gd" id="5_hwaos"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0bpb1"]
+albedo_texture = ExtResource("3_6egco")
+
+[node name="batery_new" node_paths=PackedStringArray("node_interact", "use_node") instance=ExtResource("1_34gfl")]
+script = ExtResource("2_vk728")
+node_interact = NodePath("interactive_object")
+use_node = NodePath("use")
+sfx = ExtResource("3_iyy8h")
+
+[node name="Battery" parent="." index="0"]
+transform = Transform3D(0.02, 0, 0, 0, 0.02, 0, 0, 0, 0.02, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_0bpb1")
+
+[node name="interactive_object" parent="." index="1" instance=ExtResource("4_mdnoa")]
+
+[node name="CollisionShape3D" parent="interactive_object/StaticBody3D" index="0"]
+transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0.0101934, 0)
+
+[node name="use" type="Node3D" parent="." index="2"]
+script = ExtResource("5_hwaos")
+
+[editable path="interactive_object"]
