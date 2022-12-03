@@ -1,22 +1,17 @@
-[gd_scene load_steps=19 format=3 uid="uid://db106vi7q6idt"]
+[gd_scene load_steps=16 format=3 uid="uid://bpim883jvt5px"]
 
+[ext_resource type="ArrayOccluder3D" uid="uid://bcinbb53h4cw1" path="res://levels/worldlevel_hall/worldlevel_hall.occ" id="1_tib7r"]
 [ext_resource type="PackedScene" uid="uid://ck8mt4y4gfqmk" path="res://placeholders/modular_walls/ground_large.tscn" id="2_yutu1"]
 [ext_resource type="PackedScene" uid="uid://bet3idvc4fg0n" path="res://placeholders/PlayerStart.tscn" id="3_17trl"]
-[ext_resource type="PackedScene" uid="uid://ipic8k4uwyqr" path="res://testing/wardrobe_small.tscn" id="4_quipm"]
-[ext_resource type="PackedScene" uid="uid://cfm6rrc0307u4" path="res://level_hall/room_hall_final_1.tscn" id="5_vx6ur"]
-[ext_resource type="PackedScene" uid="uid://c2w2nvkxq02ya" path="res://testing/wardrobe_rdoor_small.tscn" id="5_wm3dg"]
-[ext_resource type="PackedScene" uid="uid://cqkp3w71b6y6i" path="res://level_hall/floor_deckel.tscn" id="6_txd48"]
+[ext_resource type="PackedScene" path="res://testing_level_hall/floor_deckel.tscn" id="6_txd48"]
 [ext_resource type="AudioStream" uid="uid://c22q66lwj2uvk" path="res://audio/audio_streams/510485__lydmakeren__industrial-hall-ambience.wav" id="7_nu33b"]
-[ext_resource type="PackedScene" uid="uid://tni085u1ae3u" path="res://level_hall/new_items/lamp_2.tscn" id="8_fpdih"]
-[ext_resource type="PackedScene" uid="uid://c0pmjbtnjp0fu" path="res://placeholders/PhysicsItems/physic_item_gas_tank_small.tscn" id="10_bmfki"]
-[ext_resource type="PackedScene" uid="uid://d15mj3uauenig" path="res://placeholders/PhysicsItems/physic_item_gas_tank_medium.tscn" id="11_6ckcu"]
-[ext_resource type="PackedScene" uid="uid://buu2cgiwa1lf4" path="res://level_hall/hall_test.tscn" id="11_7un85"]
-[ext_resource type="PackedScene" uid="uid://x5806xbfanv1" path="res://level_hall/models/shelfs/shelf_big_back.tscn" id="12_b5x1m"]
-[ext_resource type="PackedScene" uid="uid://bocyb7fj086k7" path="res://level_hall/models/workbench/workbench.tscn" id="13_6juqy"]
-[ext_resource type="PackedScene" uid="uid://bs3ek0h3v12dc" path="res://testing/drawer_table.tscn" id="14_07anx"]
-
-[sub_resource type="BoxOccluder3D" id="BoxOccluder3D_lth2p"]
-size = Vector3(100, 100, 100)
+[ext_resource type="PackedScene" path="res://testing_level_hall/new_items/lamp_2.tscn" id="8_fpdih"]
+[ext_resource type="PackedScene" path="res://placeholders/PhysicsItems/physic_item_gas_tank_small.tscn" id="10_bmfki"]
+[ext_resource type="PackedScene" path="res://placeholders/PhysicsItems/physic_item_gas_tank_medium.tscn" id="11_6ckcu"]
+[ext_resource type="PackedScene" uid="uid://bqesc0jyopdm7" path="res://testing_level_hall/hall_test.tscn" id="11_7un85"]
+[ext_resource type="PackedScene" uid="uid://cdaqxq0d8qgv3" path="res://testing_stuff_kaen/wardrobe_big.tscn" id="12_6qkl0"]
+[ext_resource type="PackedScene" path="res://testing_level_hall/models/shelfs/shelf_big_back.tscn" id="12_b5x1m"]
+[ext_resource type="PackedScene" uid="uid://blgh0y158pkqq" path="res://testing_level_hall/models/workbench/workbench.tscn" id="13_6juqy"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_w3cwh"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -31,7 +26,7 @@ background_energy_multiplier = 0.2
 sky = SubResource("Sky_rxtxe")
 tonemap_mode = 3
 ssao_enabled = true
-ssao_radius = 2.24
+ssao_radius = 2.4
 ssao_intensity = 4.41
 ssao_detail = 1.14
 ssao_horizon = 1.0
@@ -49,7 +44,7 @@ volumetric_fog_ambient_inject = 1.0
 
 [node name="worldlevel_occluderculling" type="OccluderInstance3D" parent="."]
 visible = false
-occluder = SubResource("BoxOccluder3D_lth2p")
+occluder = ExtResource("1_tib7r")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_p3qlj")
@@ -71,10 +66,6 @@ transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 2, -2, 0, -2)
 
 [node name="PlayerStart" parent="." instance=ExtResource("3_17trl")]
 transform = Transform3D(0.11277, 0, 0.993621, 0, 1, 0, -0.993621, 0, 0.11277, 0.15591, 0, 2.99104)
-
-[node name="room_hall_final1" parent="." instance=ExtResource("5_vx6ur")]
-transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 0, 0, 0)
-visible = false
 
 [node name="Stuff" type="Node3D" parent="."]
 metadata/_edit_lock_ = true
@@ -127,16 +118,6 @@ transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, -1.31393, 0, 3.92358
 [node name="floor_deckel004" parent="Stuff" instance=ExtResource("6_txd48")]
 transform = Transform3D(0.584487, 0, 0.469973, 0, 0.75, 0, -0.469973, 0, 0.584487, -1.19727, 0.0389515, -3.14879)
 
-[node name="Wardrobe_small" parent="Stuff" instance=ExtResource("4_quipm")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.908584, 0, -0.104787)
-
-[node name="Wardrobe_rdoor_small" parent="Stuff/Wardrobe_small" instance=ExtResource("5_wm3dg")]
-
-[node name="Wardrobe_small2" parent="Stuff" instance=ExtResource("4_quipm")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.908584, 0, 0.477347)
-
-[node name="Wardrobe_rdoor_small" parent="Stuff/Wardrobe_small2" instance=ExtResource("5_wm3dg")]
-
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_nu33b")
 volume_db = 5.448
@@ -147,72 +128,51 @@ transform = Transform3D(-0.999349, 0, -0.036068, 0, 1, 0, 0.036068, 0, -0.999349
 
 [node name="OmniLight3D2" type="OmniLight3D" parent="lamp2"]
 transform = Transform3D(-0.999349, -0.00908128, 0.0349061, 0, 0.967784, 0.251782, -0.036068, 0.251618, -0.967154, 0, 0, 0)
-light_energy = 0.4
-light_indirect_energy = 12.0
+light_energy = 0.5
+light_indirect_energy = 10.0
 light_volumetric_fog_energy = 3.0
 shadow_enabled = true
 omni_range = 20.0
 metadata/_edit_lock_ = true
 
-[node name="PhysicItem_gas_tank_small" parent="." instance=ExtResource("10_bmfki")]
-transform = Transform3D(0.035196, 0.997955, 0.0533661, 0, 0.0533991, -0.998573, -0.99938, 0.0351458, 0.00187944, 0.936144, 0.177734, -3.20457)
-
-[node name="PhysicItem_gas_tank_small2" parent="." instance=ExtResource("10_bmfki")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.30228, 0, -8.23251)
-
-[node name="PhysicItem_gas_tank_small7" parent="." instance=ExtResource("10_bmfki")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.09704, 0.957959, 1.46636)
-
-[node name="PhysicItem_gas_tank_small8" parent="." instance=ExtResource("10_bmfki")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.79164, 0.957959, 1.46636)
-
-[node name="PhysicItem_gas_tank_small9" parent="." instance=ExtResource("10_bmfki")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.90883, 0.957959, 1.72722)
-
-[node name="PhysicItem_gas_tank_small11" parent="." instance=ExtResource("10_bmfki")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.24599, 0.345702, 2.15312)
-
-[node name="PhysicItem_gas_tank_small10" parent="." instance=ExtResource("10_bmfki")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.33343, 0.840578, 1.72722)
-
-[node name="PhysicItem_gas_tank_small13" parent="." instance=ExtResource("10_bmfki")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -1.36865, 0.812303, -1.25654)
-
-[node name="PhysicItem_gas_tank_small14" parent="." instance=ExtResource("10_bmfki")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -1.36865, 0.812303, -1.56194)
-
-[node name="PhysicItem_gas_tank_small15" parent="." instance=ExtResource("10_bmfki")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -1.10779, 0.812303, -1.44475)
-
-[node name="PhysicItem_gas_tank_small3" parent="." instance=ExtResource("11_6ckcu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.29528, 0.0384793, 0.926036)
-
-[node name="PhysicItem_gas_tank_small5" parent="." instance=ExtResource("11_6ckcu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.26805, 0.0384793, -7.99679)
-
-[node name="PhysicItem_gas_tank_small6" parent="." instance=ExtResource("11_6ckcu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.26805, 0.0384793, -8.39054)
-
-[node name="PhysicItem_gas_tank_small16" parent="." instance=ExtResource("11_6ckcu")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -1.54812, 0.0384793, 4.32926)
-
-[node name="PhysicItem_gas_tank_small17" parent="." instance=ExtResource("11_6ckcu")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -1.94187, 0.0384793, 4.32926)
-
-[node name="PhysicItem_gas_tank_small4" parent="." instance=ExtResource("11_6ckcu")]
-transform = Transform3D(0.988129, -0.153624, 0, 0.153624, 0.988129, 0, 0, 0, 1, -1.10755, 0.0384793, 1.19671)
-
 [node name="hall_test" parent="." instance=ExtResource("11_7un85")]
 transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 0, 0, 0)
 
-[node name="shelf_big_back3" parent="." instance=ExtResource("12_b5x1m")]
-transform = Transform3D(-5.68248e-08, 0, 1.3, 0, 1.3, 0, -1.3, 0, -5.68248e-08, -1.47516, 0, -1.15323)
+[node name="shelf_big_back" parent="." instance=ExtResource("12_b5x1m")]
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, -3.16641, -1.78814e-07, 1.17386)
 
-[node name="shelf_big_back4" parent="." instance=ExtResource("12_b5x1m")]
-transform = Transform3D(-5.68248e-08, 0, 1.3, 0, 1.3, 0, -1.3, 0, -5.68248e-08, -3.66199, 0, 1.98288)
+[node name="shelf_big_back2" parent="." instance=ExtResource("12_b5x1m")]
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, -2.11381, -1.78814e-07, 1.17386)
+
+[node name="shelf_big_back3" parent="." instance=ExtResource("12_b5x1m")]
+transform = Transform3D(-5.24537e-08, 0, 1.2, 0, 1.2, 0, -1.2, 0, -5.24537e-08, -1.44451, -1.78814e-07, 0.373548)
 
 [node name="workbench" parent="." instance=ExtResource("13_6juqy")]
-transform = Transform3D(-3.27835e-08, 0, 0.75, 0, 0.75, 0, -0.75, 0, -3.27835e-08, -3.31956, 0.746829, 3.54908)
+transform = Transform3D(-3.49691e-08, 0, 0.8, 0, 0.8, 0, -0.8, 0, -3.49691e-08, -3.06431, 0.754188, 3.56249)
 
-[node name="DrawerTable" parent="." instance=ExtResource("14_07anx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.85642, 0, 1.54637)
+[node name="Wardrobe_big" parent="." instance=ExtResource("12_6qkl0")]
+transform = Transform3D(-0.00794116, 0, 0.999969, 0, 1, 0, -0.999969, 0, -0.00794116, -0.963933, 1.78814e-07, -1.02582)
+
+[node name="PhysicItem_gas_tank_small" parent="." instance=ExtResource("10_bmfki")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.89123, 0.77743, 1.56465)
+
+[node name="PhysicItem_gas_tank_small8" parent="." instance=ExtResource("10_bmfki")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.05528, 0.294728, 0.00949562)
+
+[node name="PhysicItem_gas_tank_small4" parent="." instance=ExtResource("10_bmfki")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.31714, 0.771113, 1.56465)
+
+[node name="PhysicItem_gas_tank_small7" parent="." instance=ExtResource("10_bmfki")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.59131, 1.7388, 1.56465)
+
+[node name="PhysicItem_gas_tank_small5" parent="." instance=ExtResource("10_bmfki")]
+transform = Transform3D(-0.0651244, -0.997877, 0, 0.997877, -0.0651244, 0, 0, 0, 1, -1.85003, 1.39905, 1.56465)
+
+[node name="PhysicItem_gas_tank_small6" parent="." instance=ExtResource("10_bmfki")]
+transform = Transform3D(-0.0651244, -0.997877, 0, 0.997877, -0.0651244, 0, 0, 0, 1, -2.88949, 0.498721, 1.56465)
+
+[node name="PhysicItem_gas_tank_small2" parent="." instance=ExtResource("11_6ckcu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.58904, 0, 2.45492)
+
+[node name="PhysicItem_gas_tank_small3" parent="." instance=ExtResource("11_6ckcu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.58904, 0, 2.05842)

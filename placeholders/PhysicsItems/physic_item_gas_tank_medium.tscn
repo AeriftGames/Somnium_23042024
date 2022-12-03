@@ -1,9 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://d15mj3uauenig"]
+[gd_scene load_steps=13 format=3]
 
 [ext_resource type="Script" path="res://placeholders/PhysicsItems/physic_item_test.cs" id="1_dqo6p"]
 [ext_resource type="AudioStream" uid="uid://i5s8a8274bq6" path="res://audio/audio_streams/interactive_basic/36787__farbin__drop-cardboard-box.wav" id="2_tprdi"]
-[ext_resource type="Texture2D" uid="uid://crw6t4anwsg0i" path="res://level_hall/new_items/gas_tank_medium_body_color.jpg" id="3_w87s5"]
-[ext_resource type="Texture2D" uid="uid://bmp0fadosexjc" path="res://level_hall/new_items/gas_tank_medium_normal.jpg" id="4_v6c6w"]
+[ext_resource type="Texture2D" uid="uid://crw6t4anwsg0i" path="res://testing_level_hall/new_items/gas_tank_medium_body_color.jpg" id="3_w87s5"]
+[ext_resource type="Texture2D" uid="uid://bmp0fadosexjc" path="res://testing_level_hall/new_items/gas_tank_medium_normal.jpg" id="4_v6c6w"]
 [ext_resource type="Script" path="res://core_systems/interactive_system/interactive_object.cs" id="5_x8qta"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_l84ni"]
