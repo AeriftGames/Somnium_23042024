@@ -14,7 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://dim74o3ajko3e" path="res://testing_stuff_kaen/drawer_table.tscn" id="11_sgvvf"]
 [ext_resource type="PackedScene" uid="uid://ipic8k4uwyqr" path="res://testing_stuff_kaen/wardrobe_small.tscn" id="13_5c36d"]
 [ext_resource type="PackedScene" path="res://testing_stuff_kaen/wardrobe_rdoor_small.tscn" id="14_yfxhm"]
-[ext_resource type="PackedScene" path="res://testing_stuff_kaen/wardrobe_ldoor_small.tscn" id="15_rltmb"]
+[ext_resource type="PackedScene" uid="uid://co74ssxqnm6rv" path="res://testing_stuff_kaen/wardrobe_ldoor_small.tscn" id="15_rltmb"]
 [ext_resource type="PackedScene" uid="uid://cdaqxq0d8qgv3" path="res://testing_stuff_kaen/wardrobe_big.tscn" id="16_7ebsw"]
 [ext_resource type="PackedScene" path="res://testing_stuff_kaen/table_lever_test.tscn" id="17_srp4w"]
 

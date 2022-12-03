@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bxvheu3wp7u23"]
+[gd_scene load_steps=12 format=3 uid="uid://bxvheu3wp7u23"]
 
 [ext_resource type="ArrayOccluder3D" uid="uid://bhp8wurw06bpa" path="res://levels/worldlevel_newhall/worldlevel_newhall.occ" id="1_va7r5"]
 [ext_resource type="PackedScene" uid="uid://bet3idvc4fg0n" path="res://placeholders/PlayerStart.tscn" id="3_5222s"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://blgh0y158pkqq" path="res://testing_level_hall/models/workbench/workbench.tscn" id="5_61h53"]
 [ext_resource type="PackedScene" uid="uid://ipic8k4uwyqr" path="res://testing_stuff_kaen/wardrobe_small.tscn" id="6_rbs8j"]
 [ext_resource type="PackedScene" path="res://testing_stuff_kaen/wardrobe_rdoor_small.tscn" id="7_hrosl"]
+[ext_resource type="PackedScene" uid="uid://cryhclbq4jsy7" path="res://placeholders/PhysicsItems/physic_item_gas_tank_small.tscn" id="8_yjkxg"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_w3cwh"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -31,7 +32,7 @@ volumetric_fog_enabled = true
 [node name="worldlevel" type="Node3D"]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.491015, 0.726058, 0.481398, 0.724598, 0.0336308, 0.688351, 0.483593, 0.68681, -0.542613, 0, 1.02584, -0.252968)
+transform = Transform3D(-0.491015, 0.726058, 0.481398, 0.724598, 0.0336308, 0.688351, 0.483593, 0.68681, -0.542614, 0, 1.02584, -0.252968)
 shadow_enabled = true
 
 [node name="worldlevel_occluderculling" type="OccluderInstance3D" parent="."]
@@ -73,3 +74,6 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 4.6, 0
 
 [node name="Wardrobe_rdoor_small" parent="Wardrobe_small2" instance=ExtResource("7_hrosl")]
 metadata/_edit_lock_ = true
+
+[node name="PhysicItem_gas_tank_small" parent="." instance=ExtResource("8_yjkxg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0.8, -4.1)

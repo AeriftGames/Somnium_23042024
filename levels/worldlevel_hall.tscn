@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://co6jp7iw03ooj" path="res://testing_level_hall/floor_deckel.tscn" id="6_txd48"]
 [ext_resource type="AudioStream" uid="uid://c22q66lwj2uvk" path="res://audio/audio_streams/510485__lydmakeren__industrial-hall-ambience.wav" id="7_nu33b"]
 [ext_resource type="PackedScene" path="res://testing_level_hall/new_items/lamp_2.tscn" id="8_fpdih"]
-[ext_resource type="PackedScene" path="res://placeholders/PhysicsItems/physic_item_gas_tank_small.tscn" id="10_bmfki"]
+[ext_resource type="PackedScene" uid="uid://cryhclbq4jsy7" path="res://placeholders/PhysicsItems/physic_item_gas_tank_small.tscn" id="10_bmfki"]
 [ext_resource type="PackedScene" path="res://placeholders/PhysicsItems/physic_item_gas_tank_medium.tscn" id="11_6ckcu"]
 [ext_resource type="PackedScene" uid="uid://bqesc0jyopdm7" path="res://testing_level_hall/hall_test.tscn" id="11_7un85"]
 [ext_resource type="PackedScene" uid="uid://cdaqxq0d8qgv3" path="res://testing_stuff_kaen/wardrobe_big.tscn" id="12_6qkl0"]

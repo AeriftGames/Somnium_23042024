@@ -185,6 +185,8 @@ public partial class CharacterInteractiveSystem : Godot.Object
     public void StopGrabbing()
     {
         basicHud.SetHandGrabState(false, false);
+        basicHud.SetCrosshairVisible(true);
+
         SetRigidBodyParamForGrab(pickedBody, false);
         isGrabbing = false;
         character.objectCamera.HandGrabJoint.NodeB = character.objectCamera.HandGrabJoint.GetPath();

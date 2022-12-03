@@ -69,7 +69,7 @@ public partial class wall_lever_test : Node3D
             mouseUpdated = true;
         }
     }
-
+    /*
     public override void _Process(double delta)
     {
         // pokud jsme v GrabAction pustime update
@@ -81,6 +81,20 @@ public partial class wall_lever_test : Node3D
         // Reset for zero
         motionMouse = Vector2.Zero;
         mouseUpdated = false;
+    }*/
+
+    public override void _PhysicsProcess(double delta)
+    {
+        // pokud jsme v GrabAction pustime update
+        if (isActionUpdate)
+        {
+            UpdateLever(delta);
+        }
+
+        // Reset for zero
+        motionMouse = Vector2.Zero;
+        mouseUpdated = false;
+
     }
 
     public virtual EReachPointEnd CalculateReaches()
