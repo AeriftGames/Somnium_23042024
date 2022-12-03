@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3]
+[gd_scene load_steps=57 format=3 uid="uid://bgmsvtrn4l4r2"]
 
 [ext_resource type="Script" path="res://core_systems/level_loader_system/all_this_shaders_need_compiled.cs" id="1_o15x1"]
 [ext_resource type="Material" uid="uid://d08tc1iusbqxj" path="res://placeholders/modular_walls/mat/mat_ground1.tres" id="2_2s5p8"]
@@ -7,15 +7,25 @@
 [ext_resource type="Material" uid="uid://btskthdiqqlrw" path="res://placeholders/modular_walls/mat/mat_wall2.tres" id="4_ylkxq"]
 [ext_resource type="PackedScene" uid="uid://c6u5kj6ckrar1" path="res://particles/dust/dust_particle.tscn" id="5_f7ym2"]
 [ext_resource type="Material" uid="uid://bc2lnxshiuvtk" path="res://textures/mat1.tres" id="5_sxmi3"]
+[ext_resource type="Material" path="res://testing_level_hall/el_box_mat.tres" id="6_umlll"]
 [ext_resource type="PackedScene" uid="uid://ed06oymnfx7m" path="res://objects/boxes/carry_box.tscn" id="7_3x0vb"]
+[ext_resource type="Material" path="res://testing_level_hall/fix_zed_mat.tres" id="7_kgtuc"]
 [ext_resource type="PackedScene" uid="uid://df3v88u2getl5" path="res://objects/door/bunker_door.tscn" id="8_361yp"]
+[ext_resource type="Material" uid="uid://cbj08m8km5lmd" path="res://testing_level_hall/pipes_mat.tres" id="8_fe3nr"]
 [ext_resource type="PackedScene" path="res://objects/door/door.tscn" id="9_hpdxh"]
+[ext_resource type="Material" uid="uid://c3817n2fl6uh8" path="res://testing_level_hall/pipe_connects_mat.tres" id="9_y34ts"]
 [ext_resource type="PackedScene" uid="uid://b6l080hrctdgf" path="res://objects/flashlight/flashlight.tscn" id="10_d871k"]
+[ext_resource type="Material" uid="uid://ck4t6r2ysoqm" path="res://testing_level_hall/skoba_mat.tres" id="10_flomm"]
+[ext_resource type="Material" path="res://testing_level_hall/vents_holders_mat.tres" id="11_66c6b"]
 [ext_resource type="PackedScene" path="res://objects/furniture/cabinet_new.tscn" id="11_lo4k4"]
+[ext_resource type="Material" path="res://testing_level_hall/vents_mat.tres" id="12_opohs"]
 [ext_resource type="PackedScene" uid="uid://d5wc26cy4c6o" path="res://objects/furniture/cabinet_small.tscn" id="12_rmt1d"]
+[ext_resource type="Material" uid="uid://u6cwmff6labp" path="res://testing_level_hall/wire_holder_mat.tres" id="13_n5qbt"]
 [ext_resource type="PackedScene" uid="uid://ukqaj32a10wx" path="res://objects/keypad/keypad.tscn" id="13_r0yd0"]
+[ext_resource type="Material" uid="uid://u0unu1v20kn3" path="res://testing_level_hall/wire_mat.tres" id="14_3e7w5"]
 [ext_resource type="PackedScene" uid="uid://djuv0voeaxmos" path="res://objects/light/light_celling.tscn" id="14_q5dvk"]
 [ext_resource type="PackedScene" uid="uid://bys0s78vbryfp" path="res://objects/light/light_celling_long.tscn" id="15_1d4ex"]
+[ext_resource type="Material" uid="uid://hoe8b861rkh8" path="res://testing_level_hall/floor_deckel_mat.tres" id="15_vm6bd"]
 [ext_resource type="PackedScene" uid="uid://cmc2d1am8ff6j" path="res://objects/misc/food_can.tscn" id="17_a8n73"]
 [ext_resource type="PackedScene" uid="uid://16d10e0sx2rr" path="res://objects/pipes/pipecurve.glb" id="18_ifolj"]
 [ext_resource type="PackedScene" uid="uid://d1fahaee5i3x6" path="res://objects/pipes/pipestraight.glb" id="19_bbken"]
@@ -30,6 +40,17 @@
 [ext_resource type="PackedScene" uid="uid://bndr3up87gn1i" path="res://placeholders/Decals/blood_decal.tscn" id="26_xsorb"]
 [ext_resource type="PackedScene" uid="uid://xfouxhhlpltn" path="res://placeholders/interactive_items/interactive_item_test.tscn" id="27_bkq8p"]
 [ext_resource type="PackedScene" uid="uid://bfhxpq55lmdom" path="res://placeholders/MeshWall.tscn" id="28_yskm7"]
+[ext_resource type="PackedScene" uid="uid://dim74o3ajko3e" path="res://testing_stuff_kaen/drawer_table.tscn" id="31_s7eyh"]
+[ext_resource type="PackedScene" path="res://testing_stuff_kaen/table_lever_test.tscn" id="32_8u032"]
+[ext_resource type="PackedScene" path="res://testing_stuff_kaen/wall_lever_test.tscn" id="33_72hxg"]
+[ext_resource type="PackedScene" uid="uid://cdaqxq0d8qgv3" path="res://testing_stuff_kaen/wardrobe_big.tscn" id="34_mh0t6"]
+[ext_resource type="PackedScene" uid="uid://ipic8k4uwyqr" path="res://testing_stuff_kaen/wardrobe_small.tscn" id="35_kmcrk"]
+[ext_resource type="PackedScene" uid="uid://bqesc0jyopdm7" path="res://testing_level_hall/hall_test.tscn" id="43_s6a85"]
+[ext_resource type="PackedScene" path="res://testing_level_hall/models/shelfs/shelf_big_back.tscn" id="46_ky1dy"]
+[ext_resource type="PackedScene" uid="uid://blgh0y158pkqq" path="res://testing_level_hall/models/workbench/workbench.tscn" id="47_01v4u"]
+[ext_resource type="PackedScene" path="res://testing_level_hall/new_items/gas_tank_medium_03.tscn" id="48_nkb5l"]
+[ext_resource type="PackedScene" uid="uid://ckhhg2rwjpner" path="res://testing_level_hall/new_items/gas_tank_small.tscn" id="49_qghd4"]
+[ext_resource type="PackedScene" path="res://testing_level_hall/new_items/lamp_2.tscn" id="50_3jcsv"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_23kqo"]
 
@@ -70,6 +91,56 @@ mesh = SubResource("BoxMesh_23kqo")
 surface_material_override/0 = ExtResource("4_ylkxq")
 
 [node name="cube4" type="MeshInstance3D" parent="AllMaterials"]
+mesh = SubResource("BoxMesh_23kqo")
+surface_material_override/0 = ExtResource("5_sxmi3")
+
+[node name="cube5" type="MeshInstance3D" parent="AllMaterials"]
+material_override = ExtResource("6_umlll")
+mesh = SubResource("BoxMesh_23kqo")
+surface_material_override/0 = ExtResource("5_sxmi3")
+
+[node name="cube6" type="MeshInstance3D" parent="AllMaterials"]
+material_override = ExtResource("7_kgtuc")
+mesh = SubResource("BoxMesh_23kqo")
+surface_material_override/0 = ExtResource("5_sxmi3")
+
+[node name="cube7" type="MeshInstance3D" parent="AllMaterials"]
+material_override = ExtResource("8_fe3nr")
+mesh = SubResource("BoxMesh_23kqo")
+surface_material_override/0 = ExtResource("5_sxmi3")
+
+[node name="cube8" type="MeshInstance3D" parent="AllMaterials"]
+material_override = ExtResource("9_y34ts")
+mesh = SubResource("BoxMesh_23kqo")
+surface_material_override/0 = ExtResource("5_sxmi3")
+
+[node name="cube9" type="MeshInstance3D" parent="AllMaterials"]
+material_override = ExtResource("10_flomm")
+mesh = SubResource("BoxMesh_23kqo")
+surface_material_override/0 = ExtResource("5_sxmi3")
+
+[node name="cube10" type="MeshInstance3D" parent="AllMaterials"]
+material_override = ExtResource("11_66c6b")
+mesh = SubResource("BoxMesh_23kqo")
+surface_material_override/0 = ExtResource("5_sxmi3")
+
+[node name="cube11" type="MeshInstance3D" parent="AllMaterials"]
+material_override = ExtResource("12_opohs")
+mesh = SubResource("BoxMesh_23kqo")
+surface_material_override/0 = ExtResource("5_sxmi3")
+
+[node name="cube12" type="MeshInstance3D" parent="AllMaterials"]
+material_override = ExtResource("13_n5qbt")
+mesh = SubResource("BoxMesh_23kqo")
+surface_material_override/0 = ExtResource("5_sxmi3")
+
+[node name="cube13" type="MeshInstance3D" parent="AllMaterials"]
+material_override = ExtResource("14_3e7w5")
+mesh = SubResource("BoxMesh_23kqo")
+surface_material_override/0 = ExtResource("5_sxmi3")
+
+[node name="cube14" type="MeshInstance3D" parent="AllMaterials"]
+material_override = ExtResource("15_vm6bd")
 mesh = SubResource("BoxMesh_23kqo")
 surface_material_override/0 = ExtResource("5_sxmi3")
 
@@ -147,6 +218,42 @@ mesh = SubResource("BoxMesh_n64ut")
 [node name="InteractiveItem_test" parent="AllScenes" instance=ExtResource("27_bkq8p")]
 
 [node name="MeshWall" parent="AllScenes" instance=ExtResource("28_yskm7")]
+
+[node name="DrawerTable" parent="AllScenes" instance=ExtResource("31_s7eyh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.19712, 0, 1.45689)
+
+[node name="TableLever" parent="AllScenes" instance=ExtResource("32_8u032")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.240349, 0.274046, 1.35579)
+
+[node name="WallLever" parent="AllScenes" instance=ExtResource("33_72hxg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.240349, 0.290311, 1.38473)
+
+[node name="Wardrobe_big" parent="AllScenes" instance=ExtResource("34_mh0t6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.141221, 0, 1.99134)
+
+[node name="Wardrobe_small" parent="AllScenes" instance=ExtResource("35_kmcrk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.651221, 0.122874, 1.88299)
+
+[node name="hall_test" parent="AllScenes" instance=ExtResource("43_s6a85")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.6525, 0, 0.381261)
+
+[node name="shelf_big_back" parent="AllScenes" instance=ExtResource("46_ky1dy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.259718, 2.38419e-07, 3.67153)
+
+[node name="workbench" parent="AllScenes" instance=ExtResource("47_01v4u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.26361, -0.131226, 3.87813)
+
+[node name="gas_tank_medium_03" parent="AllScenes" instance=ExtResource("48_nkb5l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.173768, 0, 4.41587)
+
+[node name="gas_tank_small" parent="AllScenes" instance=ExtResource("49_qghd4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.173768, 0, 4.41587)
+
+[node name="gas_tank_small2" parent="AllScenes" instance=ExtResource("49_qghd4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0797606, 2.38419e-07, 4.29063)
+
+[node name="lamp2" parent="AllScenes" instance=ExtResource("50_3jcsv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.505711, 0.23, 3.69448)
 
 [node name="AllInteractiveItemsNeedToggle" type="Node3D" parent="."]
 

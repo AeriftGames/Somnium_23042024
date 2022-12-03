@@ -3,7 +3,7 @@
 [ext_resource type="ArrayOccluder3D" uid="uid://bcinbb53h4cw1" path="res://levels/worldlevel_hall/worldlevel_hall.occ" id="1_tib7r"]
 [ext_resource type="PackedScene" uid="uid://ck8mt4y4gfqmk" path="res://placeholders/modular_walls/ground_large.tscn" id="2_yutu1"]
 [ext_resource type="PackedScene" uid="uid://bet3idvc4fg0n" path="res://placeholders/PlayerStart.tscn" id="3_17trl"]
-[ext_resource type="PackedScene" path="res://testing_level_hall/floor_deckel.tscn" id="6_txd48"]
+[ext_resource type="PackedScene" uid="uid://co6jp7iw03ooj" path="res://testing_level_hall/floor_deckel.tscn" id="6_txd48"]
 [ext_resource type="AudioStream" uid="uid://c22q66lwj2uvk" path="res://audio/audio_streams/510485__lydmakeren__industrial-hall-ambience.wav" id="7_nu33b"]
 [ext_resource type="PackedScene" path="res://testing_level_hall/new_items/lamp_2.tscn" id="8_fpdih"]
 [ext_resource type="PackedScene" path="res://placeholders/PhysicsItems/physic_item_gas_tank_small.tscn" id="10_bmfki"]
@@ -128,8 +128,8 @@ transform = Transform3D(-0.999349, 0, -0.036068, 0, 1, 0, 0.036068, 0, -0.999349
 
 [node name="OmniLight3D2" type="OmniLight3D" parent="lamp2"]
 transform = Transform3D(-0.999349, -0.00908128, 0.0349061, 0, 0.967784, 0.251782, -0.036068, 0.251618, -0.967154, 0, 0, 0)
-light_energy = 0.5
-light_indirect_energy = 10.0
+light_energy = 0.4
+light_indirect_energy = 12.0
 light_volumetric_fog_energy = 3.0
 shadow_enabled = true
 omni_range = 20.0
@@ -141,9 +141,6 @@ transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 0, 0, 0)
 [node name="shelf_big_back" parent="." instance=ExtResource("12_b5x1m")]
 transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, -3.16641, -1.78814e-07, 1.17386)
 
-[node name="shelf_big_back2" parent="." instance=ExtResource("12_b5x1m")]
-transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, -2.11381, -1.78814e-07, 1.17386)
-
 [node name="shelf_big_back3" parent="." instance=ExtResource("12_b5x1m")]
 transform = Transform3D(-5.24537e-08, 0, 1.2, 0, 1.2, 0, -1.2, 0, -5.24537e-08, -1.44451, -1.78814e-07, 0.373548)
 
@@ -153,20 +150,11 @@ transform = Transform3D(-3.49691e-08, 0, 0.8, 0, 0.8, 0, -0.8, 0, -3.49691e-08, 
 [node name="Wardrobe_big" parent="." instance=ExtResource("12_6qkl0")]
 transform = Transform3D(-0.00794116, 0, 0.999969, 0, 1, 0, -0.999969, 0, -0.00794116, -0.963933, 1.78814e-07, -1.02582)
 
-[node name="PhysicItem_gas_tank_small" parent="." instance=ExtResource("10_bmfki")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.89123, 0.77743, 1.56465)
-
 [node name="PhysicItem_gas_tank_small8" parent="." instance=ExtResource("10_bmfki")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.05528, 0.294728, 0.00949562)
 
 [node name="PhysicItem_gas_tank_small4" parent="." instance=ExtResource("10_bmfki")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.31714, 0.771113, 1.56465)
-
-[node name="PhysicItem_gas_tank_small7" parent="." instance=ExtResource("10_bmfki")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.59131, 1.7388, 1.56465)
-
-[node name="PhysicItem_gas_tank_small5" parent="." instance=ExtResource("10_bmfki")]
-transform = Transform3D(-0.0651244, -0.997877, 0, 0.997877, -0.0651244, 0, 0, 0, 1, -1.85003, 1.39905, 1.56465)
 
 [node name="PhysicItem_gas_tank_small6" parent="." instance=ExtResource("10_bmfki")]
 transform = Transform3D(-0.0651244, -0.997877, 0, 0.997877, -0.0651244, 0, 0, 0, 1, -2.88949, 0.498721, 1.56465)

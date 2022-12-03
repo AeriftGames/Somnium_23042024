@@ -1,5 +1,6 @@
-[gd_scene load_steps=14 format=3 uid="uid://dim74o3ajko3e"]
+[gd_scene load_steps=15 format=3 uid="uid://dim74o3ajko3e"]
 
+[ext_resource type="PackedScene" uid="uid://cfjcbwpbwgrug" path="res://testing_stuff_kaen/drawer_test.tscn" id="2_g6tgf"]
 [ext_resource type="Texture2D" uid="uid://bybrpbyf1euit" path="res://textures/NormalMap (3).png" id="2_jj4it"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u2w2w"]
@@ -115,3 +116,15 @@ mesh = SubResource("BoxMesh_oivph")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D4/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_bterf")
+
+[node name="Drawer_test" parent="." instance=ExtResource("2_g6tgf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.647861, 0)
+drawerInertia = Vector3(0, 0, 0)
+
+[node name="Drawer_test2" parent="." instance=ExtResource("2_g6tgf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.395566, 0)
+drawerInertia = Vector3(0, 0, 0)
+
+[node name="Drawer_test3" parent="." instance=ExtResource("2_g6tgf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.145932, 0)
+drawerInertia = Vector3(0, 0, 0)
