@@ -79,18 +79,35 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
         AudioStreamPlayerJumpLand = GetNode<AudioStreamPlayer>("AudioStreamPlayer_JumpLand");
 
         // Create timer for landing effect
-        var callable_FisnishLandingEffect = new Callable(FinishLandingEffect);
+        var callable_FisnishLandingEffect = new Callable(this,"FinishLandingEffect");
         landing_timer.Connect("timeout", callable_FisnishLandingEffect);
         landing_timer.WaitTime = 0.3;
         landing_timer.OneShot = true;
         AddChild(landing_timer);
     }
 
+    public void UpdateInputsProcess(double delta)
+    {
+        // hrac pozaduje lean ?
+
+        if(Input.IsActionPressed("leanLeft") && !Input.IsActionPressed("leanRight"))
+            objectCamera.SetActualLean(ObjectCamera.ELeanType.Left);
+        else if (Input.IsActionPressed("leanRight") && !Input.IsActionPressed("leanLeft"))
+            objectCamera.SetActualLean(ObjectCamera.ELeanType.Right);
+        else
+            objectCamera.SetActualLean(ObjectCamera.ELeanType.Center);
+    }
+
     public override void _Process(double delta)
     {
         base._Process(delta);
+    }
 
-        UpdateInputsProcess((float) delta);
+    public override void _PhysicsProcess(double delta)
+    {
+        base._PhysicsProcess(delta);
+
+        UpdateInputsProcess((float)delta);
 
         // SET CUSTOM LABEL MOVESPEED AND POSITION OF PLAYER
         float a = Mathf.Snapped(ActualMovementSpeed, 0.1f);
@@ -107,42 +124,6 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
         UpdateLandingHeadBobbing((float)delta);
 
         UpdateLeaning((float)delta);
-    }
-
-    public void UpdateInputsProcess(double delta)
-    {
-        // hrac pozaduje lean ?
-
-        if(Input.IsActionPressed("leanLeft") && !Input.IsActionPressed("leanRight"))
-            objectCamera.SetActualLean(ObjectCamera.ELeanType.Left);
-        else if (Input.IsActionPressed("leanRight") && !Input.IsActionPressed("leanLeft"))
-            objectCamera.SetActualLean(ObjectCamera.ELeanType.Right);
-        else
-            objectCamera.SetActualLean(ObjectCamera.ELeanType.Center);
-        /*
-        if (Input.IsActionPressed("leanRight") && !Input.IsActionPressed("leanLeft"))
-        {
-            objectCamera.SetActualLean(ObjectCamera.ELeanType.Right);
-        }
-        else
-            objectCamera.SetActualLean(ObjectCamera.ELeanType.Center);*/
-        /*
-        // hrac pozaduje opustit lean
-
-        if (Input.IsActionJustReleased("leanLeft"))
-        {
-            objectCamera.SetActualLean(ObjectCamera.ELeanType.Center);
-        }
-
-        if(Input.IsActionJustReleased("leanRight"))
-        {
-            objectCamera.SetActualLean(ObjectCamera.ELeanType.Center);
-        }*/
-    }
-
-    public override void _PhysicsProcess(double delta)
-    {
-        base._PhysicsProcess(delta);
     }
 
     public override void EventLanding()
@@ -224,7 +205,7 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
             lerpHeadWalkY = 0.0f;
             lerpFootstepSpeedModifier = 3.0f;
         }
-
+        
         // Lerp pro head bobbing walk Y
         HeadGimbalA.Position = HeadGimbalA.Position.Lerp(
             new Vector3(0, lerpHeadWalkY, 0), lerpFootstepSpeedModifier * delta);
@@ -236,6 +217,7 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
         HeadGimbalB.Position = HeadGimbalB.Position.Lerp(
             new Vector3(0, lerpHeadLandY, 0), lerpLandingSpeedModifier * delta);
 
+        
         // Lerp pro landing rot
         objectCamera.GimbalLand.Rotation = objectCamera.GimbalLand.Rotation.Lerp(
             new Vector3(lerpHeadLandRotX, 0, 0), lerpLandingSpeedModifier * delta);

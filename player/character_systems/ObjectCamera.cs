@@ -11,11 +11,16 @@ public partial class ObjectCamera : Node3D
 	public Node3D NodeRotX = null;
     public Node3D NodeLean = null;
 	public Camera3D Camera = null;
+    public Marker3D HandGrabMarker;
+    public Generic6DOFJoint3D HandGrabJoint = null;
+    public StaticBody3D HandStaticBody = null;
 
     private Vector2 _MouseMotion = new Vector2(0f, 0f);
     private Vector2 _LookVelocity = new Vector2(0f, 0f);
 
     FPSCharacter_BasicMoving ownerCharacter = null;
+
+    private LerpObject.LerpVector3 LerpObject_ObjectCameraPos = new LerpObject.LerpVector3();
 
     // lean
     Node3D LerpPos_LeanCenter = null;
@@ -28,6 +33,8 @@ public partial class ObjectCamera : Node3D
     Tween tweenLeanRot = null;
     Tween tweenLeanPos = null;
 
+    private bool isCameraLookInputEnable = true;
+
     public override void _Ready()
 	{
 		NodeRotY = GetNode<Node3D>("NodeRotY");
@@ -35,11 +42,18 @@ public partial class ObjectCamera : Node3D
         NodeRotX = GetNode<Node3D>("NodeRotY/GimbalLand/NodeRotX");
         NodeLean = GetNode<Node3D>("NodeRotY/GimbalLand/NodeRotX/NodeLean");
 		Camera = GetNode<Camera3D>("NodeRotY/GimbalLand/NodeRotX/NodeLean/Camera");
+        HandGrabMarker = GetNode<Marker3D>("NodeRotY/GimbalLand/NodeRotX/NodeLean/Camera/HandGrabMarker");
+        HandGrabJoint = GetNode<Generic6DOFJoint3D>("NodeRotY/GimbalLand/NodeRotX/NodeLean/Camera/HandGrabJoint");
+        HandStaticBody = GetNode<StaticBody3D>("NodeRotY/GimbalLand/NodeRotX/" +
+            "NodeLean/Camera/HandGrabMarker/HandStaticBody");
 
         //lean
         LerpPos_LeanCenter = GetNode<Node3D>("NodeRotY/GimbalLand/NodeRotX/LerpPos_LeanCenter");
         LerpPos_LeanLeft = GetNode<Node3D>("NodeRotY/GimbalLand/NodeRotX/LerpPos_LeanLeft");
         LerpPos_LeanRight = GetNode<Node3D>("NodeRotY/GimbalLand/NodeRotX/LerpPos_LeanRight");
+
+        //
+        LerpObject_ObjectCameraPos.EnableUpdate(true);
     }
 
     public void SetCharacterOwner(FPSCharacter_BasicMoving newFPSCharacter_BasicMoving)
@@ -49,20 +63,32 @@ public partial class ObjectCamera : Node3D
 
 	public override void _Process(double delta)
 	{
+    }
+
+    public override void _PhysicsProcess(double delta)
+    {
+        base._PhysicsProcess(delta);
+
         if (ownerCharacter.IsInputEnable())
             UpdateCameraLook(_MouseMotion, delta);
+
+        // new lerp object camera pos to player head
+        LerpObject_ObjectCameraPos.SetAllParam(GlobalPosition,
+            ownerCharacter.HeadHolderCamera.GlobalPosition, ownerCharacter.LerpSpeedPosObjectCamera);
+
+        GlobalPosition = LerpObject_ObjectCameraPos.Update(delta);
+
+        _MouseMotion = new Vector2(0, 0);
     }
 
     // Hadle inout for mouse
     public override void _Input(InputEvent @event)
     {
-        if (@event is InputEventMouseMotion && ownerCharacter.IsInputEnable())
+        if (@event is InputEventMouseMotion && ownerCharacter.IsInputEnable() && isCameraLookInputEnable)
         {
             InputEventMouseMotion mouseEventMotion = @event as InputEventMouseMotion;
             _MouseMotion = mouseEventMotion.Relative;
         }
-        else
-            _MouseMotion = new Vector2(0, 0);
     }
 
     // Update CameraLook from mouse input and calculating rotation nodeRotY and nodeRotX
@@ -89,6 +115,12 @@ public partial class ObjectCamera : Node3D
 
         // Reset MouseMotion
         _MouseMotion = Vector2.Zero;
+    }
+
+    // Povoli ci zakaze lerp tohoto objektu k characteru hlavy
+    public void SetLerpToCharacterEnable(bool newEnable)
+    {
+        LerpObject_ObjectCameraPos.EnableUpdate(newEnable);
     }
 
     public void SetActualLean(ELeanType newLeanType)
@@ -291,5 +323,20 @@ public partial class ObjectCamera : Node3D
         returnedVector.z = per_rot_final;
 
         return returnedVector;
+    }
+
+    public Marker3D GetHandGrabMarker()
+    {
+        return HandGrabMarker;
+    }
+
+    public void SetCameraLookInputEnable(bool newEnable)
+    {
+        isCameraLookInputEnable = newEnable;
+    }
+
+    public bool GetCameraLookInputEnable()
+    {
+        return isCameraLookInputEnable;
     }
 }

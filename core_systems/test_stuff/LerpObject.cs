@@ -41,12 +41,11 @@ public partial class LerpObject
         public void EnableUpdate(bool newEnable) { isEnableUpdate = newEnable; }
         public bool IsEnableUpdate() { return isEnableUpdate; }
 
-        public void SetAllParam(Vector3 newActual, Vector3 newTarget, float newSpeed, bool newIsEnableUpdate)
+        public void SetAllParam(Vector3 newActual, Vector3 newTarget, float newSpeed)
         {
             Actual = newActual;
             Target = newTarget;
             Speed = newSpeed;
-            isEnableUpdate = newIsEnableUpdate;
         }
 
         public float GetLengthToTarget()
@@ -83,12 +82,11 @@ public partial class LerpObject
         public void EnableUpdate(bool newEnable) { isEnableUpdate = newEnable; }
         public bool IsEnableUpdate() { return isEnableUpdate; }
 
-        public void SetAllParam(float newActual, float newTarget, float newSpeed, bool newIsEnableUpdate)
+        public void SetAllParam(float newActual, float newTarget, float newSpeed)
         {
             Actual = newActual;
             Target = newTarget;
             Speed = newSpeed;
-            isEnableUpdate = newIsEnableUpdate;
         }
 
         public float GetLengthToTarget()

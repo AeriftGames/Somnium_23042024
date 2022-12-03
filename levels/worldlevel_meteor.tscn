@@ -1,7 +1,7 @@
 [gd_scene load_steps=39 format=3 uid="uid://dxa60v0imq34d"]
 
-[ext_resource type="ArrayOccluder3D" uid="uid://c65wc0yeg3cak" path="res://levels/world_level_rooms/worldlevel_rooms_test.occ" id="1_48aky"]
 [ext_resource type="PackedScene" uid="uid://ck8mt4y4gfqmk" path="res://placeholders/modular_walls/ground_large.tscn" id="1_vcfbv"]
+[ext_resource type="ArrayOccluder3D" uid="uid://bhaab52v5mdk2" path="res://levels/worldlevel_meteor/worldlevel_meteor.occ" id="1_xkl7i"]
 [ext_resource type="PackedScene" uid="uid://clgsga4ty4mrp" path="res://placeholders/modular_walls/wall_normal.tscn" id="4_yawcu"]
 [ext_resource type="PackedScene" uid="uid://crjyudrh814yq" path="res://placeholders/modular_walls/wall_small_corner_simple_l.tscn" id="5_assn5"]
 [ext_resource type="PackedScene" uid="uid://0kvn14vfui6b" path="res://placeholders/modular_walls/wall_small.tscn" id="6_hsgco"]
@@ -67,7 +67,7 @@ albedo_texture = ExtResource("22_rb3g8")
 
 [node name="worldlevel_occluderculling" type="OccluderInstance3D" parent="."]
 visible = false
-occluder = ExtResource("1_48aky")
+occluder = ExtResource("1_xkl7i")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_vpq6f")

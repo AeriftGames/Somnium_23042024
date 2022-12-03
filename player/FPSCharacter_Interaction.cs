@@ -10,13 +10,36 @@ using System;
  *   (je to z duvodu nacterni rotace kamery pro plynule opetovne nastaveni do puvodniho stavu)
  * - TODO 2: zlepsit vraceni do puvodniho stavu tim ze budeme lerpovat mezi
  *   temp_hitPosition a targetLook(interact_object_look)
- * - TODO 3: predelat komunikaci s MessageObject - hotovo
 */
 public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
 {
-	BasicHud basicHud = null;
+	CharacterInteractiveSystem InteractiveSystem = null;
 
-	[Export] public float LengthInteractRay = 5.0f;
+    [ExportGroupAttribute("InteractiveSystem: Base Settings")]
+	[Export] public bool CanUse = true;
+    [Export] public bool CanGrabObject = true;
+    [Export] public bool CanThrowObject = true;
+    [Export] public bool CanRotateObject = true;
+    [Export] public bool CanMoveFarOrNearObject = true;
+    [Export] public bool MustBeInInteractiveArea = true;
+    [Export] public float LengthInteractRay = 5.0f;
+    [Export] public float GrabObjectPullPower = 4.0f;
+    [Export] public float ThrowObjectPower = 6.0f;
+    [Export] public float MoveFarOrNearObjectStep = 0.1f;
+    [Export] public float MoveFarOrNearObjectOriginal = 1.5f;
+	[Export] public float MoveFarOrNearObjectMin = 1.0f;
+    [Export] public float MoveFarOrNearObjectMax = 2.0f;
+    [Export] public float RotateObjectStep = 0.3f;
+
+    [ExportGroupAttribute("InteractiveSystem: Rigidbody PhysicParams In Grab")]
+	[Export] public Vector3 RBPhysicInGrab_Inertia = new Vector3(0.5f,0.5f,0.5f);
+	[Export] public float RBPhysicInGrab_AngularDamp = 3.0f;
+    [Export] public float RBPhysicInGrab_LinearDamp = 1.0f;
+    [Export] public float RBPhysicInGrab_Friction = 0.15f;
+    [Export] public float RBPhysicInGrab_Bounce = 0.0f;
+    [Export] public float RBPhysicInGrab_Mass = 1.0f;
+
+    BasicHud basicHud = null;
 
 	Vector3 tempCamRot = Vector3.Zero;
 	Vector3 tempTargetLook = Vector3.Zero;
@@ -41,15 +64,18 @@ public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
     [Export] public AudioStream AudioFlashlight_On;
     [Export] public AudioStream AudioFlashlight_Off;
 
-
     public override void _Ready()
 	{
 		base._Ready();
 
-		basicHud = GetNode<BasicHud>("BasicHud");
-		basicHud.SetUseVisible(false);
+		// nacteni hudu
+        basicHud = GetNode<BasicHud>("BasicHud");
+        basicHud.SetUseVisible(false);
 
-		//
+        // vytvoreni grab system
+        InteractiveSystem = new CharacterInteractiveSystem(this,basicHud);
+
+		// hands
 		HolderHands = GetNode<Node3D>("HeadMain/HeadGimbalA/HeadGimbalB/HeadHolderCamera/HolderHands");
 
 		// Simple Flashlight toggle test
@@ -59,83 +85,88 @@ public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
 	public override void _Process(double delta)
 	{
 		base._Process(delta);
-
-		// Toggle Simple Flashlight
-		if(Input.IsActionJustPressed("ToggleFlashlight"))
-			ToggleSimpleFlashlight();
-
-		// UPDATE HANDS
-		objectHands.GlobalPosition = 
-			objectHands.GlobalPosition.Lerp(objectCamera.Camera.GlobalPosition, 40 * (float)delta);
-		
-		Vector3 hands_rot = objectHands.GlobalRotation;
-		float hands_rotY = hands_rot.y;
-		float hands_rotX = hands_rot.x;
-		hands_rotY = Mathf.LerpAngle(hands_rotY,objectCamera.Camera.GlobalRotation.y, 30* (float)delta);
-		hands_rotX = Mathf.LerpAngle(hands_rotX, objectCamera.Camera.GlobalRotation.x, 30 * (float)delta);
-		hands_rot.y = hands_rotY;
-		hands_rot.x = hands_rotX;
-		objectHands.GlobalRotation = hands_rot;
-		
-
-		// UPDATE LERPOBJECT INTERACT
-		if (LerpCameraPosToInteract.IsEnableUpdate())
-			GetFPSCharacterCamera().GlobalPosition = LerpCameraPosToInteract.Update(delta);
-
-		if (LerpCameraLookToInteract.IsEnableUpdate())
-			GetFPSCharacterCamera().LookAtFromPosition(GetFPSCharacterCamera().GlobalPosition,
-				LerpCameraLookToInteract.GetTarget());
-
-		// kamera je na ceste zpet k normalu
-		if(isActualOnLerpToNormal)
-		{
-			// jsme jiz tesne v cili ?
-			if(LerpCameraPosToInteract.GetLengthToTarget() < 0.01f)
-			{
-				// vyresetujeme parametry, povolime input a prerusime update lerpu
-				GetFPSCharacterCamera().Position = new Vector3(0.0f, 0.0f, 0.0f);
-				GetFPSCharacterCamera().Rotation = tempCamRot;
-
-				SetInputEnable(true);
-				LerpCameraPosToInteract.EnableUpdate(false);
-				LerpCameraLookToInteract.EnableUpdate(false);
-				isActualOnLerpToNormal = false;
-			}
-		}
-
 	}
 
-	public override void _PhysicsProcess(double delta)
+    public override void _Input(InputEvent @event)
+    {
+		base._Input(@event);
+
+		// RotateObject Update
+		InteractiveSystem.UpdateGrabbedItemRotate(@event);
+    }
+
+    public override void _PhysicsProcess(double delta)
 	{
 		base._PhysicsProcess(delta);
 
-		basicHud.SetUseVisible(false);
+		bool useNow = IsInputEnable() && CanUse && Input.IsActionJustPressed("UseAction");
+		bool grabNow = IsInputEnable() && CanGrabObject && Input.IsActionPressed("mouseClickLeft");
+		bool throwObjectNow = IsInputEnable() && CanThrowObject && Input.IsActionJustPressed("throwObject");
+		bool rotateGrabbedObject = IsInputEnable() && CanRotateObject && Input.IsActionPressed("rotateGrabbedObject");
+		bool moveFarGrabbedObject = IsInputEnable() && CanMoveFarOrNearObject && Input.IsActionJustReleased("moveFarGrabbedObject");
+        bool moveNearGrabbedObject = IsInputEnable() && CanMoveFarOrNearObject && Input.IsActionJustReleased("moveNearGrabbedObject");
 
-		if (IsInputEnable() == false) return;
-		bool useNow = Input.IsActionJustPressed("UseAction");
+        if (grabNow == false)
+			DetectInteractiveObjectWithCameraRay();
 
-		// otestujeme zdali existuje interactive_object, pokud ano otestujeme zdali je aktivni v range
-		// pokud neco z toho neni pravda vyskocime z funkce
-		interactive_object hit_interactive_object = DetectInteractiveObjectWithCameraRay();
-		if (hit_interactive_object == null) return;
-		if (hit_interactive_object.GetIsActive() == false) return;
+		InteractiveSystem.BasicUpdate(useNow,grabNow,delta);
+		InteractiveSystem.InteractivePhysicsUpdate(grabNow,throwObjectNow,rotateGrabbedObject,
+			moveFarGrabbedObject,moveNearGrabbedObject,delta);
 
-		// pokud tedy mame pred sebou aktivni interactive_object, vypiseme jeho moznou akci v hudu
-		basicHud.SetUseLabelText(hit_interactive_object.GetUseActionName());
-		basicHud.SetUseVisible(true);
+		// ---------------------------------------------------------------------------------
+        // Toggle Simple Flashlight
+        if (Input.IsActionJustPressed("ToggleFlashlight"))
+            ToggleSimpleFlashlight();
 
-		// chceme interactive_object pouzit?
-		if (useNow)
-			hit_interactive_object.Use(this);
-	}
+        // UPDATE HANDS
+        objectHands.GlobalPosition =
+            objectHands.GlobalPosition.Lerp(objectCamera.Camera.GlobalPosition, 40 * (float)delta);
 
-	public interactive_object DetectInteractiveObjectWithCameraRay()
+        Vector3 hands_rot = objectHands.GlobalRotation;
+        float hands_rotY = hands_rot.y;
+        float hands_rotX = hands_rot.x;
+        hands_rotY = Mathf.LerpAngle(hands_rotY, objectCamera.Camera.GlobalRotation.y, 30 * (float)delta);
+        hands_rotX = Mathf.LerpAngle(hands_rotX, objectCamera.Camera.GlobalRotation.x, 30 * (float)delta);
+        hands_rot.y = hands_rotY;
+        hands_rot.x = hands_rotX;
+        objectHands.GlobalRotation = hands_rot;
+
+
+        // UPDATE LERPOBJECT INTERACT
+        if (LerpCameraPosToInteract.IsEnableUpdate())
+            GetFPSCharacterCamera().GlobalPosition = LerpCameraPosToInteract.Update(delta);
+
+        if (LerpCameraLookToInteract.IsEnableUpdate())
+            GetFPSCharacterCamera().LookAtFromPosition(GetFPSCharacterCamera().GlobalPosition,
+                LerpCameraLookToInteract.GetTarget());
+
+        // kamera je na ceste zpet k normalu
+        if (isActualOnLerpToNormal)
+        {
+            // jsme jiz tesne v cili ?
+            if (LerpCameraPosToInteract.GetLengthToTarget() < 0.01f)
+            {
+                // vyresetujeme parametry, povolime input a prerusime update lerpu
+                GetFPSCharacterCamera().Position = new Vector3(0.0f, 0.0f, 0.0f);
+                GetFPSCharacterCamera().Rotation = tempCamRot;
+
+                SetInputEnable(true);
+                LerpCameraPosToInteract.EnableUpdate(false);
+                LerpCameraLookToInteract.EnableUpdate(false);
+                isActualOnLerpToNormal = false;
+            }
+        }
+    }
+
+	public bool DetectInteractiveObjectWithCameraRay()
 	{
-		interactive_object result = null;
-		if (GetFPSCharacterCamera() == null) return null;
+		bool result = false;
+        interactive_object interact_object = null;
+
+		if (GetFPSCharacterCamera() == null) return false;
 
 		PhysicsDirectSpaceState3D directSpace = GetWorld3d().DirectSpaceState;
-		if (directSpace == null) return null;
+		if (directSpace == null) return false;
 
 		PhysicsRayQueryParameters3D rayParam = new PhysicsRayQueryParameters3D();
 		rayParam.From = GetFPSCharacterCamera().GlobalPosition;
@@ -146,58 +177,39 @@ public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
 		if (rayResult.Count > 0)
 		{
 			Node HitCollider = (Node)rayResult["collider"];
-			if (HitCollider == null) return null;
-
-			if (HitCollider.GetParent() == null) return null;
-
-			/*
-			Type type = HitCollider.GetParent().GetType();
-			if (type != typeof(interactive_object)) return null;
-			*/
+			if (HitCollider == null) return false;
+			if (HitCollider.GetParent() == null) return false;
 
 			if(HitCollider.GetParent().IsInGroup("interactive_object"))
 			{
-				result = (interactive_object)HitCollider.GetParent();
+                interact_object = (interactive_object)HitCollider.GetParent();
 				tempHitPosition = (Vector3)rayResult["position"];
-			}
+            }
 		}
 
+		// Final
+		InteractiveSystem.SetActualInteractiveObject(interact_object,tempHitPosition);
 		return result;
 	}
 
 	public void DisableInputsAndCameraMoveLookTarget(Vector3 targetPos,Vector3 targetLook)
 	{
-		/*
-		// INSTANT
-		SetInputEnable(false);
-		tempCamRot = GetFPSCharacterCamera().Rotation;
-		GetFPSCharacterCamera().GlobalPosition = targetPos;
-		GetFPSCharacterCamera().LookAt(targetLook);
-		//
-		*/
-
 		// LERPOBJECT START INTERACT
 		SetInputEnable(false);
 		tempCamRot = GetFPSCharacterCamera().Rotation;
 		//tempTargetLook = targetLook;
 		LerpCameraPosToInteract.SetAllParam(GetFPSCharacterCamera().GlobalPosition,
-			targetPos, 10f, true);
+			targetPos, 10f);
+		LerpCameraPosToInteract.EnableUpdate(true);
 
 		LerpCameraLookToInteract.SetAllParam(GetFPSCharacterCamera().Transform.basis.z*0.1f,
 			targetLook,
-			1.0f, true);
-	}
+			1.0f);
+		LerpCameraLookToInteract.EnableUpdate(true);
+    }
 
 	public void EnableInputsAndCameraToNormal()
 	{
-		/*
-		// INSTANT
-		GetFPSCharacterCamera().Position = new Vector3(0.0f,0.0f,0.0f);
-		GetFPSCharacterCamera().Rotation = tempCamRot;
-		SetInputEnable(true);
-		//
-		*/
-
 		// LERPOBJECT END INTERACT
 		// !!! tip na mozne zlepseni: lerpovat mezi tempHitPosition a targetLook od interactive_objectu !!!
 		isActualOnLerpToNormal = true;
@@ -238,5 +250,15 @@ public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
             AudioStreamPlayer_TestItem.Stream = AudioFlashlight_Off;
             AudioStreamPlayer_TestItem.Play();
         }
+	}
+
+	public CharacterInteractiveSystem GetInteractiveSystem()
+	{
+		return InteractiveSystem;
+	}
+
+	public BasicHud GetBasicHud()
+	{
+		return basicHud;
 	}
 }

@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.IO;
 
 public partial class UniversalFunctions
 {
@@ -41,5 +42,26 @@ public partial class UniversalFunctions
         }
 
         return result;
+    }
+    public static string[] GetDirectoryFiles(string directory, string filetype)
+    {
+        string[] a = Directory.GetFiles(Directory.GetCurrentDirectory() + directory, "*" + filetype);
+        if (a == null) return null;
+        if (a.Length == 0) return null;
+        
+        return a;
+    }
+
+    public static string GetStringBetween(string strSource, string strStart, string strEnd)
+    {
+        if (strSource.Contains(strStart) && strSource.Contains(strEnd))
+        {
+            int Start, End;
+            Start = strSource.IndexOf(strStart, 0) + strStart.Length;
+            End = strSource.IndexOf(strEnd, Start);
+            return strSource.Substring(Start, End - Start);
+        }
+
+        return "";
     }
 }

@@ -21,7 +21,7 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
     protected Node3D HeadMain = null;
     protected Node3D HeadGimbalA = null;
     protected Node3D HeadGimbalB = null;
-    protected Node3D HeadHolderCamera = null;
+    public Node3D HeadHolderCamera = null;
 
     [Export] public ObjectCamera objectCamera;
 
@@ -65,10 +65,9 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
     private ECharacterPosture _ActualCharacterPosture = ECharacterPosture.Stand;
     private Vector3 _HeadMainLerpTarget;    // uses for crunch<->stand move lerp camera
     private bool _isInputEnable = true;
+    private bool _isMoveInputEnable = true;
 
     private bool isFallingStart = false;
-
-    private LerpObject.LerpVector3 LerpObject_ObjectCameraPos = new LerpObject.LerpVector3();
 
     public float ActualMovementSpeed = 0.0f;
     public Vector3 LastPosition = Vector3.Zero;
@@ -78,6 +77,8 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
     private float lastYPosFallingEnd = 0.0f;
     private float lastYVelocity = 0.0f;
     float heightfallingtest = 0.0f;
+
+    private Control allHuds = null;
 
     public override void _Ready()
     {
@@ -100,6 +101,8 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
 
         //
         objectCamera.SetCharacterOwner(this);
+
+        allHuds = GetNode<Control>("AllHuds");
     }
 
     // Update Physical updated process
@@ -122,16 +125,6 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
                     break;
                 }
         }
-    }
-
-    // Update Visual updated process
-    public override void _Process(double delta)
-    {
-        // new lerp object camera pos
-        LerpObject_ObjectCameraPos.SetAllParam(objectCamera.GlobalPosition,
-            HeadHolderCamera.GlobalPosition, LerpSpeedPosObjectCamera, true);
-
-        objectCamera.GlobalPosition = LerpObject_ObjectCameraPos.Update(delta);
 
         // Calculate actual movement speed 
         ActualMovementSpeed = GlobalPosition.DistanceTo(LastPosition) * 20000.0f * (float)delta;
@@ -139,6 +132,11 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
 
 
         LastPosition = GlobalPosition;
+    }
+
+    // Update Visual updated process
+    public override void _Process(double delta)
+    {
     }
 
     // Update velocity for fly move and return this velocity
@@ -206,7 +204,16 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
                     _ActualSetMoveSpeed = MoveSpeedInStand;
                 }
 
-                velocity = velocity.Lerp(direction * _ActualSetMoveSpeed, AccelerateSmoothStep * (float)delta);
+                // New move Fix pro vyreseni bugu se zdi !
+                if (IsOnWall() && inputDir.y != 0)
+                {
+                    var newDir = GetWallNormal().Slide(direction).Normalized();
+                    velocity = velocity.Lerp(newDir * _ActualSetMoveSpeed, AccelerateSmoothStep * (float)delta);
+                }
+                else
+                {
+                    velocity = velocity.Lerp(direction * _ActualSetMoveSpeed, AccelerateSmoothStep * (float)delta);
+                }
             }
             else
             {
@@ -232,7 +239,7 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
             }
         }
 
-        GameMaster.GM.GetDebugHud().CustomLabelUpdateText(2, this, "heightest = " + heightfallingtest);
+        GameMaster.GM.GetDebugHud().CustomLabelUpdateText(2, this, "velocity = " + direction);
 
         // Function of Falling and StartFalling
         if (!IsOnFloor())
@@ -401,6 +408,14 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
             Input.MouseMode = Input.MouseModeEnum.Captured;
         else
             Input.MouseMode = Input.MouseModeEnum.Visible;
+
+        SetMoveInputEnable(_isInputEnable);
+        //objectCamera.IsCameraLookInputEnable(_isInputEnable);
+    }
+
+    public void SetMoveInputEnable(bool newEnable)
+    {
+        _isMoveInputEnable = newEnable;
     }
 
     public void SetMouseVisible(bool newMouseVisible)
@@ -474,5 +489,10 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
     public Camera3D GetFPSCharacterCamera()
     {
         return objectCamera.Camera;
+    }
+
+    public Control GetAllHudsControlNode()
+    {
+        return allHuds;
     }
 }

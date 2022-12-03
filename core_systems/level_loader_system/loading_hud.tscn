@@ -1,0 +1,75 @@
+[gd_scene load_steps=2 format=3 uid="uid://tr2dxfjg7wdl"]
+
+[ext_resource type="Script" path="res://core_systems/level_loader_system/LoadingHud.cs" id="1_3ph3u"]
+
+[node name="LoadingHud" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_3ph3u")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+color = Color(0, 0, 0, 1)
+
+[node name="NameOfLevelLabel" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -199.901
+offset_top = -60.0
+offset_right = 199.902
+offset_bottom = -22.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 25
+text = "wordlevel: rooms_test"
+horizontal_alignment = 1
+
+[node name="LoadingLabel2" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -350.0
+offset_top = -15.5
+offset_right = 350.0
+offset_bottom = 15.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 20
+text = "loading, please wait..."
+horizontal_alignment = 1
+
+[node name="ShaderPrecompLabelVBox" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2i(400, 200)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -350.0
+offset_top = 301.0
+offset_right = 350.0
+offset_bottom = 501.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ShaderProcessText" type="Label" parent="ShaderPrecompLabelVBox"]
+offset_right = 700.0
+offset_bottom = 31.0
+theme_override_font_sizes/font_size = 20
+text = "PRECOMPLILE SHADER 0%"
+horizontal_alignment = 1
