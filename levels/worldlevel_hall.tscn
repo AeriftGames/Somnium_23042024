@@ -38,7 +38,6 @@ ssao_horizon = 1.0
 ssil_enabled = true
 sdfgi_enabled = true
 sdfgi_use_occlusion = true
-sdfgi_energy = 2.0
 glow_enabled = true
 fog_enabled = true
 fog_light_energy = 0.1
@@ -148,8 +147,8 @@ transform = Transform3D(-0.999349, 0, -0.036068, 0, 1, 0, 0.036068, 0, -0.999349
 
 [node name="OmniLight3D2" type="OmniLight3D" parent="lamp2"]
 transform = Transform3D(-0.999349, -0.00908128, 0.0349061, 0, 0.967784, 0.251782, -0.036068, 0.251618, -0.967154, 0, 0, 0)
-light_energy = 0.5
-light_indirect_energy = 5.0
+light_energy = 0.4
+light_indirect_energy = 12.0
 light_volumetric_fog_energy = 3.0
 shadow_enabled = true
 omni_range = 20.0
