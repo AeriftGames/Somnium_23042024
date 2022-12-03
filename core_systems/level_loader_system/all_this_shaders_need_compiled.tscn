@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://bgmsvtrn4l4r2"]
+[gd_scene load_steps=53 format=3 uid="uid://bgmsvtrn4l4r2"]
 
 [ext_resource type="Script" path="res://core_systems/level_loader_system/all_this_shaders_need_compiled.cs" id="1_o15x1"]
 [ext_resource type="Material" uid="uid://d08tc1iusbqxj" path="res://placeholders/modular_walls/mat/mat_ground1.tres" id="2_2s5p8"]
@@ -17,7 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://b6l080hrctdgf" path="res://objects/flashlight/flashlight.tscn" id="10_d871k"]
 [ext_resource type="Material" uid="uid://ck4t6r2ysoqm" path="res://testing_level_hall/skoba_mat.tres" id="10_flomm"]
 [ext_resource type="Material" path="res://testing_level_hall/vents_holders_mat.tres" id="11_66c6b"]
-[ext_resource type="PackedScene" path="res://objects/furniture/cabinet_new.tscn" id="11_lo4k4"]
+[ext_resource type="PackedScene" uid="uid://pw2ww2bgkvd0" path="res://objects/furniture/cabinet_new.tscn" id="11_lo4k4"]
 [ext_resource type="Material" path="res://testing_level_hall/vents_mat.tres" id="12_opohs"]
 [ext_resource type="PackedScene" uid="uid://d5wc26cy4c6o" path="res://objects/furniture/cabinet_small.tscn" id="12_rmt1d"]
 [ext_resource type="Material" uid="uid://u6cwmff6labp" path="res://testing_level_hall/wire_holder_mat.tres" id="13_n5qbt"]
@@ -26,11 +26,7 @@
 [ext_resource type="PackedScene" uid="uid://djuv0voeaxmos" path="res://objects/light/light_celling.tscn" id="14_q5dvk"]
 [ext_resource type="PackedScene" uid="uid://bys0s78vbryfp" path="res://objects/light/light_celling_long.tscn" id="15_1d4ex"]
 [ext_resource type="Material" uid="uid://hoe8b861rkh8" path="res://testing_level_hall/floor_deckel_mat.tres" id="15_vm6bd"]
-[ext_resource type="PackedScene" uid="uid://cmc2d1am8ff6j" path="res://objects/misc/food_can.tscn" id="17_a8n73"]
-[ext_resource type="PackedScene" uid="uid://16d10e0sx2rr" path="res://objects/pipes/pipecurve.glb" id="18_ifolj"]
-[ext_resource type="PackedScene" uid="uid://d1fahaee5i3x6" path="res://objects/pipes/pipestraight.glb" id="19_bbken"]
-[ext_resource type="PackedScene" uid="uid://bv2lie0sokewl" path="res://objects/read/postcard_test/postcard.tscn" id="20_wf2l7"]
-[ext_resource type="PackedScene" uid="uid://b5j5fsa38hgon" path="res://objects/read/postcard_test/paper_test_view.tscn" id="21_74g87"]
+[ext_resource type="PackedScene" uid="uid://b5j5fsa38hgon" path="res://objects/read/postcard_test/postcard_view.tscn" id="21_74g87"]
 [ext_resource type="PackedScene" uid="uid://c5x31aaf0q2i3" path="res://placeholders/posters/poster1.tscn" id="23_yn0fc"]
 [ext_resource type="PackedScene" uid="uid://cill7wx53gakg" path="res://placeholders/posters/poster2.tscn" id="24_7ynjp"]
 [ext_resource type="PackedScene" uid="uid://dp7dmsp410av7" path="res://placeholders/interactive_items/interactive_item_look_and_interact_test.tscn" id="25_p4cp4"]
@@ -177,15 +173,6 @@ script = null
 [node name="light_celling" parent="AllScenes" instance=ExtResource("14_q5dvk")]
 
 [node name="light_celling_long" parent="AllScenes" instance=ExtResource("15_1d4ex")]
-
-[node name="food_can" parent="AllScenes" instance=ExtResource("17_a8n73")]
-
-[node name="pipecurve" parent="AllScenes" instance=ExtResource("18_ifolj")]
-
-[node name="pipestraight" parent="AllScenes" instance=ExtResource("19_bbken")]
-
-[node name="postcard" parent="AllScenes" instance=ExtResource("20_wf2l7")]
-script = null
 
 [node name="paper_test_view" parent="AllScenes" instance=ExtResource("21_74g87")]
 
