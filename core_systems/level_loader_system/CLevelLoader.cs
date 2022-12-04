@@ -2,10 +2,8 @@ using Godot;
 using Godot.Collections;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.IO;
-using System.Linq;
-using static System.Net.Mime.MediaTypeNames;
+using System.Threading.Tasks;
 
 public partial class CLevelLoader : Godot.Object
 {
@@ -20,46 +18,34 @@ public partial class CLevelLoader : Godot.Object
         public string path;
     }
 
-    private SLevelInfo needNewLevelInfo;
-
     private GameMaster gm;
-
-    private Godot.Timer loadNewLeveldelay_timer;
 
     public CLevelLoader(Node ownerInstance, bool isPrecompiledShaders)
     {
         gm = (GameMaster)ownerInstance;
         this.isPrecompiledShaders = isPrecompiledShaders;
-
-        needNewLevelInfo = new SLevelInfo();
-        needNewLevelInfo.name = "";
-        needNewLevelInfo.path = "";
-
-        // Create timer for delay to load new level
-        loadNewLeveldelay_timer = new Godot.Timer();
-        var callable_delayToLoadNewLevel = new Callable(this, "ChangeLevelSceneNow");
-        loadNewLeveldelay_timer.Connect("timeout", callable_delayToLoadNewLevel);
-        loadNewLeveldelay_timer.WaitTime = 0.5;
-        loadNewLeveldelay_timer.OneShot = true;
-        GameMaster.GM.AddChild(loadNewLeveldelay_timer);
     }
 
-    public void LoadNewWorldLevel(string newLevelScenePath, string newLevelName)
+    public async void LoadNewWorldLevel(string newLevelScenePath, string newLevelName)
     {
+        // funkce ktera prepne veskera svetla v levelu na hidden
+        UnloadLevelProcess();
+
+        // Spusti async task pro zmenu levelu
+        await ChangeLevelSceneWithDelay(newLevelScenePath,newLevelName,1000);
+    }
+
+    async Task ChangeLevelSceneWithDelay(string newLevelScenePath, string newLevelName, int delay)
+    {
+        // potrebny delay
+        await Task.Delay(delay);
+
         // zapneme cernou obrazovku
         gm.EnableBlackScreen(true);
 
-        // ulozime si info o levelu ktery chceme spustit
-        needNewLevelInfo.path = newLevelScenePath;
-        needNewLevelInfo.name = newLevelName;
-
-        BeforeUnloadLevel();
-    }
-
-    private void ChangeLevelSceneNow()
-    {
-        actualLevelName = needNewLevelInfo.name;
-        gm.GetTree().ChangeSceneToFile(needNewLevelInfo.path);
+        // zmenime level
+        actualLevelName = newLevelName;
+        gm.GetTree().ChangeSceneToFile(newLevelScenePath);
     }
 
     public List<SLevelInfo> GetAllLevelsInfo()
@@ -155,7 +141,7 @@ public partial class CLevelLoader : Godot.Object
         loadingHud.SetShaderProcessValueText(process.ToString());
     }
 
-    public void BeforeUnloadLevel()
+    public void UnloadLevelProcess()
     {
         // funkce ktera proleze cely level a najde vsechny svetla, ktera nasledne nastavime na visible = false
         // melo by to vyresit problem s GI a prepinani levelu
@@ -186,9 +172,6 @@ public partial class CLevelLoader : Godot.Object
                     }
                 }
             }
-
-            // spusti kratky timer, po kterym se spusti vnitrni funkce ChangeLevelSceneNow() a ta spusti novy level
-            loadNewLeveldelay_timer.Start();
         }
     }
 }

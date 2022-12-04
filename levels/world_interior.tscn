@@ -18,6 +18,7 @@ reflected_light_source = 2
 tonemap_mode = 2
 ssao_enabled = true
 ssil_enabled = true
+sdfgi_enabled = true
 sdfgi_use_occlusion = true
 sdfgi_energy = 2.313
 fog_enabled = true
@@ -370,7 +371,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.6, 0, -9.6)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.6, 0, -8.6)
 
 [node name="OmniLight3d" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 2, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.65338, 2.14823, -0.18248)
 light_energy = 0.343
 shadow_enabled = true
 omni_range = 44.822

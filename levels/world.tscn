@@ -3,7 +3,7 @@
 [ext_resource type="ArrayOccluder3D" uid="uid://bucr66xlw0upl" path="res://levels/world/world.occ" id="1_beeae"]
 [ext_resource type="Texture2D" uid="uid://660jcc1vju43" path="res://textures/brick_pavement_0108_02_s.jpg" id="1_jq6xl"]
 [ext_resource type="Texture2D" uid="uid://bybrpbyf1euit" path="res://textures/NormalMap (3).png" id="2_wx2m5"]
-[ext_resource type="PackedScene" path="res://placeholders/MeshWall.tscn" id="3_l1uqq"]
+[ext_resource type="PackedScene" uid="uid://bfhxpq55lmdom" path="res://placeholders/MeshWall.tscn" id="3_l1uqq"]
 [ext_resource type="PackedScene" uid="uid://bet3idvc4fg0n" path="res://placeholders/PlayerStart.tscn" id="5_hst73"]
 
 [sub_resource type="Sky" id="Sky_fi2v8"]
@@ -14,6 +14,7 @@ tonemap_mode = 3
 ssr_enabled = true
 ssao_enabled = true
 ssil_enabled = true
+sdfgi_enabled = true
 sdfgi_use_occlusion = true
 glow_enabled = true
 fog_enabled = true

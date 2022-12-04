@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Diagnostics;
+using System.Threading.Tasks;
 
 public partial class GameMaster : Node
 {
@@ -24,7 +25,7 @@ public partial class GameMaster : Node
 	//
 	private Control blackScreen = null;
 
-	public override void _Ready()
+    public override void _Ready()
 	{
 		GD.Print("GameMaster loaded");
 		GM = this;
@@ -70,15 +71,27 @@ public partial class GameMaster : Node
 				QuitGame();
     }
 
-	public void QuitGame()
+	public async void QuitGame()
 	{
-		Log.WriteLog(this,LogSystem.ELogMsgType.INFO,"Quit Game");
+		Log.WriteLog(this,LogSystem.ELogMsgType.INFO,"Quiting Game");
+		await TaskQuitGame();
+	}
+
+    async Task TaskQuitGame()
+    {
+		// Unload level process
+        LevelLoader.UnloadLevelProcess();
+
+        await Task.Delay(1000);
+
+        // zapneme cernou obrazovku
+        EnableBlackScreen(true);
 
 		SafeQueueAll();
 		GetTree().Quit();
-	}
+    }
 
-	public void SafeQueueAll()
+    public void SafeQueueAll()
 	{
         _fpsCharacter.objectCamera.QueueFree();
         _fpsCharacter.FreeAll();
