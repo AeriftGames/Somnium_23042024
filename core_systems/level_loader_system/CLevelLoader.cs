@@ -129,4 +129,9 @@ public partial class CLevelLoader : Godot.Object
         loadingHud.SetShaderProcessValueText(process.ToString());
     }
 
+    public void BeforeUnloadLevel()
+    {
+        GameMaster.GM.Log.WriteLog(GameMaster.GM, LogSystem.ELogMsgType.INFO, "unload lights");
+    }
+
 }
