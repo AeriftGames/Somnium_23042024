@@ -1,5 +1,6 @@
-[gd_scene load_steps=14 format=3 uid="uid://bxvheu3wp7u23"]
+[gd_scene load_steps=15 format=3 uid="uid://bxvheu3wp7u23"]
 
+[ext_resource type="Script" path="res://levels/worldlevel.cs" id="1_a5qcd"]
 [ext_resource type="ArrayOccluder3D" uid="uid://bhp8wurw06bpa" path="res://levels/worldlevel_newhall/worldlevel_newhall.occ" id="1_va7r5"]
 [ext_resource type="PackedScene" uid="uid://bet3idvc4fg0n" path="res://placeholders/PlayerStart.tscn" id="3_5222s"]
 [ext_resource type="PackedScene" path="res://testing_level_hall/models/shelfs/shelf_big_back.tscn" id="4_r37ke"]
@@ -22,7 +23,6 @@ sky = SubResource("Sky_rxtxe")
 tonemap_mode = 2
 ssao_enabled = true
 ssil_enabled = true
-sdfgi_enabled = true
 sdfgi_use_occlusion = true
 glow_enabled = true
 fog_enabled = true
@@ -38,6 +38,7 @@ size = Vector3(2, 0.1, 4)
 size = Vector3(2, 0.1, 4)
 
 [node name="worldlevel" type="Node3D"]
+script = ExtResource("1_a5qcd")
 
 [node name="worldlevel_occluderculling" type="OccluderInstance3D" parent="."]
 visible = false

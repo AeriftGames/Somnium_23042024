@@ -1,5 +1,6 @@
-[gd_scene load_steps=16 format=3 uid="uid://bpim883jvt5px"]
+[gd_scene load_steps=17 format=3 uid="uid://bpim883jvt5px"]
 
+[ext_resource type="Script" path="res://levels/worldlevel.cs" id="1_a314l"]
 [ext_resource type="ArrayOccluder3D" uid="uid://bcinbb53h4cw1" path="res://levels/worldlevel_hall/worldlevel_hall.occ" id="1_tib7r"]
 [ext_resource type="PackedScene" uid="uid://ck8mt4y4gfqmk" path="res://placeholders/modular_walls/ground_large.tscn" id="2_yutu1"]
 [ext_resource type="PackedScene" uid="uid://bet3idvc4fg0n" path="res://placeholders/PlayerStart.tscn" id="3_17trl"]
@@ -31,7 +32,6 @@ ssao_intensity = 4.41
 ssao_detail = 1.14
 ssao_horizon = 1.0
 ssil_enabled = true
-sdfgi_enabled = true
 sdfgi_use_occlusion = true
 glow_enabled = true
 fog_enabled = true
@@ -41,6 +41,7 @@ volumetric_fog_density = 0.035
 volumetric_fog_ambient_inject = 1.0
 
 [node name="worldlevel" type="Node3D"]
+script = ExtResource("1_a314l")
 
 [node name="worldlevel_occluderculling" type="OccluderInstance3D" parent="."]
 visible = false

@@ -3,6 +3,7 @@ using Godot.Collections;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Reflection.Emit;
 using System.Threading.Tasks;
 
 public partial class CLevelLoader : Godot.Object
@@ -100,7 +101,7 @@ public partial class CLevelLoader : Godot.Object
         // co se dokonci jeji funkce zavola EndPrecompileShaderProcess tady dole.
     }
 
-    public void EndPrecompileShaderProcess()
+    public async void EndPrecompileShaderProcess()
     {
         FPSCharacter_BasicMoving character_basic = GameMaster.GM.GetFPSCharacter();
         ObjectCamera objectCamera = character_basic.objectCamera;
@@ -119,8 +120,8 @@ public partial class CLevelLoader : Godot.Object
         // loading hud dokonci svoji ulohu a znici se
         loadingHud.LoadingIsComplete(false);
 
-        // vypneme cernou obrazovku
-        gm.EnableBlackScreen(false);
+        // Toggle all lights for fix GI
+        await SetLevelWorldEnvironment(true);
     }
 
     // instantiate a addchild loading hud to fpscharacter/allhuds and return it
@@ -173,5 +174,50 @@ public partial class CLevelLoader : Godot.Object
                 }
             }
         }
+    }
+
+    public async Task SetLevelWorldEnvironment(bool newSdfgi)
+    {
+        await Task.Delay(100);
+
+        Node level = GameMaster.GM.GetNode("/root/worldlevel");
+        if (level == null)
+        {
+            // If worldlevel dosnt finded
+            GameMaster.GM.Log.WriteLog(GameMaster.GM, LogSystem.ELogMsgType.ERROR,
+                "Not find /root/worldlevel");
+        }
+        else
+        {
+            // prepne mod svetel na disable
+            var allLights = level.FindChildren("", "Light3D", true, false);
+            if (allLights.Count > 0)
+            {
+                GameMaster.GM.Log.WriteLog(GameMaster.GM, LogSystem.ELogMsgType.INFO, "number of lights: " + allLights.Count);
+
+                foreach (var a in allLights)
+                {
+                    Light3D light = a as Light3D;
+                    if (light != null)
+                    {
+                        Light3D.BakeMode oldBakeMode = light.LightBakeMode;
+                        light.LightBakeMode = Light3D.BakeMode.Disabled;
+                        await SetLight3DBakeModeDelay(light,oldBakeMode);
+                    }
+                }
+            }
+        }
+    }
+
+    private async Task SetLight3DBakeModeDelay(Light3D newLight,Light3D.BakeMode newBakeMode)
+    {
+        // za 200ms nastav originalni nastaveni bake
+        await Task.Delay(20);
+        newLight.LightBakeMode = newBakeMode;
+
+        GD.Print(newLight.Name + "set bake mode: " + newBakeMode.ToString());
+
+        // vypneme cernou obrazovku
+        GameMaster.GM.EnableBlackScreen(false);
     }
 }

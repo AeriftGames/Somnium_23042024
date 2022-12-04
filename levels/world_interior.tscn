@@ -1,6 +1,7 @@
-[gd_scene load_steps=39 format=3 uid="uid://cfhr1bbijkhk7"]
+[gd_scene load_steps=40 format=3 uid="uid://cfhr1bbijkhk7"]
 
 [ext_resource type="ArrayOccluder3D" uid="uid://bvuu4stocopv2" path="res://levels/world_interior/world_interior.occ" id="1_h3qem"]
+[ext_resource type="Script" path="res://levels/worldlevel.cs" id="1_siidf"]
 [ext_resource type="Texture2D" uid="uid://660jcc1vju43" path="res://textures/brick_pavement_0108_02_s.jpg" id="1_uebcf"]
 [ext_resource type="Texture2D" uid="uid://bybrpbyf1euit" path="res://textures/NormalMap (3).png" id="2_18fqb"]
 [ext_resource type="Material" uid="uid://bc2lnxshiuvtk" path="res://textures/mat1.tres" id="3_6mmgv"]
@@ -18,7 +19,6 @@ reflected_light_source = 2
 tonemap_mode = 2
 ssao_enabled = true
 ssil_enabled = true
-sdfgi_enabled = true
 sdfgi_use_occlusion = true
 sdfgi_energy = 2.313
 fog_enabled = true
@@ -123,6 +123,7 @@ data = PackedVector3Array(-1, 1, 1, 1, 1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, -
 data = PackedVector3Array(-1, 1, 1, 1, 1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, -1, 1, 1, 1, -1, -1, 1, -1, 1, -1, -1, -1, 1, -1, -1, -1, -1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, 1, 1, 1, -1, 1, -1, -1, 1, -1, 1, -1, 1, -1, -1, 1, 1, -1, -1, -1, -1, 1, 1, -1, -1, 1, -1, -1, -1, 1, 1, 1, -1, 1, 1, 1, 1, -1, -1, 1, 1, -1, 1, -1, 1, 1, -1, -1, -1, 1, 1, -1, 1, -1, -1, -1, 1, -1, 1, 1, -1, -1, -1, -1, -1)
 
 [node name="worldlevel" type="Node3D"]
+script = ExtResource("1_siidf")
 
 [node name="worldlevel_occluderculling" type="OccluderInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.89176, 0, 0)
