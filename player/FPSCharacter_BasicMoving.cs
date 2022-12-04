@@ -495,4 +495,9 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
     {
         return allHuds;
     }
+
+    public virtual void FreeAll()
+    {
+        QueueFree();
+    }
 }

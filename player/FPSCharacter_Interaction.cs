@@ -261,4 +261,9 @@ public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
 	{
 		return basicHud;
 	}
+
+	public override void FreeAll()
+	{
+        base.FreeAll();
+	}
 }

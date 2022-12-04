@@ -323,7 +323,8 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
         lerpLandingSpeedModifier = speedmod;
 
         // Start timer to normal
-        landing_timer.Start();
+        if(landing_timer != null)
+            landing_timer.Start();
     }
 
     // EVENT Dead
@@ -340,5 +341,12 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
     public void UpdateLeaning(double delta)
     {
 
+    }
+
+    public override void FreeAll()
+    {
+        base.FreeAll();
+        landing_timer.QueueFree();
+        QueueFree();
     }
 }

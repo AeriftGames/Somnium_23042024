@@ -73,7 +73,19 @@ public partial class GameMaster : Node
 	public void QuitGame()
 	{
 		Log.WriteLog(this,LogSystem.ELogMsgType.INFO,"Quit Game");
+
+		SafeQueueAll();
 		GetTree().Quit();
+	}
+
+	public void SafeQueueAll()
+	{
+        _fpsCharacter.objectCamera.QueueFree();
+        _fpsCharacter.FreeAll();
+		_fpsCharacter.QueueFree();
+
+		if (_fpsCharacter.IsQueuedForDeletion())
+			GD.Print("fps character = smazano");
 	}
 
     public override void _Process(double delta)

@@ -1,12 +1,12 @@
-[gd_scene load_steps=12 format=3 uid="uid://bxvheu3wp7u23"]
+[gd_scene load_steps=14 format=3 uid="uid://bxvheu3wp7u23"]
 
 [ext_resource type="ArrayOccluder3D" uid="uid://bhp8wurw06bpa" path="res://levels/worldlevel_newhall/worldlevel_newhall.occ" id="1_va7r5"]
 [ext_resource type="PackedScene" uid="uid://bet3idvc4fg0n" path="res://placeholders/PlayerStart.tscn" id="3_5222s"]
-[ext_resource type="PackedScene" uid="uid://dts446345mv2l" path="res://testing_level_newhall/room_hall_2_03.tscn" id="4_27gi4"]
 [ext_resource type="PackedScene" path="res://testing_level_hall/models/shelfs/shelf_big_back.tscn" id="4_r37ke"]
 [ext_resource type="PackedScene" uid="uid://blgh0y158pkqq" path="res://testing_level_hall/models/workbench/workbench.tscn" id="5_61h53"]
 [ext_resource type="PackedScene" uid="uid://ipic8k4uwyqr" path="res://testing_stuff_kaen/wardrobe_small.tscn" id="6_rbs8j"]
 [ext_resource type="PackedScene" path="res://testing_stuff_kaen/wardrobe_rdoor_small.tscn" id="7_hrosl"]
+[ext_resource type="PackedScene" uid="uid://ds2om7g2l2p6k" path="res://testing_level_newhall/room_hall_2_08.tscn" id="8_nvayt"]
 [ext_resource type="PackedScene" uid="uid://cryhclbq4jsy7" path="res://placeholders/PhysicsItems/physic_item_gas_tank_small.tscn" id="8_yjkxg"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_w3cwh"]
@@ -17,7 +17,7 @@ ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
 sky_material = SubResource("ProceduralSkyMaterial_w3cwh")
 
 [sub_resource type="Environment" id="Environment_p3qlj"]
-background_mode = 2
+background_energy_multiplier = 0.0
 sky = SubResource("Sky_rxtxe")
 tonemap_mode = 2
 ssao_enabled = true
@@ -26,14 +26,18 @@ sdfgi_enabled = true
 sdfgi_use_occlusion = true
 glow_enabled = true
 fog_enabled = true
+fog_light_energy = 0.3
 fog_density = 0.002
 volumetric_fog_enabled = true
+volumetric_fog_density = 0.035
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bxdgd"]
+size = Vector3(2, 0.1, 4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cuh5r"]
+size = Vector3(2, 0.1, 4)
 
 [node name="worldlevel" type="Node3D"]
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.491015, 0.726058, 0.481398, 0.724598, 0.0336308, 0.688351, 0.483593, 0.68681, -0.542614, 0, 1.02584, -0.252968)
-shadow_enabled = true
 
 [node name="worldlevel_occluderculling" type="OccluderInstance3D" parent="."]
 visible = false
@@ -48,8 +52,6 @@ environment = SubResource("Environment_p3qlj")
 
 [node name="PlayerStart" parent="." instance=ExtResource("3_5222s")]
 transform = Transform3D(0.017592, 0, 0.999845, 0, 1, 0, -0.999845, 0, 0.017592, 7.63606, 0, -3.63779)
-
-[node name="room_hall2_03" parent="." instance=ExtResource("4_27gi4")]
 
 [node name="shelf_big_back2" parent="." instance=ExtResource("4_r37ke")]
 transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0.1451, 0, -4.43498)
@@ -77,3 +79,33 @@ metadata/_edit_lock_ = true
 
 [node name="PhysicItem_gas_tank_small" parent="." instance=ExtResource("8_yjkxg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0.8, -4.1)
+
+[node name="room_hall2_08" parent="." instance=ExtResource("8_nvayt")]
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.4, -1.76381)
+light_energy = 0.6
+light_indirect_energy = 5.0
+shadow_enabled = true
+omni_attenuation = 1.1487
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 3.4, -1.76381)
+light_energy = 0.6
+light_indirect_energy = 5.0
+shadow_enabled = true
+omni_attenuation = 1.1487
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.920505, -0.390731, 0, 0.390731, 0.920505, -1.5, 0.5, -5.55119)
+visible = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_bxdgd")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.920505, 0.390731, 0, -0.390731, 0.920505, -3.72801, 2.02791, -6.31913)
+visible = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D2"]
+shape = SubResource("BoxShape3D_cuh5r")
