@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bxvheu3wp7u23"]
+[gd_scene load_steps=16 format=3 uid="uid://bxvheu3wp7u23"]
 
 [ext_resource type="Script" path="res://levels/worldlevel.cs" id="1_a5qcd"]
 [ext_resource type="ArrayOccluder3D" uid="uid://bhp8wurw06bpa" path="res://levels/worldlevel_newhall/worldlevel_newhall.occ" id="1_va7r5"]
@@ -33,6 +33,9 @@ volumetric_fog_density = 0.035
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_bxdgd"]
 size = Vector3(2, 0.1, 4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_iy4j0"]
+size = Vector3(2, 0.1, 0.2)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_cuh5r"]
 size = Vector3(2, 0.1, 4)
@@ -84,29 +87,45 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0.8, -4.1)
 [node name="room_hall2_08" parent="." instance=ExtResource("8_nvayt")]
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.4, -1.76381)
-light_energy = 0.6
-light_indirect_energy = 5.0
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.261249, 2.52873, -1.15197)
+light_energy = 0.25
+light_indirect_energy = 4.0
 shadow_enabled = true
-omni_attenuation = 1.1487
+omni_range = 7.0
+omni_attenuation = 1.10957
 
 [node name="OmniLight3D2" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 3.4, -1.76381)
-light_energy = 0.6
-light_indirect_energy = 5.0
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.9666, 4.09133, 1.14881)
+light_energy = 0.15
 shadow_enabled = true
+omni_range = 15.207
 omni_attenuation = 1.1487
 
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
+[node name="StaticBodySchody" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.920505, -0.390731, 0, 0.390731, 0.920505, -1.5, 0.5, -5.55119)
-visible = false
+metadata/_edit_lock_ = true
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBodySchody"]
 shape = SubResource("BoxShape3D_bxdgd")
 
-[node name="StaticBody3D2" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.920505, 0.390731, 0, -0.390731, 0.920505, -3.72801, 2.02791, -6.31913)
-visible = false
+[node name="StaticBodySchody2" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.866026, -0.5, 0, 0.5, 0.866026, 5.95428, -1.07223, -0.668937)
+metadata/_edit_lock_ = true
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D2"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBodySchody2"]
+shape = SubResource("BoxShape3D_bxdgd")
+
+[node name="StaticBodySchody3" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.95428, 0.308785, -0.729122)
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBodySchody3"]
+transform = Transform3D(1, 0, 0, 0, 0.986788, -0.162017, 0, 0.162017, 0.986788, 0.305036, -0.370861, -1.75316)
+shape = SubResource("BoxShape3D_iy4j0")
+
+[node name="StaticBodySchody1" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.920505, 0.390731, 0, -0.390731, 0.920505, -3.72801, 2.02791, -6.31913)
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBodySchody1"]
 shape = SubResource("BoxShape3D_cuh5r")
