@@ -75,10 +75,6 @@ window/quality/msaa_3d=3
 
 project/assembly_name="My Fps Prototype"
 
-[editor]
-
-run/main_run_args="--verbose"
-
 [input]
 
 moveForward={
