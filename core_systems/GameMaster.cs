@@ -14,7 +14,7 @@ public partial class GameMaster : Node
 	public Node GDNode_Logging;
 
 	// LEVEL LOADER
-	public CLevelLoader LevelLoader;
+	public CLevelLoader LevelLoader = null;
 
 	// POINTERS
 	private DebugHud _debugHud = null;
@@ -68,8 +68,6 @@ public partial class GameMaster : Node
 		if (@event is InputEventKey eventKey)
 			if (eventKey.Pressed && eventKey.Keycode == Key.Escape)
 				QuitGame();
-			else if (eventKey.Pressed && eventKey.Keycode == Key.T)
-				ActionT();
     }
 
 	public void QuitGame()
@@ -88,12 +86,6 @@ public partial class GameMaster : Node
 
 		if (_fpsCharacter.IsQueuedForDeletion())
 			GD.Print("fps character = smazano");
-	}
-
-	public void ActionT()
-	{
-		if (LevelLoader == null) return;
-		LevelLoader.BeforeUnloadLevel();
 	}
 
     public override void _Process(double delta)

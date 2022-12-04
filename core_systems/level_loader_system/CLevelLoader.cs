@@ -20,11 +20,28 @@ public partial class CLevelLoader : Godot.Object
         public string path;
     }
 
+    private SLevelInfo needNewLevelInfo;
+
     private GameMaster gm;
+
+    private Godot.Timer loadNewLeveldelay_timer;
+
     public CLevelLoader(Node ownerInstance, bool isPrecompiledShaders)
     {
         gm = (GameMaster)ownerInstance;
         this.isPrecompiledShaders = isPrecompiledShaders;
+
+        needNewLevelInfo = new SLevelInfo();
+        needNewLevelInfo.name = "";
+        needNewLevelInfo.path = "";
+
+        // Create timer for delay to load new level
+        loadNewLeveldelay_timer = new Godot.Timer();
+        var callable_delayToLoadNewLevel = new Callable(this, "ChangeLevelSceneNow");
+        loadNewLeveldelay_timer.Connect("timeout", callable_delayToLoadNewLevel);
+        loadNewLeveldelay_timer.WaitTime = 0.5;
+        loadNewLeveldelay_timer.OneShot = true;
+        GameMaster.GM.AddChild(loadNewLeveldelay_timer);
     }
 
     public void LoadNewWorldLevel(string newLevelScenePath, string newLevelName)
@@ -32,8 +49,17 @@ public partial class CLevelLoader : Godot.Object
         // zapneme cernou obrazovku
         gm.EnableBlackScreen(true);
 
-        actualLevelName = newLevelName;
-        gm.GetTree().ChangeSceneToFile(newLevelScenePath);
+        // ulozime si info o levelu ktery chceme spustit
+        needNewLevelInfo.path = newLevelScenePath;
+        needNewLevelInfo.name = newLevelName;
+
+        BeforeUnloadLevel();
+    }
+
+    private void ChangeLevelSceneNow()
+    {
+        actualLevelName = needNewLevelInfo.name;
+        gm.GetTree().ChangeSceneToFile(needNewLevelInfo.path);
     }
 
     public List<SLevelInfo> GetAllLevelsInfo()
@@ -44,8 +70,8 @@ public partial class CLevelLoader : Godot.Object
         string[] allFiles = UniversalFunctions.GetDirectoryFiles(levels_directory, ".tscn");
         foreach (string file_path in allFiles)
         {
-            var file_name = UniversalFunctions.GetStringBetween(file_path, Directory.GetCurrentDirectory() + 
-                levels_directory+"\\", ".tscn");
+            var file_name = UniversalFunctions.GetStringBetween(file_path, Directory.GetCurrentDirectory() +
+                levels_directory + "\\", ".tscn");
 
             SLevelInfo level = new SLevelInfo();
             level.path = file_path;
@@ -54,7 +80,7 @@ public partial class CLevelLoader : Godot.Object
             allLevels.Add(level);
         }
 
-        if(allLevels.Count == 0) { GameMaster.GM.Log.WriteLog(gm,LogSystem.ELogMsgType.ERROR,"nenacetli jsme zadne LevelInfo"); }
+        if (allLevels.Count == 0) { GameMaster.GM.Log.WriteLog(gm, LogSystem.ELogMsgType.ERROR, "nenacetli jsme zadne LevelInfo"); }
 
         return allLevels;
     }
@@ -65,10 +91,10 @@ public partial class CLevelLoader : Godot.Object
         loadingHud = SpawnLoadingHud();
         loadingHud.SetInitializeAndVisibleNow(actualLevelName, false);
 
-        // TODO - bonus, vytvorit gui scenu pro loading (prekryti vsech tech nesmyslu co se deji za oponou :D)
+        // TODO - bonus, vytvorit gui scenu pro loading (prekryti vsech tech nesmyslu co se deji za oponou)
         gm.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "START PRECOMPILE SHADER PROCESS...");
 
-        Vector3 precompGlobalPosCenter = new Vector3(500,0,500);
+        Vector3 precompGlobalPosCenter = new Vector3(500, 0, 500);
 
         FPSCharacter_BasicMoving character_basic = GameMaster.GM.GetFPSCharacter();
         ObjectCamera objectCamera = character_basic.objectCamera;
@@ -82,7 +108,7 @@ public partial class CLevelLoader : Godot.Object
         var all_this_shaders_need_precomp_Instance = (all_this_shaders_need_compiled)GD.Load<PackedScene>(
             "res://core_systems/level_loader_system/all_this_shaders_need_compiled.tscn").Instantiate();
         gm.GetTree().Root.AddChild(all_this_shaders_need_precomp_Instance);
-        all_this_shaders_need_precomp_Instance.GlobalPosition = new Vector3(450,0,450);
+        all_this_shaders_need_precomp_Instance.GlobalPosition = new Vector3(450, 0, 450);
 
         // ted se spusti all_this_shader_need_compiled ready funkce a po par vterinach
         // co se dokonci jeji funkce zavola EndPrecompileShaderProcess tady dole.
@@ -131,7 +157,38 @@ public partial class CLevelLoader : Godot.Object
 
     public void BeforeUnloadLevel()
     {
-        GameMaster.GM.Log.WriteLog(GameMaster.GM, LogSystem.ELogMsgType.INFO, "unload lights");
-    }
+        // funkce ktera proleze cely level a najde vsechny svetla, ktera nasledne nastavime na visible = false
+        // melo by to vyresit problem s GI a prepinani levelu
 
+        GameMaster.GM.Log.WriteLog(GameMaster.GM, LogSystem.ELogMsgType.INFO, "unload lights");
+
+        Node level = GameMaster.GM.GetNode("/root/worldlevel");
+        if (level == null)
+        {
+            // If worldlevel for spawn dont finded
+            GameMaster.GM.Log.WriteLog(GameMaster.GM, LogSystem.ELogMsgType.ERROR,
+                "Not find /root/worldlevel for set unvisible all lights from LevelLoader");
+        }
+        else
+        {
+            var allLights = level.FindChildren("", "Light3D", true, false);
+
+            if (allLights.Count > 0)
+            {
+                GameMaster.GM.Log.WriteLog(GameMaster.GM, LogSystem.ELogMsgType.INFO, "number of lights: " + allLights.Count);
+
+                foreach (var a in allLights)
+                {
+                    Light3D light = a as Light3D;
+                    if (light != null)
+                    {
+                        light.Visible = false;
+                    }
+                }
+            }
+
+            // spusti kratky timer, po kterym se spusti vnitrni funkce ChangeLevelSceneNow() a ta spusti novy level
+            loadNewLeveldelay_timer.Start();
+        }
+    }
 }
