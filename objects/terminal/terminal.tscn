@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3]
+[gd_scene load_steps=7 format=3 uid="uid://cn6ywajm2nwyk"]
 
 [ext_resource type="Script" path="res://objects/terminal/terminal.gd" id="1_45i5t"]
 [ext_resource type="Shader" path="res://objects/terminal/terminal.gdshader" id="2_dnmio"]

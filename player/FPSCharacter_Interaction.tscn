@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3]
+[gd_scene load_steps=14 format=3 uid="uid://c2e0vms61c46m"]
 
 [ext_resource type="PackedScene" uid="uid://2b8vuef2k4is" path="res://player/FPSCharacter_WalkingEffects.tscn" id="1_0ipjt"]
 [ext_resource type="Script" path="res://player/FPSCharacter_Interaction.cs" id="2_fmih3"]
@@ -63,8 +63,17 @@ AudioFlashlight_Off = ExtResource("4_wmi65")
 FootStepLength = 1.25
 WalkCameraLerpHeight = 0.12
 lerpFootstepSpeedModifier = 2.0
+FootstepSounds = null
 FootstepsVolumeDB = -20.0
+MediumHeightForLandingEffect = 2.0
+HighHeightForLandingEffect = 3.0
+miniHeightLandingSounds = null
+smallHeightLandingSounds = null
+mediumHeightLandingSounds = null
+highHeightLandingSounds = null
+deathHeightLandingSounds = null
 LandingVolumeDB = -10.0
+JumpingSounds = null
 JumpingVolumeDB = -5.0
 JumpVelocity = 4.3
 MoveSpeedInStand = 2.25

@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3]
+[gd_scene load_steps=43 format=3 uid="uid://b7dh71rdu8dm6"]
 
 [ext_resource type="PackedScene" uid="uid://ck8mt4y4gfqmk" path="res://placeholders/modular_walls/ground_large.tscn" id="2_lls1c"]
 [ext_resource type="PackedScene" uid="uid://dc0mmunts8oay" path="res://placeholders/modular_walls/cube_hole_medium_wide.tscn" id="3_they1"]
@@ -22,7 +22,6 @@
 [ext_resource type="PackedScene" uid="uid://ttxrafhid6rv" path="res://placeholders/PhysicsItems/physic_crate.tscn" id="20_mdus6"]
 [ext_resource type="PackedScene" uid="uid://bfuhid56fgfje" path="res://placeholders/PhysicsItems/physic_crate1.tscn" id="21_uemld"]
 [ext_resource type="PackedScene" uid="uid://dgse04gq5at0" path="res://placeholders/PhysicsItems/physic_item_test_small.tscn" id="22_0tcas"]
-[ext_resource type="PackedScene" path="res://testing/drawer_table.tscn" id="23_yga7f"]
 [ext_resource type="PackedScene" uid="uid://ipic8k4uwyqr" path="res://testing_stuff_kaen/wardrobe_small.tscn" id="24_lbp1k"]
 
 [sub_resource type="ArrayOccluder3D" id="ArrayOccluder3D_u0ro1"]
@@ -775,15 +774,6 @@ transform = Transform3D(-0.0016737, 0, 0.099986, 0, 0.1, 0, -0.099986, 0, -0.001
 [node name="steel_frame_shelves_01_1k2" parent="." instance=ExtResource("19_h6axk")]
 transform = Transform3D(-0.0016737, 0, 0.099986, 0, 0.1, 0, -0.099986, 0, -0.0016737, -3.57201, 2.38419e-07, -3.69906)
 
-[node name="DrawerTable" parent="." instance=ExtResource("23_yga7f")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -3.44944, 0, 1.57995)
-
-[node name="DrawerTable3" parent="." instance=ExtResource("23_yga7f")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -3.44944, 0, 0.656543)
-
-[node name="DrawerTable2" parent="." instance=ExtResource("23_yga7f")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -2.67072, 0, 7.3876)
-
 [node name="Wardrobe_small" parent="." instance=ExtResource("24_lbp1k")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -3.291, -1.19209e-07, -0.26617)
 
@@ -810,6 +800,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.2085, 0, -0.841683)
 
 [node name="Wardrobe_small10" parent="." instance=ExtResource("24_lbp1k")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.6141, 0, -0.841683)
-
-[node name="DrawerTable4" parent="." instance=ExtResource("23_yga7f")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.8241, 0, -1.09821)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://c43oig653gcvy"]
+[gd_scene load_steps=49 format=3 uid="uid://c43oig653gcvy"]
 
 [ext_resource type="ArrayOccluder3D" uid="uid://c65wc0yeg3cak" path="res://levels/world_level_rooms/worldlevel_rooms_test.occ" id="1_48aky"]
 [ext_resource type="Script" path="res://levels/worldlevel_meteor.gd" id="1_0375g"]
@@ -37,6 +37,9 @@
 [ext_resource type="PackedScene" uid="uid://cmso6nb03kmgl" path="res://testing_oalar/box2.glb" id="37_s7lcx"]
 [ext_resource type="PackedScene" path="res://testing_oalar/poster.tscn" id="37_xticy"]
 [ext_resource type="PackedScene" uid="uid://bidh1jafqnmu2" path="res://testing_oalar/bunker.glb" id="38_fjt1y"]
+[ext_resource type="PackedScene" uid="uid://d21twnro2sgeu" path="res://placeholders/PhysicsItems/box_test.tscn" id="38_qw5pi"]
+[ext_resource type="PackedScene" uid="uid://d2wp3eif66h15" path="res://bunker.glb" id="39_wqnys"]
+[ext_resource type="PackedScene" uid="uid://dxvin5g21vt0i" path="res://light.tscn" id="40_ryy51"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_nrkwj"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -349,10 +352,11 @@ omni_range = 22.85
 omni_attenuation = 1.74111
 
 [node name="light_celling" parent="Lights" instance=ExtResource("21_7dcuu")]
-transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -5.98626, 2.56009, -1.73624)
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -5.98626, 2.56009, -4.05513)
 
 [node name="OmniLight3DFlashing" parent="Lights/light_celling" instance=ExtResource("14_cmtqf")]
 transform = Transform3D(3.33333, 0, 0, 0, 1.54716, -2.95253, 0, 2.95253, 1.54716, 0, -0.524133, 0)
+light_energy = 8.455
 
 [node name="light_celling2" parent="Lights" instance=ExtResource("21_7dcuu")]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -5.98626, 2.56009, 9.32938)
@@ -589,7 +593,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.14548, 0.912764, 2.65053)
 transform = Transform3D(-0.000185604, 0.998798, 0.0490063, 0.00378276, 0.0490067, -0.998791, -0.999993, 0, -0.00378731, -9.26157, 1.28378, 4.874)
 
 [node name="bunker" parent="." instance=ExtResource("38_fjt1y")]
-transform = Transform3D(-0.0206982, 0, 0.999786, 0, 1, 0, -0.999786, 0, -0.0206982, -9.61983, 1.48337, -1.75168)
+transform = Transform3D(-0.0206982, 0, 0.999786, 0, 1, 0, -0.999786, 0, -0.0206982, -11.792, 1.48337, 5.8001)
+
+[node name="PhysicItem_gas_tank_small" parent="." instance=ExtResource("38_qw5pi")]
+transform = Transform3D(-0.171877, 0.985118, 0, 0.232111, 0.0404973, -0.971846, -0.957383, -0.167038, -0.235617, -4.18953, 1.78175, -9.55664)
+
+[node name="bunker2" parent="." instance=ExtResource("39_wqnys")]
+transform = Transform3D(0.0212217, 0, 0.999775, 0, 1, 0, -0.999775, 0, 0.0212217, -13.0734, 1.81618, -1.70935)
+
+[node name="Node3D" type="Node3D" parent="."]
+
+[node name="light" parent="Node3D" instance=ExtResource("40_ryy51")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.18856, 1.37838, -1.96896)
 
 [editable path="LevelGeometry/Grounds/floor3"]
 [editable path="cabinet_small3"]
