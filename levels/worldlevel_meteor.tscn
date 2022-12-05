@@ -605,6 +605,10 @@ transform = Transform3D(0.0212217, 0, 0.999775, 0, 1, 0, -0.999775, 0, 0.0212217
 
 [node name="light" parent="Node3D" instance=ExtResource("40_ryy51")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.18856, 1.37838, -1.96896)
+emission_enabled = true
+
+[node name="light2" parent="Node3D" instance=ExtResource("40_ryy51")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.77429, 1.37838, -1.96896)
 
 [editable path="LevelGeometry/Grounds/floor3"]
 [editable path="cabinet_small3"]
