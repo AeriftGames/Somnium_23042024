@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bxvheu3wp7u23"]
+[gd_scene load_steps=17 format=3 uid="uid://bxvheu3wp7u23"]
 
 [ext_resource type="Script" path="res://levels/worldlevel.cs" id="1_a5qcd"]
 [ext_resource type="ArrayOccluder3D" uid="uid://bhp8wurw06bpa" path="res://levels/worldlevel_newhall/worldlevel_newhall.occ" id="1_va7r5"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" path="res://testing_stuff_kaen/wardrobe_rdoor_small.tscn" id="7_hrosl"]
 [ext_resource type="PackedScene" uid="uid://ds2om7g2l2p6k" path="res://testing_level_newhall/room_hall_2_08.tscn" id="8_nvayt"]
 [ext_resource type="PackedScene" uid="uid://cryhclbq4jsy7" path="res://placeholders/PhysicsItems/physic_item_gas_tank_small.tscn" id="8_yjkxg"]
+[ext_resource type="AudioStream" uid="uid://ngmb6mrvsbqc" path="res://audio/audio_streams/613738__punneedsounds__amb-ost1.mp3" id="10_1rgtk"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_w3cwh"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -129,3 +130,9 @@ metadata/_edit_lock_ = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBodySchody1"]
 shape = SubResource("BoxShape3D_cuh5r")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_1rgtk")
+volume_db = -5.426
+pitch_scale = 1.69
+autoplay = true
