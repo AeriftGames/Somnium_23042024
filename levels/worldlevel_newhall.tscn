@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bxvheu3wp7u23"]
+[gd_scene load_steps=48 format=3 uid="uid://bxvheu3wp7u23"]
 
 [ext_resource type="Script" path="res://levels/worldlevel.cs" id="1_a5qcd"]
 [ext_resource type="ArrayOccluder3D" uid="uid://bhp8wurw06bpa" path="res://levels/worldlevel_newhall/worldlevel_newhall.occ" id="1_va7r5"]
@@ -10,6 +10,37 @@
 [ext_resource type="PackedScene" uid="uid://ds2om7g2l2p6k" path="res://testing_level_newhall/room_hall_2_08.tscn" id="8_nvayt"]
 [ext_resource type="PackedScene" uid="uid://cryhclbq4jsy7" path="res://placeholders/PhysicsItems/physic_item_gas_tank_small.tscn" id="8_yjkxg"]
 [ext_resource type="AudioStream" uid="uid://ngmb6mrvsbqc" path="res://audio/audio_streams/613738__punneedsounds__amb-ost1.mp3" id="10_1rgtk"]
+[ext_resource type="PackedScene" uid="uid://pa3cewcym3dk" path="res://placeholders/modular_electric_wires/one_wire_up_short.tscn" id="11_mfpff"]
+[ext_resource type="PackedScene" uid="uid://bc75a73l67dsd" path="res://placeholders/modular_electric_wires/one_wire_biground.tscn" id="11_p4orl"]
+[ext_resource type="PackedScene" uid="uid://bpvrxjoi50p0t" path="res://placeholders/modular_electric_wires/one_wire_corner_in_medium.tscn" id="12_up0rs"]
+[ext_resource type="PackedScene" uid="uid://d2rt3o3mbq2t6" path="res://placeholders/modular_electric_wires/one_wire_corner_in_short.tscn" id="13_q3lg0"]
+[ext_resource type="PackedScene" uid="uid://mg0spjlf3hdq" path="res://placeholders/modular_electric_wires/one_wire_corner_out_medium.tscn" id="14_c7da8"]
+[ext_resource type="PackedScene" uid="uid://dag14glg2u4os" path="res://placeholders/modular_electric_wires/one_wire_corner_out_short.tscn" id="15_arej1"]
+[ext_resource type="PackedScene" uid="uid://8nrfg346ioxl" path="res://placeholders/modular_electric_wires/one_wire_smallround.tscn" id="16_3ugf1"]
+[ext_resource type="PackedScene" uid="uid://crjcb1kgy6xi7" path="res://placeholders/modular_electric_wires/one_wire_up_long.tscn" id="17_y2tdt"]
+[ext_resource type="PackedScene" uid="uid://dbx8wx881lqo8" path="res://placeholders/modular_electric_wires/one_wire_up_medium.tscn" id="18_1jlr6"]
+[ext_resource type="PackedScene" uid="uid://c6ilupwax043e" path="res://placeholders/modular_electric_wires/six_wires_biground.tscn" id="20_c80lf"]
+[ext_resource type="PackedScene" uid="uid://x0aqm11au4v0" path="res://placeholders/modular_electric_wires/six_wires_corner_in_medium.tscn" id="21_ff4ve"]
+[ext_resource type="PackedScene" uid="uid://b35v53dt2y2gx" path="res://placeholders/modular_electric_wires/six_wires_corner_in_short.tscn" id="22_s1ihm"]
+[ext_resource type="PackedScene" uid="uid://du5r5gj7lb26v" path="res://placeholders/modular_electric_wires/six_wires_corner_out_medium.tscn" id="23_a1iqa"]
+[ext_resource type="PackedScene" uid="uid://d3kvfffxi7kdq" path="res://placeholders/modular_electric_wires/six_wires_corner_out_short.tscn" id="24_rhee0"]
+[ext_resource type="PackedScene" uid="uid://4v5oy3wwf7a" path="res://placeholders/modular_electric_wires/six_wires_smallround.tscn" id="25_rgeqe"]
+[ext_resource type="PackedScene" uid="uid://cbenkl1jmh38y" path="res://placeholders/modular_electric_wires/six_wires_up_long.tscn" id="26_66rgr"]
+[ext_resource type="PackedScene" uid="uid://ct0lisru5b3t0" path="res://placeholders/modular_electric_wires/six_wires_up_medium.tscn" id="27_61md5"]
+[ext_resource type="PackedScene" uid="uid://cvcm5pq8kuukm" path="res://placeholders/modular_electric_wires/six_wires_up_short.tscn" id="28_1wybh"]
+[ext_resource type="PackedScene" uid="uid://bffgsatuea2lw" path="res://placeholders/modular_electric_wires/three_wires_biground.tscn" id="29_6qqst"]
+[ext_resource type="PackedScene" uid="uid://dhax72t2hu1on" path="res://placeholders/modular_electric_wires/three_wires_corner_in_medium.tscn" id="30_dw5eq"]
+[ext_resource type="PackedScene" uid="uid://dekjxpxxrrtv" path="res://placeholders/modular_electric_wires/three_wires_corner_in_short.tscn" id="31_xros3"]
+[ext_resource type="PackedScene" uid="uid://chcr46aqv5kbo" path="res://placeholders/modular_electric_wires/three_wires_corner_out_medium.tscn" id="32_fanft"]
+[ext_resource type="PackedScene" uid="uid://bhqupl0u70c00" path="res://placeholders/modular_electric_wires/three_wires_corner_out_short.tscn" id="33_5ehuf"]
+[ext_resource type="PackedScene" uid="uid://bnsnl4nvwmofj" path="res://placeholders/modular_electric_wires/three_wires_smallround.tscn" id="34_b7uj1"]
+[ext_resource type="PackedScene" uid="uid://lhs1iy6w4cwl" path="res://placeholders/modular_electric_wires/three_wires_up_long.tscn" id="35_kiolm"]
+[ext_resource type="PackedScene" uid="uid://ddxr8piq1nlri" path="res://placeholders/modular_electric_wires/three_wires_up_medium.tscn" id="36_c3p2y"]
+[ext_resource type="PackedScene" uid="uid://bc1n4oo7ge4lj" path="res://placeholders/modular_electric_wires/three_wires_up_short.tscn" id="37_lphfr"]
+[ext_resource type="PackedScene" uid="uid://0fo3wqgt727x" path="res://placeholders/modular_electric_wires/el_box.tscn" id="38_qv8v5"]
+[ext_resource type="PackedScene" uid="uid://ctfv40d1fil12" path="res://placeholders/modular_electric_wires/only_box.tscn" id="39_3oko1"]
+[ext_resource type="PackedScene" path="res://testing_level_hall/new_items/lamp_2.tscn" id="40_l2qkh"]
+[ext_resource type="PackedScene" uid="uid://s1qn1ecriuys" path="res://placeholders/modular_electric_wires/WireElement.tscn" id="41_rhikq"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_w3cwh"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -68,7 +99,7 @@ transform = Transform3D(-1.2, 0, -1.04907e-07, 0, 1.2, 0, 1.04907e-07, 0, -1.2, 
 transform = Transform3D(-1.2, 0, -1.04907e-07, 0, 1.2, 0, 1.04907e-07, 0, -1.2, 1.6451, 0, 0.465017)
 
 [node name="workbench" parent="." instance=ExtResource("5_61h53")]
-transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 1.6, 0.8, -4.1)
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 1.6, 0.8, -4.08643)
 
 [node name="Wardrobe_small" parent="." instance=ExtResource("6_rbs8j")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 4, 0, -0.1)
@@ -86,11 +117,12 @@ metadata/_edit_lock_ = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0.8, -4.1)
 
 [node name="room_hall2_08" parent="." instance=ExtResource("8_nvayt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000910759, 0.00908041, -0.00108337)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.261249, 2.52873, -1.15197)
 light_energy = 0.25
-light_indirect_energy = 4.0
+light_indirect_energy = 6.0
 shadow_enabled = true
 omni_range = 7.0
 omni_attenuation = 1.10957
@@ -98,6 +130,15 @@ omni_attenuation = 1.10957
 [node name="OmniLight3D2" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.9666, 4.09133, 1.14881)
 light_energy = 0.15
+shadow_enabled = true
+omni_range = 15.207
+omni_attenuation = 1.1487
+
+[node name="OmniLight3D3" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.87129, 1.67911, -4.67265)
+visible = false
+light_energy = 2.0
+light_indirect_energy = 2.0
 shadow_enabled = true
 omni_range = 15.207
 omni_attenuation = 1.1487
@@ -136,3 +177,303 @@ stream = ExtResource("10_1rgtk")
 volume_db = -5.426
 pitch_scale = 1.69
 autoplay = true
+
+[node name="one_wire_biground" parent="." instance=ExtResource("11_p4orl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.77091, 0, -6.00365)
+
+[node name="one_wire_corner_in_medium" parent="." instance=ExtResource("12_up0rs")]
+transform = Transform3D(-1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 9.33608, 0.0752754, -5.82155)
+
+[node name="one_wire_corner_in_short" parent="." instance=ExtResource("13_q3lg0")]
+transform = Transform3D(-1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 9.91851, 0.0646801, -5.82155)
+
+[node name="one_wire_corner_out_medium" parent="." instance=ExtResource("14_c7da8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.0838, 0.0861638, -5.82155)
+
+[node name="one_wire_corner_out_short" parent="." instance=ExtResource("15_arej1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.1174, 0.0669083, -5.82155)
+
+[node name="one_wire_smallround" parent="." instance=ExtResource("16_3ugf1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.64902, 0, -5.82155)
+
+[node name="one_wire_up_long" parent="." instance=ExtResource("17_y2tdt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.54419, 0, -5.82155)
+
+[node name="one_wire_up_medium" parent="." instance=ExtResource("18_1jlr6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.6692, 0, -5.82155)
+
+[node name="one_wire_up_short" parent="." instance=ExtResource("11_mfpff")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.77779, 0, -5.82155)
+
+[node name="six_wires_biground" parent="." instance=ExtResource("20_c80lf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.19034, 0.00749546, -7.53055)
+
+[node name="six_wires_corner_in_medium" parent="." instance=ExtResource("21_ff4ve")]
+transform = Transform3D(-1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 10.605, 0.109364, -7.54836)
+
+[node name="six_wires_corner_in_short" parent="." instance=ExtResource("22_s1ihm")]
+transform = Transform3D(-1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 9.8076, 0.114576, -7.50231)
+
+[node name="six_wires_corner_out_medium" parent="." instance=ExtResource("23_a1iqa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.2813, 0.0972797, -7.58945)
+
+[node name="six_wires_corner_out_short" parent="." instance=ExtResource("24_rhee0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.0077, 0.14683, -7.56419)
+
+[node name="six_wires_smallround" parent="." instance=ExtResource("25_rgeqe")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.4402, 0, -7.54703)
+
+[node name="six_wires_up_long" parent="." instance=ExtResource("26_66rgr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.60066, 0, -7.54859)
+
+[node name="six_wires_up_medium" parent="." instance=ExtResource("27_61md5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.74296, 0, -7.5729)
+
+[node name="six_wires_up_short" parent="." instance=ExtResource("28_1wybh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.9306, 0, -7.53368)
+
+[node name="three_wires_biground" parent="." instance=ExtResource("29_6qqst")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.5611, 0.0640255, -7.03447)
+
+[node name="three_wires_corner_in_medium" parent="." instance=ExtResource("30_dw5eq")]
+transform = Transform3D(-1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 9.54638, 0.0873466, -7.03642)
+
+[node name="three_wires_corner_in_short" parent="." instance=ExtResource("31_xros3")]
+transform = Transform3D(-1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 9.92183, 0.116384, -6.9809)
+
+[node name="three_wires_corner_out_medium" parent="." instance=ExtResource("32_fanft")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.3582, 0.0962216, -7.03642)
+
+[node name="three_wires_corner_out_short" parent="." instance=ExtResource("33_5ehuf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.0469, 0.126805, -7.03642)
+
+[node name="three_wires_smallround" parent="." instance=ExtResource("34_b7uj1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.6398, 0.0445026, -7.03642)
+
+[node name="three_wires_up_long" parent="." instance=ExtResource("35_kiolm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.7376, 0, -7.03642)
+
+[node name="three_wires_up_medium" parent="." instance=ExtResource("36_c3p2y")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.00676, 0.0740182, -7.03642)
+
+[node name="three_wires_up_short" parent="." instance=ExtResource("37_lphfr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.22645, 0, -7.03642)
+
+[node name="Wires" type="Node3D" parent="."]
+
+[node name="three_wires_up_medium2" parent="Wires" instance=ExtResource("36_c3p2y")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 0.917585, 0, 8.74228e-08, 0, -1, 3.04116, 0.34648, 0.50209)
+
+[node name="el_box" parent="Wires" instance=ExtResource("38_qv8v5")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 3.04898, 1.2043, 0.471042)
+
+[node name="three_wires_smallround2" parent="Wires" instance=ExtResource("34_b7uj1")]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 2.91477, 1.14657, 0.477048)
+
+[node name="three_wires_smallround4" parent="Wires" instance=ExtResource("34_b7uj1")]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 3.23753, 0.0834716, 0.477048)
+
+[node name="three_wires_smallround3" parent="Wires" instance=ExtResource("34_b7uj1")]
+transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 3.37544, 1.46293, 0.477048)
+
+[node name="three_wires_smallround5" parent="Wires" instance=ExtResource("34_b7uj1")]
+transform = Transform3D(1.31134e-07, 1, 0, -1, 1.31134e-07, 0, 0, 0, 1, 2.51567, 2.08788, 0.477048)
+
+[node name="three_wires_smallround10" parent="Wires" instance=ExtResource("34_b7uj1")]
+transform = Transform3D(-5.73206e-15, -4.37114e-08, -1, -0.91164, 0.410989, -1.79649e-08, 0.410989, 0.91164, -3.98491e-08, -0.284218, 2.80614, -2.25072)
+
+[node name="three_wires_smallround8" parent="Wires" instance=ExtResource("34_b7uj1")]
+transform = Transform3D(-2.18557e-07, -1, 0, 1, -2.18557e-07, 0, 0, 0, 1, -2.99409, 2.08788, 0.48768)
+
+[node name="three_wires_smallround9" parent="Wires" instance=ExtResource("34_b7uj1")]
+transform = Transform3D(3.0598e-07, 1, 0, -1, 3.0598e-07, 0, 0, 0, 1, -3.39557, 2.49167, 0.48768)
+
+[node name="three_wires_up_long2" parent="Wires" instance=ExtResource("35_kiolm")]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 3.30345, 0.0847053, 0.451785)
+
+[node name="one_wire_corner_out_short2" parent="Wires" instance=ExtResource("15_arej1")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 5.48457, 0.0669083, 0.515698)
+
+[node name="one_wire_corner_out_short3" parent="Wires" instance=ExtResource("15_arej1")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 5.4906, 4.24447, 0.515698)
+
+[node name="only_box" parent="Wires" instance=ExtResource("39_3oko1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.07562, 0.0739912, 0.498917)
+
+[node name="only_box2" parent="Wires" instance=ExtResource("39_3oko1")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 2.59626, 1.26017, -5.24208)
+
+[node name="only_box3" parent="Wires" instance=ExtResource("39_3oko1")]
+transform = Transform3D(0.00229123, -0.0119891, 0.999925, -0.999991, -0.00365257, 0.00224758, 0.00362536, -0.999921, -0.0119974, -0.22308, 2.75808, -2.03182)
+
+[node name="one_wire_up_short2" parent="Wires" instance=ExtResource("11_mfpff")]
+transform = Transform3D(-4.37114e-08, -1, 0, -1, 4.37114e-08, 8.74228e-08, -8.74228e-08, 3.82137e-15, -1, 5.38271, 0.0719557, 0.5128)
+
+[node name="one_wire_up_long2" parent="Wires" instance=ExtResource("17_y2tdt")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 5.03172, -0.110836, 0.499451)
+
+[node name="one_wire_up_long3" parent="Wires" instance=ExtResource("17_y2tdt")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 5.03172, 1.88923, 0.499451)
+
+[node name="one_wire_biground2" parent="Wires" instance=ExtResource("11_p4orl")]
+transform = Transform3D(4.37114e-08, -1, 3.82137e-15, -1, -4.37114e-08, -8.74228e-08, 8.74228e-08, 0, -1, 5.43463, 4.24496, 0.486676)
+
+[node name="one_wire_up_medium2" parent="Wires" instance=ExtResource("18_1jlr6")]
+transform = Transform3D(-4.37114e-08, 4.37114e-08, 1, 1, 1.91069e-15, 4.37114e-08, 0, 1, -4.37114e-08, 5.49413, 4.24155, 0.622258)
+
+[node name="three_wires_up_medium3" parent="Wires" instance=ExtResource("36_c3p2y")]
+transform = Transform3D(4.37114e-08, -1, 3.82137e-15, -1, -4.37114e-08, -8.74228e-08, 8.74228e-08, 0, -1, 2.45217, 2.09329, 0.500358)
+
+[node name="three_wires_up_medium5" parent="Wires" instance=ExtResource("36_c3p2y")]
+transform = Transform3D(4.37114e-08, -1, 3.82137e-15, -1, -4.37114e-08, -8.74228e-08, 8.74228e-08, 0, -1, 2.91583, 2.98104, 0.500358)
+
+[node name="three_wires_up_medium7" parent="Wires" instance=ExtResource("36_c3p2y")]
+transform = Transform3D(4.37114e-08, -1, 3.82137e-15, -1, -4.37114e-08, -8.74228e-08, 8.74228e-08, 0, -1, 1.3509, 2.09329, 0.500358)
+
+[node name="three_wires_up_medium8" parent="Wires" instance=ExtResource("36_c3p2y")]
+transform = Transform3D(4.37114e-08, -1, 3.82137e-15, -1, -4.37114e-08, -8.74228e-08, 8.74228e-08, 0, -1, 1.81455, 2.98104, 0.500358)
+
+[node name="three_wires_up_medium16" parent="Wires" instance=ExtResource("36_c3p2y")]
+transform = Transform3D(-8.74228e-08, 4.37114e-08, 1, -1, -4.37114e-08, -8.74228e-08, 4.37114e-08, -1, 4.37114e-08, -0.305485, 2.80075, -3.40442)
+
+[node name="three_wires_up_medium17" parent="Wires" instance=ExtResource("36_c3p2y")]
+transform = Transform3D(-8.74228e-08, 4.37114e-08, 1, -1, -4.37114e-08, -8.74228e-08, 4.37114e-08, -1, 4.37114e-08, -0.305485, 2.80114, -2.30612)
+
+[node name="three_wires_up_medium18" parent="Wires" instance=ExtResource("36_c3p2y")]
+transform = Transform3D(-8.74228e-08, 4.37114e-08, 1, -1, -4.37114e-08, -8.74228e-08, 4.37114e-08, -1, 4.37114e-08, -0.305485, 2.80114, -2.30612)
+
+[node name="three_wires_up_medium9" parent="Wires" instance=ExtResource("36_c3p2y")]
+transform = Transform3D(4.37114e-08, -1, 3.82137e-15, -1, -4.37114e-08, -8.74228e-08, 8.74228e-08, 0, -1, 0.251971, 2.09329, 0.500358)
+
+[node name="three_wires_up_medium10" parent="Wires" instance=ExtResource("36_c3p2y")]
+transform = Transform3D(4.37114e-08, -1, 3.82137e-15, -1, -4.37114e-08, -8.74228e-08, 8.74228e-08, 0, -1, 0.715625, 2.98104, 0.500358)
+
+[node name="three_wires_up_medium11" parent="Wires" instance=ExtResource("36_c3p2y")]
+transform = Transform3D(4.37114e-08, -1, 3.82137e-15, -1, -4.37114e-08, -8.74228e-08, 8.74228e-08, 0, -1, -0.841277, 2.09329, 0.500358)
+
+[node name="three_wires_up_medium12" parent="Wires" instance=ExtResource("36_c3p2y")]
+transform = Transform3D(4.37114e-08, -1, 3.82137e-15, -1, -4.37114e-08, -8.74228e-08, 8.74228e-08, 0, -1, -0.359724, 2.98104, 0.500358)
+
+[node name="three_wires_up_medium13" parent="Wires" instance=ExtResource("36_c3p2y")]
+transform = Transform3D(4.37114e-08, -1, 3.82137e-15, -1, -4.37114e-08, -8.74228e-08, 8.74228e-08, 0, -1, -1.95113, 2.09329, 0.500358)
+
+[node name="three_wires_up_medium15" parent="Wires" instance=ExtResource("36_c3p2y")]
+transform = Transform3D(4.37114e-08, -1, 3.82137e-15, -1, -4.37114e-08, -8.74228e-08, 8.74228e-08, 0, -1, -3.45327, 2.49913, 0.500358)
+
+[node name="three_wires_up_medium14" parent="Wires" instance=ExtResource("36_c3p2y")]
+transform = Transform3D(4.37114e-08, -1, 3.82137e-15, -1, -4.37114e-08, -8.74228e-08, 8.74228e-08, 0, -1, -1.4227, 2.98104, 0.500358)
+
+[node name="three_wires_up_medium4" parent="Wires" instance=ExtResource("36_c3p2y")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 3.37869, 1.52554, 0.500358)
+
+[node name="three_wires_up_short2" parent="Wires" instance=ExtResource("37_lphfr")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 2.71724, 1.39616, 0.49642)
+
+[node name="three_wires_biground2" parent="Wires" instance=ExtResource("29_6qqst")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 3.37972, 2.57643, 0.502813)
+
+[node name="six_wires_corner_out_medium2" parent="Wires" instance=ExtResource("23_a1iqa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.46752, 1.65463, -4.53355)
+
+[node name="six_wires_corner_out_medium3" parent="Wires" instance=ExtResource("23_a1iqa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.46752, 1.84369, -4.53355)
+
+[node name="six_wires_biground2" parent="Wires" instance=ExtResource("20_c80lf")]
+transform = Transform3D(-4.37114e-08, 0, 1, -1, -4.37114e-08, -4.37114e-08, 4.37114e-08, -1, 1.91069e-15, 2.53172, 1.84176, -4.76831)
+
+[node name="six_wires_biground3" parent="Wires" instance=ExtResource("20_c80lf")]
+transform = Transform3D(0.0213612, 9.33728e-10, 0.999772, -0.999772, -4.37014e-08, 0.0213612, 4.37114e-08, -1, 1.91069e-15, 2.51152, 1.64973, -4.7739)
+
+[node name="six_wires_up_medium2" parent="Wires" instance=ExtResource("27_61md5")]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 2.19023, 1.84469, -4.49479)
+
+[node name="six_wires_up_medium3" parent="Wires" instance=ExtResource("27_61md5")]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 1.09193, 1.84469, -4.49479)
+
+[node name="six_wires_up_medium4" parent="Wires" instance=ExtResource("27_61md5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.212156, 2.18932, -4.49479)
+
+[node name="six_wires_up_medium5" parent="Wires" instance=ExtResource("27_61md5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.212156, 3.29048, -4.49479)
+
+[node name="six_wires_up_medium6" parent="Wires" instance=ExtResource("27_61md5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.212156, 4.39106, -4.49479)
+
+[node name="six_wires_up_short2" parent="Wires" instance=ExtResource("28_1wybh")]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 2.1931, 1.65605, -4.51593)
+
+[node name="six_wires_up_short3" parent="Wires" instance=ExtResource("28_1wybh")]
+transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 1.40377, 1.31147, -4.51593)
+
+[node name="six_wires_smallround2" parent="Wires" instance=ExtResource("25_rgeqe")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.40766, 1.38194, -4.47554)
+
+[node name="six_wires_smallround3" parent="Wires" instance=ExtResource("25_rgeqe")]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0.0634471, 1.84256, -4.47554)
+
+[node name="six_wires_up_medium7" parent="Wires" instance=ExtResource("27_61md5")]
+transform = Transform3D(-4.37114e-08, 0, 1, -8.74228e-08, -1, -3.82137e-15, 1, -8.74228e-08, 4.37114e-08, 2.50516, 1.28414, -5.25829)
+
+[node name="six_wires_up_medium8" parent="Wires" instance=ExtResource("27_61md5")]
+transform = Transform3D(-4.37114e-08, 0, 1, -8.74228e-08, -1, -3.82137e-15, 1, -8.74228e-08, 4.37114e-08, 2.50516, 0.18574, -5.25829)
+
+[node name="three_wires_up_long3" parent="Wires" instance=ExtResource("35_kiolm")]
+transform = Transform3D(-4.37114e-08, 0, 1, -1, -4.37114e-08, -4.37114e-08, 4.37114e-08, -1, 1.91069e-15, 2.50021, 1.20725, -5.3864)
+
+[node name="three_wires_up_long4" parent="Wires" instance=ExtResource("35_kiolm")]
+transform = Transform3D(-4.37114e-08, 1, -4.37114e-08, -1, -4.37114e-08, -4.37114e-08, -4.37114e-08, 4.37114e-08, 1, 2.80921, 0.103083, -9.51506)
+
+[node name="three_wires_up_long5" parent="Wires" instance=ExtResource("35_kiolm")]
+transform = Transform3D(-4.37114e-08, 1, -4.37114e-08, -1, -4.37114e-08, -4.37114e-08, -4.37114e-08, 4.37114e-08, 1, 4.82607, 0.103083, -9.51506)
+
+[node name="three_wires_up_long6" parent="Wires" instance=ExtResource("35_kiolm")]
+transform = Transform3D(-4.37114e-08, 1, -4.37114e-08, -1, -4.37114e-08, -4.37114e-08, -4.37114e-08, 4.37114e-08, 1, 6.84095, 0.103083, -9.51506)
+
+[node name="three_wires_corner_in_medium2" parent="Wires" instance=ExtResource("30_dw5eq")]
+transform = Transform3D(-1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 2.5736, 0.103589, -9.42873)
+
+[node name="three_wires_smallround6" parent="Wires" instance=ExtResource("34_b7uj1")]
+transform = Transform3D(-4.37114e-08, 0, 1, 1, -4.37114e-08, 4.37114e-08, 4.37114e-08, 1, 1.91069e-15, 2.50216, 0.10726, -7.94871)
+
+[node name="three_wires_smallround7" parent="Wires" instance=ExtResource("34_b7uj1")]
+transform = Transform3D(-4.37114e-08, 0, 1, -1, -4.37114e-08, -4.37114e-08, 4.37114e-08, -1, 1.91069e-15, 2.52241, 1.03525, -7.2045)
+
+[node name="three_wires_up_short3" parent="Wires" instance=ExtResource("37_lphfr")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 2.47873, 0.313709, -7.74583)
+
+[node name="three_wires_biground3" parent="Wires" instance=ExtResource("29_6qqst")]
+transform = Transform3D(-4.37114e-08, 0, 1, -1, -4.37114e-08, -4.37114e-08, 4.37114e-08, -1, 1.91069e-15, 2.52047, 1.20676, -7.33858)
+
+[node name="three_wires_up_medium6" parent="Wires" instance=ExtResource("36_c3p2y")]
+transform = Transform3D(-4.37114e-08, 0, 1, 1, -4.37114e-08, 4.37114e-08, 4.37114e-08, 1, 1.91069e-15, 2.49085, 0.102923, -9.26548)
+
+[node name="three_wires_up_short4" parent="Wires" instance=ExtResource("37_lphfr")]
+transform = Transform3D(-4.34159e-08, 0.00673692, 0.999977, 1, -4.37114e-08, 4.37114e-08, 4.40049e-08, 0.999977, -0.00673692, 2.48727, 0.100698, -8.44616)
+
+[node name="lamp2" parent="." instance=ExtResource("40_l2qkh")]
+transform = Transform3D(0.0262935, -0.00972133, 0.999607, 0.00153145, 0.999952, 0.00968442, -0.999653, 0.00127622, 0.0263072, 6.43843, 4.09636, 1.42086)
+
+[node name="WireElement8" parent="." instance=ExtResource("41_rhikq")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 2.51439, 0.349161, -8.33251)
+_numberWires = 5
+
+[node name="WireElement9" parent="." instance=ExtResource("41_rhikq")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 2.51439, 0.349161, -8.49189)
+_numberWires = 5
+
+[node name="WireElement10" parent="." instance=ExtResource("41_rhikq")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 2.51439, 0.869936, -8.2838)
+_numberWires = 2
+_useStartHolder = false
+_useEndHolder = false
+
+[node name="WireElement11" parent="." instance=ExtResource("41_rhikq")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 2.51439, 0.869936, -8.53114)
+_numberWires = 2
+_useStartHolder = false
+_useEndHolder = false
+
+[node name="WireElement12" parent="." instance=ExtResource("41_rhikq")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 2.51439, 0.869936, -8.40553)
+_numberWires = 5
+_useStartHolder = false
