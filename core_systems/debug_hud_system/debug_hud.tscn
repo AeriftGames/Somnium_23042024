@@ -116,7 +116,7 @@ anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_top = -658.0
-offset_right = 300.0
+offset_right = 320.0
 grow_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_xryx5")
 
@@ -155,14 +155,14 @@ anchor_bottom = 1.0
 offset_top = 31.0
 
 [node name="ShowFps_CheckBox" type="CheckBox" parent="OptionsPanel/TabContainer/main"]
-offset_right = 300.0
+offset_right = 320.0
 offset_bottom = 30.0
 theme_override_font_sizes/font_size = 15
 text = "Show FPS"
 
 [node name="ShowPerformance_CheckBox" type="CheckBox" parent="OptionsPanel/TabContainer/main"]
 offset_top = 34.0
-offset_right = 300.0
+offset_right = 320.0
 offset_bottom = 64.0
 theme_override_font_sizes/font_size = 15
 text = "Show Performance"
@@ -170,75 +170,75 @@ text = "Show Performance"
 [node name="HSeparator" type="HSeparator" parent="OptionsPanel/TabContainer/main"]
 custom_minimum_size = Vector2(250, 0)
 offset_top = 68.0
-offset_right = 300.0
+offset_right = 320.0
 offset_bottom = 72.0
 
 [node name="CustomLabelEnable_Checkbox0" type="CheckBox" parent="OptionsPanel/TabContainer/main"]
 offset_top = 76.0
-offset_right = 300.0
+offset_right = 320.0
 offset_bottom = 106.0
 theme_override_font_sizes/font_size = 15
 text = "CustomLabel 0"
 
 [node name="CustomLabelEnable_Checkbox1" type="CheckBox" parent="OptionsPanel/TabContainer/main"]
 offset_top = 110.0
-offset_right = 300.0
+offset_right = 320.0
 offset_bottom = 140.0
 theme_override_font_sizes/font_size = 15
 text = "CustomLabel 1"
 
 [node name="CustomLabelEnable_Checkbox2" type="CheckBox" parent="OptionsPanel/TabContainer/main"]
 offset_top = 144.0
-offset_right = 300.0
+offset_right = 320.0
 offset_bottom = 174.0
 theme_override_font_sizes/font_size = 15
 text = "CustomLabel 2"
 
 [node name="CustomLabelEnable_Checkbox3" type="CheckBox" parent="OptionsPanel/TabContainer/main"]
 offset_top = 178.0
-offset_right = 300.0
+offset_right = 320.0
 offset_bottom = 208.0
 theme_override_font_sizes/font_size = 15
 text = "CustomLabel 3"
 
 [node name="CustomLabelEnable_Checkbox4" type="CheckBox" parent="OptionsPanel/TabContainer/main"]
 offset_top = 212.0
-offset_right = 300.0
+offset_right = 320.0
 offset_bottom = 242.0
 theme_override_font_sizes/font_size = 15
 text = "CustomLabel 4"
 
 [node name="CustomLabelEnable_Checkbox5" type="CheckBox" parent="OptionsPanel/TabContainer/main"]
 offset_top = 246.0
-offset_right = 300.0
+offset_right = 320.0
 offset_bottom = 276.0
 theme_override_font_sizes/font_size = 15
 text = "CustomLabel 5"
 
 [node name="CustomLabelEnable_Checkbox6" type="CheckBox" parent="OptionsPanel/TabContainer/main"]
 offset_top = 280.0
-offset_right = 300.0
+offset_right = 320.0
 offset_bottom = 310.0
 theme_override_font_sizes/font_size = 15
 text = "CustomLabel 6"
 
 [node name="CustomLabelEnable_Checkbox7" type="CheckBox" parent="OptionsPanel/TabContainer/main"]
 offset_top = 314.0
-offset_right = 300.0
+offset_right = 320.0
 offset_bottom = 344.0
 theme_override_font_sizes/font_size = 15
 text = "CustomLabel 7"
 
 [node name="CustomLabelEnable_Checkbox8" type="CheckBox" parent="OptionsPanel/TabContainer/main"]
 offset_top = 348.0
-offset_right = 300.0
+offset_right = 320.0
 offset_bottom = 378.0
 theme_override_font_sizes/font_size = 15
 text = "CustomLabel 8"
 
 [node name="CustomLabelEnable_Checkbox9" type="CheckBox" parent="OptionsPanel/TabContainer/main"]
 offset_top = 382.0
-offset_right = 300.0
+offset_right = 320.0
 offset_bottom = 412.0
 theme_override_font_sizes/font_size = 15
 text = "CustomLabel 9"
@@ -246,12 +246,12 @@ text = "CustomLabel 9"
 [node name="HSeparator2" type="HSeparator" parent="OptionsPanel/TabContainer/main"]
 custom_minimum_size = Vector2(250, 0)
 offset_top = 416.0
-offset_right = 300.0
+offset_right = 320.0
 offset_bottom = 420.0
 
 [node name="EnableWorldOcclusionCulling_CheckBox" type="CheckBox" parent="OptionsPanel/TabContainer/main"]
 offset_top = 424.0
-offset_right = 300.0
+offset_right = 320.0
 offset_bottom = 454.0
 theme_override_font_sizes/font_size = 15
 text = "Enable worldlevel occlusion cull"
@@ -259,7 +259,7 @@ text = "Enable worldlevel occlusion cull"
 [node name="HSeparator3" type="HSeparator" parent="OptionsPanel/TabContainer/main"]
 custom_minimum_size = Vector2(250, 0)
 offset_top = 458.0
-offset_right = 300.0
+offset_right = 320.0
 offset_bottom = 462.0
 
 [node name="level" type="VBoxContainer" parent="OptionsPanel/TabContainer"]
@@ -269,29 +269,28 @@ visible = false
 
 [node name="HSeparator" type="HSeparator" parent="OptionsPanel/TabContainer/video"]
 self_modulate = Color(1, 1, 1, 0)
-custom_minimum_size = Vector2(0, 30)
-offset_right = 313.0
-offset_bottom = 30.0
+custom_minimum_size = Vector2(0, 33)
+offset_right = 318.0
+offset_bottom = 33.0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="OptionsPanel/TabContainer/video"]
-offset_top = 34.0
-offset_right = 313.0
-offset_bottom = 65.0
+[node name="Antialias_HBoxContainer" type="HBoxContainer" parent="OptionsPanel/TabContainer/video"]
+offset_top = 37.0
+offset_right = 318.0
+offset_bottom = 68.0
 alignment = 1
 
-[node name="Label" type="Label" parent="OptionsPanel/TabContainer/video/HBoxContainer"]
+[node name="Label" type="Label" parent="OptionsPanel/TabContainer/video/Antialias_HBoxContainer"]
 custom_minimum_size = Vector2(80, 0)
 offset_top = 2.0
-offset_right = 80.0
+offset_right = 85.0
 offset_bottom = 28.0
 size_flags_horizontal = 3
-text = "antialias "
-horizontal_alignment = 1
+text = " antialias "
 
-[node name="Antialias_OptionButton" type="OptionButton" parent="OptionsPanel/TabContainer/video/HBoxContainer"]
+[node name="Antialias_OptionButton" type="OptionButton" parent="OptionsPanel/TabContainer/video/Antialias_HBoxContainer"]
 custom_minimum_size = Vector2(100, 0)
-offset_left = 84.0
-offset_right = 313.0
+offset_left = 89.0
+offset_right = 318.0
 offset_bottom = 31.0
 size_flags_horizontal = 3
 item_count = 5
@@ -305,6 +304,47 @@ popup/item_3/text = "only MSAA3D_2X"
 popup/item_3/id = 3
 popup/item_4/text = "SS_AA+TAA+MSAA3D_2X"
 popup/item_4/id = 4
+
+[node name="Scale3d_HBoxContainer" type="HBoxContainer" parent="OptionsPanel/TabContainer/video"]
+offset_top = 72.0
+offset_right = 318.0
+offset_bottom = 98.0
+alignment = 1
+
+[node name="Label" type="Label" parent="OptionsPanel/TabContainer/video/Scale3d_HBoxContainer"]
+custom_minimum_size = Vector2(80, 0)
+offset_right = 80.0
+offset_bottom = 26.0
+text = " scale 3D"
+
+[node name="Scale3d_HSlider" type="HSlider" parent="OptionsPanel/TabContainer/video/Scale3d_HBoxContainer"]
+custom_minimum_size = Vector2(150, 0)
+offset_left = 84.0
+offset_top = 5.0
+offset_right = 234.0
+offset_bottom = 21.0
+size_flags_horizontal = 0
+size_flags_vertical = 4
+min_value = 50.0
+max_value = 130.0
+value = 100.0
+
+[node name="Scale3dvalue_Label" type="Label" parent="OptionsPanel/TabContainer/video/Scale3d_HBoxContainer"]
+custom_minimum_size = Vector2(80, 0)
+offset_left = 238.0
+offset_right = 318.0
+offset_bottom = 26.0
+text = "100%"
+horizontal_alignment = 1
+
+[node name="HalfResGI_CheckBox" type="CheckBox" parent="OptionsPanel/TabContainer/video"]
+layout_direction = 3
+offset_top = 102.0
+offset_right = 318.0
+offset_bottom = 133.0
+text = "half resolution GI"
+alignment = 2
+icon_alignment = 1
 
 [node name="Label" type="Label" parent="OptionsPanel"]
 custom_minimum_size = Vector2(150, 0)
@@ -396,5 +436,7 @@ text = "video memory used:"
 [connection signal="toggled" from="OptionsPanel/TabContainer/main/CustomLabelEnable_Checkbox8" to="." method="_on_custom_label_enable_checkbox_toggled"]
 [connection signal="toggled" from="OptionsPanel/TabContainer/main/CustomLabelEnable_Checkbox9" to="." method="_on_custom_label_enable_checkbox_toggled"]
 [connection signal="toggled" from="OptionsPanel/TabContainer/main/EnableWorldOcclusionCulling_CheckBox" to="." method="_on_enable_world_occlusion_culling_check_box_toggled"]
-[connection signal="item_selected" from="OptionsPanel/TabContainer/video/HBoxContainer/Antialias_OptionButton" to="." method="_on_antialias_option_button_item_selected"]
+[connection signal="item_selected" from="OptionsPanel/TabContainer/video/Antialias_HBoxContainer/Antialias_OptionButton" to="." method="_on_antialias_option_button_item_selected"]
+[connection signal="value_changed" from="OptionsPanel/TabContainer/video/Scale3d_HBoxContainer/Scale3d_HSlider" to="." method="_on_scale_3d_h_slider_value_changed"]
+[connection signal="toggled" from="OptionsPanel/TabContainer/video/HalfResGI_CheckBox" to="." method="_on_half_res_gi_check_box_toggled"]
 [connection signal="pressed" from="OptionsPanel/QuitGameButton" to="." method="_on_quit_game_button_pressed"]
