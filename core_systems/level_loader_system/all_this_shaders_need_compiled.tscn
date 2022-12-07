@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://bgmsvtrn4l4r2"]
+[gd_scene load_steps=50 format=3 uid="uid://bgmsvtrn4l4r2"]
 
 [ext_resource type="Script" path="res://core_systems/level_loader_system/all_this_shaders_need_compiled.cs" id="1_o15x1"]
 [ext_resource type="Material" uid="uid://d08tc1iusbqxj" path="res://placeholders/modular_walls/mat/mat_ground1.tres" id="2_2s5p8"]
@@ -17,11 +17,8 @@
 [ext_resource type="PackedScene" uid="uid://b6l080hrctdgf" path="res://objects/flashlight/flashlight.tscn" id="10_d871k"]
 [ext_resource type="Material" uid="uid://ck4t6r2ysoqm" path="res://testing_level_hall/skoba_mat.tres" id="10_flomm"]
 [ext_resource type="Material" path="res://testing_level_hall/vents_holders_mat.tres" id="11_66c6b"]
-[ext_resource type="PackedScene" uid="uid://pw2ww2bgkvd0" path="res://objects/furniture/cabinet_new.tscn" id="11_lo4k4"]
 [ext_resource type="Material" path="res://testing_level_hall/vents_mat.tres" id="12_opohs"]
-[ext_resource type="PackedScene" uid="uid://d5wc26cy4c6o" path="res://objects/furniture/cabinet_small.tscn" id="12_rmt1d"]
 [ext_resource type="Material" uid="uid://u6cwmff6labp" path="res://testing_level_hall/wire_holder_mat.tres" id="13_n5qbt"]
-[ext_resource type="PackedScene" uid="uid://ukqaj32a10wx" path="res://objects/keypad/keypad.tscn" id="13_r0yd0"]
 [ext_resource type="Material" uid="uid://u0unu1v20kn3" path="res://testing_level_hall/wire_mat.tres" id="14_3e7w5"]
 [ext_resource type="PackedScene" uid="uid://djuv0voeaxmos" path="res://objects/light/light_celling.tscn" id="14_q5dvk"]
 [ext_resource type="PackedScene" uid="uid://bys0s78vbryfp" path="res://objects/light/light_celling_long.tscn" id="15_1d4ex"]
@@ -162,13 +159,6 @@ script = null
 script = null
 
 [node name="flashlight" parent="AllScenes" instance=ExtResource("10_d871k")]
-
-[node name="cabinet_new" parent="AllScenes" instance=ExtResource("11_lo4k4")]
-
-[node name="cabinet_small" parent="AllScenes" instance=ExtResource("12_rmt1d")]
-
-[node name="keypad" parent="AllScenes" instance=ExtResource("13_r0yd0")]
-script = null
 
 [node name="light_celling" parent="AllScenes" instance=ExtResource("14_q5dvk")]
 

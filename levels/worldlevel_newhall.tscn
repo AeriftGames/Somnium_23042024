@@ -454,26 +454,10 @@ transform = Transform3D(-4.34159e-08, 0.00673692, 0.999977, 1, -4.37114e-08, 4.3
 transform = Transform3D(0.0262935, -0.00972133, 0.999607, 0.00153145, 0.999952, 0.00968442, -0.999653, 0.00127622, 0.0263072, 6.43843, 4.09636, 1.42086)
 
 [node name="WireElement8" parent="." instance=ExtResource("41_rhikq")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 2.51439, 0.349161, -8.33251)
-_numberWires = 5
-
-[node name="WireElement9" parent="." instance=ExtResource("41_rhikq")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 2.51439, 0.349161, -8.49189)
-_numberWires = 5
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 2.51439, 0.363904, -8.33251)
 
 [node name="WireElement10" parent="." instance=ExtResource("41_rhikq")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 2.51439, 0.869936, -8.2838)
-_numberWires = 2
-_useStartHolder = false
-_useEndHolder = false
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 2.51439, 0.363904, -8.33251)
 
-[node name="WireElement11" parent="." instance=ExtResource("41_rhikq")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 2.51439, 0.869936, -8.53114)
-_numberWires = 2
-_useStartHolder = false
-_useEndHolder = false
-
-[node name="WireElement12" parent="." instance=ExtResource("41_rhikq")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 2.51439, 0.869936, -8.40553)
-_numberWires = 5
-_useStartHolder = false
+[node name="WireElement9" parent="." instance=ExtResource("41_rhikq")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 2.51439, 0.349161, -8.80387)

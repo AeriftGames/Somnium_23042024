@@ -193,7 +193,6 @@ public partial class DebugHud : Control
 		GameMaster.GM.QuitGame();
 	}
 
-
     public void BuildLevelButtons()
 	{
 		var allLevelsInfo = GameMaster.GM.LevelLoader.GetAllLevelsInfo();
@@ -208,6 +207,51 @@ public partial class DebugHud : Control
 
 			VBoxContainer LevelButtonContainer = GetNode<VBoxContainer>("OptionsPanel/TabContainer/level");
 			LevelButtonContainer.AddChild(level_button_Instance);
+        }
+	}
+
+	public void _on_antialias_option_button_item_selected(int newID)
+	{
+		if(newID == 0)
+		{
+			//disable
+			GetTree().Root.ScreenSpaceAa = Viewport.ScreenSpaceAA.Disabled;
+			GetTree().Root.UseTaa = false;
+			GetTree().Root.Msaa3d = Viewport.MSAA.Disabled;
+			GameMaster.GM.Log.WriteLog(this, LogSystem.ELogMsgType.INFO, "antialias: disable");
+
+        }
+		else if(newID == 1)
+		{
+            //only ss_aa
+            GetTree().Root.ScreenSpaceAa = Viewport.ScreenSpaceAA.Fxaa;
+            GetTree().Root.UseTaa = false;
+            GetTree().Root.Msaa3d = Viewport.MSAA.Disabled;
+            GameMaster.GM.Log.WriteLog(this, LogSystem.ELogMsgType.INFO, "antialias: only ss_aa");
+        }
+		else if(newID == 2)
+		{
+            //ss_aa+taa
+            GetTree().Root.ScreenSpaceAa = Viewport.ScreenSpaceAA.Fxaa;
+            GetTree().Root.UseTaa = true;
+            GetTree().Root.Msaa3d = Viewport.MSAA.Disabled;
+            GameMaster.GM.Log.WriteLog(this, LogSystem.ELogMsgType.INFO, "antialias: ss_aa + taa");
+        }
+		else if(newID == 3)
+		{
+            //only msaa3d_2x
+            GetTree().Root.ScreenSpaceAa = Viewport.ScreenSpaceAA.Disabled;
+            GetTree().Root.UseTaa = false;
+            GetTree().Root.Msaa3d = Viewport.MSAA.Msaa2x;
+            GameMaster.GM.Log.WriteLog(this, LogSystem.ELogMsgType.INFO, "antialias: only msaa3d_2x");
+        }
+		else if(newID == 4)
+		{
+            //ss_aa+taa+msaa3d_2x
+            GetTree().Root.ScreenSpaceAa = Viewport.ScreenSpaceAA.Fxaa;
+            GetTree().Root.UseTaa = true;
+            GetTree().Root.Msaa3d = Viewport.MSAA.Msaa2x;
+            GameMaster.GM.Log.WriteLog(this, LogSystem.ELogMsgType.INFO, "antialias: ss_aa + taa + msaa3d_2x");
         }
 	}
 }
