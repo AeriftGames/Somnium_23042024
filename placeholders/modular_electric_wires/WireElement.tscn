@@ -11,13 +11,15 @@ script = ExtResource("1_7appc")
 [node name="Wires" type="Marker3D" parent="."]
 
 [node name="StartHolderMesh" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0423944, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.055, 0.021)
 material_override = ExtResource("3_4bqdy")
+mesh = ExtResource("3_icfvg")
 skeleton = NodePath("")
 
 [node name="EndHolderMesh" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.489673, 0.021)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.485, 0.021)
 material_override = ExtResource("3_4bqdy")
+mesh = ExtResource("3_icfvg")
 skeleton = NodePath("")
 
 [node name="EndHolderMesh2" type="MeshInstance3D" parent="."]

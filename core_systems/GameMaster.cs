@@ -98,7 +98,7 @@ public partial class GameMaster : Node
 		_fpsCharacter.QueueFree();
 
 		if (_fpsCharacter.IsQueuedForDeletion())
-			GD.Print("fps character = smazano");
+			GD.Print("fps character queued done");
 	}
 
     public override void _Process(double delta)
