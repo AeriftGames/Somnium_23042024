@@ -51,7 +51,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Somnium"
-run/main_scene="res://levels/worldlevel_rooms_test.tscn"
+run/main_scene="res://levels/worldlevel_hall.tscn"
 config/features=PackedStringArray("4.0")
 run/max_fps=60
 boot_splash/bg_color=Color(0, 0, 0, 1)
@@ -69,11 +69,14 @@ LastSingleton="*res://autoload/last_singleton.gd"
 window/size/viewport_width=1920
 window/size/viewport_height=1080
 window/size/borderless=true
-window/quality/msaa_3d=3
 
 [dotnet]
 
 project/assembly_name="My Fps Prototype"
+
+[editor]
+
+run/main_run_args="--verbose"
 
 [input]
 
@@ -207,6 +210,7 @@ testBottom={
 
 [rendering]
 
-anti_aliasing/quality/use_taa=true
+global_illumination/gi/use_half_resolution=true
+anti_aliasing/quality/screen_space_aa=1
 occlusion_culling/use_occlusion_culling=true
 mesh_lod/lod_change/threshold_pixels=0.2

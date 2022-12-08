@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3]
+[gd_scene load_steps=13 format=3 uid="uid://u35r00f8i2hn"]
 
 [ext_resource type="Texture2D" uid="uid://dv7wylvnjcnc2" path="res://testing_level_hall/models/shelfs/deska_log_color.jpg" id="1_y2r34"]
 [ext_resource type="Texture2D" uid="uid://xlfl5p7uedmu" path="res://testing_level_hall/models/shelfs/deska_log_normal.jpg" id="2_roraj"]

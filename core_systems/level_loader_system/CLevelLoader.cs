@@ -12,6 +12,7 @@ public partial class CLevelLoader : Godot.Object
 
     public string actualLevelName = (string)ProjectSettings.GetSetting("application/run/main_scene");
     public LoadingHud loadingHud = null;
+    public bool SDFGI = false;
 
     public struct SLevelInfo
     {
@@ -122,6 +123,7 @@ public partial class CLevelLoader : Godot.Object
 
         // Toggle all lights for fix GI
         await SetLevelWorldEnvironment(true);
+
     }
 
     // instantiate a addchild loading hud to fpscharacter/allhuds and return it
@@ -178,7 +180,7 @@ public partial class CLevelLoader : Godot.Object
 
     public async Task SetLevelWorldEnvironment(bool newSdfgi)
     {
-        await Task.Delay(100);
+        //await Task.Delay(50);
 
         Node level = GameMaster.GM.GetNode("/root/worldlevel");
         if (level == null)
@@ -189,6 +191,13 @@ public partial class CLevelLoader : Godot.Object
         }
         else
         {
+            // existuje voxelGI v levelu ? zapneme ho
+            VoxelGI b = (VoxelGI)level.FindChild("VoxelGI", false, true);
+            if(b!= null)
+                b.Visible = true;
+
+            await Task.Delay(50);
+
             // prepne mod svetel na disable
             var allLights = level.FindChildren("", "Light3D", true, false);
             if (allLights.Count > 0)
@@ -200,9 +209,12 @@ public partial class CLevelLoader : Godot.Object
                     Light3D light = a as Light3D;
                     if (light != null)
                     {
-                        Light3D.BakeMode oldBakeMode = light.LightBakeMode;
-                        light.LightBakeMode = Light3D.BakeMode.Disabled;
-                        await SetLight3DBakeModeDelay(light,oldBakeMode);
+                        if(light.LightBakeMode != Light3D.BakeMode.Static)
+                        {
+                            Light3D.BakeMode oldBakeMode = light.LightBakeMode;
+                            light.LightBakeMode = Light3D.BakeMode.Disabled;
+                            await SetLight3DBakeModeDelay(light, oldBakeMode);
+                        }
                     }
                 }
             }
@@ -212,7 +224,7 @@ public partial class CLevelLoader : Godot.Object
     private async Task SetLight3DBakeModeDelay(Light3D newLight,Light3D.BakeMode newBakeMode)
     {
         // za 200ms nastav originalni nastaveni bake
-        await Task.Delay(20);
+        await Task.Delay(10);
         newLight.LightBakeMode = newBakeMode;
 
         GD.Print(newLight.Name + "set bake mode: " + newBakeMode.ToString());
