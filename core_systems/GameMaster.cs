@@ -103,6 +103,7 @@ public partial class GameMaster : Node
 
     public override void _Process(double delta)
 	{
+		// Update LOADING
 	}
 
 	public void message_update()

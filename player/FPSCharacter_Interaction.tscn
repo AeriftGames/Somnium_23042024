@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://0g1u2jvnfbpy"]
+[gd_scene load_steps=23 format=3 uid="uid://0g1u2jvnfbpy"]
 
 [ext_resource type="PackedScene" uid="uid://2b8vuef2k4is" path="res://player/FPSCharacter_WalkingEffects.tscn" id="1_0ipjt"]
 [ext_resource type="Script" path="res://player/FPSCharacter_Interaction.cs" id="2_fmih3"]
@@ -6,10 +6,22 @@
 [ext_resource type="AudioStream" uid="uid://bq620yjstjdl" path="res://audio/audio_streams/flashlight/flashlight_on.wav" id="3_hi7iy"]
 [ext_resource type="AudioStream" uid="uid://com3v7we27wvm" path="res://audio/audio_streams/flashlight/flashlight_off.wav" id="4_wmi65"]
 [ext_resource type="PackedScene" uid="uid://duwf5mdtkjlre" path="res://core_systems/item_inspect/item_inspect.tscn" id="5_iw50w"]
+[ext_resource type="AudioStream" uid="uid://bis1a4lsh3ja2" path="res://audio/audio_streams/footsteps_basic/458319__dwoboyle__footsteps-tile-23.wav" id="5_yypjm"]
 [ext_resource type="Texture2D" uid="uid://byineyv5wipjo" path="res://textures/cursor-hand-grab-svgrepo-com.png" id="6_fb16h"]
+[ext_resource type="AudioStream" uid="uid://byegyiket2nug" path="res://audio/audio_streams/footsteps_basic/458339__dwoboyle__footsteps-tile-14.wav" id="6_fj4rm"]
 [ext_resource type="Texture2D" uid="uid://ci4to6fyojbqm" path="res://textures/wave-hand-svgrepo-com.png" id="7_bqbud"]
+[ext_resource type="AudioStream" uid="uid://dbe3b7d6axwxn" path="res://audio/audio_streams/footsteps_basic/458341__dwoboyle__footsteps-tile-12.wav" id="7_htvfd"]
 [ext_resource type="PackedScene" uid="uid://bctrg21138lx" path="res://ui/report_bug.tscn" id="7_oxteu"]
+[ext_resource type="AudioStream" uid="uid://cm64k75csj3aa" path="res://audio/audio_streams/footsteps_basic/458345__dwoboyle__footsteps-tile-16.wav" id="9_lx7ws"]
 [ext_resource type="PackedScene" uid="uid://babdw2pj0huby" path="res://core_systems/debug_hud_system/debug_hud.tscn" id="10_iakih"]
+[ext_resource type="AudioStream" uid="uid://dufe3vlndhwqu" path="res://audio/audio_streams/footsteps_basic/458348__dwoboyle__footsteps-tile-20.wav" id="10_op3jv"]
+[ext_resource type="AudioStream" uid="uid://dc03hp5kkho47" path="res://audio/audio_streams/footsteps_basic/458349__dwoboyle__footsteps-tile-19.wav" id="11_ls388"]
+[ext_resource type="AudioStream" uid="uid://5f4nst6h6sbt" path="res://audio/audio_streams/landing_basic/landing-on-the-ground-1.wav" id="12_8dx2j"]
+[ext_resource type="AudioStream" uid="uid://2ds6dv0qv07b" path="res://audio/audio_streams/landing_basic/landing-on-the-ground-2.wav" id="13_f3cgj"]
+[ext_resource type="AudioStream" uid="uid://cxvc7scm222al" path="res://audio/audio_streams/landing_basic/landing-on-the-ground-3.wav" id="14_r1kko"]
+[ext_resource type="AudioStream" uid="uid://cmv7mwr57dvwj" path="res://audio/audio_streams/landing_basic/landing-on-the-ground-6.wav" id="15_y1rke"]
+[ext_resource type="AudioStream" uid="uid://bjveh4yf0jj2v" path="res://audio/audio_streams/landing_basic/364690__alegemaate__human-impact-on-ground.wav" id="16_tnxju"]
+[ext_resource type="AudioStream" uid="uid://byfcifn2qiddh" path="res://audio/audio_streams/landing_basic/504626__leonelmail__body-fall-v-hvy-dirt.mp3" id="17_es1lv"]
 
 [node name="FPSCharacter_Interaction" instance=ExtResource("1_0ipjt")]
 wall_min_slide_angle = 0.0
@@ -36,21 +48,12 @@ RBPhysicInGrab_Bounce = 0.0
 RBPhysicInGrab_Mass = 1.0
 AudioFlashlight_On = ExtResource("3_hi7iy")
 AudioFlashlight_Off = ExtResource("4_wmi65")
-FootStepLength = 1.25
-WalkCameraLerpHeight = 0.12
-lerpFootstepSpeedModifier = 2.0
-FootstepsVolumeDB = -20.0
-LandingVolumeDB = -10.0
-JumpingVolumeDB = -5.0
-JumpVelocity = 4.3
-MoveSpeedInStand = 2.25
-MoveSpeedInCrunch = 1.4
-MoveSpeedInSprint = 4.1
-MoveSpeedInFall = 1.4
-AccelerateSmoothStep = 6.0
-DeccelerateSmoothStep = 6.0
-MouseSensitivity = 0.15
-MouseSmooth = 15.0
+FootstepSounds = [ExtResource("5_yypjm"), ExtResource("6_fj4rm"), ExtResource("7_htvfd"), ExtResource("9_lx7ws"), ExtResource("10_op3jv"), ExtResource("11_ls388")]
+miniHeightLandingSounds = [ExtResource("12_8dx2j"), ExtResource("13_f3cgj")]
+smallHeightLandingSounds = [ExtResource("14_r1kko")]
+mediumHeightLandingSounds = [ExtResource("15_y1rke")]
+highHeightLandingSounds = [ExtResource("16_tnxju")]
+deathHeightLandingSounds = [ExtResource("17_es1lv")]
 
 [node name="HolderHands" type="Node3D" parent="HeadMain/HeadGimbalA/HeadGimbalB/HeadHolderCamera" index="0"]
 

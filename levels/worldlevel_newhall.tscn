@@ -351,6 +351,8 @@ metadata/_edit_lock_ = true
 
 [node name="PhysicItem_gas_tank_small" parent="." instance=ExtResource("8_yjkxg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0.8, -4.1)
+UseActionText = "no action"
+PhysicEffectsAudioStream = null
 
 [node name="room_hall2_08" parent="." instance=ExtResource("8_nvayt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000910759, 0.00908041, -0.00108337)
