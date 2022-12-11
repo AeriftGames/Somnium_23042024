@@ -1,0 +1,28 @@
+[gd_scene load_steps=9 format=3 uid="uid://c10tdfavbwdyx"]
+
+[ext_resource type="PackedScene" uid="uid://mmaua2et74ge" path="res://placeholders/modular_pipes/new_big/pipe_big_round.tscn" id="1_xu0k0"]
+[ext_resource type="PackedScene" uid="uid://b25x0omaktdd6" path="res://placeholders/modular_pipes/new_big/pipe_big_end.tscn" id="2_4ufs1"]
+[ext_resource type="PackedScene" uid="uid://5ukc61pf18s8" path="res://placeholders/modular_pipes/new_big/pipe_big_valve_base.tscn" id="3_74hhr"]
+[ext_resource type="PackedScene" uid="uid://oe4u1fhwausm" path="res://placeholders/modular_pipes/new_big/pipe_big_split.tscn" id="4_yhf5u"]
+[ext_resource type="PackedScene" uid="uid://caqua4b2del2c" path="res://placeholders/modular_pipes/new_big/pipe_big_short.tscn" id="5_6pqln"]
+[ext_resource type="PackedScene" uid="uid://c8i6bvbekua4j" path="res://placeholders/modular_pipes/new_big/pipe_big_medium.tscn" id="6_obvi1"]
+[ext_resource type="PackedScene" uid="uid://cw3hrvpva3ih" path="res://placeholders/modular_pipes/new_big/pipe_big_long.tscn" id="7_e0r6g"]
+[ext_resource type="PackedScene" uid="uid://cxdmt4ty2nkvu" path="res://placeholders/modular_pipes/new_big/pipe_big_valve.tscn" id="8_bxdhe"]
+
+[node name="pipes_test" type="Node3D"]
+
+[node name="pipe_big_round" parent="." instance=ExtResource("1_xu0k0")]
+
+[node name="pipe_big_end" parent="." instance=ExtResource("2_4ufs1")]
+
+[node name="pipe_big_valve_base" parent="." instance=ExtResource("3_74hhr")]
+
+[node name="pipe_big_split" parent="." instance=ExtResource("4_yhf5u")]
+
+[node name="pipe_big_short" parent="." instance=ExtResource("5_6pqln")]
+
+[node name="pipe_big_medium" parent="." instance=ExtResource("6_obvi1")]
+
+[node name="pipe_big_long" parent="." instance=ExtResource("7_e0r6g")]
+
+[node name="pipe_big_valve" parent="." instance=ExtResource("8_bxdhe")]

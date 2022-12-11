@@ -40,6 +40,10 @@ public partial class all_this_shaders_need_compiled : Node3D
         toggle_timer.OneShot = true;
         AddChild(toggle_timer);
         toggle_timer.Start();
+
+        // Prepne baterku na enable
+        FPSCharacter_Interaction a = (FPSCharacter_Interaction)GameMaster.GM.GetFPSCharacter();
+        a.ToggleSimpleFlashlight();
     }
 
     public void DoneVisible()
@@ -54,6 +58,10 @@ public partial class all_this_shaders_need_compiled : Node3D
         }
         else
         {
+            // Prepne baterku na disable
+            FPSCharacter_Interaction a = (FPSCharacter_Interaction)GameMaster.GM.GetFPSCharacter();
+            a.ToggleSimpleFlashlight();
+
             // second timer(visible) cycle
             GameMaster.GM.LevelLoader.SetNewInfoLevelCompilingShader("PRECOMPLILE SHADER PROCESS - ALL SCENES CALL QUEUEFREE" , 100);
             GameMaster.GM.LevelLoader.EndPrecompileShaderProcess();
