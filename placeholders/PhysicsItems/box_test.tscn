@@ -1,9 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://d21twnro2sgeu"]
+[gd_scene load_steps=8 format=3]
 
 [ext_resource type="Script" path="res://placeholders/PhysicsItems/physic_item_test.cs" id="1_hq0lu"]
 [ext_resource type="AudioStream" uid="uid://i5s8a8274bq6" path="res://audio/audio_streams/interactive_basic/36787__farbin__drop-cardboard-box.wav" id="2_q41vs"]
 [ext_resource type="Script" path="res://core_systems/interactive_system/interactive_object.cs" id="3_401v3"]
-[ext_resource type="PackedScene" uid="uid://wdo2apiyqbpo" path="res://box.tscn" id="3_gxnw8"]
+[ext_resource type="PackedScene" uid="uid://wdo2apiyqbpo" path="res://testing_oalar/box.tscn" id="3_gxnw8"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_l84ni"]
 friction = 0.5
