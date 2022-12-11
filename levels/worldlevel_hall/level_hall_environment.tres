@@ -1,0 +1,17 @@
+[gd_resource type="Environment" format=3 uid="uid://bg7lt3mm463sv"]
+
+[resource]
+background_energy_multiplier = 0.28
+sky_rotation = Vector3(-0.492183, 0, 0)
+ambient_light_color = Color(0.203922, 0.203922, 0.203922, 1)
+ambient_light_energy = 0.0
+tonemap_mode = 2
+ssao_enabled = true
+ssil_enabled = true
+sdfgi_use_occlusion = true
+glow_enabled = true
+fog_enabled = true
+fog_light_energy = 0.3
+fog_density = 0.002
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.035

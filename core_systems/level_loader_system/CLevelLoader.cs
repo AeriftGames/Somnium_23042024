@@ -14,6 +14,11 @@ public partial class CLevelLoader : Godot.Object
     public LoadingHud loadingHud = null;
     public bool SDFGI = false;
 
+    //
+    public string loadingScenePath ="";
+    Godot.Collections.Array progress;
+    bool canUpdate = false;
+
     public struct SLevelInfo
     {
         public string name;
@@ -26,6 +31,8 @@ public partial class CLevelLoader : Godot.Object
     {
         gm = (GameMaster)ownerInstance;
         this.isPrecompiledShaders = isPrecompiledShaders;
+
+        progress = new Godot.Collections.Array();
     }
 
     public async void LoadNewWorldLevel(string newLevelScenePath, string newLevelName)
@@ -47,7 +54,8 @@ public partial class CLevelLoader : Godot.Object
 
         // zmenime level
         actualLevelName = newLevelName;
-        gm.GetTree().ChangeSceneToFile(newLevelScenePath);
+        //gm.GetTree().ChangeSceneToFile(newLevelScenePath);
+        LoadNewWorldLevel_Threaded(newLevelScenePath, newLevelName);
     }
 
     public List<SLevelInfo> GetAllLevelsInfo()
@@ -209,6 +217,7 @@ public partial class CLevelLoader : Godot.Object
                     Light3D light = a as Light3D;
                     if (light != null)
                     {
+                        // Chceme toggle jen u dynamic lights ! staticke nechceme vypinat !
                         if(light.LightBakeMode != Light3D.BakeMode.Static)
                         {
                             Light3D.BakeMode oldBakeMode = light.LightBakeMode;
@@ -231,5 +240,33 @@ public partial class CLevelLoader : Godot.Object
 
         // vypneme cernou obrazovku
         GameMaster.GM.EnableBlackScreen(false);
+    }
+
+    public void LoadNewWorldLevel_Threaded(string newLevelScenePath, string newLevelName)
+    {
+        canUpdate = true;
+        loadingScenePath = newLevelScenePath;
+
+        ResourceLoader.LoadThreadedRequest(loadingScenePath,"");
+    }
+
+    public void Update(double delta)
+    {
+        if (canUpdate == false) return;
+
+        ResourceLoader.ThreadLoadStatus loadingNewWorldLevelStatus = ResourceLoader.LoadThreadedGetStatus(loadingScenePath, progress);
+
+        // Novy level se nacetl uspesne a lze pouzit
+        if(loadingNewWorldLevelStatus == ResourceLoader.ThreadLoadStatus.Loaded)
+        {
+            GD.Print("loading scene is complete, it is change now");
+            gm.GetTree().ChangeSceneToPacked((PackedScene)ResourceLoader.LoadThreadedGet(loadingScenePath));
+            canUpdate = false;
+        }
+        else if(loadingNewWorldLevelStatus == ResourceLoader.ThreadLoadStatus.InProgress)
+        {
+            // Bohuzel nedela co by melo.. ale v tomhle update loopu by jsme mohli treba animovat nejaky loading
+            //GD.Print("loading bar: " + progress[0]);
+        }
     }
 }

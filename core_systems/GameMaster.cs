@@ -93,17 +93,22 @@ public partial class GameMaster : Node
 
     public void SafeQueueAll()
 	{
+		// Vypne _Process GameMastera
+		ProcessMode = ProcessModeEnum.Disabled;
+
+		// uvolni kameru a celeho hrace
         _fpsCharacter.objectCamera.QueueFree();
         _fpsCharacter.FreeAll();
 		_fpsCharacter.QueueFree();
 
+		// pokud byl hrac uspesne zavolan pro delete, vypiseme to v konzoli
 		if (_fpsCharacter.IsQueuedForDeletion())
 			GD.Print("fps character queued done");
 	}
 
     public override void _Process(double delta)
 	{
-		// Update LOADING
+		LevelLoader.Update(delta);
 	}
 
 	public void message_update()

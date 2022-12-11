@@ -8,13 +8,11 @@ ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
 sky_material = SubResource("ProceduralSkyMaterial_w3cwh")
 
 [resource]
+background_energy_multiplier = 0.0
 sky = SubResource("Sky_rxtxe")
 sky_rotation = Vector3(-0.492183, 0, 0)
-ambient_light_source = 2
-ambient_light_color = Color(0.184314, 0.184314, 0.184314, 1)
-reflected_light_source = 2
+ambient_light_energy = 1.32
 tonemap_mode = 2
-tonemap_white = 1.2
 ssao_enabled = true
 ssil_enabled = true
 sdfgi_use_occlusion = true

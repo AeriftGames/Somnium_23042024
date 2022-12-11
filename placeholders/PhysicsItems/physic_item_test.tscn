@@ -37,7 +37,6 @@ mesh = SubResource("BoxMesh_p2lha")
 
 [node name="interactive_object" type="Node3D" parent="." groups=["interactive_object"]]
 script = ExtResource("2_ccmec")
-InteractiveLevel = 2
 metadata/_edit_lock_ = true
 
 [node name="StaticBody3D" type="StaticBody3D" parent="interactive_object"]

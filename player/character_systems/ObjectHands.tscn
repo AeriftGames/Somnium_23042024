@@ -38,11 +38,10 @@ visible = false
 
 [node name="SpotLight3D" type="SpotLight3D" parent="ObjectFlashlight"]
 light_energy = 3.0
-light_indirect_energy = 0.538
 light_volumetric_fog_energy = 1.5
 light_projector = ExtResource("3_ftn8c")
-light_size = 0.15
 shadow_enabled = true
+shadow_bias = 0.11
 spot_range = 16.0
 spot_attenuation = 1.83791
 spot_angle = 32.08

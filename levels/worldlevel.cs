@@ -21,13 +21,6 @@ public partial class worldlevel : Node3D
                 env.Environment.SdfgiEnabled = true;
 				GameMaster.GM.LevelLoader.SDFGI = true;
             }
-			/*
-			VoxelGINode = FindChild("VoxelGI", false, true);
-            if (VoxelGINode != null)
-			{
-                GetNode<VoxelGI>("VoxelGI").Visible = true;
-                GameMaster.GM.LevelLoader.SDFGI = false;
-            }*/
         }
 				
 
