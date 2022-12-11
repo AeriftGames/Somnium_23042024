@@ -1,8 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://dxvin5g21vt0i"]
+[gd_scene load_steps=6 format=3 uid="uid://hdvm8xmigrjl"]
 
-[ext_resource type="PackedScene" uid="uid://bkgnp7ft0iktt" path="res://light.glb" id="1_gdxku"]
-[ext_resource type="Script" path="res://light.gd" id="2_gbm2g"]
-[ext_resource type="Material" uid="uid://cmnm5vmxyhach" path="res://light_on.tres" id="3_kaedn"]
+[ext_resource type="PackedScene" uid="uid://bkgnp7ft0iktt" path="res://testing_oalar/light.glb" id="1_t7g8a"]
+[ext_resource type="Script" path="res://testing_oalar/light.gd" id="2_mubfm"]
+[ext_resource type="Material" uid="uid://cmnm5vmxyhach" path="res://light_on.tres" id="3_jghfl"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_vepna"]
 _surfaces = [{
@@ -25,7 +25,7 @@ _surfaces = [{
 "format": 4119,
 "index_count": 36,
 "index_data": PackedByteArray(1, 0, 20, 0, 14, 0, 1, 0, 7, 0, 20, 0, 10, 0, 19, 0, 6, 0, 10, 0, 23, 0, 19, 0, 21, 0, 12, 0, 18, 0, 21, 0, 15, 0, 12, 0, 16, 0, 9, 0, 3, 0, 16, 0, 22, 0, 9, 0, 5, 0, 8, 0, 2, 0, 5, 0, 11, 0, 8, 0, 17, 0, 0, 0, 13, 0, 17, 0, 4, 0, 0, 0),
-"material": ExtResource("3_kaedn"),
+"material": ExtResource("3_jghfl"),
 "name": "Material",
 "primitive": 3,
 "vertex_count": 24,
@@ -34,8 +34,8 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_vepna")
 
-[node name="light" instance=ExtResource("1_gdxku")]
-script = ExtResource("2_gbm2g")
+[node name="light" instance=ExtResource("1_t7g8a")]
+script = ExtResource("2_mubfm")
 
 [node name="Light" parent="." index="0"]
 mesh = SubResource("ArrayMesh_ye8k4")
