@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://cam7s512rj0e3"
-path="res://.godot/imported/box_removeable_top2.glb-ad6d25d8afe33fd98e40845a720d3df1.scn"
+path="res://.godot/imported/box_removeable_top2.glb-613870555e1cbab9628066a36a519eb2.scn"
 
 [deps]
 
-source_file="res://box_removeable_top2.glb"
-dest_files=["res://.godot/imported/box_removeable_top2.glb-ad6d25d8afe33fd98e40845a720d3df1.scn"]
+source_file="res://testing_oalar/box_removeable_top2.glb"
+dest_files=["res://.godot/imported/box_removeable_top2.glb-613870555e1cbab9628066a36a519eb2.scn"]
 
 [params]
 
