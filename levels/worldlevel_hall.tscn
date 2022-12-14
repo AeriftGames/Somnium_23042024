@@ -50,9 +50,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0751435, 0)
 [node name="ground_large" parent="LevelGeometry/Grounds" instance=ExtResource("2_yutu1")]
 transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 2, -2, 0, 2)
 
-[node name="ground_large2" parent="LevelGeometry/Grounds" instance=ExtResource("2_yutu1")]
-transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 2, 2, 0, 2)
-
 [node name="ground_large3" parent="LevelGeometry/Grounds" instance=ExtResource("2_yutu1")]
 transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 2, -2, 0, -2)
 

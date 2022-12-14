@@ -3,21 +3,19 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://owfklj0damwh"
-path.s3tc="res://.godot/imported/ceiling_color.jpg-66de4a23991da30d348559e68c856eb9.s3tc.ctex"
-path.etc2="res://.godot/imported/ceiling_color.jpg-66de4a23991da30d348559e68c856eb9.etc2.ctex"
+path="res://.godot/imported/ceiling_color.jpg-66de4a23991da30d348559e68c856eb9.ctex"
 metadata={
-"imported_formats": ["s3tc", "etc2"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://testing_level_newhall/ceiling_color.jpg"
-dest_files=["res://.godot/imported/ceiling_color.jpg-66de4a23991da30d348559e68c856eb9.s3tc.ctex", "res://.godot/imported/ceiling_color.jpg-66de4a23991da30d348559e68c856eb9.etc2.ctex"]
+dest_files=["res://.godot/imported/ceiling_color.jpg-66de4a23991da30d348559e68c856eb9.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/bptc_ldr=0

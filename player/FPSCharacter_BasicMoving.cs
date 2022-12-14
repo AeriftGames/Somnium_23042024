@@ -108,6 +108,8 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
     // Update Physical updated process
     public override void _PhysicsProcess(double delta)
     {
+        if (GameMaster.GM.GetIsQuitting()) return;
+
         switch (CharacterMode)
         {
             case ECharacterMode.FlyMode:

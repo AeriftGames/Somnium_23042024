@@ -65,7 +65,7 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
     private bool FootstepRight = false;
     private float lerpHeadWalkY = 0.0f;
 
-    Godot.Timer landing_timer = new Godot.Timer();
+    Godot.Timer landing_timer = null;
     private float lerpHeadLandY = 0.0f;
     private float lerpHeadLandRotX = 0.0f;
 
@@ -79,6 +79,7 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
         AudioStreamPlayerJumpLand = GetNode<AudioStreamPlayer>("AudioStreamPlayer_JumpLand");
 
         // Create timer for landing effect
+        landing_timer = new Godot.Timer();
         var callable_FisnishLandingEffect = new Callable(this,"FinishLandingEffect");
         landing_timer.Connect("timeout", callable_FisnishLandingEffect);
         landing_timer.WaitTime = 0.3;
@@ -105,6 +106,8 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
 
     public override void _PhysicsProcess(double delta)
     {
+        if (GameMaster.GM.GetIsQuitting()) return;
+
         base._PhysicsProcess(delta);
 
         UpdateInputsProcess((float)delta);
@@ -345,6 +348,8 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
 
     public override void FreeAll()
     {
+        landing_timer.Stop();
+        landing_timer.QueueFree();
         base.FreeAll();
         landing_timer.QueueFree();
         QueueFree();

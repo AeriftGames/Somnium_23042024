@@ -4,6 +4,7 @@
 
 [node name="GameMaster" type="Node"]
 script = ExtResource("1_mjdjb")
+needObjectID = 1786706395137213
 
 [node name="BlackScreen" type="Control" parent="."]
 layout_mode = 3

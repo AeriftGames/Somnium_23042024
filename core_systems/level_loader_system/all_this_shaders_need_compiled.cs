@@ -13,14 +13,17 @@ public partial class all_this_shaders_need_compiled : Node3D
     Node3D AllInteractiveItemsNeedToggle;
 
     // delay timer
-    Godot.Timer visible_timer = new Godot.Timer();
-    Godot.Timer toggle_timer = new Godot.Timer();
+    Godot.Timer visible_timer = null;
+    Godot.Timer toggle_timer = null;
 
     bool isAllUnvisible = false;
     bool wasFirstToggle = false;
 
 	public override void _Ready()
 	{
+        visible_timer = new Godot.Timer();
+        toggle_timer = new Godot.Timer();
+
         AllInteractiveItemsNeedToggle = GetNode<Node3D>("AllInteractiveItemsNeedToggle");
 
 		Visible = true;
@@ -65,6 +68,12 @@ public partial class all_this_shaders_need_compiled : Node3D
             // second timer(visible) cycle
             GameMaster.GM.LevelLoader.SetNewInfoLevelCompilingShader("PRECOMPLILE SHADER PROCESS - ALL SCENES CALL QUEUEFREE" , 100);
             GameMaster.GM.LevelLoader.EndPrecompileShaderProcess();
+
+            //
+            visible_timer.Stop();
+            visible_timer.QueueFree();
+            toggle_timer.Stop();
+            toggle_timer.QueueFree();
 
             QueueFree();
         }

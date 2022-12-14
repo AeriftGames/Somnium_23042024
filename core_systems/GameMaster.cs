@@ -25,6 +25,11 @@ public partial class GameMaster : Node
 	//
 	private Control blackScreen = null;
 
+	[Export] ulong needObjectID = 1;
+
+	//
+	private bool isQuitting = false;
+
     public override void _Ready()
 	{
 		GD.Print("GameMaster loaded");
@@ -67,13 +72,18 @@ public partial class GameMaster : Node
     public override void _UnhandledInput(InputEvent @event)
     {
 		if (@event is InputEventKey eventKey)
+		{
 			if (eventKey.Pressed && eventKey.Keycode == Key.Escape)
 				QuitGame();
+		}
     }
 
 	public async void QuitGame()
 	{
 		Log.WriteLog(this,LogSystem.ELogMsgType.INFO,"Quiting Game");
+
+		isQuitting = true;
+
 		await TaskQuitGame();
 	}
 
@@ -87,6 +97,19 @@ public partial class GameMaster : Node
         // zapneme cernou obrazovku
         EnableBlackScreen(true);
 
+        Node level = GetNode("/root/worldlevel");
+		var a = level.FindChildren("*", "RigidBody3D", true, true);
+		
+		GD.Print(a.Count);
+		foreach (var item in a)
+		{
+			GD.Print(item.Name);
+		}
+
+		msgObject.FreeAll();
+		LevelLoader.Free();
+		Log.Free();
+
 		SafeQueueAll();
 		GetTree().Quit();
     }
@@ -97,6 +120,7 @@ public partial class GameMaster : Node
 		ProcessMode = ProcessModeEnum.Disabled;
 
 		// uvolni kameru a celeho hrace
+		_fpsCharacter.objectCamera.FreeAll();
         _fpsCharacter.objectCamera.QueueFree();
         _fpsCharacter.FreeAll();
 		_fpsCharacter.QueueFree();
@@ -106,9 +130,17 @@ public partial class GameMaster : Node
 			GD.Print("fps character queued done");
 	}
 
-    public override void _Process(double delta)
+	public bool GetIsQuitting()
 	{
-		LevelLoader.Update(delta);
+		return isQuitting;
+	}
+
+	public override void _Process(double delta)
+	{
+		if (Input.IsActionJustPressed("testDebug"))
+			GD.Print("objekt ktery hledame ma nazev: " + GD.InstanceFromId(needObjectID).GetClass());
+
+        LevelLoader.Update(delta);
 	}
 
 	public void message_update()
