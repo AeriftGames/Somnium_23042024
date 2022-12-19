@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://bgmsvtrn4l4r2"]
+[gd_scene load_steps=54 format=3 uid="uid://bgmsvtrn4l4r2"]
 
 [ext_resource type="Script" path="res://core_systems/level_loader_system/all_this_shaders_need_compiled.cs" id="1_o15x1"]
 [ext_resource type="Material" uid="uid://d08tc1iusbqxj" path="res://placeholders/modular_walls/mat/mat_ground1.tres" id="2_2s5p8"]
@@ -47,7 +47,6 @@
 [ext_resource type="PackedScene" uid="uid://u35r00f8i2hn" path="res://testing_level_hall/models/shelfs/shelf_big_back.tscn" id="46_ky1dy"]
 [ext_resource type="PackedScene" uid="uid://blgh0y158pkqq" path="res://testing_level_hall/models/workbench/workbench.tscn" id="47_01v4u"]
 [ext_resource type="PackedScene" path="res://testing_level_hall/new_items/gas_tank_medium_03.tscn" id="48_nkb5l"]
-[ext_resource type="PackedScene" uid="uid://ds2om7g2l2p6k" path="res://testing_level_newhall/room_hall_2_08.tscn" id="49_ekumt"]
 [ext_resource type="PackedScene" uid="uid://ckhhg2rwjpner" path="res://testing_level_hall/new_items/gas_tank_small.tscn" id="49_qghd4"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_23kqo"]
@@ -259,6 +258,3 @@ transform = Transform3D(-0.0588534, 0, -0.998267, 0, 1, 0, 0.998267, 0, -0.05885
 
 [node name="Decal" parent="AllDecals" instance=ExtResource("26_xsorb")]
 transform = Transform3D(0.75, 0.433013, -0.5, -0.5, 0.866025, -2.6077e-08, 0.433013, 0.25, 0.866025, -0.0500001, 0, -1.4462)
-
-[node name="room_hall2_08" parent="." instance=ExtResource("49_ekumt")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.4686, 0, 2.34421)
