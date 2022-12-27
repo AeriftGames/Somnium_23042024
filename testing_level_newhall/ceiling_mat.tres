@@ -1,0 +1,13 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://dvakw8broive6"]
+
+[ext_resource type="Texture2D" uid="uid://bexe7r0mqt0fa" path="res://testing_level_newhall/textures/ceiling_color.jpg" id="1_iyvgw"]
+[ext_resource type="Texture2D" uid="uid://c0i32jmuiqanp" path="res://testing_level_newhall/textures/ceiling_normal.jpg" id="2_qf3tq"]
+
+[resource]
+resource_name = "Material.006"
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_iyvgw")
+metallic = 0.140909
+roughness = 0.672727
+normal_enabled = true
+normal_texture = ExtResource("2_qf3tq")

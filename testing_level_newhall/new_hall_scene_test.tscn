@@ -79,25 +79,6 @@ shape = SubResource("BoxShape3D_cuh5r")
 [node name="Lights" type="Node3D" parent="."]
 metadata/_edit_lock_ = true
 
-[node name="OmniLight3D" type="OmniLight3D" parent="Lights"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.551749, 3.35043, -3.15684)
-light_energy = 0.2
-light_indirect_energy = 11.964
-light_bake_mode = 1
-shadow_enabled = true
-shadow_bias = 0.11
-omni_range = 4.748
-
-[node name="OmniLight3D2" type="OmniLight3D" parent="Lights"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.41093, 4.09133, 1.14881)
-light_energy = 0.2
-light_indirect_energy = 10.617
-light_specular = 2.0
-light_bake_mode = 1
-shadow_enabled = true
-omni_range = 8.0
-omni_attenuation = 1.1487
-
 [node name="Items" type="Node3D" parent="."]
 metadata/_edit_lock_ = true
 

@@ -217,10 +217,13 @@ testDebug={
 [rendering]
 
 driver/threads/thread_model=2
-lights_and_shadows/positional_shadow/soft_shadow_filter_quality=3
-occlusion_culling/occlusion_rays_per_thread=256
-limits/cluster_builder/max_clustered_elements=2048.0
+lights_and_shadows/directional_shadow/soft_shadow_filter_quality=1
+occlusion_culling/occlusion_rays_per_thread=1024
+limits/global_shader_variables/buffer_size=125536
+limits/spatial_indexer/update_iterations_per_frame=20
+limits/forward_renderer/threaded_render_minimum_instances=1000
+limits/cluster_builder/max_clustered_elements=1024.0
 anti_aliasing/quality/screen_space_aa=1
 occlusion_culling/use_occlusion_culling=true
 mesh_lod/lod_change/threshold_pixels=0.2
-lights_and_shadows/positional_shadow/atlas_size=8192
+lights_and_shadows/positional_shadow/atlas_size=8184
