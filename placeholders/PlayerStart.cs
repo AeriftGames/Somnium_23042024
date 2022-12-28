@@ -11,8 +11,8 @@ public partial class PlayerStart : Node3D
 	// Node contains meshes, which we need visible in editor and unvisible in the game
 	public Node3D EditorMesh = null;
 
-	// spawn delay timer
-    Godot.Timer spawn_timer = new Godot.Timer();
+    // spawn delay timer
+    Godot.Timer spawn_timer = null;
 
     public override void _Ready()
 	{
@@ -21,6 +21,7 @@ public partial class PlayerStart : Node3D
 		EditorMesh.Visible = false;
 		EditorMesh.QueueFree();
 
+        spawn_timer = new Godot.Timer();
         // Create timer for delaying spawn if start game
         var callable_spawn = new Callable(this,"SpawnNewPlayer");
         spawn_timer.Connect("timeout", callable_spawn);
@@ -105,10 +106,15 @@ public partial class PlayerStart : Node3D
             newRotation = objectHands_instance.GlobalRotation;
             newRotation.y = GlobalRotation.y;
             objectHands_instance.GlobalRotation = newRotation;
-
+            
             // !!! SHADER PRECOMPILATION PROCESS START !!!
             if(GameMaster.GM.LevelLoader.isPrecompiledShaders)
                 GameMaster.GM.LevelLoader.StartPrecompileShaderProcess();
+            
+            GameMaster.GM.EnableBlackScreen(false);
+            //delete
+            spawn_timer.Stop();
+            spawn_timer.QueueFree();
         }
     }
 }

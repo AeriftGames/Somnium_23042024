@@ -1,10 +1,10 @@
-[gd_scene load_steps=13 format=3]
+[gd_scene load_steps=13 format=3 uid="uid://cryhclbq4jsy7"]
 
 [ext_resource type="Script" path="res://placeholders/PhysicsItems/physic_item_test.cs" id="1_hq0lu"]
 [ext_resource type="AudioStream" uid="uid://i5s8a8274bq6" path="res://audio/audio_streams/interactive_basic/36787__farbin__drop-cardboard-box.wav" id="2_q41vs"]
 [ext_resource type="Script" path="res://core_systems/interactive_system/interactive_object.cs" id="3_401v3"]
-[ext_resource type="Texture2D" uid="uid://1rj1ukmm2rwp" path="res://testing_level_hall/new_items/gas_tank_small_color.jpg" id="3_fmxbr"]
-[ext_resource type="Texture2D" uid="uid://he1vrdmoqk3x" path="res://testing_level_hall/new_items/gas_tank_small_normal.jpg" id="4_ejki2"]
+[ext_resource type="Texture2D" uid="uid://1rj1ukmm2rwp" path="res://testing_stuff_kaen/testing_level_hall/new_items/gas_tank_small_color.jpg" id="3_yy67i"]
+[ext_resource type="Texture2D" uid="uid://he1vrdmoqk3x" path="res://testing_stuff_kaen/testing_level_hall/new_items/gas_tank_small_normal.jpg" id="4_c54wk"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_l84ni"]
 friction = 0.5
@@ -14,13 +14,13 @@ radius = 0.124
 height = 0.36
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jqd1k"]
-albedo_texture = ExtResource("3_fmxbr")
+albedo_texture = ExtResource("3_yy67i")
 metallic = 0.29
 metallic_specular = 0.78
 roughness = 0.53
 normal_enabled = true
 normal_scale = 0.5
-normal_texture = ExtResource("4_ejki2")
+normal_texture = ExtResource("4_c54wk")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_jvknv"]
 _surfaces = [{

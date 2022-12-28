@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Diagnostics;
+using System.Threading.Tasks;
 
 public partial class GameMaster : Node
 {
@@ -14,7 +15,7 @@ public partial class GameMaster : Node
 	public Node GDNode_Logging;
 
 	// LEVEL LOADER
-	public CLevelLoader LevelLoader;
+	public CLevelLoader LevelLoader = null;
 
 	// POINTERS
 	private DebugHud _debugHud = null;
@@ -24,7 +25,12 @@ public partial class GameMaster : Node
 	//
 	private Control blackScreen = null;
 
-	public override void _Ready()
+	[Export] ulong needObjectID = 1;
+
+	//
+	private bool isQuitting = false;
+
+    public override void _Ready()
 	{
 		GD.Print("GameMaster loaded");
 		GM = this;
@@ -44,8 +50,8 @@ public partial class GameMaster : Node
 		// vytvoreni csharp logging systemu
 		Log = new LogSystem(this);
 
-		// vytvoreni LevelLoaderu
-		LevelLoader = new CLevelLoader(this, true);
+		// vytvoreni LevelLoaderu, druhy parametr = pouziti ShadersPrecompilation?
+		LevelLoader = new CLevelLoader(this, false);
 	}
 
 	// Set/Get FPS Character
@@ -66,18 +72,78 @@ public partial class GameMaster : Node
     public override void _UnhandledInput(InputEvent @event)
     {
 		if (@event is InputEventKey eventKey)
+		{
 			if (eventKey.Pressed && eventKey.Keycode == Key.Escape)
 				QuitGame();
+		}
     }
 
-	public void QuitGame()
+	public async void QuitGame()
 	{
-		Log.WriteLog(this,LogSystem.ELogMsgType.INFO,"Quit Game");
-		GetTree().Quit();
+		Log.WriteLog(this,LogSystem.ELogMsgType.INFO,"Quiting Game");
+
+		isQuitting = true;
+
+		await TaskQuitGame();
 	}
 
-    public override void _Process(double delta)
+    async Task TaskQuitGame()
+    {
+		// Unload level process
+        LevelLoader.UnloadLevelProcess();
+
+        await Task.Delay(1000);
+
+        // zapneme cernou obrazovku
+        EnableBlackScreen(true);
+
+        Node level = GetNode("/root/worldlevel");
+		var a = level.FindChildren("*", "RigidBody3D", true, true);
+		/*
+		GD.Print(a.Count);
+		foreach (var item in a)
+		{
+			GD.Print(item.Name);
+		}
+		*/
+		msgObject.FreeAll();
+		LevelLoader.Free();
+		Log.Free();
+
+		SafeQueueAll();
+		GetTree().Quit();
+    }
+
+    public void SafeQueueAll()
 	{
+		// Vypne _Process GameMastera
+		ProcessMode = ProcessModeEnum.Disabled;
+
+		// uvolni kameru a celeho hrace
+		_fpsCharacter.objectCamera.FreeAll();
+        _fpsCharacter.objectCamera.QueueFree();
+        _fpsCharacter.FreeAll();
+		_fpsCharacter.QueueFree();
+
+		// pokud byl hrac uspesne zavolan pro delete, vypiseme to v konzoli
+		if (_fpsCharacter.IsQueuedForDeletion())
+		{
+            GD.Print("FPSCharacter is removed");
+            GD.Print("Game is quit sucesfully");
+        }
+	}
+
+	public bool GetIsQuitting()
+	{
+		return isQuitting;
+	}
+
+	public override void _Process(double delta)
+	{
+		if (Input.IsActionJustPressed("testDebug"))
+			GD.Print("objekt ktery hledame ma nazev: " + GD.InstanceFromId(needObjectID).GetClass());
+
+        LevelLoader.Update(delta);
 	}
 
 	public void message_update()

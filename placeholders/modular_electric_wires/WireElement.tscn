@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=3 uid="uid://s1qn1ecriuys"]
+
+[ext_resource type="Script" path="res://placeholders/modular_electric_wires/WireElement.cs" id="1_7appc"]
+[ext_resource type="Material" uid="uid://bcw7x78hmdjf7" path="res://placeholders/modular_electric_wires/wire2_holder_mat.tres" id="3_4bqdy"]
+[ext_resource type="ArrayMesh" uid="uid://cugkv2lkm2cx4" path="res://placeholders/modular_electric_wires/small_holder_mesh.tres" id="3_icfvg"]
+[ext_resource type="ArrayMesh" uid="uid://c40b0mrxswu4c" path="res://placeholders/modular_electric_wires/one_wire_smallround_mesh.tres" id="4_bfy78"]
+
+[node name="WireElement" type="Node3D"]
+script = ExtResource("1_7appc")
+
+[node name="Wires" type="Marker3D" parent="."]
+
+[node name="StartHolderMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.055, 0.021)
+material_override = ExtResource("3_4bqdy")
+mesh = ExtResource("3_icfvg")
+skeleton = NodePath("")
+
+[node name="EndHolderMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.485, 0.021)
+material_override = ExtResource("3_4bqdy")
+mesh = ExtResource("3_icfvg")
+skeleton = NodePath("")
+
+[node name="EndHolderMesh2" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0.204, 0.196, 0)
+visible = false
+material_override = ExtResource("3_4bqdy")
+mesh = ExtResource("3_icfvg")
+skeleton = NodePath("")
+
+[node name="Node3D" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0205066, 0, 0)
+
+[node name="test" type="MeshInstance3D" parent="."]
+visible = false
+material_override = ExtResource("3_4bqdy")
+mesh = ExtResource("4_bfy78")
+skeleton = NodePath("")

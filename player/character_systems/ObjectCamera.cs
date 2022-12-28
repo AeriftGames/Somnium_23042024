@@ -35,6 +35,8 @@ public partial class ObjectCamera : Node3D
 
     private bool isCameraLookInputEnable = true;
 
+    bool isStopped = false;
+
     public override void _Ready()
 	{
 		NodeRotY = GetNode<Node3D>("NodeRotY");
@@ -67,6 +69,8 @@ public partial class ObjectCamera : Node3D
 
     public override void _PhysicsProcess(double delta)
     {
+        if (GameMaster.GM.GetIsQuitting()) return;
+
         base._PhysicsProcess(delta);
 
         if (ownerCharacter.IsInputEnable())
@@ -125,6 +129,8 @@ public partial class ObjectCamera : Node3D
 
     public void SetActualLean(ELeanType newLeanType)
     {
+        if (isStopped) return;
+
         // ziskame dostupnost funkci(WalkingEffects) z naseho zakladniho charactera
         FPSCharacter_WalkingEffects characterWalkingEffects = (FPSCharacter_WalkingEffects)ownerCharacter;
         if (characterWalkingEffects == null) return;
@@ -338,5 +344,16 @@ public partial class ObjectCamera : Node3D
     public bool GetCameraLookInputEnable()
     {
         return isCameraLookInputEnable;
+    }
+
+    public void FreeAll()
+    {
+        isStopped = true;
+        tweenLeanPos.Stop();
+        tweenLeanRot.Stop();
+        tweenLeanPos.Kill();
+        tweenLeanRot.Kill();
+        tweenLeanPos.Dispose();
+        tweenLeanRot.Dispose();
     }
 }

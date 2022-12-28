@@ -1,4 +1,5 @@
 using Godot;
+using Godot.Collections;
 using System;
 
 public partial class physic_item_test : RigidBody3D
@@ -6,7 +7,7 @@ public partial class physic_item_test : RigidBody3D
     [Export] string UseActionText = "no action";
     [Export] string ObjectName = "box";
 
-    [Export] public AudioStream[] PhysicEffectsAudioStream;
+    [Export] public Array<AudioStream> PhysicEffectsAudioStream;
 
     interactive_object interactiveObject;
 

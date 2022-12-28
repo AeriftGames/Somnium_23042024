@@ -1,0 +1,16 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://bh56vpx0bamhh"]
+
+[ext_resource type="Texture2D" uid="uid://o1i5gm734brs" path="res://models/boxes/textures/box_color.jpg" id="1_v6k4j"]
+[ext_resource type="Texture2D" uid="uid://bxfr3apqbkha2" path="res://models/boxes/textures/box_normal.jpg" id="2_flgwn"]
+
+[resource]
+resource_name = "Material"
+cull_mode = 2
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_v6k4j")
+metallic = 0.2
+metallic_specular = 0.15
+roughness = 0.8
+normal_enabled = true
+normal_scale = 0.7
+normal_texture = ExtResource("2_flgwn")

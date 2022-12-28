@@ -275,4 +275,9 @@ public partial class MessageObject: Godot.Object
         Node tempData = GetNodeData();
         return tempData;
     }
+
+    public void FreeAll()
+    {
+        Free();
+    }
 }

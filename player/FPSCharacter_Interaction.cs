@@ -97,6 +97,8 @@ public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
 
     public override void _PhysicsProcess(double delta)
 	{
+		if (GameMaster.GM.GetIsQuitting()) return;
+
 		base._PhysicsProcess(delta);
 
 		bool useNow = IsInputEnable() && CanUse && Input.IsActionJustPressed("UseAction");
@@ -260,5 +262,12 @@ public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
 	public BasicHud GetBasicHud()
 	{
 		return basicHud;
+	}
+
+	public override void FreeAll()
+	{
+        base.FreeAll();
+		objectHands.QueueFree();
+		QueueFree();
 	}
 }

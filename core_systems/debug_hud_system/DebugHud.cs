@@ -193,7 +193,6 @@ public partial class DebugHud : Control
 		GameMaster.GM.QuitGame();
 	}
 
-
     public void BuildLevelButtons()
 	{
 		var allLevelsInfo = GameMaster.GM.LevelLoader.GetAllLevelsInfo();
@@ -210,4 +209,65 @@ public partial class DebugHud : Control
 			LevelButtonContainer.AddChild(level_button_Instance);
         }
 	}
+
+	// Signal pr zmenu antialiasingu skrze option_button
+	public void _on_antialias_option_button_item_selected(int newID)
+	{
+		if(newID == 0)
+		{
+			//disable
+			GetTree().Root.ScreenSpaceAa = Viewport.ScreenSpaceAA.Disabled;
+			GetTree().Root.UseTaa = false;
+			GetTree().Root.Msaa3d = Viewport.MSAA.Disabled;
+			GameMaster.GM.Log.WriteLog(this, LogSystem.ELogMsgType.INFO, "antialias: disable");
+
+        }
+		else if(newID == 1)
+		{
+            //only ss_aa
+            GetTree().Root.ScreenSpaceAa = Viewport.ScreenSpaceAA.Fxaa;
+            GetTree().Root.UseTaa = false;
+            GetTree().Root.Msaa3d = Viewport.MSAA.Disabled;
+            GameMaster.GM.Log.WriteLog(this, LogSystem.ELogMsgType.INFO, "antialias: only ss_aa");
+        }
+		else if(newID == 2)
+		{
+            //ss_aa+taa
+            GetTree().Root.ScreenSpaceAa = Viewport.ScreenSpaceAA.Fxaa;
+            GetTree().Root.UseTaa = true;
+            GetTree().Root.Msaa3d = Viewport.MSAA.Disabled;
+            GameMaster.GM.Log.WriteLog(this, LogSystem.ELogMsgType.INFO, "antialias: ss_aa + taa");
+        }
+		else if(newID == 3)
+		{
+            //only msaa3d_2x
+            GetTree().Root.ScreenSpaceAa = Viewport.ScreenSpaceAA.Disabled;
+            GetTree().Root.UseTaa = false;
+            GetTree().Root.Msaa3d = Viewport.MSAA.Msaa2x;
+            GameMaster.GM.Log.WriteLog(this, LogSystem.ELogMsgType.INFO, "antialias: only msaa3d_2x");
+        }
+		else if(newID == 4)
+		{
+            //ss_aa+taa+msaa3d_2x
+            GetTree().Root.ScreenSpaceAa = Viewport.ScreenSpaceAA.Fxaa;
+            GetTree().Root.UseTaa = true;
+            GetTree().Root.Msaa3d = Viewport.MSAA.Msaa2x;
+            GameMaster.GM.Log.WriteLog(this, LogSystem.ELogMsgType.INFO, "antialias: ss_aa + taa + msaa3d_2x");
+        }
+	}
+
+	public void _on_scale_3d_h_slider_value_changed(float newValue)
+	{
+		Label scale3dLabel = GetNode<Label>("OptionsPanel/TabContainer/video/Scale3d_HBoxContainer/Scale3dvalue_Label");
+		scale3dLabel.Text = (newValue / 100.0f).ToString();
+
+		GetTree().Root.Scaling3dScale = (newValue / 100.0f);
+        GameMaster.GM.Log.WriteLog(this, LogSystem.ELogMsgType.INFO, "scale 3D: " + newValue/100.0f);
+    }
+
+	public void _on_half_res_gi_check_box_toggled(bool newPressed)
+	{
+		RenderingServer.GiSetUseHalfResolution(newPressed);
+        GameMaster.GM.Log.WriteLog(this, LogSystem.ELogMsgType.INFO, "half resolution GI: " + newPressed.ToString());
+    }
 }

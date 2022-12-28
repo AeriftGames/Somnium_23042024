@@ -38,18 +38,18 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
     [Export] public bool CanSprint = true;
     [Export] public bool CanJump = true;
     [Export] public bool CanMoveInFall = true;
-    [Export] public float JumpVelocity = 4.5f;
-    [Export] public float MoveSpeedInStand = 2.75f;
-    [Export] public float MoveSpeedInCrunch = 1.5f;
-    [Export] public float MoveSpeedInSprint = 5.0f;
-    [Export] public float MoveSpeedInFall = 1.5f;
-    [Export] public float AccelerateSmoothStep = 7f;
-    [Export] public float DeccelerateSmoothStep = 7f;
+    [Export] public float JumpVelocity = 4.3f;
+    [Export] public float MoveSpeedInStand = 2.25f;
+    [Export] public float MoveSpeedInCrunch = 1.4f;
+    [Export] public float MoveSpeedInSprint = 4.1f;
+    [Export] public float MoveSpeedInFall = 1.4f;
+    [Export] public float AccelerateSmoothStep = 6f;
+    [Export] public float DeccelerateSmoothStep = 6f;
     [Export] public float DeccelerateInFallSmoothStep = 1.0f;
 
     [ExportGroupAttribute("Looking Settings")]
-    [Export] public float MouseSensitivity = 0.3f;
-    [Export] public float MouseSmooth = 20f;
+    [Export] public float MouseSensitivity = 0.15f;
+    [Export] public float MouseSmooth = 15f;
     [Export] public float CameraVerticalLookMin = -80f;
     [Export] public float CameraVerticalLookMax = 80f;
     [Export] public float LerpSpeedPosObjectCamera = 15.0f;
@@ -108,6 +108,8 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
     // Update Physical updated process
     public override void _PhysicsProcess(double delta)
     {
+        if (GameMaster.GM.GetIsQuitting()) return;
+
         switch (CharacterMode)
         {
             case ECharacterMode.FlyMode:
@@ -494,5 +496,10 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
     public Control GetAllHudsControlNode()
     {
         return allHuds;
+    }
+
+    public virtual void FreeAll()
+    {
+        QueueFree();
     }
 }
