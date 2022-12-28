@@ -50,8 +50,8 @@ public partial class GameMaster : Node
 		// vytvoreni csharp logging systemu
 		Log = new LogSystem(this);
 
-		// vytvoreni LevelLoaderu
-		LevelLoader = new CLevelLoader(this, true);
+		// vytvoreni LevelLoaderu, druhy parametr = pouziti ShadersPrecompilation?
+		LevelLoader = new CLevelLoader(this, false);
 	}
 
 	// Set/Get FPS Character

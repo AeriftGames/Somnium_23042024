@@ -106,11 +106,11 @@ public partial class PlayerStart : Node3D
             newRotation = objectHands_instance.GlobalRotation;
             newRotation.y = GlobalRotation.y;
             objectHands_instance.GlobalRotation = newRotation;
-            /*
+            
             // !!! SHADER PRECOMPILATION PROCESS START !!!
             if(GameMaster.GM.LevelLoader.isPrecompiledShaders)
                 GameMaster.GM.LevelLoader.StartPrecompileShaderProcess();
-            */
+            
             GameMaster.GM.EnableBlackScreen(false);
             //delete
             spawn_timer.Stop();

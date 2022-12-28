@@ -27,11 +27,12 @@ public partial class CLevelLoader : Godot.Object
 
     private GameMaster gm;
 
-    public CLevelLoader(Node ownerInstance, bool isPrecompiledShaders)
+    public CLevelLoader(Node ownerInstance, bool newIsPrecompiledShaders)
     {
         gm = (GameMaster)ownerInstance;
-        this.isPrecompiledShaders = isPrecompiledShaders;
+        isPrecompiledShaders = newIsPrecompiledShaders;
 
+        // threaded
         progress = new Godot.Collections.Array();
     }
 
@@ -266,7 +267,7 @@ public partial class CLevelLoader : Godot.Object
         else if(loadingNewWorldLevelStatus == ResourceLoader.ThreadLoadStatus.InProgress)
         {
             // Bohuzel nedela co by melo.. ale v tomhle update loopu by jsme mohli treba animovat nejaky loading
-            //GD.Print("loading bar: " + progress[0]);
+            GD.Print("loading bar: " + progress[0]);
         }
     }
 }
