@@ -1,7 +1,7 @@
 @tool
 extends EditorPlugin
 
-const MainPanel: PackedScene = preload("res://addons/glTF_importer/importer.tscn")
+const MainPanel: PackedScene = preload("res://addons/SceneModifier/importer.tscn")
 
 var main_panel_instance: Node
 
@@ -26,7 +26,7 @@ func _make_visible(visible):
 
 
 func _get_plugin_name():
-	return "glTF Importer"
+	return "Scene Modifier"
 
 
 func _get_plugin_icon():

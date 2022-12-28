@@ -78,7 +78,7 @@ project/assembly_name="My Fps Prototype"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/glTF_importer/plugin.cfg")
+enabled=PackedStringArray("res://addons/SceneModifier/plugin.cfg")
 
 [input]
 
