@@ -40,6 +40,7 @@ volumetric_fog_ambient_inject = 0.12
 
 [node name="worldlevel" type="Node3D"]
 script = ExtResource("1_hstvh")
+InGameStartEnableSDFGI = true
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.61698, 0.407767, -0.673099, 0.471081, 0.493776, 0.730937, 0.630411, -0.768057, 0.112559, 0.5, 0, 0)

@@ -189,7 +189,7 @@ public partial class CLevelLoader : Godot.Object
 
     public async Task SetLevelWorldEnvironment(bool newSdfgi)
     {
-        //await Task.Delay(50);
+        await Task.Delay(50);
 
         Node level = GameMaster.GM.GetNode("/root/worldlevel");
         if (level == null)
@@ -251,7 +251,7 @@ public partial class CLevelLoader : Godot.Object
         ResourceLoader.LoadThreadedRequest(loadingScenePath,"");
     }
 
-    public void Update(double delta)
+    public async void Update(double delta)
     {
         if (canUpdate == false) return;
 
@@ -263,6 +263,9 @@ public partial class CLevelLoader : Godot.Object
             GD.Print("loading scene is complete, it is change now");
             gm.GetTree().ChangeSceneToPacked((PackedScene)ResourceLoader.LoadThreadedGet(loadingScenePath));
             canUpdate = false;
+
+            // Toggle all lights for fix GI
+            await SetLevelWorldEnvironment(true);
         }
         else if(loadingNewWorldLevelStatus == ResourceLoader.ThreadLoadStatus.InProgress)
         {

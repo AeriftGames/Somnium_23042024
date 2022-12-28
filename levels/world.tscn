@@ -43,6 +43,7 @@ data = PackedVector3Array(15, 0, 15, 10, 0, 15, 15, 0, 10, 10, 0, 15, 10, 0, 10,
 
 [node name="worldlevel" type="Node3D"]
 script = ExtResource("1_yq86y")
+InGameStartEnableSDFGI = true
 
 [node name="worldlevel_occluderculling" type="OccluderInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.89176, 0, 0)

@@ -1,5 +1,6 @@
-[gd_scene load_steps=44 format=3 uid="uid://b0t7u4n2xaokh"]
+[gd_scene load_steps=45 format=3 uid="uid://b0t7u4n2xaokh"]
 
+[ext_resource type="Script" path="res://levels/worldlevel.cs" id="1_ugy1o"]
 [ext_resource type="PackedScene" uid="uid://ck8mt4y4gfqmk" path="res://placeholders/modular_walls/ground_large.tscn" id="2_lls1c"]
 [ext_resource type="PackedScene" uid="uid://dc0mmunts8oay" path="res://placeholders/modular_walls/cube_hole_medium_wide.tscn" id="3_they1"]
 [ext_resource type="Material" uid="uid://btskthdiqqlrw" path="res://placeholders/modular_walls/mat/mat_wall2.tres" id="4_rwyom"]
@@ -42,7 +43,6 @@ sky = SubResource("Sky_a3ntq")
 tonemap_mode = 3
 ssao_enabled = true
 ssil_enabled = true
-sdfgi_enabled = true
 sdfgi_use_occlusion = true
 sdfgi_read_sky_light = false
 fog_enabled = true
@@ -106,6 +106,8 @@ friction = 0.5
 friction = 0.3
 
 [node name="worldlevel" type="Node3D"]
+script = ExtResource("1_ugy1o")
+InGameStartEnableSDFGI = true
 
 [node name="worldlevel_occluderculling" type="OccluderInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.89176, 0, 0)

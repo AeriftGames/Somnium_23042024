@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://c43oig653gcvy"]
+[gd_scene load_steps=45 format=3 uid="uid://c43oig653gcvy"]
 
 [ext_resource type="ArrayOccluder3D" uid="uid://c65wc0yeg3cak" path="res://levels/world_level_rooms/worldlevel_rooms_test.occ" id="1_48aky"]
 [ext_resource type="Script" path="res://levels/worldlevel_meteor.gd" id="1_0375g"]
@@ -29,7 +29,6 @@
 [ext_resource type="PackedScene" uid="uid://d1fahaee5i3x6" path="res://objects/pipes/pipestraight.glb" id="28_bnr13"]
 [ext_resource type="PackedScene" uid="uid://d5wc26cy4c6o" path="res://objects/furniture/cabinet_small.tscn" id="29_ebuaj"]
 [ext_resource type="PackedScene" path="res://objects/door/door.tscn" id="29_rc6hx"]
-[ext_resource type="PackedScene" uid="uid://pw2ww2bgkvd0" path="res://objects/furniture/cabinet_new.tscn" id="30_vtat2"]
 [ext_resource type="PackedScene" uid="uid://cokykrpxx7lmy" path="res://objects/battery/battery.tscn" id="31_rjyuk"]
 [ext_resource type="PackedScene" uid="uid://c7ohsu8vdlks6" path="res://objects/misc/food_can/food_can.tscn" id="32_am5io"]
 [ext_resource type="PackedScene" uid="uid://dhg3c333pnd8n" path="res://objects/battery/batery_new.tscn" id="33_ak0xq"]
@@ -481,22 +480,19 @@ transform = Transform3D(-1.31134e-08, 0, -0.3, 0, 0.3, 0, 0.3, 0, -1.31134e-08, 
 [node name="door3" parent="." instance=ExtResource("29_rc6hx")]
 transform = Transform3D(-0.6, 0, -5.24536e-08, 0, 0.6, 0, 5.24536e-08, 0, -0.6, -4.00621, -0.543687, 3.23242)
 
-[node name="cabinet_new" parent="." instance=ExtResource("30_vtat2")]
-transform = Transform3D(-0.4, 0, -3.49691e-08, 0, 0.4, 0, 3.49691e-08, 0, -0.4, -2.4996, 0.703549, -8.88343)
-
-[node name="battery" parent="cabinet_new" instance=ExtResource("31_rjyuk")]
+[node name="cabinet_new@battery" parent="." instance=ExtResource("31_rjyuk")]
 transform = Transform3D(0.1, 0, 5.32907e-15, 0, 0.1, 0, -5.32907e-15, 0, 0.1, 1.26187, 0, -0.796638)
 
-[node name="battery3" parent="cabinet_new" instance=ExtResource("31_rjyuk")]
+[node name="cabinet_new@battery3" parent="." instance=ExtResource("31_rjyuk")]
 transform = Transform3D(0.1, -5.62691e-09, 2.05159e-09, 5.62691e-09, 0.0765326, -0.0643643, 2.05158e-09, 0.0643643, 0.0765326, 0.802648, 1.46512, 0.990042)
 
-[node name="battery2" parent="cabinet_new" instance=ExtResource("31_rjyuk")]
+[node name="cabinet_new@battery2" parent="." instance=ExtResource("31_rjyuk")]
 transform = Transform3D(-0.00121298, 0.0999926, -8.84832e-09, -0.0999926, -0.00121298, -8.74164e-09, -8.84832e-09, 8.74163e-09, 0.1, 0.802648, 1.47781, 1.24188)
 
-[node name="postcard" parent="cabinet_new" instance=ExtResource("23_ua0lw")]
+[node name="cabinet_new@postcard" parent="." instance=ExtResource("23_ua0lw")]
 transform = Transform3D(-0.126002, 0, -0.272256, 0, 0.3, 0, 0.272256, 0, -0.126002, 1.21437, 2.80231, -1.00781)
 
-[node name="postcard2" parent="cabinet_new" instance=ExtResource("23_ua0lw")]
+[node name="cabinet_new@postcard2" parent="." instance=ExtResource("23_ua0lw")]
 transform = Transform3D(0.0809684, 0, -0.288867, 0, 0.3, 0, 0.288867, 0, 0.0809684, 1.15276, 0.192082, 0.334911)
 
 [node name="food_can" parent="." instance=ExtResource("32_am5io")]
