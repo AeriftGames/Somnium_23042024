@@ -99,13 +99,13 @@ public partial class GameMaster : Node
 
         Node level = GetNode("/root/worldlevel");
 		var a = level.FindChildren("*", "RigidBody3D", true, true);
-		
+		/*
 		GD.Print(a.Count);
 		foreach (var item in a)
 		{
 			GD.Print(item.Name);
 		}
-
+		*/
 		msgObject.FreeAll();
 		LevelLoader.Free();
 		Log.Free();
@@ -127,7 +127,10 @@ public partial class GameMaster : Node
 
 		// pokud byl hrac uspesne zavolan pro delete, vypiseme to v konzoli
 		if (_fpsCharacter.IsQueuedForDeletion())
-			GD.Print("fps character queued done");
+		{
+            GD.Print("FPSCharacter is removed");
+            GD.Print("Game is quit sucesfully");
+        }
 	}
 
 	public bool GetIsQuitting()

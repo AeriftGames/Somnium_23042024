@@ -1,0 +1,13 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3]
+
+[ext_resource type="Texture2D" uid="uid://c7elbt5cyqwyb" path="res://testing_stuff_kaen/testing_level_newhall/textures/schody2_color.jpg" id="1_jrbis"]
+[ext_resource type="Texture2D" uid="uid://kdt2ymomhasd" path="res://testing_stuff_kaen/testing_level_newhall/schody2_normal.jpg" id="2_b73di"]
+
+[resource]
+resource_name = "Material.004"
+cull_mode = 2
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_jrbis")
+roughness = 0.5
+normal_enabled = true
+normal_texture = ExtResource("2_b73di")

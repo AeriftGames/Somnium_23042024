@@ -1,6 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://c763w52ytt5if"]
+[gd_scene load_steps=4 format=3 uid="uid://dr884bc7e11qi"]
 
-[ext_resource type="Material" path="res://testing_level_hall/vents_mat.tres" id="1_2xuqq"]
+[ext_resource type="Material" path="res://testing_stuff_kaen/testing_level_hall/vents_mat.tres" id="1_2xuqq"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_pasgo"]
 _surfaces = [{
