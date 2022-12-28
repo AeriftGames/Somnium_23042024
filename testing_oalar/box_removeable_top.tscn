@@ -1,4 +1,4 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=2 format=3 uid="uid://e6occb548le6"]
 
 [ext_resource type="PackedScene" uid="uid://wdo2apiyqbpo" path="res://testing_oalar/box.tscn" id="1_470xd"]
 

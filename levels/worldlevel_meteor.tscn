@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=3 uid="uid://c43oig653gcvy"]
+[gd_scene load_steps=48 format=3 uid="uid://c43oig653gcvy"]
 
 [ext_resource type="ArrayOccluder3D" uid="uid://c65wc0yeg3cak" path="res://levels/world_level_rooms/worldlevel_rooms_test.occ" id="1_48aky"]
 [ext_resource type="Script" path="res://levels/worldlevel_meteor.gd" id="1_0375g"]
@@ -37,9 +37,8 @@
 [ext_resource type="PackedScene" uid="uid://cmso6nb03kmgl" path="res://testing_oalar/box2.glb" id="37_s7lcx"]
 [ext_resource type="PackedScene" path="res://testing_oalar/poster.tscn" id="37_xticy"]
 [ext_resource type="PackedScene" uid="uid://bidh1jafqnmu2" path="res://testing_oalar/bunker.glb" id="38_fjt1y"]
-[ext_resource type="PackedScene" uid="uid://d21twnro2sgeu" path="res://placeholders/PhysicsItems/box_test.tscn" id="38_qw5pi"]
+[ext_resource type="PackedScene" path="res://placeholders/PhysicsItems/box_test.tscn" id="38_qw5pi"]
 [ext_resource type="PackedScene" uid="uid://d2wp3eif66h15" path="res://bunker.glb" id="39_wqnys"]
-[ext_resource type="PackedScene" uid="uid://dxvin5g21vt0i" path="res://light.tscn" id="40_ryy51"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_nrkwj"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -602,13 +601,6 @@ transform = Transform3D(-0.171877, 0.985118, 0, 0.232111, 0.0404973, -0.971846, 
 transform = Transform3D(0.0212217, 0, 0.999775, 0, 1, 0, -0.999775, 0, 0.0212217, -13.0734, 1.81618, -1.70935)
 
 [node name="Node3D" type="Node3D" parent="."]
-
-[node name="light" parent="Node3D" instance=ExtResource("40_ryy51")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.18856, 1.37838, -1.96896)
-emission_enabled = true
-
-[node name="light2" parent="Node3D" instance=ExtResource("40_ryy51")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.77429, 1.37838, -1.96896)
 
 [editable path="LevelGeometry/Grounds/floor3"]
 [editable path="cabinet_small3"]
