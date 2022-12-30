@@ -80,6 +80,7 @@ shape = SubResource("CapsuleShape3D_klqbt")
 
 [node name="gas_tank_small" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0109436, 0)
+ignore_occlusion_culling = true
 mesh = SubResource("ArrayMesh_tukss")
 skeleton = NodePath("")
 

@@ -14,6 +14,7 @@ script = ExtResource("1_uvf2j")
 [node name="NodeLean" type="Node3D" parent="NodeRotY/GimbalLand/NodeRotX"]
 
 [node name="Camera" type="Camera3D" parent="NodeRotY/GimbalLand/NodeRotX/NodeLean"]
+cull_mask = 3
 fov = 65.0
 far = 300.0
 

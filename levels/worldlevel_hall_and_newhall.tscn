@@ -1,10 +1,9 @@
 [gd_scene load_steps=49 format=3 uid="uid://rcpy1e4tif1j"]
 
 [ext_resource type="Script" path="res://levels/worldlevel.cs" id="1_22uyt"]
-[ext_resource type="ArrayOccluder3D" uid="uid://csrk017npxhrv" path="res://levels/worldlevel_hall_and_newhall.occ" id="2_flopx"]
+[ext_resource type="ArrayOccluder3D" uid="uid://cutd5dlobddug" path="res://levels/worldlevel_hall_and_newhall.occ" id="2_flopx"]
 [ext_resource type="Environment" uid="uid://nmuknx7wiohq" path="res://levels/worldlevel_newhall/worldlevel_newhall.tres" id="3_fxaej"]
 [ext_resource type="PackedScene" uid="uid://bet3idvc4fg0n" path="res://placeholders/PlayerStart.tscn" id="5_pjs15"]
-[ext_resource type="AudioStream" uid="uid://c22q66lwj2uvk" path="res://audio/audio_streams/510485__lydmakeren__industrial-hall-ambience.wav" id="7_j8ghw"]
 [ext_resource type="PackedScene" uid="uid://cw0ydavkgsc1g" path="res://testing_stuff_kaen/testing_level_hall/hall_test.tscn" id="9_t32gr"]
 [ext_resource type="PackedScene" path="res://testing_stuff_kaen/testing_level_hall/new_items/lamp_2.tscn" id="11_a1jgn"]
 [ext_resource type="Material" path="res://testing_stuff_kaen/testing_level_newhall/single_door_joints_mat.tres" id="11_w0lph"]
@@ -43,6 +42,7 @@
 [ext_resource type="PackedScene" uid="uid://dmg1dxcoyy0ei" path="res://testing_stuff_kaen/testing_level_newhall/room_hall_2_new_2.tscn" id="41_sb5nx"]
 [ext_resource type="PackedScene" path="res://placeholders/PhysicsItems/physic_item_gas_tank_medium.tscn" id="43_jnqde"]
 [ext_resource type="PackedScene" uid="uid://cryhclbq4jsy7" path="res://placeholders/PhysicsItems/physic_item_gas_tank_small.tscn" id="43_xwgko"]
+[ext_resource type="PackedScene" uid="uid://mmaua2et74ge" path="res://placeholders/modular_pipes/new_big/pipe_big_round.tscn" id="45_6bsui"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_e0om5"]
 _surfaces = [{
@@ -90,15 +90,14 @@ InGameStartEnableSDFGI = true
 
 [node name="worldlevel_occluderculling" type="OccluderInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.3756, 0)
-visible = false
 occluder = ExtResource("2_flopx")
+bake_mask = 4293918721
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource("3_fxaej")
 
 [node name="PlayerStart" parent="." instance=ExtResource("5_pjs15")]
-transform = Transform3D(0.11277, 0, 0.993621, 0, 1, 0, -0.993621, 0, 0.11277, -8.11536, 0.723109, -2.53479)
-visible = false
+transform = Transform3D(-0.999395, 0, -0.0347771, 0, 1, 0, 0.0347771, 0, -0.999395, -8.11536, 0.00932676, 21.157)
 
 [node name="Stuff" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.35456, 0, -1.192)
@@ -178,30 +177,6 @@ transform = Transform3D(0.12993, 0, 0.37831, 0, 0.4, 0, -0.37831, 0, 0.12993, -8
 [node name="box0_main32" parent="Stuff" instance=ExtResource("14_k1qqc")]
 transform = Transform3D(-0.0901912, 0, 0.389699, 0, 0.4, 0, -0.389699, 0, -0.0901912, -7.92314, 3.33265, 27.3823)
 
-[node name="box0_main33" parent="Stuff" instance=ExtResource("14_k1qqc")]
-transform = Transform3D(-0.00761796, 0, 0.499942, 0, 0.5, 0, -0.499942, 0, -0.00761796, -7.99824, 4.23719, 27.2118)
-
-[node name="box0_main34" parent="Stuff" instance=ExtResource("14_k1qqc")]
-transform = Transform3D(-0.169894, 0, 0.470251, 0, 0.5, 0, -0.470251, 0, -0.169894, -7.90874, 4.23719, 26.0839)
-
-[node name="box0_main35" parent="Stuff" instance=ExtResource("14_k1qqc")]
-transform = Transform3D(0.157012, 0, 0.367896, 0, 0.4, 0, -0.367896, 0, 0.157012, -7.90874, 5.13535, 26.0839)
-
-[node name="box0_main36" parent="Stuff" instance=ExtResource("14_k1qqc")]
-transform = Transform3D(-0.0617047, 0, 0.395212, 0, 0.4, 0, -0.395212, 0, -0.0617047, -7.89264, 5.13535, 27.1391)
-
-[node name="box0_main37" parent="Stuff" instance=ExtResource("14_k1qqc")]
-transform = Transform3D(0.0689815, 0, -0.495219, 0, 0.5, 0, 0.495219, 0, 0.0689815, -8.09254, 4.23719, 23.6325)
-
-[node name="box0_main38" parent="Stuff" instance=ExtResource("14_k1qqc")]
-transform = Transform3D(0.226381, 0, -0.445816, 0, 0.5, 0, 0.445816, 0, 0.226381, -8.04274, 4.23719, 24.7629)
-
-[node name="box0_main39" parent="Stuff" instance=ExtResource("14_k1qqc")]
-transform = Transform3D(-0.110624, 0, -0.384399, 0, 0.4, 0, 0.384399, 0, -0.110624, -8.04274, 5.13535, 24.7629)
-
-[node name="box0_main40" parent="Stuff" instance=ExtResource("14_k1qqc")]
-transform = Transform3D(0.109792, 0, -0.384637, 0, 0.4, 0, 0.384637, 0, 0.109792, -8.18834, 5.13535, 23.7176)
-
 [node name="box0_main27" parent="Stuff" instance=ExtResource("14_k1qqc")]
 transform = Transform3D(-0.0176853, 0, -0.499687, 0, 0.5, 0, 0.499687, 0, -0.0176853, -1.39447, 2.4345, 27.9143)
 
@@ -256,6 +231,120 @@ transform = Transform3D(-1.2, 0, -1.04907e-07, 0, 1.2, 0, 1.04907e-07, 0, -1.2, 
 [node name="Wardrobe_big" parent="Stuff" instance=ExtResource("12_xk1du")]
 transform = Transform3D(-0.00794116, 0, 0.999969, 0, 1, 0, -0.999969, 0, -0.00794116, -0.963933, 1.78814e-07, -1.02582)
 
+[node name="pipe_big_medium" parent="Stuff" instance=ExtResource("34_py3ih")]
+transform = Transform3D(-0.992108, 0, 0.125385, 0, 1, 0, -0.125385, 0, -0.992108, -10.5152, 2.90533, 27.5268)
+
+[node name="pipe_big_medium2" parent="Stuff" instance=ExtResource("34_py3ih")]
+transform = Transform3D(-0.992108, 0, 0.125385, 0, 1, 0, -0.125385, 0, -0.992108, -10.5152, 4.83198, 27.5268)
+
+[node name="pipe_big_medium3" parent="Stuff" instance=ExtResource("34_py3ih")]
+transform = Transform3D(-0.992108, 0, 0.125385, -0.125385, -4.37114e-08, -0.992108, 5.48076e-09, -1, 4.33664e-08, -10.5152, 6.22145, 25.858)
+
+[node name="pipe_big_split" parent="Stuff" instance=ExtResource("36_k4xu8")]
+transform = Transform3D(-0.999825, 0, 0.0187089, 0, 1, 0, -0.0187089, 0, -0.999825, -10.5178, 2.80895, 27.5246)
+
+[node name="pipe_big_split3" parent="Stuff" instance=ExtResource("36_k4xu8")]
+transform = Transform3D(-0.999825, 0, 0.0187089, 0, 1, 0, -0.0187089, 0, -0.999825, -10.5178, 3.77048, 27.5246)
+
+[node name="pipe_big_split4" parent="Stuff" instance=ExtResource("36_k4xu8")]
+transform = Transform3D(-0.999825, 0, 0.0187089, 0, 1, 0, -0.0187089, 0, -0.999825, -10.5178, 5.70486, 27.5246)
+
+[node name="pipe_big_medium4" parent="Stuff" instance=ExtResource("34_py3ih")]
+transform = Transform3D(4.33664e-08, 1, -5.48076e-09, 0.992108, -4.37114e-08, -0.125385, -0.125385, 0, -0.992108, -8.36549, 6.64046, 24.2095)
+
+[node name="pipe_big_medium5" parent="Stuff" instance=ExtResource("34_py3ih")]
+transform = Transform3D(4.33664e-08, 1, -5.48076e-09, 0.992108, -4.37114e-08, -0.125385, -0.125385, 0, -0.992108, -6.43884, 6.64046, 24.2095)
+
+[node name="pipe_big_split6" parent="Stuff" instance=ExtResource("36_k4xu8")]
+transform = Transform3D(4.37037e-08, 1, -8.17792e-10, 0.999825, -4.37114e-08, -0.0187089, -0.0187089, 0, -0.999825, -7.50034, 6.64307, 24.2073)
+
+[node name="pipe_big_split7" parent="Stuff" instance=ExtResource("36_k4xu8")]
+transform = Transform3D(4.37037e-08, 1, -8.17792e-10, 0.999825, -4.37114e-08, -0.0187089, -0.0187089, 0, -0.999825, -5.56596, 6.64307, 24.2073)
+
+[node name="pipe_big_medium6" parent="Stuff" instance=ExtResource("34_py3ih")]
+transform = Transform3D(4.33664e-08, 1, -5.48076e-09, 0.992108, -4.37114e-08, -0.125385, -0.125385, 0, -0.992108, -4.46752, 6.64046, 24.2095)
+
+[node name="pipe_big_medium7" parent="Stuff" instance=ExtResource("34_py3ih")]
+transform = Transform3D(4.33664e-08, 1, -5.48076e-09, 0.992108, -4.37114e-08, -0.125385, -0.125385, 0, -0.992108, -2.54087, 6.64046, 24.2095)
+
+[node name="pipe_big_split8" parent="Stuff" instance=ExtResource("36_k4xu8")]
+transform = Transform3D(4.37037e-08, 1, -8.17792e-10, 0.999825, -4.37114e-08, -0.0187089, -0.0187089, 0, -0.999825, -3.60237, 6.64307, 24.2073)
+
+[node name="pipe_big_split9" parent="Stuff" instance=ExtResource("36_k4xu8")]
+transform = Transform3D(4.37037e-08, 1, -8.17792e-10, 0.999825, -4.37114e-08, -0.0187089, -0.0187089, 0, -0.999825, -1.66799, 6.64307, 24.2073)
+
+[node name="pipe_big_medium8" parent="Stuff" instance=ExtResource("34_py3ih")]
+transform = Transform3D(4.33664e-08, 1, -5.48076e-09, 0.992108, -4.37114e-08, -0.125385, -0.125385, 0, -0.992108, -0.522216, 6.64046, 24.2095)
+
+[node name="pipe_big_medium9" parent="Stuff" instance=ExtResource("34_py3ih")]
+transform = Transform3D(4.33664e-08, 1, -5.48076e-09, 0.992108, -4.37114e-08, -0.125385, -0.125385, 0, -0.992108, 1.40444, 6.64046, 24.2095)
+
+[node name="pipe_big_split10" parent="Stuff" instance=ExtResource("36_k4xu8")]
+transform = Transform3D(4.37037e-08, 1, -8.17792e-10, 0.999825, -4.37114e-08, -0.0187089, -0.0187089, 0, -0.999825, 0.342935, 6.64307, 24.2073)
+
+[node name="pipe_big_split5" parent="Stuff" instance=ExtResource("36_k4xu8")]
+transform = Transform3D(-0.999825, 0, 0.0187089, -0.0187089, -4.37114e-08, -0.999825, 8.17792e-10, -1, 4.37037e-08, -10.5178, 6.20834, 26.9737)
+
+[node name="pipe_big_split15" parent="Stuff" instance=ExtResource("36_k4xu8")]
+transform = Transform3D(-0.499913, 1.60952e-08, 0.00935373, -0.00935373, -2.15948e-08, -0.499913, -1.56884e-08, -0.5, 2.18922e-08, -9.49767, 5.5526, 24.5377)
+
+[node name="pipe_big_medium14" parent="Stuff" instance=ExtResource("34_py3ih")]
+transform = Transform3D(-0.496054, -4.21277e-08, 0.0626925, -0.0626925, -2.51609e-08, -0.496054, 4.49501e-08, -0.5, 1.96802e-08, -9.49506, 5.55118, 24.9904)
+
+[node name="pipe_big_split19" parent="Stuff" instance=ExtResource("36_k4xu8")]
+transform = Transform3D(-0.499913, 1.60952e-08, 0.00935373, -0.00935373, -2.15948e-08, -0.499913, -1.56884e-08, -0.5, 2.18922e-08, -9.49767, 5.5526, 23.5191)
+
+[node name="pipe_big_medium17" parent="Stuff" instance=ExtResource("34_py3ih")]
+transform = Transform3D(-0.496054, -4.21277e-08, 0.0626925, -0.0626925, -2.51609e-08, -0.496054, 4.49501e-08, -0.5, 1.96802e-08, -9.49506, 5.55118, 23.9717)
+
+[node name="pipe_big_split20" parent="Stuff" instance=ExtResource("36_k4xu8")]
+transform = Transform3D(-0.499913, 1.60952e-08, 0.00935373, -0.00935373, -2.15948e-08, -0.499913, -1.56884e-08, -0.5, 2.18922e-08, -9.49767, 5.5526, 22.4993)
+
+[node name="pipe_big_medium18" parent="Stuff" instance=ExtResource("34_py3ih")]
+transform = Transform3D(-0.496054, -4.21277e-08, 0.0626925, -0.0626925, -2.51609e-08, -0.496054, 4.49501e-08, -0.5, 1.96802e-08, -9.49506, 5.55118, 22.952)
+
+[node name="pipe_big_split16" parent="Stuff" instance=ExtResource("36_k4xu8")]
+transform = Transform3D(-0.499913, 1.60952e-08, 0.00935373, -0.00935373, -2.15948e-08, -0.499913, -1.56884e-08, -0.5, 2.18922e-08, -9.49767, 5.54403, 25.575)
+
+[node name="pipe_big_split17" parent="Stuff" instance=ExtResource("36_k4xu8")]
+transform = Transform3D(-0.499913, -2.77507e-17, 0.00935448, -2.77556e-17, 0.5, -5.16988e-26, -0.00935448, -5.19278e-19, -0.499913, -9.50153, 5.82173, 25.8222)
+
+[node name="pipe_big_medium10" parent="Stuff" instance=ExtResource("34_py3ih")]
+transform = Transform3D(-0.992108, 0, 0.125385, 0, 1, 0, -0.125385, 0, -0.992108, -9.99294, 2.90533, 27.5268)
+
+[node name="pipe_big_medium11" parent="Stuff" instance=ExtResource("34_py3ih")]
+transform = Transform3D(-0.992108, 0, 0.125385, 0, 1, 0, -0.125385, 0, -0.992108, -9.99294, 4.83198, 27.5268)
+
+[node name="pipe_big_medium12" parent="Stuff" instance=ExtResource("34_py3ih")]
+transform = Transform3D(-0.992108, 0, 0.125385, 0, 1, 0, -0.125385, 0, -0.992108, -9.99294, 6.78373, 27.5268)
+
+[node name="pipe_big_medium15" parent="Stuff" instance=ExtResource("34_py3ih")]
+transform = Transform3D(-0.496054, 0, 0.0626926, 0, 0.5, 0, -0.0626926, 0, -0.496054, -9.50139, 6.38247, 25.8226)
+
+[node name="pipe_big_split18" parent="Stuff" instance=ExtResource("36_k4xu8")]
+transform = Transform3D(-0.499913, -2.77507e-17, 0.00935448, -2.77556e-17, 0.5, -5.16988e-26, -0.00935448, -5.19278e-19, -0.499913, -9.50153, 6.82885, 25.8222)
+
+[node name="pipe_big_medium16" parent="Stuff" instance=ExtResource("34_py3ih")]
+transform = Transform3D(-0.496054, 0, 0.0626926, 0, 0.5, 0, -0.0626926, 0, -0.496054, -9.50139, 7.38958, 25.8226)
+
+[node name="pipe_big_valve_base2" parent="Stuff" instance=ExtResource("35_bxnva")]
+transform = Transform3D(-0.0944733, 6.02597e-08, -0.995527, 1.77455e-07, 1, 4.36902e-08, 0.995527, -1.72534e-07, -0.0944733, -9.98294, 2.97218, 27.5114)
+
+[node name="pipe_big_split11" parent="Stuff" instance=ExtResource("36_k4xu8")]
+transform = Transform3D(-0.999825, 0, 0.0187089, 0, 1, 0, -0.0187089, 0, -0.999825, -9.99555, 3.15151, 27.5246)
+
+[node name="pipe_big_split12" parent="Stuff" instance=ExtResource("36_k4xu8")]
+transform = Transform3D(-0.999825, 0, 0.0187089, 0, 1, 0, -0.0187089, 0, -0.999825, -9.99555, 3.77048, 27.5246)
+
+[node name="pipe_big_split13" parent="Stuff" instance=ExtResource("36_k4xu8")]
+transform = Transform3D(-0.999825, 0, 0.0187089, 0, 1, 0, -0.0187089, 0, -0.999825, -9.99555, 5.69721, 27.5246)
+
+[node name="pipe_big_split14" parent="Stuff" instance=ExtResource("36_k4xu8")]
+transform = Transform3D(-0.973042, -1.09615e-08, -0.230627, -9.33693e-09, -1, 8.69227e-08, -0.230627, 8.67329e-08, 0.973042, -9.99555, 2.79607, 27.5246)
+
+[node name="pipe_big_valve2" parent="Stuff" instance=ExtResource("37_mbegl")]
+transform = Transform3D(-0.992108, 0.125385, -5.48076e-09, 0, -4.37114e-08, -1, -0.125385, -0.992108, 4.33664e-08, -9.93153, 2.97543, 26.9512)
+
 [node name="Items" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.35456, 0, -1.192)
 
@@ -278,9 +367,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.66771, 1.24416, 8.89154)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.60434, 0.318316, 8.89822)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("7_j8ghw")
+stream = ExtResource("38_xxj7q")
 volume_db = -20.0
+pitch_scale = 0.84
 autoplay = true
+bus = &"Music"
 
 [node name="hall_test" parent="." instance=ExtResource("9_t32gr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.36015, 0, -1.18099)
@@ -652,27 +743,6 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -6.898
 [node name="hall_test2" parent="." instance=ExtResource("9_t32gr")]
 transform = Transform3D(0.00562005, 0, -0.999984, 0, 1, 0, 0.999984, 0, 0.00562005, 0.886889, 0, 6.27726)
 
-[node name="OmniLight3D" type="OmniLight3D" parent="hall_test2"]
-transform = Transform3D(1, 0, 2.18861e-08, 0, 1, 0, -2.14204e-08, 0, 1, 17.8239, 5.9594, 19.6243)
-light_indirect_energy = 6.512
-shadow_enabled = true
-omni_range = 12.419
-
-[node name="OmniLight3D4" type="OmniLight3D" parent="hall_test2"]
-transform = Transform3D(1, 0, 2.8871e-08, 0, 1, 0, -2.8871e-08, 0, 1, 25.5492, 6.62591, 13.3988)
-light_energy = 0.7
-light_indirect_energy = 12.0
-shadow_enabled = true
-omni_range = 16.0
-omni_attenuation = 1.31951
-
-[node name="OmniLight3D3" type="OmniLight3D" parent="hall_test2"]
-transform = Transform3D(1, 0, 3.3062e-08, 0, 1, 0, -3.25963e-08, 0, 1, 12.3132, 2.7052, 9.28703)
-light_energy = 0.1
-light_indirect_energy = 10.0
-shadow_enabled = true
-omni_range = 10.0
-
 [node name="worldlevel_new_hall_test4" parent="." instance=ExtResource("13_qu6ou")]
 transform = Transform3D(-0.999984, 0, -0.00562005, 0, 1, 0, 0.00562005, 0, -0.999984, 20.7021, 2.01442, 7.6476)
 
@@ -681,3 +751,64 @@ transform = Transform3D(0.00562009, 0, -0.999984, 0, 1, 0, 0.999984, 0, 0.005620
 
 [node name="worldlevel_new_hall_test6" parent="." instance=ExtResource("13_qu6ou")]
 transform = Transform3D(-0.00562017, 0, 0.999984, 0, 1, 0, -0.999984, 0, -0.00562017, -9.65865, 1.92382, 29.1205)
+
+[node name="pipe_big_round" parent="." instance=ExtResource("45_6bsui")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -18.8719, 6.05009, 26.1638)
+
+[node name="pipe_big_round2" parent="." instance=ExtResource("45_6bsui")]
+transform = Transform3D(-2.18557e-08, 2.18557e-08, 0.5, 0.5, -2.18557e-08, 2.18557e-08, 2.18557e-08, 0.5, -2.18557e-08, -17.8554, 5.63477, 24.5481)
+
+[node name="pipe_big_round3" parent="." instance=ExtResource("45_6bsui")]
+transform = Transform3D(-2.18557e-08, 2.18557e-08, 0.5, 0.5, -2.18557e-08, 2.18557e-08, 2.18557e-08, 0.5, -2.18557e-08, -18.6643, 5.63477, 24.5253)
+
+[node name="pipe_big_split21" parent="." instance=ExtResource("36_k4xu8")]
+transform = Transform3D(-0.499913, 1.60952e-08, 0.00935373, -0.00935373, -2.15948e-08, -0.499913, -1.56884e-08, -0.5, 2.18922e-08, -18.6599, 5.5526, 23.3244)
+
+[node name="pipe_big_medium19" parent="." instance=ExtResource("34_py3ih")]
+transform = Transform3D(-0.496054, -4.21277e-08, 0.0626925, -0.0626925, -2.51609e-08, -0.496054, 4.49501e-08, -0.5, 1.96802e-08, -18.6573, 5.55118, 23.777)
+
+[node name="pipe_big_split22" parent="." instance=ExtResource("36_k4xu8")]
+transform = Transform3D(-0.499913, 1.60952e-08, 0.00935373, -0.00935373, -2.15948e-08, -0.499913, -1.56884e-08, -0.5, 2.18922e-08, -18.6599, 5.5526, 22.3057)
+
+[node name="pipe_big_medium20" parent="." instance=ExtResource("34_py3ih")]
+transform = Transform3D(-0.496054, -4.21277e-08, 0.0626925, -0.0626925, -2.51609e-08, -0.496054, 4.49501e-08, -0.5, 1.96802e-08, -18.6573, 5.55118, 22.7584)
+
+[node name="pipe_big_medium21" parent="." instance=ExtResource("34_py3ih")]
+transform = Transform3D(-0.496054, -4.21277e-08, 0.0626925, -0.0626925, -2.51609e-08, -0.496054, 4.49501e-08, -0.5, 1.96802e-08, -18.6573, 5.55118, 21.7386)
+
+[node name="pipe_big_split23" parent="." instance=ExtResource("36_k4xu8")]
+transform = Transform3D(-0.499913, 1.60952e-08, 0.00935373, -0.00935373, -2.15948e-08, -0.499913, -1.56884e-08, -0.5, 2.18922e-08, -18.6599, 5.54403, 24.3616)
+
+[node name="pipe_big_split24" parent="." instance=ExtResource("36_k4xu8")]
+transform = Transform3D(-0.499913, -2.77507e-17, 0.00935448, -2.77556e-17, 0.5, -5.16988e-26, -0.00935448, -5.19278e-19, -0.499913, -18.6637, 5.82173, 24.6088)
+
+[node name="pipe_big_medium22" parent="." instance=ExtResource("34_py3ih")]
+transform = Transform3D(-0.496054, 0, 0.0626926, 0, 0.5, 0, -0.0626926, 0, -0.496054, -18.6636, 6.38247, 24.6093)
+
+[node name="pipe_big_split25" parent="." instance=ExtResource("36_k4xu8")]
+transform = Transform3D(-0.499913, -2.77507e-17, 0.00935448, -2.77556e-17, 0.5, -5.16988e-26, -0.00935448, -5.19278e-19, -0.499913, -18.6637, 6.82885, 24.6088)
+
+[node name="pipe_big_medium23" parent="." instance=ExtResource("34_py3ih")]
+transform = Transform3D(-0.496054, 0, 0.0626926, 0, 0.5, 0, -0.0626926, 0, -0.496054, -18.6636, 7.38958, 24.6093)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(0.0056201, 0, -0.999984, 0, 1, 0, 0.999984, 0, 0.0056201, -16.2711, 4.92724, 25.5428)
+light_energy = 0.15
+light_indirect_energy = 3.0
+shadow_enabled = true
+omni_range = 12.419
+
+[node name="OmniLight3D4" type="OmniLight3D" parent="."]
+transform = Transform3D(0.00562008, 0, -0.999984, 0, 1, 0, 0.999984, 0, 0.00562008, -12.3681, 6.62591, 31.9014)
+light_energy = 0.7
+light_indirect_energy = 12.0
+shadow_enabled = true
+omni_range = 16.0
+omni_attenuation = 1.31951
+
+[node name="OmniLight3D3" type="OmniLight3D" parent="."]
+transform = Transform3D(0.00562008, 0, -0.999984, 0, 1, 0, 0.999984, 0, 0.00562008, -8.33079, 2.7052, 18.6425)
+light_energy = 0.1
+light_indirect_energy = 10.0
+shadow_enabled = true
+omni_range = 10.0

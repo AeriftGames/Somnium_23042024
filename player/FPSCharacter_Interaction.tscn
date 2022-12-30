@@ -58,7 +58,6 @@ mouse_filter = 1
 script = ExtResource("3_etvvy")
 
 [node name="Crosshair" type="ColorRect" parent="BasicHud" index="0"]
-layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -73,7 +72,6 @@ grow_vertical = 2
 
 [node name="UseLabel" type="Label" parent="BasicHud" index="1"]
 custom_minimum_size = Vector2(30, 0)
-layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -91,7 +89,6 @@ horizontal_alignment = 1
 [node name="HandGrabbedTexture" type="TextureRect" parent="BasicHud" index="2"]
 self_modulate = Color(1, 1, 1, 0.470588)
 custom_minimum_size = Vector2(50, 50)
-layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -109,7 +106,6 @@ ignore_texture_size = true
 [node name="HandCanGrabTexture" type="TextureRect" parent="BasicHud" index="3"]
 self_modulate = Color(1, 1, 1, 0.470588)
 custom_minimum_size = Vector2(50, 50)
-layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5

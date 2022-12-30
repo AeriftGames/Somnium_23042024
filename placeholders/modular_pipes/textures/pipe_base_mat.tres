@@ -6,7 +6,6 @@
 [resource]
 resource_name = "Material.015"
 cull_mode = 2
-vertex_color_use_as_albedo = true
 albedo_texture = ExtResource("1_2x6mx")
 metallic = 0.8
 roughness = 0.5

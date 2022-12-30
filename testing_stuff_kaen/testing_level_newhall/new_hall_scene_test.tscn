@@ -27,9 +27,9 @@
 [ext_resource type="PackedScene" uid="uid://5ukc61pf18s8" path="res://placeholders/modular_pipes/new_big/pipe_big_valve_base.tscn" id="25_6nsoe"]
 [ext_resource type="PackedScene" uid="uid://oe4u1fhwausm" path="res://placeholders/modular_pipes/new_big/pipe_big_split.tscn" id="26_maybd"]
 [ext_resource type="PackedScene" uid="uid://cxdmt4ty2nkvu" path="res://placeholders/modular_pipes/new_big/pipe_big_valve.tscn" id="27_vmtlq"]
-[ext_resource type="AudioStream" uid="uid://ngmb6mrvsbqc" path="res://audio/audio_streams/613738__punneedsounds__amb-ost1.mp3" id="28_2mjc0"]
-[ext_resource type="PackedScene" path="res://models/airvents/ventilace_test.tscn" id="29_prn0h"]
+[ext_resource type="PackedScene" uid="uid://dr884bc7e11qi" path="res://models/airvents/ventilace_test.tscn" id="29_prn0h"]
 [ext_resource type="PackedScene" path="res://models/airvents/vent_holders_test.tscn" id="30_jygnb"]
+[ext_resource type="PackedScene" uid="uid://crjmwsnlcikjr" path="res://models/airvents/arivents_bigfan_2.tscn" id="31_35gir"]
 [ext_resource type="PackedScene" uid="uid://dmg1dxcoyy0ei" path="res://testing_stuff_kaen/testing_level_newhall/room_hall_2_new_2.tscn" id="31_fmpb6"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_bxdgd"]
@@ -361,12 +361,6 @@ transform = Transform3D(0.99428, 0, 0.106802, -9.33693e-09, -1, 8.69227e-08, 0.1
 [node name="pipe_big_valve" parent="Pipes" instance=ExtResource("27_vmtlq")]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 9.20402, 1.04668, -3.66099)
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("28_2mjc0")
-volume_db = -5.426
-pitch_scale = 1.69
-autoplay = true
-
 [node name="ventilace" parent="." instance=ExtResource("29_prn0h")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.557482, 4.72895, 1.17153)
 
@@ -374,3 +368,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.557482, 4.72895, 1.17153)
 transform = Transform3D(-1, -5.02688e-16, -8.74228e-08, 1.65541e-09, 0.999821, -0.0189357, 8.74071e-08, -0.0189357, -0.999821, 0.551347, 4.69671, -0.583212)
 
 [node name="room_hall2_new2" parent="." instance=ExtResource("31_fmpb6")]
+
+[node name="arivents_bigfan_2" parent="." instance=ExtResource("31_35gir")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 5.28453, 4.41294, -8.21103)
