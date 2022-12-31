@@ -1,4 +1,5 @@
 using Godot;
+using Microsoft.VisualBasic.FileIO;
 using System;
 
 public partial class interactive_object : Node3D
@@ -112,6 +113,12 @@ public partial class interactive_object : Node3D
 	{
 		return interactCenterNode.GlobalPosition;
     }
+
+	public bool CalledQueue()
+	{
+		msgObject.Free();
+		return true;
+	}
 
     public virtual void message_update()
 	{

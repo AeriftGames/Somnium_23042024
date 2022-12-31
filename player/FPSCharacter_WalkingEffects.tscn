@@ -1,33 +1,31 @@
-[gd_scene load_steps=19 format=3 uid="uid://2b8vuef2k4is"]
+[gd_scene load_steps=18 format=3 uid="uid://2b8vuef2k4is"]
 
 [ext_resource type="PackedScene" uid="uid://dhm8txujxj2hn" path="res://player/FPSCharacter_BasicMoving.tscn" id="1_0yate"]
 [ext_resource type="Script" path="res://player/FPSCharacter_WalkingEffects.cs" id="2_y82hk"]
-[ext_resource type="AudioStream" uid="uid://bis1a4lsh3ja2" path="res://audio/audio_streams/footsteps_basic/458319__dwoboyle__footsteps-tile-23.wav" id="3_2idnw"]
+[ext_resource type="AudioStream" uid="uid://bis1a4lsh3ja2" path="res://audio/audio_streams/footsteps_basic/458319__dwoboyle__footsteps-tile-23.wav" id="3_mvghn"]
 [ext_resource type="AudioStream" uid="uid://byegyiket2nug" path="res://audio/audio_streams/footsteps_basic/458339__dwoboyle__footsteps-tile-14.wav" id="4_lkw0d"]
-[ext_resource type="AudioStream" uid="uid://dbe3b7d6axwxn" path="res://audio/audio_streams/footsteps_basic/458341__dwoboyle__footsteps-tile-12.wav" id="5_yqv32"]
-[ext_resource type="AudioStream" uid="uid://dc03hp5kkho47" path="res://audio/audio_streams/footsteps_basic/458349__dwoboyle__footsteps-tile-19.wav" id="6_u04x1"]
-[ext_resource type="AudioStream" uid="uid://dufe3vlndhwqu" path="res://audio/audio_streams/footsteps_basic/458348__dwoboyle__footsteps-tile-20.wav" id="7_iq6yt"]
-[ext_resource type="AudioStream" uid="uid://cm64k75csj3aa" path="res://audio/audio_streams/footsteps_basic/458345__dwoboyle__footsteps-tile-16.wav" id="8_u0tpo"]
+[ext_resource type="AudioStream" uid="uid://dbe3b7d6axwxn" path="res://audio/audio_streams/footsteps_basic/458341__dwoboyle__footsteps-tile-12.wav" id="5_uyeq4"]
+[ext_resource type="AudioStream" uid="uid://cm64k75csj3aa" path="res://audio/audio_streams/footsteps_basic/458345__dwoboyle__footsteps-tile-16.wav" id="6_dmtoi"]
+[ext_resource type="AudioStream" uid="uid://dufe3vlndhwqu" path="res://audio/audio_streams/footsteps_basic/458348__dwoboyle__footsteps-tile-20.wav" id="7_deli0"]
+[ext_resource type="AudioStream" uid="uid://dc03hp5kkho47" path="res://audio/audio_streams/footsteps_basic/458349__dwoboyle__footsteps-tile-19.wav" id="8_657ux"]
+[ext_resource type="AudioStream" uid="uid://5f4nst6h6sbt" path="res://audio/audio_streams/landing_basic/landing-on-the-ground-1.wav" id="9_76jo3"]
 [ext_resource type="AudioStream" uid="uid://denfrlkrbtd8p" path="res://audio/audio_streams/jump_basic/458277__dwoboyle__footsteps-tile-jump-04-from.wav" id="9_beu4j"]
-[ext_resource type="AudioStream" uid="uid://di4iqx0icnvn6" path="res://audio/audio_streams/jump_basic/458279__dwoboyle__footsteps-tile-jump-02-from.wav" id="10_vqnb6"]
-[ext_resource type="AudioStream" uid="uid://cmv7mwr57dvwj" path="res://audio/audio_streams/landing_basic/landing-on-the-ground-6.wav" id="11_2pnb6"]
-[ext_resource type="AudioStream" uid="uid://cnpckgpyhu8d8" path="res://audio/audio_streams/jump_basic/458281__dwoboyle__footsteps-tile-jump-01-from.wav" id="11_ijw6f"]
-[ext_resource type="AudioStream" uid="uid://bjveh4yf0jj2v" path="res://audio/audio_streams/landing_basic/364690__alegemaate__human-impact-on-ground.wav" id="12_3o2jf"]
-[ext_resource type="AudioStream" uid="uid://cvmrp75sk7rms" path="res://audio/audio_streams/jump_basic/458283__dwoboyle__footsteps-tile-jump-06-from.wav" id="12_v6cot"]
-[ext_resource type="AudioStream" uid="uid://5f4nst6h6sbt" path="res://audio/audio_streams/landing_basic/landing-on-the-ground-1.wav" id="13_7qy38"]
-[ext_resource type="AudioStream" uid="uid://byfcifn2qiddh" path="res://audio/audio_streams/landing_basic/504626__leonelmail__body-fall-v-hvy-dirt.mp3" id="13_o8d88"]
-[ext_resource type="AudioStream" uid="uid://2ds6dv0qv07b" path="res://audio/audio_streams/landing_basic/landing-on-the-ground-2.wav" id="14_2c5tf"]
-[ext_resource type="AudioStream" uid="uid://cxvc7scm222al" path="res://audio/audio_streams/landing_basic/landing-on-the-ground-3.wav" id="15_oihje"]
+[ext_resource type="AudioStream" uid="uid://2ds6dv0qv07b" path="res://audio/audio_streams/landing_basic/landing-on-the-ground-2.wav" id="10_7y3ds"]
+[ext_resource type="AudioStream" uid="uid://b5h56d5noym1s" path="res://audio/audio_streams/landing_basic/landing-on-the-ground-4.wav" id="10_kmdt6"]
+[ext_resource type="AudioStream" uid="uid://cmv7mwr57dvwj" path="res://audio/audio_streams/landing_basic/landing-on-the-ground-6.wav" id="12_yldhb"]
+[ext_resource type="AudioStream" uid="uid://bjveh4yf0jj2v" path="res://audio/audio_streams/landing_basic/364690__alegemaate__human-impact-on-ground.wav" id="13_5gwsi"]
+[ext_resource type="AudioStream" uid="uid://di4iqx0icnvn6" path="res://audio/audio_streams/jump_basic/458279__dwoboyle__footsteps-tile-jump-02-from.wav" id="15_d3653"]
+[ext_resource type="AudioStream" uid="uid://cnpckgpyhu8d8" path="res://audio/audio_streams/jump_basic/458281__dwoboyle__footsteps-tile-jump-01-from.wav" id="16_mury2"]
+[ext_resource type="AudioStream" uid="uid://cvmrp75sk7rms" path="res://audio/audio_streams/jump_basic/458283__dwoboyle__footsteps-tile-jump-06-from.wav" id="17_d0h5u"]
 
 [node name="FPSCharacter_WalkingEffects" instance=ExtResource("1_0yate")]
-floor_block_on_wall = true
 script = ExtResource("2_y82hk")
-FootStepLength = 1.5
-WalkCameraLerpHeight = 0.15
+FootStepLength = 1.25
+WalkCameraLerpHeight = 0.12
 RunCameraLerpHeight = 0.25
-lerpFootstepSpeedModifier = 1.0
-FootstepSounds = [ExtResource("3_2idnw"), ExtResource("4_lkw0d"), ExtResource("5_yqv32"), ExtResource("6_u04x1"), ExtResource("7_iq6yt"), ExtResource("8_u0tpo")]
-FootstepsVolumeDB = -10.0
+lerpFootstepSpeedModifier = 2.0
+FootstepSounds = [ExtResource("3_mvghn"), ExtResource("4_lkw0d"), ExtResource("5_uyeq4"), ExtResource("6_dmtoi"), ExtResource("7_deli0"), ExtResource("8_657ux")]
+FootstepsVolumeDB = -20.0
 LandCameraLerpHeight = -0.4
 LandCameraLerpRotation = -0.1
 lerpLandingSpeedModifier = 3.0
@@ -35,14 +33,14 @@ MiniHeightForLandingEffect = 0.3
 SmallHeightForLandingEffect = 1.2
 MediumHeightForLandingEffect = 2.5
 HighHeightForLandingEffect = 4.0
-miniHeightLandingSounds = [ExtResource("13_7qy38"), ExtResource("14_2c5tf")]
-smallHeightLandingSounds = [ExtResource("15_oihje")]
-mediumHeightLandingSounds = [ExtResource("11_2pnb6")]
-highHeightLandingSounds = [ExtResource("12_3o2jf")]
-deathHeightLandingSounds = [ExtResource("13_o8d88")]
-LandingVolumeDB = -6.0
-JumpingSounds = [ExtResource("9_beu4j"), ExtResource("10_vqnb6"), ExtResource("11_ijw6f"), ExtResource("12_v6cot")]
-JumpingVolumeDB = 1.1
+miniHeightLandingSounds = [ExtResource("9_76jo3")]
+smallHeightLandingSounds = [ExtResource("10_7y3ds")]
+mediumHeightLandingSounds = [ExtResource("10_kmdt6")]
+highHeightLandingSounds = [ExtResource("12_yldhb")]
+deathHeightLandingSounds = [ExtResource("13_5gwsi")]
+LandingVolumeDB = -10.0
+JumpingSounds = [ExtResource("9_beu4j"), ExtResource("15_d3653"), ExtResource("16_mury2"), ExtResource("17_d0h5u")]
+JumpingVolumeDB = -5.0
 LeanMaxPositionDistanceX = 0.5
 LeanMaxRotateDistanceZ = 0.25
 LeanPositionTweenTime = 0.5
@@ -56,6 +54,6 @@ stream = ExtResource("4_lkw0d")
 volume_db = -20.466
 
 [node name="AudioStreamPlayer_JumpLand" type="AudioStreamPlayer" parent="." index="6"]
-stream = ExtResource("12_v6cot")
+stream = ExtResource("9_76jo3")
 volume_db = -13.0
 pitch_scale = 0.5

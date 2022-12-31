@@ -1,6 +1,7 @@
-[gd_scene load_steps=21 format=3 uid="uid://b477tn66b8n2b"]
+[gd_scene load_steps=22 format=3 uid="uid://b477tn66b8n2b"]
 
 [ext_resource type="ArrayOccluder3D" uid="uid://d25pcacpuv734" path="res://levels/worldlevel_testing_physics_room/worldlevel_testing_physics_room.occ" id="1_3ep4w"]
+[ext_resource type="Script" path="res://levels/worldlevel.cs" id="1_hstvh"]
 [ext_resource type="PackedScene" uid="uid://ck8mt4y4gfqmk" path="res://placeholders/modular_walls/ground_large.tscn" id="2_nsr8b"]
 [ext_resource type="PackedScene" uid="uid://bet3idvc4fg0n" path="res://placeholders/PlayerStart.tscn" id="3_8gbgc"]
 [ext_resource type="PackedScene" uid="uid://clgsga4ty4mrp" path="res://placeholders/modular_walls/wall_normal.tscn" id="4_uq5u6"]
@@ -14,7 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://dim74o3ajko3e" path="res://testing_stuff_kaen/drawer_table.tscn" id="11_sgvvf"]
 [ext_resource type="PackedScene" uid="uid://ipic8k4uwyqr" path="res://testing_stuff_kaen/wardrobe_small.tscn" id="13_5c36d"]
 [ext_resource type="PackedScene" path="res://testing_stuff_kaen/wardrobe_rdoor_small.tscn" id="14_yfxhm"]
-[ext_resource type="PackedScene" path="res://testing_stuff_kaen/wardrobe_ldoor_small.tscn" id="15_rltmb"]
+[ext_resource type="PackedScene" uid="uid://co74ssxqnm6rv" path="res://testing_stuff_kaen/wardrobe_ldoor_small.tscn" id="15_rltmb"]
 [ext_resource type="PackedScene" uid="uid://cdaqxq0d8qgv3" path="res://testing_stuff_kaen/wardrobe_big.tscn" id="16_7ebsw"]
 [ext_resource type="PackedScene" path="res://testing_stuff_kaen/table_lever_test.tscn" id="17_srp4w"]
 
@@ -28,10 +29,9 @@ sky_material = SubResource("ProceduralSkyMaterial_w3cwh")
 [sub_resource type="Environment" id="Environment_p3qlj"]
 background_mode = 2
 sky = SubResource("Sky_rxtxe")
-tonemap_mode = 2
+tonemap_mode = 3
 ssao_enabled = true
 ssil_enabled = true
-sdfgi_enabled = true
 glow_enabled = true
 fog_density = 0.001
 volumetric_fog_density = 0.02
@@ -39,6 +39,8 @@ volumetric_fog_gi_inject = 3.62
 volumetric_fog_ambient_inject = 0.12
 
 [node name="worldlevel" type="Node3D"]
+script = ExtResource("1_hstvh")
+InGameStartEnableSDFGI = true
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.61698, 0.407767, -0.673099, 0.471081, 0.493776, 0.730937, 0.630411, -0.768057, 0.112559, 0.5, 0, 0)

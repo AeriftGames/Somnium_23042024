@@ -1,8 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://x5o6n083ax2a"]
+[gd_scene load_steps=8 format=3 uid="uid://x5o6n083ax2a"]
 
 [ext_resource type="Script" path="res://placeholders/PhysicsItems/physic_item_test.cs" id="1_8fm2c"]
 [ext_resource type="Script" path="res://core_systems/interactive_system/interactive_object.cs" id="2_ccmec"]
-[ext_resource type="AudioStream" uid="uid://i5s8a8274bq6" path="res://audio/audio_streams/interactive_basic/36787__farbin__drop-cardboard-box.wav" id="2_i8ff8"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_l84ni"]
 friction = 0.8
@@ -29,8 +28,6 @@ contact_monitor = true
 linear_damp = 0.5
 angular_damp = 0.5
 script = ExtResource("1_8fm2c")
-UseActionText = ""
-PhysicEffectsAudioStream = [ExtResource("2_i8ff8")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_gdsnn")
@@ -40,7 +37,6 @@ mesh = SubResource("BoxMesh_p2lha")
 
 [node name="interactive_object" type="Node3D" parent="." groups=["interactive_object"]]
 script = ExtResource("2_ccmec")
-InteractiveLevel = 2
 metadata/_edit_lock_ = true
 
 [node name="StaticBody3D" type="StaticBody3D" parent="interactive_object"]

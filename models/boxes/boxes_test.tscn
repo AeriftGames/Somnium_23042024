@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://ctagj60044crx"]
+
+[ext_resource type="PackedScene" uid="uid://0oyvcuqijj5q" path="res://models/boxes/box_0.tscn" id="1_xjyif"]
+[ext_resource type="PackedScene" uid="uid://cesku4bfg7c26" path="res://models/boxes/box_1.tscn" id="2_flp50"]
+[ext_resource type="PackedScene" uid="uid://csksvlncxrfav" path="res://models/boxes/box_2.tscn" id="3_yq30k"]
+
+[node name="boxes_test" type="Node3D"]
+
+[node name="box0_main" parent="." instance=ExtResource("1_xjyif")]
+
+[node name="box1_main" parent="." instance=ExtResource("2_flp50")]
+
+[node name="box2_main" parent="." instance=ExtResource("3_yq30k")]

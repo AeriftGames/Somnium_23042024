@@ -51,9 +51,8 @@ _global_script_class_icons={
 [application]
 
 config/name="Somnium"
-run/main_scene="res://levels/worldlevel_rooms_test.tscn"
-config/features=PackedStringArray("4.0")
-run/flush_stdout_on_print=true
+run/main_scene="res://levels/worldlevel_hall.tscn"
+config/features=PackedStringArray("4.0", "C#")
 run/max_fps=60
 boot_splash/bg_color=Color(0, 0, 0, 1)
 config/icon="res://icon.svg"
@@ -70,15 +69,15 @@ LastSingleton="*res://autoload/last_singleton.gd"
 window/size/viewport_width=1920
 window/size/viewport_height=1080
 window/size/borderless=true
-window/quality/msaa_3d=3
 
 [dotnet]
 
-project/assembly_name="My Fps Prototype"
+project/assembly_name="Somnium"
 
-[editor_plugins]
+[filesystem]
 
-enabled=PackedStringArray("res://addons/SceneModifier/plugin.cfg")
+import/blender/enabled=false
+import/fbx/enabled=false
 
 [input]
 
@@ -197,6 +196,11 @@ testBottom={
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194322,"unicode":0,"echo":false,"script":null)
 ]
 }
+testDebug={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194438,"unicode":0,"echo":false,"script":null)
+]
+}
 
 [layer_names]
 
@@ -212,8 +216,15 @@ testBottom={
 
 [rendering]
 
-anti_aliasing/quality/msaa_3d=1
+driver/threads/thread_model=2
+lights_and_shadows/directional_shadow/soft_shadow_filter_quality=1
+occlusion_culling/occlusion_rays_per_thread=1024
+limits/global_shader_variables/buffer_size=125536
+limits/spatial_indexer/update_iterations_per_frame=20
+limits/forward_renderer/threaded_render_minimum_instances=1000
+limits/cluster_builder/max_clustered_elements=1024.0
 anti_aliasing/quality/screen_space_aa=1
-anti_aliasing/quality/use_taa=true
+anti_aliasing/quality/use_debanding=true
 occlusion_culling/use_occlusion_culling=true
-mesh_lod/lod_change/threshold_pixels=0.0
+mesh_lod/lod_change/threshold_pixels=0.2
+lights_and_shadows/positional_shadow/atlas_size=8184
