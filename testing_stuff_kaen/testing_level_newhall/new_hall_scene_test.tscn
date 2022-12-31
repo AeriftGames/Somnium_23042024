@@ -1,6 +1,6 @@
 [gd_scene load_steps=33 format=3 uid="uid://dctjipcvi0ssg"]
 
-[ext_resource type="PackedScene" path="res://testing_stuff_kaen/testing_level_hall/new_items/lamp_2.tscn" id="1_hv6t1"]
+[ext_resource type="PackedScene" uid="uid://bbpyvlqpjgi4t" path="res://testing_stuff_kaen/testing_level_hall/new_items/lamp_2.tscn" id="1_hv6t1"]
 [ext_resource type="PackedScene" uid="uid://0oyvcuqijj5q" path="res://models/boxes/box_0.tscn" id="4_l51xk"]
 [ext_resource type="PackedScene" uid="uid://cesku4bfg7c26" path="res://models/boxes/box_1.tscn" id="5_blo54"]
 [ext_resource type="PackedScene" uid="uid://ddxr8piq1nlri" path="res://placeholders/modular_electric_wires/three_wires_up_medium.tscn" id="6_oqd7b"]
@@ -355,5 +355,24 @@ transform = Transform3D(-1, -5.02688e-16, -8.74228e-08, 1.65541e-09, 0.999821, -
 
 [node name="room_hall2_new2" parent="." instance=ExtResource("31_fmpb6")]
 
+[node name="OmniLight3D" type="OmniLight3D" parent="room_hall2_new2"]
+transform = Transform3D(1, 0, 2.70084e-08, 0, 1, 0, -2.70084e-08, 0, 1, 6.45538, 3.98603, 1.32174)
+light_energy = 0.05
+light_indirect_energy = 1.5
+shadow_enabled = true
+distance_fade_enabled = true
+distance_fade_shadow = 15.0
+omni_range = 10.0
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="room_hall2_new2"]
+transform = Transform3D(1, 0, 2.70084e-08, 0, 1, 0, -2.70084e-08, 0, 1, 6.45538, 3.48086, -7.22589)
+light_energy = 0.05
+light_indirect_energy = 1.5
+shadow_enabled = true
+distance_fade_enabled = true
+distance_fade_shadow = 15.0
+omni_range = 10.0
+
 [node name="arivents_bigfan_2" parent="." instance=ExtResource("31_35gir")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 5.28453, 4.41294, -8.21103)
+FanRotationSpeed = 2.0

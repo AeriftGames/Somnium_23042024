@@ -5,7 +5,7 @@
 [ext_resource type="Environment" uid="uid://nmuknx7wiohq" path="res://levels/worldlevel_newhall/worldlevel_newhall.tres" id="3_fxaej"]
 [ext_resource type="PackedScene" uid="uid://bet3idvc4fg0n" path="res://placeholders/PlayerStart.tscn" id="5_pjs15"]
 [ext_resource type="PackedScene" uid="uid://cw0ydavkgsc1g" path="res://testing_stuff_kaen/testing_level_hall/hall_test.tscn" id="9_t32gr"]
-[ext_resource type="PackedScene" path="res://testing_stuff_kaen/testing_level_hall/new_items/lamp_2.tscn" id="11_a1jgn"]
+[ext_resource type="PackedScene" uid="uid://bbpyvlqpjgi4t" path="res://testing_stuff_kaen/testing_level_hall/new_items/lamp_2.tscn" id="11_a1jgn"]
 [ext_resource type="Material" path="res://testing_stuff_kaen/testing_level_newhall/single_door_joints_mat.tres" id="11_w0lph"]
 [ext_resource type="PackedScene" uid="uid://dctjipcvi0ssg" path="res://testing_stuff_kaen/testing_level_newhall/new_hall_scene_test.tscn" id="13_qu6ou"]
 [ext_resource type="PackedScene" uid="uid://0oyvcuqijj5q" path="res://models/boxes/box_0.tscn" id="14_k1qqc"]
@@ -88,6 +88,7 @@ InGameStartEnableSDFGI = true
 
 [node name="worldlevel_occluderculling" type="OccluderInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.3756, 0)
+visible = false
 occluder = ExtResource("2_flopx")
 bake_mask = 4293918721
 
@@ -779,6 +780,8 @@ transform = Transform3D(0.0056201, 0, -0.999984, 0, 1, 0, 0.999984, 0, 0.0056201
 light_energy = 0.15
 light_indirect_energy = 3.0
 shadow_enabled = true
+distance_fade_enabled = true
+distance_fade_shadow = 15.0
 omni_range = 12.419
 
 [node name="OmniLight3D4" type="OmniLight3D" parent="."]
@@ -786,6 +789,8 @@ transform = Transform3D(0.00562008, 0, -0.999984, 0, 1, 0, 0.999984, 0, 0.005620
 light_energy = 0.7
 light_indirect_energy = 12.0
 shadow_enabled = true
+distance_fade_enabled = true
+distance_fade_shadow = 15.0
 omni_range = 16.0
 omni_attenuation = 1.31951
 
@@ -794,6 +799,8 @@ transform = Transform3D(0.00562008, 0, -0.999984, 0, 1, 0, 0.999984, 0, 0.005620
 light_energy = 0.1
 light_indirect_energy = 10.0
 shadow_enabled = true
+distance_fade_enabled = true
+distance_fade_shadow = 15.0
 omni_range = 10.0
 
 [node name="locker" parent="." instance=ExtResource("45_tso8u")]

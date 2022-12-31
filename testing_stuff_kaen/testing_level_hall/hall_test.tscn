@@ -7,7 +7,7 @@
 [ext_resource type="Material" path="res://testing_stuff_kaen/testing_level_hall/round_extend_mat.tres" id="5_epdxm"]
 [ext_resource type="Material" path="res://testing_stuff_kaen/testing_level_hall/round_allround_mat.tres" id="6_2723a"]
 [ext_resource type="Material" path="res://testing_stuff_kaen/testing_level_hall/vents_mat.tres" id="7_lr5da"]
-[ext_resource type="PackedScene" path="res://testing_stuff_kaen/testing_level_hall/new_items/lamp_2.tscn" id="8_tcove"]
+[ext_resource type="PackedScene" uid="uid://bbpyvlqpjgi4t" path="res://testing_stuff_kaen/testing_level_hall/new_items/lamp_2.tscn" id="8_tcove"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_sfbwf"]
 _surfaces = [{
@@ -268,8 +268,6 @@ light_indirect_energy = 12.0
 light_specular = 1.244
 shadow_enabled = true
 distance_fade_enabled = true
-distance_fade_begin = 10.0
-distance_fade_shadow = 20.0
-distance_fade_length = 15.0
+distance_fade_shadow = 15.0
 omni_range = 5.645
 omni_attenuation = 1.41421

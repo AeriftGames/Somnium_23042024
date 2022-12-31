@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://bet3idvc4fg0n" path="res://placeholders/PlayerStart.tscn" id="3_17trl"]
 [ext_resource type="Environment" uid="uid://bg7lt3mm463sv" path="res://levels/worldlevel_hall/level_hall_environment.tres" id="3_fksla"]
 [ext_resource type="AudioStream" uid="uid://c22q66lwj2uvk" path="res://audio/audio_streams/510485__lydmakeren__industrial-hall-ambience.wav" id="7_nu33b"]
-[ext_resource type="PackedScene" path="res://testing_stuff_kaen/testing_level_hall/new_items/lamp_2.tscn" id="8_fpdih"]
+[ext_resource type="PackedScene" uid="uid://bbpyvlqpjgi4t" path="res://testing_stuff_kaen/testing_level_hall/new_items/lamp_2.tscn" id="8_fpdih"]
 [ext_resource type="PackedScene" uid="uid://cryhclbq4jsy7" path="res://placeholders/PhysicsItems/physic_item_gas_tank_small.tscn" id="10_bmfki"]
 [ext_resource type="PackedScene" path="res://placeholders/PhysicsItems/physic_item_gas_tank_medium.tscn" id="11_6ckcu"]
 [ext_resource type="PackedScene" uid="uid://cw0ydavkgsc1g" path="res://testing_stuff_kaen/testing_level_hall/hall_test.tscn" id="11_7un85"]

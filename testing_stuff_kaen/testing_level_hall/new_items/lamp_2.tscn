@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=5 format=3 uid="uid://bbpyvlqpjgi4t"]
 
 [ext_resource type="PackedScene" uid="uid://daemtxe1m3o1r" path="res://testing_stuff_kaen/testing_level_hall/new_items/lamp2.glb" id="1_e6j11"]
 
@@ -10,7 +10,7 @@ albedo_color = Color(0.906332, 0.906332, 0.906332, 1)
 roughness = 0.5
 emission_enabled = true
 emission = Color(0.894118, 0.894118, 0.894118, 1)
-emission_energy_multiplier = 4.0
+emission_energy_multiplier = 2.0
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_ygqrs"]
 _surfaces = [{
