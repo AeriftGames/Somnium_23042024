@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=3 uid="uid://rcpy1e4tif1j"]
+[gd_scene load_steps=47 format=3 uid="uid://rcpy1e4tif1j"]
 
 [ext_resource type="Script" path="res://levels/worldlevel.cs" id="1_22uyt"]
 [ext_resource type="ArrayOccluder3D" uid="uid://cutd5dlobddug" path="res://levels/worldlevel_hall_and_newhall.occ" id="2_flopx"]
@@ -7,9 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://cw0ydavkgsc1g" path="res://testing_stuff_kaen/testing_level_hall/hall_test.tscn" id="9_t32gr"]
 [ext_resource type="PackedScene" path="res://testing_stuff_kaen/testing_level_hall/new_items/lamp_2.tscn" id="11_a1jgn"]
 [ext_resource type="Material" path="res://testing_stuff_kaen/testing_level_newhall/single_door_joints_mat.tres" id="11_w0lph"]
-[ext_resource type="PackedScene" uid="uid://ipic8k4uwyqr" path="res://testing_stuff_kaen/wardrobe_small.tscn" id="12_oduwf"]
-[ext_resource type="PackedScene" uid="uid://cdaqxq0d8qgv3" path="res://testing_stuff_kaen/wardrobe_big.tscn" id="12_xk1du"]
-[ext_resource type="PackedScene" path="res://testing_stuff_kaen/wardrobe_rdoor_small.tscn" id="13_ayeih"]
 [ext_resource type="PackedScene" uid="uid://dctjipcvi0ssg" path="res://testing_stuff_kaen/testing_level_newhall/new_hall_scene_test.tscn" id="13_qu6ou"]
 [ext_resource type="PackedScene" uid="uid://0oyvcuqijj5q" path="res://models/boxes/box_0.tscn" id="14_k1qqc"]
 [ext_resource type="PackedScene" uid="uid://cesku4bfg7c26" path="res://models/boxes/box_1.tscn" id="15_0475t"]
@@ -43,6 +40,7 @@
 [ext_resource type="PackedScene" path="res://placeholders/PhysicsItems/physic_item_gas_tank_medium.tscn" id="43_jnqde"]
 [ext_resource type="PackedScene" uid="uid://cryhclbq4jsy7" path="res://placeholders/PhysicsItems/physic_item_gas_tank_small.tscn" id="43_xwgko"]
 [ext_resource type="PackedScene" uid="uid://mmaua2et74ge" path="res://placeholders/modular_pipes/new_big/pipe_big_round.tscn" id="45_6bsui"]
+[ext_resource type="PackedScene" uid="uid://bryarwbmvp6pm" path="res://models/lockers/locker_physic.tscn" id="45_tso8u"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_e0om5"]
 _surfaces = [{
@@ -181,7 +179,7 @@ transform = Transform3D(-0.0901912, 0, 0.389699, 0, 0.4, 0, -0.389699, 0, -0.090
 transform = Transform3D(-0.0176853, 0, -0.499687, 0, 0.5, 0, 0.499687, 0, -0.0176853, -1.39447, 2.4345, 27.9143)
 
 [node name="box0_main41" parent="Stuff" instance=ExtResource("14_k1qqc")]
-transform = Transform3D(0.145885, 0, -0.478244, 0, 0.5, 0, 0.478244, 0, 0.145885, -1.54088, 2.4345, 29.0363)
+transform = Transform3D(0.145885, 0, -0.478244, 0, 0.5, 0, 0.478244, 0, 0.145885, -1.54088, 2.44061, 29.0363)
 
 [node name="box0_main42" parent="Stuff" instance=ExtResource("14_k1qqc")]
 transform = Transform3D(-0.175424, 0, -0.359481, 0, 0.4, 0, 0.359481, 0, -0.175424, -1.54088, 3.33265, 29.0363)
@@ -227,9 +225,6 @@ transform = Transform3D(0.109792, 0, -0.384637, 0, 0.4, 0, 0.384637, 0, 0.109792
 
 [node name="shelf_big_back" parent="Stuff" instance=ExtResource("41_g4s37")]
 transform = Transform3D(-1.2, 0, -1.04907e-07, 0, 1.2, 0, 1.04907e-07, 0, -1.2, 2.95425, 0, 9.24959)
-
-[node name="Wardrobe_big" parent="Stuff" instance=ExtResource("12_xk1du")]
-transform = Transform3D(-0.00794116, 0, 0.999969, 0, 1, 0, -0.999969, 0, -0.00794116, -0.963933, 1.78814e-07, -1.02582)
 
 [node name="pipe_big_medium" parent="Stuff" instance=ExtResource("34_py3ih")]
 transform = Transform3D(-0.992108, 0, 0.125385, 0, 1, 0, -0.125385, 0, -0.992108, -10.5152, 2.90533, 27.5268)
@@ -361,7 +356,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.74818, 0.0565782, 9.24404)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.95148, 0.74328, 8.89154)
 
 [node name="PhysicItem_gas_tank_small8" parent="Items" instance=ExtResource("43_xwgko")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.66771, 1.24416, 8.89154)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.66771, 1.24416, 9.347)
 
 [node name="PhysicItem_gas_tank_small9" parent="Items" instance=ExtResource("43_xwgko")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.60434, 0.318316, 8.89822)
@@ -432,18 +427,6 @@ metadata/_edit_lock_ = true
 
 [node name="lamp2" parent="worldlevel_new_hall_test/Items" instance=ExtResource("11_a1jgn")]
 transform = Transform3D(0.0262935, -0.00972133, 0.999607, 0.00153145, 0.999952, 0.00968442, -0.999653, 0.00127622, 0.0263072, 6.43843, 4.09636, 1.42086)
-
-[node name="Wardrobe_small" parent="worldlevel_new_hall_test/Items" instance=ExtResource("12_oduwf")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 4, 0, -0.1)
-
-[node name="Wardrobe_rdoor_small" parent="worldlevel_new_hall_test/Items/Wardrobe_small" instance=ExtResource("13_ayeih")]
-metadata/_edit_lock_ = true
-
-[node name="Wardrobe_small2" parent="worldlevel_new_hall_test/Items" instance=ExtResource("12_oduwf")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 4.6, 0, -0.1)
-
-[node name="Wardrobe_rdoor_small" parent="worldlevel_new_hall_test/Items/Wardrobe_small2" instance=ExtResource("13_ayeih")]
-metadata/_edit_lock_ = true
 
 [node name="box0_main2" parent="worldlevel_new_hall_test/Items" instance=ExtResource("14_k1qqc")]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -3.72374, 0.325868, -3.9485)
@@ -812,3 +795,93 @@ light_energy = 0.1
 light_indirect_energy = 10.0
 shadow_enabled = true
 omni_range = 10.0
+
+[node name="locker" parent="." instance=ExtResource("45_tso8u")]
+transform = Transform3D(-1.1, 0, -9.61651e-08, 0, 1.1, 0, 9.61651e-08, 0, -1.1, -9.42913, 2.00004, 25.1618)
+
+[node name="locker2" parent="." instance=ExtResource("45_tso8u")]
+transform = Transform3D(-1.1, 0, -9.61651e-08, 0, 1.1, 0, 9.61651e-08, 0, -1.1, -9.42913, 2.00004, 24.573)
+
+[node name="locker3" parent="." instance=ExtResource("45_tso8u")]
+transform = Transform3D(1.1, 0, 1.9233e-07, 0, 1.1, 0, -1.9233e-07, 0, 1.1, -13.8599, 2.00004, 27.3193)
+
+[node name="locker4" parent="." instance=ExtResource("45_tso8u")]
+transform = Transform3D(1.1, 0, 1.9233e-07, 0, 1.1, 0, -1.9233e-07, 0, 1.1, -13.8599, 2.00004, 27.7998)
+
+[node name="locker5" parent="." instance=ExtResource("45_tso8u")]
+transform = Transform3D(1.1, 0, 1.9233e-07, 0, 1.1, 0, -1.9233e-07, 0, 1.1, -13.8599, 2.00004, 28.2929)
+
+[node name="locker6" parent="." instance=ExtResource("45_tso8u")]
+transform = Transform3D(1.1, 0, 1.9233e-07, 0, 1.1, 0, -1.9233e-07, 0, 1.1, -13.8599, 2.00004, 28.7972)
+
+[node name="locker7" parent="." instance=ExtResource("45_tso8u")]
+transform = Transform3D(1.1, 0, 1.9233e-07, 0, 1.1, 0, -1.9233e-07, 0, 1.1, -9.48799, 0.0796114, 18.3477)
+
+[node name="locker8" parent="." instance=ExtResource("45_tso8u")]
+transform = Transform3D(1.1, 0, 1.9233e-07, 0, 1.1, 0, -1.9233e-07, 0, 1.1, -9.48799, 0.0796114, 17.872)
+
+[node name="locker9" parent="." instance=ExtResource("45_tso8u")]
+transform = Transform3D(1.1, 0, 1.9233e-07, 0, 1.1, 0, -1.9233e-07, 0, 1.1, -9.48799, 0.0796114, 16.477)
+
+[node name="locker10" parent="." instance=ExtResource("45_tso8u")]
+transform = Transform3D(1.1, 0, 1.9233e-07, 0, 1.1, 0, -1.9233e-07, 0, 1.1, -9.48799, 0.0796114, 16.9524)
+
+[node name="locker16" parent="." instance=ExtResource("45_tso8u")]
+transform = Transform3D(1.1, 0, 1.9233e-07, 0, 1.1, 0, -1.9233e-07, 0, 1.1, -9.55191, 0.0796114, -2.50984)
+
+[node name="locker17" parent="." instance=ExtResource("45_tso8u")]
+transform = Transform3D(1.1, 0, 1.9233e-07, 0, 1.1, 0, -1.9233e-07, 0, 1.1, -9.55191, 0.0796114, -2.03451)
+
+[node name="locker18" parent="." instance=ExtResource("45_tso8u")]
+transform = Transform3D(1.1, 0, 1.9233e-07, 0, 1.1, 0, -1.9233e-07, 0, 1.1, -9.55191, 0.0796114, -0.928147)
+
+[node name="locker19" parent="." instance=ExtResource("45_tso8u")]
+transform = Transform3D(1.1, 0, 1.9233e-07, 0, 1.1, 0, -1.9233e-07, 0, 1.1, -9.55191, 0.0796114, -0.452817)
+
+[node name="locker20" parent="." instance=ExtResource("45_tso8u")]
+transform = Transform3D(-2.40413e-07, 0, 1.1, 0, 1.1, 0, -1.1, 0, -2.40413e-07, -21.2697, 2.08968, 0.498167)
+
+[node name="locker21" parent="." instance=ExtResource("45_tso8u")]
+transform = Transform3D(-2.40413e-07, 0, 1.1, 0, 1.1, 0, -1.1, 0, -2.40413e-07, -20.7943, 2.08968, 0.498167)
+
+[node name="locker22" parent="." instance=ExtResource("45_tso8u")]
+transform = Transform3D(-2.40413e-07, 0, 1.1, 0, 1.1, 0, -1.1, 0, -2.40413e-07, -22.2198, 2.08968, 0.498167)
+
+[node name="locker23" parent="." instance=ExtResource("45_tso8u")]
+transform = Transform3D(-2.40413e-07, 0, 1.1, 0, 1.1, 0, -1.1, 0, -2.40413e-07, -21.7444, 2.08968, 0.498167)
+
+[node name="locker28" parent="." instance=ExtResource("45_tso8u")]
+transform = Transform3D(1.1, 0, 2.38419e-07, 0, 1.1, 0, -2.38419e-07, 0, 1.1, -26.0299, 4.80482, -1.40141)
+
+[node name="locker29" parent="." instance=ExtResource("45_tso8u")]
+transform = Transform3D(1.1, 0, 2.38419e-07, 0, 1.1, 0, -2.38419e-07, 0, 1.1, -26.0299, 4.80482, -0.926081)
+
+[node name="locker30" parent="." instance=ExtResource("45_tso8u")]
+transform = Transform3D(1.1, 0, 2.38419e-07, 0, 1.1, 0, -2.38419e-07, 0, 1.1, -26.0299, 4.80482, -1.87615)
+
+[node name="locker24" parent="." instance=ExtResource("45_tso8u")]
+transform = Transform3D(-2.40413e-07, 0, 1.1, 0, 1.1, 0, -1.1, 0, -2.40413e-07, -23.174, 2.08968, 0.498167)
+
+[node name="locker25" parent="." instance=ExtResource("45_tso8u")]
+transform = Transform3D(-2.40413e-07, 0, 1.1, 0, 1.1, 0, -1.1, 0, -2.40413e-07, -22.6986, 2.08968, 0.498167)
+
+[node name="locker26" parent="." instance=ExtResource("45_tso8u")]
+transform = Transform3D(-2.40413e-07, 0, 1.1, 0, 1.1, 0, -1.1, 0, -2.40413e-07, -24.1161, 2.08968, 0.498167)
+
+[node name="locker27" parent="." instance=ExtResource("45_tso8u")]
+transform = Transform3D(-2.40413e-07, 0, 1.1, 0, 1.1, 0, -1.1, 0, -2.40413e-07, -23.6407, 2.08968, 0.498167)
+
+[node name="locker11" parent="." instance=ExtResource("45_tso8u")]
+transform = Transform3D(-1.1, 0, -2.88495e-07, 0, 1.1, 0, 2.88495e-07, 0, -1.1, -7.00878, 0.0796114, 9.09352)
+
+[node name="locker15" parent="." instance=ExtResource("45_tso8u")]
+transform = Transform3D(-1.1, 0, -2.88495e-07, 0, 1.1, 0, 2.88495e-07, 0, -1.1, -7.00878, 0.0796114, 8.63859)
+
+[node name="locker12" parent="." instance=ExtResource("45_tso8u")]
+transform = Transform3D(-1.1, 0, -2.88495e-07, 0, 1.1, 0, 2.88495e-07, 0, -1.1, -7.00878, 0.0796114, 9.55724)
+
+[node name="locker13" parent="." instance=ExtResource("45_tso8u")]
+transform = Transform3D(-1.1, 0, -2.88495e-07, 0, 1.1, 0, 2.88495e-07, 0, -1.1, -7.00878, 0.0796114, 10.4967)
+
+[node name="locker14" parent="." instance=ExtResource("45_tso8u")]
+transform = Transform3D(-1.1, 0, -2.88495e-07, 0, 1.1, 0, 2.88495e-07, 0, -1.1, -7.00878, 0.0796114, 10.0214)

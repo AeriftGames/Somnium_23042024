@@ -1,8 +1,6 @@
-[gd_scene load_steps=35 format=3 uid="uid://dctjipcvi0ssg"]
+[gd_scene load_steps=33 format=3 uid="uid://dctjipcvi0ssg"]
 
 [ext_resource type="PackedScene" path="res://testing_stuff_kaen/testing_level_hall/new_items/lamp_2.tscn" id="1_hv6t1"]
-[ext_resource type="PackedScene" uid="uid://ipic8k4uwyqr" path="res://testing_stuff_kaen/wardrobe_small.tscn" id="2_v7fgm"]
-[ext_resource type="PackedScene" path="res://testing_stuff_kaen/wardrobe_rdoor_small.tscn" id="3_xcipe"]
 [ext_resource type="PackedScene" uid="uid://0oyvcuqijj5q" path="res://models/boxes/box_0.tscn" id="4_l51xk"]
 [ext_resource type="PackedScene" uid="uid://cesku4bfg7c26" path="res://models/boxes/box_1.tscn" id="5_blo54"]
 [ext_resource type="PackedScene" uid="uid://ddxr8piq1nlri" path="res://placeholders/modular_electric_wires/three_wires_up_medium.tscn" id="6_oqd7b"]
@@ -84,18 +82,6 @@ metadata/_edit_lock_ = true
 
 [node name="lamp2" parent="Items" instance=ExtResource("1_hv6t1")]
 transform = Transform3D(0.0262935, -0.00972133, 0.999607, 0.00153145, 0.999952, 0.00968442, -0.999653, 0.00127622, 0.0263072, 6.43843, 4.09636, 1.42086)
-
-[node name="Wardrobe_small" parent="Items" instance=ExtResource("2_v7fgm")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 4, 0, -0.1)
-
-[node name="Wardrobe_rdoor_small" parent="Items/Wardrobe_small" instance=ExtResource("3_xcipe")]
-metadata/_edit_lock_ = true
-
-[node name="Wardrobe_small2" parent="Items" instance=ExtResource("2_v7fgm")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 4.6, 0, -0.1)
-
-[node name="Wardrobe_rdoor_small" parent="Items/Wardrobe_small2" instance=ExtResource("3_xcipe")]
-metadata/_edit_lock_ = true
 
 [node name="box0_main2" parent="Items" instance=ExtResource("4_l51xk")]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -3.72374, 0.325868, -3.9485)

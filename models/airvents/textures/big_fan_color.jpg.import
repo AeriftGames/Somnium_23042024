@@ -3,23 +3,25 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://drsw608fmcnf2"
-path="res://.godot/imported/big_fan_color.jpg-80832bc4e25773893d9922922f3c1879.ctex"
+path.s3tc="res://.godot/imported/big_fan_color.jpg-80832bc4e25773893d9922922f3c1879.s3tc.ctex"
+path.etc2="res://.godot/imported/big_fan_color.jpg-80832bc4e25773893d9922922f3c1879.etc2.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc", "etc2"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://models/airvents/textures/big_fan_color.jpg"
-dest_files=["res://.godot/imported/big_fan_color.jpg-80832bc4e25773893d9922922f3c1879.ctex"]
+dest_files=["res://.godot/imported/big_fan_color.jpg-80832bc4e25773893d9922922f3c1879.s3tc.ctex", "res://.godot/imported/big_fan_color.jpg-80832bc4e25773893d9922922f3c1879.etc2.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/bptc_ldr=0
-compress/normal_map=1
+compress/normal_map=2
 compress/channel_pack=0
 mipmaps/generate=true
 mipmaps/limit=-1
