@@ -96,7 +96,7 @@ bake_mask = 4293918721
 environment = ExtResource("3_fxaej")
 
 [node name="PlayerStart" parent="." instance=ExtResource("5_pjs15")]
-transform = Transform3D(-0.999395, 0, -0.0347771, 0, 1, 0, 0.0347771, 0, -0.999395, -8.11536, 0.00932676, 21.157)
+transform = Transform3D(-0.999395, 0, -0.0347771, 0, 1, 0, 0.0347771, 0, -0.999395, -15.8036, 2.0193, -6.63959)
 
 [node name="Stuff" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.35456, 0, -1.192)
@@ -709,6 +709,13 @@ transform = Transform3D(-1, -5.02688e-16, -8.74228e-08, 1.65541e-09, 0.999821, -
 
 [node name="OmniLight3D" type="OmniLight3D" parent="worldlevel_new_hall_test"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.24286, 4.28428, -2.86112)
+light_energy = 0.15
+light_bake_mode = 1
+shadow_enabled = true
+omni_range = 12.324
+
+[node name="OmniLight3D3" type="OmniLight3D" parent="worldlevel_new_hall_test"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.9498, 4.28428, -2.86112)
 light_energy = 0.15
 light_bake_mode = 1
 shadow_enabled = true
