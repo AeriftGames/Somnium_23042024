@@ -88,7 +88,8 @@ public partial class DebugHud : Control
             DebugEnabledLabel.Text = "F1 for hide these options";
 			OptionsPanel.Visible = true;
 			GameMaster.GM.GetFPSCharacter().SetInputEnable(false);
-			Input.MouseMode = Input.MouseModeEnum.Confined;
+            GameMaster.GM.GetFPSCharacter().SetMouseVisible(true);
+            Input.MouseMode = Input.MouseModeEnum.Confined;
         }
 		else
 		{
@@ -96,7 +97,7 @@ public partial class DebugHud : Control
 			DebugEnabledLabel.Text = "F1 for edit debug hud";
             OptionsPanel.Visible = false;
             GameMaster.GM.GetFPSCharacter().SetInputEnable(true);
-            //GameMaster.GM.GetFPSCharacter().SetMouseVisible(false);
+            GameMaster.GM.GetFPSCharacter().SetMouseVisible(false);
         }
 	}
 

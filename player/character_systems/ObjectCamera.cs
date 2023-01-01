@@ -40,6 +40,10 @@ public partial class ObjectCamera : Node3D
     // Zoom
     private float neededZoomValue;
     private LerpObject.LerpFloat LerpObject_CameraZoom = new LerpObject.LerpFloat();
+    private LerpObject.LerpVector3 LerpObject_CameraZoomToObject = new LerpObject.LerpVector3();
+    private Vector3 workingZoomPosVector = Vector3.Zero;
+    private Node3D lookingPoint = null;
+    private bool isRunningZoom = false;
 
     public override void _Ready()
 	{
@@ -62,6 +66,8 @@ public partial class ObjectCamera : Node3D
         neededZoomValue = Camera.Fov;
         LerpObject_ObjectCameraPos.EnableUpdate(true);
         LerpObject_CameraZoom.EnableUpdate(true);
+        lookingPoint = GetNode<Node3D>("NodeRotY/GimbalLand/NodeRotX/NodeLean/CameraLookPoint");
+        LerpObject_CameraZoomToObject.EnableUpdate(true);
     }
 
     public void SetCharacterOwner(FPSCharacter_BasicMoving newFPSCharacter_BasicMoving)
@@ -78,6 +84,27 @@ public partial class ObjectCamera : Node3D
         // CameraZoom Process
         if (Mathf.Abs(LerpObject_CameraZoom.GetTarget() - Camera.Fov) > 0.15f)
             Camera.Fov = LerpObject_CameraZoom.ActualUpdate(Camera.Fov,delta);
+
+        //CameraZoomToObject Process
+        if (Mathf.Abs(LerpObject_CameraZoomToObject.GetTarget().DistanceTo(workingZoomPosVector)) > 0.0025f &&
+            isRunningZoom)
+        {
+            LerpObject_CameraZoomToObject.SetActual(workingZoomPosVector);
+            workingZoomPosVector = LerpObject_CameraZoomToObject.Update(delta);
+
+            Camera.LookAtFromPosition(Camera.GlobalPosition, workingZoomPosVector, Vector3.Up);
+        }
+        else
+        {
+            // jsme u cile k normalu ?
+            if(LerpObject_CameraZoomToObject.GetTarget() == lookingPoint.GlobalPosition && isRunningZoom)
+            {
+                Camera.Rotation = Vector3.Zero;
+                ownerCharacter.SetInputEnable(true);
+                SetCameraLookInputEnable(true);
+                isRunningZoom = false;
+            }
+        }
     }
 
     public override void _PhysicsProcess(double delta)
@@ -376,6 +403,66 @@ public partial class ObjectCamera : Node3D
             else
                 LerpObject_CameraZoom.SetSpeed(newZoomInterpSpeed);
         }
+    }
+
+    public void SetZoomToObject(bool newZoom, Node3D newZoomedObject, float newZoomValue = -1.0f,
+        float newZoomInterpSpeed = -1.0f, float newZoomRotateSpeed = -1.0f)
+    {
+        FPSCharacter_Interaction characterInteraction = (FPSCharacter_Interaction)ownerCharacter;
+
+        // true = zoomed + faced to, false = zoom + faced to normal
+        if (newZoom)
+        {
+            if (newZoomedObject == null) return;
+
+            if (isRunningZoom == false)
+                workingZoomPosVector = lookingPoint.GlobalPosition;
+
+            isRunningZoom = true;
+
+            SetCameraLookInputEnable(false);
+            ownerCharacter.SetInputEnable(false);
+
+            // speed value for move lerp object
+            if(newZoomInterpSpeed == -1)
+                LerpObject_CameraZoomToObject.SetSpeed(characterInteraction.
+                    CameraZoomToObjectInterpRotationSpeed);
+            else
+                LerpObject_CameraZoomToObject.SetSpeed(newZoomInterpSpeed);
+
+            // Set Target Zoom
+            LerpObject_CameraZoomToObject.SetTarget(Camera.GlobalPosition +
+                Camera.GlobalPosition.DirectionTo(newZoomedObject.GlobalPosition) * 1.0f);
+
+            // Zoom
+            if (newZoomValue == -1)
+                SetZoom(true, characterInteraction.CameraFovZoomed,
+                    characterInteraction.CameraFovInterpSpeed);
+            else
+                SetZoom(true, newZoomValue, newZoomInterpSpeed);
+        }
+        else
+        {
+            if(isRunningZoom)
+            {
+                // Rotation to
+                if (newZoomInterpSpeed == -1)
+                    LerpObject_CameraZoomToObject.SetSpeed(characterInteraction.
+                        CameraZoomToObjectInterpRotationSpeed);
+                else
+                    LerpObject_CameraZoomToObject.SetSpeed(newZoomInterpSpeed);
+
+                LerpObject_CameraZoomToObject.SetTarget(lookingPoint.GlobalPosition);
+
+                // Zoom
+                if (newZoomValue == -1)
+                    SetZoom(false, characterInteraction.CameraFovZoomed,
+                        characterInteraction.CameraFovInterpSpeed);
+                else
+                    SetZoom(false, newZoomValue, newZoomInterpSpeed);
+            }
+        }
+
     }
 
     public Marker3D GetHandGrabMarker()

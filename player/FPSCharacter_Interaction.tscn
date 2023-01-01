@@ -17,6 +17,9 @@ script = ExtResource("2_fmih3")
 CameraFovNormal = 65.0
 CameraFovZoomed = 40.0
 CameraFovInterpSpeed = 4.0
+CameraZoomToObjectZoomed = 35.0
+CameraZoomToObjectInterpSpeed = 4.0
+CameraZoomToObjectInterpRotationSpeed = 7.0
 CanUse = true
 CanGrabObject = true
 CanThrowObject = true
@@ -41,6 +44,9 @@ AudioFlashlight_On = ExtResource("3_l3f5j")
 AudioFlashlight_Off = ExtResource("4_0clxq")
 
 [node name="HolderHands" type="Node3D" parent="HeadMain/HeadGimbalA/HeadGimbalB/HeadHolderCamera" index="0"]
+
+[node name="HeadCrunchPos" parent="." index="4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
 
 [node name="AudioStreamPlayer_Footsteps" parent="." index="5"]
 volume_db = -6.0

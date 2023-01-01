@@ -19,6 +19,11 @@ public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
 	[Export] public float CameraFovNormal = 65.0f;
 	[Export] public float CameraFovZoomed = 40.0f;
 	[Export] public float CameraFovInterpSpeed = 4.0f;
+	[Export] public Node3D CameraZoomToObject = null;
+    [Export] public float CameraZoomToObjectZoomed = 35.0f;
+    [Export] public float CameraZoomToObjectInterpSpeed = 4.0f;
+    [Export] public float CameraZoomToObjectInterpRotationSpeed = 7.0f;
+    Node3D testZoomObject = null;
 
     [ExportGroupAttribute("InteractiveSystem: Base Settings")]
 	[Export] public bool CanUse = true;
@@ -85,7 +90,7 @@ public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
 
 		// Simple Flashlight toggle test
 		AudioStreamPlayer_TestItem = GetNode<AudioStreamPlayer>("AudioStreamPlayer_TestItem");
-	}
+    }
 
 	public override void _Process(double delta)
 	{
@@ -130,6 +135,18 @@ public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
 			SetCameraZoom(true);
 		else
 			SetCameraZoom(false);
+
+        // Camera Zoom To Object
+        if (Input.IsActionPressed("CameraZoomToObject"))
+		{
+            testZoomObject = GetNode<Node3D>("/root/worldlevel/barrel1");
+            SetCameraZoomToObject(true, testZoomObject);
+        }
+        else
+		{
+            testZoomObject = GetNode<Node3D>("/root/worldlevel/barrel1");
+            SetCameraZoomToObject(false, testZoomObject);
+        }
 
         // UPDATE HANDS
         objectHands.GlobalPosition =
@@ -269,6 +286,13 @@ public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
 	{
 		objectCamera.SetZoom(newZoom, newZoomValue, newZoomInterpSpeed);
     }
+
+	public void SetCameraZoomToObject(bool newZoom, Node3D newZoomedObject, float newZoomValue = -1.0f,
+		float newZoomInterpSpeed = -1.0f, float newZoomRotateSpeed = -1.0f)
+	{
+		objectCamera.SetZoomToObject(newZoom,newZoomedObject,newZoomValue,
+			newZoomInterpSpeed,newZoomRotateSpeed);
+	}
 
 	public CharacterInteractiveSystem GetInteractiveSystem()
 	{
