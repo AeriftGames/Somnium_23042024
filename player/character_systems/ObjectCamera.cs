@@ -37,6 +37,10 @@ public partial class ObjectCamera : Node3D
 
     bool isStopped = false;
 
+    // Zoom
+    private float neededZoomValue;
+    private LerpObject.LerpFloat LerpObject_CameraZoom = new LerpObject.LerpFloat();
+
     public override void _Ready()
 	{
 		NodeRotY = GetNode<Node3D>("NodeRotY");
@@ -54,8 +58,10 @@ public partial class ObjectCamera : Node3D
         LerpPos_LeanLeft = GetNode<Node3D>("NodeRotY/GimbalLand/NodeRotX/LerpPos_LeanLeft");
         LerpPos_LeanRight = GetNode<Node3D>("NodeRotY/GimbalLand/NodeRotX/LerpPos_LeanRight");
 
-        //
+        //Zoom
+        neededZoomValue = Camera.Fov;
         LerpObject_ObjectCameraPos.EnableUpdate(true);
+        LerpObject_CameraZoom.EnableUpdate(true);
     }
 
     public void SetCharacterOwner(FPSCharacter_BasicMoving newFPSCharacter_BasicMoving)
@@ -65,6 +71,13 @@ public partial class ObjectCamera : Node3D
 
 	public override void _Process(double delta)
 	{
+        if (GameMaster.GM.GetIsQuitting()) return;
+
+        FPSCharacter_Interaction character_Interaction = (FPSCharacter_Interaction)ownerCharacter;
+
+        // CameraZoom Process
+        if (Mathf.Abs(LerpObject_CameraZoom.GetTarget() - Camera.Fov) > 0.15f)
+            Camera.Fov = LerpObject_CameraZoom.ActualUpdate(Camera.Fov,delta);
     }
 
     public override void _PhysicsProcess(double delta)
@@ -329,6 +342,40 @@ public partial class ObjectCamera : Node3D
         returnedVector.z = per_rot_final;
 
         return returnedVector;
+    }
+
+    public void SetZoom(bool newZoom, float newZoomValue = -1.0f, float newZoomInterpSpeed = -1.0f)
+    {
+        FPSCharacter_Interaction characterInteraction = (FPSCharacter_Interaction)ownerCharacter;
+
+        // true = zoomed, false = zoom to normal value
+        if (newZoom)
+        {
+            // zoom value
+            if(newZoomValue == -1.0f)
+                //neededZoomValue = characterInteraction.CameraFovZoomed;
+                LerpObject_CameraZoom.SetTarget(characterInteraction.CameraFovZoomed);
+            else
+                //neededZoomValue = newZoomValue;
+                LerpObject_CameraZoom.SetTarget(newZoomValue);
+
+            // speed value
+            if (newZoomInterpSpeed == -1)
+                LerpObject_CameraZoom.SetSpeed(characterInteraction.CameraFovInterpSpeed);
+            else
+                LerpObject_CameraZoom.SetSpeed(newZoomInterpSpeed);
+        }
+        else
+        {
+            // zoom to normal - vzdy k normal hodnote a rychlosti ktere je definovane v FPSCharaterInteraction
+            LerpObject_CameraZoom.SetTarget(characterInteraction.CameraFovNormal);
+
+            // speed value
+            if (newZoomInterpSpeed == -1)
+                LerpObject_CameraZoom.SetSpeed(characterInteraction.CameraFovInterpSpeed);
+            else
+                LerpObject_CameraZoom.SetSpeed(newZoomInterpSpeed);
+        }
     }
 
     public Marker3D GetHandGrabMarker()

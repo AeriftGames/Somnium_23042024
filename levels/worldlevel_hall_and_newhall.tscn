@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://rcpy1e4tif1j"]
+[gd_scene load_steps=48 format=3 uid="uid://rcpy1e4tif1j"]
 
 [ext_resource type="Script" path="res://levels/worldlevel.cs" id="1_22uyt"]
 [ext_resource type="ArrayOccluder3D" uid="uid://cutd5dlobddug" path="res://levels/worldlevel_hall_and_newhall.occ" id="2_flopx"]
@@ -37,6 +37,7 @@
 [ext_resource type="PackedScene" path="res://models/airvents/vent_holders_test.tscn" id="40_xanmt"]
 [ext_resource type="PackedScene" path="res://testing_stuff_kaen/testing_level_hall/models/shelfs/shelf_big_back.tscn" id="41_g4s37"]
 [ext_resource type="PackedScene" uid="uid://dmg1dxcoyy0ei" path="res://testing_stuff_kaen/testing_level_newhall/room_hall_2_new_2.tscn" id="41_sb5nx"]
+[ext_resource type="PackedScene" uid="uid://c8rp8776xs0jo" path="res://models/barrels/barrel_1.tscn" id="42_6acnw"]
 [ext_resource type="PackedScene" path="res://placeholders/PhysicsItems/physic_item_gas_tank_medium.tscn" id="43_jnqde"]
 [ext_resource type="PackedScene" uid="uid://cryhclbq4jsy7" path="res://placeholders/PhysicsItems/physic_item_gas_tank_small.tscn" id="43_xwgko"]
 [ext_resource type="PackedScene" uid="uid://mmaua2et74ge" path="res://placeholders/modular_pipes/new_big/pipe_big_round.tscn" id="45_6bsui"]
@@ -899,3 +900,42 @@ transform = Transform3D(-1.1, 0, -2.88495e-07, 0, 1.1, 0, 2.88495e-07, 0, -1.1, 
 
 [node name="locker14" parent="." instance=ExtResource("45_tso8u")]
 transform = Transform3D(-1.1, 0, -2.88495e-07, 0, 1.1, 0, 2.88495e-07, 0, -1.1, -7.00878, 0.0796114, 10.0214)
+
+[node name="barrel1" parent="." instance=ExtResource("42_6acnw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.1002, 2.01442, -0.982451)
+
+[node name="barrel2" parent="." instance=ExtResource("42_6acnw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.746, 2.01442, -0.982451)
+
+[node name="barrel3" parent="." instance=ExtResource("42_6acnw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.4198, 2.83375, -0.982451)
+
+[node name="barrel4" parent="." instance=ExtResource("42_6acnw")]
+transform = Transform3D(0.118161, 0, -0.992994, 0, 1, 0, 0.992994, 0, 0.118161, -7.03869, 0.0184457, -3.67071)
+
+[node name="barrel5" parent="." instance=ExtResource("42_6acnw")]
+transform = Transform3D(0.118161, 0, -0.992994, 0, 1, 0, 0.992994, 0, 0.118161, -7.11501, 0.0184457, -4.31206)
+
+[node name="barrel6" parent="." instance=ExtResource("42_6acnw")]
+transform = Transform3D(0.118161, 0, -0.992994, 0, 1, 0, 0.992994, 0, 0.118161, -7.07646, 0.83778, -3.9881)
+
+[node name="barrel7" parent="." instance=ExtResource("42_6acnw")]
+transform = Transform3D(0.944129, 0, -0.329575, 0, 1, 0, 0.329575, 0, 0.944129, 6.55591, 2.07277, -3.4358)
+
+[node name="barrel8" parent="." instance=ExtResource("42_6acnw")]
+transform = Transform3D(0.944129, 0, -0.329575, 0, 1, 0, 0.329575, 0, 0.944129, 5.94612, 2.07277, -3.64866)
+
+[node name="barrel9" parent="." instance=ExtResource("42_6acnw")]
+transform = Transform3D(0.944129, 0, -0.329575, 0, 1, 0, 0.329575, 0, 0.944129, 6.25414, 2.8921, -3.54114)
+
+[node name="barrel10" parent="." instance=ExtResource("42_6acnw")]
+transform = Transform3D(0.930622, 0, 0.365982, 0, 1, 0, -0.365982, 0, 0.930622, -11.5028, 1.9284, 20.3026)
+
+[node name="barrel11" parent="." instance=ExtResource("42_6acnw")]
+transform = Transform3D(0.930622, 0, 0.365982, 0, 1, 0, -0.365982, 0, 0.930622, -12.1038, 1.9284, 20.539)
+
+[node name="barrel13" parent="." instance=ExtResource("42_6acnw")]
+transform = Transform3D(0.930622, 0, 0.365982, 0, 1, 0, -0.365982, 0, 0.930622, -13.0208, 1.9284, 20.1899)
+
+[node name="barrel12" parent="." instance=ExtResource("42_6acnw")]
+transform = Transform3D(0.930622, 0, 0.365982, 0, 1, 0, -0.365982, 0, 0.930622, -11.8002, 2.74773, 20.4196)

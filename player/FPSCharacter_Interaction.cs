@@ -15,6 +15,11 @@ public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
 {
 	CharacterInteractiveSystem InteractiveSystem = null;
 
+	[ExportGroupAttribute("Camera Zoom")]
+	[Export] public float CameraFovNormal = 65.0f;
+	[Export] public float CameraFovZoomed = 40.0f;
+	[Export] public float CameraFovInterpSpeed = 4.0f;
+
     [ExportGroupAttribute("InteractiveSystem: Base Settings")]
 	[Export] public bool CanUse = true;
     [Export] public bool CanGrabObject = true;
@@ -119,6 +124,12 @@ public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
         // Toggle Simple Flashlight
         if (Input.IsActionJustPressed("ToggleFlashlight"))
             ToggleSimpleFlashlight();
+
+		// Camera Zoom
+		if (Input.IsActionPressed("CameraZoom"))
+			SetCameraZoom(true);
+		else
+			SetCameraZoom(false);
 
         // UPDATE HANDS
         objectHands.GlobalPosition =
@@ -253,6 +264,11 @@ public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
             AudioStreamPlayer_TestItem.Play();
         }
 	}
+
+	public void SetCameraZoom(bool newZoom, float newZoomValue = -1.0f, float newZoomInterpSpeed = -1.0f)
+	{
+		objectCamera.SetZoom(newZoom, newZoomValue, newZoomInterpSpeed);
+    }
 
 	public CharacterInteractiveSystem GetInteractiveSystem()
 	{
