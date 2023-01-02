@@ -98,6 +98,7 @@ public partial class DebugHud : Control
             OptionsPanel.Visible = false;
             GameMaster.GM.GetFPSCharacter().SetInputEnable(true);
             GameMaster.GM.GetFPSCharacter().SetMouseVisible(false);
+            Input.MouseMode = Input.MouseModeEnum.Captured;
         }
 	}
 
@@ -270,5 +271,35 @@ public partial class DebugHud : Control
 	{
 		RenderingServer.GiSetUseHalfResolution(newPressed);
         GameMaster.GM.Log.WriteLog(this, LogSystem.ELogMsgType.INFO, "half resolution GI: " + newPressed.ToString());
+    }
+
+	public void _on_ssao_check_box_toggled(bool newPressed)
+	{
+		WorldEnvironment worldEnvironment = (WorldEnvironment)GetNode("/root/worldlevel/WorldEnvironment");
+		if (worldEnvironment == null) return;
+		if (worldEnvironment.Environment == null) return;
+
+		worldEnvironment.Environment.SsaoEnabled = newPressed;
+        GameMaster.GM.Log.WriteLog(this, LogSystem.ELogMsgType.INFO, "enable ssao: " + newPressed.ToString());
+    }
+
+    public void _on_ssil_check_box_toggled(bool newPressed)
+	{
+        WorldEnvironment worldEnvironment = (WorldEnvironment)GetNode("/root/worldlevel/WorldEnvironment");
+        if (worldEnvironment == null) return;
+        if (worldEnvironment.Environment == null) return;
+
+		worldEnvironment.Environment.SsilEnabled = newPressed;
+        GameMaster.GM.Log.WriteLog(this, LogSystem.ELogMsgType.INFO, "enable ssil: " + newPressed.ToString());
+    }
+
+	public void _on_sdfgi_check_box_toggled(bool newPressed)
+	{
+        WorldEnvironment worldEnvironment = (WorldEnvironment)GetNode("/root/worldlevel/WorldEnvironment");
+        if (worldEnvironment == null) return;
+        if (worldEnvironment.Environment == null) return;
+
+        worldEnvironment.Environment.SdfgiEnabled = newPressed;
+        GameMaster.GM.Log.WriteLog(this, LogSystem.ELogMsgType.INFO, "enable sdfgi: " + newPressed.ToString());
     }
 }

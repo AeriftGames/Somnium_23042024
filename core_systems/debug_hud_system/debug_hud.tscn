@@ -314,6 +314,27 @@ text = "half resolution GI"
 alignment = 2
 icon_alignment = 1
 
+[node name="Ssao_CheckBox" type="CheckBox" parent="OptionsPanel/TabContainer/video"]
+layout_direction = 3
+layout_mode = 2
+text = "enable SSAO"
+alignment = 2
+icon_alignment = 1
+
+[node name="Ssil_CheckBox" type="CheckBox" parent="OptionsPanel/TabContainer/video"]
+layout_direction = 3
+layout_mode = 2
+text = "enable SSIL"
+alignment = 2
+icon_alignment = 1
+
+[node name="Sdfgi_CheckBox" type="CheckBox" parent="OptionsPanel/TabContainer/video"]
+layout_direction = 3
+layout_mode = 2
+text = "enable SDFGI"
+alignment = 2
+icon_alignment = 1
+
 [node name="Label" type="Label" parent="OptionsPanel"]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 1
@@ -404,4 +425,7 @@ text = "video memory used:"
 [connection signal="item_selected" from="OptionsPanel/TabContainer/video/Antialias_HBoxContainer/Antialias_OptionButton" to="." method="_on_antialias_option_button_item_selected"]
 [connection signal="value_changed" from="OptionsPanel/TabContainer/video/Scale3d_HBoxContainer/Scale3d_HSlider" to="." method="_on_scale_3d_h_slider_value_changed"]
 [connection signal="toggled" from="OptionsPanel/TabContainer/video/HalfResGI_CheckBox" to="." method="_on_half_res_gi_check_box_toggled"]
+[connection signal="toggled" from="OptionsPanel/TabContainer/video/Ssao_CheckBox" to="." method="_on_ssao_check_box_toggled"]
+[connection signal="toggled" from="OptionsPanel/TabContainer/video/Ssil_CheckBox" to="." method="_on_ssil_check_box_toggled"]
+[connection signal="toggled" from="OptionsPanel/TabContainer/video/Sdfgi_CheckBox" to="." method="_on_sdfgi_check_box_toggled"]
 [connection signal="pressed" from="OptionsPanel/QuitGameButton" to="." method="_on_quit_game_button_pressed"]
