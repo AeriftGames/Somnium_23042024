@@ -44,6 +44,8 @@ public partial class ObjectCamera : Node3D
     private Vector3 workingZoomPosVector = Vector3.Zero;
     private Node3D lookingPoint = null;
     private bool isRunningZoom = false;
+    private bool isZoomRotSetDirection = false;
+    private bool isOnHitTargetZoomToNormal = false;
 
     public override void _Ready()
 	{
@@ -66,6 +68,7 @@ public partial class ObjectCamera : Node3D
         neededZoomValue = Camera.Fov;
         LerpObject_ObjectCameraPos.EnableUpdate(true);
         LerpObject_CameraZoom.EnableUpdate(true);
+        LerpObject_CameraZoom.SetTarget(65.0f);     // Initial setup = normal fov
         lookingPoint = GetNode<Node3D>("NodeRotY/GimbalLand/NodeRotX/NodeLean/CameraLookPoint");
         LerpObject_CameraZoomToObject.EnableUpdate(true);
     }
@@ -99,10 +102,42 @@ public partial class ObjectCamera : Node3D
             // jsme u cile k normalu ?
             if(LerpObject_CameraZoomToObject.GetTarget() == lookingPoint.GlobalPosition && isRunningZoom)
             {
-                Camera.Rotation = Vector3.Zero;
-                ownerCharacter.SetInputEnable(true);
-                SetCameraLookInputEnable(true);
-                isRunningZoom = false;
+                if(!isZoomRotSetDirection)
+                {
+                    Camera.Rotation = Vector3.Zero;
+                    ownerCharacter.SetInputEnable(true);
+                    SetCameraLookInputEnable(true);
+                    isRunningZoom = false;
+                }
+            }
+            
+            // jsme u cile k objektu ?
+            else if(LerpObject_CameraZoomToObject.GetTarget() != lookingPoint.GlobalPosition && isRunningZoom)
+            {
+                // ma se nastavit i celkovy pohled playera na novou pozici ?
+                if(isZoomRotSetDirection)
+                {
+                    NodeRotY.LookAt(LerpObject_CameraZoomToObject.GetTarget(), Vector3.Up);
+                    var a = NodeRotY.Rotation;
+                    a.x = 0.0f;
+                    NodeRotY.Rotation = a;
+
+                    NodeRotX.LookAt(LerpObject_CameraZoomToObject.GetTarget(), Vector3.Up);
+                    a = NodeRotX.Rotation;
+                    a.y = 0.0f;
+                    NodeRotX.Rotation = a;
+
+                    Camera.Rotation = Vector3.Zero;
+                    ownerCharacter.SetInputEnable(true);
+                    SetCameraLookInputEnable(true);
+                    isRunningZoom = false;
+
+                    isZoomRotSetDirection = false;
+
+                    //Zoom to normal ?
+                    if(isOnHitTargetZoomToNormal)
+                        SetZoom(false);
+                }
             }
         }
     }
@@ -394,6 +429,8 @@ public partial class ObjectCamera : Node3D
         }
         else
         {
+            if (isZoomRotSetDirection) return;
+
             // zoom to normal - vzdy k normal hodnote a rychlosti ktere je definovane v FPSCharaterInteraction
             LerpObject_CameraZoom.SetTarget(characterInteraction.CameraFovNormal);
 
@@ -405,8 +442,9 @@ public partial class ObjectCamera : Node3D
         }
     }
 
-    public void SetZoomToObject(bool newZoom, Node3D newZoomedObject, float newZoomValue = -1.0f,
-        float newZoomInterpSpeed = -1.0f, float newZoomRotateSpeed = -1.0f)
+    public void SetZoomToObject(bool newZoom, Node3D newZoomedObject,bool newSetPlayerDirection,
+        float newZoomValue, float newZoomInterpSpeed, float newZoomRotateSpeed,
+        bool newOnHitTargetZoomToNormal)
     {
         FPSCharacter_Interaction characterInteraction = (FPSCharacter_Interaction)ownerCharacter;
 
@@ -440,11 +478,19 @@ public partial class ObjectCamera : Node3D
                     characterInteraction.CameraFovInterpSpeed);
             else
                 SetZoom(true, newZoomValue, newZoomInterpSpeed);
+
+            // Ma se nastavit novy direction hrace na vychozi bod?
+            isZoomRotSetDirection = newSetPlayerDirection;
+
+            // Ma se vratit zoom to normal kdyz dorazi k cilovemu objektu pohled kamery?
+            isOnHitTargetZoomToNormal = newOnHitTargetZoomToNormal;
         }
         else
         {
             if(isRunningZoom)
             {
+                if (isZoomRotSetDirection) return;
+
                 // Rotation to
                 if (newZoomInterpSpeed == -1)
                     LerpObject_CameraZoomToObject.SetSpeed(characterInteraction.

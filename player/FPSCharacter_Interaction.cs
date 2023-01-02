@@ -23,6 +23,7 @@ public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
     [Export] public float CameraZoomToObjectZoomed = 35.0f;
     [Export] public float CameraZoomToObjectInterpSpeed = 4.0f;
     [Export] public float CameraZoomToObjectInterpRotationSpeed = 7.0f;
+	[Export] public bool CameraZoomToObjectSetPlayerDirection = false;
     Node3D testZoomObject = null;
 
     [ExportGroupAttribute("InteractiveSystem: Base Settings")]
@@ -133,7 +134,7 @@ public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
 		// Camera Zoom
 		if (Input.IsActionPressed("CameraZoom"))
 			SetCameraZoom(true);
-		else
+		else if(Input.IsActionJustReleased("CameraZoom"))
 			SetCameraZoom(false);
 
         // Camera Zoom To Object
@@ -146,6 +147,13 @@ public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
 		{
             testZoomObject = GetNode<Node3D>("/root/worldlevel/barrel1");
             SetCameraZoomToObject(false, testZoomObject);
+        }
+
+		// Camera Zoom to Object a i tam zmenime direction hrace
+		if(Input.IsActionJustPressed("CameraZoomToObjectAndSetDirection"))
+		{
+            testZoomObject = GetNode<Node3D>("/root/worldlevel/barrel1");
+            SetCameraZoomToObject(true, testZoomObject,true,30,4,6,true);
         }
 
         // UPDATE HANDS
@@ -287,11 +295,12 @@ public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
 		objectCamera.SetZoom(newZoom, newZoomValue, newZoomInterpSpeed);
     }
 
-	public void SetCameraZoomToObject(bool newZoom, Node3D newZoomedObject, float newZoomValue = -1.0f,
-		float newZoomInterpSpeed = -1.0f, float newZoomRotateSpeed = -1.0f)
+	public void SetCameraZoomToObject(bool newZoom, Node3D newZoomedObject,bool newSetPlayerDirection = false,
+		float newZoomValue = -1.0f, float newZoomInterpSpeed = -1.0f, float newZoomRotateSpeed = -1.0f,
+        bool newOnHitTargetZoomToNormal = false)
 	{
-		objectCamera.SetZoomToObject(newZoom,newZoomedObject,newZoomValue,
-			newZoomInterpSpeed,newZoomRotateSpeed);
+		objectCamera.SetZoomToObject(newZoom,newZoomedObject,newSetPlayerDirection,
+			newZoomValue,newZoomInterpSpeed,newZoomRotateSpeed,newOnHitTargetZoomToNormal);
 	}
 
 	public CharacterInteractiveSystem GetInteractiveSystem()

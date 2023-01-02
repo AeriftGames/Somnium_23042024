@@ -20,6 +20,7 @@ CameraFovInterpSpeed = 4.0
 CameraZoomToObjectZoomed = 35.0
 CameraZoomToObjectInterpSpeed = 4.0
 CameraZoomToObjectInterpRotationSpeed = 7.0
+CameraZoomToObjectSetPlayerDirection = false
 CanUse = true
 CanGrabObject = true
 CanThrowObject = true
