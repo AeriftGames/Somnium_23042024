@@ -152,6 +152,8 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = 31.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="ShowFps_CheckBox" type="CheckBox" parent="OptionsPanel/TabContainer/main"]
 offset_right = 320.0
@@ -270,17 +272,28 @@ visible = false
 [node name="HSeparator" type="HSeparator" parent="OptionsPanel/TabContainer/video"]
 self_modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(0, 33)
+offset_right = 318.0
+offset_bottom = 33.0
 
 [node name="Antialias_HBoxContainer" type="HBoxContainer" parent="OptionsPanel/TabContainer/video"]
+offset_top = 37.0
+offset_right = 318.0
+offset_bottom = 68.0
 alignment = 1
 
 [node name="Label" type="Label" parent="OptionsPanel/TabContainer/video/Antialias_HBoxContainer"]
 custom_minimum_size = Vector2(80, 0)
+offset_top = 2.0
+offset_right = 85.0
+offset_bottom = 28.0
 size_flags_horizontal = 3
 text = " antialias "
 
 [node name="Antialias_OptionButton" type="OptionButton" parent="OptionsPanel/TabContainer/video/Antialias_HBoxContainer"]
 custom_minimum_size = Vector2(100, 0)
+offset_left = 89.0
+offset_right = 318.0
+offset_bottom = 31.0
 size_flags_horizontal = 3
 item_count = 5
 popup/item_0/text = "disable"
@@ -295,14 +308,23 @@ popup/item_4/text = "SS_AA+TAA+MSAA3D_2X"
 popup/item_4/id = 4
 
 [node name="Scale3d_HBoxContainer" type="HBoxContainer" parent="OptionsPanel/TabContainer/video"]
+offset_top = 72.0
+offset_right = 318.0
+offset_bottom = 98.0
 alignment = 1
 
 [node name="Label" type="Label" parent="OptionsPanel/TabContainer/video/Scale3d_HBoxContainer"]
 custom_minimum_size = Vector2(80, 0)
+offset_right = 80.0
+offset_bottom = 26.0
 text = " scale 3D"
 
 [node name="Scale3d_HSlider" type="HSlider" parent="OptionsPanel/TabContainer/video/Scale3d_HBoxContainer"]
 custom_minimum_size = Vector2(150, 0)
+offset_left = 84.0
+offset_top = 5.0
+offset_right = 234.0
+offset_bottom = 21.0
 size_flags_horizontal = 0
 size_flags_vertical = 4
 min_value = 50.0
@@ -311,32 +333,53 @@ value = 100.0
 
 [node name="Scale3dvalue_Label" type="Label" parent="OptionsPanel/TabContainer/video/Scale3d_HBoxContainer"]
 custom_minimum_size = Vector2(80, 0)
+offset_left = 238.0
+offset_right = 318.0
+offset_bottom = 26.0
 text = "100%"
 horizontal_alignment = 1
 
 [node name="HalfResGI_CheckBox" type="CheckBox" parent="OptionsPanel/TabContainer/video"]
 layout_direction = 3
+offset_top = 102.0
+offset_right = 318.0
+offset_bottom = 133.0
 text = "half resolution GI"
 alignment = 2
 icon_alignment = 1
 
 [node name="Ssao_CheckBox" type="CheckBox" parent="OptionsPanel/TabContainer/video"]
 layout_direction = 3
+offset_top = 137.0
+offset_right = 318.0
+offset_bottom = 168.0
 text = "enable SSAO"
 alignment = 2
 icon_alignment = 1
 
 [node name="Ssil_CheckBox" type="CheckBox" parent="OptionsPanel/TabContainer/video"]
 layout_direction = 3
+offset_top = 172.0
+offset_right = 318.0
+offset_bottom = 203.0
 text = "enable SSIL"
 alignment = 2
 icon_alignment = 1
 
 [node name="Sdfgi_CheckBox" type="CheckBox" parent="OptionsPanel/TabContainer/video"]
 layout_direction = 3
+offset_top = 207.0
+offset_right = 318.0
+offset_bottom = 238.0
 text = "enable SDFGI"
 alignment = 2
 icon_alignment = 1
+
+[node name="SaveAsDefaultButton" type="Button" parent="OptionsPanel/TabContainer/video"]
+offset_top = 242.0
+offset_right = 318.0
+offset_bottom = 273.0
+text = "Save as default"
 
 [node name="Label" type="Label" parent="OptionsPanel"]
 custom_minimum_size = Vector2(150, 0)
@@ -434,4 +477,5 @@ text = "video memory used:"
 [connection signal="toggled" from="OptionsPanel/TabContainer/video/Ssao_CheckBox" to="." method="_on_ssao_check_box_toggled"]
 [connection signal="toggled" from="OptionsPanel/TabContainer/video/Ssil_CheckBox" to="." method="_on_ssil_check_box_toggled"]
 [connection signal="toggled" from="OptionsPanel/TabContainer/video/Sdfgi_CheckBox" to="." method="_on_sdfgi_check_box_toggled"]
+[connection signal="pressed" from="OptionsPanel/TabContainer/video/SaveAsDefaultButton" to="." method="_on_save_as_default_button_pressed"]
 [connection signal="pressed" from="OptionsPanel/QuitGameButton" to="." method="_on_quit_game_button_pressed"]

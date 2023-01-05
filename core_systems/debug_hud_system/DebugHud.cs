@@ -251,4 +251,9 @@ public partial class DebugHud : Control
        // apply and not save
 	   GameMaster.GM.Settings.Set_Sdfgi(newPressed,true,false);
     }
+
+	public void _on_save_as_default_button_pressed()
+	{
+		GameMaster.GM.Settings.LoadAndApply_AllGraphicsSettings();
+	}
 }

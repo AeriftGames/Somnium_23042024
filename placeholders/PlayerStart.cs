@@ -110,7 +110,10 @@ public partial class PlayerStart : Node3D
             // !!! SHADER PRECOMPILATION PROCESS START !!!
             if(GameMaster.GM.LevelLoader.isPrecompiledShaders)
                 GameMaster.GM.LevelLoader.StartPrecompileShaderProcess();
-            
+
+            // Apply Settings
+            GameMaster.GM.Settings.LoadAndApply_AllGraphicsSettings();
+
             GameMaster.GM.EnableBlackScreen(false);
             //delete
             spawn_timer.Stop();

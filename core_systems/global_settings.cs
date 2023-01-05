@@ -13,7 +13,7 @@ public partial class global_settings : Godot.Object
 	// tady ziskavame pristup k hodnotam ulozenych v global_settings_data.tres
 	public global_settings_data GetData()
 	{
-        Resource Settings = GD.Load("res://global_settings.tres");
+        Resource Settings = GD.Load("res://global_settings_data.tres");
         if (Settings != null && Settings is global_settings_data settings_data)
 			return settings_data;
 		else
@@ -30,6 +30,23 @@ public partial class global_settings : Godot.Object
 
 	/**************************************************************************/
 	// Graphics
+
+    // Spoustime v player startu pri startu hry (aby se mohl nastavit WorldEnvironment)
+    public void LoadAndApply_AllGraphicsSettings()
+    {
+        // nacteme data ulozena ze souboru
+        global_settings_data data = GetData();
+
+        // pouze aplikujeme jednotliva nastaveni
+        Set_Ssao(data.Ssao,true,true);
+        Set_Ssil(data.Ssil, true, true);
+        Set_Scale3D(data.Scale3d,true,true);
+        Set_HalfResolutionGI(data.HalfResolutionGI,true,true);
+        Set_Antialias(data.Antialias,true,true);
+        Set_Sdfgi(data.Sdfgi, true, true);
+
+        gm.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "all graphics data is sets");
+    }
 
 	public void Set_Ssao(bool newValue, bool newApplyNow = false, bool newSaveNow = false)
 	{
