@@ -273,4 +273,17 @@ public partial class CLevelLoader : Godot.Object
             GD.Print("loading bar: " + progress[0]);
         }
     }
+
+    public Node GetActualLevelScene()
+    {
+        Node level = GameMaster.GM.GetNode("/root/worldlevel");
+        if (level == null)
+        {
+            // pokud nemuzeme level najit, napiseme chybu do logu
+            GameMaster.GM.Log.WriteLog(GameMaster.GM, LogSystem.ELogMsgType.ERROR,
+                "GetActualLevelScene() - Not find /root/worldlevel");
+        }
+
+        return level;
+    }
 }

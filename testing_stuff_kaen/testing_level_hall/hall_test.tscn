@@ -5,7 +5,7 @@
 [ext_resource type="Material" path="res://testing_stuff_kaen/testing_level_hall/fix_zed_mat.tres" id="3_mbtrq"]
 [ext_resource type="Material" path="res://testing_stuff_kaen/testing_level_hall/wall_and_floor_mat.tres" id="4_50t7h"]
 [ext_resource type="Material" path="res://testing_stuff_kaen/testing_level_hall/round_extend_mat.tres" id="5_epdxm"]
-[ext_resource type="Material" path="res://testing_stuff_kaen/testing_level_hall/round_allround_mat.tres" id="6_2723a"]
+[ext_resource type="Material" uid="uid://bo5gbg5uibf2j" path="res://testing_stuff_kaen/testing_level_hall/round_allround_mat.tres" id="6_2723a"]
 [ext_resource type="Material" path="res://testing_stuff_kaen/testing_level_hall/vents_mat.tres" id="7_lr5da"]
 [ext_resource type="PackedScene" uid="uid://bbpyvlqpjgi4t" path="res://testing_stuff_kaen/testing_level_hall/new_items/lamp_2.tscn" id="8_tcove"]
 

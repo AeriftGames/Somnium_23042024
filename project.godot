@@ -74,6 +74,10 @@ window/size/borderless=true
 
 project/assembly_name="Somnium"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/SceneTool/plugin.cfg")
+
 [filesystem]
 
 import/blender/enabled=false

@@ -1,15 +1,20 @@
-[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://b8q54pvceicbr"]
+[gd_resource type="StandardMaterial3D" load_steps=4 format=3 uid="uid://b8q54pvceicbr"]
 
 [ext_resource type="Texture2D" uid="uid://4v7coe32gow7" path="res://models/barrels/textures/barrel_color.png" id="1_abw7a"]
 [ext_resource type="Texture2D" uid="uid://csryghfn3hq6d" path="res://models/barrels/textures/barrel_normal.png" id="2_ws2a7"]
+[ext_resource type="Texture2D" uid="uid://d3b1xitvkee33" path="res://models/barrels/textures/roughness_mapH.png" id="3_t3kmj"]
 
 [resource]
 resource_name = "Material.001"
 cull_mode = 2
 vertex_color_use_as_albedo = true
+albedo_color = Color(0.882353, 0.847059, 0.792157, 1)
 albedo_texture = ExtResource("1_abw7a")
-metallic = 0.9
-roughness = 0.3
+metallic = 0.1
+metallic_specular = 0.0
+metallic_texture_channel = 4
+roughness_texture = ExtResource("3_t3kmj")
+roughness_texture_channel = 4
 normal_enabled = true
-normal_scale = 0.5
+normal_scale = 0.2
 normal_texture = ExtResource("2_ws2a7")

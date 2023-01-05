@@ -1,6 +1,6 @@
 [gd_resource type="AudioBusLayout" load_steps=2 format=3 uid="uid://b7oexv0btv44j"]
 
-[sub_resource type="AudioEffectReverb" id="AudioEffectReverb_ee6nt"]
+[sub_resource type="AudioEffectReverb" id="AudioEffectReverb_fs8ip"]
 resource_name = "Reverb"
 predelay_feedback = 0.15
 room_size = 0.2
@@ -11,7 +11,7 @@ wet = 0.18
 
 [resource]
 bus/0/volume_db = -0.130497
-bus/0/effect/0/effect = SubResource("AudioEffectReverb_ee6nt")
+bus/0/effect/0/effect = SubResource("AudioEffectReverb_fs8ip")
 bus/0/effect/0/enabled = true
 bus/1/name = &"Sfx"
 bus/1/solo = false

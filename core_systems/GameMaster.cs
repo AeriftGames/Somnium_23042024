@@ -16,6 +16,7 @@ public partial class GameMaster : Node
 
 	// LEVEL LOADER
 	public CLevelLoader LevelLoader = null;
+	public global_settings Settings = null;
 
 	// POINTERS
 	private DebugHud _debugHud = null;
@@ -52,7 +53,10 @@ public partial class GameMaster : Node
 
 		// vytvoreni LevelLoaderu, druhy parametr = pouziti ShadersPrecompilation?
 		LevelLoader = new CLevelLoader(this, true);
-	}
+
+		// vytvoreni Settings - global_settings
+		Settings = new global_settings(this);
+    }
 
 	// Set/Get FPS Character
 	public void SetFPSCharacter(FPSCharacter_BasicMoving newFpsCharater) { _fpsCharacter = newFpsCharater; }

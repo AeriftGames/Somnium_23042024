@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bet3idvc4fg0n" path="res://placeholders/PlayerStart.tscn" id="5_pjs15"]
 [ext_resource type="PackedScene" uid="uid://cw0ydavkgsc1g" path="res://testing_stuff_kaen/testing_level_hall/hall_test.tscn" id="9_t32gr"]
 [ext_resource type="PackedScene" uid="uid://bbpyvlqpjgi4t" path="res://testing_stuff_kaen/testing_level_hall/new_items/lamp_2.tscn" id="11_a1jgn"]
-[ext_resource type="Material" path="res://testing_stuff_kaen/testing_level_newhall/single_door_joints_mat.tres" id="11_w0lph"]
+[ext_resource type="Material" uid="uid://cnnm3unml15vt" path="res://testing_stuff_kaen/testing_level_newhall/single_door_joints_mat.tres" id="11_w0lph"]
 [ext_resource type="PackedScene" uid="uid://dctjipcvi0ssg" path="res://testing_stuff_kaen/testing_level_newhall/new_hall_scene_test.tscn" id="13_qu6ou"]
 [ext_resource type="PackedScene" uid="uid://0oyvcuqijj5q" path="res://models/boxes/box_0.tscn" id="14_k1qqc"]
 [ext_resource type="PackedScene" uid="uid://cesku4bfg7c26" path="res://models/boxes/box_1.tscn" id="15_0475t"]
@@ -464,7 +464,7 @@ transform = Transform3D(-0.222663, 0, 0.332297, 0, 0.4, 0, -0.332297, 0, -0.2226
 transform = Transform3D(0.599615, 0, -0.0214945, 0, 0.6, 0, 0.0214945, 0, 0.599615, 3.32386, 0.604492, -4.76991)
 
 [node name="box1_main10" parent="worldlevel_new_hall_test/Items" instance=ExtResource("15_0475t")]
-transform = Transform3D(0.337387, 0, -0.214873, 0, 0.4, 0, 0.214873, 0, 0.337387, 2.77455, 0.409707, -3.52389)
+transform = Transform3D(0.337387, 0, -0.214873, 0, 0.4, 0, 0.214873, 0, 0.337387, 3.25495, 0.409707, -3.52389)
 
 [node name="box1_main2" parent="worldlevel_new_hall_test/Items" instance=ExtResource("15_0475t")]
 transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, -3.62451, 1.79852, -0.382237)
@@ -709,18 +709,12 @@ transform = Transform3D(-1, -5.02688e-16, -8.74228e-08, 1.65541e-09, 0.999821, -
 [node name="room_hall2_new2" parent="worldlevel_new_hall_test" instance=ExtResource("41_sb5nx")]
 
 [node name="OmniLight3D" type="OmniLight3D" parent="worldlevel_new_hall_test"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.24286, 4.28428, -2.86112)
-light_energy = 0.15
-light_bake_mode = 1
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.317837, 4.28428, -2.86112)
+light_energy = 0.3
+light_indirect_energy = 10.0
+light_volumetric_fog_energy = 1.5
 shadow_enabled = true
-omni_range = 12.324
-
-[node name="OmniLight3D3" type="OmniLight3D" parent="worldlevel_new_hall_test"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.9498, 4.28428, -2.86112)
-light_energy = 0.15
-light_bake_mode = 1
-shadow_enabled = true
-omni_range = 12.324
+omni_range = 15.0
 
 [node name="OmniLight3D2" type="OmniLight3D" parent="worldlevel_new_hall_test"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.08914, 1.87428, -7.25846)
@@ -784,9 +778,9 @@ transform = Transform3D(-0.499913, -2.77507e-17, 0.00935448, -2.77556e-17, 0.5, 
 transform = Transform3D(-0.496054, 0, 0.0626926, 0, 0.5, 0, -0.0626926, 0, -0.496054, -18.6636, 7.38958, 24.6093)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
-transform = Transform3D(0.0056201, 0, -0.999984, 0, 1, 0, 0.999984, 0, 0.0056201, -16.2711, 4.92724, 25.5428)
+transform = Transform3D(0.0056201, 0, -0.999984, 0, 1, 0, 0.999984, 0, 0.0056201, -12.9818, 4.37298, 20.1401)
 light_energy = 0.15
-light_indirect_energy = 3.0
+light_indirect_energy = 8.223
 shadow_enabled = true
 distance_fade_enabled = true
 distance_fade_shadow = 15.0
@@ -938,4 +932,4 @@ transform = Transform3D(0.930622, 0, 0.365982, 0, 1, 0, -0.365982, 0, 0.930622, 
 transform = Transform3D(0.930622, 0, 0.365982, 0, 1, 0, -0.365982, 0, 0.930622, -13.0208, 1.9284, 20.1899)
 
 [node name="barrel12" parent="." instance=ExtResource("42_6acnw")]
-transform = Transform3D(0.930622, 0, 0.365982, 0, 1, 0, -0.365982, 0, 0.930622, -11.8002, 2.74773, 20.4196)
+transform = Transform3D(-0.930622, 8.74228e-08, -0.365982, -8.13576e-08, -1, -3.19952e-08, -0.365982, 0, 0.930622, -11.8002, 3.74773, 20.4196)
