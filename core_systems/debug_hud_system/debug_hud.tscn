@@ -148,6 +148,7 @@ theme_override_styles/tab_selected = SubResource("StyleBoxFlat_2d7rl")
 theme_override_styles/tab_unselected = SubResource("StyleBoxFlat_yi35b")
 
 [node name="main" type="VBoxContainer" parent="OptionsPanel/TabContainer"]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -264,10 +265,8 @@ offset_right = 320.0
 offset_bottom = 462.0
 
 [node name="level" type="VBoxContainer" parent="OptionsPanel/TabContainer"]
-visible = false
 
 [node name="video" type="VBoxContainer" parent="OptionsPanel/TabContainer"]
-visible = false
 
 [node name="HSeparator" type="HSeparator" parent="OptionsPanel/TabContainer/video"]
 self_modulate = Color(1, 1, 1, 0)

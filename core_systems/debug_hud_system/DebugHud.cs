@@ -90,6 +90,9 @@ public partial class DebugHud : Control
 			GameMaster.GM.GetFPSCharacter().SetInputEnable(false);
             GameMaster.GM.GetFPSCharacter().SetMouseVisible(true);
             Input.MouseMode = Input.MouseModeEnum.Confined;
+
+			// updatuje na vsechny controls v tab video - vychozi stav na aktualni hodnoty
+			ApplyAllVideoControls();
         }
 		else
 		{
@@ -215,13 +218,13 @@ public partial class DebugHud : Control
 	// Signal pr zmenu antialiasingu skrze option_button
 	public void _on_antialias_option_button_item_selected(int newID)
 	{
-		// apply and not save
+		// only apply
 		GameMaster.GM.Settings.Apply_AntialiasID(newID,true,false);
 	}
 
 	public void _on_scale_3d_h_slider_value_changed(float newValue)
 	{
-        // apply and not save
+        // only apply
         GameMaster.GM.Settings.Apply_Scale3D(newValue / 100.0f,true,false);
 
 		Label scale3dLabel = GetNode<Label>("OptionsPanel/TabContainer/video/Scale3d_HBoxContainer/Scale3dvalue_Label");
@@ -230,30 +233,63 @@ public partial class DebugHud : Control
 
 	public void _on_half_res_gi_check_box_toggled(bool newPressed)
 	{
-        // apply and not save
+        // only apply
         GameMaster.GM.Settings.Apply_HalfResolutionGI(newPressed,true,false);
     }
 
 	public void _on_ssao_check_box_toggled(bool newPressed)
 	{
-        // apply and not save
+        // only apply
         GameMaster.GM.Settings.Apply_Ssao(newPressed,true,false);
     }
 
     public void _on_ssil_check_box_toggled(bool newPressed)
 	{
-        // apply and not save
+        // only apply
 		GameMaster.GM.Settings.Apply_Ssil(newPressed,true,false);
     }
 
     public void _on_sdfgi_check_box_toggled(bool newPressed)
 	{
-       // apply and not save
+       // only apply
 	   GameMaster.GM.Settings.Apply_Sdfgi(newPressed,true,false);
     }
 
 	public void _on_save_as_default_button_pressed()
 	{
+		// save all actual graphics settings
 		GameMaster.GM.Settings.SaveActual_AllGraphicsSettings();
 	}
+
+	public void ApplyAllVideoControls()
+	{
+		// antialias 
+		OptionButton antialias_option = GetNode<OptionButton>("OptionsPanel/TabContainer/video/" +
+			"Antialias_HBoxContainer/Antialias_OptionButton");
+		antialias_option.Selected = GameMaster.GM.Settings.GetActual_AntialiasID();
+
+		// scale 3d
+		HSlider scale3d_slider = GetNode<HSlider>("OptionsPanel/TabContainer/video/" +
+			"Scale3d_HBoxContainer/Scale3d_HSlider");
+		scale3d_slider.Value = GameMaster.GM.Settings.GetActual_Scale3D() * 100.0f;
+
+        Label scale3d_label = GetNode<Label>("OptionsPanel/TabContainer/video/Scale3d_HBoxContainer/Scale3dvalue_Label");
+        scale3d_label.Text = GameMaster.GM.Settings.GetActual_Scale3D().ToString();
+
+		// half resolution gi
+		CheckBox halfresgi_checkbox = GetNode<CheckBox>("OptionsPanel/TabContainer/video/HalfResGI_CheckBox");
+		halfresgi_checkbox.ButtonPressed = GameMaster.GM.Settings.GetActual_HalfResolutionGI();
+
+		// ssao
+		CheckBox ssao_checkbox = GetNode<CheckBox>("OptionsPanel/TabContainer/video/Ssao_CheckBox");
+		ssao_checkbox.ButtonPressed = GameMaster.GM.Settings.GetActual_Ssao();
+
+        // ssil
+        CheckBox ssil_checkbox = GetNode<CheckBox>("OptionsPanel/TabContainer/video/Ssil_CheckBox");
+        ssil_checkbox.ButtonPressed = GameMaster.GM.Settings.GetActual_Ssil();
+
+        // sdfgi
+        CheckBox sdfgi_checkbox = GetNode<CheckBox>("OptionsPanel/TabContainer/video/Sdfgi_CheckBox");
+        sdfgi_checkbox.ButtonPressed = GameMaster.GM.Settings.GetActual_Sdfgi();
+    }
 }
