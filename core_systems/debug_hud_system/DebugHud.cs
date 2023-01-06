@@ -224,13 +224,13 @@ public partial class DebugHud : Control
 	public void _on_antialias_option_button_item_selected(int newID)
 	{
 		// only apply
-		GameMaster.GM.Settings.Apply_AntialiasID(newID,true,false);
+		GameMaster.GM.GetSettings().Apply_AntialiasID(newID,true,false);
 	}
 
 	public void _on_scale_3d_h_slider_value_changed(float newValue)
 	{
         // only apply
-        GameMaster.GM.Settings.Apply_Scale3D(newValue / 100.0f,true,false);
+        GameMaster.GM.GetSettings().Apply_Scale3D(newValue / 100.0f,true,false);
 
 		Label scale3dLabel = GetNode<Label>("OptionsPanel/TabContainer/video/Scale3d_HBoxContainer/Scale3dvalue_Label");
 		scale3dLabel.Text = (newValue / 100.0f).ToString();
@@ -239,31 +239,31 @@ public partial class DebugHud : Control
 	public void _on_half_res_gi_check_box_toggled(bool newPressed)
 	{
         // only apply
-        GameMaster.GM.Settings.Apply_HalfResolutionGI(newPressed,true,false);
+        GameMaster.GM.GetSettings().Apply_HalfResolutionGI(newPressed,true,false);
     }
 
 	public void _on_ssao_check_box_toggled(bool newPressed)
 	{
         // only apply
-        GameMaster.GM.Settings.Apply_Ssao(newPressed,true,false);
+        GameMaster.GM.GetSettings().Apply_Ssao(newPressed,true,false);
     }
 
     public void _on_ssil_check_box_toggled(bool newPressed)
 	{
         // only apply
-		GameMaster.GM.Settings.Apply_Ssil(newPressed,true,false);
+		GameMaster.GM.GetSettings().Apply_Ssil(newPressed,true,false);
     }
 
     public void _on_sdfgi_check_box_toggled(bool newPressed)
 	{
        // only apply
-	   GameMaster.GM.Settings.Apply_Sdfgi(newPressed,true,false);
+	   GameMaster.GM.GetSettings().Apply_Sdfgi(newPressed,true,false);
     }
 
 	public void _on_save_as_default_button_pressed()
 	{
 		// save all actual graphics settings
-		GameMaster.GM.Settings.SaveActual_AllGraphicsSettings();
+		GameMaster.GM.GetSettings().SaveActual_AllGraphicsSettings();
 	}
 
 	public void ApplyAllVideoControls()
@@ -271,37 +271,37 @@ public partial class DebugHud : Control
 		// antialias 
 		OptionButton antialias_option = GetNode<OptionButton>("OptionsPanel/TabContainer/video/" +
 			"Antialias_HBoxContainer/Antialias_OptionButton");
-		antialias_option.Selected = GameMaster.GM.Settings.GetActual_AntialiasID();
+		antialias_option.Selected = GameMaster.GM.GetSettings().GetActual_AntialiasID();
 
 		// scale 3d
 		HSlider scale3d_slider = GetNode<HSlider>("OptionsPanel/TabContainer/video/" +
 			"Scale3d_HBoxContainer/Scale3d_HSlider");
-		scale3d_slider.Value = GameMaster.GM.Settings.GetActual_Scale3D() * 100.0f;
+		scale3d_slider.Value = GameMaster.GM.GetSettings().GetActual_Scale3D() * 100.0f;
 
         Label scale3d_label = GetNode<Label>("OptionsPanel/TabContainer/video/Scale3d_HBoxContainer/Scale3dvalue_Label");
-        scale3d_label.Text = GameMaster.GM.Settings.GetActual_Scale3D().ToString();
+        scale3d_label.Text = GameMaster.GM.GetSettings().GetActual_Scale3D().ToString();
 
 		// half resolution gi
 		CheckBox halfresgi_checkbox = GetNode<CheckBox>("OptionsPanel/TabContainer/video/HalfResGI_CheckBox");
-		halfresgi_checkbox.ButtonPressed = GameMaster.GM.Settings.GetActual_HalfResolutionGI();
+		halfresgi_checkbox.ButtonPressed = GameMaster.GM.GetSettings().GetActual_HalfResolutionGI();
 
 		// ssao
 		CheckBox ssao_checkbox = GetNode<CheckBox>("OptionsPanel/TabContainer/video/Ssao_CheckBox");
-		ssao_checkbox.ButtonPressed = GameMaster.GM.Settings.GetActual_Ssao();
+		ssao_checkbox.ButtonPressed = GameMaster.GM.GetSettings().GetActual_Ssao();
 
         // ssil
         CheckBox ssil_checkbox = GetNode<CheckBox>("OptionsPanel/TabContainer/video/Ssil_CheckBox");
-        ssil_checkbox.ButtonPressed = GameMaster.GM.Settings.GetActual_Ssil();
+        ssil_checkbox.ButtonPressed = GameMaster.GM.GetSettings().GetActual_Ssil();
 
         // sdfgi
         CheckBox sdfgi_checkbox = GetNode<CheckBox>("OptionsPanel/TabContainer/video/Sdfgi_CheckBox");
-        sdfgi_checkbox.ButtonPressed = GameMaster.GM.Settings.GetActual_Sdfgi();
+        sdfgi_checkbox.ButtonPressed = GameMaster.GM.GetSettings().GetActual_Sdfgi();
     }
 
     public void _on_main_volume_h_slider_value_changed(float newValue)
 	{
         // only apply
-        GameMaster.GM.Settings.Apply_MainVolume(newValue, true, false);
+        GameMaster.GM.GetSettings().Apply_MainVolume(newValue, true, false);
 
 		// update label
         Label mainVolume_label = GetNode<Label>("OptionsPanel/TabContainer/audio/audio_HBoxContainer/mainVolume_Label");
@@ -311,7 +311,7 @@ public partial class DebugHud : Control
 	public void _on_sfx_volume_h_slider_value_changed(float newValue)
 	{
         // only apply
-        GameMaster.GM.Settings.Apply_SfxVolume(newValue, true, false);
+        GameMaster.GM.GetSettings().Apply_SfxVolume(newValue, true, false);
 
         // update label
         Label sfxVolume_label = GetNode<Label>("OptionsPanel/TabContainer/audio/audio_HBoxContainer2/sfxVolume_Label");
@@ -321,7 +321,7 @@ public partial class DebugHud : Control
 	public void _on_music_volume_h_slider_value_changed(float newValue)
 	{
         // only apply
-        GameMaster.GM.Settings.Apply_MusicVolume(newValue, true, false);
+        GameMaster.GM.GetSettings().Apply_MusicVolume(newValue, true, false);
 
         // update label
         Label musicVolume_label = GetNode<Label>("OptionsPanel/TabContainer/audio/audio_HBoxContainer3/musicVolume_Label");
@@ -332,36 +332,36 @@ public partial class DebugHud : Control
 	{
 		// main volume
 		HSlider mainVolumeSlider = GetNode<HSlider>("OptionsPanel/TabContainer/audio/audio_HBoxContainer/mainVolume_HSlider");
-		mainVolumeSlider.Value = GameMaster.GM.Settings.GetActual_MainVolume();
+		mainVolumeSlider.Value = GameMaster.GM.GetSettings().GetActual_MainVolume();
 
 		Label mainVolumeLabel = GetNode<Label>("OptionsPanel/TabContainer/audio/audio_HBoxContainer/mainVolume_Label");
-		mainVolumeLabel.Text = GameMaster.GM.Settings.GetActual_MainVolume().ToString() + " db";
+		mainVolumeLabel.Text = GameMaster.GM.GetSettings().GetActual_MainVolume().ToString() + " db";
 
         // sfx volume
         HSlider sfxVolumeSlider = GetNode<HSlider>("OptionsPanel/TabContainer/audio/audio_HBoxContainer2/sfxVolume_HSlider");
-		sfxVolumeSlider.Value = GameMaster.GM.Settings.GetActual_SfxVolume();
+		sfxVolumeSlider.Value = GameMaster.GM.GetSettings().GetActual_SfxVolume();
 
         Label sfxVolumeLabel = GetNode<Label>("OptionsPanel/TabContainer/audio/audio_HBoxContainer2/sfxVolume_Label");
-        sfxVolumeLabel.Text = GameMaster.GM.Settings.GetActual_SfxVolume().ToString() + " db"; ;
+        sfxVolumeLabel.Text = GameMaster.GM.GetSettings().GetActual_SfxVolume().ToString() + " db"; ;
 
         // sfx volume
         HSlider musicVolumeSlider = GetNode<HSlider>("OptionsPanel/TabContainer/audio/audio_HBoxContainer3/musicVolume_HSlider");
-        musicVolumeSlider.Value = GameMaster.GM.Settings.GetActual_MusicVolume();
+        musicVolumeSlider.Value = GameMaster.GM.GetSettings().GetActual_MusicVolume();
 
         Label musicVolumeLabel = GetNode<Label>("OptionsPanel/TabContainer/audio/audio_HBoxContainer3/musicVolume_Label");
-        musicVolumeLabel.Text = GameMaster.GM.Settings.GetActual_MusicVolume().ToString() + " db"; ;
+        musicVolumeLabel.Text = GameMaster.GM.GetSettings().GetActual_MusicVolume().ToString() + " db"; ;
     }
 
 	public void _on_save_audio_as_default_button_pressed()
 	{
 		// save all actual graphics settings
-		GameMaster.GM.Settings.SaveActual_AllAudioSettings();
+		GameMaster.GM.GetSettings().SaveActual_AllAudioSettings();
     }
 
 	public void ApplyAllMainControls()
 	{
 		// ziskame ulozena data
-		global_settings_data data = GameMaster.GM.Settings.GetData();
+		global_settings_data data = GameMaster.GM.GetSettings().GetData();
 
 		SetEnable(data.ShowDebugHud);
 
@@ -388,7 +388,7 @@ public partial class DebugHud : Control
 	public void _on_save_main_as_default_button_pressed()
 	{
         // ziskame ulozena data
-        global_settings_data data = GameMaster.GM.Settings.GetData();
+        global_settings_data data = GameMaster.GM.GetSettings().GetData();
 
 		data.ShowDebugHud = isEnable;
 		data.ShowFps = GetNode<CheckBox>("OptionsPanel/TabContainer/main/ShowFps_CheckBox").ButtonPressed;

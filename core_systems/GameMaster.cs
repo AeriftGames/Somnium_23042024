@@ -16,7 +16,7 @@ public partial class GameMaster : Node
 
 	// LEVEL LOADER
 	public CLevelLoader LevelLoader = null;
-	public global_settings Settings = null;
+	private global_settings Settings = null;
 
 	// POINTERS
 	private DebugHud _debugHud = null;
@@ -73,6 +73,12 @@ public partial class GameMaster : Node
 
 	// prekryje veskery hud a 3d svet cernou obrazovkou
 	public void EnableBlackScreen(bool newEnable){ blackScreen.Visible = newEnable; }
+
+	//
+	public global_settings GetSettings()
+	{
+		return Settings;
+	}
 
     public override void _UnhandledInput(InputEvent @event)
     {

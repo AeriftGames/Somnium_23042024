@@ -112,7 +112,7 @@ public partial class PlayerStart : Node3D
                 GameMaster.GM.LevelLoader.StartPrecompileShaderProcess();
 
             // Apply Settings
-            GameMaster.GM.Settings.LoadAndApply_AllGraphicsSettings();
+            GameMaster.GM.GetSettings().LoadAndApply_AllGraphicsSettings();
             GameMaster.GM.GetDebugHud().ApplyAllMainControls();
 
             GameMaster.GM.EnableBlackScreen(false);
