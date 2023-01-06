@@ -140,20 +140,26 @@ public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
         // Camera Zoom To Object
         if (Input.IsActionPressed("CameraZoomToObject"))
 		{
-            testZoomObject = GetNode<Node3D>("/root/worldlevel/barrel1");
-            SetCameraZoomToObject(true, testZoomObject);
+            testZoomObject = GetNodeOrNull<Node3D>("/root/worldlevel/barrel1");
+
+			if(testZoomObject != null)
+				SetCameraZoomToObject(true, testZoomObject);
         }
         else
 		{
-            testZoomObject = GetNode<Node3D>("/root/worldlevel/barrel1");
-            SetCameraZoomToObject(false, testZoomObject);
+			testZoomObject = GetNodeOrNull<Node3D>("/root/worldlevel/barrel1");
+
+            if (testZoomObject != null)
+                SetCameraZoomToObject(false, testZoomObject);
         }
 
 		// Camera Zoom to Object a i tam zmenime direction hrace
 		if(Input.IsActionJustPressed("CameraZoomToObjectAndSetDirection"))
 		{
-            testZoomObject = GetNode<Node3D>("/root/worldlevel/barrel1");
-            SetCameraZoomToObject(true, testZoomObject,true,30,4,6,true);
+            testZoomObject = GetNodeOrNull<Node3D>("/root/worldlevel/barrel1");
+
+            if (testZoomObject != null)
+                SetCameraZoomToObject(true, testZoomObject,true,30,4,6,true);
         }
 
         // UPDATE HANDS
