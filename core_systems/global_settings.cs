@@ -332,7 +332,7 @@ public partial class global_settings : Godot.Object
         gm.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "all audio data is apply");
     }
 
-    // Toto volani projede veskera aktualni aplikovana graficka nastaveni a
+    // Toto volani projede veskera aktualni aplikovana audio nastaveni a
     // ulozi je do souboru global_settings_data.tres
     public void SaveActual_AllAudioSettings()
     {
@@ -416,5 +416,24 @@ public partial class global_settings : Godot.Object
     public float GetActual_MusicVolume()
     {
         return AudioServer.GetBusVolumeDb(AudioServer.GetBusIndex("Music"));
+    }
+
+    /**************************************************************************/
+    // DEBUG HUD
+
+    // settings SHOW DEBUG HUD
+    public void Save_ShowDebugHud(bool newValue)
+    {
+        // Save now
+        GetData().ShowDebugHud = newValue;
+        GetData().Save();
+    }
+
+    // settings SHOW FPS
+    public void Save_ShowFps(bool newValue)
+    {
+        // Save now
+        GetData().ShowDebugHud = newValue;
+        GetData().Save();
     }
 }

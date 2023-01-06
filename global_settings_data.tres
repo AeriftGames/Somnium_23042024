@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=2 format=3 uid="uid://ce81dqdv6x8el"]
+[gd_resource type="Resource" load_steps=2 format=3]
 
 [ext_resource type="Script" path="res://core_systems/global_settings_data.cs" id="1_8rhwy"]
 
@@ -13,8 +13,8 @@ HalfResolutionGI = false
 MainVolume = 0.0
 MusicVolume = -2.0
 SfxVolume = -2.0
-ShowDebugHud = false
-ShowFps = false
+ShowDebugHud = true
+ShowFps = true
 ShowPerformance = false
 ShowCustomLabel0 = false
 ShowCustomLabel1 = false
@@ -26,4 +26,4 @@ ShowCustomLabel6 = false
 ShowCustomLabel7 = false
 ShowCustomLabel8 = false
 ShowCustomLabel9 = false
-EnableWorldLevelOcclusionCull = false
+EnableWorldLevelOcclusionCull = true

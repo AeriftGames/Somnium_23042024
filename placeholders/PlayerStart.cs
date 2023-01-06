@@ -113,6 +113,7 @@ public partial class PlayerStart : Node3D
 
             // Apply Settings
             GameMaster.GM.Settings.LoadAndApply_AllGraphicsSettings();
+            GameMaster.GM.GetDebugHud().ApplyAllMainControls();
 
             GameMaster.GM.EnableBlackScreen(false);
             //delete

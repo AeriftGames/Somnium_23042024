@@ -78,6 +78,8 @@ public partial class DebugHud : Control
         }
     }
 
+	public bool GetEnable() { return isEnable; }
+
 	public void SetOptionsEnable(bool newEnable)
 	{
 		isOptionsPanelEnabled = newEnable;
@@ -147,7 +149,6 @@ public partial class DebugHud : Control
 
     public void CustomLabelUpdateText(int idCustomLabel, Node newCallNode, string newText)
     {
-
 		if (isEnable == false) return;
 
 		// Pokud nekdo vola update textu, zjistime jestli zadane id je v rozsahu
@@ -160,15 +161,18 @@ public partial class DebugHud : Control
     }
 
     // Nastavi viditelnost a zaroven i moznost updatu daneho labelu
-    public void SetCustomLabelUpdateAndVisible(int idCustomLabel, bool newUpdateAndVisble)
+    public void SetCustomLabelEnable(int idCustomLabel, bool newUpdateAndVisble)
 	{
 		CustomLabels[idCustomLabel].Visible = newUpdateAndVisble;
 
         GameMaster.GM.Log.WriteLog(this, LogSystem.ELogMsgType.INFO, 
 			"CustomLabel[" + idCustomLabel + "] set visible " + newUpdateAndVisble);
     }
-	// *** SIGNAL FROM ALL CHECKBOXES(CUSTOM LABELS) IN OPTIONSPANEL ***
 
+	public bool GetCustomLabelEnable(int idCustomLabel)
+	{
+		return CustomLabels[idCustomLabel].Visible;
+	}
 	public void _on_show_fps_check_box_toggled(bool isPressed)
 	{
 		FPSLabel.Visible = isPressed;
@@ -177,7 +181,7 @@ public partial class DebugHud : Control
 
     public void _on_custom_label_enable_checkbox_toggled(bool isPressed, int id)
 	{
-		SetCustomLabelUpdateAndVisible(id,isPressed);
+		SetCustomLabelEnable(id,isPressed);
 	}
 
     public void _on_enable_world_occlusion_culling_check_box_toggled(bool isPressed)
@@ -352,6 +356,60 @@ public partial class DebugHud : Control
 	{
 		// save all actual graphics settings
 		GameMaster.GM.Settings.SaveActual_AllAudioSettings();
+    }
+
+	public void ApplyAllMainControls()
+	{
+		// ziskame ulozena data
+		global_settings_data data = GameMaster.GM.Settings.GetData();
+
+		SetEnable(data.ShowDebugHud);
+
+        GetNode<CheckBox>("OptionsPanel/TabContainer/main/ShowFps_CheckBox").ButtonPressed = data.ShowFps;
+        _on_show_performance_check_box_toggled(data.ShowPerformance);
+
+        GetNode<CheckBox>("OptionsPanel/TabContainer/main/ShowPerformance_CheckBox").ButtonPressed = data.ShowPerformance;
+
+		GetNode<CheckBox>("OptionsPanel/TabContainer/main/CustomLabelEnable_Checkbox0").ButtonPressed = data.ShowCustomLabel0;
+        GetNode<CheckBox>("OptionsPanel/TabContainer/main/CustomLabelEnable_Checkbox1").ButtonPressed = data.ShowCustomLabel1;
+        GetNode<CheckBox>("OptionsPanel/TabContainer/main/CustomLabelEnable_Checkbox2").ButtonPressed = data.ShowCustomLabel2;
+        GetNode<CheckBox>("OptionsPanel/TabContainer/main/CustomLabelEnable_Checkbox3").ButtonPressed = data.ShowCustomLabel3;
+        GetNode<CheckBox>("OptionsPanel/TabContainer/main/CustomLabelEnable_Checkbox4").ButtonPressed = data.ShowCustomLabel4;
+        GetNode<CheckBox>("OptionsPanel/TabContainer/main/CustomLabelEnable_Checkbox5").ButtonPressed = data.ShowCustomLabel5;
+        GetNode<CheckBox>("OptionsPanel/TabContainer/main/CustomLabelEnable_Checkbox6").ButtonPressed = data.ShowCustomLabel6;
+        GetNode<CheckBox>("OptionsPanel/TabContainer/main/CustomLabelEnable_Checkbox7").ButtonPressed = data.ShowCustomLabel7;
+        GetNode<CheckBox>("OptionsPanel/TabContainer/main/CustomLabelEnable_Checkbox8").ButtonPressed = data.ShowCustomLabel8;
+        GetNode<CheckBox>("OptionsPanel/TabContainer/main/CustomLabelEnable_Checkbox9").ButtonPressed = data.ShowCustomLabel9;
+
+        GetNode<CheckBox>("OptionsPanel/TabContainer/main/EnableWorldOcclusionCulling_CheckBox").ButtonPressed = 
+			data.EnableWorldLevelOcclusionCull;
+    }
+
+	public void _on_save_main_as_default_button_pressed()
+	{
+        // ziskame ulozena data
+        global_settings_data data = GameMaster.GM.Settings.GetData();
+
+		data.ShowDebugHud = isEnable;
+		data.ShowFps = GetNode<CheckBox>("OptionsPanel/TabContainer/main/ShowFps_CheckBox").ButtonPressed;
+		data.ShowPerformance = GetNode<CheckBox>("OptionsPanel/TabContainer/main/ShowPerformance_CheckBox").ButtonPressed;
+
+		data.ShowCustomLabel0 = GetCustomLabelEnable(0);
+        data.ShowCustomLabel1 = GetCustomLabelEnable(1);
+        data.ShowCustomLabel2 = GetCustomLabelEnable(2);
+        data.ShowCustomLabel3 = GetCustomLabelEnable(3);
+        data.ShowCustomLabel4 = GetCustomLabelEnable(4);
+        data.ShowCustomLabel5 = GetCustomLabelEnable(5);
+        data.ShowCustomLabel6 = GetCustomLabelEnable(6);
+        data.ShowCustomLabel7 = GetCustomLabelEnable(7);
+        data.ShowCustomLabel8 = GetCustomLabelEnable(8);
+        data.ShowCustomLabel9 = GetCustomLabelEnable(9);
+
+		data.EnableWorldLevelOcclusionCull =
+			GetNode<CheckBox>("OptionsPanel/TabContainer/main/EnableWorldOcclusionCulling_CheckBox").ButtonPressed;
+
+		// ulozime data
+		data.Save();
     }
 
 }
