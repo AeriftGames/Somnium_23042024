@@ -1,10 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://5cgexxmt8wls"]
+[gd_scene load_steps=12 format=3 uid="uid://5cgexxmt8wls"]
 
 [ext_resource type="Script" path="res://levels/worldlevel.cs" id="1_a314l"]
 [ext_resource type="ArrayOccluder3D" uid="uid://bcinbb53h4cw1" path="res://levels/worldlevel_hall/worldlevel_hall.occ" id="1_tib7r"]
 [ext_resource type="PackedScene" uid="uid://bet3idvc4fg0n" path="res://placeholders/PlayerStart.tscn" id="3_17trl"]
 [ext_resource type="Environment" uid="uid://bg7lt3mm463sv" path="res://levels/worldlevel_hall/level_hall_environment.tres" id="3_fksla"]
-[ext_resource type="AudioStream" uid="uid://c22q66lwj2uvk" path="res://audio/audio_streams/510485__lydmakeren__industrial-hall-ambience.wav" id="7_nu33b"]
 [ext_resource type="PackedScene" uid="uid://bbpyvlqpjgi4t" path="res://testing_stuff_kaen/testing_level_hall/new_items/lamp_2.tscn" id="8_fpdih"]
 [ext_resource type="PackedScene" uid="uid://cryhclbq4jsy7" path="res://placeholders/PhysicsItems/physic_item_gas_tank_small.tscn" id="10_bmfki"]
 [ext_resource type="PackedScene" path="res://placeholders/PhysicsItems/physic_item_gas_tank_medium.tscn" id="11_6ckcu"]
@@ -34,11 +33,6 @@ transform = Transform3D(0.11277, 0, 0.993621, 0, 1, 0, -0.993621, 0, 0.11277, 0.
 
 [node name="Stuff" type="Node3D" parent="."]
 metadata/_edit_lock_ = true
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("7_nu33b")
-volume_db = 5.448
-autoplay = true
 
 [node name="lamp2" parent="." instance=ExtResource("8_fpdih")]
 transform = Transform3D(-0.999349, 0, -0.036068, 0, 1, 0, 0.036068, 0, -0.999349, 1.47246, 2.43907, -0.324632)

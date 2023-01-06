@@ -11,6 +11,10 @@ public partial class global_settings : Godot.Object
 	public global_settings(Node ownerInstance)
 	{
 		gm = (GameMaster)ownerInstance;
+
+        // Audio volumes init
+        LoadAndApply_AllAudioSettings();
+        SaveActual_AllAudioSettings();
 	}
 
 	// tady ziskavame pristup k hodnotam ulozenych v global_settings_data.tres
@@ -24,7 +28,7 @@ public partial class global_settings : Godot.Object
     }
 
 	/**************************************************************************/
-	// Graphics
+	// GRAPHICS
 
     // Spoustime v player startu pri startu hry (aby se mohl nastavit WorldEnvironment)
     public void LoadAndApply_AllGraphicsSettings()
@@ -70,7 +74,7 @@ public partial class global_settings : Godot.Object
 				("WorldEnvironment").Environment;
 
 			env.SsaoEnabled = newValue;
-            gm.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "apply settings: ssao = " + newValue);
+            gm.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "apply video settings: ssao = " + newValue);
         }
 
 		// Save now
@@ -78,7 +82,7 @@ public partial class global_settings : Godot.Object
 		{
 			GetData().Ssao = newValue;
             GetData().Save();
-			gm.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "save settings: ssao = " + newValue);
+			gm.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "save video settings: ssao = " + newValue);
 		}
 	}
 
@@ -100,7 +104,7 @@ public partial class global_settings : Godot.Object
                 ("WorldEnvironment").Environment;
 
             env.SsilEnabled = newValue;
-            gm.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "apply settings: ssil = " + newValue);
+            gm.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "apply video settings: ssil = " + newValue);
         }
 
         // Save now
@@ -108,7 +112,7 @@ public partial class global_settings : Godot.Object
         {
             GetData().Ssil = newValue;
             GetData().Save();
-            gm.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "save settings: ssil = " + newValue);
+            gm.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "save video settings: ssil = " + newValue);
         }
     }
 
@@ -120,7 +124,7 @@ public partial class global_settings : Godot.Object
         return env.SsilEnabled;
     }
 
-    // SDFGI
+    // settings SDFGI
     public void Apply_Sdfgi(bool newValue, bool newApplyNow = false, bool newSaveNow = false)
     {
         // Apply now
@@ -130,7 +134,7 @@ public partial class global_settings : Godot.Object
                 ("WorldEnvironment").Environment;
 
             env.SdfgiEnabled = newValue;
-            gm.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "apply settings: sdfgi = " + newValue);
+            gm.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "apply video settings: sdfgi = " + newValue);
         }
 
         // Save now
@@ -138,7 +142,7 @@ public partial class global_settings : Godot.Object
         {
             GetData().Sdfgi = newValue;
             GetData().Save();
-            gm.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "save settings: sdfgi = " + newValue);
+            gm.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "save video settings: sdfgi = " + newValue);
         }
     }
 
@@ -150,7 +154,7 @@ public partial class global_settings : Godot.Object
         return env.SdfgiEnabled;
     }
 
-    // ANTIALIAS ID
+    // settings ANTIALIAS ID
     public void Apply_AntialiasID(int newAntialiasID, bool newApplyNow = false, bool newSaveNow = false)
     {
         // Apply now
@@ -162,7 +166,7 @@ public partial class global_settings : Godot.Object
                 gm.GetTree().Root.ScreenSpaceAa = Viewport.ScreenSpaceAA.Disabled;
                 gm.GetTree().Root.UseTaa = false;
                 gm.GetTree().Root.Msaa3d = Viewport.MSAA.Disabled;
-                GameMaster.GM.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "apply settings: antialias = disable");
+                GameMaster.GM.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "apply video settings: antialias = disable");
 
             }
             else if (newAntialiasID == 1)
@@ -171,7 +175,7 @@ public partial class global_settings : Godot.Object
                 gm.GetTree().Root.ScreenSpaceAa = Viewport.ScreenSpaceAA.Fxaa;
                 gm.GetTree().Root.UseTaa = false;
                 gm.GetTree().Root.Msaa3d = Viewport.MSAA.Disabled;
-                GameMaster.GM.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "apply settings: antialias = only ss_aa");
+                GameMaster.GM.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "apply video settings: antialias = only ss_aa");
             }
             else if (newAntialiasID == 2)
             {
@@ -179,7 +183,7 @@ public partial class global_settings : Godot.Object
                 gm.GetTree().Root.ScreenSpaceAa = Viewport.ScreenSpaceAA.Fxaa;
                 gm.GetTree().Root.UseTaa = true;
                 gm.GetTree().Root.Msaa3d = Viewport.MSAA.Disabled;
-                GameMaster.GM.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "apply settings: antialias = ss_aa + taa");
+                GameMaster.GM.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "apply video settings: antialias = ss_aa + taa");
             }
             else if (newAntialiasID == 3)
             {
@@ -187,7 +191,7 @@ public partial class global_settings : Godot.Object
                 gm.GetTree().Root.ScreenSpaceAa = Viewport.ScreenSpaceAA.Disabled;
                 gm.GetTree().Root.UseTaa = false;
                 gm.GetTree().Root.Msaa3d = Viewport.MSAA.Msaa2x;
-                GameMaster.GM.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "apply settings: antialias = only msaa3d_2x");
+                GameMaster.GM.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "apply video settings: antialias = only msaa3d_2x");
             }
             else if (newAntialiasID == 4)
             {
@@ -195,7 +199,7 @@ public partial class global_settings : Godot.Object
                 gm.GetTree().Root.ScreenSpaceAa = Viewport.ScreenSpaceAA.Fxaa;
                 gm.GetTree().Root.UseTaa = true;
                 gm.GetTree().Root.Msaa3d = Viewport.MSAA.Msaa2x;
-                GameMaster.GM.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "apply settings: antialias = ss_aa + taa + msaa3d_2x");
+                GameMaster.GM.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "apply video settings: antialias = ss_aa + taa + msaa3d_2x");
             }
             else
             {
@@ -210,7 +214,7 @@ public partial class global_settings : Godot.Object
         {
             GetData().Antialias = newAntialiasID;
             GetData().Save();
-            gm.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "save settings: antialias = " + newAntialiasID);
+            gm.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "save video settings: antialias = " + newAntialiasID);
         }
     }
 
@@ -260,13 +264,13 @@ public partial class global_settings : Godot.Object
         }
     }
 
-    // SCALE 3D
+    // settings SCALE 3D
     public void Apply_Scale3D(float newValue, bool newApplyNow = false, bool newSaveNow = false)
     {
         // Apply now
         if(newApplyNow)
         {
-            gm.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "apply settings: scale 3d = " + newValue);
+            gm.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "apply video settings: scale 3d = " + newValue);
             gm.GetTree().Root.Scaling3dScale = newValue;
         }
 
@@ -275,7 +279,7 @@ public partial class global_settings : Godot.Object
         {
             GetData().Scale3d = newValue;
             GetData().Save();
-            gm.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "save settings: scale 3d = " + newValue);
+            gm.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "save video settings: scale 3d = " + newValue);
         }
     }
 
@@ -284,14 +288,14 @@ public partial class global_settings : Godot.Object
         return gm.GetTree().Root.Scaling3dScale;
     }
 
-    // HALF RESOLUTION GI
+    // settings HALF RESOLUTION GI
     public void Apply_HalfResolutionGI(bool newValue, bool newApplyNow = false, bool newSaveNow = false)
     {
         // Apply now
         if (newApplyNow)
         {
             RenderingServer.GiSetUseHalfResolution(newValue);
-            gm.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "apply settings: half resolutoin gi = " + newValue);
+            gm.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "apply video settings: half resolutoin gi = " + newValue);
 
             // musime ulozit novy stav bokem, jinak by jsme pozdeji nemohli ziskat aktualni stav
             actual_halfResolutionGI = newValue;
@@ -302,12 +306,115 @@ public partial class global_settings : Godot.Object
         {
             GetData().HalfResolutionGI = newValue;
             GetData().Save();
-            gm.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "save settings: half resolution gi = " + newValue);
+            gm.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "save video settings: half resolution gi = " + newValue);
         }
     }
 
     public bool GetActual_HalfResolutionGI()
     {
         return actual_halfResolutionGI;
+    }
+
+    /**************************************************************************/
+    // AUDIO
+
+    // Spoustime
+    public void LoadAndApply_AllAudioSettings()
+    {
+        // nacteme veskera data ulozena ze souboru
+        global_settings_data data = GetData();
+
+        // pouze aplikujeme jednotliva nastaveni = neukladame do souboru
+        Apply_MainVolume(data.MainVolume, true, false);
+        Apply_SfxVolume(data.SfxVolume, true, false);
+        Apply_MusicVolume(data.MusicVolume, true, false);
+
+        gm.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "all audio data is apply");
+    }
+
+    // Toto volani projede veskera aktualni aplikovana graficka nastaveni a
+    // ulozi je do souboru global_settings_data.tres
+    public void SaveActual_AllAudioSettings()
+    {
+        global_settings_data data = GetData();
+
+        // neaplikujeme, pouze ulozime jednotliva aktualni nastaveni do souboru
+        Apply_MainVolume(GetActual_MainVolume(), false, true);
+        Apply_SfxVolume(GetActual_SfxVolume(), false, true);
+        Apply_MusicVolume(GetActual_MusicVolume(), false, true);
+
+        gm.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "all audio data is saved");
+    }
+
+    // settings MAIN VOLUME
+    public void Apply_MainVolume(float newValue, bool newApplyNow = false, bool newSaveNow = false)
+    {
+        // Apply now
+        if (newApplyNow)
+        {
+            AudioServer.SetBusVolumeDb(AudioServer.GetBusIndex("Master"),newValue);
+            gm.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "apply audio settings: main volume = " + newValue);
+        }
+
+        // Save now
+        if (newSaveNow)
+        {
+            GetData().MainVolume = newValue;
+            GetData().Save();
+            gm.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "save audio settings: main volume = " + newValue);
+        }
+    }
+
+    public float GetActual_MainVolume()
+    {
+        return AudioServer.GetBusVolumeDb(AudioServer.GetBusIndex("Master"));
+    }
+
+    // settings SFX VOLUME
+    public void Apply_SfxVolume(float newValue, bool newApplyNow = false, bool newSaveNow = false)
+    {
+        // Apply now
+        if (newApplyNow)
+        {
+            AudioServer.SetBusVolumeDb(AudioServer.GetBusIndex("Sfx"), newValue);
+            gm.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "apply audio settings: sfx volume = " + newValue);
+        }
+
+        // Save now
+        if (newSaveNow)
+        {
+            GetData().SfxVolume = newValue;
+            GetData().Save();
+            gm.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "save audio settings: sfx volume = " + newValue);
+        }
+    }
+
+    public float GetActual_SfxVolume()
+    {
+        return AudioServer.GetBusVolumeDb(AudioServer.GetBusIndex("Sfx"));
+    }
+
+    // settings Music VOLUME
+    public void Apply_MusicVolume(float newValue, bool newApplyNow = false, bool newSaveNow = false)
+    {
+        // Apply now
+        if (newApplyNow)
+        {
+            AudioServer.SetBusVolumeDb(AudioServer.GetBusIndex("Music"), newValue);
+            gm.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "apply audio settings: music volume = " + newValue);
+        }
+
+        // Save now
+        if (newSaveNow)
+        {
+            GetData().MusicVolume = newValue;
+            GetData().Save();
+            gm.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "save audio settings: music volume = " + newValue);
+        }
+    }
+
+    public float GetActual_MusicVolume()
+    {
+        return AudioServer.GetBusVolumeDb(AudioServer.GetBusIndex("Music"));
     }
 }

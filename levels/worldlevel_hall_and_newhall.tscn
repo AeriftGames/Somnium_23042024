@@ -365,7 +365,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.60434, 0.318316, 8.89822)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("38_xxj7q")
-volume_db = -20.0
 pitch_scale = 0.84
 autoplay = true
 bus = &"Music"
@@ -693,12 +692,6 @@ transform = Transform3D(0.99428, 0, 0.106802, -9.33693e-09, -1, 8.69227e-08, 0.1
 
 [node name="pipe_big_valve" parent="worldlevel_new_hall_test/Pipes" instance=ExtResource("37_mbegl")]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 9.20402, 1.04668, -3.66099)
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="worldlevel_new_hall_test"]
-stream = ExtResource("38_xxj7q")
-volume_db = -5.426
-pitch_scale = 1.69
-autoplay = true
 
 [node name="ventilace" parent="worldlevel_new_hall_test" instance=ExtResource("39_qbsgn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.557482, 4.72895, 1.17153)

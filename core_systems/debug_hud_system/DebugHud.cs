@@ -91,8 +91,9 @@ public partial class DebugHud : Control
             GameMaster.GM.GetFPSCharacter().SetMouseVisible(true);
             Input.MouseMode = Input.MouseModeEnum.Confined;
 
-			// updatuje na vsechny controls v tab video - vychozi stav na aktualni hodnoty
+			// updatuje vsechny controls prvky
 			ApplyAllVideoControls();
+			ApplyAllAudioControls();
         }
 		else
 		{
@@ -292,4 +293,65 @@ public partial class DebugHud : Control
         CheckBox sdfgi_checkbox = GetNode<CheckBox>("OptionsPanel/TabContainer/video/Sdfgi_CheckBox");
         sdfgi_checkbox.ButtonPressed = GameMaster.GM.Settings.GetActual_Sdfgi();
     }
+
+    public void _on_main_volume_h_slider_value_changed(float newValue)
+	{
+        // only apply
+        GameMaster.GM.Settings.Apply_MainVolume(newValue, true, false);
+
+		// update label
+        Label mainVolume_label = GetNode<Label>("OptionsPanel/TabContainer/audio/audio_HBoxContainer/mainVolume_Label");
+        mainVolume_label.Text = newValue.ToString() + " db"; ;
+    }
+
+	public void _on_sfx_volume_h_slider_value_changed(float newValue)
+	{
+        // only apply
+        GameMaster.GM.Settings.Apply_SfxVolume(newValue, true, false);
+
+        // update label
+        Label sfxVolume_label = GetNode<Label>("OptionsPanel/TabContainer/audio/audio_HBoxContainer2/sfxVolume_Label");
+        sfxVolume_label.Text = newValue.ToString() + " db"; ;
+    }
+
+	public void _on_music_volume_h_slider_value_changed(float newValue)
+	{
+        // only apply
+        GameMaster.GM.Settings.Apply_MusicVolume(newValue, true, false);
+
+        // update label
+        Label musicVolume_label = GetNode<Label>("OptionsPanel/TabContainer/audio/audio_HBoxContainer3/musicVolume_Label");
+        musicVolume_label.Text = newValue.ToString() + " db"; ;
+    }
+
+	public void ApplyAllAudioControls()
+	{
+		// main volume
+		HSlider mainVolumeSlider = GetNode<HSlider>("OptionsPanel/TabContainer/audio/audio_HBoxContainer/mainVolume_HSlider");
+		mainVolumeSlider.Value = GameMaster.GM.Settings.GetActual_MainVolume();
+
+		Label mainVolumeLabel = GetNode<Label>("OptionsPanel/TabContainer/audio/audio_HBoxContainer/mainVolume_Label");
+		mainVolumeLabel.Text = GameMaster.GM.Settings.GetActual_MainVolume().ToString() + " db";
+
+        // sfx volume
+        HSlider sfxVolumeSlider = GetNode<HSlider>("OptionsPanel/TabContainer/audio/audio_HBoxContainer2/sfxVolume_HSlider");
+		sfxVolumeSlider.Value = GameMaster.GM.Settings.GetActual_SfxVolume();
+
+        Label sfxVolumeLabel = GetNode<Label>("OptionsPanel/TabContainer/audio/audio_HBoxContainer2/sfxVolume_Label");
+        sfxVolumeLabel.Text = GameMaster.GM.Settings.GetActual_SfxVolume().ToString() + " db"; ;
+
+        // sfx volume
+        HSlider musicVolumeSlider = GetNode<HSlider>("OptionsPanel/TabContainer/audio/audio_HBoxContainer3/musicVolume_HSlider");
+        musicVolumeSlider.Value = GameMaster.GM.Settings.GetActual_MusicVolume();
+
+        Label musicVolumeLabel = GetNode<Label>("OptionsPanel/TabContainer/audio/audio_HBoxContainer3/musicVolume_Label");
+        musicVolumeLabel.Text = GameMaster.GM.Settings.GetActual_MusicVolume().ToString() + " db"; ;
+    }
+
+	public void _on_save_audio_as_default_button_pressed()
+	{
+		// save all actual graphics settings
+		GameMaster.GM.Settings.SaveActual_AllAudioSettings();
+    }
+
 }
