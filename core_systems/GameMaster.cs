@@ -26,6 +26,7 @@ public partial class GameMaster : Node
 	//
 	private Control blackScreen = null;
 
+	// pro testovani hledani objektu podle id
 	[Export] ulong needObjectID = 1;
 
 	//
@@ -112,7 +113,8 @@ public partial class GameMaster : Node
 		*/
 		msgObject.FreeAll();
 		LevelLoader.Free();
-		Log.Free();
+        Settings.Free();
+        Log.Free();
 
 		SafeQueueAll();
 		GetTree().Quit();
@@ -131,10 +133,7 @@ public partial class GameMaster : Node
 
 		// pokud byl hrac uspesne zavolan pro delete, vypiseme to v konzoli
 		if (_fpsCharacter.IsQueuedForDeletion())
-		{
-            GD.Print("FPSCharacter is removed");
             GD.Print("Game is quit sucesfully");
-        }
 	}
 
 	public bool GetIsQuitting()

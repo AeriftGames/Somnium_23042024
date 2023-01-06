@@ -4,11 +4,11 @@
 
 [resource]
 script = ExtResource("1_8rhwy")
-Sdfgi = false
-Ssao = false
-Ssil = false
-Antialias = 0
-Scale3d = 0.0
+Sdfgi = true
+Ssao = true
+Ssil = true
+Antialias = 4
+Scale3d = 1.0
 HalfResolutionGI = false
 MainVolume = 0.0
 MusicVolume = 0.0

@@ -216,13 +216,13 @@ public partial class DebugHud : Control
 	public void _on_antialias_option_button_item_selected(int newID)
 	{
 		// apply and not save
-		GameMaster.GM.Settings.Set_Antialias(newID,true,false);
+		GameMaster.GM.Settings.Apply_AntialiasID(newID,true,false);
 	}
 
 	public void _on_scale_3d_h_slider_value_changed(float newValue)
 	{
         // apply and not save
-        GameMaster.GM.Settings.Set_Scale3D(newValue / 100.0f,true,false);
+        GameMaster.GM.Settings.Apply_Scale3D(newValue / 100.0f,true,false);
 
 		Label scale3dLabel = GetNode<Label>("OptionsPanel/TabContainer/video/Scale3d_HBoxContainer/Scale3dvalue_Label");
 		scale3dLabel.Text = (newValue / 100.0f).ToString();
@@ -231,29 +231,29 @@ public partial class DebugHud : Control
 	public void _on_half_res_gi_check_box_toggled(bool newPressed)
 	{
         // apply and not save
-        GameMaster.GM.Settings.Set_HalfResolutionGI(newPressed,true,false);
+        GameMaster.GM.Settings.Apply_HalfResolutionGI(newPressed,true,false);
     }
 
 	public void _on_ssao_check_box_toggled(bool newPressed)
 	{
         // apply and not save
-        GameMaster.GM.Settings.Set_Ssao(newPressed,true,false);
+        GameMaster.GM.Settings.Apply_Ssao(newPressed,true,false);
     }
 
     public void _on_ssil_check_box_toggled(bool newPressed)
 	{
         // apply and not save
-		GameMaster.GM.Settings.Set_Ssil(newPressed,true,false);
+		GameMaster.GM.Settings.Apply_Ssil(newPressed,true,false);
     }
 
     public void _on_sdfgi_check_box_toggled(bool newPressed)
 	{
        // apply and not save
-	   GameMaster.GM.Settings.Set_Sdfgi(newPressed,true,false);
+	   GameMaster.GM.Settings.Apply_Sdfgi(newPressed,true,false);
     }
 
 	public void _on_save_as_default_button_pressed()
 	{
-		GameMaster.GM.Settings.LoadAndApply_AllGraphicsSettings();
+		GameMaster.GM.Settings.SaveActual_AllGraphicsSettings();
 	}
 }
