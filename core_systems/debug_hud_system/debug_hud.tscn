@@ -272,6 +272,7 @@ size_flags_horizontal = 4
 text = "Save main as default"
 
 [node name="level" type="VBoxContainer" parent="OptionsPanel/TabContainer"]
+visible = false
 
 [node name="video" type="VBoxContainer" parent="OptionsPanel/TabContainer"]
 
@@ -441,15 +442,24 @@ layout_direction = 3
 offset_top = 312.0
 offset_right = 313.0
 offset_bottom = 343.0
-text = "unlock max fps"
+text = "unlock max fps (experimental)"
+alignment = 2
+icon_alignment = 1
+
+[node name="DisableVsync_CheckBox" type="CheckBox" parent="OptionsPanel/TabContainer/video"]
+layout_direction = 3
+offset_top = 347.0
+offset_right = 313.0
+offset_bottom = 378.0
+text = "disable v-sync (experimental)"
 alignment = 2
 icon_alignment = 1
 
 [node name="SaveAsDefaultButton" type="Button" parent="OptionsPanel/TabContainer/video"]
 offset_left = 71.0
-offset_top = 347.0
+offset_top = 382.0
 offset_right = 242.0
-offset_bottom = 378.0
+offset_bottom = 413.0
 size_flags_horizontal = 4
 text = "Save video as default"
 
@@ -626,6 +636,7 @@ text = "video memory used:"
 [connection signal="toggled" from="OptionsPanel/TabContainer/video/Ssil_CheckBox" to="." method="_on_ssil_check_box_toggled"]
 [connection signal="toggled" from="OptionsPanel/TabContainer/video/Sdfgi_CheckBox" to="." method="_on_sdfgi_check_box_toggled"]
 [connection signal="toggled" from="OptionsPanel/TabContainer/video/UnlockMaxFps_CheckBox" to="." method="_on_unlock_max_fps_check_box_toggled"]
+[connection signal="toggled" from="OptionsPanel/TabContainer/video/DisableVsync_CheckBox" to="." method="_on_disable_vsync_check_box_toggled"]
 [connection signal="pressed" from="OptionsPanel/TabContainer/video/SaveAsDefaultButton" to="." method="_on_save_as_default_button_pressed"]
 [connection signal="value_changed" from="OptionsPanel/TabContainer/audio/audio_HBoxContainer/mainVolume_HSlider" to="." method="_on_main_volume_h_slider_value_changed"]
 [connection signal="value_changed" from="OptionsPanel/TabContainer/audio/audio_HBoxContainer2/sfxVolume_HSlider" to="." method="_on_sfx_volume_h_slider_value_changed"]

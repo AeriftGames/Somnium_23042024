@@ -15,7 +15,7 @@ public partial class global_settings : Godot.Object
 
         // Audio volumes init
         LoadAndApply_AllAudioSettings();
-        SaveActual_AllAudioSettings();
+        //SaveActual_AllAudioSettings();
 	}
 
 	// tady ziskavame pristup k hodnotam ulozenych v global_settings_data.tres
@@ -28,9 +28,6 @@ public partial class global_settings : Godot.Object
 			return null;          
     }
 
-	/**************************************************************************/
-	// GRAPHICS
-
     // Spoustime v player startu pri startu hry (aby se mohl nastavit WorldEnvironment)
     public void LoadAndApply_AllGraphicsSettings()
     {
@@ -42,11 +39,12 @@ public partial class global_settings : Godot.Object
         Apply_ScreenSizeID(data.ScreenSizeID, true, false);
         Apply_Ssao(data.Ssao, true, false);
         Apply_Ssil(data.Ssil, true, false);
-        Apply_Scale3D(data.Scale3d,true, false);
-        Apply_HalfResolutionGI(data.HalfResolutionGI,true, false);
-        Apply_AntialiasID(data.AntialiasID,true, false);
+        Apply_Scale3D(data.Scale3d, true, false);
+        Apply_HalfResolutionGI(data.HalfResolutionGI, true, false);
+        Apply_AntialiasID(data.AntialiasID, true, false);
         Apply_Sdfgi(data.Sdfgi, true, false);
         Apply_UnlockMaxFps(data.UnlockMaxFps, true, false);
+        Apply_DisableVsync(data.DisableVsync, true, false);
 
         gm.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "all graphics data is apply");
     }
@@ -67,9 +65,41 @@ public partial class global_settings : Godot.Object
         Apply_Scale3D(GetActual_Scale3D(), false, true);
         Apply_HalfResolutionGI(GetActual_HalfResolutionGI(), false, true);
         Apply_UnlockMaxFps(GetActual_UnlockMaxFps(), false, true);
+        Apply_DisableVsync(GetActual_DisableVsync(), false, true);
 
         gm.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "all graphics data is saved");
     }
+
+    // Spoustime zde v global_settings pri konstrukci (init)
+    public void LoadAndApply_AllAudioSettings()
+    {
+        // nacteme veskera data ulozena ze souboru
+        global_settings_data data = GetData();
+
+        // pouze aplikujeme jednotliva nastaveni = neukladame do souboru
+        Apply_MainVolume(data.MainVolume, true, false);
+        Apply_SfxVolume(data.SfxVolume, true, false);
+        Apply_MusicVolume(data.MusicVolume, true, false);
+
+        gm.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "all audio data is apply");
+    }
+
+    // Toto volani projede veskera aktualni aplikovana audio nastaveni a
+    // ulozi je do souboru global_settings_data.tres
+    public void SaveActual_AllAudioSettings()
+    {
+        global_settings_data data = GetData();
+
+        // neaplikujeme, pouze ulozime jednotliva aktualni nastaveni do souboru
+        Apply_MainVolume(GetActual_MainVolume(), false, true);
+        Apply_SfxVolume(GetActual_SfxVolume(), false, true);
+        Apply_MusicVolume(GetActual_MusicVolume(), false, true);
+
+        gm.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "all audio data is saved");
+    }
+
+    /**************************************************************************/
+    // GRAPHICS
 
     // settings SCREEN MODE ID
     public void Apply_ScreenMode(int newScreenModeID, bool newApplyNow = false, bool newSaveNow = false)
@@ -341,6 +371,37 @@ public partial class global_settings : Godot.Object
             return true;
     }
 
+    // settings DISABLE VSYNC
+    public void Apply_DisableVsync(bool newValue, bool newApplyNow = false, bool newSaveNow = false)
+    {
+        // Apply now
+        if (newApplyNow)
+        {
+            if (newValue == false)
+                DisplayServer.WindowSetVsyncMode(DisplayServer.VSyncMode.Enabled);
+            else
+                DisplayServer.WindowSetVsyncMode(DisplayServer.VSyncMode.Disabled);
+
+            gm.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "apply video settings: disable vsync = " + newValue);
+        }
+
+        // Save now
+        if (newSaveNow)
+        {
+            GetData().UnlockMaxFps = newValue;
+            GetData().Save();
+            gm.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "save video settings: disable vsync = " + newValue);
+        }
+    }
+
+    public bool GetActual_DisableVsync()
+    {
+        if (DisplayServer.WindowGetVsyncMode() == DisplayServer.VSyncMode.Enabled)
+            return false;
+        else
+            return true;
+    }
+
     // settings ANTIALIAS ID
     public void Apply_AntialiasID(int newAntialiasID, bool newApplyNow = false, bool newSaveNow = false)
     {
@@ -504,34 +565,6 @@ public partial class global_settings : Godot.Object
 
     /**************************************************************************/
     // AUDIO
-
-    // Spoustime
-    public void LoadAndApply_AllAudioSettings()
-    {
-        // nacteme veskera data ulozena ze souboru
-        global_settings_data data = GetData();
-
-        // pouze aplikujeme jednotliva nastaveni = neukladame do souboru
-        Apply_MainVolume(data.MainVolume, true, false);
-        Apply_SfxVolume(data.SfxVolume, true, false);
-        Apply_MusicVolume(data.MusicVolume, true, false);
-
-        gm.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "all audio data is apply");
-    }
-
-    // Toto volani projede veskera aktualni aplikovana audio nastaveni a
-    // ulozi je do souboru global_settings_data.tres
-    public void SaveActual_AllAudioSettings()
-    {
-        global_settings_data data = GetData();
-
-        // neaplikujeme, pouze ulozime jednotliva aktualni nastaveni do souboru
-        Apply_MainVolume(GetActual_MainVolume(), false, true);
-        Apply_SfxVolume(GetActual_SfxVolume(), false, true);
-        Apply_MusicVolume(GetActual_MusicVolume(), false, true);
-
-        gm.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "all audio data is saved");
-    }
 
     // settings MAIN VOLUME
     public void Apply_MainVolume(float newValue, bool newApplyNow = false, bool newSaveNow = false)

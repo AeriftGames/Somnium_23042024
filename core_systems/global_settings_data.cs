@@ -15,6 +15,7 @@ public partial class global_settings_data : Resource
     [Export] public bool Ssil { get; set; }
     [Export] public bool HalfResolutionGI { get; set; }
     [Export] public bool UnlockMaxFps { get; set; }
+    [Export] public bool DisableVsync { get; set; }
 
     [ExportGroupAttribute("Audio Settings")]
     [Export] public float MainVolume { get; set; }

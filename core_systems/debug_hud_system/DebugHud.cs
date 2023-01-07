@@ -299,6 +299,12 @@ public partial class DebugHud : Control
 		GameMaster.GM.GetSettings().Apply_UnlockMaxFps(newPressed,true,false);
 	}
 
+	public void _on_disable_vsync_check_box_toggled(bool newPressed)
+	{
+		// only apply
+		GameMaster.GM.GetSettings().Apply_DisableVsync(newPressed, true, false);
+	}
+
     public void _on_save_as_default_button_pressed()
 	{
 		// save all actual graphics settings
@@ -349,6 +355,9 @@ public partial class DebugHud : Control
 
 		CheckBox unlockmaxfps_checkbox = GetNode<CheckBox>("OptionsPanel/TabContainer/video/UnlockMaxFps_CheckBox");
 		unlockmaxfps_checkbox.ButtonPressed = GameMaster.GM.GetSettings().GetActual_UnlockMaxFps();
+
+		CheckBox vsync_checkbox = GetNode<CheckBox>("OptionsPanel/TabContainer/video/DisableVsync_CheckBox");
+		vsync_checkbox.ButtonPressed = GameMaster.GM.GetSettings().GetActual_DisableVsync();
     }
 
     public void _on_main_volume_h_slider_value_changed(float newValue)
