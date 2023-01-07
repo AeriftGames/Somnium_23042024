@@ -6,11 +6,13 @@ using System.Xml.Schema;
 public partial class global_settings_data : Resource
 {
     [ExportGroupAttribute("Graphics Settings")]
+    [Export] public int ScreenMode { get; set; }
+    [Export] public int WindowSizeID { get; set; }
+    [Export] public float Scale3d { get; set; }
+    [Export] public int AntialiasID { get; set; }
     [Export] public bool Sdfgi { get; set; }
     [Export] public bool Ssao { get; set; }
     [Export] public bool Ssil { get; set; }
-    [Export] public int Antialias { get; set; }
-    [Export] public float Scale3d { get; set; }
     [Export] public bool HalfResolutionGI { get; set; }
 
     [ExportGroupAttribute("Audio Settings")]

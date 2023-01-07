@@ -151,6 +151,8 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = 31.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="ShowFps_CheckBox" type="CheckBox" parent="OptionsPanel/TabContainer/main"]
 offset_right = 320.0
@@ -277,18 +279,82 @@ visible = false
 [node name="HSeparator" type="HSeparator" parent="OptionsPanel/TabContainer/video"]
 self_modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(0, 33)
+offset_right = 313.0
+offset_bottom = 33.0
+
+[node name="ScreenMode_HBoxContainer" type="HBoxContainer" parent="OptionsPanel/TabContainer/video"]
+offset_top = 37.0
+offset_right = 313.0
+offset_bottom = 68.0
+alignment = 1
+
+[node name="Label" type="Label" parent="OptionsPanel/TabContainer/video/ScreenMode_HBoxContainer"]
+custom_minimum_size = Vector2(80, 0)
+offset_top = 2.0
+offset_right = 129.0
+offset_bottom = 28.0
+size_flags_horizontal = 3
+text = " screen mode"
+
+[node name="ScreenMode_OptionButton" type="OptionButton" parent="OptionsPanel/TabContainer/video/ScreenMode_HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+offset_left = 133.0
+offset_right = 313.0
+offset_bottom = 31.0
+size_flags_horizontal = 3
+item_count = 3
+popup/item_0/text = "windowed"
+popup/item_0/id = 0
+popup/item_1/text = "fullscreen normal"
+popup/item_1/id = 1
+popup/item_2/text = "fullscreen wide"
+popup/item_2/id = 2
+
+[node name="WindowSize_HBoxContainer" type="HBoxContainer" parent="OptionsPanel/TabContainer/video"]
+offset_top = 72.0
+offset_right = 313.0
+offset_bottom = 103.0
+alignment = 1
+
+[node name="Label" type="Label" parent="OptionsPanel/TabContainer/video/WindowSize_HBoxContainer"]
+custom_minimum_size = Vector2(80, 0)
+offset_top = 2.0
+offset_right = 154.0
+offset_bottom = 28.0
+size_flags_horizontal = 3
+text = " window size"
+
+[node name="WindowSize_OptionButton" type="OptionButton" parent="OptionsPanel/TabContainer/video/WindowSize_HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+offset_left = 158.0
+offset_right = 313.0
+offset_bottom = 31.0
+size_flags_horizontal = 3
+item_count = 2
+popup/item_0/text = "1280x720"
+popup/item_0/id = 0
+popup/item_1/text = "1920x1080"
+popup/item_1/id = 1
 
 [node name="Antialias_HBoxContainer" type="HBoxContainer" parent="OptionsPanel/TabContainer/video"]
+offset_top = 107.0
+offset_right = 313.0
+offset_bottom = 138.0
 alignment = 1
 
 [node name="Label" type="Label" parent="OptionsPanel/TabContainer/video/Antialias_HBoxContainer"]
 custom_minimum_size = Vector2(80, 0)
+offset_top = 2.0
+offset_right = 80.0
+offset_bottom = 28.0
 size_flags_horizontal = 3
-text = "antialias "
-horizontal_alignment = 1
+text = " antialias "
 
 [node name="Antialias_OptionButton" type="OptionButton" parent="OptionsPanel/TabContainer/video/Antialias_HBoxContainer"]
 custom_minimum_size = Vector2(100, 0)
+offset_left = 84.0
+offset_right = 313.0
+offset_bottom = 31.0
 size_flags_horizontal = 3
 item_count = 5
 popup/item_0/text = "disable"
@@ -303,51 +369,77 @@ popup/item_4/text = "SS_AA+TAA+MSAA3D_2X"
 popup/item_4/id = 4
 
 [node name="Scale3d_HBoxContainer" type="HBoxContainer" parent="OptionsPanel/TabContainer/video"]
+offset_top = 142.0
+offset_right = 313.0
+offset_bottom = 168.0
 alignment = 1
 
 [node name="Label" type="Label" parent="OptionsPanel/TabContainer/video/Scale3d_HBoxContainer"]
 custom_minimum_size = Vector2(80, 0)
-text = "scale 3D"
-horizontal_alignment = 1
+offset_right = 80.0
+offset_bottom = 26.0
+text = " scale 3D"
 
 [node name="Scale3d_HSlider" type="HSlider" parent="OptionsPanel/TabContainer/video/Scale3d_HBoxContainer"]
 custom_minimum_size = Vector2(150, 0)
+offset_left = 84.0
+offset_top = 5.0
+offset_right = 234.0
+offset_bottom = 21.0
 size_flags_horizontal = 0
 size_flags_vertical = 4
-min_value = 50.0
 max_value = 130.0
 value = 100.0
 
 [node name="Scale3dvalue_Label" type="Label" parent="OptionsPanel/TabContainer/video/Scale3d_HBoxContainer"]
 custom_minimum_size = Vector2(75, 0)
+offset_left = 238.0
+offset_right = 313.0
+offset_bottom = 26.0
 text = "100%"
 horizontal_alignment = 1
 
 [node name="HalfResGI_CheckBox" type="CheckBox" parent="OptionsPanel/TabContainer/video"]
 layout_direction = 3
+offset_top = 172.0
+offset_right = 313.0
+offset_bottom = 203.0
 text = "half resolution GI"
 alignment = 2
 icon_alignment = 1
 
 [node name="Ssao_CheckBox" type="CheckBox" parent="OptionsPanel/TabContainer/video"]
 layout_direction = 3
+offset_top = 207.0
+offset_right = 313.0
+offset_bottom = 238.0
 text = "enable SSAO"
 alignment = 2
 icon_alignment = 1
 
 [node name="Ssil_CheckBox" type="CheckBox" parent="OptionsPanel/TabContainer/video"]
 layout_direction = 3
+offset_top = 242.0
+offset_right = 313.0
+offset_bottom = 273.0
 text = "enable SSIL"
 alignment = 2
 icon_alignment = 1
 
 [node name="Sdfgi_CheckBox" type="CheckBox" parent="OptionsPanel/TabContainer/video"]
 layout_direction = 3
+offset_top = 277.0
+offset_right = 313.0
+offset_bottom = 308.0
 text = "enable SDFGI"
 alignment = 2
 icon_alignment = 1
 
 [node name="SaveAsDefaultButton" type="Button" parent="OptionsPanel/TabContainer/video"]
+offset_left = 71.0
+offset_top = 312.0
+offset_right = 242.0
+offset_bottom = 343.0
 size_flags_horizontal = 4
 text = "Save video as default"
 
@@ -515,6 +607,8 @@ text = "video memory used:"
 [connection signal="toggled" from="OptionsPanel/TabContainer/main/CustomLabelEnable_Checkbox9" to="." method="_on_custom_label_enable_checkbox_toggled" binds= [9]]
 [connection signal="toggled" from="OptionsPanel/TabContainer/main/EnableWorldOcclusionCulling_CheckBox" to="." method="_on_enable_world_occlusion_culling_check_box_toggled"]
 [connection signal="pressed" from="OptionsPanel/TabContainer/main/SaveMainAsDefaultButton" to="." method="_on_save_main_as_default_button_pressed"]
+[connection signal="item_selected" from="OptionsPanel/TabContainer/video/ScreenMode_HBoxContainer/ScreenMode_OptionButton" to="." method="_on_screen_mode_option_button_item_selected"]
+[connection signal="item_selected" from="OptionsPanel/TabContainer/video/WindowSize_HBoxContainer/WindowSize_OptionButton" to="." method="_on_window_size_option_button_item_selected"]
 [connection signal="item_selected" from="OptionsPanel/TabContainer/video/Antialias_HBoxContainer/Antialias_OptionButton" to="." method="_on_antialias_option_button_item_selected"]
 [connection signal="value_changed" from="OptionsPanel/TabContainer/video/Scale3d_HBoxContainer/Scale3d_HSlider" to="." method="_on_scale_3d_h_slider_value_changed"]
 [connection signal="toggled" from="OptionsPanel/TabContainer/video/HalfResGI_CheckBox" to="." method="_on_half_res_gi_check_box_toggled"]

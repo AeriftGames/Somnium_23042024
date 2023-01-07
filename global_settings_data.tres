@@ -4,11 +4,13 @@
 
 [resource]
 script = ExtResource("1_8rhwy")
+ScreenMode = 2
+WindowSizeID = 0
+Scale3d = 0.8
+AntialiasID = 2
 Sdfgi = true
 Ssao = true
-Ssil = true
-Antialias = 4
-Scale3d = 1.0
+Ssil = false
 HalfResolutionGI = false
 MainVolume = 0.0
 MusicVolume = -2.0

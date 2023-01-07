@@ -12,52 +12,52 @@ public partial class DebugHud : Control
 	Panel PerformancePanel = null;
 
 	bool isOptionsPanelEnabled = false;
-    Godot.Timer update_timer = new Godot.Timer();
+	Godot.Timer update_timer = new Godot.Timer();
 
 	CheckBox ShowFpsCheckBox = null;
 
 	bool isEnable = false;
 
-    public override void _Ready()
+	public override void _Ready()
 	{
-        // pro dostupnost skrze gamemastera
-        GameMaster.GM.SetDebugHud(this);
+		// pro dostupnost skrze gamemastera
+		GameMaster.GM.SetDebugHud(this);
 
-        OptionsPanel = GetNode<Panel>("OptionsPanel");
-        DebugEnabledLabel = GetNode<Label>("DebugEnabledLabel");
-        FPSLabel = GetNode<Label>("FPSLabel");
+		OptionsPanel = GetNode<Panel>("OptionsPanel");
+		DebugEnabledLabel = GetNode<Label>("DebugEnabledLabel");
+		FPSLabel = GetNode<Label>("FPSLabel");
 		PerformancePanel = GetNode<Panel>("PerformancePanel");
 
 		ShowFpsCheckBox = GetNode<CheckBox>("OptionsPanel//TabContainer/main/ShowFps_CheckBox");
 
 		InitAllCustomLabels();
 
-        OptionsPanel.Visible = false;
+		OptionsPanel.Visible = false;
 		PerformancePanel.Visible = false;
-        FPSLabel.Visible = true;
+		FPSLabel.Visible = true;
 		ShowFpsCheckBox.ButtonPressed = true;
-        DebugEnabledLabel.Text = "F1 for edit debug hud";
+		DebugEnabledLabel.Text = "F1 for edit debug hud";
 
-        // Create timer for specific loop update (fps)
-        var callable_UpdateElements = new Callable(this,"UpdateTimer");
-        update_timer.Connect("timeout", callable_UpdateElements);
-        update_timer.WaitTime = 0.2;
-        update_timer.OneShot = false;
-        AddChild(update_timer);
+		// Create timer for specific loop update (fps)
+		var callable_UpdateElements = new Callable(this, "UpdateTimer");
+		update_timer.Connect("timeout", callable_UpdateElements);
+		update_timer.WaitTime = 0.2;
+		update_timer.OneShot = false;
+		AddChild(update_timer);
 		update_timer.Stop();
 
 		// On Default = for default visble..
 		SetEnable(true);
 
 		BuildLevelButtons();
-    }
+	}
 
 	public override void _Process(double delta)
 	{
 		if (isEnable == false) return;
 
 		// vypne/zapne tento debug
-		if(Input.IsActionJustPressed("ToggleDebugHud"))
+		if (Input.IsActionJustPressed("ToggleDebugHud"))
 			SetOptionsEnable(!isOptionsPanelEnabled);
 	}
 
@@ -67,16 +67,16 @@ public partial class DebugHud : Control
 		Visible = newEnable;
 		isEnable = newEnable;
 
-		if(newEnable)
+		if (newEnable)
 		{
-            update_timer.Start();
-        }
+			update_timer.Start();
+		}
 		else
 		{
-            update_timer.Stop();
+			update_timer.Stop();
 			SetOptionsEnable(false);
-        }
-    }
+		}
+	}
 
 	public bool GetEnable() { return isEnable; }
 
@@ -84,56 +84,56 @@ public partial class DebugHud : Control
 	{
 		isOptionsPanelEnabled = newEnable;
 
-		if(isOptionsPanelEnabled)
+		if (isOptionsPanelEnabled)
 		{
-            // PANEL ENABLED
-            DebugEnabledLabel.Text = "F1 for hide these options";
+			// PANEL ENABLED
+			DebugEnabledLabel.Text = "F1 for hide these options";
 			OptionsPanel.Visible = true;
 			GameMaster.GM.GetFPSCharacter().SetInputEnable(false);
-            GameMaster.GM.GetFPSCharacter().SetMouseVisible(true);
-            Input.MouseMode = Input.MouseModeEnum.Confined;
+			GameMaster.GM.GetFPSCharacter().SetMouseVisible(true);
+			Input.MouseMode = Input.MouseModeEnum.Confined;
 
 			// updatuje vsechny controls prvky
 			ApplyAllVideoControls();
 			ApplyAllAudioControls();
-        }
+		}
 		else
 		{
 			// PANEL DISABLED
 			DebugEnabledLabel.Text = "F1 for edit debug hud";
-            OptionsPanel.Visible = false;
-            GameMaster.GM.GetFPSCharacter().SetInputEnable(true);
-            GameMaster.GM.GetFPSCharacter().SetMouseVisible(false);
-            Input.MouseMode = Input.MouseModeEnum.Captured;
-        }
+			OptionsPanel.Visible = false;
+			GameMaster.GM.GetFPSCharacter().SetInputEnable(true);
+			GameMaster.GM.GetFPSCharacter().SetMouseVisible(false);
+			Input.MouseMode = Input.MouseModeEnum.Captured;
+		}
 	}
 
 	// je spousten podle timeru
 	private void UpdateTimer()
 	{
-		if(FPSLabel.Visible)
+		if (FPSLabel.Visible)
 			FPSLabel.Text = "FPS: " + Engine.GetFramesPerSecond().ToString();
 
 		// pokud je performancePanel visible tak updatujeme labely
-		if(PerformancePanel.Visible)
+		if (PerformancePanel.Visible)
 		{
 			// draw calls
 			GetNode<Label>("PerformancePanel/VBoxContainer/DrawCallsLabel").Text =
 				"draw calls: " + Performance.GetMonitor(Performance.Monitor.RenderTotalDrawCallsInFrame);
 
-            // draw objects
-            GetNode<Label>("PerformancePanel/VBoxContainer/ObjectsLabel").Text =
-                "objects: " + Performance.GetMonitor(Performance.Monitor.RenderTotalObjectsInFrame);
+			// draw objects
+			GetNode<Label>("PerformancePanel/VBoxContainer/ObjectsLabel").Text =
+				"objects: " + Performance.GetMonitor(Performance.Monitor.RenderTotalObjectsInFrame);
 
-            // draw primitives
-            GetNode<Label>("PerformancePanel/VBoxContainer/PrimitivesLabel").Text =
-                "primitives: " + Performance.GetMonitor(Performance.Monitor.RenderTotalPrimitivesInFrame);
+			// draw primitives
+			GetNode<Label>("PerformancePanel/VBoxContainer/PrimitivesLabel").Text =
+				"primitives: " + Performance.GetMonitor(Performance.Monitor.RenderTotalPrimitivesInFrame);
 
-            // draw primitives
-            GetNode<Label>("PerformancePanel/VBoxContainer/VideoMemoryLabel").Text =
-                "video memory used: " + Performance.GetMonitor(Performance.Monitor.RenderVideoMemUsed);
-        }
-    }
+			// draw primitives
+			GetNode<Label>("PerformancePanel/VBoxContainer/VideoMemoryLabel").Text =
+				"video memory used: " + Performance.GetMonitor(Performance.Monitor.RenderVideoMemUsed);
+		}
+	}
 
 	public void InitAllCustomLabels()
 	{
@@ -143,31 +143,31 @@ public partial class DebugHud : Control
 			// Projedeme vsechny prvky v CustomLabelVBox a ulozime si je do array CustomLabels
 			CustomLabels[i] = (Label)vbox.GetChild(i);
 			// Popiseme vsechny prvky
-			CustomLabels[i].Text = "CL["+ i +"]";
+			CustomLabels[i].Text = "CL[" + i + "]";
 		}
 	}
 
-    public void CustomLabelUpdateText(int idCustomLabel, Node newCallNode, string newText)
-    {
+	public void CustomLabelUpdateText(int idCustomLabel, Node newCallNode, string newText)
+	{
 		if (isEnable == false) return;
 
 		// Pokud nekdo vola update textu, zjistime jestli zadane id je v rozsahu
-        if (idCustomLabel >= 0 && idCustomLabel < (CustomLabels.Length - 1))
-        {
+		if (idCustomLabel >= 0 && idCustomLabel < (CustomLabels.Length - 1))
+		{
 			// je pokud je dany CustomLabel viditelny, updatujeme jeho text
 			if (CustomLabels[idCustomLabel].Visible == true)
 				CustomLabels[idCustomLabel].Text = "CL[" + idCustomLabel + "] (" + newCallNode.Name + ") " + newText;
-        }
-    }
+		}
+	}
 
-    // Nastavi viditelnost a zaroven i moznost updatu daneho labelu
-    public void SetCustomLabelEnable(int idCustomLabel, bool newUpdateAndVisble)
+	// Nastavi viditelnost a zaroven i moznost updatu daneho labelu
+	public void SetCustomLabelEnable(int idCustomLabel, bool newUpdateAndVisble)
 	{
 		CustomLabels[idCustomLabel].Visible = newUpdateAndVisble;
 
-        GameMaster.GM.Log.WriteLog(this, LogSystem.ELogMsgType.INFO, 
+		GameMaster.GM.Log.WriteLog(this, LogSystem.ELogMsgType.INFO,
 			"CustomLabel[" + idCustomLabel + "] set visible " + newUpdateAndVisble);
-    }
+	}
 
 	public bool GetCustomLabelEnable(int idCustomLabel)
 	{
@@ -179,19 +179,19 @@ public partial class DebugHud : Control
 	}
 
 
-    public void _on_custom_label_enable_checkbox_toggled(bool isPressed, int id)
+	public void _on_custom_label_enable_checkbox_toggled(bool isPressed, int id)
 	{
-		SetCustomLabelEnable(id,isPressed);
+		SetCustomLabelEnable(id, isPressed);
 	}
 
-    public void _on_enable_world_occlusion_culling_check_box_toggled(bool isPressed)
+	public void _on_enable_world_occlusion_culling_check_box_toggled(bool isPressed)
 	{
 		Node3D worldlevel_occluderculling = (Node3D)GetNode("/root/worldlevel/worldlevel_occluderculling");
 		worldlevel_occluderculling.Visible = isPressed;
 
 		GameMaster.GM.Log.WriteLog(this, LogSystem.ELogMsgType.INFO,
 			"worldlevel_occluderculling set visible to: " + isPressed);
-    }
+	}
 
 	public void _on_show_performance_check_box_toggled(bool isPressed)
 	{
@@ -203,31 +203,64 @@ public partial class DebugHud : Control
 		GameMaster.GM.QuitGame();
 	}
 
-    public void BuildLevelButtons()
+	public void BuildLevelButtons()
 	{
 		var allLevelsInfo = GameMaster.GM.LevelLoader.GetAllLevelsInfo();
 		foreach (var level in allLevelsInfo)
 		{
-            // Instance Button
-            level_button level_button_Instance = (level_button)GD.Load<PackedScene>(
-                "res://core_systems/debug_hud_system/level_button.tscn").Instantiate();
+			// Instance Button
+			level_button level_button_Instance = (level_button)GD.Load<PackedScene>(
+				"res://core_systems/debug_hud_system/level_button.tscn").Instantiate();
 
-            level_button_Instance.Text = level.name;
-			level_button_Instance.SetLevelData(level.path,level.name);
+			level_button_Instance.Text = level.name;
+			level_button_Instance.SetLevelData(level.path, level.name);
 
 			VBoxContainer LevelButtonContainer = GetNode<VBoxContainer>("OptionsPanel/TabContainer/level");
 			LevelButtonContainer.AddChild(level_button_Instance);
-        }
+		}
 	}
 
-	// Signal pr zmenu antialiasingu skrze option_button
-	public void _on_antialias_option_button_item_selected(int newID)
+	public void CheckScreenModeSetting()
+	{
+		// pokud mame vybrany mod windowed, tak povolime moznost vybrat velikost okna, jinak ne
+		if(GameMaster.GM.GetSettings().GetActual_ScreenMode() == 0)
+		{
+            GetNode<OptionButton>("OptionsPanel/TabContainer/video/WindowSize_HBoxContainer/" +
+                "WindowSize_OptionButton").Disabled = false;
+			GetNode<OptionButton>("OptionsPanel/TabContainer/video/WindowSize_HBoxContainer/" +
+				"WindowSize_OptionButton").Selected = GameMaster.GM.GetSettings().GetActual_WindowSizeID();
+        }
+        else
+		{
+            GetNode<OptionButton>("OptionsPanel/TabContainer/video/WindowSize_HBoxContainer/" +
+                "WindowSize_OptionButton").Disabled = true;
+            GetNode<OptionButton>("OptionsPanel/TabContainer/video/WindowSize_HBoxContainer/" +
+                "WindowSize_OptionButton").Selected = -1;
+        }
+    }
+
+	// Signal pro zmenu screen mode skrze option button
+    public void _on_screen_mode_option_button_item_selected(int newID)
+	{
+		GameMaster.GM.GetSettings().Apply_ScreenMode(newID,true,false);
+		CheckScreenModeSetting();	// volame pro logiku zapnuti/vypnuti moznosti vybirat velikost okna
+    }
+
+    // Signal pro zmenu rozliseni skrze option button
+    public void _on_window_size_option_button_item_selected(int newID)
+    {
+		// only apply
+        GameMaster.GM.GetSettings().Apply_WindowSizeID(newID, true, false);
+    }
+
+    // Signal pr zmenu antialiasingu skrze option button
+    public void _on_antialias_option_button_item_selected(int newID)
 	{
 		// only apply
-		GameMaster.GM.GetSettings().Apply_AntialiasID(newID,true,false);
+		GameMaster.GM.GetSettings().Apply_AntialiasID(newID, true, false);
 	}
 
-	public void _on_scale_3d_h_slider_value_changed(float newValue)
+    public void _on_scale_3d_h_slider_value_changed(float newValue)
 	{
         // only apply
         GameMaster.GM.GetSettings().Apply_Scale3D(newValue / 100.0f,true,false);
@@ -268,13 +301,24 @@ public partial class DebugHud : Control
 
 	public void ApplyAllVideoControls()
 	{
-		// antialias 
-		OptionButton antialias_option = GetNode<OptionButton>("OptionsPanel/TabContainer/video/" +
+        // screen mode
+        OptionButton screenmode_option = GetNode<OptionButton>("OptionsPanel/TabContainer/video/" +
+			"ScreenMode_HBoxContainer/ScreenMode_OptionButton");
+		screenmode_option.Selected = GameMaster.GM.GetSettings().GetActual_ScreenMode();
+
+        CheckScreenModeSetting();	// volame pro logiku zapnuti/vypnuti moznosti vybirat velikost okna
+
+        // antialias 
+        OptionButton antialias_option = GetNode<OptionButton>("OptionsPanel/TabContainer/video/" +
 			"Antialias_HBoxContainer/Antialias_OptionButton");
 		antialias_option.Selected = GameMaster.GM.GetSettings().GetActual_AntialiasID();
 
-		// scale 3d
-		HSlider scale3d_slider = GetNode<HSlider>("OptionsPanel/TabContainer/video/" +
+		OptionButton windowsize_option = GetNode<OptionButton>("OptionsPanel/TabContainer/video/" +
+			"WindowSize_HBoxContainer/WindowSize_OptionButton");
+		windowsize_option.Selected = GameMaster.GM.GetSettings().GetActual_WindowSizeID();
+
+        // scale 3d
+        HSlider scale3d_slider = GetNode<HSlider>("OptionsPanel/TabContainer/video/" +
 			"Scale3d_HBoxContainer/Scale3d_HSlider");
 		scale3d_slider.Value = GameMaster.GM.GetSettings().GetActual_Scale3D() * 100.0f;
 

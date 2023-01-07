@@ -37,11 +37,13 @@ public partial class global_settings : Godot.Object
         global_settings_data data = GetData();
 
         // pouze aplikujeme jednotliva nastaveni = neukladame do souboru
+        Apply_ScreenMode(data.ScreenMode, true, false);
+        Apply_WindowSizeID(data.WindowSizeID, true, false);
         Apply_Ssao(data.Ssao, true, false);
         Apply_Ssil(data.Ssil, true, false);
         Apply_Scale3D(data.Scale3d,true, false);
         Apply_HalfResolutionGI(data.HalfResolutionGI,true, false);
-        Apply_AntialiasID(data.Antialias,true, false);
+        Apply_AntialiasID(data.AntialiasID,true, false);
         Apply_Sdfgi(data.Sdfgi, true, false);
 
         gm.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "all graphics data is apply");
@@ -54,6 +56,8 @@ public partial class global_settings : Godot.Object
         global_settings_data data = GetData();
 
         // neaplikujeme, pouze ulozime jednotliva aktualni nastaveni do souboru
+        Apply_ScreenMode(GetActual_ScreenMode(), false, true);
+        Apply_WindowSizeID(GetActual_WindowSizeID(), false, true);
         Apply_Ssao(GetActual_Ssao(), false, true);
         Apply_Ssil(GetActual_Ssil(), false, true);
         Apply_Sdfgi(GetActual_Sdfgi(), false, true);
@@ -64,8 +68,88 @@ public partial class global_settings : Godot.Object
         gm.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "all graphics data is saved");
     }
 
+    // settings SCREEN MODE ID
+    public void Apply_ScreenMode(int newScreenModeID, bool newApplyNow = false, bool newSaveNow = false)
+    {
+        // Apply now
+        if (newApplyNow)
+        {
+            if (newScreenModeID == 0)
+            {
+                //Windowed
+                gm.GetTree().Root.Mode = Window.ModeEnum.Windowed;
+                Apply_WindowSizeID(GetData().WindowSizeID,true,false);
+                gm.GetTree().Root.ContentScaleAspect = Window.ContentScaleAspectEnum.KeepWidth;
+
+                GameMaster.GM.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "apply video settings:" +
+                    " screen mode id = windowed");
+
+            }
+            else if (newScreenModeID == 1)
+            {
+                //Fullscreen normal
+                gm.GetTree().Root.Mode = Window.ModeEnum.ExclusiveFullscreen;
+                gm.GetTree().Root.ContentScaleAspect = Window.ContentScaleAspectEnum.KeepWidth;
+
+                GameMaster.GM.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "apply video settings:" +
+                    " screen mode id = fullscreen normal");
+            }
+            else if (newScreenModeID == 2)
+            {
+                //Fullscreen wide
+                gm.GetTree().Root.Mode = Window.ModeEnum.ExclusiveFullscreen;
+                gm.GetTree().Root.ContentScaleAspect = Window.ContentScaleAspectEnum.Expand;
+
+                GameMaster.GM.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "apply video settings:" +
+                    " screen mode id = fullscreen wide");
+            }
+            else
+            {
+                //chyba - mimo rozsah id
+                GameMaster.GM.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "pokus o chybne nastaveni screen mode id," +
+                    " hodnotou: " + newScreenModeID);
+            }
+        }
+
+        // Save now
+        if (newSaveNow)
+        {
+            GetData().ScreenMode = newScreenModeID;
+            GetData().Save();
+            gm.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "save video settings: screen mode id = " + newScreenModeID);
+        }
+    }
+
+    public int GetActual_ScreenMode()
+    {
+        if (gm.GetTree().Root.Mode == Window.ModeEnum.Windowed)
+        {
+            //windowed
+            return 0;
+        }
+        else if (gm.GetTree().Root.Mode == Window.ModeEnum.ExclusiveFullscreen && 
+            gm.GetTree().Root.ContentScaleAspect == Window.ContentScaleAspectEnum.KeepWidth)
+        {
+            //fullscreen normal
+            return 1;
+        }
+        else if (gm.GetTree().Root.Mode == Window.ModeEnum.ExclusiveFullscreen &&
+            gm.GetTree().Root.ContentScaleAspect == Window.ContentScaleAspectEnum.Expand)
+        {
+            //fullscreen expand
+            return 2;
+        }
+        else
+        {
+            //error - mimo rozsah id
+            gm.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "chybne vraceni hodnoty z GetActual_ScreeMode," +
+                " nejspis je jiny nastaveni screen mode nez dane id presety");
+            return -1;
+        }
+    }
+
     // settings SSAO
-	public void Apply_Ssao(bool newValue, bool newApplyNow = false, bool newSaveNow = false)
+    public void Apply_Ssao(bool newValue, bool newApplyNow = false, bool newSaveNow = false)
 	{
 		// Apply now
 		if(newApplyNow && gm.LevelLoader.GetActualLevelScene() != null)
@@ -166,7 +250,7 @@ public partial class global_settings : Godot.Object
                 gm.GetTree().Root.ScreenSpaceAa = Viewport.ScreenSpaceAA.Disabled;
                 gm.GetTree().Root.UseTaa = false;
                 gm.GetTree().Root.Msaa3d = Viewport.MSAA.Disabled;
-                GameMaster.GM.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "apply video settings: antialias = disable");
+                GameMaster.GM.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "apply video settings: antialias id = disable");
 
             }
             else if (newAntialiasID == 1)
@@ -175,7 +259,7 @@ public partial class global_settings : Godot.Object
                 gm.GetTree().Root.ScreenSpaceAa = Viewport.ScreenSpaceAA.Fxaa;
                 gm.GetTree().Root.UseTaa = false;
                 gm.GetTree().Root.Msaa3d = Viewport.MSAA.Disabled;
-                GameMaster.GM.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "apply video settings: antialias = only ss_aa");
+                GameMaster.GM.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "apply video settings: antialias id = only ss_aa");
             }
             else if (newAntialiasID == 2)
             {
@@ -183,7 +267,7 @@ public partial class global_settings : Godot.Object
                 gm.GetTree().Root.ScreenSpaceAa = Viewport.ScreenSpaceAA.Fxaa;
                 gm.GetTree().Root.UseTaa = true;
                 gm.GetTree().Root.Msaa3d = Viewport.MSAA.Disabled;
-                GameMaster.GM.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "apply video settings: antialias = ss_aa + taa");
+                GameMaster.GM.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "apply video settings: antialias id = ss_aa + taa");
             }
             else if (newAntialiasID == 3)
             {
@@ -191,7 +275,7 @@ public partial class global_settings : Godot.Object
                 gm.GetTree().Root.ScreenSpaceAa = Viewport.ScreenSpaceAA.Disabled;
                 gm.GetTree().Root.UseTaa = false;
                 gm.GetTree().Root.Msaa3d = Viewport.MSAA.Msaa2x;
-                GameMaster.GM.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "apply video settings: antialias = only msaa3d_2x");
+                GameMaster.GM.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "apply video settings: antialias id = only msaa3d_2x");
             }
             else if (newAntialiasID == 4)
             {
@@ -199,7 +283,7 @@ public partial class global_settings : Godot.Object
                 gm.GetTree().Root.ScreenSpaceAa = Viewport.ScreenSpaceAA.Fxaa;
                 gm.GetTree().Root.UseTaa = true;
                 gm.GetTree().Root.Msaa3d = Viewport.MSAA.Msaa2x;
-                GameMaster.GM.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "apply video settings: antialias = ss_aa + taa + msaa3d_2x");
+                GameMaster.GM.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "apply video settings: antialias id = ss_aa + taa + msaa3d_2x");
             }
             else
             {
@@ -212,7 +296,7 @@ public partial class global_settings : Godot.Object
         // Save now
         if (newSaveNow)
         {
-            GetData().Antialias = newAntialiasID;
+            GetData().AntialiasID = newAntialiasID;
             GetData().Save();
             gm.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "save video settings: antialias = " + newAntialiasID);
         }
@@ -260,6 +344,71 @@ public partial class global_settings : Godot.Object
             //error - mimo rozsah id
             gm.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "chybne vraceni hodnoty z GetActual_AntialiasID," +
                 " nejspis je jiny nastaveni antialias nez dane id presety");
+            return -1;
+        }
+    }
+
+    // settings WINDOW SIZE ID
+    public void Apply_WindowSizeID(int newWindowSizeID, bool newApplyNow = false, bool newSaveNow = false)
+    {
+        // Apply now
+        if (newApplyNow)
+        {
+            if (newWindowSizeID == 0)
+            {
+                //1280x720
+                gm.GetTree().Root.Size = new Vector2i(1280, 720);
+                GameMaster.GM.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "apply video settings: window size id = 1280x720");
+
+            }
+            else if (newWindowSizeID == 1)
+            {
+                //1920x1080
+                gm.GetTree().Root.Size = new Vector2i(1920, 1080);
+                GameMaster.GM.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "apply video settings: window size id = 1920x1080");
+            }
+            else if(newWindowSizeID == 2)
+            {
+                //native
+            }
+            else
+            {
+                //chyba - mimo rozsah id
+                GameMaster.GM.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "pokus o chybne nastaveni window size id," +
+                    " hodnotou: " + newWindowSizeID);
+            }
+        }
+
+        // Save now
+        if (newSaveNow)
+        {
+            GetData().WindowSizeID = newWindowSizeID;
+            GetData().Save();
+            gm.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "save video settings: window size id = " + newWindowSizeID);
+        }
+    }
+
+    public int GetActual_WindowSizeID()
+    {
+        if (gm.GetTree().Root.Size.x == 1280 && gm.GetTree().Root.Size.y == 720)
+        {
+            //1280x720
+            return 0;
+        }
+        else if (gm.GetTree().Root.Size.x == 1920 && gm.GetTree().Root.Size.y == 1080)
+        {
+            //1920x1080
+            return 1;
+        }
+        else if(gm.GetTree().Root.Mode == Window.ModeEnum.ExclusiveFullscreen)
+        {
+            return 2;
+        }
+        else
+        {
+            //error - mimo rozsah id
+            gm.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "chybne vraceni hodnoty z GetActual_WindowSizeID," +
+                " nejspis je jiny nastaveni window size nez dane id presety");
             return -1;
         }
     }
