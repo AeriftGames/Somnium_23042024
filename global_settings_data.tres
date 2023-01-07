@@ -4,8 +4,8 @@
 
 [resource]
 script = ExtResource("1_8rhwy")
-ScreenMode = 2
-WindowSizeID = 0
+ScreenMode = 0
+ScreenSizeID = 0
 Scale3d = 0.8
 AntialiasID = 2
 Sdfgi = true

@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Windows;
 
 public partial class global_settings : Godot.Object
 {
@@ -38,7 +39,7 @@ public partial class global_settings : Godot.Object
 
         // pouze aplikujeme jednotliva nastaveni = neukladame do souboru
         Apply_ScreenMode(data.ScreenMode, true, false);
-        Apply_WindowSizeID(data.WindowSizeID, true, false);
+        Apply_ScreenSizeID(data.ScreenSizeID, true, false);
         Apply_Ssao(data.Ssao, true, false);
         Apply_Ssil(data.Ssil, true, false);
         Apply_Scale3D(data.Scale3d,true, false);
@@ -57,7 +58,7 @@ public partial class global_settings : Godot.Object
 
         // neaplikujeme, pouze ulozime jednotliva aktualni nastaveni do souboru
         Apply_ScreenMode(GetActual_ScreenMode(), false, true);
-        Apply_WindowSizeID(GetActual_WindowSizeID(), false, true);
+        Apply_ScreenSizeID(GetActual_ScreenSizeID(), false, true);
         Apply_Ssao(GetActual_Ssao(), false, true);
         Apply_Ssil(GetActual_Ssil(), false, true);
         Apply_Sdfgi(GetActual_Sdfgi(), false, true);
@@ -78,9 +79,7 @@ public partial class global_settings : Godot.Object
             {
                 //Windowed
                 gm.GetTree().Root.Mode = Window.ModeEnum.Windowed;
-                Apply_WindowSizeID(GetData().WindowSizeID,true,false);
-                gm.GetTree().Root.ContentScaleAspect = Window.ContentScaleAspectEnum.KeepWidth;
-
+                gm.GetTree().Root.ContentScaleAspect = Window.ContentScaleAspectEnum.Expand;
                 GameMaster.GM.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "apply video settings:" +
                     " screen mode id = windowed");
 
@@ -142,8 +141,79 @@ public partial class global_settings : Godot.Object
         else
         {
             //error - mimo rozsah id
-            gm.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "chybne vraceni hodnoty z GetActual_ScreeMode," +
+            gm.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "chybne vraceni hodnoty z GetActual_ScreenMode," +
                 " nejspis je jiny nastaveni screen mode nez dane id presety");
+            return -1;
+        }
+    }
+
+    // settings WINDOW SIZE ID
+    public void Apply_ScreenSizeID(int newScreenSizeID, bool newApplyNow = false, bool newSaveNow = false)
+    {
+        // Apply now
+        if (newApplyNow)
+        {
+            if (newScreenSizeID == 0)
+            {
+                //1280x720
+                gm.GetTree().Root.Size = new Vector2i(1280, 720);
+                //Apply_ScreenMode(GetActual_ScreenMode(),true,false);
+                GameMaster.GM.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "apply video settings: screen size id = 1280x720");
+
+            }
+            else if (newScreenSizeID == 1)
+            {
+                //1920x1080
+                gm.GetTree().Root.Size = new Vector2i(1920, 1080);
+                //Apply_ScreenMode(GetActual_ScreenMode(), true, false);
+                GameMaster.GM.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "apply video settings: screen size id = 1920x1080");
+            }
+            else if (newScreenSizeID == 2)
+            {
+                // screen size
+                Apply_ScreenMode(0, true, false);
+                gm.GetTree().Root.Size = new Vector2i(DisplayServer.ScreenGetSize().x-1, DisplayServer.ScreenGetSize().y-1);
+                GameMaster.GM.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "apply video settings: screen size id = screen size");
+            }
+            else
+            {
+                //chyba - mimo rozsah id
+                GameMaster.GM.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "pokus o chybne nastaveni screen size id," +
+                    " hodnotou: " + newScreenSizeID);
+            }
+        }
+
+        // Save now
+        if (newSaveNow)
+        {
+            GetData().ScreenSizeID = newScreenSizeID;
+            GetData().Save();
+            gm.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "save video settings: screen size id = " + newScreenSizeID);
+        }
+    }
+
+    public int GetActual_ScreenSizeID()
+    {
+        if (gm.GetTree().Root.Size.x == 1280 && gm.GetTree().Root.Size.y == 720)
+        {
+            //1280x720
+            return 0;
+        }
+        else if (gm.GetTree().Root.Size.x == 1920 && gm.GetTree().Root.Size.y == 1080)
+        {
+            //1920x1080
+            return 1;
+        }
+        else if (gm.GetTree().Root.Mode == Window.ModeEnum.ExclusiveFullscreen ||
+            gm.GetTree().Root.Mode == Window.ModeEnum.Windowed)
+        {
+            return 2;
+        }
+        else
+        {
+            //error - mimo rozsah id
+            gm.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "chybne vraceni hodnoty z GetActual_ScreenSizeID," +
+                " nejspis je jiny nastaveni screen size nez dane id presety");
             return -1;
         }
     }
@@ -344,71 +414,6 @@ public partial class global_settings : Godot.Object
             //error - mimo rozsah id
             gm.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "chybne vraceni hodnoty z GetActual_AntialiasID," +
                 " nejspis je jiny nastaveni antialias nez dane id presety");
-            return -1;
-        }
-    }
-
-    // settings WINDOW SIZE ID
-    public void Apply_WindowSizeID(int newWindowSizeID, bool newApplyNow = false, bool newSaveNow = false)
-    {
-        // Apply now
-        if (newApplyNow)
-        {
-            if (newWindowSizeID == 0)
-            {
-                //1280x720
-                gm.GetTree().Root.Size = new Vector2i(1280, 720);
-                GameMaster.GM.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "apply video settings: window size id = 1280x720");
-
-            }
-            else if (newWindowSizeID == 1)
-            {
-                //1920x1080
-                gm.GetTree().Root.Size = new Vector2i(1920, 1080);
-                GameMaster.GM.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "apply video settings: window size id = 1920x1080");
-            }
-            else if(newWindowSizeID == 2)
-            {
-                //native
-            }
-            else
-            {
-                //chyba - mimo rozsah id
-                GameMaster.GM.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "pokus o chybne nastaveni window size id," +
-                    " hodnotou: " + newWindowSizeID);
-            }
-        }
-
-        // Save now
-        if (newSaveNow)
-        {
-            GetData().WindowSizeID = newWindowSizeID;
-            GetData().Save();
-            gm.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "save video settings: window size id = " + newWindowSizeID);
-        }
-    }
-
-    public int GetActual_WindowSizeID()
-    {
-        if (gm.GetTree().Root.Size.x == 1280 && gm.GetTree().Root.Size.y == 720)
-        {
-            //1280x720
-            return 0;
-        }
-        else if (gm.GetTree().Root.Size.x == 1920 && gm.GetTree().Root.Size.y == 1080)
-        {
-            //1920x1080
-            return 1;
-        }
-        else if(gm.GetTree().Root.Mode == Window.ModeEnum.ExclusiveFullscreen)
-        {
-            return 2;
-        }
-        else
-        {
-            //error - mimo rozsah id
-            gm.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "chybne vraceni hodnoty z GetActual_WindowSizeID," +
-                " nejspis je jiny nastaveni window size nez dane id presety");
             return -1;
         }
     }

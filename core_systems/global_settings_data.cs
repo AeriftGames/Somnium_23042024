@@ -7,7 +7,7 @@ public partial class global_settings_data : Resource
 {
     [ExportGroupAttribute("Graphics Settings")]
     [Export] public int ScreenMode { get; set; }
-    [Export] public int WindowSizeID { get; set; }
+    [Export] public int ScreenSizeID { get; set; }
     [Export] public float Scale3d { get; set; }
     [Export] public int AntialiasID { get; set; }
     [Export] public bool Sdfgi { get; set; }

@@ -228,14 +228,14 @@ public partial class DebugHud : Control
             GetNode<OptionButton>("OptionsPanel/TabContainer/video/WindowSize_HBoxContainer/" +
                 "WindowSize_OptionButton").Disabled = false;
 			GetNode<OptionButton>("OptionsPanel/TabContainer/video/WindowSize_HBoxContainer/" +
-				"WindowSize_OptionButton").Selected = GameMaster.GM.GetSettings().GetActual_WindowSizeID();
+				"WindowSize_OptionButton").Selected = GameMaster.GM.GetSettings().GetActual_ScreenSizeID();
         }
         else
 		{
             GetNode<OptionButton>("OptionsPanel/TabContainer/video/WindowSize_HBoxContainer/" +
                 "WindowSize_OptionButton").Disabled = true;
             GetNode<OptionButton>("OptionsPanel/TabContainer/video/WindowSize_HBoxContainer/" +
-                "WindowSize_OptionButton").Selected = -1;
+                "WindowSize_OptionButton").Selected = 2;
         }
     }
 
@@ -250,7 +250,7 @@ public partial class DebugHud : Control
     public void _on_window_size_option_button_item_selected(int newID)
     {
 		// only apply
-        GameMaster.GM.GetSettings().Apply_WindowSizeID(newID, true, false);
+        GameMaster.GM.GetSettings().Apply_ScreenSizeID(newID, true, false);
     }
 
     // Signal pr zmenu antialiasingu skrze option button
@@ -315,7 +315,7 @@ public partial class DebugHud : Control
 
 		OptionButton windowsize_option = GetNode<OptionButton>("OptionsPanel/TabContainer/video/" +
 			"WindowSize_HBoxContainer/WindowSize_OptionButton");
-		windowsize_option.Selected = GameMaster.GM.GetSettings().GetActual_WindowSizeID();
+		windowsize_option.Selected = GameMaster.GM.GetSettings().GetActual_ScreenSizeID();
 
         // scale 3d
         HSlider scale3d_slider = GetNode<HSlider>("OptionsPanel/TabContainer/video/" +
