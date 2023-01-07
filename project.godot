@@ -51,7 +51,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Somnium"
-run/main_scene="res://levels/worldlevel_hall.tscn"
+run/main_scene="res://levels/worldlevel_hall_and_newhall.tscn"
 config/features=PackedStringArray("4.0", "C#")
 run/max_fps=60
 boot_splash/bg_color=Color(0, 0, 0, 1)
@@ -73,6 +73,7 @@ window/size/borderless=true
 window/size/extend_to_title=true
 window/size/window_width_override=1920
 window/size/window_height_override=1080
+window/vsync/vsync_mode=0
 window/stretch/mode="canvas_items"
 window/stretch/aspect="keep_width"
 

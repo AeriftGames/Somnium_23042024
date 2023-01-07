@@ -46,6 +46,7 @@ public partial class global_settings : Godot.Object
         Apply_HalfResolutionGI(data.HalfResolutionGI,true, false);
         Apply_AntialiasID(data.AntialiasID,true, false);
         Apply_Sdfgi(data.Sdfgi, true, false);
+        Apply_UnlockMaxFps(data.UnlockMaxFps, true, false);
 
         gm.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "all graphics data is apply");
     }
@@ -65,6 +66,7 @@ public partial class global_settings : Godot.Object
         Apply_AntialiasID(GetActual_AntialiasID(), false, true);
         Apply_Scale3D(GetActual_Scale3D(), false, true);
         Apply_HalfResolutionGI(GetActual_HalfResolutionGI(), false, true);
+        Apply_UnlockMaxFps(GetActual_UnlockMaxFps(), false, true);
 
         gm.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "all graphics data is saved");
     }
@@ -306,6 +308,37 @@ public partial class global_settings : Godot.Object
                 ("WorldEnvironment").Environment;
 
         return env.SdfgiEnabled;
+    }
+
+    // settings UNLOCK MAX FPS
+    public void Apply_UnlockMaxFps(bool newValue, bool newApplyNow = false, bool newSaveNow = false)
+    {
+        // Apply now
+        if (newApplyNow)
+        {
+            if (newValue == false)
+                Engine.MaxFps = 60;
+            else
+                Engine.MaxFps = 0;
+
+            gm.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "apply video settings: unlock max fps = " + newValue);
+        }
+
+        // Save now
+        if (newSaveNow)
+        {
+            GetData().UnlockMaxFps = newValue;
+            GetData().Save();
+            gm.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "save video settings: unlock max fps = " + newValue);
+        }
+    }
+
+    public bool GetActual_UnlockMaxFps()
+    {
+        if (Engine.MaxFps == 60)
+            return false;
+        else
+            return true;
     }
 
     // settings ANTIALIAS ID

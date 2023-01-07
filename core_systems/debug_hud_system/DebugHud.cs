@@ -293,7 +293,13 @@ public partial class DebugHud : Control
 	   GameMaster.GM.GetSettings().Apply_Sdfgi(newPressed,true,false);
     }
 
-	public void _on_save_as_default_button_pressed()
+    public void _on_unlock_max_fps_check_box_toggled(bool newPressed)
+	{
+		// only apply
+		GameMaster.GM.GetSettings().Apply_UnlockMaxFps(newPressed,true,false);
+	}
+
+    public void _on_save_as_default_button_pressed()
 	{
 		// save all actual graphics settings
 		GameMaster.GM.GetSettings().SaveActual_AllGraphicsSettings();
@@ -340,6 +346,9 @@ public partial class DebugHud : Control
         // sdfgi
         CheckBox sdfgi_checkbox = GetNode<CheckBox>("OptionsPanel/TabContainer/video/Sdfgi_CheckBox");
         sdfgi_checkbox.ButtonPressed = GameMaster.GM.GetSettings().GetActual_Sdfgi();
+
+		CheckBox unlockmaxfps_checkbox = GetNode<CheckBox>("OptionsPanel/TabContainer/video/UnlockMaxFps_CheckBox");
+		unlockmaxfps_checkbox.ButtonPressed = GameMaster.GM.GetSettings().GetActual_UnlockMaxFps();
     }
 
     public void _on_main_volume_h_slider_value_changed(float newValue)
