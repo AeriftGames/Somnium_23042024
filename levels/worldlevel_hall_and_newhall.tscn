@@ -771,7 +771,7 @@ transform = Transform3D(-0.499913, -2.77507e-17, 0.00935448, -2.77556e-17, 0.5, 
 transform = Transform3D(-0.496054, 0, 0.0626926, 0, 0.5, 0, -0.0626926, 0, -0.496054, -18.6636, 7.38958, 24.6093)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
-transform = Transform3D(0.0056201, 0, -0.999984, 0, 1, 0, 0.999984, 0, 0.0056201, -12.9818, 4.37298, 20.1401)
+transform = Transform3D(0.0056201, 0, -0.999984, 0, 1, 0, 0.999984, 0, 0.0056201, -18.4081, 6.31547, 22.3014)
 light_energy = 0.15
 light_indirect_energy = 8.223
 shadow_enabled = true
@@ -853,13 +853,13 @@ transform = Transform3D(-2.40413e-07, 0, 1.1, 0, 1.1, 0, -1.1, 0, -2.40413e-07, 
 transform = Transform3D(-2.40413e-07, 0, 1.1, 0, 1.1, 0, -1.1, 0, -2.40413e-07, -21.7444, 2.08968, 0.498167)
 
 [node name="locker28" parent="." instance=ExtResource("45_tso8u")]
-transform = Transform3D(1.1, 0, 2.38419e-07, 0, 1.1, 0, -2.38419e-07, 0, 1.1, -26.0299, 4.80482, -1.40141)
+transform = Transform3D(1.1, 0, 2.38419e-07, 0, 1.1, 0, -2.38419e-07, 0, 1.1, -26.0299, 4.9516, -1.40141)
 
 [node name="locker29" parent="." instance=ExtResource("45_tso8u")]
-transform = Transform3D(1.1, 0, 2.38419e-07, 0, 1.1, 0, -2.38419e-07, 0, 1.1, -26.0299, 4.80482, -0.926081)
+transform = Transform3D(1.1, 0, 2.38419e-07, 0, 1.1, 0, -2.38419e-07, 0, 1.1, -26.0299, 4.9516, -0.926081)
 
 [node name="locker30" parent="." instance=ExtResource("45_tso8u")]
-transform = Transform3D(1.1, 0, 2.38419e-07, 0, 1.1, 0, -2.38419e-07, 0, 1.1, -26.0299, 4.80482, -1.87615)
+transform = Transform3D(1.1, 0, 2.38419e-07, 0, 1.1, 0, -2.38419e-07, 0, 1.1, -26.0299, 4.9516, -1.87615)
 
 [node name="locker24" parent="." instance=ExtResource("45_tso8u")]
 transform = Transform3D(-2.40413e-07, 0, 1.1, 0, 1.1, 0, -1.1, 0, -2.40413e-07, -23.174, 2.08968, 0.498167)

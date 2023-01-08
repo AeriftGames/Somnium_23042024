@@ -112,6 +112,11 @@ public partial class global_settings : Godot.Object
                 //Windowed
                 gm.GetTree().Root.Mode = Window.ModeEnum.Windowed;
                 gm.GetTree().Root.ContentScaleAspect = Window.ContentScaleAspectEnum.Expand;
+
+                // impulz pro zmenu rozliseni
+                if (GetActual_ScreenSizeID() == 2)
+                    Apply_ScreenSizeID(2,true,false);
+          
                 GameMaster.GM.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "apply video settings:" +
                     " screen mode id = windowed");
 
@@ -203,8 +208,11 @@ public partial class global_settings : Godot.Object
             else if (newScreenSizeID == 2)
             {
                 // screen size
-                Apply_ScreenMode(0, true, false);
-                gm.GetTree().Root.Size = new Vector2i(DisplayServer.ScreenGetSize().x-1, DisplayServer.ScreenGetSize().y-1);
+                //if(GetActual_ScreenMode() == 0)
+                    gm.GetTree().Root.Size = new Vector2i(DisplayServer.ScreenGetSize().x - 1, DisplayServer.ScreenGetSize().y - 1);
+
+                //Apply_ScreenMode(0, true, false);
+                //gm.GetTree().Root.Size = new Vector2i(DisplayServer.ScreenGetSize().x-1, DisplayServer.ScreenGetSize().y-1);
                 GameMaster.GM.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "apply video settings: screen size id = screen size");
             }
             else
