@@ -375,4 +375,4 @@ omni_range = 10.0
 
 [node name="arivents_bigfan_2" parent="." instance=ExtResource("31_35gir")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 5.28453, 4.41294, -8.21103)
-FanRotationSpeed = 2.0
+FanRotationSpeed = 0.0

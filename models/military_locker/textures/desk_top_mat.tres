@@ -1,0 +1,14 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://db24gswo4kv4i"]
+
+[ext_resource type="Texture2D" uid="uid://dothof3c203l6" path="res://models/military_locker/textures/desk_top_color.png" id="1_xahk1"]
+[ext_resource type="Texture2D" uid="uid://4rm7fv5xcg75" path="res://models/military_locker/textures/desk_top_normal.png" id="2_kup62"]
+
+[resource]
+resource_name = "Material.011"
+cull_mode = 2
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_xahk1")
+roughness = 0.904545
+normal_enabled = true
+normal_scale = 0.3
+normal_texture = ExtResource("2_kup62")

@@ -1,0 +1,15 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://gwp05fsb0gl0"]
+
+[ext_resource type="Texture2D" uid="uid://bldqpov2ch2cf" path="res://models/military_locker/textures/locker_mechanism_color.png" id="1_o85h8"]
+[ext_resource type="Texture2D" uid="uid://chx1gvh5kr0fr" path="res://models/military_locker/textures/locker_mechanism_normal.png" id="2_2kuld"]
+
+[resource]
+resource_name = "locker_mechanism"
+cull_mode = 2
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_o85h8")
+metallic = 0.809091
+roughness = 0.472727
+normal_enabled = true
+normal_scale = 0.5
+normal_texture = ExtResource("2_2kuld")
