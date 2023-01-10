@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://dctjipcvi0ssg"]
+[gd_scene load_steps=34 format=3 uid="uid://dctjipcvi0ssg"]
 
 [ext_resource type="PackedScene" uid="uid://bbpyvlqpjgi4t" path="res://testing_stuff_kaen/testing_level_hall/new_items/lamp_2.tscn" id="1_hv6t1"]
 [ext_resource type="PackedScene" uid="uid://0oyvcuqijj5q" path="res://models/boxes/box_0.tscn" id="4_l51xk"]
@@ -38,6 +38,9 @@ size = Vector3(2, 0.1, 0.2)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_cuh5r"]
 size = Vector3(2, 0.1, 4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tntse"]
+size = Vector3(0.16491, 1.90438, 2.57942)
 
 [node name="worldlevel_new_hall_test" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.4273, 2.01442, 1.44025)
@@ -376,3 +379,21 @@ omni_range = 10.0
 [node name="arivents_bigfan_2" parent="." instance=ExtResource("31_35gir")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 5.28453, 4.41294, -8.21103)
 FanRotationSpeed = 0.0
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.42494, 0, -0.816233)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_tntse")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.07728, 0, -0.816233)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D2"]
+shape = SubResource("BoxShape3D_tntse")
+
+[node name="StaticBody3D3" type="StaticBody3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 8.40141, 0, 0.391397)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D3"]
+shape = SubResource("BoxShape3D_tntse")

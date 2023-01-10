@@ -8,11 +8,11 @@ ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
 sky_material = SubResource("ProceduralSkyMaterial_iqwsm")
 
 [resource]
+background_energy_multiplier = 0.15
 sky = SubResource("Sky_hvd77")
 sky_rotation = Vector3(-0.492183, 0, 0)
 tonemap_mode = 2
 ssao_enabled = true
-ssil_enabled = true
 sdfgi_use_occlusion = true
 sdfgi_read_sky_light = false
 sdfgi_energy = 0.5
@@ -21,4 +21,3 @@ fog_enabled = true
 fog_light_energy = 0.3
 fog_density = 0.002
 volumetric_fog_enabled = true
-volumetric_fog_density = 0.035

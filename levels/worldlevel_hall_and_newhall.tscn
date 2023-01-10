@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://rcpy1e4tif1j"]
+[gd_scene load_steps=53 format=3 uid="uid://rcpy1e4tif1j"]
 
 [ext_resource type="Script" path="res://levels/worldlevel.cs" id="1_22uyt"]
 [ext_resource type="ArrayOccluder3D" uid="uid://cutd5dlobddug" path="res://levels/worldlevel_hall_and_newhall.occ" id="2_flopx"]
@@ -86,6 +86,9 @@ size = Vector3(2, 0.1, 0.2)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_cuh5r"]
 size = Vector3(2, 0.1, 4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_p28pa"]
+size = Vector3(0.16491, 1.90438, 2.57942)
 
 [node name="worldlevel" type="Node3D"]
 script = ExtResource("1_22uyt")
@@ -350,7 +353,10 @@ transform = Transform3D(-0.992108, 0.125385, -5.48076e-09, 0, -4.37114e-08, -1, 
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.35456, 0, -1.192)
 
 [node name="PhysicItem_gas_tank_small" parent="Items" instance=ExtResource("43_xwgko")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.8469, 2.01442, 0.245055)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.2402, 2.85771, 1.37697)
+
+[node name="PhysicItem_gas_tank_small2" parent="Items" instance=ExtResource("43_xwgko")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.33687, 2.95945, 1.37224)
 
 [node name="PhysicItem_gas_tank_small5" parent="Items" instance=ExtResource("43_jnqde")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08457, 0.0799833, 9.13767)
@@ -433,15 +439,6 @@ metadata/_edit_lock_ = true
 [node name="lamp2" parent="worldlevel_new_hall_test/Items" instance=ExtResource("11_a1jgn")]
 transform = Transform3D(0.0262935, -0.00972133, 0.999607, 0.00153145, 0.999952, 0.00968442, -0.999653, 0.00127622, 0.0263072, 6.43843, 4.09636, 1.42086)
 
-[node name="box0_main2" parent="worldlevel_new_hall_test/Items" instance=ExtResource("14_k1qqc")]
-transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -3.72374, 0.325868, -3.9485)
-
-[node name="box0_main3" parent="worldlevel_new_hall_test/Items" instance=ExtResource("14_k1qqc")]
-transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -3.72374, 0.325868, -3.24183)
-
-[node name="box0_main4" parent="worldlevel_new_hall_test/Items" instance=ExtResource("14_k1qqc")]
-transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -3.72374, 0.926841, -3.56856)
-
 [node name="box1_main" parent="worldlevel_new_hall_test/Items" instance=ExtResource("15_0475t")]
 transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, -3.62451, 0.604492, -0.382237)
 
@@ -468,6 +465,9 @@ transform = Transform3D(0.599615, 0, -0.0214945, 0, 0.6, 0, 0.0214945, 0, 0.5996
 
 [node name="box1_main10" parent="worldlevel_new_hall_test/Items" instance=ExtResource("15_0475t")]
 transform = Transform3D(0.337387, 0, -0.214873, 0, 0.4, 0, 0.214873, 0, 0.337387, 3.25495, 0.409707, -3.52389)
+
+[node name="box1_main11" parent="worldlevel_new_hall_test/Items" instance=ExtResource("15_0475t")]
+transform = Transform3D(0.210867, 0, -0.134295, 0, 0.25, 0, 0.134295, 0, 0.210867, 4.65071, 0.400963, -0.0467827)
 
 [node name="box1_main2" parent="worldlevel_new_hall_test/Items" instance=ExtResource("15_0475t")]
 transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, -3.62451, 1.79852, -0.382237)
@@ -705,20 +705,45 @@ transform = Transform3D(-1, -5.02688e-16, -8.74228e-08, 1.65541e-09, 0.999821, -
 
 [node name="room_hall2_new2" parent="worldlevel_new_hall_test" instance=ExtResource("41_sb5nx")]
 
+[node name="OmniLight3D2" type="OmniLight3D" parent="worldlevel_new_hall_test"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.08914, 1.87428, -7.25846)
+visible = false
+light_energy = 0.2
+shadow_enabled = true
+omni_range = 7.431
+
+[node name="StaticBody3D" type="StaticBody3D" parent="worldlevel_new_hall_test"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.42494, 0, -0.816233)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="worldlevel_new_hall_test/StaticBody3D"]
+shape = SubResource("BoxShape3D_p28pa")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="worldlevel_new_hall_test"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.07728, 0, -0.816233)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="worldlevel_new_hall_test/StaticBody3D2"]
+shape = SubResource("BoxShape3D_p28pa")
+
+[node name="StaticBody3D3" type="StaticBody3D" parent="worldlevel_new_hall_test"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 8.40141, 0, 0.391397)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="worldlevel_new_hall_test/StaticBody3D3"]
+shape = SubResource("BoxShape3D_p28pa")
+
 [node name="OmniLight3D" type="OmniLight3D" parent="worldlevel_new_hall_test"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.317837, 4.28428, -2.86112)
-light_energy = 0.3
-light_indirect_energy = 10.0
-light_volumetric_fog_energy = 1.5
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.776741, 4.04401, -3.06692)
+light_energy = 0.5
+light_indirect_energy = 5.0
+light_volumetric_fog_energy = 0.25
 shadow_enabled = true
 omni_range = 15.0
 
-[node name="OmniLight3D2" type="OmniLight3D" parent="worldlevel_new_hall_test"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.08914, 1.87428, -7.25846)
-light_energy = 0.2
-light_bake_mode = 1
-shadow_enabled = true
-omni_range = 7.431
+[node name="OmniLight3D3" type="OmniLight3D" parent="worldlevel_new_hall_test"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.06396, 3.87572, -4.07618)
+light_energy = 0.15
+light_indirect_energy = 5.032
+light_volumetric_fog_energy = 0.25
+omni_range = 10.0
 
 [node name="worldlevel_new_hall_test2" parent="." instance=ExtResource("13_qu6ou")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -6.89801, 2.01442, -20.9162)
@@ -857,13 +882,13 @@ transform = Transform3D(-2.40413e-07, 0, 1.1, 0, 1.1, 0, -1.1, 0, -2.40413e-07, 
 transform = Transform3D(-2.40413e-07, 0, 1.1, 0, 1.1, 0, -1.1, 0, -2.40413e-07, -21.7444, 2.08968, 0.498167)
 
 [node name="locker28" parent="." instance=ExtResource("45_tso8u")]
-transform = Transform3D(1.1, 0, 2.38419e-07, 0, 1.1, 0, -2.38419e-07, 0, 1.1, -26.0299, 4.9516, -1.40141)
+transform = Transform3D(1.1, 0, 2.38419e-07, 0, 1.1, 0, -2.38419e-07, 0, 1.1, -26.0299, 4.9516, -1.69184)
 
 [node name="locker29" parent="." instance=ExtResource("45_tso8u")]
 transform = Transform3D(1.1, 0, 2.38419e-07, 0, 1.1, 0, -2.38419e-07, 0, 1.1, -26.0299, 4.9516, -0.926081)
 
 [node name="locker30" parent="." instance=ExtResource("45_tso8u")]
-transform = Transform3D(1.1, 0, 2.38419e-07, 0, 1.1, 0, -2.38419e-07, 0, 1.1, -26.0299, 4.9516, -1.87615)
+transform = Transform3D(1.1, 0, 2.38419e-07, 0, 1.1, 0, -2.38419e-07, 0, 1.1, -26.0299, 4.9516, -2.45295)
 
 [node name="locker24" parent="." instance=ExtResource("45_tso8u")]
 transform = Transform3D(-2.40413e-07, 0, 1.1, 0, 1.1, 0, -1.1, 0, -2.40413e-07, -23.174, 2.08968, 0.498167)
@@ -893,13 +918,13 @@ transform = Transform3D(-1.1, 0, -2.88495e-07, 0, 1.1, 0, 2.88495e-07, 0, -1.1, 
 transform = Transform3D(-1.1, 0, -2.88495e-07, 0, 1.1, 0, 2.88495e-07, 0, -1.1, -7.00878, 0.0796114, 10.0214)
 
 [node name="barrel1" parent="." instance=ExtResource("42_6acnw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.1002, 2.01442, -0.982451)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.587, 2.01442, 0.30285)
 
 [node name="barrel2" parent="." instance=ExtResource("42_6acnw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.746, 2.01442, -0.982451)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.2328, 2.01442, 0.30285)
 
 [node name="barrel3" parent="." instance=ExtResource("42_6acnw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.4198, 2.83375, -0.982451)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.1139, 2.83375, 0.30285)
 
 [node name="barrel4" parent="." instance=ExtResource("42_6acnw")]
 transform = Transform3D(0.118161, 0, -0.992994, 0, 1, 0, 0.992994, 0, 0.118161, -7.03869, 0.0184457, -3.67071)
@@ -1014,3 +1039,12 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -11.96
 
 [node name="PhysicItem_test2" parent="." instance=ExtResource("46_bbvkl")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -12.4626, 2.09607, 20.1091)
+
+[node name="militarya_locker9_mat5" parent="." instance=ExtResource("43_nf7j1")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -17.384, 2.01442, 0.233475)
+
+[node name="militarya_locker9_mat7" parent="." instance=ExtResource("43_nf7j1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.7416, 2.01442, -3.0349)
+
+[node name="militarya_locker9_mat6" parent="." instance=ExtResource("43_nf7j1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.8897, 4.76243, 0.0789764)
