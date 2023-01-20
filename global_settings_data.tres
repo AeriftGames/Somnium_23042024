@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=2 format=3 uid="uid://noh8d6sjstxl"]
+[gd_resource type="Resource" load_steps=2 format=3]
 
 [ext_resource type="Script" path="res://core_systems/global_settings_data.cs" id="1_8rhwy"]
 
@@ -15,8 +15,8 @@ HalfResolutionGI = false
 UnlockMaxFps = false
 DisableVsync = false
 MainVolume = 0.0
-MusicVolume = -2.0
-SfxVolume = -2.0
+MusicVolume = 1.0
+SfxVolume = -9.0
 ShowDebugHud = true
 ShowFps = true
 ShowPerformance = false

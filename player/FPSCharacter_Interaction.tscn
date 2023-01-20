@@ -43,6 +43,8 @@ RBPhysicInGrab_Bounce = 0.0
 RBPhysicInGrab_Mass = 1.0
 AudioFlashlight_On = ExtResource("3_l3f5j")
 AudioFlashlight_Off = ExtResource("4_0clxq")
+WalkCameraLerpHeight = 0.075
+RunCameraLerpHeight = 0.12
 
 [node name="HolderHands" type="Node3D" parent="HeadMain/HeadGimbalA/HeadGimbalB/HeadHolderCamera" index="0"]
 
@@ -115,7 +117,7 @@ offset_bottom = 63.753
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("6_fb16h")
-ignore_texture_size = true
+expand_mode = 1
 
 [node name="HandCanGrabTexture" type="TextureRect" parent="BasicHud" index="3"]
 self_modulate = Color(1, 1, 1, 0.470588)
@@ -133,7 +135,7 @@ offset_bottom = 63.753
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("7_bqbud")
-ignore_texture_size = true
+expand_mode = 1
 
 [node name="Item_inspect" parent="." index="9" instance=ExtResource("5_iw50w")]
 visible = false

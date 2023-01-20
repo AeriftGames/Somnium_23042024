@@ -8,11 +8,16 @@ ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
 sky_material = SubResource("ProceduralSkyMaterial_iqwsm")
 
 [resource]
-background_energy_multiplier = 0.15
+background_mode = 1
+background_color = Color(0.00392157, 0.00392157, 0.00392157, 1)
 sky = SubResource("Sky_hvd77")
 sky_rotation = Vector3(-0.492183, 0, 0)
+ambient_light_source = 3
+ambient_light_color = Color(0.67451, 0.67451, 0.67451, 1)
+ambient_light_energy = 3.54
 tonemap_mode = 2
 ssao_enabled = true
+sdfgi_enabled = true
 sdfgi_use_occlusion = true
 sdfgi_read_sky_light = false
 sdfgi_energy = 0.5

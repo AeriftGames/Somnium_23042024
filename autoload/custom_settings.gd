@@ -1,5 +1,5 @@
 class_name custom_settings extends Node
-@icon("res://autoload/custom_settings_icon.svg")
+##@icon("res://autoload/custom_settings_icon.svg")
 
 ## Used for loading settings.cfg file.
 ##

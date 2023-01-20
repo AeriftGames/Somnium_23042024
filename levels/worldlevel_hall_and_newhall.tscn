@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cw0ydavkgsc1g" path="res://testing_stuff_kaen/testing_level_hall/hall_test.tscn" id="9_t32gr"]
 [ext_resource type="PackedScene" uid="uid://bbpyvlqpjgi4t" path="res://testing_stuff_kaen/testing_level_hall/new_items/lamp_2.tscn" id="11_a1jgn"]
 [ext_resource type="Material" uid="uid://cnnm3unml15vt" path="res://testing_stuff_kaen/testing_level_newhall/single_door_joints_mat.tres" id="11_w0lph"]
+[ext_resource type="AudioStream" uid="uid://bhqg52i4b3xfb" path="res://audio/audio_streams/music/test.mp3" id="13_ks3we"]
 [ext_resource type="PackedScene" uid="uid://dctjipcvi0ssg" path="res://testing_stuff_kaen/testing_level_newhall/new_hall_scene_test.tscn" id="13_qu6ou"]
 [ext_resource type="PackedScene" uid="uid://0oyvcuqijj5q" path="res://models/boxes/box_0.tscn" id="14_k1qqc"]
 [ext_resource type="PackedScene" uid="uid://cesku4bfg7c26" path="res://models/boxes/box_1.tscn" id="15_0475t"]
@@ -32,7 +33,6 @@
 [ext_resource type="PackedScene" uid="uid://5ukc61pf18s8" path="res://placeholders/modular_pipes/new_big/pipe_big_valve_base.tscn" id="35_bxnva"]
 [ext_resource type="PackedScene" uid="uid://oe4u1fhwausm" path="res://placeholders/modular_pipes/new_big/pipe_big_split.tscn" id="36_k4xu8"]
 [ext_resource type="PackedScene" uid="uid://cxdmt4ty2nkvu" path="res://placeholders/modular_pipes/new_big/pipe_big_valve.tscn" id="37_mbegl"]
-[ext_resource type="AudioStream" uid="uid://ngmb6mrvsbqc" path="res://audio/audio_streams/613738__punneedsounds__amb-ost1.mp3" id="38_xxj7q"]
 [ext_resource type="PackedScene" uid="uid://dr884bc7e11qi" path="res://models/airvents/ventilace_test.tscn" id="39_qbsgn"]
 [ext_resource type="PackedScene" path="res://models/airvents/vent_holders_test.tscn" id="40_xanmt"]
 [ext_resource type="PackedScene" path="res://testing_stuff_kaen/testing_level_hall/models/shelfs/shelf_big_back.tscn" id="41_g4s37"]
@@ -374,8 +374,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.66771, 1.24416, 9.347)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.60434, 0.318316, 8.89822)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("38_xxj7q")
-pitch_scale = 0.84
+stream = ExtResource("13_ks3we")
 autoplay = true
 bus = &"Music"
 
