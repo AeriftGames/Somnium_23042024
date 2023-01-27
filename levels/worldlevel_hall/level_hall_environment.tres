@@ -9,6 +9,7 @@ ambient_light_energy = 0.1
 tonemap_mode = 2
 ssao_enabled = true
 ssil_enabled = true
+sdfgi_enabled = true
 sdfgi_use_occlusion = true
 sdfgi_read_sky_light = false
 sdfgi_energy = 0.25

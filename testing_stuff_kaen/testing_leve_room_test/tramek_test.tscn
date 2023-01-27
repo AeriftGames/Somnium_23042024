@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://50536ak5aome"]
+
+[ext_resource type="Material" uid="uid://bd0f2ixpxs8l8" path="res://testing_stuff_kaen/testing_leve_room_test/tramek_mat.tres" id="1_ikey6"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_rllnl"]
+material = ExtResource("1_ikey6")
+size = Vector3(0.2, 2, 0.2)
+
+[node name="tramek_test" type="MeshInstance3D"]
+cast_shadow = 0
+mesh = SubResource("BoxMesh_rllnl")

@@ -18,10 +18,10 @@ public partial class worldlevel : Node3D
 		{
 			if (InGameStartEnableSDFGI)
 			{
-                env.Environment.SdfgiEnabled = true;
+				env.Environment.SdfgiEnabled = true;
 				GameMaster.GM.LevelLoader.SDFGI = true;
-            }
-        }
+			}
+		}
 				
 
 	}

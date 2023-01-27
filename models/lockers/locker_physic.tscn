@@ -48,4 +48,5 @@ skeleton = NodePath("")
 shape = SubResource("ConcavePolygonShape3D_rytmt")
 
 [node name="Wardrobe_rdoor_small" parent="." instance=ExtResource("2_wg5gc")]
-transform = Transform3D(-3.97774e-08, 0, 0.91, 0, 0.91, 0, -0.91, 0, -3.97774e-08, 0.208229, -0.144565, 0.0473894)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.208229, -0.242231, 0.0639799)
+top_level = true

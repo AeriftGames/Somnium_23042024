@@ -39,7 +39,7 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_ryxie")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_p8mw7"]
-size = Vector3(0.040123, 1.56002, 0.360158)
+size = Vector3(0.040123, 1.39874, 0.317296)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_3wano"]
 size = Vector3(0.0949911, 0.204534, 0.105418)
@@ -63,12 +63,12 @@ linear_damp = 5.0
 angular_damp = 5.0
 
 [node name="locker_door" type="MeshInstance3D" parent="WardrobeDoorGrab"]
-transform = Transform3D(-4.80825e-08, 0, -1.1, 0, 1.1, 0, 1.1, 0, -4.80825e-08, 0.245946, 1.04655, -0.0279939)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.245946, 1.04655, -0.0279939)
 mesh = SubResource("ArrayMesh_252rj")
 skeleton = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="WardrobeDoorGrab"]
-transform = Transform3D(-4.80825e-08, 0, -1.1, 0, 1.1, 0, 1.1, 0, -4.80825e-08, 0.0489851, 1.04655, -0.0279939)
+transform = Transform3D(-4.80825e-08, 0, -1.1, 0, 1.1, 0, 1.1, 0, -4.80825e-08, 0.0639035, 1.04655, -0.0279939)
 shape = SubResource("BoxShape3D_p8mw7")
 
 [node name="interactive_object" parent="WardrobeDoorGrab" instance=ExtResource("2_50nm6")]

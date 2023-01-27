@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://levels/worldlevel.cs" id="1_22uyt"]
 [ext_resource type="ArrayOccluder3D" uid="uid://cutd5dlobddug" path="res://levels/worldlevel_hall_and_newhall.occ" id="2_flopx"]
-[ext_resource type="Environment" uid="uid://nmuknx7wiohq" path="res://levels/worldlevel_newhall/worldlevel_newhall.tres" id="3_fxaej"]
+[ext_resource type="Environment" uid="uid://bg7lt3mm463sv" path="res://levels/worldlevel_hall/level_hall_environment.tres" id="3_k5xns"]
 [ext_resource type="PackedScene" uid="uid://bet3idvc4fg0n" path="res://placeholders/PlayerStart.tscn" id="5_pjs15"]
 [ext_resource type="PackedScene" uid="uid://cw0ydavkgsc1g" path="res://testing_stuff_kaen/testing_level_hall/hall_test.tscn" id="9_t32gr"]
 [ext_resource type="PackedScene" uid="uid://bbpyvlqpjgi4t" path="res://testing_stuff_kaen/testing_level_hall/new_items/lamp_2.tscn" id="11_a1jgn"]
@@ -101,7 +101,7 @@ occluder = ExtResource("2_flopx")
 bake_mask = 4293918721
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = ExtResource("3_fxaej")
+environment = ExtResource("3_k5xns")
 
 [node name="PlayerStart" parent="." instance=ExtResource("5_pjs15")]
 transform = Transform3D(-0.999395, 0, -0.0347771, 0, 1, 0, 0.0347771, 0, -0.999395, -15.8036, 2.0193, -6.63959)
