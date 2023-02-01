@@ -3,7 +3,7 @@ using System;
 using System.Data;
 using System.Linq.Expressions;
 
-public partial class CharacterInteractiveSystem : Godot.Object
+public partial class CharacterInteractiveSystem : Godot.GodotObject
 {
     FPSCharacter_Interaction character = null;
     BasicHud basicHud;
@@ -157,10 +157,10 @@ public partial class CharacterInteractiveSystem : Godot.Object
                 InputEventMouseMotion mouseEventMotion = @event as InputEventMouseMotion;
 
                 character.objectCamera.HandStaticBody.RotateX(
-                    Mathf.DegToRad(mouseEventMotion.Relative.y * character.RotateObjectStep));
+                    Mathf.DegToRad(mouseEventMotion.Relative.Y * character.RotateObjectStep));
 
                 character.objectCamera.HandStaticBody.RotateY(
-                    Mathf.DegToRad(mouseEventMotion.Relative.x * character.RotateObjectStep));
+                    Mathf.DegToRad(mouseEventMotion.Relative.X * character.RotateObjectStep));
             }
         }
     }
@@ -174,7 +174,7 @@ public partial class CharacterInteractiveSystem : Godot.Object
         {
             // Set to original handGrabPosition
             Vector3 actualPosition = character.objectCamera.GetHandGrabMarker().Position;
-            actualPosition.z = -character.MoveFarOrNearObjectOriginal;
+            actualPosition.Z = -character.MoveFarOrNearObjectOriginal;
             character.objectCamera.GetHandGrabMarker().Position = actualPosition;
 
             // Nastavi nas novy Rigidbody object a nastavi mu pozadovane fyzikalni parametry pro grab
@@ -193,7 +193,7 @@ public partial class CharacterInteractiveSystem : Godot.Object
 
         // Set to original handGrabPosition
         Vector3 actualPosition = character.objectCamera.GetHandGrabMarker().Position;
-        actualPosition.z = -character.MoveFarOrNearObjectOriginal;
+        actualPosition.Z = -character.MoveFarOrNearObjectOriginal;
         character.objectCamera.GetHandGrabMarker().Position = actualPosition;
     }
 
@@ -279,7 +279,7 @@ public partial class CharacterInteractiveSystem : Godot.Object
         {
             basicHud.SetHandGrabState(true, true);
             // grabbing
-            Vector3 pickedBodyGlobalPositon = pickedBody.GlobalTransform.origin;
+            Vector3 pickedBodyGlobalPositon = pickedBody.GlobalTransform.Origin;
             Vector3 HandGrabGlobalPosition = character.objectCamera.HandGrabMarker.GlobalPosition;
 
             pickedBody.LinearVelocity = (HandGrabGlobalPosition - pickedBodyGlobalPositon) * character.GrabObjectPullPower;
@@ -297,7 +297,7 @@ public partial class CharacterInteractiveSystem : Godot.Object
             StopGrabbing();
 
             pickedBody.ApplyCentralImpulse(character.GetFPSCharacterCamera().
-                GlobalTransform.basis.z.Normalized() * -character.ThrowObjectPower);
+                GlobalTransform.Basis.Z.Normalized() * -character.ThrowObjectPower);
 
             isCanNewGrab = false;
             pickedBody = null;
@@ -315,12 +315,12 @@ public partial class CharacterInteractiveSystem : Godot.Object
             Vector3 actualPosition = character.objectCamera.GetHandGrabMarker().Position;
 
             if (newMoveFarGrabbedObject)
-                actualPosition.z -= character.MoveFarOrNearObjectStep;
+                actualPosition.Z -= character.MoveFarOrNearObjectStep;
 
             if (newMoveNearGrabbedObject)
-                actualPosition.z += character.MoveFarOrNearObjectStep;
+                actualPosition.Z += character.MoveFarOrNearObjectStep;
 
-            actualPosition.z = Mathf.Clamp(actualPosition.z,
+            actualPosition.Z = Mathf.Clamp(actualPosition.Z,
                 -character.MoveFarOrNearObjectMax, -character.MoveFarOrNearObjectMin);
 
             character.objectCamera.GetHandGrabMarker().Position = actualPosition;

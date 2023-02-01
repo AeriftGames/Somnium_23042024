@@ -2,7 +2,7 @@ using Godot;
 using System;
 using System.Windows;
 
-public partial class global_settings : Godot.Object
+public partial class global_settings : Godot.GodotObject
 {
 	private GameMaster gm;
 
@@ -193,7 +193,7 @@ public partial class global_settings : Godot.Object
             if (newScreenSizeID == 0)
             {
                 //1280x720
-                gm.GetTree().Root.Size = new Vector2i(1280, 720);
+                gm.GetTree().Root.Size = new Vector2I(1280, 720);
                 //Apply_ScreenMode(GetActual_ScreenMode(),true,false);
                 GameMaster.GM.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "apply video settings: screen size id = 1280x720");
 
@@ -201,7 +201,7 @@ public partial class global_settings : Godot.Object
             else if (newScreenSizeID == 1)
             {
                 //1920x1080
-                gm.GetTree().Root.Size = new Vector2i(1920, 1080);
+                gm.GetTree().Root.Size = new Vector2I(1920, 1080);
                 //Apply_ScreenMode(GetActual_ScreenMode(), true, false);
                 GameMaster.GM.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "apply video settings: screen size id = 1920x1080");
             }
@@ -209,7 +209,7 @@ public partial class global_settings : Godot.Object
             {
                 // screen size
                 //if(GetActual_ScreenMode() == 0)
-                    gm.GetTree().Root.Size = new Vector2i(DisplayServer.ScreenGetSize().x - 1, DisplayServer.ScreenGetSize().y - 1);
+                    gm.GetTree().Root.Size = new Vector2I(DisplayServer.ScreenGetSize().X - 1, DisplayServer.ScreenGetSize().Y - 1);
 
                 //Apply_ScreenMode(0, true, false);
                 //gm.GetTree().Root.Size = new Vector2i(DisplayServer.ScreenGetSize().x-1, DisplayServer.ScreenGetSize().y-1);
@@ -234,12 +234,12 @@ public partial class global_settings : Godot.Object
 
     public int GetActual_ScreenSizeID()
     {
-        if (gm.GetTree().Root.Size.x == 1280 && gm.GetTree().Root.Size.y == 720)
+        if (gm.GetTree().Root.Size.X == 1280 && gm.GetTree().Root.Size.Y == 720)
         {
             //1280x720
             return 0;
         }
-        else if (gm.GetTree().Root.Size.x == 1920 && gm.GetTree().Root.Size.y == 1080)
+        else if (gm.GetTree().Root.Size.X == 1920 && gm.GetTree().Root.Size.Y == 1080)
         {
             //1920x1080
             return 1;
@@ -419,42 +419,42 @@ public partial class global_settings : Godot.Object
             if (newAntialiasID == 0)
             {
                 //disable
-                gm.GetTree().Root.ScreenSpaceAa = Viewport.ScreenSpaceAA.Disabled;
+                gm.GetTree().Root.ScreenSpaceAA = Viewport.ScreenSpaceAAEnum.Disabled;
                 gm.GetTree().Root.UseTaa = false;
-                gm.GetTree().Root.Msaa3d = Viewport.MSAA.Disabled;
+                gm.GetTree().Root.Msaa3D = Viewport.Msaa.Disabled;
                 GameMaster.GM.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "apply video settings: antialias id = disable");
 
             }
             else if (newAntialiasID == 1)
             {
                 //only ss_aa
-                gm.GetTree().Root.ScreenSpaceAa = Viewport.ScreenSpaceAA.Fxaa;
+                gm.GetTree().Root.ScreenSpaceAA = Viewport.ScreenSpaceAAEnum.Fxaa;
                 gm.GetTree().Root.UseTaa = false;
-                gm.GetTree().Root.Msaa3d = Viewport.MSAA.Disabled;
+                gm.GetTree().Root.Msaa3D = Viewport.Msaa.Disabled;
                 GameMaster.GM.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "apply video settings: antialias id = only ss_aa");
             }
             else if (newAntialiasID == 2)
             {
                 //ss_aa+taa
-                gm.GetTree().Root.ScreenSpaceAa = Viewport.ScreenSpaceAA.Fxaa;
+                gm.GetTree().Root.ScreenSpaceAA = Viewport.ScreenSpaceAAEnum.Fxaa;
                 gm.GetTree().Root.UseTaa = true;
-                gm.GetTree().Root.Msaa3d = Viewport.MSAA.Disabled;
+                gm.GetTree().Root.Msaa3D = Viewport.Msaa.Disabled;
                 GameMaster.GM.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "apply video settings: antialias id = ss_aa + taa");
             }
             else if (newAntialiasID == 3)
             {
                 //only msaa3d_2x
-                gm.GetTree().Root.ScreenSpaceAa = Viewport.ScreenSpaceAA.Disabled;
+                gm.GetTree().Root.ScreenSpaceAA = Viewport.ScreenSpaceAAEnum.Disabled;
                 gm.GetTree().Root.UseTaa = false;
-                gm.GetTree().Root.Msaa3d = Viewport.MSAA.Msaa2x;
+                gm.GetTree().Root.Msaa3D = Viewport.Msaa.Msaa2X;
                 GameMaster.GM.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "apply video settings: antialias id = only msaa3d_2x");
             }
             else if (newAntialiasID == 4)
             {
                 //ss_aa+taa+msaa3d_2x
-                gm.GetTree().Root.ScreenSpaceAa = Viewport.ScreenSpaceAA.Fxaa;
+                gm.GetTree().Root.ScreenSpaceAA = Viewport.ScreenSpaceAAEnum.Fxaa;
                 gm.GetTree().Root.UseTaa = true;
-                gm.GetTree().Root.Msaa3d = Viewport.MSAA.Msaa2x;
+                gm.GetTree().Root.Msaa3D = Viewport.Msaa.Msaa2X;
                 GameMaster.GM.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "apply video settings: antialias id = ss_aa + taa + msaa3d_2x");
             }
             else
@@ -476,37 +476,37 @@ public partial class global_settings : Godot.Object
 
     public int GetActual_AntialiasID()
     {
-        if (gm.GetTree().Root.ScreenSpaceAa == Viewport.ScreenSpaceAA.Disabled &&
+        if (gm.GetTree().Root.ScreenSpaceAA == Viewport.ScreenSpaceAAEnum.Disabled &&
             gm.GetTree().Root.UseTaa == false &&
-            gm.GetTree().Root.Msaa3d == Viewport.MSAA.Disabled)
+            gm.GetTree().Root.Msaa3D == Viewport.Msaa.Disabled)
         {
             //disable
             return 0;
         }
-        else if (gm.GetTree().Root.ScreenSpaceAa == Viewport.ScreenSpaceAA.Fxaa &&
+        else if (gm.GetTree().Root.ScreenSpaceAA == Viewport.ScreenSpaceAAEnum.Fxaa &&
             gm.GetTree().Root.UseTaa == false &&
-            gm.GetTree().Root.Msaa3d == Viewport.MSAA.Disabled)
+            gm.GetTree().Root.Msaa3D == Viewport.Msaa.Disabled)
         {
             //ss_aa
             return 1;
         }
-        else if (gm.GetTree().Root.ScreenSpaceAa == Viewport.ScreenSpaceAA.Fxaa &&
+        else if (gm.GetTree().Root.ScreenSpaceAA == Viewport.ScreenSpaceAAEnum.Fxaa &&
             gm.GetTree().Root.UseTaa == true &&
-            gm.GetTree().Root.Msaa3d == Viewport.MSAA.Disabled)
+            gm.GetTree().Root.Msaa3D == Viewport.Msaa.Disabled)
         {
             //ss_aa+taa
             return 2;
         }
-        else if (gm.GetTree().Root.ScreenSpaceAa == Viewport.ScreenSpaceAA.Disabled &&
+        else if (gm.GetTree().Root.ScreenSpaceAA == Viewport.ScreenSpaceAAEnum.Disabled &&
             gm.GetTree().Root.UseTaa == false &&
-            gm.GetTree().Root.Msaa3d == Viewport.MSAA.Msaa2x)
+            gm.GetTree().Root.Msaa3D == Viewport.Msaa.Msaa2X)
         {
             //only msaa3d_2x
             return 3;
         }
-        else if (gm.GetTree().Root.ScreenSpaceAa == Viewport.ScreenSpaceAA.Fxaa &&
+        else if (gm.GetTree().Root.ScreenSpaceAA == Viewport.ScreenSpaceAAEnum.Fxaa &&
             gm.GetTree().Root.UseTaa == true &&
-            gm.GetTree().Root.Msaa3d == Viewport.MSAA.Msaa2x)
+            gm.GetTree().Root.Msaa3D == Viewport.Msaa.Msaa2X)
         {
             //ss_aa+taa+msaa3d_2x
             return 4;
@@ -527,7 +527,7 @@ public partial class global_settings : Godot.Object
         if(newApplyNow)
         {
             gm.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "apply video settings: scale 3d = " + newValue);
-            gm.GetTree().Root.Scaling3dScale = newValue;
+            gm.GetTree().Root.Scaling3DScale = newValue;
         }
 
         // Save now
@@ -541,7 +541,7 @@ public partial class global_settings : Godot.Object
 
     public float GetActual_Scale3D()
     {
-        return gm.GetTree().Root.Scaling3dScale;
+        return gm.GetTree().Root.Scaling3DScale;
     }
 
     // settings HALF RESOLUTION GI
@@ -550,7 +550,7 @@ public partial class global_settings : Godot.Object
         // Apply now
         if (newApplyNow)
         {
-            RenderingServer.GiSetUseHalfResolution(newValue);
+            RenderingServer.GISetUseHalfResolution(newValue);
             gm.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "apply video settings: half resolutoin gi = " + newValue);
 
             // musime ulozit novy stav bokem, jinak by jsme pozdeji nemohli ziskat aktualni stav

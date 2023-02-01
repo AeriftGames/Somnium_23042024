@@ -100,7 +100,7 @@ public partial class wall_lever_test : Node3D
     public virtual EReachPointEnd CalculateReaches()
     {
         // Vypocet pro detekci horniho konecneho bodu a spodniho konecneho bodu
-        float actual_rot = Mathf.RadToDeg(leverGrab.Rotation.x);
+        float actual_rot = Mathf.RadToDeg(leverGrab.Rotation.X);
 
         if(actual_rot >= upperReachEnd - toleranceDetectReach)
         {
@@ -123,7 +123,7 @@ public partial class wall_lever_test : Node3D
             case EReachPointEnd.Top:
                 {
                     var newRot = leverGrab.Rotation;
-                    newRot.x = Mathf.DegToRad(lowerReachEnd - 3);
+                    newRot.X = Mathf.DegToRad(lowerReachEnd - 3);
                     leverGrab.Rotation = newRot;
                     UpdateLever(0);
                     break; 
@@ -131,7 +131,7 @@ public partial class wall_lever_test : Node3D
             case EReachPointEnd.Bottom:
                 {
                     var newRot = leverGrab.Rotation;
-                    newRot.x = Mathf.DegToRad(upperReachEnd + 3);
+                    newRot.X = Mathf.DegToRad(upperReachEnd + 3);
                     leverGrab.Rotation = newRot;
                     UpdateLever(0);
                     break;
@@ -139,7 +139,7 @@ public partial class wall_lever_test : Node3D
             case EReachPointEnd.Work: 
                 {
                     var newRot = leverGrab.Rotation;
-                    newRot.x = Mathf.DegToRad(centerReachNeutral);
+                    newRot.X = Mathf.DegToRad(centerReachNeutral);
                     leverGrab.Rotation = newRot;
                     UpdateLever(0);
                     break;
@@ -149,7 +149,7 @@ public partial class wall_lever_test : Node3D
 
     public virtual void UpdateLever(double delta)
     {
-        var newVel = -GlobalTransform.basis.y.Normalized() * motionMouse.y * mouseMotionSpeed;
+        var newVel = -GlobalTransform.Basis.Y.Normalized() * motionMouse.Y * mouseMotionSpeed;
 
         switch (grabMoveType)
         {
@@ -180,7 +180,7 @@ public partial class wall_lever_test : Node3D
 
                     TestLight(true);
                     PlaySound(true);
-                    EmitSignal(SignalName.LeverReachEnd, true);
+                    //EmitSignal(SignalName.LeverReachEnd, true);
                     onceIsReachPoint = true;
                     break;
                 }
@@ -190,7 +190,7 @@ public partial class wall_lever_test : Node3D
 
                     TestLight(false);
                     PlaySound(true);
-                    EmitSignal(SignalName.LeverReachEnd, false);
+                    //EmitSignal(SignalName.LeverReachEnd, false);
                     onceIsReachPoint = true;
                     break;
                 }

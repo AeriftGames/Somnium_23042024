@@ -167,12 +167,12 @@ public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
             objectHands.GlobalPosition.Lerp(objectCamera.Camera.GlobalPosition, 40 * (float)delta);
 
         Vector3 hands_rot = objectHands.GlobalRotation;
-        float hands_rotY = hands_rot.y;
-        float hands_rotX = hands_rot.x;
-        hands_rotY = Mathf.LerpAngle(hands_rotY, objectCamera.Camera.GlobalRotation.y, 30 * (float)delta);
-        hands_rotX = Mathf.LerpAngle(hands_rotX, objectCamera.Camera.GlobalRotation.x, 30 * (float)delta);
-        hands_rot.y = hands_rotY;
-        hands_rot.x = hands_rotX;
+        float hands_rotY = hands_rot.Y;
+        float hands_rotX = hands_rot.X;
+        hands_rotY = Mathf.LerpAngle(hands_rotY, objectCamera.Camera.GlobalRotation.Y, 30 * (float)delta);
+        hands_rotX = Mathf.LerpAngle(hands_rotX, objectCamera.Camera.GlobalRotation.X, 30 * (float)delta);
+        hands_rot.Y = hands_rotY;
+        hands_rot.X = hands_rotX;
         objectHands.GlobalRotation = hands_rot;
 
 
@@ -209,13 +209,13 @@ public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
 
 		if (GetFPSCharacterCamera() == null) return false;
 
-		PhysicsDirectSpaceState3D directSpace = GetWorld3d().DirectSpaceState;
+		PhysicsDirectSpaceState3D directSpace = GetWorld3D().DirectSpaceState;
 		if (directSpace == null) return false;
 
 		PhysicsRayQueryParameters3D rayParam = new PhysicsRayQueryParameters3D();
 		rayParam.From = GetFPSCharacterCamera().GlobalPosition;
 		rayParam.To = GetFPSCharacterCamera().GlobalPosition - 
-			GetFPSCharacterCamera().GlobalTransform.basis.z * LengthInteractRay;
+			GetFPSCharacterCamera().GlobalTransform.Basis.Z * LengthInteractRay;
 
 		var rayResult = directSpace.IntersectRay(rayParam);
 		if (rayResult.Count > 0)
@@ -246,7 +246,7 @@ public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
 			targetPos, 10f);
 		LerpCameraPosToInteract.EnableUpdate(true);
 
-		LerpCameraLookToInteract.SetAllParam(GetFPSCharacterCamera().Transform.basis.z*0.1f,
+		LerpCameraLookToInteract.SetAllParam(GetFPSCharacterCamera().Transform.Basis.Z*0.1f,
 			targetLook,
 			1.0f);
 		LerpCameraLookToInteract.EnableUpdate(true);

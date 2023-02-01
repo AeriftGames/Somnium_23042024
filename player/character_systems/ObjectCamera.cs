@@ -12,7 +12,7 @@ public partial class ObjectCamera : Node3D
     public Node3D NodeLean = null;
 	public Camera3D Camera = null;
     public Marker3D HandGrabMarker;
-    public Generic6DOFJoint3D HandGrabJoint = null;
+    public Generic6DofJoint3D HandGrabJoint = null;
     public StaticBody3D HandStaticBody = null;
 
     private Vector2 _MouseMotion = new Vector2(0f, 0f);
@@ -55,7 +55,7 @@ public partial class ObjectCamera : Node3D
         NodeLean = GetNode<Node3D>("NodeRotY/GimbalLand/NodeRotX/NodeLean");
 		Camera = GetNode<Camera3D>("NodeRotY/GimbalLand/NodeRotX/NodeLean/Camera");
         HandGrabMarker = GetNode<Marker3D>("NodeRotY/GimbalLand/NodeRotX/NodeLean/Camera/HandGrabMarker");
-        HandGrabJoint = GetNode<Generic6DOFJoint3D>("NodeRotY/GimbalLand/NodeRotX/NodeLean/Camera/HandGrabJoint");
+        HandGrabJoint = GetNode<Generic6DofJoint3D>("NodeRotY/GimbalLand/NodeRotX/NodeLean/Camera/HandGrabJoint");
         HandStaticBody = GetNode<StaticBody3D>("NodeRotY/GimbalLand/NodeRotX/" +
             "NodeLean/Camera/HandGrabMarker/HandStaticBody");
 
@@ -119,12 +119,12 @@ public partial class ObjectCamera : Node3D
                 {
                     NodeRotY.LookAt(LerpObject_CameraZoomToObject.GetTarget(), Vector3.Up);
                     var a = NodeRotY.Rotation;
-                    a.x = 0.0f;
+                    a.X = 0.0f;
                     NodeRotY.Rotation = a;
 
                     NodeRotX.LookAt(LerpObject_CameraZoomToObject.GetTarget(), Vector3.Up);
                     a = NodeRotX.Rotation;
-                    a.y = 0.0f;
+                    a.Y = 0.0f;
                     NodeRotX.Rotation = a;
 
                     Camera.Rotation = Vector3.Zero;
@@ -174,19 +174,19 @@ public partial class ObjectCamera : Node3D
     public void UpdateCameraLook(Vector2 newMouseMotion, double delta)
     {
         // Lerping mouse motion for smooth look (x,y)
-        _LookVelocity.x = Mathf.Lerp(_LookVelocity.x, newMouseMotion.x * ownerCharacter.MouseSensitivity,
+        _LookVelocity.X = Mathf.Lerp(_LookVelocity.X, newMouseMotion.X * ownerCharacter.MouseSensitivity,
             (float)delta * ownerCharacter.MouseSmooth);
 
-        _LookVelocity.y = Mathf.Lerp(_LookVelocity.y, newMouseMotion.y * ownerCharacter.MouseSensitivity,
+        _LookVelocity.Y = Mathf.Lerp(_LookVelocity.Y, newMouseMotion.Y * ownerCharacter.MouseSensitivity,
             (float)delta * ownerCharacter.MouseSmooth);
 
         // Set new rotates
-        NodeRotY.RotateY(-Mathf.DegToRad(_LookVelocity.x));
-        NodeRotX.RotateX(-Mathf.DegToRad(_LookVelocity.y));
+        NodeRotY.RotateY(-Mathf.DegToRad(_LookVelocity.X));
+        NodeRotX.RotateX(-Mathf.DegToRad(_LookVelocity.Y));
 
         // Set clamp camera vertical look
         Vector3 actualRotX = NodeRotX.Rotation;
-        actualRotX.x = Mathf.Clamp(actualRotX.x,
+        actualRotX.X = Mathf.Clamp(actualRotX.X,
             Mathf.DegToRad(ownerCharacter.CameraVerticalLookMin),
             Mathf.DegToRad(ownerCharacter.CameraVerticalLookMax));
 
@@ -282,7 +282,7 @@ public partial class ObjectCamera : Node3D
             UniversalFunctions.HitResult hitResult = UniversalFunctions.IsSimpleRaycastHit(this,
                 NodeRotX.GlobalPosition,
                 NodeRotX.GlobalPosition +
-                NodeLean.GlobalTransform.basis.x.Normalized() * (ray_length * direction_x), 1);
+                NodeLean.GlobalTransform.Basis.X.Normalized() * (ray_length * direction_x), 1);
 
             if (hitResult.isHit)
             {
@@ -294,7 +294,7 @@ public partial class ObjectCamera : Node3D
                     GameMaster.GM.GetDebugHud().CustomLabelUpdateText(4, this, "raycast for lean: " + hitLength);
 
                     returnedVector = LerpPos_LeanCenter.Position +
-                        (NodeRotX.Transform.basis.x.Normalized() * (hitLength * direction_x));
+                        (NodeRotX.Transform.Basis.Y.Normalized() * (hitLength * direction_x));
                 }
             }
         }
@@ -306,19 +306,19 @@ public partial class ObjectCamera : Node3D
             UniversalFunctions.HitResult hitResult = UniversalFunctions.IsSimpleRaycastHit(this,
                 NodeRotX.GlobalPosition,
                 NodeRotX.GlobalPosition +
-                NodeRotX.GlobalTransform.basis.x.Normalized() * (ray_length * direction_x), 1);
+                NodeRotX.GlobalTransform.Basis.X.Normalized() * (ray_length * direction_x), 1);
 
             // 2. predni raycast
             UniversalFunctions.HitResult hit2Result = UniversalFunctions.IsSimpleRaycastHit(this,
-                NodeRotX.GlobalPosition + (NodeRotX.GlobalTransform.basis.z.Normalized() * -multiRaycastStep),
-                NodeRotX.GlobalPosition + (NodeRotX.GlobalTransform.basis.z.Normalized() * -multiRaycastStep) +
-                NodeRotX.GlobalTransform.basis.x.Normalized() * ((ray_length) * direction_x), 1);
+                NodeRotX.GlobalPosition + (NodeRotX.GlobalTransform.Basis.Z.Normalized() * -multiRaycastStep),
+                NodeRotX.GlobalPosition + (NodeRotX.GlobalTransform.Basis.Z.Normalized() * -multiRaycastStep) +
+                NodeRotX.GlobalTransform.Basis.X.Normalized() * ((ray_length) * direction_x), 1);
 
             // 3. zadni raycast
             UniversalFunctions.HitResult hit3Result = UniversalFunctions.IsSimpleRaycastHit(this,
-                NodeRotX.GlobalPosition + (NodeRotX.GlobalTransform.basis.z.Normalized() * multiRaycastStep),
-                NodeRotX.GlobalPosition + (NodeRotX.GlobalTransform.basis.z.Normalized() * multiRaycastStep) +
-                NodeRotX.GlobalTransform.basis.x.Normalized() * ((ray_length) * direction_x), 1);
+                NodeRotX.GlobalPosition + (NodeRotX.GlobalTransform.Basis.Z.Normalized() * multiRaycastStep),
+                NodeRotX.GlobalPosition + (NodeRotX.GlobalTransform.Basis.Z.Normalized() * multiRaycastStep) +
+                NodeRotX.GlobalTransform.Basis.X.Normalized() * ((ray_length) * direction_x), 1);
 
             if (hitResult.isHit || hit2Result.isHit || hit3Result.isHit)
             {
@@ -353,7 +353,7 @@ public partial class ObjectCamera : Node3D
                     GameMaster.GM.GetDebugHud().CustomLabelUpdateText(4, this, "raycast for lean: " + nejmensi);
 
                     returnedVector = LerpPos_LeanCenter.Position +
-                        (NodeRotX.Transform.basis.x.Normalized() * (nejmensi * direction_x));
+                        (NodeRotX.Transform.Basis.X.Normalized() * (nejmensi * direction_x));
                 }
             }
         }
@@ -378,20 +378,20 @@ public partial class ObjectCamera : Node3D
                 }
             case ELeanType.Left:
                 {
-                    returnedVector.z = newMaxLeanRotZ;
+                    returnedVector.Z = newMaxLeanRotZ;
                     direction_x = 1;
                     break;
                 }
             case ELeanType.Right:
                 {
-                    returnedVector.z = -newMaxLeanRotZ;
+                    returnedVector.Z = -newMaxLeanRotZ;
                     direction_x = -1;
                     break;
                 }
         }
 
         // aktualni distance lean
-        float testDistance = newMaxLeanPosX - (newMaxLeanPosX - Mathf.Abs(newActualLeanPos.x));
+        float testDistance = newMaxLeanPosX - (newMaxLeanPosX - Mathf.Abs(newActualLeanPos.X));
 
         //percentage rozsah lean pos
         float percentage_pos = testDistance / newMaxLeanPosX * 100f;
@@ -401,7 +401,7 @@ public partial class ObjectCamera : Node3D
         float per_rot_final = (percentage_pos * percentage_rot_step) * direction_x;
 
         // nastavime finalni vector
-        returnedVector.z = per_rot_final;
+        returnedVector.Z = per_rot_final;
 
         return returnedVector;
     }

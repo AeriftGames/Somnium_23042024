@@ -16,7 +16,7 @@ public partial class UniversalFunctions
     {
         HitResult result = new HitResult();
 
-        PhysicsDirectSpaceState3D directSpace = owner.GetWorld3d().DirectSpaceState;
+        PhysicsDirectSpaceState3D directSpace = owner.GetWorld3D().DirectSpaceState;
         if(directSpace != null)
         {
             PhysicsRayQueryParameters3D rayParam = new PhysicsRayQueryParameters3D();

@@ -6,7 +6,7 @@ using System.IO;
 using System.Reflection.Emit;
 using System.Threading.Tasks;
 
-public partial class CLevelLoader : Godot.Object
+public partial class CLevelLoader : Godot.GodotObject
 {
     public bool isPrecompiledShaders = true;
 

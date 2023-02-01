@@ -61,13 +61,13 @@ public partial class PlayerStart : Node3D
         // Instance from scenefile and cast to specific class
         var objectCamera_Instance = (ObjectCamera)GD.Load<PackedScene>(
             "res://player/character_systems/ObjectCamera.tscn").Instantiate();
-
+        
         var characterInteraction_Instance = (FPSCharacter_Interaction)GD.Load<PackedScene>(
             "res://player/FPSCharacter_Interaction.tscn").Instantiate();
-
+        
         var objectHands_instance = (ObjectHands)GD.Load<PackedScene>(
             "res://player/character_systems/ObjectHands.tscn").Instantiate();
-
+        
         // Initial settings - link objectCamera to character
         characterInteraction_Instance.objectCamera = objectCamera_Instance;
         characterInteraction_Instance.objectHands = objectHands_instance;
@@ -94,17 +94,17 @@ public partial class PlayerStart : Node3D
 
             // Set new rotation for objectCamera.NodeRotY (look rotation horizontal)
             Vector3 newRotation = objectCamera_Instance.NodeRotY.Rotation;
-            newRotation.y = GlobalRotation.y;
+            newRotation.Y = GlobalRotation.Y;
             objectCamera_Instance.NodeRotY.Rotation = newRotation;
 
             // Set new rotation for character just for case
             newRotation = characterInteraction_Instance.GlobalRotation;
-            newRotation.y = GlobalRotation.y;
+            newRotation.Y = GlobalRotation.Y;
             characterInteraction_Instance.GlobalRotation = newRotation;
 
             // Set new rotation for objectHands just for case
             newRotation = objectHands_instance.GlobalRotation;
-            newRotation.y = GlobalRotation.y;
+            newRotation.Y = GlobalRotation.Y;
             objectHands_instance.GlobalRotation = newRotation;
             
             // !!! SHADER PRECOMPILATION PROCESS START !!!

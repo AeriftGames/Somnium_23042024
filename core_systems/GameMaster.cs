@@ -26,9 +26,6 @@ public partial class GameMaster : Node
 	//
 	private Control blackScreen = null;
 
-	// pro testovani hledani objektu podle id
-	[Export] ulong needObjectID = 1;
-
 	//
 	private bool isQuitting = false;
 
@@ -149,9 +146,6 @@ public partial class GameMaster : Node
 
 	public override void _Process(double delta)
 	{
-		if (Input.IsActionJustPressed("testDebug"))
-			GD.Print("objekt ktery hledame ma nazev: " + GD.InstanceFromId(needObjectID).GetClass());
-
 		LevelLoader.Update(delta);
 	}
 

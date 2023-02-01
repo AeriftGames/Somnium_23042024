@@ -4,23 +4,22 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://d0axphodwd5op"
 path.s3tc="res://.godot/imported/cabinet.png-ec6b634e298c8f1f0d291c355bb2dba4.s3tc.ctex"
-path.etc2="res://.godot/imported/cabinet.png-ec6b634e298c8f1f0d291c355bb2dba4.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc", "etc2"],
+"imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://objects/furniture/cabinet.png"
-dest_files=["res://.godot/imported/cabinet.png-ec6b634e298c8f1f0d291c355bb2dba4.s3tc.ctex", "res://.godot/imported/cabinet.png-ec6b634e298c8f1f0d291c355bb2dba4.etc2.ctex"]
+dest_files=["res://.godot/imported/cabinet.png-ec6b634e298c8f1f0d291c355bb2dba4.s3tc.ctex"]
 
 [params]
 
 compress/mode=2
+compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
-compress/bptc_ldr=0
 compress/normal_map=0
 compress/channel_pack=0
 mipmaps/generate=true

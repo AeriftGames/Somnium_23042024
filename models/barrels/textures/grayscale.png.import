@@ -4,23 +4,22 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://b1i3j28gy0g02"
 path.s3tc="res://.godot/imported/grayscale.png-be6a7d42bfe25030cc17f92b8b70a0a2.s3tc.ctex"
-path.etc2="res://.godot/imported/grayscale.png-be6a7d42bfe25030cc17f92b8b70a0a2.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc", "etc2"],
+"imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://models/barrels/textures/grayscale.png"
-dest_files=["res://.godot/imported/grayscale.png-be6a7d42bfe25030cc17f92b8b70a0a2.s3tc.ctex", "res://.godot/imported/grayscale.png-be6a7d42bfe25030cc17f92b8b70a0a2.etc2.ctex"]
+dest_files=["res://.godot/imported/grayscale.png-be6a7d42bfe25030cc17f92b8b70a0a2.s3tc.ctex"]
 
 [params]
 
 compress/mode=2
+compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
-compress/bptc_ldr=0
 compress/normal_map=0
 compress/channel_pack=0
 mipmaps/generate=true

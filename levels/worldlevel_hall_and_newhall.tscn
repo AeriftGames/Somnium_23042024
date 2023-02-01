@@ -96,7 +96,6 @@ InGameStartEnableSDFGI = true
 
 [node name="worldlevel_occluderculling" type="OccluderInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.3756, 0)
-visible = false
 occluder = ExtResource("2_flopx")
 bake_mask = 4293918721
 

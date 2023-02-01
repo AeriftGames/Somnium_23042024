@@ -72,7 +72,7 @@ public partial class wardrobe_small : Node3D
     public void UpdateDoor(double delta)
     {
         var newVel = wardrobeDoorGrab.GlobalPosition.DirectionTo(
-            targetMove.GlobalPosition).Normalized() * motionMouse.y * mouseMotionSpeed;
+            targetMove.GlobalPosition).Normalized() * motionMouse.Y * mouseMotionSpeed;
 
         switch (grabMoveType)
         {

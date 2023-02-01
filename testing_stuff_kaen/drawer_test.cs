@@ -23,7 +23,7 @@ public partial class drawer_test : Node3D
 	private Vector2 motionMouse = Vector2.Zero;
 
     private RigidBody3D drawerGrab = null;
-	private Generic6DOFJoint3D genericJoint = null;
+	private Generic6DofJoint3D genericJoint = null;
 
     bool mouseUpdated = false;
 
@@ -32,12 +32,12 @@ public partial class drawer_test : Node3D
 		interactiveObject = GetNode<interactive_object>("DrawerGrab/interactive_object");
 
 		drawerGrab = GetNode<RigidBody3D>("DrawerGrab");
-		genericJoint = GetNode<Generic6DOFJoint3D>("GenericJoint");
+		genericJoint = GetNode<Generic6DofJoint3D>("GenericJoint");
 
         drawerGrab.Inertia = drawerInertia;
         drawerGrab.LinearDamp = drawerLinearDamp;
         drawerGrab.AngularDamp = drawerAngularDamp;
-		genericJoint.SetParamZ(Generic6DOFJoint3D.Param.LinearLowerLimit,linearLimitZ);
+		genericJoint.SetParamZ(Generic6DofJoint3D.Param.LinearLowerLimit,linearLimitZ);
         drawerGrab.Mass = drawerMass;
 	}
 
@@ -82,7 +82,7 @@ public partial class drawer_test : Node3D
     public void UpdateDrawer(double delta)
     {
         // nastavime velocity podle motion mouse
-        var newVel = drawerGrab.GlobalTransform.basis.z.Normalized() * motionMouse.y * mouseMotionSpeed;
+        var newVel = drawerGrab.GlobalTransform.Basis.Z.Normalized() * motionMouse.Y * mouseMotionSpeed;
 
         switch (grabMoveType) 
         {
