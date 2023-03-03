@@ -1,0 +1,65 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="Script" path="res://placeholders/PhysicsItems/physic_item_test.cs" id="1_hq0lu"]
+[ext_resource type="AudioStream" uid="uid://i5s8a8274bq6" path="res://audio/audio_streams/interactive_basic/36787__farbin__drop-cardboard-box.wav" id="2_q41vs"]
+[ext_resource type="Script" path="res://core_systems/interactive_system/interactive_object.cs" id="3_401v3"]
+[ext_resource type="PackedScene" uid="uid://wdo2apiyqbpo" path="res://testing_oalar/box.tscn" id="3_gxnw8"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_l84ni"]
+friction = 0.5
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2rf0e"]
+size = Vector3(1.11953, 1.15231, 1.03376)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_d42n3"]
+radius = 1.99958
+
+[node name="PhysicItem_gas_tank_small" type="RigidBody3D"]
+collision_layer = 9
+collision_mask = 8
+mass = 5.0
+physics_material_override = SubResource("PhysicsMaterial_l84ni")
+gravity_scale = 0.75
+continuous_cd = true
+max_contacts_reported = 2
+contact_monitor = true
+linear_damp = 1.0
+angular_damp = 1.0
+script = ExtResource("1_hq0lu")
+UseActionText = "-pick-"
+PhysicEffectsAudioStream = [ExtResource("2_q41vs")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.401975, 0, 0, 0, 0.332057, 0, 0, 0, 0.355775, 0, 0.0432713, 0)
+shape = SubResource("BoxShape3D_2rf0e")
+
+[node name="Box" parent="." instance=ExtResource("3_gxnw8")]
+
+[node name="interactive_object" type="Node3D" parent="." groups=["interactive_object"]]
+script = ExtResource("3_401v3")
+InteractiveLevel = 2
+metadata/_edit_lock_ = true
+
+[node name="StaticBody3D" type="StaticBody3D" parent="interactive_object"]
+collision_layer = 4
+collision_mask = 0
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="interactive_object/StaticBody3D"]
+transform = Transform3D(0.401975, 0, 0, 0, 0.332057, 0, 0, 0, 0.355775, 0, 0.0432713, 0)
+shape = SubResource("BoxShape3D_2rf0e")
+
+[node name="interactive_object_area3D" type="Area3D" parent="interactive_object/StaticBody3D"]
+collision_layer = 4
+collision_mask = 2
+monitorable = false
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="interactive_object/StaticBody3D/interactive_object_area3D"]
+shape = SubResource("SphereShape3D_d42n3")
+metadata/_edit_lock_ = true
+
+[node name="AudioPlayer_PhysicEffects" type="AudioStreamPlayer3D" parent="."]
+
+[connection signal="body_entered" from="interactive_object/StaticBody3D/interactive_object_area3D" to="interactive_object" method="_on_interactive_object_area_3d_body_entered"]
+[connection signal="body_exited" from="interactive_object/StaticBody3D/interactive_object_area3D" to="interactive_object" method="_on_interactive_object_area_3d_body_exited"]

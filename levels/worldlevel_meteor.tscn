@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://c43oig653gcvy"]
+[gd_scene load_steps=46 format=3 uid="uid://6odw5nbqrcpi"]
 
 [ext_resource type="ArrayOccluder3D" uid="uid://c65wc0yeg3cak" path="res://levels/world_level_rooms/worldlevel_rooms_test.occ" id="1_48aky"]
 [ext_resource type="Script" path="res://levels/worldlevel_meteor.gd" id="1_0375g"]
@@ -33,10 +33,10 @@
 [ext_resource type="PackedScene" uid="uid://c7ohsu8vdlks6" path="res://objects/misc/food_can/food_can.tscn" id="32_am5io"]
 [ext_resource type="PackedScene" uid="uid://dhg3c333pnd8n" path="res://objects/battery/batery_new.tscn" id="33_ak0xq"]
 [ext_resource type="PackedScene" uid="uid://dsqqgpmcwgjvg" path="res://testing_oalar/chemlight.tscn" id="34_pq7dj"]
-[ext_resource type="PackedScene" path="res://models/shelves/shelf_1/shelf_big_back.tscn" id="37_gjsq0"]
 [ext_resource type="PackedScene" uid="uid://cmso6nb03kmgl" path="res://testing_oalar/box2.glb" id="37_s7lcx"]
 [ext_resource type="PackedScene" path="res://testing_oalar/poster.tscn" id="37_xticy"]
-[ext_resource type="PackedScene" uid="uid://bidh1jafqnmu2" path="res://testing_oalar/bunker.glb" id="38_fjt1y"]
+[ext_resource type="PackedScene" path="res://placeholders/PhysicsItems/box_test.tscn" id="38_qw5pi"]
+[ext_resource type="PackedScene" uid="uid://d2wp3eif66h15" path="res://testing_oalar/bunker.glb" id="39_wqnys"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_nrkwj"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -349,10 +349,11 @@ omni_range = 22.85
 omni_attenuation = 1.74111
 
 [node name="light_celling" parent="Lights" instance=ExtResource("21_7dcuu")]
-transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -5.98626, 2.56009, -1.73624)
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -5.98626, 2.56009, -4.05513)
 
 [node name="OmniLight3DFlashing" parent="Lights/light_celling" instance=ExtResource("14_cmtqf")]
 transform = Transform3D(3.33333, 0, 0, 0, 1.54716, -2.95253, 0, 2.95253, 1.54716, 0, -0.524133, 0)
+light_energy = 8.455
 
 [node name="light_celling2" parent="Lights" instance=ExtResource("21_7dcuu")]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -5.98626, 2.56009, 9.32938)
@@ -501,7 +502,7 @@ transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -6.85918, 1.2215, -11.5
 can_type = 0
 
 [node name="food_can3" parent="." instance=ExtResource("32_am5io")]
-transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -2.91382, 0.912551, -8.57338)
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -2.40583, 1.36989, -9.0407)
 can_type = 0
 
 [node name="food_can4" parent="." instance=ExtResource("32_am5io")]
@@ -559,13 +560,13 @@ transform = Transform3D(-0.0118022, 0.886206, 0.463141, -0.999911, -0.0133165, 0
 transform = Transform3D(0.00309128, -0.232118, 0.972682, -0.999911, -0.0133165, 0, 0.0129527, -0.972597, -0.232138, -7.25902, 0.104475, -8.34572)
 
 [node name="batery_new4" parent="." instance=ExtResource("33_ak0xq")]
-transform = Transform3D(-0.0129183, 0.970011, 0.242718, -0.999911, -0.0133165, 4.31334e-10, 0.00323215, -0.242696, 0.970097, -2.94481, 0.954821, -9.0852)
+transform = Transform3D(-0.0129183, 0.970011, 0.242718, -0.999911, -0.0133165, 4.31334e-10, 0.00323215, -0.242696, 0.970097, -2.94481, 1.75205, -9.0852)
 
 [node name="batery_new5" parent="." instance=ExtResource("33_ak0xq")]
-transform = Transform3D(-0.00253703, 0.190501, 0.981684, -0.999911, -0.0133165, 6.3716e-10, 0.0130726, -0.981597, 0.190518, -2.96136, 0.954821, -9.1631)
+transform = Transform3D(-0.00253703, 0.190501, 0.981684, -0.999911, -0.0133165, 6.3716e-10, 0.0130726, -0.981597, 0.190518, -2.94481, 1.75205, -9.1631)
 
 [node name="batery_new6" parent="." instance=ExtResource("33_ak0xq")]
-transform = Transform3D(0.00319561, -0.239953, 0.970779, -0.999911, -0.0133165, 8.17188e-10, 0.0129274, -0.970693, -0.239974, -2.99353, 0.954821, -9.00705)
+transform = Transform3D(0.00319561, -0.239953, 0.970779, -0.999911, -0.0133165, 8.17188e-10, 0.0129274, -0.970693, -0.239974, -2.99353, 1.75205, -9.00705)
 
 [node name="batery_new3" parent="." instance=ExtResource("33_ak0xq")]
 transform = Transform3D(0.00187125, -0.140509, -0.990078, -0.999911, -0.0133165, -1.7254e-10, -0.0131844, 0.98999, -0.140521, -3.02996, 1.27126, -8.65296)
@@ -585,11 +586,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.14548, 0.912764, 2.65053)
 [node name="poster" parent="." instance=ExtResource("37_xticy")]
 transform = Transform3D(-0.000185604, 0.998798, 0.0490063, 0.00378276, 0.0490067, -0.998791, -0.999993, 0, -0.00378731, -9.26157, 1.28378, 4.874)
 
-[node name="bunker" parent="." instance=ExtResource("38_fjt1y")]
-transform = Transform3D(-0.0206982, 0, 0.999786, 0, 1, 0, -0.999786, 0, -0.0206982, -9.61983, 1.48337, -1.75168)
+[node name="bunker" parent="." instance=ExtResource("39_wqnys")]
+transform = Transform3D(-0.0206982, 0, 0.999786, 0, 1, 0, -0.999786, 0, -0.0206982, -11.792, 1.48337, 5.8001)
 
-[node name="shelf_big_back" parent="." instance=ExtResource("37_gjsq0")]
-transform = Transform3D(-5.24537e-08, 0, -1.2, 0, 1.2, 0, 1.2, 0, -5.24537e-08, -2.6206, 1.19209e-07, -8.90771)
+[node name="PhysicItem_gas_tank_small" parent="." instance=ExtResource("38_qw5pi")]
+transform = Transform3D(-0.171877, 0.985118, 0, 0.232111, 0.0404973, -0.971846, -0.957383, -0.167038, -0.235617, -4.18953, 1.78175, -9.55664)
+
+[node name="bunker2" parent="." instance=ExtResource("39_wqnys")]
+transform = Transform3D(0.0212217, 0, 0.999775, 0, 1, 0, -0.999775, 0, 0.0212217, -13.0734, 1.81618, -1.70935)
+
+[node name="Node3D" type="Node3D" parent="."]
 
 [editable path="LevelGeometry/Grounds/floor3"]
 [editable path="cabinet_small3"]
