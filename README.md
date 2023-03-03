@@ -9,8 +9,8 @@ Herní prototyp vytvořený pomocí herního engine *Godot 4 beta 3.**
 - [Somnium Prototype](#somnium-prototype)
   * [Seznam kapitol](#seznam-kapitol)
   * [Všeobecný popis](#v-eobecn--popis)
-    + [Inspirace](#inspirace)
-    + [Gameplay](#gameplay)
+	+ [Inspirace](#inspirace)
+	+ [Gameplay](#gameplay)
   * [Dokumentace](#dokumentace)
   * [Story](#story)
 

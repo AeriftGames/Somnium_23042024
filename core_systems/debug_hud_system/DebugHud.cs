@@ -225,75 +225,75 @@ public partial class DebugHud : Control
 		// pokud mame vybrany mod windowed, tak povolime moznost vybrat velikost okna, jinak ne
 		if(GameMaster.GM.GetSettings().GetActual_ScreenMode() == 0)
 		{
-            GetNode<OptionButton>("OptionsPanel/TabContainer/video/WindowSize_HBoxContainer/" +
-                "WindowSize_OptionButton").Disabled = false;
+			GetNode<OptionButton>("OptionsPanel/TabContainer/video/WindowSize_HBoxContainer/" +
+				"WindowSize_OptionButton").Disabled = false;
 			GetNode<OptionButton>("OptionsPanel/TabContainer/video/WindowSize_HBoxContainer/" +
 				"WindowSize_OptionButton").Selected = GameMaster.GM.GetSettings().GetActual_ScreenSizeID();
-        }
-        else
+		}
+		else
 		{
-            GetNode<OptionButton>("OptionsPanel/TabContainer/video/WindowSize_HBoxContainer/" +
-                "WindowSize_OptionButton").Disabled = true;
-            GetNode<OptionButton>("OptionsPanel/TabContainer/video/WindowSize_HBoxContainer/" +
-                "WindowSize_OptionButton").Selected = 2;
-        }
-    }
+			GetNode<OptionButton>("OptionsPanel/TabContainer/video/WindowSize_HBoxContainer/" +
+				"WindowSize_OptionButton").Disabled = true;
+			GetNode<OptionButton>("OptionsPanel/TabContainer/video/WindowSize_HBoxContainer/" +
+				"WindowSize_OptionButton").Selected = 2;
+		}
+	}
 
 	// Signal pro zmenu screen mode skrze option button
-    public void _on_screen_mode_option_button_item_selected(int newID)
+	public void _on_screen_mode_option_button_item_selected(int newID)
 	{
 		GameMaster.GM.GetSettings().Apply_ScreenMode(newID,true,false);
 		CheckScreenModeSetting();	// volame pro logiku zapnuti/vypnuti moznosti vybirat velikost okna
-    }
+	}
 
-    // Signal pro zmenu rozliseni skrze option button
-    public void _on_window_size_option_button_item_selected(int newID)
-    {
+	// Signal pro zmenu rozliseni skrze option button
+	public void _on_window_size_option_button_item_selected(int newID)
+	{
 		// only apply
-        GameMaster.GM.GetSettings().Apply_ScreenSizeID(newID, true, false);
-    }
+		GameMaster.GM.GetSettings().Apply_ScreenSizeID(newID, true, false);
+	}
 
-    // Signal pr zmenu antialiasingu skrze option button
-    public void _on_antialias_option_button_item_selected(int newID)
+	// Signal pr zmenu antialiasingu skrze option button
+	public void _on_antialias_option_button_item_selected(int newID)
 	{
 		// only apply
 		GameMaster.GM.GetSettings().Apply_AntialiasID(newID, true, false);
 	}
 
-    public void _on_scale_3d_h_slider_value_changed(float newValue)
+	public void _on_scale_3d_h_slider_value_changed(float newValue)
 	{
-        // only apply
-        GameMaster.GM.GetSettings().Apply_Scale3D(newValue / 100.0f,true,false);
+		// only apply
+		GameMaster.GM.GetSettings().Apply_Scale3D(newValue / 100.0f,true,false);
 
 		Label scale3dLabel = GetNode<Label>("OptionsPanel/TabContainer/video/Scale3d_HBoxContainer/Scale3dvalue_Label");
 		scale3dLabel.Text = (newValue / 100.0f).ToString();
-    }
+	}
 
 	public void _on_half_res_gi_check_box_toggled(bool newPressed)
 	{
-        // only apply
-        GameMaster.GM.GetSettings().Apply_HalfResolutionGI(newPressed,true,false);
-    }
+		// only apply
+		GameMaster.GM.GetSettings().Apply_HalfResolutionGI(newPressed,true,false);
+	}
 
 	public void _on_ssao_check_box_toggled(bool newPressed)
 	{
-        // only apply
-        GameMaster.GM.GetSettings().Apply_Ssao(newPressed,true,false);
-    }
+		// only apply
+		GameMaster.GM.GetSettings().Apply_Ssao(newPressed,true,false);
+	}
 
-    public void _on_ssil_check_box_toggled(bool newPressed)
+	public void _on_ssil_check_box_toggled(bool newPressed)
 	{
-        // only apply
+		// only apply
 		GameMaster.GM.GetSettings().Apply_Ssil(newPressed,true,false);
-    }
+	}
 
-    public void _on_sdfgi_check_box_toggled(bool newPressed)
+	public void _on_sdfgi_check_box_toggled(bool newPressed)
 	{
-       // only apply
+	   // only apply
 	   GameMaster.GM.GetSettings().Apply_Sdfgi(newPressed,true,false);
-    }
+	}
 
-    public void _on_unlock_max_fps_check_box_toggled(bool newPressed)
+	public void _on_unlock_max_fps_check_box_toggled(bool newPressed)
 	{
 		// only apply
 		GameMaster.GM.GetSettings().Apply_UnlockMaxFps(newPressed,true,false);
@@ -305,7 +305,7 @@ public partial class DebugHud : Control
 		GameMaster.GM.GetSettings().Apply_DisableVsync(newPressed, true, false);
 	}
 
-    public void _on_save_as_default_button_pressed()
+	public void _on_save_as_default_button_pressed()
 	{
 		// save all actual graphics settings
 		GameMaster.GM.GetSettings().SaveActual_AllGraphicsSettings();
@@ -313,15 +313,15 @@ public partial class DebugHud : Control
 
 	public void ApplyAllVideoControls()
 	{
-        // screen mode
-        OptionButton screenmode_option = GetNode<OptionButton>("OptionsPanel/TabContainer/video/" +
+		// screen mode
+		OptionButton screenmode_option = GetNode<OptionButton>("OptionsPanel/TabContainer/video/" +
 			"ScreenMode_HBoxContainer/ScreenMode_OptionButton");
 		screenmode_option.Selected = GameMaster.GM.GetSettings().GetActual_ScreenMode();
 
-        CheckScreenModeSetting();	// volame pro logiku zapnuti/vypnuti moznosti vybirat velikost okna
+		CheckScreenModeSetting();	// volame pro logiku zapnuti/vypnuti moznosti vybirat velikost okna
 
-        // antialias 
-        OptionButton antialias_option = GetNode<OptionButton>("OptionsPanel/TabContainer/video/" +
+		// antialias 
+		OptionButton antialias_option = GetNode<OptionButton>("OptionsPanel/TabContainer/video/" +
 			"Antialias_HBoxContainer/Antialias_OptionButton");
 		antialias_option.Selected = GameMaster.GM.GetSettings().GetActual_AntialiasID();
 
@@ -329,13 +329,13 @@ public partial class DebugHud : Control
 			"WindowSize_HBoxContainer/WindowSize_OptionButton");
 		windowsize_option.Selected = GameMaster.GM.GetSettings().GetActual_ScreenSizeID();
 
-        // scale 3d
-        HSlider scale3d_slider = GetNode<HSlider>("OptionsPanel/TabContainer/video/" +
+		// scale 3d
+		HSlider scale3d_slider = GetNode<HSlider>("OptionsPanel/TabContainer/video/" +
 			"Scale3d_HBoxContainer/Scale3d_HSlider");
 		scale3d_slider.Value = GameMaster.GM.GetSettings().GetActual_Scale3D() * 100.0f;
 
-        Label scale3d_label = GetNode<Label>("OptionsPanel/TabContainer/video/Scale3d_HBoxContainer/Scale3dvalue_Label");
-        scale3d_label.Text = GameMaster.GM.GetSettings().GetActual_Scale3D().ToString();
+		Label scale3d_label = GetNode<Label>("OptionsPanel/TabContainer/video/Scale3d_HBoxContainer/Scale3dvalue_Label");
+		scale3d_label.Text = GameMaster.GM.GetSettings().GetActual_Scale3D().ToString();
 
 		// half resolution gi
 		CheckBox halfresgi_checkbox = GetNode<CheckBox>("OptionsPanel/TabContainer/video/HalfResGI_CheckBox");
@@ -345,50 +345,50 @@ public partial class DebugHud : Control
 		CheckBox ssao_checkbox = GetNode<CheckBox>("OptionsPanel/TabContainer/video/Ssao_CheckBox");
 		ssao_checkbox.ButtonPressed = GameMaster.GM.GetSettings().GetActual_Ssao();
 
-        // ssil
-        CheckBox ssil_checkbox = GetNode<CheckBox>("OptionsPanel/TabContainer/video/Ssil_CheckBox");
-        ssil_checkbox.ButtonPressed = GameMaster.GM.GetSettings().GetActual_Ssil();
+		// ssil
+		CheckBox ssil_checkbox = GetNode<CheckBox>("OptionsPanel/TabContainer/video/Ssil_CheckBox");
+		ssil_checkbox.ButtonPressed = GameMaster.GM.GetSettings().GetActual_Ssil();
 
-        // sdfgi
-        CheckBox sdfgi_checkbox = GetNode<CheckBox>("OptionsPanel/TabContainer/video/Sdfgi_CheckBox");
-        sdfgi_checkbox.ButtonPressed = GameMaster.GM.GetSettings().GetActual_Sdfgi();
+		// sdfgi
+		CheckBox sdfgi_checkbox = GetNode<CheckBox>("OptionsPanel/TabContainer/video/Sdfgi_CheckBox");
+		sdfgi_checkbox.ButtonPressed = GameMaster.GM.GetSettings().GetActual_Sdfgi();
 
 		CheckBox unlockmaxfps_checkbox = GetNode<CheckBox>("OptionsPanel/TabContainer/video/UnlockMaxFps_CheckBox");
 		unlockmaxfps_checkbox.ButtonPressed = GameMaster.GM.GetSettings().GetActual_UnlockMaxFps();
 
 		CheckBox vsync_checkbox = GetNode<CheckBox>("OptionsPanel/TabContainer/video/DisableVsync_CheckBox");
 		vsync_checkbox.ButtonPressed = GameMaster.GM.GetSettings().GetActual_DisableVsync();
-    }
+	}
 
-    public void _on_main_volume_h_slider_value_changed(float newValue)
+	public void _on_main_volume_h_slider_value_changed(float newValue)
 	{
-        // only apply
-        GameMaster.GM.GetSettings().Apply_MainVolume(newValue, true, false);
+		// only apply
+		GameMaster.GM.GetSettings().Apply_MainVolume(newValue, true, false);
 
 		// update label
-        Label mainVolume_label = GetNode<Label>("OptionsPanel/TabContainer/audio/audio_HBoxContainer/mainVolume_Label");
-        mainVolume_label.Text = newValue.ToString() + " db"; ;
-    }
+		Label mainVolume_label = GetNode<Label>("OptionsPanel/TabContainer/audio/audio_HBoxContainer/mainVolume_Label");
+		mainVolume_label.Text = newValue.ToString() + " db"; ;
+	}
 
 	public void _on_sfx_volume_h_slider_value_changed(float newValue)
 	{
-        // only apply
-        GameMaster.GM.GetSettings().Apply_SfxVolume(newValue, true, false);
+		// only apply
+		GameMaster.GM.GetSettings().Apply_SfxVolume(newValue, true, false);
 
-        // update label
-        Label sfxVolume_label = GetNode<Label>("OptionsPanel/TabContainer/audio/audio_HBoxContainer2/sfxVolume_Label");
-        sfxVolume_label.Text = newValue.ToString() + " db"; ;
-    }
+		// update label
+		Label sfxVolume_label = GetNode<Label>("OptionsPanel/TabContainer/audio/audio_HBoxContainer2/sfxVolume_Label");
+		sfxVolume_label.Text = newValue.ToString() + " db"; ;
+	}
 
 	public void _on_music_volume_h_slider_value_changed(float newValue)
 	{
-        // only apply
-        GameMaster.GM.GetSettings().Apply_MusicVolume(newValue, true, false);
+		// only apply
+		GameMaster.GM.GetSettings().Apply_MusicVolume(newValue, true, false);
 
-        // update label
-        Label musicVolume_label = GetNode<Label>("OptionsPanel/TabContainer/audio/audio_HBoxContainer3/musicVolume_Label");
-        musicVolume_label.Text = newValue.ToString() + " db"; ;
-    }
+		// update label
+		Label musicVolume_label = GetNode<Label>("OptionsPanel/TabContainer/audio/audio_HBoxContainer3/musicVolume_Label");
+		musicVolume_label.Text = newValue.ToString() + " db"; ;
+	}
 
 	public void ApplyAllAudioControls()
 	{
@@ -399,26 +399,26 @@ public partial class DebugHud : Control
 		Label mainVolumeLabel = GetNode<Label>("OptionsPanel/TabContainer/audio/audio_HBoxContainer/mainVolume_Label");
 		mainVolumeLabel.Text = GameMaster.GM.GetSettings().GetActual_MainVolume().ToString() + " db";
 
-        // sfx volume
-        HSlider sfxVolumeSlider = GetNode<HSlider>("OptionsPanel/TabContainer/audio/audio_HBoxContainer2/sfxVolume_HSlider");
+		// sfx volume
+		HSlider sfxVolumeSlider = GetNode<HSlider>("OptionsPanel/TabContainer/audio/audio_HBoxContainer2/sfxVolume_HSlider");
 		sfxVolumeSlider.Value = GameMaster.GM.GetSettings().GetActual_SfxVolume();
 
-        Label sfxVolumeLabel = GetNode<Label>("OptionsPanel/TabContainer/audio/audio_HBoxContainer2/sfxVolume_Label");
-        sfxVolumeLabel.Text = GameMaster.GM.GetSettings().GetActual_SfxVolume().ToString() + " db"; ;
+		Label sfxVolumeLabel = GetNode<Label>("OptionsPanel/TabContainer/audio/audio_HBoxContainer2/sfxVolume_Label");
+		sfxVolumeLabel.Text = GameMaster.GM.GetSettings().GetActual_SfxVolume().ToString() + " db"; ;
 
-        // sfx volume
-        HSlider musicVolumeSlider = GetNode<HSlider>("OptionsPanel/TabContainer/audio/audio_HBoxContainer3/musicVolume_HSlider");
-        musicVolumeSlider.Value = GameMaster.GM.GetSettings().GetActual_MusicVolume();
+		// sfx volume
+		HSlider musicVolumeSlider = GetNode<HSlider>("OptionsPanel/TabContainer/audio/audio_HBoxContainer3/musicVolume_HSlider");
+		musicVolumeSlider.Value = GameMaster.GM.GetSettings().GetActual_MusicVolume();
 
-        Label musicVolumeLabel = GetNode<Label>("OptionsPanel/TabContainer/audio/audio_HBoxContainer3/musicVolume_Label");
-        musicVolumeLabel.Text = GameMaster.GM.GetSettings().GetActual_MusicVolume().ToString() + " db"; ;
-    }
+		Label musicVolumeLabel = GetNode<Label>("OptionsPanel/TabContainer/audio/audio_HBoxContainer3/musicVolume_Label");
+		musicVolumeLabel.Text = GameMaster.GM.GetSettings().GetActual_MusicVolume().ToString() + " db"; ;
+	}
 
 	public void _on_save_audio_as_default_button_pressed()
 	{
 		// save all actual graphics settings
 		GameMaster.GM.GetSettings().SaveActual_AllAudioSettings();
-    }
+	}
 
 	public void ApplyAllMainControls()
 	{
@@ -427,51 +427,51 @@ public partial class DebugHud : Control
 
 		SetEnable(data.ShowDebugHud);
 
-        GetNode<CheckBox>("OptionsPanel/TabContainer/main/ShowFps_CheckBox").ButtonPressed = data.ShowFps;
-        _on_show_performance_check_box_toggled(data.ShowPerformance);
+		GetNode<CheckBox>("OptionsPanel/TabContainer/main/ShowFps_CheckBox").ButtonPressed = data.ShowFps;
+		_on_show_performance_check_box_toggled(data.ShowPerformance);
 
-        GetNode<CheckBox>("OptionsPanel/TabContainer/main/ShowPerformance_CheckBox").ButtonPressed = data.ShowPerformance;
+		GetNode<CheckBox>("OptionsPanel/TabContainer/main/ShowPerformance_CheckBox").ButtonPressed = data.ShowPerformance;
 
 		GetNode<CheckBox>("OptionsPanel/TabContainer/main/CustomLabelEnable_Checkbox0").ButtonPressed = data.ShowCustomLabel0;
-        GetNode<CheckBox>("OptionsPanel/TabContainer/main/CustomLabelEnable_Checkbox1").ButtonPressed = data.ShowCustomLabel1;
-        GetNode<CheckBox>("OptionsPanel/TabContainer/main/CustomLabelEnable_Checkbox2").ButtonPressed = data.ShowCustomLabel2;
-        GetNode<CheckBox>("OptionsPanel/TabContainer/main/CustomLabelEnable_Checkbox3").ButtonPressed = data.ShowCustomLabel3;
-        GetNode<CheckBox>("OptionsPanel/TabContainer/main/CustomLabelEnable_Checkbox4").ButtonPressed = data.ShowCustomLabel4;
-        GetNode<CheckBox>("OptionsPanel/TabContainer/main/CustomLabelEnable_Checkbox5").ButtonPressed = data.ShowCustomLabel5;
-        GetNode<CheckBox>("OptionsPanel/TabContainer/main/CustomLabelEnable_Checkbox6").ButtonPressed = data.ShowCustomLabel6;
-        GetNode<CheckBox>("OptionsPanel/TabContainer/main/CustomLabelEnable_Checkbox7").ButtonPressed = data.ShowCustomLabel7;
-        GetNode<CheckBox>("OptionsPanel/TabContainer/main/CustomLabelEnable_Checkbox8").ButtonPressed = data.ShowCustomLabel8;
-        GetNode<CheckBox>("OptionsPanel/TabContainer/main/CustomLabelEnable_Checkbox9").ButtonPressed = data.ShowCustomLabel9;
+		GetNode<CheckBox>("OptionsPanel/TabContainer/main/CustomLabelEnable_Checkbox1").ButtonPressed = data.ShowCustomLabel1;
+		GetNode<CheckBox>("OptionsPanel/TabContainer/main/CustomLabelEnable_Checkbox2").ButtonPressed = data.ShowCustomLabel2;
+		GetNode<CheckBox>("OptionsPanel/TabContainer/main/CustomLabelEnable_Checkbox3").ButtonPressed = data.ShowCustomLabel3;
+		GetNode<CheckBox>("OptionsPanel/TabContainer/main/CustomLabelEnable_Checkbox4").ButtonPressed = data.ShowCustomLabel4;
+		GetNode<CheckBox>("OptionsPanel/TabContainer/main/CustomLabelEnable_Checkbox5").ButtonPressed = data.ShowCustomLabel5;
+		GetNode<CheckBox>("OptionsPanel/TabContainer/main/CustomLabelEnable_Checkbox6").ButtonPressed = data.ShowCustomLabel6;
+		GetNode<CheckBox>("OptionsPanel/TabContainer/main/CustomLabelEnable_Checkbox7").ButtonPressed = data.ShowCustomLabel7;
+		GetNode<CheckBox>("OptionsPanel/TabContainer/main/CustomLabelEnable_Checkbox8").ButtonPressed = data.ShowCustomLabel8;
+		GetNode<CheckBox>("OptionsPanel/TabContainer/main/CustomLabelEnable_Checkbox9").ButtonPressed = data.ShowCustomLabel9;
 
-        GetNode<CheckBox>("OptionsPanel/TabContainer/main/EnableWorldOcclusionCulling_CheckBox").ButtonPressed = 
+		GetNode<CheckBox>("OptionsPanel/TabContainer/main/EnableWorldOcclusionCulling_CheckBox").ButtonPressed = 
 			data.EnableWorldLevelOcclusionCull;
-    }
+	}
 
 	public void _on_save_main_as_default_button_pressed()
 	{
-        // ziskame ulozena data
-        global_settings_data data = GameMaster.GM.GetSettings().GetData();
+		// ziskame ulozena data
+		global_settings_data data = GameMaster.GM.GetSettings().GetData();
 
 		data.ShowDebugHud = isEnable;
 		data.ShowFps = GetNode<CheckBox>("OptionsPanel/TabContainer/main/ShowFps_CheckBox").ButtonPressed;
 		data.ShowPerformance = GetNode<CheckBox>("OptionsPanel/TabContainer/main/ShowPerformance_CheckBox").ButtonPressed;
 
 		data.ShowCustomLabel0 = GetCustomLabelEnable(0);
-        data.ShowCustomLabel1 = GetCustomLabelEnable(1);
-        data.ShowCustomLabel2 = GetCustomLabelEnable(2);
-        data.ShowCustomLabel3 = GetCustomLabelEnable(3);
-        data.ShowCustomLabel4 = GetCustomLabelEnable(4);
-        data.ShowCustomLabel5 = GetCustomLabelEnable(5);
-        data.ShowCustomLabel6 = GetCustomLabelEnable(6);
-        data.ShowCustomLabel7 = GetCustomLabelEnable(7);
-        data.ShowCustomLabel8 = GetCustomLabelEnable(8);
-        data.ShowCustomLabel9 = GetCustomLabelEnable(9);
+		data.ShowCustomLabel1 = GetCustomLabelEnable(1);
+		data.ShowCustomLabel2 = GetCustomLabelEnable(2);
+		data.ShowCustomLabel3 = GetCustomLabelEnable(3);
+		data.ShowCustomLabel4 = GetCustomLabelEnable(4);
+		data.ShowCustomLabel5 = GetCustomLabelEnable(5);
+		data.ShowCustomLabel6 = GetCustomLabelEnable(6);
+		data.ShowCustomLabel7 = GetCustomLabelEnable(7);
+		data.ShowCustomLabel8 = GetCustomLabelEnable(8);
+		data.ShowCustomLabel9 = GetCustomLabelEnable(9);
 
 		data.EnableWorldLevelOcclusionCull =
 			GetNode<CheckBox>("OptionsPanel/TabContainer/main/EnableWorldOcclusionCulling_CheckBox").ButtonPressed;
 
 		// ulozime data
 		data.Save();
-    }
+	}
 
 }

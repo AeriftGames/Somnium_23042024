@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://placeholders/PhysicsItems/physic_item_test.cs" id="1_4k42x"]
 [ext_resource type="AudioStream" uid="uid://i5s8a8274bq6" path="res://audio/audio_streams/interactive_basic/36787__farbin__drop-cardboard-box.wav" id="2_spmr8"]
-[ext_resource type="Texture2D" uid="uid://1rj1ukmm2rwp" path="res://testing_stuff_kaen/testing_level_hall/new_items/gas_tank_small_color.jpg" id="3_qlw7g"]
-[ext_resource type="Texture2D" uid="uid://he1vrdmoqk3x" path="res://testing_stuff_kaen/testing_level_hall/new_items/gas_tank_small_normal.jpg" id="4_ydtra"]
+[ext_resource type="Texture2D" uid="uid://1rj1ukmm2rwp" path="res://models/gas_tanks/small_gas_tank/gas_tank_small_color.jpg" id="3_qlw7g"]
+[ext_resource type="Texture2D" uid="uid://he1vrdmoqk3x" path="res://models/gas_tanks/small_gas_tank/gas_tank_small_normal.jpg" id="4_ydtra"]
 [ext_resource type="Script" path="res://core_systems/interactive_system/interactive_object.cs" id="5_nbryj"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_l84ni"]

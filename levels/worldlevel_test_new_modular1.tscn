@@ -1,0 +1,175 @@
+[gd_scene load_steps=9 format=3 uid="uid://dsqplpo60hp2f"]
+
+[ext_resource type="Script" path="res://levels/worldlevel.cs" id="1_u58sk"]
+[ext_resource type="ArrayOccluder3D" uid="uid://1dvpcggr1b7c" path="res://levels/worldlevel_test_new_modular1/worldlevel_test_new_modular1.occ" id="2_l1yac"]
+[ext_resource type="PackedScene" uid="uid://bet3idvc4fg0n" path="res://placeholders/PlayerStart.tscn" id="3_812sq"]
+[ext_resource type="PackedScene" uid="uid://6rotta4x1vn" path="res://testing_stuff_kaen/my_trim1/levelscene_test1.tscn" id="6_dim0a"]
+[ext_resource type="AudioStream" uid="uid://ngmb6mrvsbqc" path="res://audio/audio_streams/613738__punneedsounds__amb-ost1.mp3" id="12_wlh50"]
+[ext_resource type="Texture2D" uid="uid://cxuhj4tqdb5qw" path="res://testing_stuff_kaen/my_trim1/decals_tests2/trimsheet_3_low_DefaultMaterial_BaseColor.png" id="16_is0x1"]
+[ext_resource type="Texture2D" uid="uid://dgwuv4wnpu3rq" path="res://testing_stuff_kaen/my_trim1/decals_tests2/trimsheet_3_low_DefaultMaterial_Normal.png" id="17_wddkd"]
+
+[sub_resource type="Environment" id="Environment_p3qlj"]
+background_mode = 1
+background_energy_multiplier = 1.67
+ambient_light_source = 2
+ambient_light_color = Color(0.501961, 0.501961, 0.501961, 1)
+ambient_light_energy = 6.81
+tonemap_mode = 2
+ssao_enabled = true
+ssil_enabled = true
+sdfgi_enabled = true
+sdfgi_use_occlusion = true
+sdfgi_read_sky_light = false
+glow_enabled = true
+fog_enabled = true
+fog_light_energy = 0.42
+fog_density = 0.0009
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.0363
+
+[node name="worldlevel" type="Node3D"]
+script = ExtResource("1_u58sk")
+InGameStartEnableSDFGI = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_p3qlj")
+
+[node name="worldlevel_occluderculling" type="OccluderInstance3D" parent="."]
+occluder = ExtResource("2_l1yac")
+metadata/_edit_lock_ = true
+
+[node name="PlayerStart" parent="." instance=ExtResource("3_812sq")]
+transform = Transform3D(-1, 0, 5.96046e-08, 0, 1, 0, -5.96046e-08, 0, -1, -0.721933, -1.47101, 21.5182)
+
+[node name="Level" type="Node3D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="Decals" type="Node3D" parent="Level"]
+metadata/_edit_lock_ = true
+
+[node name="Decal22" type="Decal" parent="Level/Decals"]
+transform = Transform3D(0.279187, 0.271971, -0.920916, 0.0814937, 0.948879, 0.304936, 0.956772, -0.160183, 0.242751, 3.2168, -1.41242, 37.9146)
+texture_albedo = ExtResource("16_is0x1")
+texture_normal = ExtResource("17_wddkd")
+emission_energy = 0.0
+modulate = Color(0.862745, 0, 0, 1)
+upper_fade = 0.791705
+lower_fade = 0.689226
+distance_fade_enabled = true
+distance_fade_begin = 5.0
+
+[node name="Decal23" type="Decal" parent="Level/Decals"]
+transform = Transform3D(0.816672, 0.572628, -0.071721, -0.566054, 0.819028, 0.0936739, 0.112382, -0.0359028, 0.993016, 3.4647, -1.41242, 39.1611)
+size = Vector3(4, 4, 4)
+texture_albedo = ExtResource("16_is0x1")
+texture_normal = ExtResource("17_wddkd")
+emission_energy = 0.0
+modulate = Color(0.862745, 0, 0, 1)
+upper_fade = 0.738688
+lower_fade = 0.382372
+distance_fade_enabled = true
+distance_fade_begin = 5.0
+
+[node name="Decal24" type="Decal" parent="Level/Decals"]
+transform = Transform3D(0.816672, 0.572628, -0.071721, -0.566054, 0.819028, 0.0936739, 0.112382, -0.0359028, 0.993016, 3.4647, -1.41242, 40.2146)
+size = Vector3(4, 4, 4)
+texture_albedo = ExtResource("16_is0x1")
+texture_normal = ExtResource("17_wddkd")
+emission_energy = 0.0
+modulate = Color(0.862745, 0, 0, 1)
+upper_fade = 0.738688
+lower_fade = 0.382372
+distance_fade_enabled = true
+distance_fade_begin = 5.0
+
+[node name="Decal6" type="Decal" parent="Level/Decals"]
+transform = Transform3D(-0.687125, -0.27723, 0.671567, -0.568339, 0.780923, -0.259133, -0.452603, -0.559735, -0.694152, -0.0794005, -1.45712, 28.2308)
+size = Vector3(4, 4, 4)
+texture_albedo = ExtResource("16_is0x1")
+texture_normal = ExtResource("17_wddkd")
+emission_energy = 0.0
+modulate = Color(0.231373, 0.231373, 0.231373, 1)
+upper_fade = 0.219614
+lower_fade = 0.424269
+
+[node name="Decal10" type="Decal" parent="Level/Decals"]
+transform = Transform3D(-0.423496, -0.84599, -0.323963, -0.890561, 0.323268, 0.319996, -0.165986, 0.424027, -0.890309, 1.0372, 0.240935, 29.6722)
+size = Vector3(2, 2, 1.5)
+texture_albedo = ExtResource("16_is0x1")
+texture_normal = ExtResource("17_wddkd")
+emission_energy = 0.0
+modulate = Color(0.0745098, 0.0745098, 0.0745098, 1)
+upper_fade = 0.219614
+lower_fade = 0.424269
+
+[node name="Decal8" type="Decal" parent="Level/Decals"]
+transform = Transform3D(0.3125, 0.496216, 0.810008, -0.56834, 0.780923, -0.259133, -0.76114, -0.37938, 0.526058, 7.3888, -0.937053, 27.2573)
+size = Vector3(4, 4, 4)
+texture_albedo = ExtResource("16_is0x1")
+texture_normal = ExtResource("17_wddkd")
+emission_energy = 0.0
+upper_fade = 0.409814
+lower_fade = 0.600008
+
+[node name="Decal9" type="Decal" parent="Level/Decals"]
+transform = Transform3D(-0.136303, 0.221232, 0.965649, -0.568339, 0.780923, -0.259133, -0.811426, -0.584137, 0.0192933, 7.3888, -0.751871, 30.7569)
+size = Vector3(4, 4, 4)
+texture_albedo = ExtResource("16_is0x1")
+texture_normal = ExtResource("17_wddkd")
+emission_energy = 0.0
+modulate = Color(0.231373, 0.231373, 0.231373, 1)
+upper_fade = 0.848533
+lower_fade = 0.689228
+
+[node name="Decal7" type="Decal" parent="Level/Decals"]
+transform = Transform3D(0.879793, 0.410429, -0.239817, 0.105149, 0.323972, 0.940205, 0.463581, -0.852403, 0.241872, -1.1579, -1.55073, 34.3607)
+size = Vector3(10, 5, 5)
+texture_albedo = ExtResource("16_is0x1")
+texture_normal = ExtResource("17_wddkd")
+emission_energy = 0.0
+modulate = Color(0.231373, 0.231373, 0.231373, 1)
+upper_fade = 0.600003
+lower_fade = 0.68923
+
+[node name="Lights" type="Node3D" parent="Level"]
+metadata/_edit_lock_ = true
+
+[node name="OmniLight3D19" type="OmniLight3D" parent="Level/Lights"]
+transform = Transform3D(0.612466, 0.790479, 0.00535267, 0.548843, -0.420353, -0.722548, -0.568909, 0.445474, -0.6913, -0.491141, 0.850208, 28.7675)
+light_energy = 0.3
+light_indirect_energy = 10.0
+shadow_enabled = true
+omni_range = 8.0
+
+[node name="OmniLight3D22" type="OmniLight3D" parent="Level/Lights"]
+transform = Transform3D(0.612466, 0.790479, 0.00535267, 0.548843, -0.420353, -0.722548, -0.568909, 0.445474, -0.6913, 0.548759, 0.773951, 36.3692)
+light_energy = 0.15
+light_indirect_energy = 10.0
+shadow_enabled = true
+omni_range = 3.0
+
+[node name="OmniLight3D24" type="OmniLight3D" parent="Level/Lights"]
+transform = Transform3D(0.819842, 0.101939, 0.563443, 0.548843, -0.420353, -0.722547, 0.163189, 0.901616, -0.400572, 3.97286, 1.01129, 39.1521)
+light_energy = 0.3
+light_indirect_energy = 10.0
+shadow_enabled = true
+omni_range = 6.0
+omni_attenuation = 1.03526
+
+[node name="OmniLight3D21" type="OmniLight3D" parent="Level/Lights"]
+transform = Transform3D(0.612466, 0.790479, 0.00535267, 0.548843, -0.420353, -0.722548, -0.568909, 0.445474, -0.6913, 12.443, 0.150208, 28.9504)
+light_energy = 0.15
+light_indirect_energy = 5.0
+shadow_enabled = true
+omni_range = 7.0
+
+[node name="LevelScenes" type="Node3D" parent="Level"]
+metadata/_edit_lock_ = true
+
+[node name="levelscene_test1" parent="Level/LevelScenes" instance=ExtResource("6_dim0a")]
+metadata/_edit_lock_ = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_wlh50")
+autoplay = true
+bus = &"Music"

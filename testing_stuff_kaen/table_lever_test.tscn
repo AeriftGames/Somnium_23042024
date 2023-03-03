@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3]
+[gd_scene load_steps=26 format=3 uid="uid://b80okyu0a0rv3"]
 
 [ext_resource type="Script" path="res://testing_stuff_kaen/table_lever_test.cs" id="1_qnw6u"]
 [ext_resource type="PackedScene" uid="uid://dbnevtbu1g7uy" path="res://core_systems/interactive_system/interactive_object.tscn" id="2_vkk4a"]

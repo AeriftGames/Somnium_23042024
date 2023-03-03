@@ -16,9 +16,9 @@ dest_files=["res://.godot/imported/vent_big_box_color_001.jpg-b2c0909e07908607ea
 [params]
 
 compress/mode=0
+compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
-compress/bptc_ldr=0
 compress/normal_map=1
 compress/channel_pack=0
 mipmaps/generate=true

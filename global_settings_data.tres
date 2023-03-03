@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=2 format=3 uid="uid://cayclajjel51d"]
+[gd_resource type="Resource" load_steps=2 format=3]
 
 [ext_resource type="Script" path="res://core_systems/global_settings_data.cs" id="1_8rhwy"]
 
@@ -7,7 +7,7 @@ script = ExtResource("1_8rhwy")
 ScreenMode = 0
 ScreenSizeID = 1
 Scale3d = 1.0
-AntialiasID = 4
+AntialiasID = 3
 Sdfgi = true
 Ssao = true
 Ssil = true
