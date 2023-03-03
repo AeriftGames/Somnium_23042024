@@ -16,9 +16,9 @@ dest_files=["res://.godot/imported/carry_bod_diff_2k.jpg-8bb445e751899cf367b6834
 [params]
 
 compress/mode=0
+compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
-compress/bptc_ldr=0
 compress/normal_map=0
 compress/channel_pack=0
 mipmaps/generate=false

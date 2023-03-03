@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class CLevelLoaderInteractive : Godot.Object
+public partial class CLevelLoaderInteractive : Godot.GodotObject
 {
     private GameMaster gm;
     public string actualLevelName = (string)ProjectSettings.GetSetting("application/run/main_scene");

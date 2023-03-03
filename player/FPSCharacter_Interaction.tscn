@@ -14,6 +14,13 @@
 [node name="FPSCharacter_Interaction" instance=ExtResource("1_0ipjt")]
 wall_min_slide_angle = 0.0
 script = ExtResource("2_fmih3")
+CameraFovNormal = 65.0
+CameraFovZoomed = 40.0
+CameraFovInterpSpeed = 4.0
+CameraZoomToObjectZoomed = 35.0
+CameraZoomToObjectInterpSpeed = 4.0
+CameraZoomToObjectInterpRotationSpeed = 7.0
+CameraZoomToObjectSetPlayerDirection = false
 CanUse = true
 CanGrabObject = true
 CanThrowObject = true
@@ -36,8 +43,13 @@ RBPhysicInGrab_Bounce = 0.0
 RBPhysicInGrab_Mass = 1.0
 AudioFlashlight_On = ExtResource("3_l3f5j")
 AudioFlashlight_Off = ExtResource("4_0clxq")
+WalkCameraLerpHeight = 0.075
+RunCameraLerpHeight = 0.12
 
 [node name="HolderHands" type="Node3D" parent="HeadMain/HeadGimbalA/HeadGimbalB/HeadHolderCamera" index="0"]
+
+[node name="HeadCrunchPos" parent="." index="4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
 
 [node name="AudioStreamPlayer_Footsteps" parent="." index="5"]
 volume_db = -6.0
@@ -46,6 +58,7 @@ volume_db = -6.0
 volume_db = -3.0
 
 [node name="AudioStreamPlayer_TestItem" type="AudioStreamPlayer" parent="." index="7"]
+bus = &"Sfx"
 
 [node name="BasicHud" type="Control" parent="." index="8"]
 layout_mode = 3
@@ -58,6 +71,7 @@ mouse_filter = 1
 script = ExtResource("3_etvvy")
 
 [node name="Crosshair" type="ColorRect" parent="BasicHud" index="0"]
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -72,6 +86,7 @@ grow_vertical = 2
 
 [node name="UseLabel" type="Label" parent="BasicHud" index="1"]
 custom_minimum_size = Vector2(30, 0)
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -89,6 +104,7 @@ horizontal_alignment = 1
 [node name="HandGrabbedTexture" type="TextureRect" parent="BasicHud" index="2"]
 self_modulate = Color(1, 1, 1, 0.470588)
 custom_minimum_size = Vector2(50, 50)
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -101,11 +117,12 @@ offset_bottom = 63.753
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("6_fb16h")
-ignore_texture_size = true
+expand_mode = 1
 
 [node name="HandCanGrabTexture" type="TextureRect" parent="BasicHud" index="3"]
 self_modulate = Color(1, 1, 1, 0.470588)
 custom_minimum_size = Vector2(50, 50)
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -118,7 +135,7 @@ offset_bottom = 63.753
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("7_bqbud")
-ignore_texture_size = true
+expand_mode = 1
 
 [node name="Item_inspect" parent="." index="9" instance=ExtResource("5_iw50w")]
 visible = false

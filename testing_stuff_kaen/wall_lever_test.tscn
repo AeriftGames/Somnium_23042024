@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3]
+[gd_scene load_steps=26 format=3 uid="uid://bha2wtgj5713t"]
 
 [ext_resource type="PackedScene" uid="uid://dbnevtbu1g7uy" path="res://core_systems/interactive_system/interactive_object.tscn" id="1_wnwe3"]
 [ext_resource type="Script" path="res://testing_stuff_kaen/wall_lever_test.cs" id="1_yoxc4"]

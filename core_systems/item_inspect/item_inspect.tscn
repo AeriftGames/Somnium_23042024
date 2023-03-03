@@ -1,11 +1,11 @@
 [gd_scene load_steps=5 format=3 uid="uid://duwf5mdtkjlre"]
 
-[ext_resource type="Texture2D" uid="uid://0tpcivmy2wha" path="res://icon_old.svg" id="2_lnswo"]
+[ext_resource type="Texture2D" uid="uid://bp6a4pjrd1vkg" path="res://icon_old.svg" id="2_lnswo"]
 [ext_resource type="PackedScene" uid="uid://dgv2v2fyp45be" path="res://core_systems/item_inspect/sub_viewport.tscn" id="3_swgh1"]
 
 [sub_resource type="GDScript" id="GDScript_lw3d7"]
 script/source = "class_name item_inspect_old extends Control
-@icon(\"res://core_systems/item_pickup/item_pickup_icon.svg\")
+##@icon(\"res://core_systems/item_pickup/item_pickup_icon.svg\")
 
 var rotating: bool = false
 var prev_mouse_position
@@ -109,7 +109,7 @@ script = SubResource("GDScript_lw3d7")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 self_modulate = Color(0.529412, 0.529412, 0.529412, 0.694118)
-anchors_preset = 15
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
@@ -121,7 +121,7 @@ position = Vector2(947, 524)
 texture = ExtResource("2_lnswo")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
-anchors_preset = 3
+layout_mode = 0
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
@@ -132,26 +132,15 @@ grow_horizontal = 0
 grow_vertical = 0
 
 [node name="Label" type="Label" parent="VBoxContainer"]
-offset_right = 155.0
-offset_bottom = 26.0
-grow_horizontal = 0
-grow_vertical = 0
+layout_mode = 2
 text = "Hold R to rotate"
 
 [node name="Label2" type="Label" parent="VBoxContainer"]
-offset_top = 30.0
-offset_right = 155.0
-offset_bottom = 56.0
-grow_horizontal = 0
-grow_vertical = 0
+layout_mode = 2
 text = "Press T to show text"
 
 [node name="Label3" type="Label" parent="VBoxContainer"]
-offset_top = 60.0
-offset_right = 155.0
-offset_bottom = 86.0
-grow_horizontal = 0
-grow_vertical = 0
+layout_mode = 2
 text = "Press Space to exit"
 
 [node name="SubViewport" parent="." instance=ExtResource("3_swgh1")]
@@ -169,7 +158,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="ColorRect2" type="ColorRect" parent="Control"]
-anchors_preset = 8
+layout_mode = 0
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -183,7 +172,7 @@ grow_vertical = 2
 color = Color(0.0941176, 0.0941176, 0.0941176, 0.686275)
 
 [node name="item_name" type="Label" parent="Control"]
-anchors_preset = 5
+layout_mode = 0
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = 851.5
@@ -197,7 +186,7 @@ text = "dasdasdas"
 horizontal_alignment = 1
 
 [node name="item_description" type="Label" parent="Control"]
-anchors_preset = 8
+layout_mode = 0
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5

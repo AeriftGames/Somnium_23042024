@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dhvnxdw5mvaro"]
-
-[ext_resource type="PackedScene" uid="uid://cxe6cvnayta84" path="res://models/wine_barrel_01_1k.gltf" id="1_e7k1m"]
-
-[node name="wine_barrel" instance=ExtResource("1_e7k1m")]
-transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)

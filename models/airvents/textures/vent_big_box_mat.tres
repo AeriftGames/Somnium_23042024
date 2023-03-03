@@ -1,0 +1,13 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://cpyjevo0k0fbi"]
+
+[ext_resource type="Texture2D" uid="uid://6olllrbkha6f" path="res://models/airvents/textures/vent_big_box_color_001.jpg" id="1_4vlcn"]
+
+[resource]
+resource_name = "Material.002"
+cull_mode = 2
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_4vlcn")
+metallic = 0.504545
+roughness = 0.304545
+normal_enabled = true
+normal_texture = ExtResource("1_4vlcn")

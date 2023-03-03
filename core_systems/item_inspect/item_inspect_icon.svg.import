@@ -16,9 +16,9 @@ dest_files=["res://.godot/imported/item_inspect_icon.svg-2fae51f07f08d70a1e68500
 [params]
 
 compress/mode=0
+compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
-compress/bptc_ldr=0
 compress/normal_map=0
 compress/channel_pack=0
 mipmaps/generate=false

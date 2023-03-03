@@ -1,8 +1,8 @@
 [gd_scene load_steps=34 format=3 uid="uid://cdaqxq0d8qgv3"]
 
 [ext_resource type="Script" path="res://testing_stuff_kaen/drawer_test.cs" id="3_ukun6"]
-[ext_resource type="PackedScene" path="res://testing_stuff_kaen/wardrobe_ldoor_small.tscn" id="3_wn82t"]
-[ext_resource type="PackedScene" path="res://testing_stuff_kaen/wardrobe_rdoor_small.tscn" id="4_njit3"]
+[ext_resource type="PackedScene" uid="uid://co74ssxqnm6rv" path="res://testing_stuff_kaen/wardrobe_ldoor_small.tscn" id="3_wn82t"]
+[ext_resource type="PackedScene" uid="uid://dljia5htthib2" path="res://testing_stuff_kaen/wardrobe_rdoor_small.tscn" id="4_njit3"]
 [ext_resource type="PackedScene" uid="uid://dbnevtbu1g7uy" path="res://core_systems/interactive_system/interactive_object.tscn" id="5_0ayi0"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_16gir"]

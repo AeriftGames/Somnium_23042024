@@ -1,0 +1,15 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://ciy5s3wllybc7"]
+
+[ext_resource type="Texture2D" uid="uid://ba1its5w357if" path="res://models/military_locker/textures/fence_locker_body_color_001.png" id="1_nsn4u"]
+[ext_resource type="Texture2D" uid="uid://byxr7uto7juof" path="res://models/military_locker/textures/fence_locker_body_normal.png" id="2_ewi2g"]
+
+[resource]
+resource_name = "Material.009"
+cull_mode = 2
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_nsn4u")
+metallic = 0.9
+roughness = 0.8
+normal_enabled = true
+normal_scale = 0.1
+normal_texture = ExtResource("2_ewi2g")

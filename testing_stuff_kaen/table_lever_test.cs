@@ -5,7 +5,7 @@ public partial class table_lever_test : wall_lever_test
 {
     public override void UpdateLever(double delta)
     {
-        var newVel = GlobalTransform.basis.z.Normalized() * motionMouse.y * mouseMotionSpeed;
+        var newVel = GlobalTransform.Basis.Z.Normalized() * motionMouse.Y * mouseMotionSpeed;
 
         switch (grabMoveType)
         {
@@ -35,7 +35,7 @@ public partial class table_lever_test : wall_lever_test
 
                     TestLight(true);
                     PlaySound(true);
-                    EmitSignal(SignalName.LeverReachEnd, true);
+                    //EmitSignal(SignalName.LeverReachEnd, true);
                     onceIsReachPoint = true;
                     break;
                 }
@@ -45,7 +45,7 @@ public partial class table_lever_test : wall_lever_test
 
                     TestLight(false);
                     PlaySound(true);
-                    EmitSignal(SignalName.LeverReachEnd, false);
+                    //EmitSignal(SignalName.LeverReachEnd, false);
                     onceIsReachPoint = true;
                     break;
                 }

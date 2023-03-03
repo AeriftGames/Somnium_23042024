@@ -6,7 +6,7 @@ using System.IO;
 using System.Reflection.Emit;
 using System.Threading.Tasks;
 
-public partial class CLevelLoader : Godot.Object
+public partial class CLevelLoader : Godot.GodotObject
 {
     public bool isPrecompiledShaders = true;
 
@@ -272,5 +272,18 @@ public partial class CLevelLoader : Godot.Object
             // Bohuzel nedela co by melo.. ale v tomhle update loopu by jsme mohli treba animovat nejaky loading
             GD.Print("loading bar: " + progress[0]);
         }
+    }
+
+    public Node GetActualLevelScene()
+    {
+        Node level = GameMaster.GM.GetNode("/root/worldlevel");
+        if (level == null)
+        {
+            // pokud nemuzeme level najit, napiseme chybu do logu
+            GameMaster.GM.Log.WriteLog(GameMaster.GM, LogSystem.ELogMsgType.ERROR,
+                "GetActualLevelScene() - Not find /root/worldlevel");
+        }
+
+        return level;
     }
 }

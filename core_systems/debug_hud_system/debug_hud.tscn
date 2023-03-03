@@ -42,7 +42,7 @@ offset_left = 4.0
 offset_right = 204.0
 offset_bottom = 26.0
 theme_override_font_sizes/font_size = 12
-text = "F1 for edit debug hud"
+text = "F1 - debug hud"
 
 [node name="FPSLabel" type="Label" parent="."]
 layout_mode = 0
@@ -124,19 +124,17 @@ layout_mode = 2
 text = "CL(9)"
 
 [node name="OptionsPanel" type="Panel" parent="."]
-custom_minimum_size = Vector2(300, 170)
-layout_mode = 1
-anchors_preset = 2
+custom_minimum_size = Vector2(320, 170)
+layout_mode = 0
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_top = -658.0
-offset_right = 320.0
+offset_right = 300.0
 grow_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_xryx5")
 
 [node name="NadpisLabel" type="Label" parent="OptionsPanel"]
-layout_mode = 1
-anchors_preset = 10
+layout_mode = 0
 anchor_right = 1.0
 offset_bottom = 23.0
 grow_horizontal = 2
@@ -153,12 +151,10 @@ color = Color(0.654902, 0.235294, 0, 1)
 
 [node name="TabContainer" type="TabContainer" parent="OptionsPanel"]
 self_modulate = Color(1, 1, 1, 0)
-layout_mode = 1
-anchors_preset = 15
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 27.0
-offset_bottom = -26.0
+offset_top = 36.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/tab_selected = SubResource("StyleBoxFlat_2d7rl")
@@ -244,6 +240,11 @@ text = "Enable worldlevel occlusion cull"
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 
+[node name="SaveMainAsDefaultButton" type="Button" parent="OptionsPanel/TabContainer/main"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Save main as default"
+
 [node name="level" type="VBoxContainer" parent="OptionsPanel/TabContainer"]
 visible = false
 layout_mode = 2
@@ -256,6 +257,50 @@ layout_mode = 2
 self_modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(0, 33)
 layout_mode = 2
+
+[node name="ScreenMode_HBoxContainer" type="HBoxContainer" parent="OptionsPanel/TabContainer/video"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="OptionsPanel/TabContainer/video/ScreenMode_HBoxContainer"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+text = " screen mode"
+
+[node name="ScreenMode_OptionButton" type="OptionButton" parent="OptionsPanel/TabContainer/video/ScreenMode_HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+item_count = 3
+popup/item_0/text = "windowed"
+popup/item_0/id = 0
+popup/item_1/text = "fullscreen normal"
+popup/item_1/id = 1
+popup/item_2/text = "fullscreen wide"
+popup/item_2/id = 2
+
+[node name="WindowSize_HBoxContainer" type="HBoxContainer" parent="OptionsPanel/TabContainer/video"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="OptionsPanel/TabContainer/video/WindowSize_HBoxContainer"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+text = " window size"
+
+[node name="WindowSize_OptionButton" type="OptionButton" parent="OptionsPanel/TabContainer/video/WindowSize_HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+item_count = 3
+popup/item_0/text = "1280x720"
+popup/item_0/id = 0
+popup/item_1/text = "1920x1080"
+popup/item_1/id = 1
+popup/item_2/text = "screen size"
+popup/item_2/id = 2
 
 [node name="Antialias_HBoxContainer" type="HBoxContainer" parent="OptionsPanel/TabContainer/video"]
 layout_mode = 2
@@ -297,12 +342,11 @@ custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
-min_value = 50.0
 max_value = 130.0
 value = 100.0
 
 [node name="Scale3dvalue_Label" type="Label" parent="OptionsPanel/TabContainer/video/Scale3d_HBoxContainer"]
-custom_minimum_size = Vector2(80, 0)
+custom_minimum_size = Vector2(75, 0)
 layout_mode = 2
 text = "100%"
 horizontal_alignment = 1
@@ -314,10 +358,137 @@ text = "half resolution GI"
 alignment = 2
 icon_alignment = 1
 
+[node name="Ssao_CheckBox" type="CheckBox" parent="OptionsPanel/TabContainer/video"]
+layout_direction = 3
+layout_mode = 2
+text = "enable SSAO"
+alignment = 2
+icon_alignment = 1
+
+[node name="Ssil_CheckBox" type="CheckBox" parent="OptionsPanel/TabContainer/video"]
+layout_direction = 3
+layout_mode = 2
+text = "enable SSIL"
+alignment = 2
+icon_alignment = 1
+
+[node name="Sdfgi_CheckBox" type="CheckBox" parent="OptionsPanel/TabContainer/video"]
+layout_direction = 3
+layout_mode = 2
+text = "enable SDFGI"
+alignment = 2
+icon_alignment = 1
+
+[node name="UnlockMaxFps_CheckBox" type="CheckBox" parent="OptionsPanel/TabContainer/video"]
+layout_direction = 3
+layout_mode = 2
+text = "unlock max fps (experimental)"
+alignment = 2
+icon_alignment = 1
+
+[node name="DisableVsync_CheckBox" type="CheckBox" parent="OptionsPanel/TabContainer/video"]
+layout_direction = 3
+layout_mode = 2
+text = "disable v-sync (experimental)"
+alignment = 2
+icon_alignment = 1
+
+[node name="SaveAsDefaultButton" type="Button" parent="OptionsPanel/TabContainer/video"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Save video as default"
+
+[node name="audio" type="VBoxContainer" parent="OptionsPanel/TabContainer"]
+visible = false
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="OptionsPanel/TabContainer/audio"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 33)
+layout_mode = 2
+
+[node name="audio_HBoxContainer" type="HBoxContainer" parent="OptionsPanel/TabContainer/audio"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="OptionsPanel/TabContainer/audio/audio_HBoxContainer"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+text = "main volume"
+horizontal_alignment = 1
+
+[node name="mainVolume_HSlider" type="HSlider" parent="OptionsPanel/TabContainer/audio/audio_HBoxContainer"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+min_value = -60.0
+max_value = 1.0
+step = 0.1
+
+[node name="mainVolume_Label" type="Label" parent="OptionsPanel/TabContainer/audio/audio_HBoxContainer"]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+text = "0 db"
+horizontal_alignment = 1
+
+[node name="audio_HBoxContainer2" type="HBoxContainer" parent="OptionsPanel/TabContainer/audio"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="OptionsPanel/TabContainer/audio/audio_HBoxContainer2"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+text = "sfx volume"
+horizontal_alignment = 1
+
+[node name="sfxVolume_HSlider" type="HSlider" parent="OptionsPanel/TabContainer/audio/audio_HBoxContainer2"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+min_value = -60.0
+max_value = 1.0
+step = 0.1
+
+[node name="sfxVolume_Label" type="Label" parent="OptionsPanel/TabContainer/audio/audio_HBoxContainer2"]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+text = "0 db"
+horizontal_alignment = 1
+
+[node name="audio_HBoxContainer3" type="HBoxContainer" parent="OptionsPanel/TabContainer/audio"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="OptionsPanel/TabContainer/audio/audio_HBoxContainer3"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+text = "music volume"
+horizontal_alignment = 1
+
+[node name="musicVolume_HSlider" type="HSlider" parent="OptionsPanel/TabContainer/audio/audio_HBoxContainer3"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+min_value = -60.0
+max_value = 1.0
+step = 0.1
+
+[node name="musicVolume_Label" type="Label" parent="OptionsPanel/TabContainer/audio/audio_HBoxContainer3"]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+text = "0 db"
+horizontal_alignment = 1
+
+[node name="SaveAudioAsDefaultButton" type="Button" parent="OptionsPanel/TabContainer/audio"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Save audio as default"
+
 [node name="Label" type="Label" parent="OptionsPanel"]
 custom_minimum_size = Vector2(150, 0)
-layout_mode = 1
-anchors_preset = 7
+layout_mode = 0
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
@@ -334,8 +505,7 @@ horizontal_alignment = 1
 
 [node name="QuitGameButton" type="Button" parent="OptionsPanel"]
 custom_minimum_size = Vector2(200, 30)
-layout_mode = 1
-anchors_preset = 7
+layout_mode = 0
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
@@ -350,8 +520,7 @@ text = "Quit Game"
 
 [node name="PerformancePanel" type="Panel" parent="."]
 self_modulate = Color(1, 1, 1, 0)
-layout_mode = 1
-anchors_preset = 1
+layout_mode = 0
 anchor_left = 1.0
 anchor_right = 1.0
 offset_left = -278.0
@@ -361,8 +530,7 @@ grow_horizontal = 0
 mouse_filter = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PerformancePanel"]
-layout_mode = 1
-anchors_preset = 15
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
@@ -390,18 +558,31 @@ text = "video memory used:"
 
 [connection signal="toggled" from="OptionsPanel/TabContainer/main/ShowFps_CheckBox" to="." method="_on_show_fps_check_box_toggled"]
 [connection signal="toggled" from="OptionsPanel/TabContainer/main/ShowPerformance_CheckBox" to="." method="_on_show_performance_check_box_toggled"]
-[connection signal="toggled" from="OptionsPanel/TabContainer/main/CustomLabelEnable_Checkbox0" to="." method="_on_custom_label_enable_checkbox_toggled"]
-[connection signal="toggled" from="OptionsPanel/TabContainer/main/CustomLabelEnable_Checkbox1" to="." method="_on_custom_label_enable_checkbox_toggled"]
-[connection signal="toggled" from="OptionsPanel/TabContainer/main/CustomLabelEnable_Checkbox2" to="." method="_on_custom_label_enable_checkbox_toggled"]
-[connection signal="toggled" from="OptionsPanel/TabContainer/main/CustomLabelEnable_Checkbox3" to="." method="_on_custom_label_enable_checkbox_toggled"]
-[connection signal="toggled" from="OptionsPanel/TabContainer/main/CustomLabelEnable_Checkbox4" to="." method="_on_custom_label_enable_checkbox_toggled"]
-[connection signal="toggled" from="OptionsPanel/TabContainer/main/CustomLabelEnable_Checkbox5" to="." method="_on_custom_label_enable_checkbox_toggled"]
-[connection signal="toggled" from="OptionsPanel/TabContainer/main/CustomLabelEnable_Checkbox6" to="." method="_on_custom_label_enable_checkbox_toggled"]
-[connection signal="toggled" from="OptionsPanel/TabContainer/main/CustomLabelEnable_Checkbox7" to="." method="_on_custom_label_enable_checkbox_toggled"]
-[connection signal="toggled" from="OptionsPanel/TabContainer/main/CustomLabelEnable_Checkbox8" to="." method="_on_custom_label_enable_checkbox_toggled"]
-[connection signal="toggled" from="OptionsPanel/TabContainer/main/CustomLabelEnable_Checkbox9" to="." method="_on_custom_label_enable_checkbox_toggled"]
+[connection signal="toggled" from="OptionsPanel/TabContainer/main/CustomLabelEnable_Checkbox0" to="." method="_on_custom_label_enable_checkbox_toggled" binds= [0]]
+[connection signal="toggled" from="OptionsPanel/TabContainer/main/CustomLabelEnable_Checkbox1" to="." method="_on_custom_label_enable_checkbox_toggled" binds= [1]]
+[connection signal="toggled" from="OptionsPanel/TabContainer/main/CustomLabelEnable_Checkbox2" to="." method="_on_custom_label_enable_checkbox_toggled" binds= [2]]
+[connection signal="toggled" from="OptionsPanel/TabContainer/main/CustomLabelEnable_Checkbox3" to="." method="_on_custom_label_enable_checkbox_toggled" binds= [3]]
+[connection signal="toggled" from="OptionsPanel/TabContainer/main/CustomLabelEnable_Checkbox4" to="." method="_on_custom_label_enable_checkbox_toggled" binds= [4]]
+[connection signal="toggled" from="OptionsPanel/TabContainer/main/CustomLabelEnable_Checkbox5" to="." method="_on_custom_label_enable_checkbox_toggled" binds= [5]]
+[connection signal="toggled" from="OptionsPanel/TabContainer/main/CustomLabelEnable_Checkbox6" to="." method="_on_custom_label_enable_checkbox_toggled" binds= [6]]
+[connection signal="toggled" from="OptionsPanel/TabContainer/main/CustomLabelEnable_Checkbox7" to="." method="_on_custom_label_enable_checkbox_toggled" binds= [7]]
+[connection signal="toggled" from="OptionsPanel/TabContainer/main/CustomLabelEnable_Checkbox8" to="." method="_on_custom_label_enable_checkbox_toggled" binds= [8]]
+[connection signal="toggled" from="OptionsPanel/TabContainer/main/CustomLabelEnable_Checkbox9" to="." method="_on_custom_label_enable_checkbox_toggled" binds= [9]]
 [connection signal="toggled" from="OptionsPanel/TabContainer/main/EnableWorldOcclusionCulling_CheckBox" to="." method="_on_enable_world_occlusion_culling_check_box_toggled"]
+[connection signal="pressed" from="OptionsPanel/TabContainer/main/SaveMainAsDefaultButton" to="." method="_on_save_main_as_default_button_pressed"]
+[connection signal="item_selected" from="OptionsPanel/TabContainer/video/ScreenMode_HBoxContainer/ScreenMode_OptionButton" to="." method="_on_screen_mode_option_button_item_selected"]
+[connection signal="item_selected" from="OptionsPanel/TabContainer/video/WindowSize_HBoxContainer/WindowSize_OptionButton" to="." method="_on_window_size_option_button_item_selected"]
 [connection signal="item_selected" from="OptionsPanel/TabContainer/video/Antialias_HBoxContainer/Antialias_OptionButton" to="." method="_on_antialias_option_button_item_selected"]
 [connection signal="value_changed" from="OptionsPanel/TabContainer/video/Scale3d_HBoxContainer/Scale3d_HSlider" to="." method="_on_scale_3d_h_slider_value_changed"]
 [connection signal="toggled" from="OptionsPanel/TabContainer/video/HalfResGI_CheckBox" to="." method="_on_half_res_gi_check_box_toggled"]
+[connection signal="toggled" from="OptionsPanel/TabContainer/video/Ssao_CheckBox" to="." method="_on_ssao_check_box_toggled"]
+[connection signal="toggled" from="OptionsPanel/TabContainer/video/Ssil_CheckBox" to="." method="_on_ssil_check_box_toggled"]
+[connection signal="toggled" from="OptionsPanel/TabContainer/video/Sdfgi_CheckBox" to="." method="_on_sdfgi_check_box_toggled"]
+[connection signal="toggled" from="OptionsPanel/TabContainer/video/UnlockMaxFps_CheckBox" to="." method="_on_unlock_max_fps_check_box_toggled"]
+[connection signal="toggled" from="OptionsPanel/TabContainer/video/DisableVsync_CheckBox" to="." method="_on_disable_vsync_check_box_toggled"]
+[connection signal="pressed" from="OptionsPanel/TabContainer/video/SaveAsDefaultButton" to="." method="_on_save_as_default_button_pressed"]
+[connection signal="value_changed" from="OptionsPanel/TabContainer/audio/audio_HBoxContainer/mainVolume_HSlider" to="." method="_on_main_volume_h_slider_value_changed"]
+[connection signal="value_changed" from="OptionsPanel/TabContainer/audio/audio_HBoxContainer2/sfxVolume_HSlider" to="." method="_on_sfx_volume_h_slider_value_changed"]
+[connection signal="value_changed" from="OptionsPanel/TabContainer/audio/audio_HBoxContainer3/musicVolume_HSlider" to="." method="_on_music_volume_h_slider_value_changed"]
+[connection signal="pressed" from="OptionsPanel/TabContainer/audio/SaveAudioAsDefaultButton" to="." method="_on_save_audio_as_default_button_pressed"]
 [connection signal="pressed" from="OptionsPanel/QuitGameButton" to="." method="_on_quit_game_button_pressed"]

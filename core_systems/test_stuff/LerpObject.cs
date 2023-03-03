@@ -73,6 +73,18 @@ public partial class LerpObject
             return Actual;
         }
 
+        public float ActualUpdate(float newActual, double delta)
+        {
+            SetActual(newActual);
+
+            if (isEnableUpdate)
+            {
+                Actual = Mathf.Lerp(Actual, Target, Speed * (float)delta);
+            }
+
+            return Actual;
+        }
+
         public void SetActual(float newActual) { Actual = newActual; }
         public float GetActual() { return Actual; }
         public void SetTarget(float newTarget) { Target = newTarget; }

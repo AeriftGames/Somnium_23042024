@@ -1,7 +1,0 @@
-[gd_scene load_steps=2 format=3]
-
-[ext_resource type="PackedScene" uid="uid://dmc77doec46va" path="res://testing_kaen/drawer_test.tscn" id="1_omfqa"]
-
-[node name="Drawer_test" instance=ExtResource("1_omfqa")]
-
-[editable path="DrawerGrab/interactive_object"]

@@ -16,9 +16,9 @@ dest_files=["res://.godot/imported/big_fan_grid_color.jpg-ba06eab6d22586dfef8c7d
 [params]
 
 compress/mode=0
+compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
-compress/bptc_ldr=0
 compress/normal_map=1
 compress/channel_pack=0
 mipmaps/generate=true

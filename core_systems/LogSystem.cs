@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class LogSystem : Godot.Object
+public partial class LogSystem : Godot.GodotObject
 {
 	GameMaster gm;
 	public enum ELogMsgType{INFO,WARNING,ERROR}

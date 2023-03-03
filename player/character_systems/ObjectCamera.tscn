@@ -29,6 +29,9 @@ linear_limit_x/enabled = false
 linear_limit_y/enabled = false
 linear_limit_z/enabled = false
 
+[node name="CameraLookPoint" type="Node3D" parent="NodeRotY/GimbalLand/NodeRotX/NodeLean"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+
 [node name="LerpPos_LeanCenter" type="Node3D" parent="NodeRotY/GimbalLand/NodeRotX"]
 
 [node name="LerpPos_LeanLeft" type="Node3D" parent="NodeRotY/GimbalLand/NodeRotX"]

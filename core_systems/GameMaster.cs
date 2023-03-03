@@ -16,6 +16,7 @@ public partial class GameMaster : Node
 
 	// LEVEL LOADER
 	public CLevelLoader LevelLoader = null;
+	private global_settings Settings = null;
 
 	// POINTERS
 	private DebugHud _debugHud = null;
@@ -25,12 +26,10 @@ public partial class GameMaster : Node
 	//
 	private Control blackScreen = null;
 
-	[Export] ulong needObjectID = 1;
-
 	//
 	private bool isQuitting = false;
 
-    public override void _Ready()
+	public override void _Ready()
 	{
 		GD.Print("GameMaster loaded");
 		GM = this;
@@ -52,6 +51,9 @@ public partial class GameMaster : Node
 
 		// vytvoreni LevelLoaderu, druhy parametr = pouziti ShadersPrecompilation?
 		LevelLoader = new CLevelLoader(this, true);
+
+		// vytvoreni Settings - global_settings
+		Settings = new global_settings(this);
 	}
 
 	// Set/Get FPS Character
@@ -69,14 +71,20 @@ public partial class GameMaster : Node
 	// prekryje veskery hud a 3d svet cernou obrazovkou
 	public void EnableBlackScreen(bool newEnable){ blackScreen.Visible = newEnable; }
 
-    public override void _UnhandledInput(InputEvent @event)
-    {
+	//
+	public global_settings GetSettings()
+	{
+		return Settings;
+	}
+
+	public override void _UnhandledInput(InputEvent @event)
+	{
 		if (@event is InputEventKey eventKey)
 		{
 			if (eventKey.Pressed && eventKey.Keycode == Key.Escape)
 				QuitGame();
 		}
-    }
+	}
 
 	public async void QuitGame()
 	{
@@ -87,17 +95,17 @@ public partial class GameMaster : Node
 		await TaskQuitGame();
 	}
 
-    async Task TaskQuitGame()
-    {
+	async Task TaskQuitGame()
+	{
 		// Unload level process
-        LevelLoader.UnloadLevelProcess();
+		LevelLoader.UnloadLevelProcess();
 
-        await Task.Delay(1000);
+		await Task.Delay(1000);
 
-        // zapneme cernou obrazovku
-        EnableBlackScreen(true);
+		// zapneme cernou obrazovku
+		EnableBlackScreen(true);
 
-        Node level = GetNode("/root/worldlevel");
+		Node level = GetNode("/root/worldlevel");
 		var a = level.FindChildren("*", "RigidBody3D", true, true);
 		/*
 		GD.Print(a.Count);
@@ -108,29 +116,27 @@ public partial class GameMaster : Node
 		*/
 		msgObject.FreeAll();
 		LevelLoader.Free();
+		Settings.Free();
 		Log.Free();
 
 		SafeQueueAll();
 		GetTree().Quit();
-    }
+	}
 
-    public void SafeQueueAll()
+	public void SafeQueueAll()
 	{
 		// Vypne _Process GameMastera
 		ProcessMode = ProcessModeEnum.Disabled;
 
 		// uvolni kameru a celeho hrace
 		_fpsCharacter.objectCamera.FreeAll();
-        _fpsCharacter.objectCamera.QueueFree();
-        _fpsCharacter.FreeAll();
+		_fpsCharacter.objectCamera.QueueFree();
+		_fpsCharacter.FreeAll();
 		_fpsCharacter.QueueFree();
 
 		// pokud byl hrac uspesne zavolan pro delete, vypiseme to v konzoli
 		if (_fpsCharacter.IsQueuedForDeletion())
-		{
-            GD.Print("FPSCharacter is removed");
-            GD.Print("Game is quit sucesfully");
-        }
+			GD.Print("Game is quit sucesfully");
 	}
 
 	public bool GetIsQuitting()
@@ -140,10 +146,7 @@ public partial class GameMaster : Node
 
 	public override void _Process(double delta)
 	{
-		if (Input.IsActionJustPressed("testDebug"))
-			GD.Print("objekt ktery hledame ma nazev: " + GD.InstanceFromId(needObjectID).GetClass());
-
-        LevelLoader.Update(delta);
+		LevelLoader.Update(delta);
 	}
 
 	public void message_update()

@@ -34,9 +34,9 @@ public partial class Flashlight : Node3D
 		}
 		else
 		{
-            spotlight.Visible = false;
-            meshLightInside.Visible = false;
-        }
+			spotlight.Visible = false;
+			meshLightInside.Visible = false;
+		}
 	}
 
 	public bool GetIsEnable()
