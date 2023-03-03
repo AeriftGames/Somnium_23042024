@@ -4,23 +4,22 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://cyfok0ct4rtju"
 path.s3tc="res://.godot/imported/TexturesCom_MetalFloorsBare0073_2_M_Normal.jpg-d82ac38d57f90e0de2a317d4dc80d493.s3tc.ctex"
-path.etc2="res://.godot/imported/TexturesCom_MetalFloorsBare0073_2_M_Normal.jpg-d82ac38d57f90e0de2a317d4dc80d493.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc", "etc2"],
+"imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://testing_stuff_kaen/testing_level_newhall/textures/TexturesCom_MetalFloorsBare0073_2_M_Normal.jpg"
-dest_files=["res://.godot/imported/TexturesCom_MetalFloorsBare0073_2_M_Normal.jpg-d82ac38d57f90e0de2a317d4dc80d493.s3tc.ctex", "res://.godot/imported/TexturesCom_MetalFloorsBare0073_2_M_Normal.jpg-d82ac38d57f90e0de2a317d4dc80d493.etc2.ctex"]
+dest_files=["res://.godot/imported/TexturesCom_MetalFloorsBare0073_2_M_Normal.jpg-d82ac38d57f90e0de2a317d4dc80d493.s3tc.ctex"]
 
 [params]
 
 compress/mode=2
+compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
-compress/bptc_ldr=0
 compress/normal_map=1
 compress/channel_pack=0
 mipmaps/generate=true

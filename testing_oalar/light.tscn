@@ -1,8 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://hdvm8xmigrjl"]
+[gd_scene load_steps=6 format=3]
 
 [ext_resource type="PackedScene" uid="uid://bkgnp7ft0iktt" path="res://testing_oalar/light.glb" id="1_t7g8a"]
 [ext_resource type="Script" path="res://testing_oalar/light.gd" id="2_mubfm"]
-[ext_resource type="Material" uid="uid://cmnm5vmxyhach" path="res://light_on.tres" id="3_jghfl"]
+[ext_resource type="Material" uid="uid://cmnm5vmxyhach" path="res://testing_oalar/light_on.tres" id="3_jghfl"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_vepna"]
 _surfaces = [{
