@@ -43,7 +43,7 @@ project/assembly_name="Somnium"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/SceneTool/plugin.cfg")
+enabled=PackedStringArray()
 
 [filesystem]
 
