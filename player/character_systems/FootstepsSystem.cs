@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class FootstepsSystem : Godot.Object
+public partial class FootstepsSystem : Godot.GodotObject
 {
     FPSCharacter_WalkingEffects _character;
 

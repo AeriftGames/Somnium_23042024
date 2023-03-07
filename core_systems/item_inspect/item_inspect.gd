@@ -5,32 +5,33 @@ class_name item_inspect extends Node3D
 ##
 ## A more detailes comment TODO
 
-## Variable used for interacting with interactive_object required for interaction.
-var node_interact: Node
-## The object hat inicialized interaction (should be player)
-var passed_object: Node
-## Used for checking if item is being interacted at this moment
-var isNowInteract: bool = false
 ## Item name used for displaying item name in interaction
 @export var item_name: String = "postcard_test"
 ## Used for displaying action name when look at (Pick up, Use, ..)
 @export var item_interaction_name: String = "Inspect"
 ## TODO
 @export var item_inspect_description: String = "1235"
-## Combines interaction names and item name for final tooltip
-var item_interaction: String
-## Node to display on subviewport
-var inspect_node: Resource
-## Player node
-var player_inspect: Node
+## 
+@export var inspect_node: PackedScene
 ##
 @export var sfx = load("res://objects/read/paper_test/page_flip.wav")
+## Variable used for interacting with interactive_object required for interaction.
+var node_interact: Node
+## The object hat inicialized interaction (should be player)
+var passed_object: Node
+## Used for checking if item is being interacted at this moment
+var isNowInteract: bool = false
+## Combines interaction names and item name for final tooltip
+var item_interaction: String
+## Player node
+var player_inspect: Node
 
 
 func _ready():
+	if sfx != null:
+		sfx = load("res://objects/read/paper_test/page_flip.wav")
 	node_interact = $interactive_object
 	item_interaction = item_interaction_name + " " + item_name
-	inspect_node = load("res://objects/read/postcard_test/paper_test_view.tscn")
 
 ## Logic of the item being used
 func _used():

@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=6 format=3 uid="uid://bfhxpq55lmdom"]
 
 [ext_resource type="Texture2D" uid="uid://upj3hb74fgs7" path="res://textures/grid_texture_albedo.jpg" id="1_vm4ea"]
 [ext_resource type="Texture2D" uid="uid://cuovukpdoti1o" path="res://textures/grid_texture_normal.jpg" id="2_cxsot"]

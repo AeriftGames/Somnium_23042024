@@ -1,0 +1,11 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://m43u4vnq71tr"]
+
+[ext_resource type="Texture2D" uid="uid://drsw608fmcnf2" path="res://models/airvents/textures/big_fan_color.jpg" id="1_7aojh"]
+[ext_resource type="Texture2D" uid="uid://bbmvfked5yh2i" path="res://models/airvents/textures/big_fan_normal.jpg" id="2_iaark"]
+
+[resource]
+albedo_texture = ExtResource("1_7aojh")
+metallic = 0.495455
+roughness = 0.395455
+normal_enabled = true
+normal_texture = ExtResource("2_iaark")

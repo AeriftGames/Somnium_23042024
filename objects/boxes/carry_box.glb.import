@@ -3,7 +3,7 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://cbtxg7ejvxmd2"
+uid="uid://c0dfmg6meernw"
 path="res://.godot/imported/carry_box.glb-377182405ca8baab3a045831be6b8d5b.scn"
 
 [deps]
@@ -25,5 +25,8 @@ meshes/lightmap_texel_size=0.2
 skins/use_named_skins=true
 animation/import=true
 animation/fps=30
+animation/trimming=false
+animation/remove_immutable_tracks=true
 import_script/path=""
 _subresources={}
+gltf/embedded_image_handling=1

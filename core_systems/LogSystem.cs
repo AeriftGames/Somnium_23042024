@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class LogSystem : Godot.Object
+public partial class LogSystem : Godot.GodotObject
 {
 	GameMaster gm;
 	public enum ELogMsgType{INFO,WARNING,ERROR}
@@ -20,6 +20,9 @@ public partial class LogSystem : Godot.Object
 	// Hlavni public funkce pro napsani logu
     public void WriteLog(Node newSenderNode,ELogMsgType newLogMessageType,string newText)
 	{
+		// pokud jsme ve fazi ukoncit hru, vyskocime pryc
+		if (gm.GetIsQuitting()) return;
+
 		// !!!!!!!! Pokud je debug kaen vypnuty, nepokracujeme dal a vyskocime z funkce !!!!!!!!!
 		if (GetIsDebugKaen() == false) return;
 

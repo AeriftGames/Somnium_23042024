@@ -1,9 +1,11 @@
-[gd_scene load_steps=10 format=3]
+[gd_scene load_steps=12 format=3 uid="uid://bguts0qdvbe7n"]
 
+[ext_resource type="ArrayOccluder3D" uid="uid://bucr66xlw0upl" path="res://levels/world/world.occ" id="1_beeae"]
 [ext_resource type="Texture2D" uid="uid://660jcc1vju43" path="res://textures/brick_pavement_0108_02_s.jpg" id="1_jq6xl"]
+[ext_resource type="Script" path="res://levels/worldlevel.cs" id="1_yq86y"]
 [ext_resource type="Texture2D" uid="uid://bybrpbyf1euit" path="res://textures/NormalMap (3).png" id="2_wx2m5"]
-[ext_resource type="PackedScene" path="res://placeholders/MeshWall.tscn" id="3_l1uqq"]
-[ext_resource type="PackedScene" uid="uid://2b8vuef2k4is" path="res://player/FPSCharacter_WalkingEffects.tscn" id="4_uwesg"]
+[ext_resource type="PackedScene" uid="uid://bfhxpq55lmdom" path="res://placeholders/MeshWall.tscn" id="3_l1uqq"]
+[ext_resource type="PackedScene" uid="uid://bet3idvc4fg0n" path="res://placeholders/PlayerStart.tscn" id="5_hst73"]
 
 [sub_resource type="Sky" id="Sky_fi2v8"]
 
@@ -39,7 +41,14 @@ subdivide_depth = 5
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_pm4pd"]
 data = PackedVector3Array(15, 0, 15, 10, 0, 15, 15, 0, 10, 10, 0, 15, 10, 0, 10, 15, 0, 10, 10, 0, 15, 5, 0, 15, 10, 0, 10, 5, 0, 15, 5, 0, 10, 10, 0, 10, 5, 0, 15, 0, 0, 15, 5, 0, 10, 0, 0, 15, 0, 0, 10, 5, 0, 10, 0, 0, 15, -5, 0, 15, 0, 0, 10, -5, 0, 15, -5, 0, 10, 0, 0, 10, -5, 0, 15, -10, 0, 15, -5, 0, 10, -10, 0, 15, -10, 0, 10, -5, 0, 10, -10, 0, 15, -15, 0, 15, -10, 0, 10, -15, 0, 15, -15, 0, 10, -10, 0, 10, 15, 0, 10, 10, 0, 10, 15, 0, 5, 10, 0, 10, 10, 0, 5, 15, 0, 5, 10, 0, 10, 5, 0, 10, 10, 0, 5, 5, 0, 10, 5, 0, 5, 10, 0, 5, 5, 0, 10, 0, 0, 10, 5, 0, 5, 0, 0, 10, 0, 0, 5, 5, 0, 5, 0, 0, 10, -5, 0, 10, 0, 0, 5, -5, 0, 10, -5, 0, 5, 0, 0, 5, -5, 0, 10, -10, 0, 10, -5, 0, 5, -10, 0, 10, -10, 0, 5, -5, 0, 5, -10, 0, 10, -15, 0, 10, -10, 0, 5, -15, 0, 10, -15, 0, 5, -10, 0, 5, 15, 0, 5, 10, 0, 5, 15, 0, 0, 10, 0, 5, 10, 0, 0, 15, 0, 0, 10, 0, 5, 5, 0, 5, 10, 0, 0, 5, 0, 5, 5, 0, 0, 10, 0, 0, 5, 0, 5, 0, 0, 5, 5, 0, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0, 0, 5, -5, 0, 5, 0, 0, 0, -5, 0, 5, -5, 0, 0, 0, 0, 0, -5, 0, 5, -10, 0, 5, -5, 0, 0, -10, 0, 5, -10, 0, 0, -5, 0, 0, -10, 0, 5, -15, 0, 5, -10, 0, 0, -15, 0, 5, -15, 0, 0, -10, 0, 0, 15, 0, 0, 10, 0, 0, 15, 0, -5, 10, 0, 0, 10, 0, -5, 15, 0, -5, 10, 0, 0, 5, 0, 0, 10, 0, -5, 5, 0, 0, 5, 0, -5, 10, 0, -5, 5, 0, 0, 0, 0, 0, 5, 0, -5, 0, 0, 0, 0, 0, -5, 5, 0, -5, 0, 0, 0, -5, 0, 0, 0, 0, -5, -5, 0, 0, -5, 0, -5, 0, 0, -5, -5, 0, 0, -10, 0, 0, -5, 0, -5, -10, 0, 0, -10, 0, -5, -5, 0, -5, -10, 0, 0, -15, 0, 0, -10, 0, -5, -15, 0, 0, -15, 0, -5, -10, 0, -5, 15, 0, -5, 10, 0, -5, 15, 0, -10, 10, 0, -5, 10, 0, -10, 15, 0, -10, 10, 0, -5, 5, 0, -5, 10, 0, -10, 5, 0, -5, 5, 0, -10, 10, 0, -10, 5, 0, -5, 0, 0, -5, 5, 0, -10, 0, 0, -5, 0, 0, -10, 5, 0, -10, 0, 0, -5, -5, 0, -5, 0, 0, -10, -5, 0, -5, -5, 0, -10, 0, 0, -10, -5, 0, -5, -10, 0, -5, -5, 0, -10, -10, 0, -5, -10, 0, -10, -5, 0, -10, -10, 0, -5, -15, 0, -5, -10, 0, -10, -15, 0, -5, -15, 0, -10, -10, 0, -10, 15, 0, -10, 10, 0, -10, 15, 0, -15, 10, 0, -10, 10, 0, -15, 15, 0, -15, 10, 0, -10, 5, 0, -10, 10, 0, -15, 5, 0, -10, 5, 0, -15, 10, 0, -15, 5, 0, -10, 0, 0, -10, 5, 0, -15, 0, 0, -10, 0, 0, -15, 5, 0, -15, 0, 0, -10, -5, 0, -10, 0, 0, -15, -5, 0, -10, -5, 0, -15, 0, 0, -15, -5, 0, -10, -10, 0, -10, -5, 0, -15, -10, 0, -10, -10, 0, -15, -5, 0, -15, -10, 0, -10, -15, 0, -10, -10, 0, -15, -15, 0, -10, -15, 0, -15, -10, 0, -15)
 
-[node name="World" type="Node3D"]
+[node name="worldlevel" type="Node3D"]
+script = ExtResource("1_yq86y")
+InGameStartEnableSDFGI = true
+
+[node name="worldlevel_occluderculling" type="OccluderInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.89176, 0, 0)
+visible = false
+occluder = ExtResource("1_beeae")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_a5cuu")
@@ -217,4 +226,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.5, -2.5)
 [node name="MeshWall3" parent="LevelGeometry" instance=ExtResource("3_l1uqq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -2.5)
 
-[node name="BasicFps_WalkingEffects" parent="." instance=ExtResource("4_uwesg")]
+[node name="PlayerStart" parent="." instance=ExtResource("5_hst73")]
+transform = Transform3D(-0.824087, 0, 0.566464, 0, 1, 0, -0.566464, 0, -0.824087, 4.78402, 0, 0)

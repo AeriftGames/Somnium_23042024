@@ -41,12 +41,11 @@ public partial class LerpObject
         public void EnableUpdate(bool newEnable) { isEnableUpdate = newEnable; }
         public bool IsEnableUpdate() { return isEnableUpdate; }
 
-        public void SetAllParam(Vector3 newActual, Vector3 newTarget, float newSpeed, bool newIsEnableUpdate)
+        public void SetAllParam(Vector3 newActual, Vector3 newTarget, float newSpeed)
         {
             Actual = newActual;
             Target = newTarget;
             Speed = newSpeed;
-            isEnableUpdate = newIsEnableUpdate;
         }
 
         public float GetLengthToTarget()
@@ -74,6 +73,18 @@ public partial class LerpObject
             return Actual;
         }
 
+        public float ActualUpdate(float newActual, double delta)
+        {
+            SetActual(newActual);
+
+            if (isEnableUpdate)
+            {
+                Actual = Mathf.Lerp(Actual, Target, Speed * (float)delta);
+            }
+
+            return Actual;
+        }
+
         public void SetActual(float newActual) { Actual = newActual; }
         public float GetActual() { return Actual; }
         public void SetTarget(float newTarget) { Target = newTarget; }
@@ -83,12 +94,11 @@ public partial class LerpObject
         public void EnableUpdate(bool newEnable) { isEnableUpdate = newEnable; }
         public bool IsEnableUpdate() { return isEnableUpdate; }
 
-        public void SetAllParam(float newActual, float newTarget, float newSpeed, bool newIsEnableUpdate)
+        public void SetAllParam(float newActual, float newTarget, float newSpeed)
         {
             Actual = newActual;
             Target = newTarget;
             Speed = newSpeed;
-            isEnableUpdate = newIsEnableUpdate;
         }
 
         public float GetLengthToTarget()

@@ -1,0 +1,26 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://bkwmcax1wrx2y"]
+
+[ext_resource type="Script" path="res://custom_resources/terminal_message.gd" id="1_orflx"]
+
+[resource]
+script = ExtResource("1_orflx")
+subject = "The US wants to play in China's backyard"
+message = "Nowhere has Xi Jinping's assertive foreign policy had a greater impact than in South East Asia, China's strategic backyard.
+
+But as Beijing's power has grown, so has Washington's unease - and now after years of see-sawing, the US is trying engage with the region again.
+
+When he attends the annual summit of the Association of South East Asian Nations or Asean this week in Cambodia, President Joe Biden becomes the first US leader to make that trip since 2017. He was there virtually last year too. And then he goes to Indonesia, another important player in the region, where he is scheduled to meet Chinese leader Xi Jinping before they both attend the G20 meeting.
+
+But the US is now operating in a more treacherous diplomatic environment than in the past.
+
+Asean, once considered essential for diplomacy in the Asia-Pacific, has struggled to remain effective in an increasingly polarised world. It has fashioned itself as a zone of peace and neutrality, where its 10 member states seek consensus, avoid criticising each other and feel free to engage different powers. Its small and weak secretariat, and lack of any process for enforcing decisions on members, reflects this mindset.
+
+How Xi Jinping made himself unchallengeable
+Americans in the crosshairs of China's spy game
+This worked well while there was a broad, US-led global consensus that championed trade and growth. But China's arrival on the global market and growing influence from the early 2000s coincided with diminishing US interest, as it focussed on the Middle East.
+
+China embarked on a charm offensive in the region, following former leader Deng Xiaoping's mantra \"hide your strength, bide your time\". But under Mr Xi, now in power for 10 years, China's strength was no longer hidden.
+
+In the last decade, China's occupation and military development of reef islands in the South China Sea has brought it into direct conflict with other claimants, particularly Vietnam and the Philippines. Attempts by Asean to get China to agree to a \"code of conduct\" in the disputed areas have gone nowhere. Beijing has simply stalled negotiations for 20 years. It has also dismissed an international court ruling in 2016 that its claims are invalid.
+
+It has been just as evasive on problems caused by its large-scale damming of the Mekong River."

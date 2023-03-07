@@ -1,0 +1,47 @@
+[remap]
+
+importer="scene"
+importer_version=1
+type="PackedScene"
+uid="uid://b6dxd2cf83s6f"
+path="res://.godot/imported/pipes_test.gltf-3b33a180fc01471dad05732982918376.scn"
+
+[deps]
+
+source_file="res://placeholders/modular_pipes/pipes_test.gltf"
+dest_files=["res://.godot/imported/pipes_test.gltf-3b33a180fc01471dad05732982918376.scn"]
+
+[params]
+
+nodes/root_type="Node3D"
+nodes/root_name="Scene Root"
+nodes/apply_root_scale=true
+nodes/root_scale=1.0
+meshes/ensure_tangents=true
+meshes/generate_lods=true
+meshes/create_shadow_meshes=true
+meshes/light_baking=1
+meshes/lightmap_texel_size=0.2
+skins/use_named_skins=true
+animation/import=true
+animation/fps=30
+animation/trimming=false
+animation/remove_immutable_tracks=true
+import_script/path=""
+_subresources={
+"materials": {
+"Material.010": {
+"use_external/enabled": true,
+"use_external/path": ""
+},
+"Material.014": {
+"use_external/enabled": true,
+"use_external/path": "res://placeholders/modular_pipes/textures/pipe_base_mat.tres"
+},
+"Material.015": {
+"use_external/enabled": true,
+"use_external/path": "res://placeholders/modular_pipes/textures/pipe_base_mat.tres"
+}
+}
+}
+gltf/embedded_image_handling=1

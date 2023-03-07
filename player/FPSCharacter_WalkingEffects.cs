@@ -22,12 +22,12 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
     AudioStreamPlayer AudioStreamPlayerJumpLand = null;
 
     [ExportGroupAttribute("Footsteps Settings")]
-    [Export] public float FootStepLength = 1.5f;
-    [Export] public float WalkCameraLerpHeight = 0.25f;
+    [Export] public float FootStepLength = 1.25f;
+    [Export] public float WalkCameraLerpHeight = 0.12f;
     [Export] public float RunCameraLerpHeight = 0.25f;
-    [Export] public float lerpFootstepSpeedModifier = 1.0f;
-    [Export] public AudioStream[] FootstepSounds;
-    [Export] public float FootstepsVolumeDB = -10.0f;
+    [Export] public float lerpFootstepSpeedModifier = 2.0f;
+    [Export] public Array<AudioStream> FootstepSounds;
+    [Export] public float FootstepsVolumeDB = -20.0f;
 
     [ExportGroupAttribute("Landing Settings")]
     [Export] public float LandCameraLerpHeight = -0.4f;
@@ -36,18 +36,18 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
 
     [Export] public float MiniHeightForLandingEffect = 0.3f;
     [Export] public float SmallHeightForLandingEffect = 1.2f;
-    [Export] public float MediumHeightForLandingEffect = 2.0f;
-    [Export] public float HighHeightForLandingEffect = 3.0f;    // For death is more than high
-    [Export] public AudioStream[] miniHeightLandingSounds;
-    [Export] public AudioStream[] smallHeightLandingSounds;
-    [Export] public AudioStream[] mediumHeightLandingSounds;
-    [Export] public AudioStream[] highHeightLandingSounds;
-    [Export] public AudioStream[] deathHeightLandingSounds;
-    [Export] public float LandingVolumeDB = -6.0f;
+    [Export] public float MediumHeightForLandingEffect = 2.5f;
+    [Export] public float HighHeightForLandingEffect = 4.0f;    // For death is more than high
+    [Export] public Array<AudioStream> miniHeightLandingSounds;
+    [Export] public Array<AudioStream> smallHeightLandingSounds;
+    [Export] public Array<AudioStream> mediumHeightLandingSounds;
+    [Export] public Array<AudioStream> highHeightLandingSounds;
+    [Export] public Array<AudioStream> deathHeightLandingSounds;
+    [Export] public float LandingVolumeDB = -10.0f;
 
     [ExportGroupAttribute("Jumping Settings")]
-    [Export] public AudioStream[] JumpingSounds;
-    [Export] public float JumpingVolumeDB = 1.1f;
+    [Export] public Array<AudioStream> JumpingSounds;
+    [Export] public float JumpingVolumeDB = -5f;
 
     [ExportGroupAttribute("Leaning Settings")]
     [Export] public float LeanMaxPositionDistanceX = 0.5f;
@@ -65,7 +65,7 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
     private bool FootstepRight = false;
     private float lerpHeadWalkY = 0.0f;
 
-    Godot.Timer landing_timer = new Godot.Timer();
+    Godot.Timer landing_timer = null;
     private float lerpHeadLandY = 0.0f;
     private float lerpHeadLandRotX = 0.0f;
 
@@ -79,18 +79,38 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
         AudioStreamPlayerJumpLand = GetNode<AudioStreamPlayer>("AudioStreamPlayer_JumpLand");
 
         // Create timer for landing effect
-        var callable_FisnishLandingEffect = new Callable(FinishLandingEffect);
+        landing_timer = new Godot.Timer();
+        var callable_FisnishLandingEffect = new Callable(this,"FinishLandingEffect");
         landing_timer.Connect("timeout", callable_FisnishLandingEffect);
         landing_timer.WaitTime = 0.3;
         landing_timer.OneShot = true;
         AddChild(landing_timer);
     }
 
+    public void UpdateInputsProcess(double delta)
+    {
+        // hrac pozaduje lean ?
+
+        if(Input.IsActionPressed("leanLeft") && !Input.IsActionPressed("leanRight"))
+            objectCamera.SetActualLean(ObjectCamera.ELeanType.Left);
+        else if (Input.IsActionPressed("leanRight") && !Input.IsActionPressed("leanLeft"))
+            objectCamera.SetActualLean(ObjectCamera.ELeanType.Right);
+        else
+            objectCamera.SetActualLean(ObjectCamera.ELeanType.Center);
+    }
+
     public override void _Process(double delta)
     {
         base._Process(delta);
+    }
 
-        UpdateInputsProcess((float) delta);
+    public override void _PhysicsProcess(double delta)
+    {
+        if (GameMaster.GM.GetIsQuitting()) return;
+
+        base._PhysicsProcess(delta);
+
+        UpdateInputsProcess((float)delta);
 
         // SET CUSTOM LABEL MOVESPEED AND POSITION OF PLAYER
         float a = Mathf.Snapped(ActualMovementSpeed, 0.1f);
@@ -107,42 +127,6 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
         UpdateLandingHeadBobbing((float)delta);
 
         UpdateLeaning((float)delta);
-    }
-
-    public void UpdateInputsProcess(double delta)
-    {
-        // hrac pozaduje lean ?
-
-        if(Input.IsActionPressed("leanLeft") && !Input.IsActionPressed("leanRight"))
-            objectCamera.SetActualLean(ObjectCamera.ELeanType.Left);
-        else if (Input.IsActionPressed("leanRight") && !Input.IsActionPressed("leanLeft"))
-            objectCamera.SetActualLean(ObjectCamera.ELeanType.Right);
-        else
-            objectCamera.SetActualLean(ObjectCamera.ELeanType.Center);
-        /*
-        if (Input.IsActionPressed("leanRight") && !Input.IsActionPressed("leanLeft"))
-        {
-            objectCamera.SetActualLean(ObjectCamera.ELeanType.Right);
-        }
-        else
-            objectCamera.SetActualLean(ObjectCamera.ELeanType.Center);*/
-        /*
-        // hrac pozaduje opustit lean
-
-        if (Input.IsActionJustReleased("leanLeft"))
-        {
-            objectCamera.SetActualLean(ObjectCamera.ELeanType.Center);
-        }
-
-        if(Input.IsActionJustReleased("leanRight"))
-        {
-            objectCamera.SetActualLean(ObjectCamera.ELeanType.Center);
-        }*/
-    }
-
-    public override void _PhysicsProcess(double delta)
-    {
-        base._PhysicsProcess(delta);
     }
 
     public override void EventLanding()
@@ -224,7 +208,7 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
             lerpHeadWalkY = 0.0f;
             lerpFootstepSpeedModifier = 3.0f;
         }
-
+        
         // Lerp pro head bobbing walk Y
         HeadGimbalA.Position = HeadGimbalA.Position.Lerp(
             new Vector3(0, lerpHeadWalkY, 0), lerpFootstepSpeedModifier * delta);
@@ -236,15 +220,16 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
         HeadGimbalB.Position = HeadGimbalB.Position.Lerp(
             new Vector3(0, lerpHeadLandY, 0), lerpLandingSpeedModifier * delta);
 
+        
         // Lerp pro landing rot
         objectCamera.GimbalLand.Rotation = objectCamera.GimbalLand.Rotation.Lerp(
             new Vector3(lerpHeadLandRotX, 0, 0), lerpLandingSpeedModifier * delta);
     }
 
-    private void PlayRandomSound(AudioStreamPlayer audioPlayer, AudioStream[] audioStreams,float volumeDB, float pitch)
+    private void PlayRandomSound(AudioStreamPlayer audioPlayer,Array<AudioStream> audioStreams,float volumeDB, float pitch)
     {
         if (audioPlayer == null) return;
-        if (audioStreams.Length < 1) return;
+        if (audioStreams.Count < 1) return;
 
         // random pick sound from array and play it
         RandomNumberGenerator random = new RandomNumberGenerator();
@@ -255,7 +240,7 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
         {
             // randomize sound id from array
             random.Randomize();
-            id = random.RandiRange(0, audioStreams.Length - 1);
+            id = random.RandiRange(0, audioStreams.Count - 1);
 
             // if is not same, break for loop
             if (audioPlayer.Stream != audioStreams[id])
@@ -341,7 +326,8 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
         lerpLandingSpeedModifier = speedmod;
 
         // Start timer to normal
-        landing_timer.Start();
+        if(landing_timer != null)
+            landing_timer.Start();
     }
 
     // EVENT Dead
@@ -358,5 +344,14 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
     public void UpdateLeaning(double delta)
     {
 
+    }
+
+    public override void FreeAll()
+    {
+        landing_timer.Stop();
+        landing_timer.QueueFree();
+        base.FreeAll();
+        landing_timer.QueueFree();
+        QueueFree();
     }
 }

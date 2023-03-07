@@ -1,0 +1,6 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://c2t11o48gssot"]
+
+[ext_resource type="Texture2D" uid="uid://f6aq1batur8v" path="res://objects/misc/food_can/food_can_kukurice.png" id="1_8oa3a"]
+
+[resource]
+albedo_texture = ExtResource("1_8oa3a")

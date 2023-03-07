@@ -10,7 +10,7 @@ using System;
       to pak nedovoli pouziti zadne message ani jakehokoliv funkce load, pouze SendMessageToGDNow_ToObject
       a teto funkci musime v argumentu rict kteremu objektu posilame zpravu. Pristup k datum je normalne zachovan.
 */
-public partial class MessageObject: Godot.Object
+public partial class MessageObject: Godot.GodotObject
 {
 	// s kym si predavame zpravy
 	private Node nodeSelf = null;
@@ -274,5 +274,10 @@ public partial class MessageObject: Godot.Object
         SendMessageToCSNow(newMessage);
         Node tempData = GetNodeData();
         return tempData;
+    }
+
+    public void FreeAll()
+    {
+        Free();
     }
 }

@@ -1,5 +1,5 @@
 class_name custom_settings extends Node
-@icon("res://autoload/custom_settings_icon.svg")
+##@icon("res://autoload/custom_settings_icon.svg")
 
 ## Used for loading settings.cfg file.
 ##
@@ -74,6 +74,8 @@ func _get_values() -> void:
 	logging_include_datetime = cfg.get_value("logging", "include_datetime")
 
 func message_update() -> void:
-	var msg = GameMaster.msgObject.GetMessage()
-	if(msg == "msg_get_kaen_debug_bool"):
-		GameMaster.msgObject.SetBoolData(debug_kaen)
+	if(GameMaster != null):
+		if(GameMaster.msgObject != null):
+			var msg = GameMaster.msgObject.GetMessage()
+			if(msg == "msg_get_kaen_debug_bool"):
+				GameMaster.msgObject.SetBoolData(debug_kaen)

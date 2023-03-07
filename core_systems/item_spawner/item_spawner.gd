@@ -38,7 +38,7 @@ func _choose():
 
 func _spawn(point):
 	var new = battery_scene.instantiate()
-	new.global_position = point.global_position
+	#new.global_position = point.global_position
 	new.scale = Vector3(0.1, 0.1, 0.1)
 	self.add_child(new)
 	point.queue_free()

@@ -8,11 +8,10 @@ height = 1.8
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_e5kct"]
 radius = 0.4
-height = 1.0
+height = 0.9
 
 [node name="FPSCharacter_BasicMoving" type="CharacterBody3D"]
 collision_layer = 2
-floor_block_on_wall = false
 script = ExtResource("1_sks4r")
 metadata/_edit_lock_ = true
 
@@ -22,7 +21,7 @@ shape = SubResource("CapsuleShape3D_0a8eu")
 metadata/_edit_lock_ = true
 
 [node name="CharacterCollisionCrunch" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0)
 shape = SubResource("CapsuleShape3D_e5kct")
 disabled = true
 metadata/_edit_lock_ = true
@@ -44,3 +43,12 @@ metadata/_edit_lock_ = true
 [node name="HeadCrunchPos" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
 metadata/_edit_lock_ = true
+
+[node name="AllHuds" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2

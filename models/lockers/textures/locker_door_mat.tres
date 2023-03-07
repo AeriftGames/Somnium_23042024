@@ -1,0 +1,15 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://c0owbbfswg2pd"]
+
+[ext_resource type="Texture2D" uid="uid://5uj0g6wmxs3s" path="res://models/lockers/textures/locker_door_color.png" id="1_iupmg"]
+[ext_resource type="Texture2D" uid="uid://csd4cdrb1nshi" path="res://models/lockers/textures/locker_door_normal.png" id="2_f8224"]
+
+[resource]
+resource_name = "Material.004"
+cull_mode = 2
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_iupmg")
+metallic = 0.8
+roughness = 0.4
+normal_enabled = true
+normal_scale = 0.15
+normal_texture = ExtResource("2_f8224")

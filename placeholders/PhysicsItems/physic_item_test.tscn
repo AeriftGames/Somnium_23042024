@@ -1,0 +1,63 @@
+[gd_scene load_steps=8 format=3 uid="uid://x5o6n083ax2a"]
+
+[ext_resource type="Script" path="res://placeholders/PhysicsItems/physic_item_test.cs" id="1_8fm2c"]
+[ext_resource type="Script" path="res://core_systems/interactive_system/interactive_object.cs" id="2_ccmec"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_l84ni"]
+friction = 0.8
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gdsnn"]
+size = Vector3(0.25, 0.25, 0.25)
+
+[sub_resource type="BoxMesh" id="BoxMesh_p2lha"]
+size = Vector3(0.25, 0.25, 0.25)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3ehv4"]
+size = Vector3(0.254, 0.254, 0.254)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_d42n3"]
+radius = 2.5
+
+[node name="PhysicItem_test" type="RigidBody3D"]
+collision_layer = 9
+inertia = Vector3(0.5, 0.5, 0.5)
+physics_material_override = SubResource("PhysicsMaterial_l84ni")
+continuous_cd = true
+max_contacts_reported = 2
+contact_monitor = true
+linear_damp = 0.5
+angular_damp = 0.5
+script = ExtResource("1_8fm2c")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_gdsnn")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_p2lha")
+
+[node name="interactive_object" type="Node3D" parent="." groups=["interactive_object"]]
+script = ExtResource("2_ccmec")
+metadata/_edit_lock_ = true
+
+[node name="StaticBody3D" type="StaticBody3D" parent="interactive_object"]
+collision_layer = 4
+collision_mask = 0
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="interactive_object/StaticBody3D"]
+shape = SubResource("BoxShape3D_3ehv4")
+
+[node name="interactive_object_area3D" type="Area3D" parent="interactive_object/StaticBody3D"]
+collision_layer = 4
+collision_mask = 2
+monitorable = false
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="interactive_object/StaticBody3D/interactive_object_area3D"]
+shape = SubResource("SphereShape3D_d42n3")
+metadata/_edit_lock_ = true
+
+[node name="AudioPlayer_PhysicEffects" type="AudioStreamPlayer3D" parent="."]
+
+[connection signal="body_entered" from="interactive_object/StaticBody3D/interactive_object_area3D" to="interactive_object" method="_on_interactive_object_area_3d_body_entered"]
+[connection signal="body_exited" from="interactive_object/StaticBody3D/interactive_object_area3D" to="interactive_object" method="_on_interactive_object_area_3d_body_exited"]

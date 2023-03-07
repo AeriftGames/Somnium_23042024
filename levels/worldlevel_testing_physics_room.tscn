@@ -1,0 +1,226 @@
+[gd_scene load_steps=22 format=3 uid="uid://b477tn66b8n2b"]
+
+[ext_resource type="ArrayOccluder3D" uid="uid://d25pcacpuv734" path="res://levels/worldlevel_testing_physics_room/worldlevel_testing_physics_room.occ" id="1_3ep4w"]
+[ext_resource type="Script" path="res://levels/worldlevel.cs" id="1_hstvh"]
+[ext_resource type="PackedScene" uid="uid://ck8mt4y4gfqmk" path="res://placeholders/modular_walls/ground_large.tscn" id="2_nsr8b"]
+[ext_resource type="PackedScene" uid="uid://bet3idvc4fg0n" path="res://placeholders/PlayerStart.tscn" id="3_8gbgc"]
+[ext_resource type="PackedScene" uid="uid://clgsga4ty4mrp" path="res://placeholders/modular_walls/wall_normal.tscn" id="4_uq5u6"]
+[ext_resource type="PackedScene" uid="uid://crjyudrh814yq" path="res://placeholders/modular_walls/wall_small_corner_simple_l.tscn" id="5_7brdq"]
+[ext_resource type="PackedScene" uid="uid://0kvn14vfui6b" path="res://placeholders/modular_walls/wall_small.tscn" id="6_fsfcx"]
+[ext_resource type="PackedScene" path="res://testing_stuff_kaen/wall_lever_test.tscn" id="7_pssvi"]
+[ext_resource type="PackedScene" path="res://testing_stuff_kaen/test_light.tscn" id="8_t4ks3"]
+[ext_resource type="PackedScene" uid="uid://ttxrafhid6rv" path="res://placeholders/PhysicsItems/physic_crate.tscn" id="9_hcax0"]
+[ext_resource type="PackedScene" uid="uid://x5o6n083ax2a" path="res://placeholders/PhysicsItems/physic_item_test.tscn" id="10_18ehc"]
+[ext_resource type="PackedScene" uid="uid://dgse04gq5at0" path="res://placeholders/PhysicsItems/physic_item_test_small.tscn" id="10_frolm"]
+[ext_resource type="PackedScene" uid="uid://dim74o3ajko3e" path="res://testing_stuff_kaen/drawer_table.tscn" id="11_sgvvf"]
+[ext_resource type="PackedScene" uid="uid://ipic8k4uwyqr" path="res://testing_stuff_kaen/wardrobe_small.tscn" id="13_5c36d"]
+[ext_resource type="PackedScene" path="res://testing_stuff_kaen/wardrobe_rdoor_small.tscn" id="14_yfxhm"]
+[ext_resource type="PackedScene" uid="uid://co74ssxqnm6rv" path="res://testing_stuff_kaen/wardrobe_ldoor_small.tscn" id="15_rltmb"]
+[ext_resource type="PackedScene" uid="uid://cdaqxq0d8qgv3" path="res://testing_stuff_kaen/wardrobe_big.tscn" id="16_7ebsw"]
+[ext_resource type="PackedScene" path="res://testing_stuff_kaen/table_lever_test.tscn" id="17_srp4w"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_w3cwh"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_rxtxe"]
+sky_material = SubResource("ProceduralSkyMaterial_w3cwh")
+
+[sub_resource type="Environment" id="Environment_p3qlj"]
+background_mode = 2
+sky = SubResource("Sky_rxtxe")
+tonemap_mode = 3
+ssao_enabled = true
+ssil_enabled = true
+glow_enabled = true
+fog_density = 0.001
+volumetric_fog_density = 0.02
+volumetric_fog_gi_inject = 3.62
+volumetric_fog_ambient_inject = 0.12
+
+[node name="worldlevel" type="Node3D"]
+script = ExtResource("1_hstvh")
+InGameStartEnableSDFGI = true
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.61698, 0.407767, -0.673099, 0.471081, 0.493776, 0.730937, 0.630411, -0.768057, 0.112559, 0.5, 0, 0)
+light_energy = 1.844
+light_indirect_energy = 1.278
+shadow_enabled = true
+
+[node name="worldlevel_occluderculling" type="OccluderInstance3D" parent="."]
+visible = false
+occluder = ExtResource("1_3ep4w")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_p3qlj")
+
+[node name="LevelGeometry" type="Node3D" parent="."]
+
+[node name="Grounds" type="Node3D" parent="LevelGeometry"]
+
+[node name="ground_large" parent="LevelGeometry/Grounds" instance=ExtResource("2_nsr8b")]
+transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 2, -2, 0, 2)
+
+[node name="ground_large2" parent="LevelGeometry/Grounds" instance=ExtResource("2_nsr8b")]
+transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 2, 2, 0, 2)
+
+[node name="ground_large3" parent="LevelGeometry/Grounds" instance=ExtResource("2_nsr8b")]
+transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 2, -2, 0, -2)
+
+[node name="ground_large4" parent="LevelGeometry/Grounds" instance=ExtResource("2_nsr8b")]
+transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 2, 2, 0, -2)
+
+[node name="Wals" type="Node3D" parent="LevelGeometry"]
+
+[node name="wall_normal" parent="LevelGeometry/Wals" instance=ExtResource("4_uq5u6")]
+transform = Transform3D(0, 0, 0.5, 0, 0.5, 0, -0.5, 0, 0, -1.5, 0, -4)
+
+[node name="wall_normal3" parent="LevelGeometry/Wals" instance=ExtResource("4_uq5u6")]
+transform = Transform3D(0, 0, 0.5, 0, 0.5, 0, -0.5, 0, 0, 1.5, 0, -4)
+
+[node name="wall_small_corner_simpleL" parent="LevelGeometry/Wals" instance=ExtResource("5_7brdq")]
+transform = Transform3D(0.5, 0, -2.18557e-08, 0, 0.5, 0, 2.18557e-08, 0, 0.5, -4, 0, -4)
+
+[node name="wall_small_corner_simpleL3" parent="LevelGeometry/Wals" instance=ExtResource("5_7brdq")]
+transform = Transform3D(0, 0, 0.5, 0, 0.5, 0, -0.5, 0, 0, -4, 0, 4)
+
+[node name="wall_small_corner_simpleL2" parent="LevelGeometry/Wals" instance=ExtResource("5_7brdq")]
+transform = Transform3D(-4.37114e-08, 0, -0.5, 0, 0.5, 0, 0.5, 0, -4.37114e-08, 4, 0, -4)
+
+[node name="wall_small" parent="LevelGeometry/Wals" instance=ExtResource("6_fsfcx")]
+transform = Transform3D(0, 0, 0.5, 0, 0.5, 0, -0.5, 0, 0, -3, 0, -4)
+
+[node name="wall_small4" parent="LevelGeometry/Wals" instance=ExtResource("6_fsfcx")]
+transform = Transform3D(-0.5, 0, -2.18557e-08, 0, 0.5, 0, 2.18557e-08, 0, -0.5, -4, 0, -3)
+
+[node name="wall_small5" parent="LevelGeometry/Wals" instance=ExtResource("6_fsfcx")]
+transform = Transform3D(-0.5, 0, -2.18557e-08, 0, 0.5, 0, 2.18557e-08, 0, -0.5, 4, 0, -3)
+
+[node name="wall_small6" parent="LevelGeometry/Wals" instance=ExtResource("6_fsfcx")]
+transform = Transform3D(4.37114e-08, 0, -0.5, 0, 0.5, 0, 0.5, 0, 4.37114e-08, -3, 0, 4)
+
+[node name="wall_small2" parent="LevelGeometry/Wals" instance=ExtResource("6_fsfcx")]
+transform = Transform3D(0, 0, 0.5, 0, 0.5, 0, -0.5, 0, 0, 3, 0, -4)
+
+[node name="wall_small3" parent="LevelGeometry/Wals" instance=ExtResource("6_fsfcx")]
+transform = Transform3D(0, 0, 0.5, 0, 0.5, 0, -0.5, 0, 0, 0, 0, -4)
+
+[node name="wall_normal2" parent="LevelGeometry/Wals" instance=ExtResource("4_uq5u6")]
+transform = Transform3D(-0.5, 0, -2.18557e-08, 0, 0.5, 0, 2.18557e-08, 0, -0.5, -4, 0, 1.5)
+
+[node name="wall_normal4" parent="LevelGeometry/Wals" instance=ExtResource("4_uq5u6")]
+transform = Transform3D(-0.5, 0, -2.18557e-08, 0, 0.5, 0, 2.18557e-08, 0, -0.5, -4, 0, -1.5)
+
+[node name="wall_small7" parent="LevelGeometry/Wals" instance=ExtResource("6_fsfcx")]
+transform = Transform3D(-0.5, 0, -2.18557e-08, 0, 0.5, 0, 2.18557e-08, 0, -0.5, -4, 0, 9.68575e-08)
+
+[node name="wall_small8" parent="LevelGeometry/Wals" instance=ExtResource("6_fsfcx")]
+transform = Transform3D(-0.5, 0, -2.18557e-08, 0, 0.5, 0, 2.18557e-08, 0, -0.5, -4, 0, 3)
+
+[node name="PlayerStart" parent="." instance=ExtResource("3_8gbgc")]
+transform = Transform3D(0.866026, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866026, -1, 0, -1.77875)
+
+[node name="TestingStuff" type="Node3D" parent="."]
+
+[node name="WallLeverTest" parent="TestingStuff" instance=ExtResource("7_pssvi")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 3.86238, 1.1, -2.7327)
+
+[node name="WallLeverTest2" parent="TestingStuff" instance=ExtResource("7_pssvi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.1, -3.85)
+
+[node name="WallLeverTest5" parent="TestingStuff" instance=ExtResource("7_pssvi")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -3.85472, 1.1, -2.53608)
+
+[node name="WallLeverTest7" parent="TestingStuff" instance=ExtResource("7_pssvi")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -3.62077, 1.10426, 1.62443)
+
+[node name="WallLeverTest6" parent="TestingStuff" instance=ExtResource("7_pssvi")]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, -3.72227, 1.1, -3.7255)
+
+[node name="TestLight" parent="TestingStuff" instance=ExtResource("8_t4ks3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 2, -3)
+
+[node name="PhysicItem_test" parent="TestingStuff" instance=ExtResource("10_frolm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.52235, 0.630756, 0.181416)
+collision_layer = 9
+
+[node name="PhysicItem_test2" parent="TestingStuff" instance=ExtResource("10_frolm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.52235, 0.630756, 0.37923)
+
+[node name="PhysicItem_test6" parent="TestingStuff" instance=ExtResource("10_frolm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.83379, 0.516493, -3.27617)
+
+[node name="PhysicItem_test7" parent="TestingStuff" instance=ExtResource("10_frolm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.00485, 0.516493, -3.27617)
+
+[node name="PhysicItem_test8" parent="TestingStuff" instance=ExtResource("10_frolm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.23062, 0.517689, -3.27617)
+
+[node name="PhysicItem_test9" parent="TestingStuff" instance=ExtResource("10_frolm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.83379, 0.278792, -3.27617)
+
+[node name="PhysicItem_test11" parent="TestingStuff" instance=ExtResource("10_frolm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.23062, 0.279988, -3.27617)
+
+[node name="PhysicItem_test10" parent="TestingStuff" instance=ExtResource("10_frolm")]
+transform = Transform3D(1, 0, 0, 0, 0.575933, -0.817497, 0, 0.817497, 0.575933, -3.20843, 1.23849, 0.756201)
+
+[node name="PhysicItem_test12" parent="TestingStuff" instance=ExtResource("10_frolm")]
+transform = Transform3D(1, 0, 0, 0, 0.575933, -0.817497, 0, 0.817497, 0.575933, -3.37949, 1.23849, 0.756201)
+
+[node name="PhysicItem_test13" parent="TestingStuff" instance=ExtResource("10_frolm")]
+transform = Transform3D(1, 0, 0, 0, 0.575933, -0.817497, 0, 0.817497, 0.575933, -3.60526, 1.23918, 0.757178)
+
+[node name="PhysicItem_test14" parent="TestingStuff" instance=ExtResource("10_frolm")]
+transform = Transform3D(1, 0, 0, 0, 0.575933, -0.817497, 0, 0.817497, 0.575933, -3.20843, 1.10159, 0.561881)
+
+[node name="PhysicItem_test15" parent="TestingStuff" instance=ExtResource("10_frolm")]
+transform = Transform3D(1, 0, 0, 0, 0.575933, -0.817497, 0, 0.817497, 0.575933, -3.60526, 1.10228, 0.562859)
+
+[node name="PhysicItem_test" parent="." instance=ExtResource("9_hcax0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.49007, 0, 0.33338)
+mass = 5.0
+inertia = Vector3(0, 0, 0)
+
+[node name="PhysicItem_test2" parent="." instance=ExtResource("10_18ehc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.20824, 0.44683, 1.33327)
+collision_mask = 9
+
+[node name="DrawerTable" parent="." instance=ExtResource("11_sgvvf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.51753, -1.19209e-07, -3.42754)
+
+[node name="DrawerTable2" parent="." instance=ExtResource("11_sgvvf")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -3.42882, -1.19209e-07, 0.717742)
+
+[node name="Wardrobe_small" parent="." instance=ExtResource("13_5c36d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.379273, 0, -3.09789)
+
+[node name="Wardrobe_rdoor_small" parent="Wardrobe_small" instance=ExtResource("14_yfxhm")]
+
+[node name="Wardrobe_small2" parent="." instance=ExtResource("13_5c36d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.965078, 0, -3.09789)
+
+[node name="Wardrobe_rdoor_small" parent="Wardrobe_small2" instance=ExtResource("15_rltmb")]
+
+[node name="Wardrobe_small3" parent="." instance=ExtResource("13_5c36d")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -3.15594, 0, 3.4634)
+
+[node name="Wardrobe_rdoor_small" parent="Wardrobe_small3" instance=ExtResource("14_yfxhm")]
+
+[node name="Wardrobe_small4" parent="." instance=ExtResource("13_5c36d")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -3.17003, 0, 2.88769)
+
+[node name="Wardrobe_rdoor_small" parent="Wardrobe_small4" instance=ExtResource("14_yfxhm")]
+
+[node name="Wardrobe_big" parent="." instance=ExtResource("16_7ebsw")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -3.18401, -2.38419e-07, 1.93824)
+
+[node name="TableLever" parent="." instance=ExtResource("17_srp4w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.47077, 0.938444, -3.3771)
+upperReachEnd = 50.0
+lowerReachEnd = -50.0
+mouseMotionSpeed = 0.01
+linearVelocityLimit = 10.0
+
+[connection signal="LeverReachEnd" from="TestingStuff/WallLeverTest" to="TestingStuff/TestLight" method="_on_wall_lever_test_lever_reach_end"]

@@ -11,6 +11,8 @@ class_name item_pickup extends Node3D
 ## Used for displaying item name in interaction (Battery, Ammo...)
 ## First letter should be lower case.
 @export var item_name: String = "battery"
+## Ineractive node used for interaction
+@export var node_interact: Node
 ## Node used for the item logic (add health, battery, ...)
 ## This node needs to have use() function which is called after item is picked up.
 @export var use_node: Node
@@ -23,11 +25,6 @@ class_name item_pickup extends Node3D
 ## Sound effect for pick up. After it finished playing the item will queue_free()
 @export var sfx: AudioStream
 
-## Ineractive node scene used for interaction
-@onready var node_interact_scene = load("res://core_systems/interactive_system/interactive_object.tscn")
-
-## Ineractive node used for interaction
-var node_interact: Node
 ## The object hat inicialized interaction (should be player)
 var passed_object: Node
 ## Combines interaction names and item name for final tooltip
@@ -41,8 +38,9 @@ var sfx_node: Node
 
 
 func _ready() -> void:
-	node_interact = node_interact_scene.instantiate()
-	self.add_child(node_interact)
+	if sfx != null:
+		sfx = load("res://objects/read/paper_test/page_flip.wav")
+	node_interact = $interactive_object
 	timer = Timer.new()
 	self.add_child(timer)
 	timer.timeout.connect(_on_Timer_timeout)

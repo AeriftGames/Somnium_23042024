@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://c7ohsu8vdlks6"]
+
+[ext_resource type="PackedScene" uid="uid://cw2to46qw1m0c" path="res://objects/misc/food_can/food_can.glb" id="1_jyatf"]
+[ext_resource type="Script" path="res://objects/misc/food_can/food_can.gd" id="2_3sjkv"]
+[ext_resource type="Material" uid="uid://craiyuk3a1qh1" path="res://objects/misc/food_can/food_can_tunak.tres" id="3_47dnd"]
+
+[node name="food_can" instance=ExtResource("1_jyatf")]
+transform = Transform3D(0.07, 0, 0, 0, 0.07, 0, 0, 0, 0.07, 0, 0, 0)
+script = ExtResource("2_3sjkv")
+can_type = 1
+
+[node name="Cylinder" parent="." index="0"]
+material_override = ExtResource("3_47dnd")

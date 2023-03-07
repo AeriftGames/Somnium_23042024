@@ -1,0 +1,296 @@
+[gd_scene load_steps=58 format=3 uid="uid://63otc4qbwnsk"]
+
+[ext_resource type="Script" path="res://core_systems/level_loader_system/all_this_shaders_need_compiled.cs" id="1_o15x1"]
+[ext_resource type="Material" uid="uid://d08tc1iusbqxj" path="res://placeholders/modular_walls/mat/mat_ground1.tres" id="2_2s5p8"]
+[ext_resource type="PackedScene" uid="uid://cokykrpxx7lmy" path="res://objects/battery/battery.tscn" id="2_g7xyl"]
+[ext_resource type="Material" uid="uid://b40a0nqkh83ss" path="res://placeholders/modular_walls/mat/mat_wall1.tres" id="3_s56f1"]
+[ext_resource type="Material" uid="uid://btskthdiqqlrw" path="res://placeholders/modular_walls/mat/mat_wall2.tres" id="4_ylkxq"]
+[ext_resource type="Material" uid="uid://bc2lnxshiuvtk" path="res://textures/mat1.tres" id="5_sxmi3"]
+[ext_resource type="PackedScene" uid="uid://df3v88u2getl5" path="res://objects/door/bunker_door.tscn" id="8_361yp"]
+[ext_resource type="PackedScene" path="res://objects/door/door.tscn" id="9_hpdxh"]
+[ext_resource type="PackedScene" uid="uid://b6l080hrctdgf" path="res://objects/flashlight/flashlight.tscn" id="10_d871k"]
+[ext_resource type="PackedScene" uid="uid://djuv0voeaxmos" path="res://objects/light/light_celling.tscn" id="14_q5dvk"]
+[ext_resource type="PackedScene" uid="uid://bys0s78vbryfp" path="res://objects/light/light_celling_long.tscn" id="15_1d4ex"]
+[ext_resource type="PackedScene" uid="uid://c5x31aaf0q2i3" path="res://placeholders/posters/poster1.tscn" id="23_yn0fc"]
+[ext_resource type="PackedScene" uid="uid://cill7wx53gakg" path="res://placeholders/posters/poster2.tscn" id="24_7ynjp"]
+[ext_resource type="PackedScene" uid="uid://dp7dmsp410av7" path="res://placeholders/interactive_items/interactive_item_look_and_interact_test.tscn" id="25_p4cp4"]
+[ext_resource type="PackedScene" uid="uid://bmu0nsnb63m5i" path="res://objects/flashlight2/Flashlight.tscn" id="25_wotpr"]
+[ext_resource type="PackedScene" uid="uid://gtfs2t3l23nj" path="res://placeholders/interactive_items/interactive_item_rotation_test.tscn" id="26_8yf2x"]
+[ext_resource type="PackedScene" uid="uid://bndr3up87gn1i" path="res://placeholders/Decals/blood_decal.tscn" id="26_xsorb"]
+[ext_resource type="PackedScene" uid="uid://xfouxhhlpltn" path="res://placeholders/interactive_items/interactive_item_test.tscn" id="27_bkq8p"]
+[ext_resource type="PackedScene" uid="uid://bfhxpq55lmdom" path="res://placeholders/MeshWall.tscn" id="28_yskm7"]
+[ext_resource type="PackedScene" uid="uid://dim74o3ajko3e" path="res://testing_stuff_kaen/drawer_table.tscn" id="31_s7eyh"]
+[ext_resource type="PackedScene" uid="uid://b80okyu0a0rv3" path="res://testing_stuff_kaen/table_lever_test.tscn" id="32_8u032"]
+[ext_resource type="PackedScene" uid="uid://bha2wtgj5713t" path="res://testing_stuff_kaen/wall_lever_test.tscn" id="33_72hxg"]
+[ext_resource type="PackedScene" uid="uid://cdaqxq0d8qgv3" path="res://testing_stuff_kaen/wardrobe_big.tscn" id="34_mh0t6"]
+[ext_resource type="PackedScene" uid="uid://ipic8k4uwyqr" path="res://testing_stuff_kaen/wardrobe_small.tscn" id="35_kmcrk"]
+[ext_resource type="PackedScene" uid="uid://0oyvcuqijj5q" path="res://models/boxes/box_0.tscn" id="39_nihyl"]
+[ext_resource type="PackedScene" uid="uid://cesku4bfg7c26" path="res://models/boxes/box_1.tscn" id="40_im3qu"]
+[ext_resource type="PackedScene" uid="uid://csksvlncxrfav" path="res://models/boxes/box_2.tscn" id="41_308eo"]
+[ext_resource type="PackedScene" uid="uid://caqua4b2del2c" path="res://placeholders/modular_pipes/new_big/pipe_big_short.tscn" id="42_2xmju"]
+[ext_resource type="PackedScene" uid="uid://oe4u1fhwausm" path="res://placeholders/modular_pipes/new_big/pipe_big_split.tscn" id="43_tydvw"]
+[ext_resource type="PackedScene" uid="uid://5ukc61pf18s8" path="res://placeholders/modular_pipes/new_big/pipe_big_valve_base.tscn" id="44_roxim"]
+[ext_resource type="PackedScene" uid="uid://bc75a73l67dsd" path="res://placeholders/modular_electric_wires/one_wire_biground.tscn" id="45_gwjw5"]
+[ext_resource type="PackedScene" uid="uid://0fo3wqgt727x" path="res://placeholders/modular_electric_wires/el_box.tscn" id="46_7ivhq"]
+[ext_resource type="PackedScene" path="res://models/shelves/shelf_1/shelf_big_back.tscn" id="46_ky1dy"]
+[ext_resource type="PackedScene" uid="uid://c1q4v3wvjkr6g" path="res://models/shelves/workbench/workbench.tscn" id="47_01v4u"]
+[ext_resource type="PackedScene" uid="uid://cjo25lyaaci44" path="res://models/gas_tanks/small_gas_tank/gas_tank_small.tscn" id="49_qghd4"]
+[ext_resource type="PackedScene" uid="uid://d1nkc036kqahw" path="res://placeholders/modular_walls/cube_hole_big.tscn" id="49_xvu51"]
+[ext_resource type="PackedScene" uid="uid://cqc5yj3p080jq" path="res://placeholders/modular_walls/cube_hole_big_deep.tscn" id="50_aonqr"]
+[ext_resource type="PackedScene" uid="uid://dk1uu1iam0dha" path="res://placeholders/modular_walls/cube_hole_medium.tscn" id="51_ohgpc"]
+[ext_resource type="PackedScene" uid="uid://dc0mmunts8oay" path="res://placeholders/modular_walls/cube_hole_medium_wide.tscn" id="52_pboyt"]
+[ext_resource type="PackedScene" uid="uid://ck8mt4y4gfqmk" path="res://placeholders/modular_walls/ground_large.tscn" id="53_51vfv"]
+[ext_resource type="PackedScene" uid="uid://bjbb1xoyn1a40" path="res://placeholders/modular_walls/ground_medium.tscn" id="54_2cn0n"]
+[ext_resource type="PackedScene" uid="uid://bkieh0cucmnjq" path="res://placeholders/modular_walls/ground_small.tscn" id="55_4fsv4"]
+[ext_resource type="PackedScene" uid="uid://ddkj4ce5vkuwl" path="res://placeholders/modular_walls/ground_very_large.tscn" id="56_tuiyf"]
+[ext_resource type="PackedScene" uid="uid://larq6fdfhjoe" path="res://placeholders/modular_walls/wall_doors_conic.tscn" id="57_pq7co"]
+[ext_resource type="PackedScene" uid="uid://dqg2k1yyygw3n" path="res://placeholders/modular_walls/wall_doors_normal.tscn" id="58_mpqeg"]
+[ext_resource type="PackedScene" uid="uid://clgsga4ty4mrp" path="res://placeholders/modular_walls/wall_normal.tscn" id="59_45la1"]
+[ext_resource type="PackedScene" uid="uid://0kvn14vfui6b" path="res://placeholders/modular_walls/wall_small.tscn" id="60_kgr0s"]
+[ext_resource type="PackedScene" uid="uid://djv5rnm2dye1p" path="res://placeholders/modular_walls/wall_small_corner_3_sides.tscn" id="61_lkf5h"]
+[ext_resource type="PackedScene" uid="uid://crnudh8bfmic5" path="res://placeholders/modular_walls/wall_small_corner_4_sides.tscn" id="62_l1ed0"]
+[ext_resource type="PackedScene" uid="uid://b7kr8jlclfgr8" path="res://placeholders/modular_walls/wall_small_corner_simple_end.tscn" id="63_uco4s"]
+[ext_resource type="PackedScene" uid="uid://crjyudrh814yq" path="res://placeholders/modular_walls/wall_small_corner_simple_l.tscn" id="64_lypcn"]
+[ext_resource type="PackedScene" uid="uid://crjmwsnlcikjr" path="res://models/airvents/arivents_bigfan_2.tscn" id="66_lbder"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_23kqo"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jf1c4"]
+albedo_color = Color(0.87451, 0.87451, 0.87451, 1)
+emission_enabled = true
+emission = Color(0.878431, 0.882353, 0.894118, 1)
+emission_energy_multiplier = 0.75
+
+[sub_resource type="BoxMesh" id="BoxMesh_cc0h3"]
+material = SubResource("StandardMaterial3D_jf1c4")
+size = Vector3(0.2, 0.2, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7p513"]
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 8.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_n64ut"]
+material = SubResource("StandardMaterial3D_7p513")
+size = Vector3(0.2, 0.2, 1)
+
+[node name="AllThisShadersNeedCompiled" type="Node3D"]
+script = ExtResource("1_o15x1")
+
+[node name="AllMaterials" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.18138, 0, 0)
+
+[node name="cube1" type="MeshInstance3D" parent="AllMaterials"]
+mesh = SubResource("BoxMesh_23kqo")
+surface_material_override/0 = ExtResource("2_2s5p8")
+
+[node name="cube2" type="MeshInstance3D" parent="AllMaterials"]
+mesh = SubResource("BoxMesh_23kqo")
+surface_material_override/0 = ExtResource("3_s56f1")
+
+[node name="cube3" type="MeshInstance3D" parent="AllMaterials"]
+mesh = SubResource("BoxMesh_23kqo")
+surface_material_override/0 = ExtResource("4_ylkxq")
+
+[node name="cube4" type="MeshInstance3D" parent="AllMaterials"]
+mesh = SubResource("BoxMesh_23kqo")
+surface_material_override/0 = ExtResource("5_sxmi3")
+
+[node name="cube5" type="MeshInstance3D" parent="AllMaterials"]
+mesh = SubResource("BoxMesh_23kqo")
+surface_material_override/0 = ExtResource("5_sxmi3")
+
+[node name="cube6" type="MeshInstance3D" parent="AllMaterials"]
+mesh = SubResource("BoxMesh_23kqo")
+surface_material_override/0 = ExtResource("5_sxmi3")
+
+[node name="cube7" type="MeshInstance3D" parent="AllMaterials"]
+mesh = SubResource("BoxMesh_23kqo")
+surface_material_override/0 = ExtResource("5_sxmi3")
+
+[node name="cube8" type="MeshInstance3D" parent="AllMaterials"]
+mesh = SubResource("BoxMesh_23kqo")
+surface_material_override/0 = ExtResource("5_sxmi3")
+
+[node name="cube9" type="MeshInstance3D" parent="AllMaterials"]
+mesh = SubResource("BoxMesh_23kqo")
+surface_material_override/0 = ExtResource("5_sxmi3")
+
+[node name="cube10" type="MeshInstance3D" parent="AllMaterials"]
+mesh = SubResource("BoxMesh_23kqo")
+surface_material_override/0 = ExtResource("5_sxmi3")
+
+[node name="cube11" type="MeshInstance3D" parent="AllMaterials"]
+mesh = SubResource("BoxMesh_23kqo")
+surface_material_override/0 = ExtResource("5_sxmi3")
+
+[node name="cube12" type="MeshInstance3D" parent="AllMaterials"]
+mesh = SubResource("BoxMesh_23kqo")
+surface_material_override/0 = ExtResource("5_sxmi3")
+
+[node name="cube13" type="MeshInstance3D" parent="AllMaterials"]
+mesh = SubResource("BoxMesh_23kqo")
+surface_material_override/0 = ExtResource("5_sxmi3")
+
+[node name="cube14" type="MeshInstance3D" parent="AllMaterials"]
+mesh = SubResource("BoxMesh_23kqo")
+surface_material_override/0 = ExtResource("5_sxmi3")
+
+[node name="AllMeshes" type="Node3D" parent="."]
+
+[node name="AllItems" type="Node3D" parent="."]
+
+[node name="AllParticles" type="Node3D" parent="."]
+
+[node name="AllScenes" type="Node3D" parent="."]
+
+[node name="battery" parent="AllScenes" instance=ExtResource("2_g7xyl")]
+script = null
+
+[node name="bunker_door" parent="AllScenes" instance=ExtResource("8_361yp")]
+script = null
+
+[node name="door" parent="AllScenes" instance=ExtResource("9_hpdxh")]
+script = null
+
+[node name="flashlight" parent="AllScenes" instance=ExtResource("10_d871k")]
+
+[node name="light_celling" parent="AllScenes" instance=ExtResource("14_q5dvk")]
+
+[node name="light_celling_long" parent="AllScenes" instance=ExtResource("15_1d4ex")]
+
+[node name="poster1" parent="AllScenes" instance=ExtResource("23_yn0fc")]
+
+[node name="poster2" parent="AllScenes" instance=ExtResource("24_7ynjp")]
+
+[node name="emmisive_light_test4" type="MeshInstance3D" parent="AllScenes"]
+transform = Transform3D(4.09367, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+cast_shadow = 0
+mesh = SubResource("BoxMesh_cc0h3")
+
+[node name="emmisive_light_test2" type="MeshInstance3D" parent="AllScenes"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("BoxMesh_n64ut")
+
+[node name="emmisive_light_test3" type="MeshInstance3D" parent="AllScenes"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("BoxMesh_n64ut")
+
+[node name="interactive_item_look_and_interact_test" parent="AllScenes" instance=ExtResource("25_p4cp4")]
+
+[node name="InteractiveItem_rotation_test" parent="AllScenes" instance=ExtResource("26_8yf2x")]
+
+[node name="InteractiveItem_test" parent="AllScenes" instance=ExtResource("27_bkq8p")]
+
+[node name="MeshWall" parent="AllScenes" instance=ExtResource("28_yskm7")]
+
+[node name="DrawerTable" parent="AllScenes" instance=ExtResource("31_s7eyh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.19712, 0, 1.45689)
+
+[node name="TableLever" parent="AllScenes" instance=ExtResource("32_8u032")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.240349, 0.274046, 1.35579)
+
+[node name="WallLever" parent="AllScenes" instance=ExtResource("33_72hxg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.240349, 0.290311, 1.38473)
+
+[node name="Wardrobe_big" parent="AllScenes" instance=ExtResource("34_mh0t6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.141221, 0, 1.99134)
+
+[node name="Wardrobe_small" parent="AllScenes" instance=ExtResource("35_kmcrk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.651221, 0.122874, 1.88299)
+
+[node name="shelf_big_back" parent="AllScenes" instance=ExtResource("46_ky1dy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.259718, 2.38419e-07, 3.67153)
+
+[node name="workbench" parent="AllScenes" instance=ExtResource("47_01v4u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.26361, -0.131226, 3.87813)
+
+[node name="gas_tank_small" parent="AllScenes" instance=ExtResource("49_qghd4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.173768, 0, 4.41587)
+
+[node name="gas_tank_small2" parent="AllScenes" instance=ExtResource("49_qghd4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0797606, 2.38419e-07, 4.29063)
+
+[node name="box0_main" parent="AllScenes" instance=ExtResource("39_nihyl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.4217, 0, 0)
+
+[node name="box1_main" parent="AllScenes" instance=ExtResource("40_im3qu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.1546, 0, 0)
+
+[node name="box2_main" parent="AllScenes" instance=ExtResource("41_308eo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.208, 0, 0)
+
+[node name="pipe_big_short" parent="AllScenes" instance=ExtResource("42_2xmju")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.651221, 1.21962, 1.88278)
+
+[node name="pipe_big_split" parent="AllScenes" instance=ExtResource("43_tydvw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.651221, 1.21962, 1.88278)
+
+[node name="pipe_big_valve_base" parent="AllScenes" instance=ExtResource("44_roxim")]
+transform = Transform3D(1.78814e-07, 1, 0, -1, 1.78814e-07, 0, 0, 0, 1, -0.651221, 1.21962, 1.88278)
+
+[node name="one_wire_biground" parent="AllScenes" instance=ExtResource("45_gwjw5")]
+
+[node name="el_box" parent="AllScenes" instance=ExtResource("46_7ivhq")]
+
+[node name="cube_hole_big" parent="AllScenes" instance=ExtResource("49_xvu51")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.8547, 0, 2.69322)
+
+[node name="cube_hole_big_deep" parent="AllScenes" instance=ExtResource("50_aonqr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.8547, 0, 2.69322)
+
+[node name="cube_hole_medium" parent="AllScenes" instance=ExtResource("51_ohgpc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.8547, 0, 2.69322)
+
+[node name="cube_hole_medium_wide" parent="AllScenes" instance=ExtResource("52_pboyt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.8547, 0, 2.69322)
+
+[node name="ground_large" parent="AllScenes" instance=ExtResource("53_51vfv")]
+transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 2, 15.8547, 0, 2.69322)
+
+[node name="ground_medium" parent="AllScenes" instance=ExtResource("54_2cn0n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.8547, 0, 2.69322)
+
+[node name="ground_small" parent="AllScenes" instance=ExtResource("55_4fsv4")]
+transform = Transform3D(0.5, 0, 0, 0, 1, 0, 0, 0, 0.5, 15.8547, 0, 2.69322)
+
+[node name="ground_very_large" parent="AllScenes" instance=ExtResource("56_tuiyf")]
+transform = Transform3D(4, 0, 0, 0, 1, 0, 0, 0, 4, 15.8547, 0, 2.69322)
+
+[node name="wall_doors_conic" parent="AllScenes" instance=ExtResource("57_pq7co")]
+transform = Transform3D(0, 0, 0.5, 0, 0.5, 0, -0.5, 0, 0, 15.8547, 0, 2.69322)
+
+[node name="wall_doors_normal" parent="AllScenes" instance=ExtResource("58_mpqeg")]
+transform = Transform3D(0, 0, 0.5, 0, 0.5, 0, -0.5, 0, 0, 15.8547, 0, 2.69322)
+
+[node name="wall_normal" parent="AllScenes" instance=ExtResource("59_45la1")]
+transform = Transform3D(0, 0, 0.5, 0, 0.5, 0, -0.5, 0, 0, 15.8547, 0, 2.69322)
+
+[node name="wall_small" parent="AllScenes" instance=ExtResource("60_kgr0s")]
+transform = Transform3D(0, 0, 0.5, 0, 0.5, 0, -0.5, 0, 0, 15.8547, 0, 2.69322)
+
+[node name="wall_small_corner_3Sides" parent="AllScenes" instance=ExtResource("61_lkf5h")]
+transform = Transform3D(0, 0, 0.5, 0, 0.5, 0, -0.5, 0, 0, 15.8547, 0, 2.69322)
+
+[node name="wall_small_corner_4Sides" parent="AllScenes" instance=ExtResource("62_l1ed0")]
+transform = Transform3D(0, 0, 0.5, 0, 0.5, 0, -0.5, 0, 0, 15.8547, 0, 2.69322)
+
+[node name="wall_small_corner_simple_end" parent="AllScenes" instance=ExtResource("63_uco4s")]
+transform = Transform3D(0, 0, 0.5, 0, 0.5, 0, -0.5, 0, 0, 15.8547, 0, 2.69322)
+
+[node name="wall_small_corner_simpleL" parent="AllScenes" instance=ExtResource("64_lypcn")]
+transform = Transform3D(0, 0, 0.5, 0, 0.5, 0, -0.5, 0, 0, 15.8547, 0, 2.69322)
+
+[node name="arivents_bigfan_2" parent="AllScenes" instance=ExtResource("66_lbder")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.049, 3.5237, 6.61695)
+
+[node name="AllInteractiveItemsNeedToggle" type="Node3D" parent="."]
+
+[node name="Flashlight" parent="AllInteractiveItemsNeedToggle" instance=ExtResource("25_wotpr")]
+transform = Transform3D(-0.0588534, 0, -0.998267, 0, 1, 0, 0.998267, 0, -0.0588534, -5.30882, 0, -0.0460939)
+
+[node name="AllDecals" type="Node3D" parent="."]
+
+[node name="Decal" parent="AllDecals" instance=ExtResource("26_xsorb")]
+transform = Transform3D(0.75, 0.433013, -0.5, -0.5, 0.866025, -2.6077e-08, 0.433013, 0.25, 0.866025, -0.0500001, 0, -1.4462)
+size = Vector3(2, 4, 2)

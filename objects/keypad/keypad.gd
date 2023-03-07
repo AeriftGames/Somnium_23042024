@@ -1,15 +1,15 @@
 extends Node3D
 
 @export var combination = 1235
-var keypadtext
+var keypadtext: Label
 var max_Characters = false
 var special_state = false
 var locked = false
 
-var node_interact
+var node_interact: Node
 
-var camera_pos
-var camera_look
+var camera_pos: Node
+var camera_look: Node
 
 var isNowInteract = false
 

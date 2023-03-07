@@ -1,0 +1,116 @@
+[gd_scene load_steps=29 format=3 uid="uid://bp8wysugaaq6c"]
+
+[ext_resource type="PackedScene" uid="uid://0fo3wqgt727x" path="res://placeholders/modular_electric_wires/el_box.tscn" id="1_lnlib"]
+[ext_resource type="PackedScene" uid="uid://pa3cewcym3dk" path="res://placeholders/modular_electric_wires/one_wire_up_short.tscn" id="2_2i4ll"]
+[ext_resource type="PackedScene" uid="uid://bc1n4oo7ge4lj" path="res://placeholders/modular_electric_wires/three_wires_up_short.tscn" id="3_7dfpw"]
+[ext_resource type="PackedScene" uid="uid://cvcm5pq8kuukm" path="res://placeholders/modular_electric_wires/six_wires_up_short.tscn" id="4_2dvvu"]
+[ext_resource type="PackedScene" uid="uid://dbx8wx881lqo8" path="res://placeholders/modular_electric_wires/one_wire_up_medium.tscn" id="5_8rlnd"]
+[ext_resource type="PackedScene" uid="uid://ddxr8piq1nlri" path="res://placeholders/modular_electric_wires/three_wires_up_medium.tscn" id="6_w81e1"]
+[ext_resource type="PackedScene" uid="uid://ct0lisru5b3t0" path="res://placeholders/modular_electric_wires/six_wires_up_medium.tscn" id="7_acnb0"]
+[ext_resource type="PackedScene" uid="uid://crjcb1kgy6xi7" path="res://placeholders/modular_electric_wires/one_wire_up_long.tscn" id="8_ph0b8"]
+[ext_resource type="PackedScene" uid="uid://lhs1iy6w4cwl" path="res://placeholders/modular_electric_wires/three_wires_up_long.tscn" id="9_6ftpt"]
+[ext_resource type="PackedScene" uid="uid://cbenkl1jmh38y" path="res://placeholders/modular_electric_wires/six_wires_up_long.tscn" id="10_2kiir"]
+[ext_resource type="PackedScene" uid="uid://8nrfg346ioxl" path="res://placeholders/modular_electric_wires/one_wire_smallround.tscn" id="11_cg8ey"]
+[ext_resource type="PackedScene" uid="uid://bnsnl4nvwmofj" path="res://placeholders/modular_electric_wires/three_wires_smallround.tscn" id="12_hujq5"]
+[ext_resource type="PackedScene" uid="uid://4v5oy3wwf7a" path="res://placeholders/modular_electric_wires/six_wires_smallround.tscn" id="13_sl35b"]
+[ext_resource type="PackedScene" uid="uid://bc75a73l67dsd" path="res://placeholders/modular_electric_wires/one_wire_biground.tscn" id="14_e23jq"]
+[ext_resource type="PackedScene" uid="uid://bffgsatuea2lw" path="res://placeholders/modular_electric_wires/three_wires_biground.tscn" id="15_u5hu7"]
+[ext_resource type="PackedScene" uid="uid://c6ilupwax043e" path="res://placeholders/modular_electric_wires/six_wires_biground.tscn" id="16_d7bl7"]
+[ext_resource type="PackedScene" uid="uid://dag14glg2u4os" path="res://placeholders/modular_electric_wires/one_wire_corner_out_short.tscn" id="17_80tq5"]
+[ext_resource type="PackedScene" uid="uid://bhqupl0u70c00" path="res://placeholders/modular_electric_wires/three_wires_corner_out_short.tscn" id="18_shyqh"]
+[ext_resource type="PackedScene" uid="uid://d3kvfffxi7kdq" path="res://placeholders/modular_electric_wires/six_wires_corner_out_short.tscn" id="19_us5t3"]
+[ext_resource type="PackedScene" uid="uid://d2rt3o3mbq2t6" path="res://placeholders/modular_electric_wires/one_wire_corner_in_short.tscn" id="20_3pi3u"]
+[ext_resource type="PackedScene" uid="uid://dekjxpxxrrtv" path="res://placeholders/modular_electric_wires/three_wires_corner_in_short.tscn" id="21_hf0vo"]
+[ext_resource type="PackedScene" uid="uid://b35v53dt2y2gx" path="res://placeholders/modular_electric_wires/six_wires_corner_in_short.tscn" id="22_dkuvd"]
+[ext_resource type="PackedScene" uid="uid://bpvrxjoi50p0t" path="res://placeholders/modular_electric_wires/one_wire_corner_in_medium.tscn" id="23_doqes"]
+[ext_resource type="PackedScene" uid="uid://dhax72t2hu1on" path="res://placeholders/modular_electric_wires/three_wires_corner_in_medium.tscn" id="24_5p54b"]
+[ext_resource type="PackedScene" uid="uid://x0aqm11au4v0" path="res://placeholders/modular_electric_wires/six_wires_corner_in_medium.tscn" id="25_1fpex"]
+[ext_resource type="PackedScene" uid="uid://mg0spjlf3hdq" path="res://placeholders/modular_electric_wires/one_wire_corner_out_medium.tscn" id="26_jva80"]
+[ext_resource type="PackedScene" uid="uid://chcr46aqv5kbo" path="res://placeholders/modular_electric_wires/three_wires_corner_out_medium.tscn" id="27_8cpyh"]
+[ext_resource type="PackedScene" uid="uid://du5r5gj7lb26v" path="res://placeholders/modular_electric_wires/six_wires_corner_out_medium.tscn" id="28_eigol"]
+
+[node name="wires_test" type="Node3D"]
+metadata/_edit_lock_ = true
+
+[node name="el_box" parent="." instance=ExtResource("1_lnlib")]
+visible = false
+
+[node name="one_wire_up_short" parent="." instance=ExtResource("2_2i4ll")]
+visible = false
+
+[node name="three_wires_up_short" parent="." instance=ExtResource("3_7dfpw")]
+visible = false
+
+[node name="six_wires_up_short" parent="." instance=ExtResource("4_2dvvu")]
+visible = false
+
+[node name="one_wire_up_medium" parent="." instance=ExtResource("5_8rlnd")]
+visible = false
+
+[node name="three_wires_up_medium" parent="." instance=ExtResource("6_w81e1")]
+visible = false
+
+[node name="six_wires_up_medium" parent="." instance=ExtResource("7_acnb0")]
+visible = false
+
+[node name="one_wire_up_long" parent="." instance=ExtResource("8_ph0b8")]
+visible = false
+
+[node name="three_wires_up_long" parent="." instance=ExtResource("9_6ftpt")]
+visible = false
+
+[node name="six_wires_up_long" parent="." instance=ExtResource("10_2kiir")]
+visible = false
+
+[node name="one_wire_smallround" parent="." instance=ExtResource("11_cg8ey")]
+visible = false
+
+[node name="three_wires_smallround" parent="." instance=ExtResource("12_hujq5")]
+visible = false
+
+[node name="six_wires_smallround" parent="." instance=ExtResource("13_sl35b")]
+visible = false
+
+[node name="one_wire_biground" parent="." instance=ExtResource("14_e23jq")]
+visible = false
+
+[node name="three_wires_biground" parent="." instance=ExtResource("15_u5hu7")]
+visible = false
+
+[node name="six_wires_biground" parent="." instance=ExtResource("16_d7bl7")]
+visible = false
+
+[node name="one_wire_corner_out_short" parent="." instance=ExtResource("17_80tq5")]
+visible = false
+
+[node name="three_wires_corner_out_short" parent="." instance=ExtResource("18_shyqh")]
+visible = false
+
+[node name="six_wires_corner_out_short" parent="." instance=ExtResource("19_us5t3")]
+visible = false
+
+[node name="one_wire_corner_in_short" parent="." instance=ExtResource("20_3pi3u")]
+visible = false
+
+[node name="three_wires_corner_in_short" parent="." instance=ExtResource("21_hf0vo")]
+visible = false
+
+[node name="six_wires_corner_in_short" parent="." instance=ExtResource("22_dkuvd")]
+visible = false
+
+[node name="one_wire_corner_in_medium" parent="." instance=ExtResource("23_doqes")]
+visible = false
+
+[node name="three_wires_corner_in_medium" parent="." instance=ExtResource("24_5p54b")]
+visible = false
+
+[node name="six_wires_corner_in_medium" parent="." instance=ExtResource("25_1fpex")]
+visible = false
+
+[node name="one_wire_corner_out_medium" parent="." instance=ExtResource("26_jva80")]
+visible = false
+
+[node name="three_wires_corner_out_medium" parent="." instance=ExtResource("27_8cpyh")]
+visible = false
+
+[node name="six_wires_corner_out_medium" parent="." instance=ExtResource("28_eigol")]

@@ -14,7 +14,23 @@ script = ExtResource("1_uvf2j")
 [node name="NodeLean" type="Node3D" parent="NodeRotY/GimbalLand/NodeRotX"]
 
 [node name="Camera" type="Camera3D" parent="NodeRotY/GimbalLand/NodeRotX/NodeLean"]
-fov = 70.0
+cull_mask = 3
+fov = 65.0
+far = 300.0
+
+[node name="HandGrabMarker" type="Marker3D" parent="NodeRotY/GimbalLand/NodeRotX/NodeLean/Camera"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.5)
+
+[node name="HandStaticBody" type="StaticBody3D" parent="NodeRotY/GimbalLand/NodeRotX/NodeLean/Camera/HandGrabMarker"]
+
+[node name="HandGrabJoint" type="Generic6DOFJoint3D" parent="NodeRotY/GimbalLand/NodeRotX/NodeLean/Camera"]
+node_a = NodePath("../HandGrabMarker/HandStaticBody")
+linear_limit_x/enabled = false
+linear_limit_y/enabled = false
+linear_limit_z/enabled = false
+
+[node name="CameraLookPoint" type="Node3D" parent="NodeRotY/GimbalLand/NodeRotX/NodeLean"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
 
 [node name="LerpPos_LeanCenter" type="Node3D" parent="NodeRotY/GimbalLand/NodeRotX"]
 

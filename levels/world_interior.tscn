@@ -1,10 +1,10 @@
-[gd_scene load_steps=39 format=3 uid="uid://cicfjijhrbsoq"]
+[gd_scene load_steps=39 format=3 uid="uid://cfhr1bbijkhk7"]
 
+[ext_resource type="ArrayOccluder3D" uid="uid://bvuu4stocopv2" path="res://levels/world_interior/world_interior.occ" id="1_h3qem"]
+[ext_resource type="Script" path="res://levels/worldlevel.cs" id="1_siidf"]
 [ext_resource type="Texture2D" uid="uid://660jcc1vju43" path="res://textures/brick_pavement_0108_02_s.jpg" id="1_uebcf"]
 [ext_resource type="Texture2D" uid="uid://bybrpbyf1euit" path="res://textures/NormalMap (3).png" id="2_18fqb"]
-[ext_resource type="Material" path="res://textures/mat1.tres" id="3_6mmgv"]
-[ext_resource type="Texture2D" uid="uid://0n0dx7ov4qi6" path="res://textures/blood_decal_test.png" id="4_6bpl4"]
-[ext_resource type="PackedScene" uid="uid://dhvnxdw5mvaro" path="res://placeholders/wine_barrel.tscn" id="5_ttrj3"]
+[ext_resource type="Material" uid="uid://bc2lnxshiuvtk" path="res://textures/mat1.tres" id="3_6mmgv"]
 [ext_resource type="PackedScene" uid="uid://xfouxhhlpltn" path="res://placeholders/interactive_items/interactive_item_test.tscn" id="8_6nvq8"]
 [ext_resource type="PackedScene" uid="uid://dp7dmsp410av7" path="res://placeholders/interactive_items/interactive_item_look_and_interact_test.tscn" id="8_g3ca3"]
 [ext_resource type="PackedScene" uid="uid://bet3idvc4fg0n" path="res://placeholders/PlayerStart.tscn" id="9_eg1wv"]
@@ -122,6 +122,13 @@ data = PackedVector3Array(-1, 1, 1, 1, 1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, -
 data = PackedVector3Array(-1, 1, 1, 1, 1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, -1, 1, 1, 1, -1, -1, 1, -1, 1, -1, -1, -1, 1, -1, -1, -1, -1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, 1, 1, 1, -1, 1, -1, -1, 1, -1, 1, -1, 1, -1, -1, 1, 1, -1, -1, -1, -1, 1, 1, -1, -1, 1, -1, -1, -1, 1, 1, 1, -1, 1, 1, 1, 1, -1, -1, 1, 1, -1, 1, -1, 1, 1, -1, -1, -1, 1, 1, -1, 1, -1, -1, -1, 1, -1, 1, 1, -1, -1, -1, -1, -1)
 
 [node name="worldlevel" type="Node3D"]
+script = ExtResource("1_siidf")
+InGameStartEnableSDFGI = true
+
+[node name="worldlevel_occluderculling" type="OccluderInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.89176, 0, 0)
+visible = false
+occluder = ExtResource("1_h3qem")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_vig0a")
@@ -346,44 +353,8 @@ mesh = SubResource("BoxMesh_84wwh")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="LevelGeometry/MeshInstance3D6/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_pyl4x")
 
-[node name="Decal" type="Decal" parent="LevelGeometry"]
-transform = Transform3D(0.75, 0.433013, -0.5, -0.5, 0.866025, -2.6077e-08, 0.433013, 0.25, 0.866025, -0.0500001, 0, -2.2)
-extents = Vector3(1, 2, 1)
-texture_albedo = ExtResource("4_6bpl4")
-
-[node name="Decal2" type="Decal" parent="LevelGeometry"]
-transform = Transform3D(0.775409, -0.603849, -0.184683, 0.499547, 0.765503, -0.405534, 0.386256, 0.222197, 0.895228, 9, 1, -7.5)
-extents = Vector3(1, 1.5, 1)
-texture_albedo = ExtResource("4_6bpl4")
-
-[node name="Decal3" type="Decal" parent="LevelGeometry"]
-transform = Transform3D(1.13566e-07, 6.55671e-08, -1, -0.866025, -0.5, -1.31134e-07, -0.5, 0.866025, -1.77636e-15, 5.5, 0, -9.5)
-extents = Vector3(2, 2, 2)
-texture_albedo = ExtResource("4_6bpl4")
-albedo_mix = 0.84
-upper_fade = 0.344611
-lower_fade = 0.504538
-
-[node name="wine_barrel" parent="LevelGeometry" instance=ExtResource("5_ttrj3")]
-transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, -2.5)
-
-[node name="wine_barrel2" parent="LevelGeometry" instance=ExtResource("5_ttrj3")]
-transform = Transform3D(1.3, 0, 0, 0, 1.3, 0, 0, 0, 1.3, -0.1, 0, -9.5)
-
-[node name="wine_barrel3" parent="LevelGeometry" instance=ExtResource("5_ttrj3")]
-transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 0.65, 0, -9.5)
-
-[node name="wine_barrel4" parent="LevelGeometry" instance=ExtResource("5_ttrj3")]
-transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 9.5, 0, -9.5)
-
-[node name="wine_barrel5" parent="LevelGeometry" instance=ExtResource("5_ttrj3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.6, 0, -9.6)
-
-[node name="wine_barrel6" parent="LevelGeometry" instance=ExtResource("5_ttrj3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.6, 0, -8.6)
-
 [node name="OmniLight3d" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 2, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.65338, 2.14823, -0.18248)
 light_energy = 0.343
 shadow_enabled = true
 omni_range = 44.822

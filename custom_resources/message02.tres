@@ -1,0 +1,36 @@
+[gd_resource type="Resource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://custom_resources/terminal_message.gd" id="1_orflx"]
+
+[resource]
+script = ExtResource("1_orflx")
+subject = "Ukraine war: Celebrations as Kyiv takes back key city Kherson"
+message = "Ukrainian soldiers have been welcomed into Kherson by jubilant residents, after Russia said it had fully withdrawn from the key southern city.
+
+Video showed locals on the streets, flying Ukraine's national flag and chanting as Kyiv's troops arrived.
+
+Ukrainian President Volodymyr Zelensky said Kherson was \"our city\".
+
+Kherson was the only regional capital taken by Russia after February's invasion. The retreat has been seen as one of its biggest setbacks of the war.
+
+Moscow said 30,000 personnel had been taken out of the area - as well as around 5,000 pieces of military hardware, weaponry and other assets.
+
+An evening update from the Ukrainian side said troops had pushed as far forwards as the western bank of the Dnipro river.
+
+Images emerged on Friday showing that the main river crossing - the Antonivsky Bridge - had partially collapsed. It remains unclear how the damage was caused.
+
+The Russian troops who occupied Kherson are thought to be taking up new positions on the eastern side of the river.
+
+A Kherson resident described his \"overwhelming\" emotions as people emerged singing and dancing onto the streets.
+
+Alexei Sandakov revealed his full name to the BBC, having previously referred to himself only as \"Jimmy\". He said Kherson was \"free now. It's different. Everyone is crying since this morning\".
+
+He added that \"everybody wanted to embrace\" the arriving Ukrainian soldiers.
+
+The city's change of control followed a rapid Ukrainian counter-offensive in recent months, in which Kyiv said it had recaptured 41 settlements near Kherson.
+
+In his evening address, President Zelensky said the people of Kherson \"were waiting\" and \"never gave up on Ukraine\".
+
+He added that residents had been working to remove \"any traces of the occupiers' stay\" from the streets, including Russian symbols.
+
+Meanwhile, a spokesman for Russian President Vladimir Putin denied the move represented a humiliating defeat."
