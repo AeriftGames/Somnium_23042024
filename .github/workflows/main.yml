@@ -1,41 +1,41 @@
-on:
+# Whenever a tag push matching pattern "v*" then run the job
+on: 
   push:
     tags:
-      - "v*-test"
+      - "v*"
 
 jobs:
+  # job id, can be anything
   export_game:
+    # Always use ubuntu-latest for this action
     runs-on: ubuntu-latest
-    name: Export Game Job
+    # Add permission for release creation. Can be made narrower according to your needs
+    permissions: write-all
+    # Job name, can be anything
+    name: Export Game
     steps:
-      - name: checkout
-        uses: actions/checkout@v3.0.2
-        with:
-          fetch-depth: 0
-      - name: get tag from version
-        id: tag_version
-        run: |
-          echo ::set-output name=TAG_VERSION::${GITHUB_REF#refs/tags/v}
-      - name: install wine
-        id: wine_install
-        run: |
-          sudo apt install wine64
-          echo ::set-output name=WINE_PATH::$(which wine64)
-      - name: export game
-        id: export
-        uses: firebelley/godot-export@master
-        with:
-            godot_executable_download_url: https://downloads.tuxfamily.org/godotengine/4.0/beta3/Godot_v4.0-beta3_linux.x86_64.zip
-            godot_export_templates_download_url: https://downloads.tuxfamily.org/godotengine/4.0/beta3/Godot_v4.0-beta3_export_templates.tpz
-            relative_project_path: ./ # build the godot 4 project
-            relative_export_path: ./build/ # move export output to this directory relative to git root
-            archive_output: true
-            wine_path: ${{ steps.wine_install.outputs.WINE_PATH }}
-            use_godot_4: true
-      - name: create release
-        uses: softprops/action-gh-release@v0.1.14
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          generate_release_notes: true
-          tag_name: ${{ steps.tag_version.outputs.TAG_VERSION }}
-          files: ${{ steps.export.outputs.archive_directory }}/* # Added "/*" at the end is glob pattern match for this action
+      # Always include the checkout step so that 
+      # your project is available for Godot to export
+    - name: checkout
+      uses: actions/checkout@v3.0.2
+  
+    - name: export game
+      id: export
+      # Use latest version (see releases for all versions)
+      uses: firebelley/godot-export@v4.7.0
+      with:
+        # Defining all the required inputs
+        godot_executable_download_url: https://github.com/godotengine/godot/releases/download/3.4.4-stable/Godot_v3.4.4-stable_linux_headless.64.zip
+        godot_export_templates_download_url: https://github.com/godotengine/godot/releases/download/3.4.4-stable/Godot_v3.4.4-stable_export_templates.tpz
+        relative_project_path: ./
+        archive_output: true
+
+      # This release action has worked well for me. However, you can most likely use any release action of your choosing.
+      # https://github.com/ncipollo/release-action
+    - name: create release
+      uses: ncipollo/release-action@v1.12.0
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        generateReleaseNotes: true
+        tag: ${{ github.ref_name }}
+        artifacts: ${{ steps.export.outputs.archive_directory }}/*
