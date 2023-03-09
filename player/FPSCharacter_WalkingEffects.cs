@@ -3,6 +3,7 @@ using Godot.Collections;
 using Godot.NativeInterop;
 using System;
 using System.Threading;
+using System.Threading.Tasks;
 
 /*
  * *** FPSCharacter_WalkingEffects(0.1) ***
@@ -20,6 +21,7 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
 {
     AudioStreamPlayer AudioStreamPlayerFootsteps = null;
     AudioStreamPlayer AudioStreamPlayerJumpLand = null;
+    AudioStreamPlayer AudioStreamPlayerCrouching = null;
 
     [ExportGroupAttribute("Footsteps Settings")]
     [Export] public float FootStepLength = 1.25f;
@@ -58,6 +60,11 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
     [Export] public bool LeanMultiRaycastDetect = true;
     [Export] public float LeanMultiRaycastSteps = 0.15f;
 
+    [ExportGroupAttribute("Crouching Settings")]
+    [Export] public Array<AudioStream> CrouchingSounds;
+    [Export] public int CrouchingAudioDelayMS = 100;
+    [Export] public float CrouchingVolumeDB = -5f;
+
     private Vector3 _LastHalfFootStepPosition = Vector3.Zero;
     private int lastIDFootstepSound = -1;
 
@@ -77,6 +84,7 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
 
         AudioStreamPlayerFootsteps = GetNode<AudioStreamPlayer>("AudioStreamPlayer_Footsteps");
         AudioStreamPlayerJumpLand = GetNode<AudioStreamPlayer>("AudioStreamPlayer_JumpLand");
+        AudioStreamPlayerCrouching = GetNode<AudioStreamPlayer>("AudioStreamPlayer_Crouching");
 
         // Create timer for landing effect
         landing_timer = new Godot.Timer();
@@ -344,6 +352,33 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
     public void UpdateLeaning(double delta)
     {
 
+    }
+
+    // callable when change character posture (crunch,uncrouch=stand)
+    public override async void ChangeCharacterPosture(ECharacterPosture newCharacterPosture)
+    {
+        base.ChangeCharacterPosture(newCharacterPosture);
+
+        switch (newCharacterPosture)
+        {
+            case ECharacterPosture.Crunch:
+                {
+                    await PlayCrouchAudio(CrouchingAudioDelayMS);
+                    break;
+                }
+            case ECharacterPosture.Stand:
+                {
+
+                    break;
+                }
+        }
+    }
+
+    async Task PlayCrouchAudio(int newDelay)
+    {
+        // potrebny delay
+        await Task.Delay(newDelay);
+        AudioStreamPlayerCrouching.Play();
     }
 
     public override void FreeAll()

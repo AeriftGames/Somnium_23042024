@@ -45,6 +45,7 @@ AudioFlashlight_On = ExtResource("3_l3f5j")
 AudioFlashlight_Off = ExtResource("4_0clxq")
 WalkCameraLerpHeight = 0.075
 RunCameraLerpHeight = 0.12
+CrunchLerpSpeed = 3.5
 
 [node name="HolderHands" type="Node3D" parent="HeadMain/HeadGimbalA/HeadGimbalB/HeadHolderCamera" index="0"]
 
@@ -145,5 +146,5 @@ visible = false
 
 [node name="DebugHud" parent="." index="11" instance=ExtResource("10_iakih")]
 
-[node name="AllHuds" parent="." index="12"]
+[node name="AllHuds" parent="." index="13"]
 metadata/_edit_lock_ = true

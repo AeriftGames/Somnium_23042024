@@ -292,7 +292,7 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
 	}
 
 	// Change character posture like stand,crunch.. its also change player movement speed
-	public void ChangeCharacterPosture(ECharacterPosture newCharacterPosture)
+	public virtual void ChangeCharacterPosture(ECharacterPosture newCharacterPosture)
 	{
 		switch (newCharacterPosture)
 		{

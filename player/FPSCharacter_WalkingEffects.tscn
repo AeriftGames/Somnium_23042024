@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://2b8vuef2k4is"]
+[gd_scene load_steps=19 format=3 uid="uid://2b8vuef2k4is"]
 
 [ext_resource type="PackedScene" uid="uid://dhm8txujxj2hn" path="res://player/FPSCharacter_BasicMoving.tscn" id="1_0yate"]
 [ext_resource type="Script" path="res://player/FPSCharacter_WalkingEffects.cs" id="2_y82hk"]
@@ -17,6 +17,7 @@
 [ext_resource type="AudioStream" uid="uid://di4iqx0icnvn6" path="res://audio/audio_streams/jump_basic/458279__dwoboyle__footsteps-tile-jump-02-from.wav" id="15_d3653"]
 [ext_resource type="AudioStream" uid="uid://cnpckgpyhu8d8" path="res://audio/audio_streams/jump_basic/458281__dwoboyle__footsteps-tile-jump-01-from.wav" id="16_mury2"]
 [ext_resource type="AudioStream" uid="uid://cvmrp75sk7rms" path="res://audio/audio_streams/jump_basic/458283__dwoboyle__footsteps-tile-jump-06-from.wav" id="17_d0h5u"]
+[ext_resource type="AudioStream" uid="uid://ca0tugn8tpbpo" path="res://audio/audio_streams/our/Crouch_1.wav" id="18_pf783"]
 
 [node name="FPSCharacter_WalkingEffects" instance=ExtResource("1_0yate")]
 script = ExtResource("2_y82hk")
@@ -48,6 +49,9 @@ LeanRaycastsTestLength = 0.8
 LeanMinCameraDistanceFromWall = 0.3
 LeanMultiRaycastDetect = true
 LeanMultiRaycastSteps = 0.15
+CrouchingSounds = Array[AudioStream]([ExtResource("18_pf783")])
+CrouchingAudioDelayMS = 90
+CrouchingVolumeDB = -5.0
 
 [node name="AudioStreamPlayer_Footsteps" type="AudioStreamPlayer" parent="." index="5"]
 stream = ExtResource("4_lkw0d")
@@ -58,4 +62,10 @@ bus = &"Sfx"
 stream = ExtResource("9_76jo3")
 volume_db = -13.0
 pitch_scale = 0.5
+bus = &"Sfx"
+
+[node name="AudioStreamPlayer_Crouching" type="AudioStreamPlayer" parent="." index="7"]
+stream = ExtResource("18_pf783")
+volume_db = -15.0
+pitch_scale = 0.68
 bus = &"Sfx"
