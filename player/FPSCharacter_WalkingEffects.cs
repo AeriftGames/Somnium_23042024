@@ -63,6 +63,7 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
     [ExportGroupAttribute("Crouching Settings")]
     [Export] public Array<AudioStream> CrouchingSounds;
     [Export] public int CrouchingAudioDelayMS = 100;
+    [Export] public float CrouchingAudioPitchRandomOffset = 0.05f;  // for random pitch offset 
     [Export] public float CrouchingVolumeDB = -5f;
 
     private Vector3 _LastHalfFootStepPosition = Vector3.Zero;
@@ -376,9 +377,28 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
 
     async Task PlayCrouchAudio(int newDelay)
     {
+        // random pitch scale offset
+        float original_pitch = AudioStreamPlayerCrouching.PitchScale;
+
+        RandomNumberGenerator a = new RandomNumberGenerator();
+        a.Randomize();
+
         // potrebny delay
         await Task.Delay(newDelay);
-        AudioStreamPlayerCrouching.Play();
+
+        if(CrouchingSounds.Count > 0)
+        {
+            AudioStreamPlayerCrouching.Stream = CrouchingSounds[0];
+
+            AudioStreamPlayerCrouching.PitchScale = a.RandfRange(AudioStreamPlayerCrouching.PitchScale - (CrouchingAudioPitchRandomOffset / 2),
+            AudioStreamPlayerCrouching.PitchScale + (CrouchingAudioPitchRandomOffset / 2));
+            AudioStreamPlayerCrouching.VolumeDb = CrouchingVolumeDB;
+
+            AudioStreamPlayerCrouching.Play();
+        }
+
+        await Task.Delay(200);
+        AudioStreamPlayerCrouching.PitchScale = original_pitch;
     }
 
     public override void FreeAll()

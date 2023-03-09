@@ -45,7 +45,6 @@ AudioFlashlight_On = ExtResource("3_l3f5j")
 AudioFlashlight_Off = ExtResource("4_0clxq")
 WalkCameraLerpHeight = 0.075
 RunCameraLerpHeight = 0.12
-CrunchLerpSpeed = 3.5
 
 [node name="HolderHands" type="Node3D" parent="HeadMain/HeadGimbalA/HeadGimbalB/HeadHolderCamera" index="0"]
 

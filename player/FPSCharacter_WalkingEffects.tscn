@@ -50,8 +50,10 @@ LeanMinCameraDistanceFromWall = 0.3
 LeanMultiRaycastDetect = true
 LeanMultiRaycastSteps = 0.15
 CrouchingSounds = Array[AudioStream]([ExtResource("18_pf783")])
-CrouchingAudioDelayMS = 90
-CrouchingVolumeDB = -5.0
+CrouchingAudioDelayMS = 100
+CrouchingAudioPitchRandomOffset = 0.3
+CrouchingVolumeDB = -8.0
+CrunchLerpSpeed = 3.0
 
 [node name="AudioStreamPlayer_Footsteps" type="AudioStreamPlayer" parent="." index="5"]
 stream = ExtResource("4_lkw0d")
@@ -65,7 +67,5 @@ pitch_scale = 0.5
 bus = &"Sfx"
 
 [node name="AudioStreamPlayer_Crouching" type="AudioStreamPlayer" parent="." index="7"]
-stream = ExtResource("18_pf783")
-volume_db = -15.0
-pitch_scale = 0.68
+pitch_scale = 0.65
 bus = &"Sfx"

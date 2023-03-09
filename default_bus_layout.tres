@@ -18,14 +18,14 @@ hipass = 0.09
 wet = 0.29
 
 [resource]
-bus/0/volume_db = -0.130497
+bus/0/volume_db = 1.06049
 bus/0/effect/0/effect = SubResource("AudioEffectReverb_ajupu")
 bus/0/effect/0/enabled = true
 bus/1/name = &"Sfx"
 bus/1/solo = false
 bus/1/mute = false
 bus/1/bypass_fx = false
-bus/1/volume_db = -0.128275
+bus/1/volume_db = -0.328256
 bus/1/send = &"Master"
 bus/2/name = &"Music"
 bus/2/solo = false
