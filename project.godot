@@ -8,6 +8,12 @@
 
 config_version=5
 
+[MonoCustomResourceRegistry]
+
+SearchType=0
+ResourceScriptDirectories=["res://"]
+ClassPrefix=""
+
 [application]
 
 config/name="Somnium"
@@ -40,10 +46,6 @@ window/stretch/aspect="keep_width"
 [dotnet]
 
 project/assembly_name="Somnium"
-
-[editor_plugins]
-
-enabled=PackedStringArray()
 
 [filesystem]
 

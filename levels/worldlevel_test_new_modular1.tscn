@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dsqplpo60hp2f"]
+[gd_scene load_steps=14 format=3 uid="uid://dsqplpo60hp2f"]
 
 [ext_resource type="Script" path="res://levels/worldlevel.cs" id="1_u58sk"]
 [ext_resource type="ArrayOccluder3D" uid="uid://1dvpcggr1b7c" path="res://levels/worldlevel_test_new_modular1/worldlevel_test_new_modular1.occ" id="2_l1yac"]
@@ -6,7 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://6rotta4x1vn" path="res://testing_stuff_kaen/my_trim1/levelscene_test1.tscn" id="6_dim0a"]
 [ext_resource type="AudioStream" uid="uid://c22q66lwj2uvk" path="res://audio/audio_streams/510485__lydmakeren__industrial-hall-ambience.wav" id="7_0bru2"]
 [ext_resource type="Texture2D" uid="uid://wfqgplnbjryn" path="res://textures/Cookie_tutorial_texture_flashlight.png" id="7_8c7g1"]
+[ext_resource type="Script" path="res://testing_stuff_kaen/my_trim1/test_ambient_trigger.cs" id="8_0cet6"]
 [ext_resource type="AudioStream" uid="uid://bhqg52i4b3xfb" path="res://audio/audio_streams/music/test.mp3" id="8_uitv3"]
+[ext_resource type="AudioStream" uid="uid://ctrnpxnfx855t" path="res://audio/audio_streams/ambient new/Creepy_ventilation_wind1.wav" id="9_4sdv2"]
 [ext_resource type="Texture2D" uid="uid://cxuhj4tqdb5qw" path="res://testing_stuff_kaen/my_trim1/decals_tests2/trimsheet_3_low_DefaultMaterial_BaseColor.png" id="16_is0x1"]
 [ext_resource type="Texture2D" uid="uid://dgwuv4wnpu3rq" path="res://testing_stuff_kaen/my_trim1/decals_tests2/trimsheet_3_low_DefaultMaterial_Normal.png" id="17_wddkd"]
 
@@ -28,6 +30,9 @@ fog_light_energy = 0.42
 fog_density = 0.0009
 volumetric_fog_enabled = true
 volumetric_fog_density = 0.0363
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_aaqwk"]
+size = Vector3(5, 5, 5)
 
 [node name="worldlevel" type="Node3D"]
 script = ExtResource("1_u58sk")
@@ -435,6 +440,24 @@ metadata/_edit_lock_ = true
 [node name="levelscene_test1" parent="Level/LevelScenes" instance=ExtResource("6_dim0a")]
 metadata/_edit_lock_ = true
 
+[node name="Area3D" type="Area3D" parent="Level"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.57313, -0.460283, 42.2246)
+collision_mask = 3
+audio_bus_name = &"Sfx"
+script = ExtResource("8_0cet6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level/Area3D"]
+shape = SubResource("BoxShape3D_aaqwk")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Level/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.93167, 0, 8.42359)
+stream = ExtResource("9_4sdv2")
+volume_db = -15.0
+unit_size = 2.0
+max_db = 1.0
+pitch_scale = 1.5
+bus = &"Sfx"
+
 [node name="AudioStreamPlayer_backgroundmusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_uitv3")
 pitch_scale = 0.5
@@ -460,3 +483,5 @@ autoplay = true
 max_distance = 35.0
 panning_strength = 2.0
 bus = &"Sfx"
+
+[connection signal="body_entered" from="Level/Area3D" to="Level/Area3D" method="_on_body_entered"]

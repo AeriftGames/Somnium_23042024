@@ -1,0 +1,21 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://c4txvyt85cvj5"]
+
+[ext_resource type="Script" path="res://player/material_surface/material_surface_data.cs" id="1_5moas"]
+[ext_resource type="AudioStream" uid="uid://bjveh4yf0jj2v" path="res://audio/audio_streams/landing_basic/364690__alegemaate__human-impact-on-ground.wav" id="1_u1pib"]
+
+[resource]
+script = ExtResource("1_5moas")
+MaterialSurfaceNameID = "concrete_surface"
+MaterialSurface = 0
+FootstepSounds = Array[AudioStream]([ExtResource("1_u1pib")])
+FootstepAudioPitchScale = 1.0
+FootstepAudioVolumeDB = 0.0
+LandingSounds = null
+LandingAudioPitchScale = 1.0
+LandingAudioVolumeDB = 0.0
+HitObjectSounds = null
+HitObjectAudioPitchScale = 1.0
+HitObjectAudioVolumeDB = 0.0
+DragObjectSounds = null
+DragObjectAudioPitchScale = 1.0
+DragObjectAudioVolumeDB = 0.0

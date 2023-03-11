@@ -38,7 +38,7 @@ mesh = SubResource("ArrayMesh_ronn4")
 skeleton = NodePath("")
 metadata/_edit_group_ = true
 
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
+[node name="StaticBody3D" type="StaticBody3D" parent="." groups=["material_surface_wood"]]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_45qh0")

@@ -487,6 +487,11 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
 		//GameMaster.GM.Log.WriteLog(this, LogSystem.ELogMsgType.INFO, "character is dead");
 	}
 
+	public Vector3 GetCharacterLegPosition()
+	{
+		return CharacterCollisionCrunch.GlobalPosition;
+	}
+
 	// Return by linked ObjectCamera->Camera
 	public Camera3D GetFPSCharacterCamera()
 	{
