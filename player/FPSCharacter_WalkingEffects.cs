@@ -66,8 +66,14 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
     [ExportGroupAttribute("Crouching Settings")]
     [Export] public Array<AudioStream> CrouchingSounds;
     [Export] public int CrouchingAudioDelayMS = 100;
+    [Export] public float CrouchingAudioPitch = 0.65f;
     [Export] public float CrouchingAudioPitchRandomOffset = 0.05f;  // for random pitch offset 
     [Export] public float CrouchingVolumeDB = -5f;
+    [Export] public Array<AudioStream> UncrouchingSounds;
+    [Export] public int UncrouchingAudioDelayMS = 100;
+    [Export] public float UncrouchingAudioPitch = 0.5f;
+    [Export] public float UncrouchingAudioPitchRandomOffset = 0.05f;  // for random pitch offset 
+    [Export] public float UncrouchingVolumeDB = -5f;
 
     private Vector3 _LastHalfFootStepPosition = Vector3.Zero;
     private int lastIDFootstepSound = -1;
@@ -199,9 +205,9 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
                 all_material_surfaces.EMaterialSurface materialSurface = 
                     AllMaterialSurfaces.GetMaterialSurfaceFromGroup(DetectSurfaceMaterialOfFloor());
 
-                GD.Print(materialSurface);
+                //GD.Print(materialSurface);
 
-                // Play random sound
+                // Play random footsteps sound by material surface
                 PlayRandomSound(
                     AudioStreamPlayerFootsteps,
                     AllMaterialSurfaces.GetAudioArray(
@@ -311,6 +317,8 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
         audioPlayer.PitchScale = pitch;
         audioPlayer.Stream = audioStreams[id];
         audioPlayer.Play();
+
+        //GD.Print(audioStreams[id].ResourcePath);
     }
 
     // EVENT from basic movement character
@@ -511,10 +519,31 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
                     break;
                 }
             case ECharacterPosture.Stand:
-                {
-
+                {    
+                    await PlayUncrouchAudio(UncrouchingAudioDelayMS);
                     break;
                 }
+        }
+    }
+
+    async Task PlayUncrouchAudio(int newDelay)
+    {
+        if (AudioStreamPlayerCrouching == null) return;
+        if (UncrouchingSounds == null) return;
+        if (UncrouchingSounds.Count < 1) return;
+
+        RandomNumberGenerator a = new RandomNumberGenerator();
+        a.Randomize();
+
+        // potrebny delay
+        await Task.Delay(newDelay);
+        
+        if (UncrouchingSounds.Count > 0)
+        {
+            float newPitch = a.RandfRange(UncrouchingAudioPitch - (UncrouchingAudioPitchRandomOffset / 2),
+                UncrouchingAudioPitch + (UncrouchingAudioPitchRandomOffset / 2));
+
+            PlayRandomSound(AudioStreamPlayerCrouching, UncrouchingSounds, UncrouchingVolumeDB, newPitch);
         }
     }
 
@@ -524,9 +553,6 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
         if (CrouchingSounds == null) return;
         if (CrouchingSounds.Count < 1) return;
 
-        // random pitch scale offset
-        float original_pitch = AudioStreamPlayerCrouching.PitchScale;
-
         RandomNumberGenerator a = new RandomNumberGenerator();
         a.Randomize();
 
@@ -535,17 +561,11 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
 
         if(CrouchingSounds.Count > 0)
         {
-            AudioStreamPlayerCrouching.Stream = CrouchingSounds[0];
+            float newPitch = a.RandfRange(CrouchingAudioPitch - (CrouchingAudioPitchRandomOffset / 2),
+                CrouchingAudioPitch + (CrouchingAudioPitchRandomOffset / 2));
 
-            AudioStreamPlayerCrouching.PitchScale = a.RandfRange(AudioStreamPlayerCrouching.PitchScale - (CrouchingAudioPitchRandomOffset / 2),
-            AudioStreamPlayerCrouching.PitchScale + (CrouchingAudioPitchRandomOffset / 2));
-            AudioStreamPlayerCrouching.VolumeDb = CrouchingVolumeDB;
-
-            AudioStreamPlayerCrouching.Play();
+            PlayRandomSound(AudioStreamPlayerCrouching, CrouchingSounds, CrouchingVolumeDB, newPitch);
         }
-
-        await Task.Delay(200);
-        AudioStreamPlayerCrouching.PitchScale = original_pitch;
     }
 
     public override void FreeAll()

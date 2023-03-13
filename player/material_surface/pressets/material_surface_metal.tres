@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=15 format=3 uid="uid://sbcafl6nubgl"]
+[gd_resource type="Resource" load_steps=16 format=3 uid="uid://sbcafl6nubgl"]
 
 [ext_resource type="Script" path="res://player/material_surface/material_surface_data.cs" id="1_knawp"]
 [ext_resource type="AudioStream" uid="uid://b2rq8oq84rehc" path="res://audio/audio_streams/footsteps_new/Metal/Footstep_Metal1.wav" id="1_vy3vj"]
@@ -13,7 +13,8 @@
 [ext_resource type="AudioStream" uid="uid://dpl36qts20dkb" path="res://audio/audio_streams/footsteps_new/Metal/Footstep_Metal10.wav" id="10_egpj4"]
 [ext_resource type="AudioStream" uid="uid://bhk2qh3k8fepa" path="res://audio/audio_streams/footsteps_new/Metal/Footstep_Metal11.wav" id="11_nepju"]
 [ext_resource type="AudioStream" uid="uid://8mokhnt8bu63" path="res://audio/audio_streams/footsteps_new/Metal/Footstep_Metal12.wav" id="12_4ii7o"]
-[ext_resource type="AudioStream" uid="uid://bhgemna8cbvr0" path="res://audio/audio_streams/landing_new/landing_wood.wav" id="13_0huw3"]
+[ext_resource type="AudioStream" uid="uid://bidcb6c5835w3" path="res://audio/audio_streams/landing_new/LandSound_Metal1.wav" id="13_kfq24"]
+[ext_resource type="AudioStream" uid="uid://bcio8f612r5ug" path="res://audio/audio_streams/landing_new/LandSound_Metal3.wav" id="15_4a0u0"]
 
 [resource]
 script = ExtResource("1_knawp")
@@ -22,7 +23,7 @@ MaterialSurface = 1
 FootstepSounds = Array[AudioStream]([ExtResource("1_vy3vj"), ExtResource("2_escng"), ExtResource("3_w6n3t"), ExtResource("4_we3ny"), ExtResource("5_tufqj"), ExtResource("6_dudgy"), ExtResource("7_gw1ky"), ExtResource("8_2aihy"), ExtResource("9_abtsx"), ExtResource("10_egpj4"), ExtResource("11_nepju"), ExtResource("12_4ii7o")])
 FootstepAudioPitchScale = 0.5
 FootstepAudioVolumeDB = -25.0
-LandingSounds = Array[AudioStream]([ExtResource("13_0huw3")])
+LandingSounds = Array[AudioStream]([ExtResource("13_kfq24"), ExtResource("15_4a0u0")])
 LandingAudioPitchScale = 0.6
 LandingAudioVolumeDB = -13.0
 HitObjectSounds = null

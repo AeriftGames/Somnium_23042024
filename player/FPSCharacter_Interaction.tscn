@@ -83,6 +83,7 @@ offset_right = 1.0
 offset_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+color = Color(1, 1, 1, 0.32549)
 
 [node name="UseLabel" type="Label" parent="BasicHud" index="1"]
 custom_minimum_size = Vector2(30, 0)

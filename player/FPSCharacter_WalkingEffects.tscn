@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://2b8vuef2k4is"]
+[gd_scene load_steps=31 format=3 uid="uid://2b8vuef2k4is"]
 
 [ext_resource type="PackedScene" uid="uid://dhm8txujxj2hn" path="res://player/FPSCharacter_BasicMoving.tscn" id="1_0yate"]
 [ext_resource type="Script" path="res://player/FPSCharacter_WalkingEffects.cs" id="2_y82hk"]
@@ -21,7 +21,15 @@
 [ext_resource type="AudioStream" uid="uid://bhk2qh3k8fepa" path="res://audio/audio_streams/footsteps_new/Metal/Footstep_Metal11.wav" id="13_6q5lt"]
 [ext_resource type="AudioStream" uid="uid://8mokhnt8bu63" path="res://audio/audio_streams/footsteps_new/Metal/Footstep_Metal12.wav" id="14_lxlc3"]
 [ext_resource type="AudioStream" uid="uid://ca0tugn8tpbpo" path="res://audio/audio_streams/our/Crouch_1.wav" id="18_pf783"]
-[ext_resource type="AudioStream" uid="uid://cd5poraxpdmfq" path="res://audio/audio_streams/jump_new/jump.wav" id="20_mdaej"]
+[ext_resource type="AudioStream" uid="uid://db7lr582uf0df" path="res://audio/audio_streams/jump_new/JumpSound_Wood1.wav" id="20_dltha"]
+[ext_resource type="AudioStream" uid="uid://h0hurxt1gpdn" path="res://audio/audio_streams/jump_new/JumpSound_Wood2.wav" id="21_748d1"]
+[ext_resource type="AudioStream" uid="uid://cti8npyq3rrku" path="res://audio/audio_streams/jump_new/JumpSound_Wood3.wav" id="22_a81wj"]
+[ext_resource type="AudioStream" uid="uid://cmdby14e1s2cw" path="res://audio/audio_streams/our/Uncrouch_1.wav" id="22_jysss"]
+[ext_resource type="AudioStream" uid="uid://du3e1tex5f1ya" path="res://audio/audio_streams/jump_new/JumpSound_Wood4.wav" id="23_flpxp"]
+[ext_resource type="AudioStream" uid="uid://b7ccj6qdg1scf" path="res://audio/audio_streams/crouch/Crouch_1.wav" id="24_mgiha"]
+[ext_resource type="AudioStream" uid="uid://dkxl2ejvex3dt" path="res://audio/audio_streams/crouch/Crouch_2.wav" id="25_hvw1x"]
+[ext_resource type="AudioStream" uid="uid://buyb8rvvjc5k4" path="res://audio/audio_streams/crouch/Crouch_3.wav" id="26_wpqil"]
+[ext_resource type="AudioStream" uid="uid://dplg883q6kqqe" path="res://audio/audio_streams/crouch/Crouch_4.wav" id="27_0r7qk"]
 
 [node name="FPSCharacter_WalkingEffects" instance=ExtResource("1_0yate")]
 script = ExtResource("2_y82hk")
@@ -45,7 +53,7 @@ mediumHeightLandingSounds = [ExtResource("10_kmdt6")]
 highHeightLandingSounds = [ExtResource("12_yldhb")]
 deathHeightLandingSounds = [ExtResource("13_5gwsi")]
 LandingVolumeDB = -10.0
-JumpingSounds = [ExtResource("20_mdaej")]
+JumpingSounds = [ExtResource("20_dltha"), ExtResource("21_748d1"), ExtResource("22_a81wj"), ExtResource("23_flpxp")]
 JumpingVolumeDB = -5.0
 JumpingAudioPitch = 0.8
 JumpingAudioPitchOffset = 0.14
@@ -56,10 +64,16 @@ LeanRaycastsTestLength = 0.8
 LeanMinCameraDistanceFromWall = 0.3
 LeanMultiRaycastDetect = true
 LeanMultiRaycastSteps = 0.15
-CrouchingSounds = Array[AudioStream]([ExtResource("18_pf783")])
+CrouchingSounds = Array[AudioStream]([ExtResource("24_mgiha"), ExtResource("25_hvw1x"), ExtResource("26_wpqil"), ExtResource("27_0r7qk")])
 CrouchingAudioDelayMS = 100
-CrouchingAudioPitchRandomOffset = 0.3
-CrouchingVolumeDB = -8.0
+CrouchingAudioPitch = 0.67
+CrouchingAudioPitchRandomOffset = 0.04
+CrouchingVolumeDB = -10.0
+UncrouchingSounds = Array[AudioStream]([ExtResource("22_jysss")])
+UncrouchingAudioDelayMS = 100
+UncrouchingAudioPitch = 0.65
+UncrouchingAudioPitchRandomOffset = 0.05
+UncrouchingVolumeDB = -10.0
 CrunchLerpSpeed = 3.0
 
 [node name="AudioStreamPlayer_Footsteps" type="AudioStreamPlayer" parent="." index="5"]
@@ -74,5 +88,7 @@ pitch_scale = 0.5
 bus = &"Sfx"
 
 [node name="AudioStreamPlayer_Crouching" type="AudioStreamPlayer" parent="." index="7"]
+stream = ExtResource("18_pf783")
 pitch_scale = 0.65
+max_polyphony = 2
 bus = &"Sfx"
