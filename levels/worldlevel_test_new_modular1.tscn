@@ -471,6 +471,22 @@ light_indirect_energy = 10.0
 shadow_enabled = true
 omni_range = 8.0
 
+[node name="OmniLight3D29" type="OmniLight3D" parent="Level/Lights"]
+transform = Transform3D(0.612466, 0.790479, 0.00535267, 0.548843, -0.420353, -0.722548, -0.568909, 0.445474, -0.6913, -0.443386, -0.317613, 10.7051)
+light_energy = 0.25
+light_indirect_energy = 15.0
+shadow_enabled = true
+omni_range = 15.0
+omni_attenuation = 1.46409
+
+[node name="OmniLight3D30" type="OmniLight3D" parent="Level/Lights"]
+transform = Transform3D(0.612466, 0.790479, 0.00535267, 0.548843, -0.420353, -0.722548, -0.568909, 0.445474, -0.6913, -0.676763, 1.65441, 18.7803)
+light_energy = 0.2
+light_indirect_energy = 5.0
+shadow_enabled = true
+omni_range = 10.0
+omni_attenuation = 1.18921
+
 [node name="OmniLight3D20" type="OmniLight3D" parent="Level/Lights"]
 transform = Transform3D(0.612466, 0.790479, 0.00535267, 0.548843, -0.420353, -0.722548, -0.568909, 0.445474, -0.6913, -13.3964, 2.58877, 28.1584)
 light_energy = 0.2
