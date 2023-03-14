@@ -471,21 +471,22 @@ light_indirect_energy = 10.0
 shadow_enabled = true
 omni_range = 8.0
 
-[node name="OmniLight3D29" type="OmniLight3D" parent="Level/Lights"]
-transform = Transform3D(0.612466, 0.790479, 0.00535267, 0.548843, -0.420353, -0.722548, -0.568909, 0.445474, -0.6913, -0.443386, -0.317613, 10.7051)
-light_energy = 0.25
-light_indirect_energy = 15.0
-shadow_enabled = true
-omni_range = 15.0
-omni_attenuation = 1.46409
-
 [node name="OmniLight3D30" type="OmniLight3D" parent="Level/Lights"]
-transform = Transform3D(0.612466, 0.790479, 0.00535267, 0.548843, -0.420353, -0.722548, -0.568909, 0.445474, -0.6913, -0.676763, 1.65441, 18.7803)
-light_energy = 0.2
+transform = Transform3D(0.612466, 0.790479, 0.00535267, 0.548843, -0.420353, -0.722548, -0.568909, 0.445474, -0.6913, -0.804133, 1.20113, 16.4765)
+light_energy = 0.05
 light_indirect_energy = 5.0
 shadow_enabled = true
-omni_range = 10.0
-omni_attenuation = 1.18921
+omni_range = 7.0
+omni_attenuation = 1.27456
+
+[node name="OmniLight3D29" type="OmniLight3D" parent="Level/Lights"]
+transform = Transform3D(0.612466, 0.790479, 0.00535267, 0.548843, -0.420353, -0.722548, -0.568909, 0.445474, -0.6913, -0.777861, 1.77926, 1.87759)
+light_color = Color(1, 0.854902, 0.811765, 1)
+light_energy = 0.2
+light_indirect_energy = 15.0
+shadow_enabled = true
+omni_range = 30.0
+omni_attenuation = 0.466516
 
 [node name="OmniLight3D20" type="OmniLight3D" parent="Level/Lights"]
 transform = Transform3D(0.612466, 0.790479, 0.00535267, 0.548843, -0.420353, -0.722548, -0.568909, 0.445474, -0.6913, -13.3964, 2.58877, 28.1584)
@@ -633,6 +634,17 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.4951, 3.11542, 24.1619)
 stream = ExtResource("10_yuntt")
 volume_db = -15.0
 max_db = 0.0
+autoplay = true
+max_distance = 35.0
+bus = &"Sfx"
+
+[node name="AudioStreamPlayer3D_ambient4" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.852701, 1.96115, 5.93914)
+stream = ExtResource("10_yuntt")
+volume_db = -10.0
+unit_size = 30.0
+max_db = 0.0
+pitch_scale = 0.2
 autoplay = true
 max_distance = 35.0
 bus = &"Sfx"
