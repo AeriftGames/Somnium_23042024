@@ -101,16 +101,18 @@ distance_fade_enabled = true
 distance_fade_begin = 5.0
 
 [node name="Decal6" type="Decal" parent="Level/Decals"]
-transform = Transform3D(-0.687125, -0.27723, 0.671567, -0.568339, 0.780923, -0.259133, -0.452603, -0.559735, -0.694152, 0.303286, -1.71038, 29.178)
-sorting_offset = 1.0
-size = Vector3(4, 4, 4)
+transform = Transform3D(-0.777032, 0.495232, -0.388544, 0.426779, 0.868213, 0.253113, 0.462688, 0.0308556, -0.885984, 0.587516, -1.68189, 28.7722)
+size = Vector3(3, 2, 4)
 texture_albedo = ExtResource("16_is0x1")
-texture_normal = ExtResource("17_wddkd")
 emission_energy = 0.0
-modulate = Color(0.231373, 0.231373, 0.231373, 1)
-upper_fade = 0.227359
-lower_fade = 0.261168
+modulate = Color(0, 0, 0, 1)
+normal_fade = 0.145
+upper_fade = 0.0375003
+lower_fade = 0.060919
 distance_fade_enabled = true
+distance_fade_begin = 15.0
+distance_fade_length = 20.0
+cull_mask = 1048573
 
 [node name="Decal11" type="Decal" parent="Level/Decals"]
 transform = Transform3D(-0.749046, 0.661014, -0.0446186, 0.483819, 0.499758, -0.718444, -0.452603, -0.559735, -0.694152, -2.82137, -0.127802, 27.7675)
