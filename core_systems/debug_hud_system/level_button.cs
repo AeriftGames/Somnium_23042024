@@ -24,6 +24,7 @@ public partial class level_button : Button
 
     public void _on_pressed()
 	{
+		GD.Print("test: " + level_path);
 		GameMaster.GM.LevelLoader.LoadNewWorldLevel(level_path,level_name);
 	}
 }

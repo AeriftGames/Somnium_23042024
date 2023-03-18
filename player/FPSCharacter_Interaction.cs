@@ -73,9 +73,13 @@ public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
 	AudioStreamPlayer AudioStreamPlayer_TestItem = null;
 	[ExportGroupAttribute("Simple Flashlight Settings")]
 	[Export] public AudioStream AudioFlashlight_On;
-	[Export] public AudioStream AudioFlashlight_Off;
+    [Export] public float AudioFlashlight_On_Pitch = 1.0f;
+    [Export] public float AudioFlashlight_On_VolumeDb = -10.0f;
+    [Export] public AudioStream AudioFlashlight_Off;
+    [Export] public float AudioFlashlight_Off_Pitch = 0.8f;
+    [Export] public float AudioFlashlight_Off_VolumeDb = -10.0f;
 
-	public override void _Ready()
+    public override void _Ready()
 	{
 		base._Ready();
 
@@ -277,8 +281,8 @@ public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
 			objectHands.objectFlashlight.Visible = true;
 
 			// Audio play
-			AudioStreamPlayer_TestItem.VolumeDb = -15f;
-			AudioStreamPlayer_TestItem.PitchScale = 0.9f;
+			AudioStreamPlayer_TestItem.VolumeDb = AudioFlashlight_On_VolumeDb;
+			AudioStreamPlayer_TestItem.PitchScale = AudioFlashlight_On_Pitch;
 			AudioStreamPlayer_TestItem.Stream = AudioFlashlight_On;
 			AudioStreamPlayer_TestItem.Play();
 		}
@@ -289,8 +293,8 @@ public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
 			objectHands.objectFlashlight.Visible = false;
 
 			// Audio play
-			AudioStreamPlayer_TestItem.VolumeDb = -15f;
-			AudioStreamPlayer_TestItem.PitchScale = 0.9f;
+			AudioStreamPlayer_TestItem.VolumeDb = AudioFlashlight_Off_VolumeDb;
+			AudioStreamPlayer_TestItem.PitchScale = AudioFlashlight_Off_Pitch;
 			AudioStreamPlayer_TestItem.Stream = AudioFlashlight_Off;
 			AudioStreamPlayer_TestItem.Play();
 		}

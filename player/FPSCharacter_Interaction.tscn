@@ -1,10 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://0g1u2jvnfbpy"]
+[gd_scene load_steps=10 format=3 uid="uid://0g1u2jvnfbpy"]
 
 [ext_resource type="PackedScene" uid="uid://2b8vuef2k4is" path="res://player/FPSCharacter_WalkingEffects.tscn" id="1_0ipjt"]
 [ext_resource type="Script" path="res://player/FPSCharacter_Interaction.cs" id="2_fmih3"]
 [ext_resource type="Script" path="res://player/BasicHud.cs" id="3_etvvy"]
-[ext_resource type="AudioStream" uid="uid://bq620yjstjdl" path="res://audio/audio_streams/flashlight/flashlight_on.wav" id="3_l3f5j"]
-[ext_resource type="AudioStream" uid="uid://com3v7we27wvm" path="res://audio/audio_streams/flashlight/flashlight_off.wav" id="4_0clxq"]
+[ext_resource type="AudioStream" uid="uid://0dy61tjlsf0a" path="res://audio/Flashlight_turnon.wav" id="3_ug2fg"]
 [ext_resource type="PackedScene" uid="uid://duwf5mdtkjlre" path="res://core_systems/item_inspect/item_inspect.tscn" id="5_iw50w"]
 [ext_resource type="Texture2D" uid="uid://byineyv5wipjo" path="res://textures/cursor-hand-grab-svgrepo-com.png" id="6_fb16h"]
 [ext_resource type="Texture2D" uid="uid://ci4to6fyojbqm" path="res://textures/wave-hand-svgrepo-com.png" id="7_bqbud"]
@@ -41,8 +40,12 @@ RBPhysicInGrab_LinearDamp = 1.0
 RBPhysicInGrab_Friction = 0.15
 RBPhysicInGrab_Bounce = 0.0
 RBPhysicInGrab_Mass = 1.0
-AudioFlashlight_On = ExtResource("3_l3f5j")
-AudioFlashlight_Off = ExtResource("4_0clxq")
+AudioFlashlight_On = ExtResource("3_ug2fg")
+AudioFlashlight_On_Pitch = 1.0
+AudioFlashlight_On_VolumeDb = -10.0
+AudioFlashlight_Off = ExtResource("3_ug2fg")
+AudioFlashlight_Off_Pitch = 0.8
+AudioFlashlight_Off_VolumeDb = -10.0
 WalkCameraLerpHeight = 0.075
 RunCameraLerpHeight = 0.12
 
@@ -58,6 +61,8 @@ volume_db = -6.0
 volume_db = -3.0
 
 [node name="AudioStreamPlayer_TestItem" type="AudioStreamPlayer" parent="." index="7"]
+stream = ExtResource("3_ug2fg")
+volume_db = -9.723
 bus = &"Sfx"
 
 [node name="BasicHud" type="Control" parent="." index="8"]

@@ -3,6 +3,7 @@ using Godot.Collections;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Reflection.Emit;
 using System.Threading.Tasks;
 
@@ -61,20 +62,52 @@ public partial class CLevelLoader : Godot.GodotObject
 
     public List<SLevelInfo> GetAllLevelsInfo()
     {
-        string levels_directory = "\\levels";
+        string levels_directory = "res://levels";
         List<SLevelInfo> allLevels = new List<SLevelInfo>();
+       
+        var a = DirAccess.Open(levels_directory);
+        var files = a.GetFiles();
+       
+        bool is_editor = true;
 
-        string[] allFiles = UniversalFunctions.GetDirectoryFiles(levels_directory, ".tscn");
-        foreach (string file_path in allFiles)
+        string[] levels_files = new string[files.Length];
+
+        // FOR EXPORT
+        foreach (string file_name in files) 
         {
-            var file_name = UniversalFunctions.GetStringBetween(file_path, Directory.GetCurrentDirectory() +
-                levels_directory + "\\", ".tscn");
+            if (file_name.Contains(".tscn.remap"))
+            {
+                var file_path = a.GetCurrentDir() + "/" + UniversalFunctions.GetStringBetween(file_name,"", ".remap");
+                var level_name = UniversalFunctions.GetStringBetween(file_path, a.GetCurrentDir()+"/", ".tscn");
 
-            SLevelInfo level = new SLevelInfo();
-            level.path = file_path;
-            level.name = file_name;
+                SLevelInfo level = new SLevelInfo();
+                level.path = file_path;
+                level.name = level_name;
 
-            allLevels.Add(level);
+                allLevels.Add(level);
+
+                // for export/editor check
+                is_editor = false;
+            }
+        }
+
+        // FOR EDITOR
+        if (is_editor)
+        {
+            foreach (string file_name in files)
+            {
+                if (file_name.Contains(".tscn"))
+                {
+                    var file_path = a.GetCurrentDir() + "/" + file_name;
+                    var level_name = UniversalFunctions.GetStringBetween(file_path, a.GetCurrentDir() + "/", ".tscn");
+
+                    SLevelInfo level = new SLevelInfo();
+                    level.path = file_path;
+                    level.name = level_name;
+
+                    allLevels.Add(level);
+                }
+            }
         }
 
         if (allLevels.Count == 0) { GameMaster.GM.Log.WriteLog(gm, LogSystem.ELogMsgType.ERROR, "nenacetli jsme zadne LevelInfo"); }
@@ -262,8 +295,8 @@ public partial class CLevelLoader : Godot.GodotObject
         {
             GD.Print("loading scene is complete, it is change now");
             gm.GetTree().ChangeSceneToPacked((PackedScene)ResourceLoader.LoadThreadedGet(loadingScenePath));
-            canUpdate = false;
 
+            canUpdate = false;
             // Toggle all lights for fix GI
             await SetLevelWorldEnvironment(true);
         }

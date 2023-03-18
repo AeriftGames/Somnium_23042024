@@ -4,6 +4,7 @@ using Godot.NativeInterop;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using static all_material_surfaces;
 
 /*
  * *** FPSCharacter_WalkingEffects(0.1) ***
@@ -207,15 +208,18 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
 
                 //GD.Print(materialSurface);
 
-                // Play random footsteps sound by material surface
-                PlayRandomSound(
-                    AudioStreamPlayerFootsteps,
-                    AllMaterialSurfaces.GetAudioArray(
-                        materialSurface,all_material_surfaces.EMaterialSurfaceAudio.Footstep),
-                    AllMaterialSurfaces.GetMaterialSurfaceAudioVolumeDB(
-                        materialSurface, all_material_surfaces.EMaterialSurfaceAudio.Footstep),
-                    AllMaterialSurfaces.GetMaterialSurfaceAudioPitch(
-                        materialSurface, all_material_surfaces.EMaterialSurfaceAudio.Footstep));
+                if (materialSurface != all_material_surfaces.EMaterialSurface.None)
+                {
+                    // Play random footsteps sound by material surface
+                    PlayRandomSound(
+                        AudioStreamPlayerFootsteps,
+                        AllMaterialSurfaces.GetAudioArray(
+                            materialSurface, all_material_surfaces.EMaterialSurfaceAudio.Footstep),
+                        AllMaterialSurfaces.GetMaterialSurfaceAudioVolumeDB(
+                            materialSurface, all_material_surfaces.EMaterialSurfaceAudio.Footstep),
+                        AllMaterialSurfaces.GetMaterialSurfaceAudioPitch(
+                            materialSurface, all_material_surfaces.EMaterialSurfaceAudio.Footstep));
+                }
 
             }
 
@@ -336,20 +340,19 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
             GameMaster.GM.Log.WriteLog(this, LogSystem.ELogMsgType.INFO, "(very mini) noticable land effect");
 
             // Detect materal surface name and play specific audio set of footsteps
-            string surfaceMaterial = DetectSurfaceMaterialOfFloor();
-            if (surfaceMaterial != "none")
+            EMaterialSurface materialSurface = AllMaterialSurfaces.GetMaterialSurfaceFromGroup(DetectSurfaceMaterialOfFloor());
+            if (materialSurface != EMaterialSurface.None)
             {
-                foreach (material_surface_data mat in AllMaterialSurfaces.GetAllMaterialSurfaces())
-                {
-                    if (mat.MaterialSurfaceNameID == surfaceMaterial)
-                    {
-                        // Play footstep audio
-                        PlayRandomSound(AudioStreamPlayerJumpLand,
-                            mat.LandingSounds, mat.LandingAudioVolumeDB -8, 0.7f);
-                        break;
-                    }
-                }
-            }
+                // Play random sound
+                PlayRandomSound(
+                    AudioStreamPlayerJumpLand,
+                    AllMaterialSurfaces.GetAudioArray(
+                        materialSurface, all_material_surfaces.EMaterialSurfaceAudio.Landing),
+                    AllMaterialSurfaces.GetMaterialSurfaceAudioVolumeDB(
+                        materialSurface, all_material_surfaces.EMaterialSurfaceAudio.Landing)-8,
+                    AllMaterialSurfaces.GetMaterialSurfaceAudioPitch(
+                        materialSurface, all_material_surfaces.EMaterialSurfaceAudio.Landing) -0.1f);
+            };
 
             lerpHeight = -0.1f;
             lerpRot = -0.025f;
@@ -361,21 +364,22 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
             GameMaster.GM.Log.WriteLog(this, LogSystem.ELogMsgType.INFO, "(mini land)" + "height from start falling: " + heightfall + " m");
 
             // Detect materal surface name and play specific audio set of footsteps
-            all_material_surfaces.EMaterialSurface materialSurface =
-                AllMaterialSurfaces.GetMaterialSurfaceFromGroup(DetectSurfaceMaterialOfFloor());
-
-            // Play random sound
-            PlayRandomSound(
-                AudioStreamPlayerJumpLand,
-                AllMaterialSurfaces.GetAudioArray(
-                    materialSurface, all_material_surfaces.EMaterialSurfaceAudio.Landing),
-                AllMaterialSurfaces.GetMaterialSurfaceAudioVolumeDB(
-                    materialSurface, all_material_surfaces.EMaterialSurfaceAudio.Landing -1),
-                AllMaterialSurfaces.GetMaterialSurfaceAudioPitch(
-                    materialSurface, all_material_surfaces.EMaterialSurfaceAudio.Landing));
+            EMaterialSurface materialSurface = AllMaterialSurfaces.GetMaterialSurfaceFromGroup(DetectSurfaceMaterialOfFloor());
+            if (materialSurface != EMaterialSurface.None)
+            {
+                // Play random sound
+                PlayRandomSound(
+                    AudioStreamPlayerJumpLand,
+                    AllMaterialSurfaces.GetAudioArray(
+                        materialSurface, all_material_surfaces.EMaterialSurfaceAudio.Landing),
+                    AllMaterialSurfaces.GetMaterialSurfaceAudioVolumeDB(
+                        materialSurface, all_material_surfaces.EMaterialSurfaceAudio.Landing)-1,
+                    AllMaterialSurfaces.GetMaterialSurfaceAudioPitch(
+                        materialSurface, all_material_surfaces.EMaterialSurfaceAudio.Landing));
+            };
 
             lerpHeight = -0.2f;
-            lerpRot = -0.05f;   
+            lerpRot = -0.05f;
         }
         else if (heightfall <= SmallHeightForLandingEffect)
         {
@@ -383,25 +387,19 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
             GameMaster.GM.Log.WriteLog(this, LogSystem.ELogMsgType.INFO, "(small land)" + "height from start falling: " + heightfall + " m");
 
             // Detect materal surface name and play specific audio set of footsteps
-            all_material_surfaces.EMaterialSurface materialSurface =
-                AllMaterialSurfaces.GetMaterialSurfaceFromGroup(DetectSurfaceMaterialOfFloor());
-
-            RandomNumberGenerator a = new RandomNumberGenerator();
-            a.Randomize();
-
-            float PitchScale = a.RandfRange(AllMaterialSurfaces.GetMaterialSurfaceAudioPitch(
-                    materialSurface, all_material_surfaces.EMaterialSurfaceAudio.Landing) - (0.08f / 2),
-                AllMaterialSurfaces.GetMaterialSurfaceAudioPitch(
-                    materialSurface, all_material_surfaces.EMaterialSurfaceAudio.Landing) + (0.08f / 2));
-
-            // Play random sound
-            PlayRandomSound(
-                AudioStreamPlayerJumpLand,
-                AllMaterialSurfaces.GetAudioArray(
-                    materialSurface, all_material_surfaces.EMaterialSurfaceAudio.Landing),
-                AllMaterialSurfaces.GetMaterialSurfaceAudioVolumeDB(
-                    materialSurface, all_material_surfaces.EMaterialSurfaceAudio.Landing),
-                PitchScale);
+            EMaterialSurface materialSurface = AllMaterialSurfaces.GetMaterialSurfaceFromGroup(DetectSurfaceMaterialOfFloor());
+            if (materialSurface != EMaterialSurface.None)
+            {
+                // Play random sound
+                PlayRandomSound(
+                    AudioStreamPlayerJumpLand,
+                    AllMaterialSurfaces.GetAudioArray(
+                        materialSurface, all_material_surfaces.EMaterialSurfaceAudio.Landing),
+                    AllMaterialSurfaces.GetMaterialSurfaceAudioVolumeDB(
+                        materialSurface, all_material_surfaces.EMaterialSurfaceAudio.Landing),
+                    AllMaterialSurfaces.GetMaterialSurfaceAudioPitch(
+                        materialSurface, all_material_surfaces.EMaterialSurfaceAudio.Landing));
+            }
 
             lerpHeight = -0.4f;
             lerpRot = -0.1f;
@@ -412,18 +410,19 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
             GameMaster.GM.Log.WriteLog(this, LogSystem.ELogMsgType.INFO, "(medium land)" + "height from start falling: " + heightfall + " m");
 
             // Detect materal surface name and play specific audio set of footsteps
-            all_material_surfaces.EMaterialSurface materialSurface =
-                AllMaterialSurfaces.GetMaterialSurfaceFromGroup(DetectSurfaceMaterialOfFloor());
-
-            // Play random sound
-            PlayRandomSound(
-                AudioStreamPlayerJumpLand,
-                AllMaterialSurfaces.GetAudioArray(
-                    materialSurface, all_material_surfaces.EMaterialSurfaceAudio.Landing),
-                AllMaterialSurfaces.GetMaterialSurfaceAudioVolumeDB(
-                    materialSurface, all_material_surfaces.EMaterialSurfaceAudio.Landing),
-                AllMaterialSurfaces.GetMaterialSurfaceAudioPitch(
-                    materialSurface, all_material_surfaces.EMaterialSurfaceAudio.Landing));
+            EMaterialSurface materialSurface = AllMaterialSurfaces.GetMaterialSurfaceFromGroup(DetectSurfaceMaterialOfFloor());
+            if (materialSurface != EMaterialSurface.None)
+            {
+                // Play random sound
+                PlayRandomSound(
+                    AudioStreamPlayerJumpLand,
+                    AllMaterialSurfaces.GetAudioArray(
+                        materialSurface, all_material_surfaces.EMaterialSurfaceAudio.Landing),
+                    AllMaterialSurfaces.GetMaterialSurfaceAudioVolumeDB(
+                        materialSurface, all_material_surfaces.EMaterialSurfaceAudio.Landing),
+                    AllMaterialSurfaces.GetMaterialSurfaceAudioPitch(
+                        materialSurface, all_material_surfaces.EMaterialSurfaceAudio.Landing));
+            };
 
             lerpHeight = -0.65f;
             lerpRot = -0.2f;
@@ -432,20 +431,21 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
         {
             // high land
             GameMaster.GM.Log.WriteLog(this, LogSystem.ELogMsgType.INFO, "(high land)" + "height from start falling: " + heightfall + " m");
-            
-            // Detect materal surface name and play specific audio set of footsteps
-            all_material_surfaces.EMaterialSurface materialSurface =
-                AllMaterialSurfaces.GetMaterialSurfaceFromGroup(DetectSurfaceMaterialOfFloor());
 
-            // Play random sound
-            PlayRandomSound(
-                AudioStreamPlayerJumpLand,
-                AllMaterialSurfaces.GetAudioArray(
-                    materialSurface, all_material_surfaces.EMaterialSurfaceAudio.Landing),
-                AllMaterialSurfaces.GetMaterialSurfaceAudioVolumeDB(
-                    materialSurface, all_material_surfaces.EMaterialSurfaceAudio.Landing),
-                AllMaterialSurfaces.GetMaterialSurfaceAudioPitch(
-                    materialSurface, all_material_surfaces.EMaterialSurfaceAudio.Landing));
+            // Detect materal surface name and play specific audio set of footsteps
+            EMaterialSurface materialSurface = AllMaterialSurfaces.GetMaterialSurfaceFromGroup(DetectSurfaceMaterialOfFloor());
+            if (materialSurface != EMaterialSurface.None)
+            {
+                // Play random sound
+                PlayRandomSound(
+                    AudioStreamPlayerJumpLand,
+                    AllMaterialSurfaces.GetAudioArray(
+                        materialSurface, all_material_surfaces.EMaterialSurfaceAudio.Landing),
+                    AllMaterialSurfaces.GetMaterialSurfaceAudioVolumeDB(
+                        materialSurface, all_material_surfaces.EMaterialSurfaceAudio.Landing),
+                    AllMaterialSurfaces.GetMaterialSurfaceAudioPitch(
+                        materialSurface, all_material_surfaces.EMaterialSurfaceAudio.Landing));
+            };
 
             lerpHeight = -0.8f;
             lerpRot = -0.4f;
@@ -456,18 +456,19 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
             GameMaster.GM.Log.WriteLog(this, LogSystem.ELogMsgType.INFO, "(death land)" + "height from start falling: " + heightfall + " m");
 
             // Detect materal surface name and play specific audio set of footsteps
-            all_material_surfaces.EMaterialSurface materialSurface =
-                AllMaterialSurfaces.GetMaterialSurfaceFromGroup(DetectSurfaceMaterialOfFloor());
-
-            // Play random sound
-            PlayRandomSound(
-                AudioStreamPlayerJumpLand,
-                AllMaterialSurfaces.GetAudioArray(
-                    materialSurface, all_material_surfaces.EMaterialSurfaceAudio.Landing),
-                AllMaterialSurfaces.GetMaterialSurfaceAudioVolumeDB(
-                    materialSurface, all_material_surfaces.EMaterialSurfaceAudio.Landing),
-                AllMaterialSurfaces.GetMaterialSurfaceAudioPitch(
-                    materialSurface, all_material_surfaces.EMaterialSurfaceAudio.Landing));
+            EMaterialSurface materialSurface = AllMaterialSurfaces.GetMaterialSurfaceFromGroup(DetectSurfaceMaterialOfFloor());
+            if (materialSurface != EMaterialSurface.None)
+            {
+                // Play random sound
+                PlayRandomSound(
+                    AudioStreamPlayerJumpLand,
+                    AllMaterialSurfaces.GetAudioArray(
+                        materialSurface, all_material_surfaces.EMaterialSurfaceAudio.Landing),
+                    AllMaterialSurfaces.GetMaterialSurfaceAudioVolumeDB(
+                        materialSurface, all_material_surfaces.EMaterialSurfaceAudio.Landing),
+                    AllMaterialSurfaces.GetMaterialSurfaceAudioPitch(
+                        materialSurface, all_material_surfaces.EMaterialSurfaceAudio.Landing));
+            };
 
             lerpHeight = -1.0f;
             lerpRot = -0.3f;

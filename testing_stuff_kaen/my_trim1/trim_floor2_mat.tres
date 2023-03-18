@@ -1,0 +1,26 @@
+[gd_resource type="StandardMaterial3D" load_steps=5 format=3 uid="uid://cgoup7jj0dm55"]
+
+[ext_resource type="Texture2D" uid="uid://dvwkjqqubpct" path="res://testing_stuff_kaen/my_trim1/trimsheets_floor_2/trimsheet_3_low_DefaultMaterial_BaseColor.png" id="1_iprp6"]
+[ext_resource type="Texture2D" uid="uid://rlcadl8yomkx" path="res://testing_stuff_kaen/my_trim1/trimsheets_floor_2/trimsheet_3_low_DefaultMaterial_Metallic.png" id="2_vsua5"]
+[ext_resource type="Texture2D" uid="uid://cj70aeuyw6j5p" path="res://testing_stuff_kaen/my_trim1/trimsheet_floor_4k/trimsheet_3_low_DefaultMaterial_Normal.png" id="3_ov7k5"]
+[ext_resource type="Texture2D" uid="uid://ca2aroy8nhva0" path="res://testing_stuff_kaen/my_trim1/trimsheets_floor_2/trimsheet_3_low_DefaultMaterial_Roughness.png" id="4_fh1ej"]
+
+[resource]
+resource_name = "trim"
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.733333, 0.733333, 0.737255, 1)
+albedo_texture = ExtResource("1_iprp6")
+metallic = 0.5
+metallic_texture = ExtResource("2_vsua5")
+metallic_texture_channel = 2
+roughness = 0.79
+roughness_texture = ExtResource("4_fh1ej")
+roughness_texture_channel = 4
+normal_enabled = true
+normal_scale = 2.0
+normal_texture = ExtResource("3_ov7k5")
+ao_light_affect = 0.12
+heightmap_scale = 1.0
+heightmap_deep_parallax = true
+heightmap_min_layers = 8
+heightmap_max_layers = 32
