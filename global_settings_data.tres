@@ -1,11 +1,11 @@
-[gd_resource type="Resource" load_steps=2 format=3 uid="uid://bijbvnk04sa5r"]
+[gd_resource type="Resource" load_steps=2 format=3]
 
 [ext_resource type="Script" path="res://core_systems/global_settings_data.cs" id="1_8rhwy"]
 
 [resource]
 script = ExtResource("1_8rhwy")
-ScreenMode = 0
-ScreenSizeID = 1
+ScreenMode = 2
+ScreenSizeID = 2
 Scale3d = 1.0
 AntialiasID = 3
 Sdfgi = true
@@ -30,4 +30,4 @@ ShowCustomLabel6 = false
 ShowCustomLabel7 = false
 ShowCustomLabel8 = false
 ShowCustomLabel9 = false
-EnableWorldLevelOcclusionCull = true
+EnableWorldLevelOcclusionCull = false
