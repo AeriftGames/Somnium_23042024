@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dsqplpo60hp2f"]
+[gd_scene load_steps=18 format=3 uid="uid://dsqplpo60hp2f"]
 
 [ext_resource type="Script" path="res://levels/worldlevel.cs" id="1_u58sk"]
 [ext_resource type="ArrayOccluder3D" uid="uid://1dvpcggr1b7c" path="res://levels/worldlevel_test_new_modular1/worldlevel_test_new_modular1.occ" id="2_l1yac"]
@@ -12,25 +12,29 @@
 [ext_resource type="AudioStream" uid="uid://ctrnpxnfx855t" path="res://audio/audio_streams/ambient new/Creepy_ventilation_wind1.wav" id="9_4sdv2"]
 [ext_resource type="AudioStream" uid="uid://ct5irbpao1b4g" path="res://audio/audio_streams/ambient new/Atmosphere_Hallways.wav" id="10_yuntt"]
 [ext_resource type="AudioStream" uid="uid://cxsmbnv4gvuui" path="res://audio/audio_streams/sfx_stuff/Electricity_loop.wav" id="12_wemp7"]
+[ext_resource type="PackedScene" uid="uid://cbfgum8g2n876" path="res://testing_stuff_kaen/placeholder/light_small_square.tscn" id="15_ghff5"]
 [ext_resource type="Texture2D" uid="uid://cxuhj4tqdb5qw" path="res://testing_stuff_kaen/my_trim1/decals_tests2/trimsheet_3_low_DefaultMaterial_BaseColor.png" id="16_is0x1"]
 [ext_resource type="Texture2D" uid="uid://dgwuv4wnpu3rq" path="res://testing_stuff_kaen/my_trim1/decals_tests2/trimsheet_3_low_DefaultMaterial_Normal.png" id="17_wddkd"]
 
 [sub_resource type="Environment" id="Environment_p3qlj"]
 background_energy_multiplier = 0.15
 ambient_light_color = Color(0.501961, 0.501961, 0.501961, 1)
-tonemap_mode = 1
+tonemap_mode = 2
+tonemap_exposure = 1.78
+tonemap_white = 0.8
 ssao_enabled = true
 ssil_enabled = true
 sdfgi_enabled = true
 sdfgi_use_occlusion = true
 sdfgi_read_sky_light = false
-sdfgi_min_cell_size = 0.1
 glow_enabled = true
+glow_normalized = true
+glow_blend_mode = 4
 fog_enabled = true
 fog_light_energy = 0.42
 fog_density = 0.0009
 volumetric_fog_enabled = true
-volumetric_fog_density = 0.0363
+volumetric_fog_density = 0.023
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_aaqwk"]
 size = Vector3(5, 5, 5)
@@ -1092,9 +1096,20 @@ shadow_enabled = true
 omni_range = 3.0
 
 [node name="OmniLight3D23" type="OmniLight3D" parent="Level/Lights"]
-transform = Transform3D(0.612466, 0.790479, 0.00535268, 0.548843, -0.420353, -0.722548, -0.568909, 0.445474, -0.6913, -2.75944, -0.225204, 41.6186)
+transform = Transform3D(0.612466, 0.790479, 0.00535267, 0.548843, -0.420353, -0.722548, -0.568909, 0.445474, -0.6913, -3.22874, 0.51013, 47.0552)
+light_energy = 0.1
+light_indirect_energy = 10.0
+light_size = 0.096
+light_specular = 0.868
+shadow_enabled = true
+omni_range = 10.0
+omni_attenuation = 1.23114
+
+[node name="OmniLight3D31" type="OmniLight3D" parent="Level/Lights"]
+transform = Transform3D(0.612466, 0.790479, 0.00535267, 0.548843, -0.420353, -0.722548, -0.568909, 0.445474, -0.6913, -4.01932, 1.60714, 43.2158)
 visible = false
-light_indirect_energy = 2.0
+light_energy = 0.1
+light_indirect_energy = 10.0
 light_size = 0.096
 light_specular = 0.868
 shadow_enabled = true
@@ -1105,7 +1120,7 @@ omni_attenuation = 1.23114
 transform = Transform3D(0.612466, 0.790479, 0.00535272, 0.49485, -0.378114, -0.782402, -0.616449, 0.481843, -0.62275, -3.70787, 2.00353, 42.8698)
 visible = false
 light_color = Color(1, 0.827451, 0.698039, 1)
-light_energy = 0.15
+light_energy = 0.05
 light_indirect_energy = 10.0
 light_volumetric_fog_energy = 5.0
 shadow_enabled = true
@@ -1127,6 +1142,38 @@ light_indirect_energy = 5.0
 shadow_enabled = true
 omni_range = 10.0
 
+[node name="OmniLight3D32" type="OmniLight3D" parent="Level/Lights"]
+transform = Transform3D(0.612466, 0.790479, 0.00535269, 0.548843, -0.420353, -0.722548, -0.568909, 0.445474, -0.6913, 23.2423, 0.70818, 27.4058)
+light_energy = 0.05
+light_indirect_energy = 10.0
+light_volumetric_fog_energy = 2.0
+light_size = 0.1
+shadow_enabled = true
+
+[node name="OmniLight3D34" type="OmniLight3D" parent="Level/Lights"]
+transform = Transform3D(0.612466, 0.790479, 0.00535267, 0.548843, -0.420353, -0.722548, -0.568909, 0.445474, -0.6913, 32.3439, 0.698583, 28.5664)
+light_energy = 0.03
+light_indirect_energy = 5.0
+light_size = 0.1
+light_bake_mode = 1
+shadow_enabled = true
+omni_range = 10.0
+
+[node name="OmniLight3D35" type="OmniLight3D" parent="Level/Lights"]
+transform = Transform3D(0.612466, 0.790479, 0.00535267, 0.548843, -0.420353, -0.722548, -0.568909, 0.445474, -0.6913, 37.6791, 0.501574, 27.531)
+light_energy = 0.05
+light_indirect_energy = 5.0
+light_size = 0.1
+shadow_enabled = true
+omni_range = 10.0
+
+[node name="OmniLight3D33" type="OmniLight3D" parent="Level/Lights"]
+transform = Transform3D(0.612466, 0.790479, 0.00535267, 0.548843, -0.420353, -0.722548, -0.568909, 0.445474, -0.6913, 12.8052, 0.665808, 31.7494)
+light_energy = 0.1
+light_indirect_energy = 10.0
+light_size = 0.411
+shadow_enabled = true
+
 [node name="OmniLight3D28" type="OmniLight3D" parent="Level/Lights"]
 transform = Transform3D(0.612466, 0.790479, 0.00535267, 0.548843, -0.420353, -0.722548, -0.568909, 0.445474, -0.6913, 4.98996, 0.779087, 33.5621)
 light_energy = 0.1
@@ -1134,6 +1181,7 @@ light_indirect_energy = 6.579
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Level/Lights"]
 transform = Transform3D(0.9125, -0.233727, 0.335731, -0.408328, -0.570036, 0.712971, 0.0247384, -0.787674, -0.615595, -3.57113, 1.88551, 42.7079)
+visible = false
 light_color = Color(1, 0.823529, 0.733333, 1)
 light_indirect_energy = 10.0
 light_volumetric_fog_energy = 2.0
@@ -1234,5 +1282,110 @@ pitch_scale = 0.8
 autoplay = true
 max_distance = 35.0
 bus = &"Sfx"
+
+[node name="light_small_square" parent="." instance=ExtResource("15_ghff5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.117, -1.3723, 26.2107)
+
+[node name="light_small_square2" parent="." instance=ExtResource("15_ghff5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.113, -1.3723, 26.2107)
+
+[node name="light_small_square3" parent="." instance=ExtResource("15_ghff5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.1438, -1.3723, 26.2107)
+
+[node name="light_small_square4" parent="." instance=ExtResource("15_ghff5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.1047, -1.3723, 26.2107)
+
+[node name="light_small_square5" parent="." instance=ExtResource("15_ghff5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.03, -1.3723, 26.2107)
+
+[node name="light_small_square6" parent="." instance=ExtResource("15_ghff5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.1089, -1.3723, 26.2107)
+
+[node name="light_small_square19" parent="." instance=ExtResource("15_ghff5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37.2178, -1.3723, 26.2107)
+
+[node name="light_small_square20" parent="." instance=ExtResource("15_ghff5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 39.2723, -1.3723, 26.2107)
+
+[node name="light_small_square21" parent="." instance=ExtResource("15_ghff5")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 39.1499, -1.3723, 28.548)
+
+[node name="light_small_square22" parent="." instance=ExtResource("15_ghff5")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 37.4625, -1.3723, 28.548)
+
+[node name="light_small_square24" parent="." instance=ExtResource("15_ghff5")]
+transform = Transform3D(-3.09022e-08, 0, -1, 0, 1, 0, 0.706961, 0, -4.37114e-08, 32.5587, -1.37152, 30.3928)
+
+[node name="light_small_square25" parent="." instance=ExtResource("15_ghff5")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 32.5572, -1.3723, 32.0924)
+
+[node name="light_small_square26" parent="." instance=ExtResource("15_ghff5")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 32.5572, -1.3723, 34.1469)
+
+[node name="light_small_square27" parent="." instance=ExtResource("15_ghff5")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 30.2199, -1.3723, 34.0245)
+
+[node name="light_small_square28" parent="." instance=ExtResource("15_ghff5")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 30.2199, -1.3723, 32.3371)
+
+[node name="light_small_square36" parent="." instance=ExtResource("15_ghff5")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 32.5572, -1.3723, 20.3782)
+
+[node name="light_small_square37" parent="." instance=ExtResource("15_ghff5")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 32.5572, -1.3723, 22.4327)
+
+[node name="light_small_square38" parent="." instance=ExtResource("15_ghff5")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 30.2199, -1.3723, 22.3103)
+
+[node name="light_small_square39" parent="." instance=ExtResource("15_ghff5")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 30.2199, -1.3723, 20.6229)
+
+[node name="light_small_square29" parent="." instance=ExtResource("15_ghff5")]
+transform = Transform3D(-2.92933e-08, 0, 1, 0, 1, 0, -0.670153, 0, -4.37114e-08, 30.2199, -1.3723, 30.3926)
+
+[node name="light_small_square30" parent="." instance=ExtResource("15_ghff5")]
+transform = Transform3D(-3.09022e-08, 0, -1, 0, 1, 0, 0.706961, 0, -4.37114e-08, 32.5587, -1.37152, 24.3857)
+
+[node name="light_small_square31" parent="." instance=ExtResource("15_ghff5")]
+transform = Transform3D(-2.92933e-08, 0, 1, 0, 1, 0, -0.670153, 0, -4.37114e-08, 30.2199, -1.3723, 24.3855)
+
+[node name="light_small_square32" parent="." instance=ExtResource("15_ghff5")]
+transform = Transform3D(0.706961, 0, 0, 0, 1, 0, -3.55271e-15, 0, 1, 34.4024, -1.37152, 26.2117)
+
+[node name="light_small_square33" parent="." instance=ExtResource("15_ghff5")]
+transform = Transform3D(-0.670152, 0, -8.74228e-08, 0, 1, 0, 5.85866e-08, 0, -1, 34.4022, -1.3723, 28.5505)
+
+[node name="light_small_square34" parent="." instance=ExtResource("15_ghff5")]
+transform = Transform3D(0.706961, 0, 0, 0, 1, 0, -3.55271e-15, 0, 1, 28.4041, -1.37152, 26.2117)
+
+[node name="light_small_square35" parent="." instance=ExtResource("15_ghff5")]
+transform = Transform3D(-0.670152, 0, -8.74228e-08, 0, 1, 0, 5.85866e-08, 0, -1, 28.4039, -1.3723, 28.5505)
+
+[node name="light_small_square7" parent="." instance=ExtResource("15_ghff5")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 25.8919, -1.3723, 28.5542)
+
+[node name="light_small_square8" parent="." instance=ExtResource("15_ghff5")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 23.8959, -1.3723, 28.5542)
+
+[node name="light_small_square9" parent="." instance=ExtResource("15_ghff5")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 21.8651, -1.3723, 28.5542)
+
+[node name="light_small_square13" parent="." instance=ExtResource("15_ghff5")]
+transform = Transform3D(-2, -1.74846e-07, 7.64274e-15, 0, -8.74228e-08, -2, 1.74846e-07, -2, 8.74228e-08, 23.3073, 1.28351, 27.3398)
+
+[node name="light_small_square15" parent="." instance=ExtResource("15_ghff5")]
+transform = Transform3D(-1.02062, 1.41421, -0.978945, 1.38444, 4.47035e-08, -1.44338, -1.02062, -1.41421, -0.978945, 32.8431, 1.18588, 28.8426)
+
+[node name="light_small_square14" parent="." instance=ExtResource("15_ghff5")]
+transform = Transform3D(-2, -1.74846e-07, 7.64274e-15, 0, -8.74228e-08, -2, 1.74846e-07, -2, 8.74228e-08, 12.9929, 1.4292, 30.9276)
+
+[node name="light_small_square10" parent="." instance=ExtResource("15_ghff5")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 19.9042, -1.3723, 28.5542)
+
+[node name="light_small_square11" parent="." instance=ExtResource("15_ghff5")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 17.9196, -1.3723, 28.5542)
+
+[node name="light_small_square12" parent="." instance=ExtResource("15_ghff5")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 15.9763, -1.3723, 28.5542)
 
 [connection signal="body_entered" from="Level/Area3D" to="Level/Area3D" method="_on_body_entered"]
