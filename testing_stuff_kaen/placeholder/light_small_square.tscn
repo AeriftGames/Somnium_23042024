@@ -5,8 +5,9 @@
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1a2hm"]
 emission_enabled = true
-emission = Color(0.752941, 0.854902, 0.952941, 1)
-emission_energy_multiplier = 5.0
+emission = Color(1, 0.890196, 0.741176, 1)
+emission_energy_multiplier = 3.0
+distance_fade_min_distance = 5.0
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_kmycj"]
 _surfaces = [{

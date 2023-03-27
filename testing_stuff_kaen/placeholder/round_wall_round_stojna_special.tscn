@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://b5ka7bqmym6x1"]
+[gd_scene load_steps=5 format=3 uid="uid://b5ka7bqmym6x1"]
 
 [ext_resource type="Material" uid="uid://lah0omlue113" path="res://testing_stuff_kaen/my_trim1/trim_floor1_mat.tres" id="1_4frcy"]
+[ext_resource type="PackedScene" uid="uid://cbfgum8g2n876" path="res://testing_stuff_kaen/placeholder/light_small_square.tscn" id="2_5du0d"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_0mi7c"]
 _surfaces = [{
@@ -36,3 +37,23 @@ shadow_mesh = SubResource("ArrayMesh_0mi7c")
 transform = Transform3D(-0.734439, -3.8743e-07, -0.678675, 0.678675, 1.19209e-07, -0.734439, 2.68221e-07, -1, 4.17233e-07, 0, 0, 0)
 mesh = SubResource("ArrayMesh_7arvn")
 skeleton = NodePath("")
+
+[node name="light_small_square" parent="." instance=ExtResource("2_5du0d")]
+transform = Transform3D(1.7549e-08, -0.283685, -0.406507, -0.599999, -1.85322e-08, 1.98952e-13, -1.94905e-08, 0.315063, -0.36602, -0.00273263, -0.000977412, 1.7516)
+visible = false
+
+[node name="light_small_square2" parent="." instance=ExtResource("2_5du0d")]
+transform = Transform3D(-4.05138e-08, -0.291729, 0.396915, 0.599999, -8.20603e-08, -4.95019e-08, 1.21631e-07, 0.30763, 0.3764, -1.74612, -0.000978552, 0.14058)
+visible = false
+
+[node name="light_small_square3" parent="." instance=ExtResource("2_5du0d")]
+transform = Transform3D(-0.407204, -0.00402214, 0.401711, -1.43053e-07, -0.423924, -0.00706593, 0.440663, -0.00371684, 0.37121, -1.65994, 0.299021, 0.125775)
+
+[node name="light_small_square4" parent="." instance=ExtResource("2_5du0d")]
+transform = Transform3D(-0.407204, -0.00402214, 0.401711, -1.43053e-07, -0.423924, -0.00706593, 0.440663, -0.00371684, 0.37121, -1.65994, -0.300979, 0.125775)
+
+[node name="light_small_square5" parent="." instance=ExtResource("2_5du0d")]
+transform = Transform3D(-0.407205, 0.00402219, -0.401711, -2.3234e-10, 0.423924, 0.00706598, 0.440663, 0.00371685, -0.37121, 0.0055921, -0.300978, 1.66484)
+
+[node name="light_small_square6" parent="." instance=ExtResource("2_5du0d")]
+transform = Transform3D(-0.407205, 0.00402219, -0.401711, -2.3234e-10, 0.423924, 0.00706598, 0.440663, 0.00371685, -0.37121, 0.00559224, 0.299023, 1.66484)

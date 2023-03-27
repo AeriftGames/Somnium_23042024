@@ -30,8 +30,8 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_cfqiu")
 
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_45qh0"]
-data = PackedVector3Array(0.3333, 0, 1, 1, 0, -1, 1, 0, 1, 0.3333, 0, 1, 0.3333, 0, -1, 1, 0, -1, -1, 0, 1, -0.3333, 0, -1, -0.3333, 0, 1, -1, 0, 1, -1, 0, -1, -0.3333, 0, -1, -0.3333, 0, 1, 0.3333, 0, -1, 0.3333, 0, 1, -0.3333, 0, 1, -0.3333, 0, -1, 0.3333, 0, -1, 0.3333, 0, -1, 1, 0, -3, 1, 0, -1, 0.3333, 0, -1, 0.3333, 0, -3, 1, 0, -3, -1, 0, -1, -0.3333, 0, -3, -0.3333, 0, -1, -1, 0, -1, -1, 0, -3, -0.3333, 0, -3, -0.3333, 0, -1, 0.3333, 0, -3, 0.3333, 0, -1, -0.3333, 0, -1, -0.3333, 0, -3, 0.3333, 0, -3)
+[sub_resource type="BoxShape3D" id="BoxShape3D_2nu7w"]
+size = Vector3(2, 0.025, 4)
 
 [node name="floor_4x2m_variant1" type="MeshInstance3D"]
 mesh = SubResource("ArrayMesh_ronn4")
@@ -41,4 +41,5 @@ metadata/_edit_group_ = true
 [node name="StaticBody3D" type="StaticBody3D" parent="." groups=["material_surface_wood"]]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-shape = SubResource("ConcavePolygonShape3D_45qh0")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.012, -1)
+shape = SubResource("BoxShape3D_2nu7w")
