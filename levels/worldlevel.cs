@@ -22,9 +22,5 @@ public partial class worldlevel : Node3D
 				GameMaster.GM.LevelLoader.SDFGI = true;
 			}
 		}
-				
-
 	}
-
-
 }

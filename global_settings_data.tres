@@ -1,25 +1,26 @@
-[gd_resource type="Resource" load_steps=2 format=3 uid="uid://dybmnj6fmndis"]
+[gd_resource type="Resource" load_steps=2 format=3]
 
 [ext_resource type="Script" path="res://core_systems/global_settings_data.cs" id="1_8rhwy"]
 
 [resource]
 script = ExtResource("1_8rhwy")
-ScreenMode = 2
-ScreenSizeID = 2
-Scale3d = 1.0
-AntialiasID = 3
+ScreenMode = 0
+ScreenSizeID = 1
+Scale3d = 0.66
+AntialiasID = 0
+GlobalIlumination = 0
 Sdfgi = false
 Ssao = true
 Ssil = true
 HalfResolutionGI = false
-UnlockMaxFps = false
+UnlockMaxFps = true
 DisableVsync = false
 MainVolume = 1.0
 MusicVolume = -0.7
 SfxVolume = 0.0
 ShowDebugHud = true
 ShowFps = true
-ShowPerformance = false
+ShowPerformance = true
 ShowCustomLabel0 = false
 ShowCustomLabel1 = false
 ShowCustomLabel2 = false
@@ -30,4 +31,4 @@ ShowCustomLabel6 = false
 ShowCustomLabel7 = false
 ShowCustomLabel8 = false
 ShowCustomLabel9 = false
-EnableWorldLevelOcclusionCull = false
+EnableWorldLevelOcclusionCull = true

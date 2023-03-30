@@ -146,6 +146,8 @@ public partial class CLevelLoader : Godot.GodotObject
 
     public async void EndPrecompileShaderProcess()
     {
+        GameMaster.GM.GetSettings().RefreshShaders();
+
         FPSCharacter_BasicMoving character_basic = GameMaster.GM.GetFPSCharacter();
         ObjectCamera objectCamera = character_basic.objectCamera;
 
@@ -165,7 +167,6 @@ public partial class CLevelLoader : Godot.GodotObject
 
         // Toggle all lights for fix GI
         await SetLevelWorldEnvironment(true);
-
     }
 
     // instantiate a addchild loading hud to fpscharacter/allhuds and return it
@@ -233,11 +234,14 @@ public partial class CLevelLoader : Godot.GodotObject
         }
         else
         {
+            
             // existuje voxelGI v levelu ? zapneme ho
             VoxelGI b = (VoxelGI)level.FindChild("VoxelGI", false, true);
             if(b!= null)
                 b.Visible = true;
 
+            //GameMaster.GM.GetSettings().RefreshShaders();
+            
             await Task.Delay(50);
 
             // prepne mod svetel na disable

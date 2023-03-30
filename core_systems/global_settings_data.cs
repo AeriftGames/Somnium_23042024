@@ -10,6 +10,7 @@ public partial class global_settings_data : Resource
 	[Export] public int ScreenSizeID { get; set; }
 	[Export] public float Scale3d { get; set; }
 	[Export] public int AntialiasID { get; set; }
+	[Export] public int GlobalIlumination { get; set; }
 	[Export] public bool Sdfgi { get; set; }
 	[Export] public bool Ssao { get; set; }
 	[Export] public bool Ssil { get; set; }

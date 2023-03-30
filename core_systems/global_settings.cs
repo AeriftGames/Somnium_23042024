@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Threading.Tasks;
 using System.Windows;
 
 public partial class global_settings : Godot.GodotObject
@@ -256,6 +257,42 @@ public partial class global_settings : Godot.GodotObject
                 " nejspis je jiny nastaveni screen size nez dane id presety");
             return -1;
         }
+    }
+
+    // Aplikuje ruzna GI
+    public void Apply_GlobalIlumination(int newValue,bool newApplyNow = false, bool newSaveNow = false)
+    {
+        if(newApplyNow)
+        {
+            if(newValue == 0)
+            {
+                GD.Print("test");
+                // disable
+                VoxelGI voxelGI = gm.LevelLoader.GetActualLevelScene().GetNode<VoxelGI>("VoxelGI");
+                if(voxelGI != null)
+                    voxelGI.Visible = false;
+
+                Apply_Sdfgi(false, true, false);
+            }
+            else if(newValue == 1) 
+            {
+                // sdfgi
+                VoxelGI voxelGI = gm.LevelLoader.GetActualLevelScene().GetNode<VoxelGI>("VoxelGI");
+                if (voxelGI != null)
+                    voxelGI.Visible = false;
+                Apply_Sdfgi(true, true, false);
+            }
+            else if(newValue == 2) 
+            {
+                // voxel
+                Apply_Sdfgi(false, true, false);
+                VoxelGI voxelGI = gm.LevelLoader.GetActualLevelScene().GetNode<VoxelGI>("VoxelGI");
+                if (voxelGI != null)
+                    voxelGI.Visible = false;
+            }
+        }
+
+        RefreshShaders();
     }
 
     // settings SSAO
@@ -663,5 +700,21 @@ public partial class global_settings : Godot.GodotObject
         // Save now
         GetData().ShowDebugHud = newValue;
         GetData().Save();
+    }
+
+    /**************************************************************************/
+    // OTHERS
+
+    // refresh antialising (working as impulse refresh shaders)
+    public async void RefreshShaders()
+    {
+        await RefreshShadersBackTask(GetActual_AntialiasID());
+        Apply_AntialiasID(0,true,false);
+    }
+
+    private async Task RefreshShadersBackTask(int value)
+    {
+        await Task.Delay(100);
+        Apply_AntialiasID(value,true,false);
     }
 }
