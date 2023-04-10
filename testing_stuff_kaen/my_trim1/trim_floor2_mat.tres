@@ -8,12 +8,13 @@
 [resource]
 resource_name = "trim"
 vertex_color_use_as_albedo = true
-albedo_color = Color(0.721569, 0.87451, 1, 1)
+albedo_color = Color(0.72549, 0.886275, 1, 1)
 albedo_texture = ExtResource("1_qqjyq")
 metallic = 0.2
 metallic_specular = 0.6
 metallic_texture = ExtResource("2_gwpfr")
 metallic_texture_channel = 2
+roughness = 0.9
 roughness_texture = ExtResource("4_lpyv7")
 roughness_texture_channel = 4
 normal_enabled = true

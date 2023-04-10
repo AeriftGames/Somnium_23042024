@@ -199,17 +199,16 @@ CameraZoomToObjectAndSetDirection={
 
 [physics]
 
+3d/run_on_separate_thread=true
 3d/time_before_sleep=0.75
-3d/solver/solver_iterations=32
 
 [rendering]
 
 driver/threads/thread_model=2
 lights_and_shadows/positional_shadow/soft_shadow_filter_quality=3
 scaling_3d/mode=1
-scaling_3d/scale=0.66
-scaling_3d/fsr_sharpness=0.2
-occlusion_culling/occlusion_rays_per_thread=1024
+scaling_3d/scale=0.7
+scaling_3d/fsr_sharpness=0.1
 environment/screen_space_reflection/roughness_quality=2
 limits/global_shader_variables/buffer_size=125536
 limits/spatial_indexer/update_iterations_per_frame=20

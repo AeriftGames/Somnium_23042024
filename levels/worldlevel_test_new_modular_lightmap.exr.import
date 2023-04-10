@@ -1,0 +1,26 @@
+[remap]
+
+importer="2d_array_texture"
+type="CompressedTexture2DArray"
+uid="uid://doanwolcjapmo"
+path="res://.godot/imported/worldlevel_test_new_modular_lightmap.exr-1ee42dfb21c63e9e0c4b3b0ab77968a7.ctexarray"
+metadata={
+"vram_texture": false
+}
+
+[deps]
+
+source_file="res://levels/worldlevel_test_new_modular_lightmap.exr"
+dest_files=["res://.godot/imported/worldlevel_test_new_modular_lightmap.exr-1ee42dfb21c63e9e0c4b3b0ab77968a7.ctexarray"]
+
+[params]
+
+compress/mode=3
+compress/high_quality=false
+compress/lossy_quality=0.7
+compress/hdr_compression=1
+compress/channel_pack=1
+mipmaps/generate=false
+mipmaps/limit=-1
+slices/horizontal=1
+slices/vertical=6

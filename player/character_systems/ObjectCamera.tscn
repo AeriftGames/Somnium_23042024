@@ -14,9 +14,9 @@ script = ExtResource("1_uvf2j")
 [node name="NodeLean" type="Node3D" parent="NodeRotY/GimbalLand/NodeRotX"]
 
 [node name="Camera" type="Camera3D" parent="NodeRotY/GimbalLand/NodeRotX/NodeLean"]
-cull_mask = 3
+cull_mask = 7
 fov = 65.0
-far = 300.0
+far = 1000.0
 
 [node name="HandGrabMarker" type="Marker3D" parent="NodeRotY/GimbalLand/NodeRotX/NodeLean/Camera"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.5)
