@@ -10,6 +10,7 @@ using System;
 public partial class door_rounded_test : Node3D
 {
     public enum EDoorActionType {Automatic,Buttons };
+    public enum EDoorAnimType { Instant, Animation};
 
 	MeshInstance3D meshDoorRight1;
 	MeshInstance3D meshDoorRight2;
@@ -17,14 +18,15 @@ public partial class door_rounded_test : Node3D
     AnimationPlayer animPlayer;
     AudioStreamPlayer3D audioPlayer3D;
 
-    bool open;
-    bool last_needOpenState;
-    bool animation_finish = true;
+    bool open;  // aktualni stav dveri
+    bool last_needOpenState;    // aktualni need stav dveri (fix animace)
+    bool animation_finish = true;   // je true pokud se aktualne neprehrava animace
 
     [Export] bool _open { get { return open;} set {open = value; SetInstantOpen(open); } }
     [Export] float speed = 1.0f;
 
     [Export] EDoorActionType doorActionType = EDoorActionType.Automatic;
+    [Export] EDoorAnimType doorAnimType = EDoorAnimType.Animation;
 
     [ExportGroupAttribute("For Automatic Settings")]
     [Export] bool a;
@@ -33,6 +35,7 @@ public partial class door_rounded_test : Node3D
     [Export] public Array<NodePath> buttonsPaths;
 
     [ExportGroupAttribute("Sounds")]
+    [Export] bool playSound = true;
     [Export] AudioStream openDoorAudioStream = null;
     [Export] AudioStream closeDoorAudioStream = null;
 
@@ -44,16 +47,10 @@ public partial class door_rounded_test : Node3D
         animPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
         audioPlayer3D = GetNode<AudioStreamPlayer3D>("AudioStreamPlayer3D");
 
-        last_needOpenState = open;
+        last_needOpenState = open;  // pro zjisteni posledni akce kterou pozadujeme (fix animace)
 
         SetInstantOpen(open);
     }
-
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
-	{
-		
-	}
 
     public void UpdateActualState()
     {
@@ -65,7 +62,33 @@ public partial class door_rounded_test : Node3D
         }
     }
 
-    public void SetInstantOpen(bool newOpen)
+    // Hlavni funkce pouzivani pro otevreni/zavreni dveri
+    public void OpenDoor(bool newOpen,EDoorAnimType newDoorAnimType,bool newPlaySound)
+    {
+        switch (newDoorAnimType)
+        {
+            case EDoorAnimType.Instant:
+                {
+                    SetInstantOpen(newOpen);
+
+                    if(newPlaySound)
+                        PlayAudioOpenDoor(newOpen);
+                    break;
+                }
+            case EDoorAnimType.Animation:
+                {
+                    SetAnimOpenDoor(newOpen);
+
+                    if (newPlaySound)
+                        PlayAudioOpenDoor(newOpen);
+                    break;
+                }
+            default:
+                break;
+        }
+    }
+
+    private void SetInstantOpen(bool newOpen)
     {
         if (meshDoorRight1 == null || meshDoorRight2 == null) return;
 
@@ -85,28 +108,27 @@ public partial class door_rounded_test : Node3D
         open = newOpen;
     }
 
-    public void SetAnimOpenDoor(bool newOpen)
+    private void SetAnimOpenDoor(bool newOpen)
     {
         if (meshDoorRight1 == null || meshDoorRight2 == null || animPlayer == null) return;
+        if (!animPlayer.HasAnimation("open_door") || !animPlayer.HasAnimation("close_door")) return;
 
         if (newOpen)
         {
             //open
-            animPlayer.Play("open_door",-1,speed);
-            PlayAudioOpenDoor(true);
+            animPlayer.Play("open_door",-1,speed); 
         }
         else
         {
             //close
             animPlayer.Play("close_door",-1,speed);
-            PlayAudioOpenDoor(false);
         }
 
         animation_finish = false;
         open = newOpen;
     }
 
-    public void PlayAudioOpenDoor(bool newOpen)
+    private void PlayAudioOpenDoor(bool newOpen)
     {
         if (audioPlayer3D == null) return;
 
@@ -132,6 +154,7 @@ public partial class door_rounded_test : Node3D
             {
                 GD.Print("door opened");
                 SetAnimOpenDoor(true);
+                OpenDoor(true,doorAnimType,playSound);
             }
         }
     }
@@ -145,7 +168,7 @@ public partial class door_rounded_test : Node3D
             if (animation_finish)
             {
                 GD.Print("door closed");
-                SetAnimOpenDoor(false);
+                OpenDoor(false, doorAnimType, playSound);
             }
         }
     }
@@ -159,6 +182,7 @@ public partial class door_rounded_test : Node3D
             UpdateActualState();
     }
 
+    // Hlavni funkce volana z venku pro ovladani dveri pomoci basic game button action
     public void UseActionByButton()
     {
         if(doorActionType == EDoorActionType.Buttons)
@@ -166,8 +190,7 @@ public partial class door_rounded_test : Node3D
             if(animation_finish)
             {
                 GD.Print("UseAction by button (open door)");
-                SetAnimOpenDoor(!open);
-                PlayAudioOpenDoor(!open);
+                OpenDoor(!open,doorAnimType,playSound);
             }
         }
     }
