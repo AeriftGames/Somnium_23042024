@@ -18,7 +18,10 @@ public partial class door_rounded_test : Node3D
     AudioStreamPlayer3D audioPlayer3D;
 
     bool open;
-	[Export] bool _open { get { return open;} set {open = value; SetInstantOpen(open); } }
+    bool last_needOpenState;
+    bool animation_finish = true;
+
+    [Export] bool _open { get { return open;} set {open = value; SetInstantOpen(open); } }
     [Export] float speed = 1.0f;
 
     [Export] EDoorActionType doorActionType = EDoorActionType.Automatic;
@@ -41,6 +44,8 @@ public partial class door_rounded_test : Node3D
         animPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
         audioPlayer3D = GetNode<AudioStreamPlayer3D>("AudioStreamPlayer3D");
 
+        last_needOpenState = open;
+
         SetInstantOpen(open);
     }
 
@@ -49,6 +54,16 @@ public partial class door_rounded_test : Node3D
 	{
 		
 	}
+
+    public void UpdateActualState()
+    {
+        if(last_needOpenState != open)
+        {
+            //update new state
+            SetAnimOpenDoor(last_needOpenState);
+            PlayAudioOpenDoor(last_needOpenState);
+        }
+    }
 
     public void SetInstantOpen(bool newOpen)
     {
@@ -87,6 +102,7 @@ public partial class door_rounded_test : Node3D
             PlayAudioOpenDoor(false);
         }
 
+        animation_finish = false;
         open = newOpen;
     }
 
@@ -110,8 +126,13 @@ public partial class door_rounded_test : Node3D
     {
         if (a.IsClass("CharacterBody3D") && doorActionType == EDoorActionType.Automatic)
         {
-            GD.Print("door opened");
-            SetAnimOpenDoor(true);
+            last_needOpenState = true;
+
+            if(animation_finish)
+            {
+                GD.Print("door opened");
+                SetAnimOpenDoor(true);
+            }
         }
     }
 
@@ -119,23 +140,35 @@ public partial class door_rounded_test : Node3D
     {
         if (a.IsClass("CharacterBody3D") && doorActionType == EDoorActionType.Automatic)
         {
-            GD.Print("door closed");
-            SetAnimOpenDoor(false);
+            last_needOpenState = false;
+
+            if (animation_finish)
+            {
+                GD.Print("door closed");
+                SetAnimOpenDoor(false);
+            }
         }
     }
 
     public void _on_animation_player_animation_finished(string animName)
     {
-        GD.Print(animName);
+        GD.Print(animName+ " animation finished");
+        animation_finish = true;
+
+        if(doorActionType == EDoorActionType.Automatic)
+            UpdateActualState();
     }
 
     public void UseActionByButton()
     {
         if(doorActionType == EDoorActionType.Buttons)
         {
-            GD.Print("UseAction by button (open door)");
-            SetAnimOpenDoor(!open);
-            PlayAudioOpenDoor(!open);
+            if(animation_finish)
+            {
+                GD.Print("UseAction by button (open door)");
+                SetAnimOpenDoor(!open);
+                PlayAudioOpenDoor(!open);
+            }
         }
     }
 }
