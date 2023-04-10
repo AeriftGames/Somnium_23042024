@@ -66,6 +66,8 @@ public partial class door_rounded_test : Node3D
             meshDoorRight1.Position = new Vector3(0, 0, 0);
             meshDoorRight2.Position = new Vector3(0, 0, 0);
         }
+
+        open = newOpen;
     }
 
     public void SetAnimOpenDoor(bool newOpen)
@@ -84,6 +86,8 @@ public partial class door_rounded_test : Node3D
             animPlayer.Play("close_door",-1,speed);
             PlayAudioOpenDoor(false);
         }
+
+        open = newOpen;
     }
 
     public void PlayAudioOpenDoor(bool newOpen)
@@ -123,5 +127,15 @@ public partial class door_rounded_test : Node3D
     public void _on_animation_player_animation_finished(string animName)
     {
         GD.Print(animName);
+    }
+
+    public void UseActionByButton()
+    {
+        if(doorActionType == EDoorActionType.Buttons)
+        {
+            GD.Print("UseAction by button (open door)");
+            SetAnimOpenDoor(!open);
+            PlayAudioOpenDoor(!open);
+        }
     }
 }

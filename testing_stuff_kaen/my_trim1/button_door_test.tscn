@@ -1,6 +1,6 @@
 [gd_scene load_steps=13 format=3 uid="uid://b0p7cpttoqb2h"]
 
-[ext_resource type="Script" path="res://testing_stuff_kaen/my_trim1/button_door_test.cs" id="1_nmv0f"]
+[ext_resource type="Script" path="res://testing_stuff_kaen/my_trim1/door_test/BasicButtonObject.cs" id="1_krluc"]
 [ext_resource type="Material" uid="uid://75g41m3tp8pj" path="res://testing_stuff_kaen/my_trim1/trim1_mat.tres" id="1_q3kfm"]
 [ext_resource type="Texture2D" uid="uid://d23icjgq3ocf6" path="res://textures/tile_tile_0046_01_s.jpg" id="3_58uxn"]
 [ext_resource type="Texture2D" uid="uid://cuovukpdoti1o" path="res://textures/grid_texture_normal.jpg" id="4_cfnuw"]
@@ -84,8 +84,7 @@ size = Vector3(0.106161, 0.162522, 0.119634)
 radius = 1.5034
 
 [node name="button_door_test" type="Node3D"]
-script = ExtResource("1_nmv0f")
-ObjectName = "door button"
+script = ExtResource("1_krluc")
 
 [node name="button_body" type="MeshInstance3D" parent="."]
 mesh = SubResource("ArrayMesh_u6qif")
