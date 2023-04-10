@@ -62,5 +62,12 @@ public partial class BasicButtonObject : Node3D
         {
             useObject.Call("UseActionByButton");
         }
+
+        UseButtonEffect();
+    }
+
+    public virtual void UseButtonEffect()
+    {
+        // zavola se pri pouziti
     }
 }

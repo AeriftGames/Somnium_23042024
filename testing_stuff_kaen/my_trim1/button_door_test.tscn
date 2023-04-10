@@ -1,6 +1,6 @@
-[gd_scene load_steps=13 format=3 uid="uid://b0p7cpttoqb2h"]
+[gd_scene load_steps=16 format=3 uid="uid://b0p7cpttoqb2h"]
 
-[ext_resource type="Script" path="res://testing_stuff_kaen/my_trim1/door_test/BasicButtonObject.cs" id="1_krluc"]
+[ext_resource type="Script" path="res://testing_stuff_kaen/my_trim1/button_door_test.cs" id="1_nmv0f"]
 [ext_resource type="Material" uid="uid://75g41m3tp8pj" path="res://testing_stuff_kaen/my_trim1/trim1_mat.tres" id="1_q3kfm"]
 [ext_resource type="Texture2D" uid="uid://d23icjgq3ocf6" path="res://textures/tile_tile_0046_01_s.jpg" id="3_58uxn"]
 [ext_resource type="Texture2D" uid="uid://cuovukpdoti1o" path="res://textures/grid_texture_normal.jpg" id="4_cfnuw"]
@@ -83,8 +83,86 @@ size = Vector3(0.106161, 0.162522, 0.119634)
 [sub_resource type="SphereShape3D" id="SphereShape3D_oh6ko"]
 radius = 1.5034
 
+[sub_resource type="Animation" id="Animation_lrr7k"]
+resource_name = "buttonPressed"
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("button:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.4, 1)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("button:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(0.492413, -0.25, 0, 0.25, 0, 0.479004, -0.25, 0, 0.25, 0, 0.492413, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.4, 1)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("button:position:z")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(0.00302356, -0.25, 0, 0.25, 0, 0.00302356, -0.25, 0, 0.25, 0, 0.00302356, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.4, 1)
+}
+
+[sub_resource type="Animation" id="Animation_i8jdm"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("button:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("button:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0.492413, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("button:position:z")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0.00302356, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_254ai"]
+_data = {
+"RESET": SubResource("Animation_i8jdm"),
+"buttonPressed": SubResource("Animation_lrr7k")
+}
+
 [node name="button_door_test" type="Node3D"]
-script = ExtResource("1_krluc")
+script = ExtResource("1_nmv0f")
 
 [node name="button_body" type="MeshInstance3D" parent="."]
 mesh = SubResource("ArrayMesh_u6qif")
@@ -117,6 +195,11 @@ metadata/_edit_lock_ = true
 [node name="CollisionShape3D" type="CollisionShape3D" parent="interactive_object/StaticBody3D/interactive_object_area3D"]
 shape = SubResource("SphereShape3D_oh6ko")
 metadata/_edit_lock_ = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_254ai")
+}
 
 [connection signal="body_entered" from="interactive_object/StaticBody3D/interactive_object_area3D" to="interactive_object" method="_on_interactive_object_area_3d_body_entered" flags=18]
 [connection signal="body_exited" from="interactive_object/StaticBody3D/interactive_object_area3D" to="interactive_object" method="_on_interactive_object_area_3d_body_exited" flags=18]
