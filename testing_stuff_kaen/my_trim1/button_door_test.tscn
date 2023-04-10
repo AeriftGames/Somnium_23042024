@@ -175,6 +175,7 @@ skeleton = NodePath("")
 
 [node name="interactive_object" type="Node3D" parent="." groups=["interactive_object"]]
 script = ExtResource("5_kv0o7")
+InteractVisibleBy = 1
 metadata/_edit_lock_ = true
 
 [node name="StaticBody3D" type="StaticBody3D" parent="interactive_object"]

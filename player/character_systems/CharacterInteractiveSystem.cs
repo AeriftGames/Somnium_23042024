@@ -43,6 +43,7 @@ public partial class CharacterInteractiveSystem : Godot.GodotObject
         basicHud.SetHandGrabState(false, false);
         basicHud.SetUseLabelText("");
         basicHud.SetUseVisible(false);
+        basicHud.SetHandClickVisible(false);
 
         // neexistuje zadny interactive objekt ? = opustit update
         if (actualInteractiveObject == null)
@@ -92,8 +93,29 @@ public partial class CharacterInteractiveSystem : Godot.GodotObject
         if (newInteractiveObject.InteractiveLevel == interactive_object.EInteractiveLevel.OnlyUse ||
             newInteractiveObject.InteractiveLevel == interactive_object.EInteractiveLevel.UseAndPhysic)
         {
-            basicHud.SetUseLabelText(newInteractiveObject.GetUseActionName());
-            basicHud.SetUseVisible(true);
+            switch (newInteractiveObject.InteractVisibleBy)
+            {
+                case interactive_object.EUseInteractVisibleBy.Text:
+                    {
+                        basicHud.SetUseLabelText(newInteractiveObject.GetUseActionName());
+                        basicHud.SetUseVisible(true);
+                        break;
+                    }
+                case interactive_object.EUseInteractVisibleBy.HandClick:
+                    {
+                        basicHud.SetHandClickVisible(true);
+                        break;
+                    }
+                case interactive_object.EUseInteractVisibleBy.HandClickAndText:
+                    {
+                        basicHud.SetUseLabelText(newInteractiveObject.GetUseActionName());
+                        basicHud.SetUseVisible(true);
+                        basicHud.SetHandClickVisible(true);
+                        break;
+                    }
+                default:
+                    break;
+            }
 
             // Pokud je momentalne od hrace input zadost pro USE, pouzijeme vnitrni funkci objektu pro USE
             if (newUseNow)
