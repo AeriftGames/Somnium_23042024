@@ -116,6 +116,7 @@ public partial class PlayerStart : Node3D
 			GameMaster.GM.GetDebugHud().ApplyAllMainControls();
 
 			GameMaster.GM.EnableBlackScreen(false);
+
 			//delete
 			spawn_timer.Stop();
 			spawn_timer.QueueFree();

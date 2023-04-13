@@ -148,8 +148,15 @@ public partial class ObjectCamera : Node3D
 
 		base._PhysicsProcess(delta);
 
-		if (ownerCharacter.IsInputEnable())
-			UpdateCameraLook(_MouseMotion, delta);
+		/* Nacte hodnoty (axis right) gamepadu */
+		Vector2 JoyLook = new Vector2(Input.GetActionStrength("LookJoyRight") - Input.GetActionStrength("LookJoyLeft"),
+			-(Input.GetActionStrength("LookJoyUp") - Input.GetActionStrength("LookJoyDown")));
+
+		/* Pokud JoyLook ma nejakou hodnotu (pohnuto packou na gamepadu) = gamepad jinak mys */
+		if(JoyLook.Length() > 0 && ownerCharacter.IsInputEnable())
+			UpdateCameraLook(JoyLook*15.0f, delta);
+		else if (ownerCharacter.IsInputEnable())
+            UpdateCameraLook(_MouseMotion, delta);
 
 		// new lerp object camera pos to player head
 		LerpObject_ObjectCameraPos.SetAllParam(GlobalPosition,
@@ -168,6 +175,18 @@ public partial class ObjectCamera : Node3D
 			InputEventMouseMotion mouseEventMotion = @event as InputEventMouseMotion;
 			_MouseMotion = mouseEventMotion.Relative;
 		}
+		/*
+		if(@event is InputEventJoypadMotion && ownerCharacter.IsInputEnable() && isCameraLookInputEnable)
+		{
+			InputEventJoypadMotion a = @event as InputEventJoypadMotion;
+			//_MouseMotion.X = a.GetActionStrength("right_horizontal");
+			//_MouseMotion.Y = a.GetActionStrength("right_vertical");
+			if (a.Axis == JoyAxis.RightX)
+				_MouseMotion.X = a.AxisValue;
+
+			GD.Print("test");
+		
+		}*/
 	}
 
 	// Update CameraLook from mouse input and calculating rotation nodeRotY and nodeRotX

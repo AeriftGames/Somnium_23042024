@@ -274,7 +274,7 @@ public partial class CLevelLoader : Godot.GodotObject
         await Task.Delay(10);
         newLight.LightBakeMode = newBakeMode;
 
-        GD.Print(newLight.Name + "set bake mode: " + newBakeMode.ToString());
+        GD.Print(newLight.Name + "set bake mode: " + newBakeMode.ToString() +" path:"+ newLight.GetPath());
 
         // vypneme cernou obrazovku
         GameMaster.GM.EnableBlackScreen(false);
