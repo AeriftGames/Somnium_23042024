@@ -25,7 +25,10 @@ public partial class InGameMenu : Control
         // jine pri zmene
         if (active)
 		{
-			
+			// vyresetuje vyklon hrace
+			interChar.GetObjectCamera().SetActualLean(ObjectCamera.ELeanType.Center);
+			// vyresetuje zoom
+			interChar.SetCameraZoom(false);
 		}
 		else
 		{

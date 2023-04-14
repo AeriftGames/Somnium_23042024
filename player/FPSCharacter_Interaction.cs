@@ -138,7 +138,7 @@ public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
 		// Camera Zoom
 		if (IsInputEnable() && Input.IsActionPressed("CameraZoom"))
 			SetCameraZoom(true);
-		else if(Input.IsActionJustReleased("CameraZoom") || GetInGameMenu().GetActive())
+		else if(Input.IsActionJustReleased("CameraZoom"))
 			SetCameraZoom(false);
 
 		// Camera Zoom To Object
