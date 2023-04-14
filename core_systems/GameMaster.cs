@@ -104,18 +104,8 @@ public partial class GameMaster : Node
 		FPSCharacter_Interaction interactCharacter = (FPSCharacter_Interaction)GetFPSCharacter();
 		if (interactCharacter == null) return;
 
+		// toggle stav InGameMenu
 		interactCharacter.GetInGameMenu().SetActive(!interactCharacter.GetInGameMenu().GetActive());
-
-		if(interactCharacter.GetInGameMenu().GetActive())
-		{
-			interactCharacter.SetInputEnable(false);
-			interactCharacter.SetMouseVisible(true);
-		}
-		else
-		{
-            interactCharacter.SetInputEnable(true);
-            interactCharacter.SetMouseVisible(false);
-        }
 	}
 
 	async Task TaskQuitGame()

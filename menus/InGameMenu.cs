@@ -25,14 +25,19 @@ public partial class InGameMenu : Control
         // jine pri zmene
         if (active)
 		{
-			// vyresetuje vyklon hrace
+			// vyresetuje lean a zoom hrace
 			interChar.GetObjectCamera().SetActualLean(ObjectCamera.ELeanType.Center);
-			// vyresetuje zoom
 			interChar.SetCameraZoom(false);
-		}
+
+			// zakaze char_inputs a zobrazi mys
+            interChar.SetInputEnable(false);
+            interChar.SetMouseVisible(true);
+        }
 		else
 		{
-
+			// povoli char_inputs zneviditelni mys
+            interChar.SetInputEnable(true);
+            //interChar.SetMouseVisible(false);
         }
 	}
 

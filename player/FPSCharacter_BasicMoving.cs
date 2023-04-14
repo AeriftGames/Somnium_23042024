@@ -412,7 +412,6 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
 			Input.MouseMode = Input.MouseModeEnum.Hidden;
 	
 		SetMoveInputEnable(_isInputEnable);
-		//objectCamera.IsCameraLookInputEnable(_isInputEnable);
 	}
 
 	public void SetMoveInputEnable(bool newEnable)
