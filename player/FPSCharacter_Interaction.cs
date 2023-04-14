@@ -323,6 +323,11 @@ public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
 		return basicHud;
 	}
 
+	public InGameMenu GetInGameMenu()
+	{
+		return GetAllHudsControlNode().GetNode<InGameMenu>("InGameMenu");
+	}
+
 	public override void FreeAll()
 	{
 		base.FreeAll();

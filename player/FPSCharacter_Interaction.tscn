@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://0g1u2jvnfbpy"]
+[gd_scene load_steps=12 format=3 uid="uid://0g1u2jvnfbpy"]
 
 [ext_resource type="PackedScene" uid="uid://2b8vuef2k4is" path="res://player/FPSCharacter_WalkingEffects.tscn" id="1_0ipjt"]
 [ext_resource type="Script" path="res://player/FPSCharacter_Interaction.cs" id="2_fmih3"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://ci4to6fyojbqm" path="res://textures/wave-hand-svgrepo-com.png" id="7_bqbud"]
 [ext_resource type="PackedScene" uid="uid://bctrg21138lx" path="res://ui/report_bug.tscn" id="7_oxteu"]
 [ext_resource type="PackedScene" uid="uid://babdw2pj0huby" path="res://core_systems/debug_hud_system/debug_hud.tscn" id="10_iakih"]
+[ext_resource type="PackedScene" uid="uid://wlh0gi2r057f" path="res://menus/InGameMenu.tscn" id="11_8lqy1"]
 
 [node name="FPSCharacter_Interaction" instance=ExtResource("1_0ipjt")]
 wall_min_slide_angle = 0.0
@@ -172,3 +173,6 @@ visible = false
 
 [node name="AllHuds" parent="." index="13"]
 metadata/_edit_lock_ = true
+
+[node name="InGameMenu" parent="AllHuds" index="0" instance=ExtResource("11_8lqy1")]
+layout_mode = 1
