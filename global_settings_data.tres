@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=2 format=3]
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://74m3wtsn3wye"]
 
 [ext_resource type="Script" path="res://core_systems/global_settings_data.cs" id="1_8rhwy"]
 
@@ -32,3 +32,8 @@ ShowCustomLabel7 = false
 ShowCustomLabel8 = false
 ShowCustomLabel9 = false
 EnableWorldLevelOcclusionCull = true
+LookVerticalReverse = false
+LookMouseSmooth = 15.0
+LookMouseSensitivity = 0.15
+LookGamepadSmooth = 15.0
+LookGamepadSensitivity = 0.15

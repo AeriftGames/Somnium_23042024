@@ -154,9 +154,9 @@ public partial class ObjectCamera : Node3D
 
 		/* Pokud JoyLook ma nejakou hodnotu (pohnuto packou na gamepadu) = gamepad jinak mys */
 		if(JoyLook.Length() > 0 && ownerCharacter.IsInputEnable())
-			UpdateCameraLook(JoyLook*15.0f, delta);
+			UpdateCameraLookGamepad(JoyLook*15.0f, delta);
 		else if (ownerCharacter.IsInputEnable())
-            UpdateCameraLook(_MouseMotion, delta);
+            UpdateCameraLookMouse(_MouseMotion, delta);
 
 		// new lerp object camera pos to player head
 		LerpObject_ObjectCameraPos.SetAllParam(GlobalPosition,
@@ -178,7 +178,7 @@ public partial class ObjectCamera : Node3D
 	}
 
 	// Update CameraLook from mouse input and calculating rotation nodeRotY and nodeRotX
-	public void UpdateCameraLook(Vector2 newMouseMotion, double delta)
+	public void UpdateCameraLookMouse(Vector2 newMouseMotion, double delta)
 	{
 		// Lerping mouse motion for smooth look (x,y)
 		_LookVelocity.X = Mathf.Lerp(_LookVelocity.X, newMouseMotion.X * ownerCharacter.MouseSensitivity,
@@ -203,8 +203,34 @@ public partial class ObjectCamera : Node3D
 		_MouseMotion = Vector2.Zero;
 	}
 
-	// Povoli ci zakaze lerp tohoto objektu k characteru hlavy
-	public void SetLerpToCharacterEnable(bool newEnable)
+    // Update CameraLook from gamepad input and calculating rotation nodeRotY and nodeRotX
+    public void UpdateCameraLookGamepad(Vector2 newLookGamepadMotion, double delta)
+    {
+        // Lerping mouse motion for smooth look (x,y)
+        _LookVelocity.X = Mathf.Lerp(_LookVelocity.X, newLookGamepadMotion.X * ownerCharacter.GamepadSensitvity,
+            (float)delta * ownerCharacter.GamepadSmooth);
+
+        _LookVelocity.Y = Mathf.Lerp(_LookVelocity.Y, newLookGamepadMotion.Y * ownerCharacter.GamepadSensitvity,
+            (float)delta * ownerCharacter.GamepadSmooth);
+
+        // Set new rotates
+        NodeRotY.RotateY(-Mathf.DegToRad(_LookVelocity.X));
+        NodeRotX.RotateX(-Mathf.DegToRad(_LookVelocity.Y));
+
+        // Set clamp camera vertical look
+        Vector3 actualRotX = NodeRotX.Rotation;
+        actualRotX.X = Mathf.Clamp(actualRotX.X,
+            Mathf.DegToRad(ownerCharacter.CameraVerticalLookMin),
+            Mathf.DegToRad(ownerCharacter.CameraVerticalLookMax));
+
+        NodeRotX.Rotation = actualRotX;
+
+        // Reset MouseMotion
+        _MouseMotion = Vector2.Zero;
+    }
+
+    // Povoli ci zakaze lerp tohoto objektu k characteru hlavy
+    public void SetLerpToCharacterEnable(bool newEnable)
 	{
 		LerpObject_ObjectCameraPos.EnableUpdate(newEnable);
 	}

@@ -50,6 +50,8 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
 	[ExportGroupAttribute("Looking Settings")]
 	[Export] public float MouseSensitivity = 0.15f;
 	[Export] public float MouseSmooth = 15f;
+	[Export] public float GamepadSensitvity = 0.15f;
+	[Export] public float GamepadSmooth = 15f;
 	[Export] public float CameraVerticalLookMin = -80f;
 	[Export] public float CameraVerticalLookMax = 80f;
 	[Export] public float LerpSpeedPosObjectCamera = 15.0f;
@@ -103,7 +105,9 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
 		objectCamera.SetCharacterOwner(this);
 
 		allHuds = GetNode<Control>("AllHuds");
-	}
+
+        GameMaster.GM.GetSettings().LoadAndApply_AllInputsSettings();
+    }
 
 	// Update Physical updated process
 	public override void _PhysicsProcess(double delta)

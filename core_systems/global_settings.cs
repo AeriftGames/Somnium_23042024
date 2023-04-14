@@ -16,7 +16,6 @@ public partial class global_settings : Godot.GodotObject
 
         // Audio volumes init
         LoadAndApply_AllAudioSettings();
-        //SaveActual_AllAudioSettings();
 	}
 
 	// tady ziskavame pristup k hodnotam ulozenych v global_settings_data.tres
@@ -97,6 +96,21 @@ public partial class global_settings : Godot.GodotObject
         Apply_MusicVolume(GetActual_MusicVolume(), false, true);
 
         gm.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "all audio data is saved");
+    }
+
+    // Spoustime zde v global_settings pri konstrukci (init)
+    public void LoadAndApply_AllInputsSettings()
+    {
+        // nacteme veskera data ulozena ze souboru
+        global_settings_data data = GetData();
+
+        // pouze aplikujeme jednotliva nastaveni = neukladame do souboru
+        Apply_LookMouseSmooth(data.LookMouseSmooth, true, false);
+        Apply_LookMouseSensitivity(data.LookMouseSensitivity, true, false);
+        Apply_LookGamepadSmooth(data.LookGamepadSmooth, true, false);
+        Apply_LookGamepadSensitivity(data.LookGamepadSensitivity, true, false);
+
+        gm.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "all inputs data is apply");
     }
 
     /**************************************************************************/
@@ -702,6 +716,105 @@ public partial class global_settings : Godot.GodotObject
         GetData().Save();
     }
 
+    /**************************************************************************/
+    // INPUTS
+
+    // settings Mouse Smooth
+    public void Apply_LookMouseSmooth(float newValue, bool newApplyNow = false, bool newSaveNow = false)
+    {
+        // Apply now
+        if (newApplyNow)
+        {
+            if (GameMaster.GM.GetFPSCharacter() == null) return;
+                GameMaster.GM.GetFPSCharacter().MouseSmooth = newValue;
+        }
+
+        // Save nowj
+        if (newSaveNow)
+        {
+            GetData().LookMouseSmooth = newValue;
+            GetData().Save();
+        }
+    }
+
+    public float GetActual_LookMouseSmooth()
+    {
+        if (GameMaster.GM.GetFPSCharacter() == null) return 1f;
+        return GameMaster.GM.GetFPSCharacter().MouseSmooth;
+    }
+
+    // settings Mouse Sensitivity
+    public void Apply_LookMouseSensitivity(float newValue, bool newApplyNow = false, bool newSaveNow = false)
+    {
+        // Apply now
+        if (newApplyNow)
+        {
+            if (GameMaster.GM.GetFPSCharacter() == null) return;
+            GameMaster.GM.GetFPSCharacter().MouseSensitivity = newValue;
+        }
+
+        // Save nowj
+        if (newSaveNow)
+        {
+            GetData().LookMouseSensitivity = newValue;
+            GetData().Save();
+        }
+    }
+
+    public float GetActual_LookMouseSenstivity()
+    {
+        if (GameMaster.GM.GetFPSCharacter() == null) return 1f;
+        return GameMaster.GM.GetFPSCharacter().MouseSensitivity;
+    }
+
+    // settings Gamepad Smooth
+    public void Apply_LookGamepadSmooth(float newValue, bool newApplyNow = false, bool newSaveNow = false)
+    {
+        // Apply now
+        if (newApplyNow)
+        {
+            if (GameMaster.GM.GetFPSCharacter() == null) return;
+            GameMaster.GM.GetFPSCharacter().GamepadSmooth = newValue;
+        }
+
+        // Save nowj
+        if (newSaveNow)
+        {
+            GetData().LookGamepadSmooth = newValue;
+            GetData().Save();
+        }
+    }
+
+    public float GetActual_LookGamepadSmooth()
+    {
+        if (GameMaster.GM.GetFPSCharacter() == null) return 1f;
+        return GameMaster.GM.GetFPSCharacter().GamepadSmooth;
+    }
+
+    // settings Gamepad Sensitivity
+    public void Apply_LookGamepadSensitivity(float newValue, bool newApplyNow = false, bool newSaveNow = false)
+    {
+        // Apply now
+        if (newApplyNow)
+        {
+            if (GameMaster.GM.GetFPSCharacter() == null) return;
+            GameMaster.GM.GetFPSCharacter().GamepadSensitvity = newValue;
+        }
+
+        // Save nowj
+        if (newSaveNow)
+        {
+            GetData().LookGamepadSensitivity = newValue;
+            GetData().Save();
+        }
+    }
+
+    public float GetActual_LookGamepadSenstivity()
+    {
+        if (GameMaster.GM.GetFPSCharacter() == null) return 1f;
+        return GameMaster.GM.GetFPSCharacter().GamepadSensitvity;
+    }
+    
     /**************************************************************************/
     // OTHERS
 
