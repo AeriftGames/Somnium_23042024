@@ -96,6 +96,7 @@ public partial class DebugHud : Control
 			// updatuje vsechny controls prvky
 			ApplyAllVideoControls();
 			ApplyAllAudioControls();
+			ApplyAllInputsControls();
 		}
 		else
 		{
@@ -420,7 +421,76 @@ public partial class DebugHud : Control
 		GameMaster.GM.GetSettings().SaveActual_AllAudioSettings();
 	}
 
-	public void ApplyAllMainControls()
+	public void _on_mouse_smooth_h_slider_value_changed(float newValue)
+	{
+        // only apply
+        GameMaster.GM.GetSettings().Apply_LookMouseSmooth(newValue,true,false);
+
+        // update label
+        Label label = GetNode<Label>("OptionsPanel/TabContainer/inputs/input_HBoxContainer/mouseSmooth_Label");
+		label.Text = newValue.ToString();
+    }
+
+	public void _on_mouse_sensitivity_h_slider_value_changed(float newValue)
+	{
+        // only apply
+        GameMaster.GM.GetSettings().Apply_LookMouseSensitivity(newValue,true,false);
+
+        // update label
+        Label label = GetNode<Label>("OptionsPanel/TabContainer/inputs/input_HBoxContainer2/mouseSensitivity_Label");
+        label.Text = newValue.ToString();
+    }
+
+	public void _on_gamepad_smooth_h_slider_value_changed(float newValue)
+	{
+        // only apply
+        GameMaster.GM.GetSettings().Apply_LookGamepadSmooth(newValue, true, false);
+
+        // update label
+        Label label = GetNode<Label>("OptionsPanel/TabContainer/inputs/input_HBoxContainer3/gamepadSmooth_Label");
+        label.Text = newValue.ToString();
+    }
+
+	public void _on_gamepad_sensitivity_h_slider_value_changed(float newValue)
+	{
+        // only apply
+        GameMaster.GM.GetSettings().Apply_LookGamepadSensitivity(newValue, true, false);
+
+        // update label
+        Label label = GetNode<Label>("OptionsPanel/TabContainer/inputs/input_HBoxContainer4/gamepadSensitivity_Label");
+        label.Text = newValue.ToString();
+    }
+
+	public void ApplyAllInputsControls()
+	{
+		HSlider msmooth = GetNode<HSlider>("OptionsPanel/TabContainer/inputs/input_HBoxContainer/mouseSmooth_HSlider");
+		msmooth.Value = GameMaster.GM.GetSettings().GetActual_LookMouseSmooth();
+		Label msmooth_l = GetNode<Label>("OptionsPanel/TabContainer/inputs/input_HBoxContainer/mouseSmooth_Label");
+		msmooth_l.Text = msmooth.Value.ToString();
+
+        HSlider msens = GetNode<HSlider>("OptionsPanel/TabContainer/inputs/input_HBoxContainer2/mouseSensitivity_HSlider");
+        msens.Value = GameMaster.GM.GetSettings().GetActual_LookMouseSensitivity();
+        Label msens_l = GetNode<Label>("OptionsPanel/TabContainer/inputs/input_HBoxContainer2/mouseSensitivity_Label");
+        msens_l.Text = msens.Value.ToString();
+
+        HSlider gsens = GetNode<HSlider>("OptionsPanel/TabContainer/inputs/input_HBoxContainer4/gamepadSensitivity_HSlider");
+        gsens.Value = GameMaster.GM.GetSettings().GetActual_LookGamepadSensitivity();
+        Label gsens_l = GetNode<Label>("OptionsPanel/TabContainer/inputs/input_HBoxContainer4/gamepadSensitivity_Label");
+        gsens_l.Text = gsens.Value.ToString();
+
+        HSlider gsmooth = GetNode<HSlider>("OptionsPanel/TabContainer/inputs/input_HBoxContainer3/gamepadSmooth_HSlider");
+        gsmooth.Value = GameMaster.GM.GetSettings().GetActual_LookGamepadSmooth();
+        Label gsmooth_l = GetNode<Label>("OptionsPanel/TabContainer/inputs/input_HBoxContainer3/gamepadSmooth_Label");
+        gsmooth_l.Text = gsmooth.Value.ToString();
+    }
+
+	public void _on_save_inputs_as_default_button_pressed()
+    {
+		GameMaster.GM.GetSettings().SaveActual_AllInputsSettings();
+	}
+
+
+    public void ApplyAllMainControls()
 	{
 		// ziskame ulozena data
 		global_settings_data data = GameMaster.GM.GetSettings().GetData();

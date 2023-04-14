@@ -486,6 +486,113 @@ layout_mode = 2
 size_flags_horizontal = 4
 text = "Save audio as default"
 
+[node name="inputs" type="VBoxContainer" parent="OptionsPanel/TabContainer"]
+visible = false
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="OptionsPanel/TabContainer/inputs"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 33)
+layout_mode = 2
+
+[node name="input_HBoxContainer" type="HBoxContainer" parent="OptionsPanel/TabContainer/inputs"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="OptionsPanel/TabContainer/inputs/input_HBoxContainer"]
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+text = "mouse smooth "
+horizontal_alignment = 1
+
+[node name="mouseSmooth_HSlider" type="HSlider" parent="OptionsPanel/TabContainer/inputs/input_HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+max_value = 50.0
+
+[node name="mouseSmooth_Label" type="Label" parent="OptionsPanel/TabContainer/inputs/input_HBoxContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+text = "0"
+horizontal_alignment = 1
+
+[node name="input_HBoxContainer2" type="HBoxContainer" parent="OptionsPanel/TabContainer/inputs"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="OptionsPanel/TabContainer/inputs/input_HBoxContainer2"]
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+text = "mouse sensitivity"
+horizontal_alignment = 1
+
+[node name="mouseSensitivity_HSlider" type="HSlider" parent="OptionsPanel/TabContainer/inputs/input_HBoxContainer2"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.01
+
+[node name="mouseSensitivity_Label" type="Label" parent="OptionsPanel/TabContainer/inputs/input_HBoxContainer2"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+text = "0"
+horizontal_alignment = 1
+
+[node name="input_HBoxContainer3" type="HBoxContainer" parent="OptionsPanel/TabContainer/inputs"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="OptionsPanel/TabContainer/inputs/input_HBoxContainer3"]
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+text = "gamepad smooth     "
+horizontal_alignment = 1
+
+[node name="gamepadSmooth_HSlider" type="HSlider" parent="OptionsPanel/TabContainer/inputs/input_HBoxContainer3"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+max_value = 50.0
+
+[node name="gamepadSmooth_Label" type="Label" parent="OptionsPanel/TabContainer/inputs/input_HBoxContainer3"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+text = "0"
+horizontal_alignment = 1
+
+[node name="input_HBoxContainer4" type="HBoxContainer" parent="OptionsPanel/TabContainer/inputs"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="OptionsPanel/TabContainer/inputs/input_HBoxContainer4"]
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+text = "gamepad sensitivity"
+horizontal_alignment = 1
+
+[node name="gamepadSensitivity_HSlider" type="HSlider" parent="OptionsPanel/TabContainer/inputs/input_HBoxContainer4"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.01
+
+[node name="gamepadSensitivity_Label" type="Label" parent="OptionsPanel/TabContainer/inputs/input_HBoxContainer4"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+text = "0"
+horizontal_alignment = 1
+
+[node name="SaveInputsAsDefaultButton" type="Button" parent="OptionsPanel/TabContainer/inputs"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Save inputs as default"
+
 [node name="Label" type="Label" parent="OptionsPanel"]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 0
@@ -585,4 +692,9 @@ text = "video memory used:"
 [connection signal="value_changed" from="OptionsPanel/TabContainer/audio/audio_HBoxContainer2/sfxVolume_HSlider" to="." method="_on_sfx_volume_h_slider_value_changed"]
 [connection signal="value_changed" from="OptionsPanel/TabContainer/audio/audio_HBoxContainer3/musicVolume_HSlider" to="." method="_on_music_volume_h_slider_value_changed"]
 [connection signal="pressed" from="OptionsPanel/TabContainer/audio/SaveAudioAsDefaultButton" to="." method="_on_save_audio_as_default_button_pressed"]
+[connection signal="value_changed" from="OptionsPanel/TabContainer/inputs/input_HBoxContainer/mouseSmooth_HSlider" to="." method="_on_mouse_smooth_h_slider_value_changed"]
+[connection signal="value_changed" from="OptionsPanel/TabContainer/inputs/input_HBoxContainer2/mouseSensitivity_HSlider" to="." method="_on_mouse_sensitivity_h_slider_value_changed"]
+[connection signal="value_changed" from="OptionsPanel/TabContainer/inputs/input_HBoxContainer3/gamepadSmooth_HSlider" to="." method="_on_gamepad_smooth_h_slider_value_changed"]
+[connection signal="value_changed" from="OptionsPanel/TabContainer/inputs/input_HBoxContainer4/gamepadSensitivity_HSlider" to="." method="_on_gamepad_sensitivity_h_slider_value_changed"]
+[connection signal="pressed" from="OptionsPanel/TabContainer/inputs/SaveInputsAsDefaultButton" to="." method="_on_save_inputs_as_default_button_pressed"]
 [connection signal="pressed" from="OptionsPanel/QuitGameButton" to="." method="_on_quit_game_button_pressed"]
