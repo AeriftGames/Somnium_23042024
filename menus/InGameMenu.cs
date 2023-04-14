@@ -1,16 +1,47 @@
 using Godot;
+using Godot.Collections;
 using System;
 
 public partial class InGameMenu : Control
 {
+	VBoxContainer InGameMenuButtonsContainer = null;
+
+	private int focusButtonID = 0;
 	private bool active = false;
 
 	public override void _Ready()
 	{
-		SetActive(false);
+		InGameMenuButtonsContainer = GetNode<VBoxContainer>("Control/VBoxContainer");
+
+        SetActive(false);
 	}
 
-	public void SetActive(bool newActive)
+    public override void _Process(double delta)
+    {
+        
+    }
+
+    public override void _UnhandledInput(InputEvent @event)
+    {
+        if (@event is InputEventKey eventKey)
+        {
+            // Navigace v menu smerem nahoru
+            if (eventKey.Pressed && eventKey.Keycode == Key.Up)
+            {
+				GD.Print("A");
+				SetActiveFocusButtonID(0);
+            }
+
+            // Navigace v menu smerem dolu
+            if (eventKey.Pressed && eventKey.Keycode == Key.Down)
+			{
+                GD.Print("B");
+                SetActiveFocusButtonID(1);
+            }
+        }
+    }
+
+    public void SetActive(bool newActive)
 	{
 		// vnitrni zmena stavu
 		active = newActive;
@@ -32,6 +63,8 @@ public partial class InGameMenu : Control
 			// zakaze char_inputs a zobrazi mys
             interChar.SetInputEnable(false);
             interChar.SetMouseVisible(true);
+
+			SetActiveFocusButtonID(0);
         }
 		else
 		{
@@ -51,5 +84,28 @@ public partial class InGameMenu : Control
     public void _on_button_quit_game_pressed()
 	{
 		GameMaster.GM.QuitGame();
+	}
+
+	public void SetActiveFocusButtonID(int newButtonID)
+	{
+		focusButtonID = newButtonID;
+
+		foreach (var item in InGameMenuButtonsContainer.GetChildren())
+		{
+			BaseFocusedMenuButton a = (BaseFocusedMenuButton)item;
+			if (a != null)
+			{
+				if(a.ButtonFocusID == newButtonID)
+				{
+                    GD.Print("FOCUS");
+                    a.GrabFocus();
+				}
+			}
+		}
+	}
+
+	public int GetFocusButtonID()
+	{
+		return focusButtonID;
 	}
 }

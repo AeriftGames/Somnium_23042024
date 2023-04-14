@@ -1,8 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://wlh0gi2r057f"]
 
 [ext_resource type="Script" path="res://menus/InGameMenu.cs" id="1_k4aci"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wxccj"]
+[ext_resource type="PackedScene" uid="uid://d1xpbdilt7rk1" path="res://menus/BaseFocusedMenuButton.tscn" id="2_10o54"]
 
 [node name="InGameMenu" type="Control"]
 layout_mode = 3
@@ -52,15 +51,14 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 2
 
-[node name="Button_BackToGame" type="Button" parent="Control/VBoxContainer"]
+[node name="Button_BackToGame" parent="Control/VBoxContainer" instance=ExtResource("2_10o54")]
 layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_wxccj")
-text = "continue game"
+ButtonFocusID = 0
 
-[node name="Button_QuitGame" type="Button" parent="Control/VBoxContainer"]
+[node name="Button_QuitGame" parent="Control/VBoxContainer" instance=ExtResource("2_10o54")]
 layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_wxccj")
 text = "quit game"
+ButtonFocusID = 1
 
 [node name="Label" type="Label" parent="Control"]
 layout_mode = 1
