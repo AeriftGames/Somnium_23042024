@@ -5,7 +5,6 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wxccj"]
 
 [node name="InGameMenu" type="Control"]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -58,7 +57,7 @@ layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_wxccj")
 text = "continue game"
 
-[node name="Button_BackToGame3" type="Button" parent="Control/VBoxContainer"]
+[node name="Button_QuitGame" type="Button" parent="Control/VBoxContainer"]
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_wxccj")
 text = "quit game"
@@ -74,3 +73,6 @@ offset_bottom = 26.0
 grow_horizontal = 2
 text = "In Game Menu"
 horizontal_alignment = 1
+
+[connection signal="pressed" from="Control/VBoxContainer/Button_BackToGame" to="." method="_on_button_back_to_game_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer/Button_QuitGame" to="." method="_on_button_quit_game_pressed"]
