@@ -23,22 +23,24 @@ public partial class InGameMenu : Control
 
     public override void _UnhandledInput(InputEvent @event)
     {
+		/*
         if (@event is InputEventKey eventKey)
         {
             // Navigace v menu smerem nahoru
             if (eventKey.Pressed && eventKey.Keycode == Key.Up)
             {
 				GD.Print("A");
-				SetActiveFocusButtonID(0);
+				//SetActiveFocusButtonID(0);
             }
 
             // Navigace v menu smerem dolu
             if (eventKey.Pressed && eventKey.Keycode == Key.Down)
 			{
                 GD.Print("B");
-                SetActiveFocusButtonID(1);
+                //SetActiveFocusButtonID(1);
             }
         }
+		*/
     }
 
     public void SetActive(bool newActive)
