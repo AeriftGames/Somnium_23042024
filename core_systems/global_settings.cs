@@ -113,6 +113,22 @@ public partial class global_settings : Godot.GodotObject
         gm.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "all inputs data is apply");
     }
 
+    // Toto volani projede veskera aktualni aplikovana inputs nastaveni a
+    // ulozi je do souboru global_settings_data.tres
+    public void SaveActual_AllInputsSettings()
+    {
+        // nacteme veskera data ulozena ze souboru
+        global_settings_data data = GetData();
+
+        // pouze aplikujeme jednotliva nastaveni = neukladame do souboru
+        Apply_LookMouseSmooth(GetActual_LookMouseSmooth(), false, true);
+        Apply_LookMouseSensitivity(GetActual_LookMouseSensitivity(), false, true);
+        Apply_LookGamepadSmooth(GetActual_LookGamepadSmooth(), false, true);
+        Apply_LookGamepadSensitivity(GetActual_LookGamepadSensitivity(), false, true);
+
+        gm.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "all inputs data is saved");
+    }
+
     /**************************************************************************/
     // GRAPHICS
 
@@ -761,7 +777,7 @@ public partial class global_settings : Godot.GodotObject
         }
     }
 
-    public float GetActual_LookMouseSenstivity()
+    public float GetActual_LookMouseSensitivity()
     {
         if (GameMaster.GM.GetFPSCharacter() == null) return 1f;
         return GameMaster.GM.GetFPSCharacter().MouseSensitivity;
@@ -809,7 +825,7 @@ public partial class global_settings : Godot.GodotObject
         }
     }
 
-    public float GetActual_LookGamepadSenstivity()
+    public float GetActual_LookGamepadSensitivity()
     {
         if (GameMaster.GM.GetFPSCharacter() == null) return 1f;
         return GameMaster.GM.GetFPSCharacter().GamepadSensitvity;
