@@ -498,6 +498,12 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
 		return objectCamera.Camera;
 	}
 
+	// Return ObjectCamera
+	public ObjectCamera GetObjectCamera()
+	{
+		return objectCamera;
+	}
+
 	public Control GetAllHudsControlNode()
 	{
 		return allHuds;

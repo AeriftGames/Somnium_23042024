@@ -111,6 +111,7 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
 
     public void UpdateInputsProcess(double delta)
     {
+        if (!IsInputEnable()) return;
         // hrac pozaduje lean ?
 
         if (Input.IsActionPressed("leanLeft") && !Input.IsActionPressed("leanRight"))

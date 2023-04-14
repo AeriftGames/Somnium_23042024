@@ -132,13 +132,13 @@ public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
 
 		// ---------------------------------------------------------------------------------
 		// Toggle Simple Flashlight
-		if (Input.IsActionJustPressed("ToggleFlashlight"))
+		if (IsInputEnable() && Input.IsActionJustPressed("ToggleFlashlight"))
 			ToggleSimpleFlashlight();
 
 		// Camera Zoom
-		if (Input.IsActionPressed("CameraZoom"))
+		if (IsInputEnable() && Input.IsActionPressed("CameraZoom"))
 			SetCameraZoom(true);
-		else if(Input.IsActionJustReleased("CameraZoom"))
+		else if(Input.IsActionJustReleased("CameraZoom") || GetInGameMenu().GetActive())
 			SetCameraZoom(false);
 
 		// Camera Zoom To Object

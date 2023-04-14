@@ -175,18 +175,6 @@ public partial class ObjectCamera : Node3D
 			InputEventMouseMotion mouseEventMotion = @event as InputEventMouseMotion;
 			_MouseMotion = mouseEventMotion.Relative;
 		}
-		/*
-		if(@event is InputEventJoypadMotion && ownerCharacter.IsInputEnable() && isCameraLookInputEnable)
-		{
-			InputEventJoypadMotion a = @event as InputEventJoypadMotion;
-			//_MouseMotion.X = a.GetActionStrength("right_horizontal");
-			//_MouseMotion.Y = a.GetActionStrength("right_vertical");
-			if (a.Axis == JoyAxis.RightX)
-				_MouseMotion.X = a.AxisValue;
-
-			GD.Print("test");
-		
-		}*/
 	}
 
 	// Update CameraLook from mouse input and calculating rotation nodeRotY and nodeRotX
