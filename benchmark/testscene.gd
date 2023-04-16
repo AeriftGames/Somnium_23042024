@@ -7,7 +7,7 @@ var gpu: String
 var cpu_name: String
 var cpu_count: int
 var os: String = OS.get_name() + " " + OS.get_version()
-var url: String = "http://aeriftgames.eu:5000/api/tests/add/v1"
+var url: String = "http://aeriftgames.eu:5000/api/v1/tests/add"
 var fps_avg: int = 75
 var fps_min: int = 10
 var fps_max: int = 50
