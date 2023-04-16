@@ -6,13 +6,15 @@ var tos: bool
 var gpu: String
 var cpu_name: String
 var cpu_count: int
+var os: String = OS.get_name() + " " + OS.get_version()
 var url: String = "http://aeriftgames.eu:5000/api/tests/add/v1"
 var fps_avg: int = 75
-var fps_min: int
-var fps_max: int
+var fps_min: int = 10
+var fps_max: int = 50
 var build: String = "build1"
 var level: String = "Somniumlevel1"
 var fps_all: Array
+var godot_version: String = Engine.get_version_info().string
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -46,7 +48,9 @@ func _send_test() -> void:
 		"level": level,
 		"fps_avg": fps_avg,
 		"fps_min": fps_min,
-		"fps_max": fps_max
+		"fps_max": fps_max,
+		"godot_version": godot_version,
+		"os": os
 	}
 	var query = JSON.stringify(test_data)
 	#var query = JSON.stringify(data_to_send)
