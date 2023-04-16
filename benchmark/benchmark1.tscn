@@ -170,23 +170,25 @@ metadata/_edit_lock_ = true
 [node name="levelscene_test1" parent="Level/LevelScenes" instance=ExtResource("6_gsawf")]
 metadata/_edit_lock_ = true
 
+[node name="Benchmark" type="Node3D" parent="Level"]
+
+[node name="Node3D" type="Node3D" parent="Level/Benchmark"]
+transform = Transform3D(-0.996453, 0.0036921, 0.0840682, -0.00150514, 0.998095, -0.0616746, -0.0841358, -0.0615824, -0.99455, -1.16115, 0.533462, 33.5413)
+
+[node name="Node3D2" type="Node3D" parent="Level/Benchmark"]
+transform = Transform3D(-0.996453, 0.0036921, 0.0840682, -0.00150514, 0.998095, -0.0616746, -0.0841357, -0.0615824, -0.99455, 4.601, 0.533462, 33.2721)
+
+[node name="Node3D3" type="Node3D" parent="Level/Benchmark"]
+transform = Transform3D(-0.996453, 0.0036921, 0.0840682, -0.00150514, 0.998095, -0.0616746, -0.0841357, -0.0615824, -0.99455, 4.601, 0.533462, 27.5913)
+
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_v7756")
 autoplay = true
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(-0.999702, 0, 0.0243973, 0, 1, 0, -0.0243973, 0, -0.999702, -0.644641, 0, 23.6713)
+transform = Transform3D(-0.996453, 0.0036921, 0.0840682, -0.00150514, 0.998095, -0.0616746, -0.0841358, -0.0615824, -0.99455, -0.644641, 0, 24.9262)
 current = true
 script = ExtResource("8_pgv3k")
-
-[node name="Node3D" type="Node3D" parent="Camera3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.210964, 0, -8.64447)
-
-[node name="Node3D2" type="Node3D" parent="Camera3D"]
-transform = Transform3D(1, 0, -1.86265e-09, 0, 1, 0, 1.86265e-09, 0, 1, -5.43338, 0, -8.51702)
-
-[node name="Node3D3" type="Node3D" parent="Camera3D"]
-transform = Transform3D(0.999999, 0, -1.86265e-09, 0, 1, 0, 1.86265e-09, 0, 0.999999, -5.28873, 0, -2.58973)
 
 [node name="ColorRect" type="ColorRect" parent="."]
 visible = false

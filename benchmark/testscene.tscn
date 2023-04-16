@@ -1,6 +1,9 @@
-[gd_scene format=3 uid="uid://bnten4avowrp7"]
+[gd_scene load_steps=2 format=3 uid="uid://bnten4avowrp7"]
+
+[ext_resource type="Script" path="res://benchmark/testscene.gd" id="1_a1j5s"]
 
 [node name="testscene" type="Node"]
+script = ExtResource("1_a1j5s")
 
 [node name="HTTPRequest" type="HTTPRequest" parent="."]
 

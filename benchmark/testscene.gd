@@ -6,13 +6,14 @@ var tos: bool
 var gpu: String
 var cpu_name: String
 var cpu_count: int
-var url: String = "http://oalar.eu:5000/api/tests/add/v1"
+var url: String = "http://aeriftgames.eu:5000/api/tests/add/v1"
 var score: int = 75
 var build: String = "build1"
 var level: String = "Somniumlevel1"
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	print("Starting")
 	unique_id = OS.get_unique_id()
 	var len: int
 	len = unique_id.length()
