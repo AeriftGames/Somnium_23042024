@@ -36,7 +36,7 @@ func _ready() -> void:
 func _send_test() -> void:
 	print("Sending test")
 	var test_data: Dictionary
-	var headers = ["Content-Type: application/json"]
+	var headers: Array = ["Content-Type: application/json"]
 	test_data = {
 		"unique_id": unique_id,
 		"client_name": client_name,
