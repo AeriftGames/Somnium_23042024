@@ -7,12 +7,15 @@ var gpu: String
 var cpu_name: String
 var cpu_count: int
 var url: String = "http://aeriftgames.eu:5000/api/tests/add/v1"
-var score: int = 75
+var fps_avg: int = 75
+var fps_min: int
+var fps_max: int
 var build: String = "build1"
 var level: String = "Somniumlevel1"
+var fps_all: Array
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
+func _ready() -> void:
 	print("Starting")
 	unique_id = OS.get_unique_id()
 	var len: int
@@ -28,7 +31,7 @@ func _ready():
 	_send_test()
 
 
-func _send_test():
+func _send_test() -> void:
 	print("Sending test")
 	var test_data: Dictionary
 	var headers = ["Content-Type: application/json"]
@@ -41,7 +44,9 @@ func _send_test():
 		"cpu_count": cpu_count,
 		"build": build,
 		"level": level,
-		"score": score
+		"fps_avg": fps_avg,
+		"fps_min": fps_min,
+		"fps_max": fps_max
 	}
 	var query = JSON.stringify(test_data)
 	#var query = JSON.stringify(data_to_send)
@@ -49,11 +54,23 @@ func _send_test():
 
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(delta) -> void:
+	fps_all.append(Engine.get_frames_per_second())
+	#print(fps_all.size())
 	pass
 
 
-func _on_http_request_request_completed(result, response_code, headers, body):
+func _on_http_request_request_completed(result, response_code, headers, body) -> void:
 	print("complete")
 	#var json = JSON.parse(body.get_string_from_utf8())
 	#print(json.result)
+
+## Testing function to test fps.
+func _on_timer_timeout():
+	var sum = 0
+	for e in fps_all:
+		sum += e
+	print("Average FPS: " + str(sum / fps_all.size()))
+	print("Minimum FPS: " + str(fps_all.min()))
+	print("Maximum FPS: " + str(fps_all.max()))
+	pass # Replace with function body.
