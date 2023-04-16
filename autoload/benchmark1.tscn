@@ -1,12 +1,12 @@
-[gd_scene load_steps=9 format=3 uid="uid://dsqplpo60hp2f"]
+[gd_scene load_steps=9 format=3 uid="uid://dkfptbx2q827x"]
 
-[ext_resource type="Script" path="res://levels/worldlevel.cs" id="1_u58sk"]
-[ext_resource type="ArrayOccluder3D" uid="uid://1dvpcggr1b7c" path="res://levels/worldlevel_test_new_modular1/worldlevel_test_new_modular1.occ" id="2_l1yac"]
-[ext_resource type="PackedScene" uid="uid://bet3idvc4fg0n" path="res://placeholders/PlayerStart.tscn" id="3_812sq"]
-[ext_resource type="PackedScene" uid="uid://6rotta4x1vn" path="res://testing_stuff_kaen/my_trim1/levelscene_test1.tscn" id="6_dim0a"]
-[ext_resource type="AudioStream" uid="uid://ngmb6mrvsbqc" path="res://audio/audio_streams/613738__punneedsounds__amb-ost1.mp3" id="12_wlh50"]
-[ext_resource type="Texture2D" uid="uid://cxuhj4tqdb5qw" path="res://testing_stuff_kaen/my_trim1/decals_tests2/trimsheet_3_low_DefaultMaterial_BaseColor.png" id="16_is0x1"]
-[ext_resource type="Texture2D" uid="uid://dgwuv4wnpu3rq" path="res://testing_stuff_kaen/my_trim1/decals_tests2/trimsheet_3_low_DefaultMaterial_Normal.png" id="17_wddkd"]
+[ext_resource type="Script" path="res://levels/worldlevel.cs" id="1_upl47"]
+[ext_resource type="ArrayOccluder3D" uid="uid://1dvpcggr1b7c" path="res://levels/worldlevel_test_new_modular1/worldlevel_test_new_modular1.occ" id="2_d1py7"]
+[ext_resource type="PackedScene" uid="uid://bet3idvc4fg0n" path="res://placeholders/PlayerStart.tscn" id="3_pnsib"]
+[ext_resource type="Texture2D" uid="uid://cxuhj4tqdb5qw" path="res://testing_stuff_kaen/my_trim1/decals_tests2/trimsheet_3_low_DefaultMaterial_BaseColor.png" id="4_wyj4e"]
+[ext_resource type="Texture2D" uid="uid://dgwuv4wnpu3rq" path="res://testing_stuff_kaen/my_trim1/decals_tests2/trimsheet_3_low_DefaultMaterial_Normal.png" id="5_y8852"]
+[ext_resource type="PackedScene" uid="uid://6rotta4x1vn" path="res://testing_stuff_kaen/my_trim1/levelscene_test1.tscn" id="6_gsawf"]
+[ext_resource type="AudioStream" uid="uid://ngmb6mrvsbqc" path="res://audio/audio_streams/613738__punneedsounds__amb-ost1.mp3" id="7_v7756"]
 
 [sub_resource type="Environment" id="Environment_p3qlj"]
 background_mode = 1
@@ -28,17 +28,17 @@ volumetric_fog_enabled = true
 volumetric_fog_density = 0.0363
 
 [node name="worldlevel" type="Node3D"]
-script = ExtResource("1_u58sk")
+script = ExtResource("1_upl47")
 InGameStartEnableSDFGI = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_p3qlj")
 
 [node name="worldlevel_occluderculling" type="OccluderInstance3D" parent="."]
-occluder = ExtResource("2_l1yac")
+occluder = ExtResource("2_d1py7")
 metadata/_edit_lock_ = true
 
-[node name="PlayerStart" parent="." instance=ExtResource("3_812sq")]
+[node name="PlayerStart" parent="." instance=ExtResource("3_pnsib")]
 transform = Transform3D(-1, 0, 5.96046e-08, 0, 1, 0, -5.96046e-08, 0, -1, -0.721933, -1.47101, 21.5182)
 
 [node name="Level" type="Node3D" parent="."]
@@ -49,8 +49,8 @@ metadata/_edit_lock_ = true
 
 [node name="Decal22" type="Decal" parent="Level/Decals"]
 transform = Transform3D(0.279187, 0.271971, -0.920916, 0.0814937, 0.948879, 0.304936, 0.956772, -0.160183, 0.242751, 3.2168, -1.41242, 37.9146)
-texture_albedo = ExtResource("16_is0x1")
-texture_normal = ExtResource("17_wddkd")
+texture_albedo = ExtResource("4_wyj4e")
+texture_normal = ExtResource("5_y8852")
 emission_energy = 0.0
 modulate = Color(0.862745, 0, 0, 1)
 upper_fade = 0.791705
@@ -61,8 +61,8 @@ distance_fade_begin = 5.0
 [node name="Decal23" type="Decal" parent="Level/Decals"]
 transform = Transform3D(0.816672, 0.572628, -0.071721, -0.566054, 0.819028, 0.0936739, 0.112382, -0.0359028, 0.993016, 3.4647, -1.41242, 39.1611)
 size = Vector3(4, 4, 4)
-texture_albedo = ExtResource("16_is0x1")
-texture_normal = ExtResource("17_wddkd")
+texture_albedo = ExtResource("4_wyj4e")
+texture_normal = ExtResource("5_y8852")
 emission_energy = 0.0
 modulate = Color(0.862745, 0, 0, 1)
 upper_fade = 0.738688
@@ -73,8 +73,8 @@ distance_fade_begin = 5.0
 [node name="Decal24" type="Decal" parent="Level/Decals"]
 transform = Transform3D(0.816672, 0.572628, -0.071721, -0.566054, 0.819028, 0.0936739, 0.112382, -0.0359028, 0.993016, 3.4647, -1.41242, 40.2146)
 size = Vector3(4, 4, 4)
-texture_albedo = ExtResource("16_is0x1")
-texture_normal = ExtResource("17_wddkd")
+texture_albedo = ExtResource("4_wyj4e")
+texture_normal = ExtResource("5_y8852")
 emission_energy = 0.0
 modulate = Color(0.862745, 0, 0, 1)
 upper_fade = 0.738688
@@ -85,8 +85,8 @@ distance_fade_begin = 5.0
 [node name="Decal6" type="Decal" parent="Level/Decals"]
 transform = Transform3D(-0.687125, -0.27723, 0.671567, -0.568339, 0.780923, -0.259133, -0.452603, -0.559735, -0.694152, -0.0794005, -1.45712, 28.2308)
 size = Vector3(4, 4, 4)
-texture_albedo = ExtResource("16_is0x1")
-texture_normal = ExtResource("17_wddkd")
+texture_albedo = ExtResource("4_wyj4e")
+texture_normal = ExtResource("5_y8852")
 emission_energy = 0.0
 modulate = Color(0.231373, 0.231373, 0.231373, 1)
 upper_fade = 0.219614
@@ -95,8 +95,8 @@ lower_fade = 0.424269
 [node name="Decal10" type="Decal" parent="Level/Decals"]
 transform = Transform3D(-0.423496, -0.84599, -0.323963, -0.890561, 0.323268, 0.319996, -0.165986, 0.424027, -0.890309, 1.0372, 0.240935, 29.6722)
 size = Vector3(2, 2, 1.5)
-texture_albedo = ExtResource("16_is0x1")
-texture_normal = ExtResource("17_wddkd")
+texture_albedo = ExtResource("4_wyj4e")
+texture_normal = ExtResource("5_y8852")
 emission_energy = 0.0
 modulate = Color(0.0745098, 0.0745098, 0.0745098, 1)
 upper_fade = 0.219614
@@ -105,8 +105,8 @@ lower_fade = 0.424269
 [node name="Decal8" type="Decal" parent="Level/Decals"]
 transform = Transform3D(0.3125, 0.496216, 0.810008, -0.56834, 0.780923, -0.259133, -0.76114, -0.37938, 0.526058, 7.3888, -0.937053, 27.2573)
 size = Vector3(4, 4, 4)
-texture_albedo = ExtResource("16_is0x1")
-texture_normal = ExtResource("17_wddkd")
+texture_albedo = ExtResource("4_wyj4e")
+texture_normal = ExtResource("5_y8852")
 emission_energy = 0.0
 upper_fade = 0.409814
 lower_fade = 0.600008
@@ -114,8 +114,8 @@ lower_fade = 0.600008
 [node name="Decal9" type="Decal" parent="Level/Decals"]
 transform = Transform3D(-0.136303, 0.221232, 0.965649, -0.568339, 0.780923, -0.259133, -0.811426, -0.584137, 0.0192933, 7.3888, -0.751871, 30.7569)
 size = Vector3(4, 4, 4)
-texture_albedo = ExtResource("16_is0x1")
-texture_normal = ExtResource("17_wddkd")
+texture_albedo = ExtResource("4_wyj4e")
+texture_normal = ExtResource("5_y8852")
 emission_energy = 0.0
 modulate = Color(0.231373, 0.231373, 0.231373, 1)
 upper_fade = 0.848533
@@ -124,8 +124,8 @@ lower_fade = 0.689228
 [node name="Decal7" type="Decal" parent="Level/Decals"]
 transform = Transform3D(0.879793, 0.410429, -0.239817, 0.105149, 0.323972, 0.940205, 0.463581, -0.852403, 0.241872, -1.1579, -1.55073, 34.3607)
 size = Vector3(10, 5, 5)
-texture_albedo = ExtResource("16_is0x1")
-texture_normal = ExtResource("17_wddkd")
+texture_albedo = ExtResource("4_wyj4e")
+texture_normal = ExtResource("5_y8852")
 emission_energy = 0.0
 modulate = Color(0.231373, 0.231373, 0.231373, 1)
 upper_fade = 0.600003
@@ -166,9 +166,9 @@ omni_range = 7.0
 [node name="LevelScenes" type="Node3D" parent="Level"]
 metadata/_edit_lock_ = true
 
-[node name="levelscene_test1" parent="Level/LevelScenes" instance=ExtResource("6_dim0a")]
+[node name="levelscene_test1" parent="Level/LevelScenes" instance=ExtResource("6_gsawf")]
 metadata/_edit_lock_ = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("12_wlh50")
+stream = ExtResource("7_v7756")
 autoplay = true
