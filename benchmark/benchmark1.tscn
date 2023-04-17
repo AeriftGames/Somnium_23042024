@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://duphk0qau3ve4"]
+[gd_scene load_steps=11 format=3 uid="uid://duphk0qau3ve4"]
 
 [ext_resource type="Script" path="res://levels/worldlevel.cs" id="1_upl47"]
 [ext_resource type="ArrayOccluder3D" uid="uid://1dvpcggr1b7c" path="res://levels/worldlevel_test_new_modular1/worldlevel_test_new_modular1.occ" id="2_d1py7"]
@@ -27,6 +27,8 @@ fog_light_energy = 0.42
 fog_density = 0.0009
 volumetric_fog_enabled = true
 volumetric_fog_density = 0.0363
+
+[sub_resource type="Curve3D" id="Curve3D_oklwb"]
 
 [node name="worldlevel" type="Node3D"]
 script = ExtResource("1_upl47")
@@ -181,6 +183,16 @@ transform = Transform3D(-0.996453, 0.0036921, 0.0840682, -0.00150514, 0.998095, 
 [node name="Node3D3" type="Node3D" parent="Level/Benchmark"]
 transform = Transform3D(-0.996453, 0.0036921, 0.0840682, -0.00150514, 0.998095, -0.0616746, -0.0841357, -0.0615824, -0.99455, 4.601, 0.533462, 27.5913)
 
+[node name="Path3D" type="Path3D" parent="Level/Benchmark"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.797985, 0, 21.5118)
+curve = SubResource("Curve3D_oklwb")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="Level/Benchmark/Path3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.48816)
+
+[node name="PathFollow3D2" type="PathFollow3D" parent="Level/Benchmark/Path3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 12.4027)
+
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_v7756")
 autoplay = true
@@ -191,6 +203,7 @@ current = true
 script = ExtResource("8_pgv3k")
 
 [node name="ColorRect" type="ColorRect" parent="."]
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
