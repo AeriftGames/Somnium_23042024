@@ -1,10 +1,14 @@
-[gd_scene load_steps=16 format=3 uid="uid://b0p7cpttoqb2h"]
+[gd_scene load_steps=20 format=3 uid="uid://b0p7cpttoqb2h"]
 
 [ext_resource type="Script" path="res://testing_stuff_kaen/my_trim1/button_door_test.cs" id="1_nmv0f"]
 [ext_resource type="Material" uid="uid://75g41m3tp8pj" path="res://testing_stuff_kaen/my_trim1/trim1_mat.tres" id="1_q3kfm"]
 [ext_resource type="Texture2D" uid="uid://d23icjgq3ocf6" path="res://textures/tile_tile_0046_01_s.jpg" id="3_58uxn"]
+[ext_resource type="AudioStream" uid="uid://ccht6cdfyex5v" path="res://audio/audio_streams/button_press/ButtonPress_2.wav" id="3_y1hoa"]
 [ext_resource type="Texture2D" uid="uid://cuovukpdoti1o" path="res://textures/grid_texture_normal.jpg" id="4_cfnuw"]
+[ext_resource type="AudioStream" uid="uid://d0wafy2xcdq37" path="res://audio/audio_streams/button_press/ButtonPress_3.wav" id="4_s2yqo"]
+[ext_resource type="AudioStream" uid="uid://dmexiofq7ggkd" path="res://audio/audio_streams/button_press/ButtonPress_4.wav" id="5_6hwjt"]
 [ext_resource type="Script" path="res://core_systems/interactive_system/interactive_object.cs" id="5_kv0o7"]
+[ext_resource type="AudioStream" uid="uid://df6pxda3djl2w" path="res://audio/audio_streams/button_press/ButtonPress_1.wav" id="6_y0sx3"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_g4s1e"]
 _surfaces = [{
@@ -163,6 +167,7 @@ _data = {
 
 [node name="button_door_test" type="Node3D"]
 script = ExtResource("1_nmv0f")
+audioStreams = Array[AudioStream]([ExtResource("6_y0sx3"), ExtResource("3_y1hoa"), ExtResource("4_s2yqo"), ExtResource("5_6hwjt")])
 
 [node name="button_body" type="MeshInstance3D" parent="."]
 mesh = SubResource("ArrayMesh_u6qif")
@@ -201,6 +206,13 @@ metadata/_edit_lock_ = true
 libraries = {
 "": SubResource("AnimationLibrary_254ai")
 }
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.531107, 0)
+stream = ExtResource("6_y0sx3")
+unit_size = 2.0
+max_db = 0.0
+bus = &"Sfx"
 
 [connection signal="body_entered" from="interactive_object/StaticBody3D/interactive_object_area3D" to="interactive_object" method="_on_interactive_object_area_3d_body_entered" flags=18]
 [connection signal="body_exited" from="interactive_object/StaticBody3D/interactive_object_area3D" to="interactive_object" method="_on_interactive_object_area_3d_body_exited" flags=18]

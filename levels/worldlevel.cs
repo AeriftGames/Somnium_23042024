@@ -8,6 +8,7 @@ public partial class worldlevel : Node3D
 
 	// Pokud je true = nastavi se na zacatku hry sdfgi na true. Pokud je false = ignorujeme a pouzivame z editoru
 	[Export] bool InGameStartEnableSDFGI = false;
+	[Export] bool WithoutPlayer = false;
 
 	Node VoxelGINode = null;
 
@@ -22,5 +23,17 @@ public partial class worldlevel : Node3D
 				GameMaster.GM.LevelLoader.SDFGI = true;
 			}
 		}
+
+		StartGameInit();
 	}
+
+	public void StartGameInit()
+	{
+		if(WithoutPlayer)
+		{
+            // Apply Settings
+            GameMaster.GM.GetSettings().LoadAndApply_AllGraphicsSettings();
+            GameMaster.GM.EnableBlackScreen(false);
+        }
+    }
 }

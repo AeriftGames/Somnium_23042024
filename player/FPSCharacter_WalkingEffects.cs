@@ -181,7 +181,7 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
                 JumpingAudioPitch + (JumpingAudioPitchOffset / 2));
 
         // play sounds
-        PlayRandomSound(AudioStreamPlayerJumpLand, JumpingSounds, JumpingVolumeDB, PitchScale);
+        UniversalFunctions.PlayRandomSound(AudioStreamPlayerJumpLand, JumpingSounds, JumpingVolumeDB, PitchScale);
     }
 
     private void CalculateFootSteps(float delta)
@@ -212,7 +212,7 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
                 if (materialSurface != all_material_surfaces.EMaterialSurface.None)
                 {
                     // Play random footsteps sound by material surface
-                    PlayRandomSound(
+                    UniversalFunctions.PlayRandomSound(
                         AudioStreamPlayerFootsteps,
                         AllMaterialSurfaces.GetAudioArray(
                             materialSurface, all_material_surfaces.EMaterialSurfaceAudio.Footstep),
@@ -296,36 +296,6 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
             new Vector3(lerpHeadLandRotX, 0, 0), lerpLandingSpeedModifier * delta);
     }
 
-    private void PlayRandomSound(AudioStreamPlayer audioPlayer,Array<AudioStream> audioStreams,float volumeDB, float pitch)
-    {
-        if (audioPlayer == null) return;
-        if (audioStreams.Count < 1) return;
-
-        // random pick sound from array and play it
-        RandomNumberGenerator random = new RandomNumberGenerator();
-        int id = 0;
-
-        // 20 chances
-        for (int i = 0; i < 20; i++)
-        {
-            // randomize sound id from array
-            random.Randomize();
-            id = random.RandiRange(0, audioStreams.Count - 1);
-
-            // if is not same, break for loop
-            if (audioPlayer.Stream != audioStreams[id])
-                break;
-        }
-
-        // play sounds
-        audioPlayer.VolumeDb = volumeDB;
-        audioPlayer.PitchScale = pitch;
-        audioPlayer.Stream = audioStreams[id];
-        audioPlayer.Play();
-
-        //GD.Print(audioStreams[id].ResourcePath);
-    }
-
     // EVENT from basic movement character
     public override void EventLandingEffect(float heightfall)
     {
@@ -345,7 +315,7 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
             if (materialSurface != EMaterialSurface.None)
             {
                 // Play random sound
-                PlayRandomSound(
+                UniversalFunctions.PlayRandomSound(
                     AudioStreamPlayerJumpLand,
                     AllMaterialSurfaces.GetAudioArray(
                         materialSurface, all_material_surfaces.EMaterialSurfaceAudio.Landing),
@@ -369,7 +339,7 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
             if (materialSurface != EMaterialSurface.None)
             {
                 // Play random sound
-                PlayRandomSound(
+                UniversalFunctions.PlayRandomSound(
                     AudioStreamPlayerJumpLand,
                     AllMaterialSurfaces.GetAudioArray(
                         materialSurface, all_material_surfaces.EMaterialSurfaceAudio.Landing),
@@ -392,7 +362,7 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
             if (materialSurface != EMaterialSurface.None)
             {
                 // Play random sound
-                PlayRandomSound(
+                UniversalFunctions.PlayRandomSound(
                     AudioStreamPlayerJumpLand,
                     AllMaterialSurfaces.GetAudioArray(
                         materialSurface, all_material_surfaces.EMaterialSurfaceAudio.Landing),
@@ -415,7 +385,7 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
             if (materialSurface != EMaterialSurface.None)
             {
                 // Play random sound
-                PlayRandomSound(
+                UniversalFunctions.PlayRandomSound(
                     AudioStreamPlayerJumpLand,
                     AllMaterialSurfaces.GetAudioArray(
                         materialSurface, all_material_surfaces.EMaterialSurfaceAudio.Landing),
@@ -438,7 +408,7 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
             if (materialSurface != EMaterialSurface.None)
             {
                 // Play random sound
-                PlayRandomSound(
+                UniversalFunctions.PlayRandomSound(
                     AudioStreamPlayerJumpLand,
                     AllMaterialSurfaces.GetAudioArray(
                         materialSurface, all_material_surfaces.EMaterialSurfaceAudio.Landing),
@@ -461,7 +431,7 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
             if (materialSurface != EMaterialSurface.None)
             {
                 // Play random sound
-                PlayRandomSound(
+                UniversalFunctions.PlayRandomSound(
                     AudioStreamPlayerJumpLand,
                     AllMaterialSurfaces.GetAudioArray(
                         materialSurface, all_material_surfaces.EMaterialSurfaceAudio.Landing),
@@ -545,7 +515,7 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
             float newPitch = a.RandfRange(UncrouchingAudioPitch - (UncrouchingAudioPitchRandomOffset / 2),
                 UncrouchingAudioPitch + (UncrouchingAudioPitchRandomOffset / 2));
 
-            PlayRandomSound(AudioStreamPlayerCrouching, UncrouchingSounds, UncrouchingVolumeDB, newPitch);
+            UniversalFunctions.PlayRandomSound(AudioStreamPlayerCrouching, UncrouchingSounds, UncrouchingVolumeDB, newPitch);
         }
     }
 
@@ -566,7 +536,7 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
             float newPitch = a.RandfRange(CrouchingAudioPitch - (CrouchingAudioPitchRandomOffset / 2),
                 CrouchingAudioPitch + (CrouchingAudioPitchRandomOffset / 2));
 
-            PlayRandomSound(AudioStreamPlayerCrouching, CrouchingSounds, CrouchingVolumeDB, newPitch);
+            UniversalFunctions.PlayRandomSound(AudioStreamPlayerCrouching, CrouchingSounds, CrouchingVolumeDB, newPitch);
         }
     }
 

@@ -1,9 +1,10 @@
-[gd_scene load_steps=15 format=3 uid="uid://feghnu7g52ju"]
+[gd_scene load_steps=16 format=3 uid="uid://feghnu7g52ju"]
 
 [ext_resource type="Script" path="res://testing_stuff_kaen/my_trim1/door_test/door_rounded_test.cs" id="1_cv8ll"]
 [ext_resource type="Material" uid="uid://lah0omlue113" path="res://testing_stuff_kaen/my_trim1/trim_floor1_mat.tres" id="1_rwhda"]
-[ext_resource type="AudioStream" uid="uid://c7ynce1oie6u8" path="res://audio/audio_streams/door_test/543404__alexo400__sci_fi_door.wav" id="2_h0itc"]
+[ext_resource type="AudioStream" uid="uid://d678rjibx4hv" path="res://audio/audio_streams/door_test/GameDoors1.wav" id="2_11xbb"]
 [ext_resource type="Material" uid="uid://75g41m3tp8pj" path="res://testing_stuff_kaen/my_trim1/trim1_mat.tres" id="2_upuop"]
+[ext_resource type="AudioStream" uid="uid://brlr51hgrren4" path="res://audio/audio_streams/door_test/GameDoors2.wav" id="3_arfav"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_ypmdk"]
 _surfaces = [{
@@ -289,8 +290,8 @@ _data = {
 script = ExtResource("1_cv8ll")
 speed = 0.8
 buttonsPaths = []
-openDoorAudioStream = ExtResource("2_h0itc")
-closeDoorAudioStream = ExtResource("2_h0itc")
+openDoorAudioStream = ExtResource("2_11xbb")
+closeDoorAudioStream = ExtResource("3_arfav")
 
 [node name="door_frame" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.734439, 6.85453e-07, 0.678675, 0.678675, 0, -0.734439, -5.06639e-07, 1, -4.76837e-07, 0, 0, 0)
@@ -337,11 +338,10 @@ libraries = {
 }
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
-stream = ExtResource("2_h0itc")
+stream = ExtResource("2_11xbb")
 volume_db = -5.0
 unit_size = 2.0
 max_db = -1.0
-pitch_scale = 0.9
 bus = &"Sfx"
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
