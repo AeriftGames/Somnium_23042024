@@ -59,6 +59,14 @@ public partial class DebugHud : Control
 		// vypne/zapne tento debug
 		if (Input.IsActionJustPressed("ToggleDebugHud"))
 			SetOptionsEnable(!isOptionsPanelEnabled);
+
+        // prepne hud page vpred
+        if (Input.IsActionJustPressed("NextPageInHud"))
+			SetCurrentTab(GetCurrentTabID() + 1, true);
+
+		// prepne hud page vzad
+		if(Input.IsActionJustPressed("PreviousPageInHud"))
+            SetCurrentTab(GetCurrentTabID() - 1, true);
 	}
 
 	// Enable/Disahlbe DebugHud (on off include all updates)
@@ -108,6 +116,39 @@ public partial class DebugHud : Control
 			Input.MouseMode = Input.MouseModeEnum.Captured;
 		}
 	}
+
+	private void SetCurrentTab(int newTabID,bool focusOnFirstChild = false)
+	{
+        TabContainer debugHudTabs = GetNode<TabContainer>("OptionsPanel/TabContainer");
+        if (debugHudTabs == null) return;
+
+		if(newTabID < debugHudTabs.GetTabCount() && newTabID > -1)
+		{
+            debugHudTabs.GetCurrentTabControl().Hide();
+            debugHudTabs.CurrentTab = newTabID;
+            debugHudTabs.GetCurrentTabControl().Show();
+        }
+
+		// Focus on first element in tab (manualy)
+		if(focusOnFirstChild)
+		{
+			if (debugHudTabs.GetCurrentTabControl().Name == "main")
+				GetNode<CheckBox>("OptionsPanel/TabContainer/main/ShowFps_CheckBox").GrabFocus();
+			else if (debugHudTabs.GetCurrentTabControl().Name == "level")
+				debugHudTabs.GetCurrentTabControl().GetChild<Control>(0).GrabFocus();
+			else if (debugHudTabs.GetCurrentTabControl().Name == "video")
+				GetNode<OptionButton>("OptionsPanel/TabContainer/video/ScreenMode_HBoxContainer/ScreenMode_OptionButton").GrabFocus();
+			else if (debugHudTabs.GetCurrentTabControl().Name == "audio")
+				GetNode<HSlider>("OptionsPanel/TabContainer/audio/audio_HBoxContainer/mainVolume_HSlider").GrabFocus();
+			else if (debugHudTabs.GetCurrentTabControl().Name == "inputs")
+				GetNode<HSlider>("OptionsPanel/TabContainer/inputs/input_HBoxContainer/mouseSmooth_HSlider").GrabFocus();
+        }
+    }
+
+	private int GetCurrentTabID()
+	{
+        return GetNode<TabContainer>("OptionsPanel/TabContainer").CurrentTab;
+    }
 
 	// je spousten podle timeru
 	private void UpdateTimer()
