@@ -105,6 +105,9 @@ public partial class DebugHud : Control
 			ApplyAllVideoControls();
 			ApplyAllAudioControls();
 			ApplyAllInputsControls();
+
+			// nastavi vzdy v nove spusteni aktivni prvni tab a focusneme prvni element v tabu pro navigaci
+			SetCurrentTab(0,true);
 		}
 		else
 		{
