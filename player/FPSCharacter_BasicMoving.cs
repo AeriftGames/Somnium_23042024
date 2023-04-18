@@ -55,6 +55,7 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
 	[Export] public float CameraVerticalLookMin = -80f;
 	[Export] public float CameraVerticalLookMax = 80f;
 	[Export] public float LerpSpeedPosObjectCamera = 15.0f;
+	[Export] public bool InverseVerticalLook = false;
 
 	[ExportGroupAttribute("Others Settings")]
 	[Export] public float CrunchLerpSpeed = 5.0f;

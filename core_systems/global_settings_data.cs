@@ -40,11 +40,11 @@ public partial class global_settings_data : Resource
 	[Export] public bool EnableWorldLevelOcclusionCull { get; set; }
 
     [ExportGroupAttribute("Inputs Settings")]
-    [Export] public bool LookVerticalReverse { get; set; }
     [Export] public float LookMouseSmooth { get; set; }
     [Export] public float LookMouseSensitivity { get; set; }
     [Export] public float LookGamepadSmooth { get; set; }
     [Export] public float LookGamepadSensitivity { get; set; }
+	[Export] public bool InverseVerticalLook { get; set; }
 
     public global_settings_data()
 	{

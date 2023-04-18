@@ -187,12 +187,17 @@ public partial class ObjectCamera : Node3D
 		_LookVelocity.Y = Mathf.Lerp(_LookVelocity.Y, newMouseMotion.Y * ownerCharacter.MouseSensitivity,
 			(float)delta * ownerCharacter.MouseSmooth);
 
-		// Set new rotates
+		// Set new rotates around Y
 		NodeRotY.RotateY(-Mathf.DegToRad(_LookVelocity.X));
-		NodeRotX.RotateX(-Mathf.DegToRad(_LookVelocity.Y));
 
-		// Set clamp camera vertical look
-		Vector3 actualRotX = NodeRotX.Rotation;
+		// Set new rotates around X (InverseVertical?)
+		if(!ownerCharacter.InverseVerticalLook)
+			NodeRotX.RotateX(-Mathf.DegToRad(_LookVelocity.Y));
+		else
+            NodeRotX.RotateX(Mathf.DegToRad(_LookVelocity.Y));
+
+        // Set clamp camera vertical look
+        Vector3 actualRotX = NodeRotX.Rotation;
 		actualRotX.X = Mathf.Clamp(actualRotX.X,
 			Mathf.DegToRad(ownerCharacter.CameraVerticalLookMin),
 			Mathf.DegToRad(ownerCharacter.CameraVerticalLookMax));
@@ -215,7 +220,12 @@ public partial class ObjectCamera : Node3D
 
         // Set new rotates
         NodeRotY.RotateY(-Mathf.DegToRad(_LookVelocity.X));
-        NodeRotX.RotateX(-Mathf.DegToRad(_LookVelocity.Y));
+
+        // Set new rotates around X (InverseVertical?)
+        if (!ownerCharacter.InverseVerticalLook)
+            NodeRotX.RotateX(-Mathf.DegToRad(_LookVelocity.Y));
+        else
+            NodeRotX.RotateX(Mathf.DegToRad(_LookVelocity.Y));
 
         // Set clamp camera vertical look
         Vector3 actualRotX = NodeRotX.Rotation;

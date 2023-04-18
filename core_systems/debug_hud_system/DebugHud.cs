@@ -461,7 +461,14 @@ public partial class DebugHud : Control
         label.Text = newValue.ToString();
     }
 
-	public void ApplyAllInputsControls()
+	public void _on_inverse_vertical_look_check_box_toggled(bool newValue)
+	{
+		// only apply
+		GameMaster.GM.GetSettings().Apply_InverseVerticalLook(newValue, true, false);
+	}
+
+
+    public void ApplyAllInputsControls()
 	{
 		HSlider msmooth = GetNode<HSlider>("OptionsPanel/TabContainer/inputs/input_HBoxContainer/mouseSmooth_HSlider");
 		msmooth.Value = GameMaster.GM.GetSettings().GetActual_LookMouseSmooth();
@@ -482,6 +489,11 @@ public partial class DebugHud : Control
         gsmooth.Value = GameMaster.GM.GetSettings().GetActual_LookGamepadSmooth();
         Label gsmooth_l = GetNode<Label>("OptionsPanel/TabContainer/inputs/input_HBoxContainer3/gamepadSmooth_Label");
         gsmooth_l.Text = gsmooth.Value.ToString();
+
+		CheckBox inverselook = 
+			GetNode<CheckBox>("OptionsPanel/TabContainer/inputs/input_HBoxContainer5/inverseVerticalLook_CheckBox");
+		inverselook.ButtonPressed = GameMaster.GM.GetSettings().GetActual_InverseVerticalLook();
+
     }
 
 	public void _on_save_inputs_as_default_button_pressed()

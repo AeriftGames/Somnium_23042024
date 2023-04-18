@@ -109,6 +109,7 @@ public partial class global_settings : Godot.GodotObject
         Apply_LookMouseSensitivity(data.LookMouseSensitivity, true, false);
         Apply_LookGamepadSmooth(data.LookGamepadSmooth, true, false);
         Apply_LookGamepadSensitivity(data.LookGamepadSensitivity, true, false);
+        Apply_InverseVerticalLook(data.InverseVerticalLook, true, false);
 
         gm.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "all inputs data is apply");
     }
@@ -125,6 +126,7 @@ public partial class global_settings : Godot.GodotObject
         Apply_LookMouseSensitivity(GetActual_LookMouseSensitivity(), false, true);
         Apply_LookGamepadSmooth(GetActual_LookGamepadSmooth(), false, true);
         Apply_LookGamepadSensitivity(GetActual_LookGamepadSensitivity(), false, true);
+        Apply_InverseVerticalLook(GetActual_InverseVerticalLook(), false, true);
 
         gm.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "all inputs data is saved");
     }
@@ -830,7 +832,31 @@ public partial class global_settings : Godot.GodotObject
         if (GameMaster.GM.GetFPSCharacter() == null) return 1f;
         return GameMaster.GM.GetFPSCharacter().GamepadSensitvity;
     }
-    
+
+    // settings InverseVerticalLook
+    public void Apply_InverseVerticalLook(bool newValue, bool newApplyNow = false, bool newSaveNow = false)
+    {
+        // Apply now
+        if (newApplyNow)
+        {
+            if (GameMaster.GM.GetFPSCharacter() == null) return;
+            GameMaster.GM.GetFPSCharacter().InverseVerticalLook = newValue;
+        }
+
+        // Save nowj
+        if (newSaveNow)
+        {
+            GetData().InverseVerticalLook = newValue;
+            GetData().Save();
+        }
+    }
+
+    public bool GetActual_InverseVerticalLook()
+    {
+        if (GameMaster.GM.GetFPSCharacter() == null) return false;
+        return GameMaster.GM.GetFPSCharacter().InverseVerticalLook;
+    }
+
     /**************************************************************************/
     // OTHERS
 

@@ -588,6 +588,18 @@ layout_mode = 2
 text = "0"
 horizontal_alignment = 1
 
+[node name="input_HBoxContainer5" type="HBoxContainer" parent="OptionsPanel/TabContainer/inputs"]
+layout_mode = 2
+
+[node name="inverseVerticalLook_CheckBox" type="CheckBox" parent="OptionsPanel/TabContainer/inputs/input_HBoxContainer5"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="OptionsPanel/TabContainer/inputs/input_HBoxContainer5"]
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+text = "inverse vertical look"
+horizontal_alignment = 1
+
 [node name="SaveInputsAsDefaultButton" type="Button" parent="OptionsPanel/TabContainer/inputs"]
 layout_mode = 2
 size_flags_horizontal = 4
@@ -696,5 +708,6 @@ text = "video memory used:"
 [connection signal="value_changed" from="OptionsPanel/TabContainer/inputs/input_HBoxContainer2/mouseSensitivity_HSlider" to="." method="_on_mouse_sensitivity_h_slider_value_changed"]
 [connection signal="value_changed" from="OptionsPanel/TabContainer/inputs/input_HBoxContainer3/gamepadSmooth_HSlider" to="." method="_on_gamepad_smooth_h_slider_value_changed"]
 [connection signal="value_changed" from="OptionsPanel/TabContainer/inputs/input_HBoxContainer4/gamepadSensitivity_HSlider" to="." method="_on_gamepad_sensitivity_h_slider_value_changed"]
+[connection signal="toggled" from="OptionsPanel/TabContainer/inputs/input_HBoxContainer5/inverseVerticalLook_CheckBox" to="." method="_on_inverse_vertical_look_check_box_toggled"]
 [connection signal="pressed" from="OptionsPanel/TabContainer/inputs/SaveInputsAsDefaultButton" to="." method="_on_save_inputs_as_default_button_pressed"]
 [connection signal="pressed" from="OptionsPanel/QuitGameButton" to="." method="_on_quit_game_button_pressed"]
