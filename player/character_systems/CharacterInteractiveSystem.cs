@@ -160,6 +160,26 @@ public partial class CharacterInteractiveSystem : Godot.GodotObject
                 }
         }
 
+        // Rotate Grabbed Object via gamepad
+        if (pickedBody != null && wantRotateNow)
+        {
+            character.objectCamera.SetCameraLookInputEnable(false);
+
+            /* Nacte hodnoty (axis right) gamepadu */
+            Vector2 JoyLook = new Vector2(Input.GetActionStrength("LookJoyRight") - Input.GetActionStrength("LookJoyLeft"),
+            -(Input.GetActionStrength("LookJoyUp") - Input.GetActionStrength("LookJoyDown")));
+
+            /* Pokud JoyLook ma nejakou hodnotu (pohnuto packou na gamepadu) = gamepad jinak mys */
+            if (JoyLook.Length() > 0 && character.IsInputEnable())
+            {
+                character.objectCamera.HandStaticBody.RotateX(
+                Mathf.DegToRad(JoyLook.Y * character.RotateObjectStep));
+
+                character.objectCamera.HandStaticBody.RotateY(
+                Mathf.DegToRad(JoyLook.X * character.RotateObjectStep));
+            }
+        }
+
         // Reset pro novy grab, napriklad po hodu, donuti hrace pustit tlacitko pro grab, i kdyby na jeden frame
         // pokud ho pusti, resetujeme moznost znovu grabbovat
         if (isCanNewGrab == false && newGrabNow == false)

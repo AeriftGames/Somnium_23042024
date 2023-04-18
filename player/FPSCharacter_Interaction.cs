@@ -204,6 +204,7 @@ public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
 				isActualOnLerpToNormal = false;
 			}
 		}
+
 	}
 
 	public bool DetectInteractiveObjectWithCameraRay()

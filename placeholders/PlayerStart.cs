@@ -58,8 +58,9 @@ public partial class PlayerStart : Node3D
 
 	public void SpawnPlayerInteraction()
 	{
-		// Instance from scenefile and cast to specific class
-		var objectCamera_Instance = (ObjectCamera)GD.Load<PackedScene>(
+
+        // Instance from scenefile and cast to specific class
+        var objectCamera_Instance = (ObjectCamera)GD.Load<PackedScene>(
 			"res://player/character_systems/ObjectCamera.tscn").Instantiate();
 		
 		var characterInteraction_Instance = (FPSCharacter_Interaction)GD.Load<PackedScene>(
@@ -117,8 +118,8 @@ public partial class PlayerStart : Node3D
 
 			GameMaster.GM.EnableBlackScreen(false);
 
-			//delete
-			spawn_timer.Stop();
+            //delete
+            spawn_timer.Stop();
 			spawn_timer.QueueFree();
 		}
 	}
