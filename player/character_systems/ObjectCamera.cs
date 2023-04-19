@@ -153,9 +153,9 @@ public partial class ObjectCamera : Node3D
 			-(Input.GetActionStrength("LookJoyUp") - Input.GetActionStrength("LookJoyDown")));
 
 		/* Pokud JoyLook ma nejakou hodnotu (pohnuto packou na gamepadu) = gamepad jinak mys */
-		if(JoyLook.Length() > 0 && ownerCharacter.IsInputEnable())
+		if(JoyLook.Length() > 0 && ownerCharacter.IsInputEnable() && isCameraLookInputEnable)
 			UpdateCameraLookGamepad(JoyLook*15.0f, delta);
-		else if (ownerCharacter.IsInputEnable())
+		else if (ownerCharacter.IsInputEnable() && isCameraLookInputEnable)
             UpdateCameraLookMouse(_MouseMotion, delta);
 
 		// new lerp object camera pos to player head
