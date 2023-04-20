@@ -8,6 +8,7 @@ script = ExtResource("1_a1j5s")
 [node name="HTTPRequest" type="HTTPRequest" parent="."]
 
 [node name="Timer" type="Timer" parent="."]
+autostart = true
 
 [connection signal="request_completed" from="HTTPRequest" to="." method="_on_http_request_request_completed"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

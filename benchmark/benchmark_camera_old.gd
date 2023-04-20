@@ -21,6 +21,7 @@ func _process(delta):
 	rotate_towards(current_target, 1, delta)
 	pass
 
+
 func _move_camera(point):
 	print("STARTING MOVE CAMERA")
 	var tween = create_tween()
@@ -31,11 +32,13 @@ func _move_camera(point):
 	previous_target = current_target
 	current_target = benchmark_nodes.get_child(order)
 	_move_camera(current_target)
-	
+
+
 func _rotate(delta):
 	var x = lerp(previous_target, current_target, delta * 1)
 	look_at(x, Vector3.UP)
-	
+
+
 func rotate_towards(target: Node, speed: float, delta):
 	var direction = (target.global_transform.origin - global_transform.origin).normalized()
 	var angle = direction.angle_to(Vector3.UP)

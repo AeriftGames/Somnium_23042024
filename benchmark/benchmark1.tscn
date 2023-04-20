@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://duphk0qau3ve4"]
+[gd_scene load_steps=13 format=3 uid="uid://dqrxmxdxekca3"]
 
 [ext_resource type="Script" path="res://levels/worldlevel.cs" id="1_upl47"]
 [ext_resource type="ArrayOccluder3D" uid="uid://1dvpcggr1b7c" path="res://levels/worldlevel_test_new_modular1/worldlevel_test_new_modular1.occ" id="2_d1py7"]
@@ -7,7 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://dgwuv4wnpu3rq" path="res://testing_stuff_kaen/my_trim1/decals_tests2/trimsheet_3_low_DefaultMaterial_Normal.png" id="5_y8852"]
 [ext_resource type="PackedScene" uid="uid://6rotta4x1vn" path="res://testing_stuff_kaen/my_trim1/levelscene_test1.tscn" id="6_gsawf"]
 [ext_resource type="AudioStream" uid="uid://ngmb6mrvsbqc" path="res://audio/audio_streams/613738__punneedsounds__amb-ost1.mp3" id="7_v7756"]
-[ext_resource type="Script" path="res://benchmark/benchmark_camera.gd" id="8_pgv3k"]
+[ext_resource type="Script" path="res://benchmark/Path3D.gd" id="8_md5l1"]
+[ext_resource type="Script" path="res://benchmark/PathFollow3D_pos.gd" id="9_f433i"]
 
 [sub_resource type="Environment" id="Environment_p3qlj"]
 background_mode = 1
@@ -29,6 +30,14 @@ volumetric_fog_enabled = true
 volumetric_fog_density = 0.0363
 
 [sub_resource type="Curve3D" id="Curve3D_oklwb"]
+
+[sub_resource type="Curve3D" id="Curve3D_p4qst"]
+bake_interval = 10.0
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0.386887, -0.246601, 8.91664, 0, 0, 0, 0, 0, 0, 6.68187, 0.000687167, 9.86584, 0, 0, 0, 0, 0, 0, 6.36563, -0.311747, 3.35865, 0, 0, 0, 0, 0, 0, 2.39016, -0.184084, 3.30063, 0, 0, 0, 0, 0, 0, -2.80709, -0.0617789, 3.61022),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0)
+}
+point_count = 5
 
 [node name="worldlevel" type="Node3D"]
 script = ExtResource("1_upl47")
@@ -197,13 +206,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 12.4027)
 stream = ExtResource("7_v7756")
 autoplay = true
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(-0.996453, 0.0036921, 0.0840682, -0.00150514, 0.998095, -0.0616746, -0.0841358, -0.0615824, -0.99455, -0.644641, 0, 24.9262)
-current = true
-script = ExtResource("8_pgv3k")
-
 [node name="ColorRect" type="ColorRect" parent="."]
-visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -258,3 +261,21 @@ offset_top = -8.0
 grow_horizontal = 0
 grow_vertical = 0
 text = "Accept"
+
+[node name="Path3D" type="Path3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.548861, -0.00363843, 23.001)
+curve = SubResource("Curve3D_p4qst")
+script = ExtResource("8_md5l1")
+level_name = "Rooms_sdfgion_xx"
+
+[node name="PathFollow3D_pos" type="PathFollow3D" parent="Path3D"]
+transform = Transform3D(0.149101, -0.038381, 0.988074, 3.72528e-09, 0.999244, 0.0388149, -0.988819, -0.00578735, 0.148989, 0.386887, -0.246601, 8.91664)
+script = ExtResource("9_f433i")
+
+[node name="PathFollow3D_look" type="PathFollow3D" parent="Path3D"]
+transform = Transform3D(0.149101, -0.0383811, 0.988075, 3.72529e-09, 0.999246, 0.0388149, -0.988821, -0.00578736, 0.148989, 1.0925, -0.215766, 9.09012)
+progress = 1.0
+
+[node name="Camera3D" type="Camera3D" parent="Path3D"]
+transform = Transform3D(-0.996453, 0.00369211, 0.0840682, -0.00150514, 0.998095, -0.0616746, -0.0841358, -0.0615824, -0.99455, -0.0957802, 0.00363843, 1.92524)
+current = true

@@ -16,6 +16,7 @@ var level: String = "Somniumlevel1"
 var fps_all: Array
 var godot_version: String = Engine.get_version_info().string
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	print("Starting")
