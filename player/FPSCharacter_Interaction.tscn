@@ -170,9 +170,11 @@ visible = false
 visible = false
 
 [node name="DebugHud" parent="." index="11" instance=ExtResource("10_iakih")]
+visible = false
 
 [node name="AllHuds" parent="." index="13"]
 metadata/_edit_lock_ = true
 
 [node name="InGameMenu" parent="AllHuds" index="0" instance=ExtResource("11_8lqy1")]
+visible = false
 layout_mode = 1

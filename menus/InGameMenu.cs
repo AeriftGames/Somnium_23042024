@@ -28,13 +28,19 @@ public partial class InGameMenu : Control
 		// viditelnost InGameMenu
 		Visible = active;
 
-		// ziskame interact charactera
-        FPSCharacter_Interaction interChar = (FPSCharacter_Interaction)GameMaster.GM.GetFPSCharacter();
+		// pokusime se ziskat interact charactera
+        FPSCharacter_Interaction interChar = GameMaster.GM.GetFPSCharacter() as FPSCharacter_Interaction;
 		if (interChar == null) return;
 
         // ostatni akce pri zmene
         if (active)
 		{
+			// pokusime se castit na inventory player (pokud je hrac inventory - ma otevreny inventar? pokud ano, zavreme ho)
+			FPSCharacter_Inventory invChar = interChar as FPSCharacter_Inventory;
+            if (invChar != null)
+				if (invChar.GetInventoryMenu().GetActive())
+					invChar.GetInventoryMenu().SetActive(false);
+			
 			// vyresetuje lean a zoom hrace
 			interChar.GetObjectCamera().SetActualLean(ObjectCamera.ELeanType.Center);
 			interChar.SetCameraZoom(false);

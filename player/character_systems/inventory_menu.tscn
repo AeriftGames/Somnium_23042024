@@ -1,0 +1,72 @@
+[gd_scene load_steps=5 format=3 uid="uid://cchvrg3orswki"]
+
+[ext_resource type="Shader" path="res://player/character_systems/vignete.gdshader" id="1_au2fw"]
+[ext_resource type="Script" path="res://player/character_systems/inventory_menu.cs" id="1_psfyt"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_stuy7"]
+shader = ExtResource("1_au2fw")
+shader_parameter/color = Color(0, 0, 0, 1)
+shader_parameter/multiplier = 0.2
+shader_parameter/softness = 0.8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4gi5n"]
+bg_color = Color(0.192157, 0.192157, 0.192157, 0.784314)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(0.882353, 0, 0.698039, 0.184314)
+corner_radius_top_left = 40
+corner_radius_top_right = 40
+corner_radius_bottom_right = 40
+corner_radius_bottom_left = 40
+corner_detail = 5
+expand_margin_left = 100.0
+expand_margin_top = 20.0
+expand_margin_right = 100.0
+
+[node name="InventoryMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_psfyt")
+
+[node name="ColorRect_Vignette" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_stuy7")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -302.0
+offset_top = -491.0
+offset_right = 302.0
+offset_bottom = 22.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_4gi5n")
+
+[node name="Label" type="Label" parent="Panel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -69.5
+offset_right = 69.5
+offset_bottom = 45.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 30
+text = "Inventory"
