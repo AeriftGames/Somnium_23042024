@@ -1,29 +1,24 @@
-[gd_scene load_steps=24 format=3 uid="uid://bpuw6pgphakl"]
+[gd_scene load_steps=20 format=3 uid="uid://bpuw6pgphakl"]
 
 [ext_resource type="Script" path="res://levels/worldlevel.cs" id="1_crawn"]
-[ext_resource type="ArrayOccluder3D" uid="uid://bc4jyw6lb2kf" path="res://levels/worldlevel_test_new_modular_lightmap.occ" id="2_1utdh"]
+[ext_resource type="ArrayOccluder3D" uid="uid://bc4jyw6lb2kf" path="res://levels/worldlevel_test_new_modular_lightmap.occ" id="2_c4bsc"]
 [ext_resource type="PackedScene" uid="uid://bet3idvc4fg0n" path="res://placeholders/PlayerStart.tscn" id="3_3h7yv"]
 [ext_resource type="Texture2D" uid="uid://cxuhj4tqdb5qw" path="res://testing_stuff_kaen/my_trim1/decals_tests2/trimsheet_3_low_DefaultMaterial_BaseColor.png" id="4_arjjw"]
 [ext_resource type="Texture2D" uid="uid://dgwuv4wnpu3rq" path="res://testing_stuff_kaen/my_trim1/decals_tests2/trimsheet_3_low_DefaultMaterial_Normal.png" id="5_ljcbc"]
 [ext_resource type="Texture2D" uid="uid://brmn7i5mran3m" path="res://testing_stuff_kaen/my_trim1/decals_strips_test/trimsheet_3_low_DefaultMaterial_BaseColor.png" id="6_rr7so"]
+[ext_resource type="PackedScene" uid="uid://jk6ussvbs84s" path="res://testing_stuff_kaen/test_lightmap_level/scene.tscn" id="7_i7oob"]
 [ext_resource type="Texture2D" uid="uid://2434ypekop52" path="res://testing_stuff_kaen/my_trim1/decals_strips_test/trimsheet_3_low_DefaultMaterial_Normal.png" id="7_qu148"]
-[ext_resource type="Texture2D" uid="uid://wfqgplnbjryn" path="res://textures/Cookie_tutorial_texture_flashlight.png" id="8_iy7hv"]
-[ext_resource type="PackedScene" uid="uid://6rotta4x1vn" path="res://testing_stuff_kaen/my_trim1/levelscene_test1.tscn" id="9_ofb4n"]
 [ext_resource type="Script" path="res://testing_stuff_kaen/my_trim1/test_ambient_trigger.cs" id="10_o88g7"]
 [ext_resource type="AudioStream" uid="uid://ctrnpxnfx855t" path="res://audio/audio_streams/ambient new/Creepy_ventilation_wind1.wav" id="11_pg4xo"]
 [ext_resource type="AudioStream" uid="uid://ct5irbpao1b4g" path="res://audio/audio_streams/ambient new/Atmosphere_Hallways.wav" id="12_ci0tc"]
+[ext_resource type="LightmapGIData" uid="uid://csgxfmw5r2el5" path="res://testing_stuff_kaen/test_lightmap_level/worldlevel_test_new_modular_lightmap.lmbake" id="13_ksxko"]
 [ext_resource type="AudioStream" uid="uid://c22q66lwj2uvk" path="res://audio/audio_streams/510485__lydmakeren__industrial-hall-ambience.wav" id="13_uql51"]
 [ext_resource type="AudioStream" uid="uid://cxsmbnv4gvuui" path="res://audio/audio_streams/sfx_stuff/Electricity_loop.wav" id="14_m64im"]
-[ext_resource type="PackedScene" uid="uid://cbfgum8g2n876" path="res://testing_stuff_kaen/placeholder/light_small_square.tscn" id="15_samlv"]
-[ext_resource type="Texture2D" uid="uid://dyrichinnmnxj" path="res://testing_stuff_kaen/my_trim1/decals_tests2/trimsheet_3_low_DefaultMaterial_Roughness.png" id="16_bc7c1"]
-[ext_resource type="LightmapGIData" uid="uid://c4itoxmwnmg" path="res://levels/worldlevel_test_new_modular_lightmap.lmbake" id="17_gv13v"]
+[ext_resource type="PackedScene" uid="uid://feghnu7g52ju" path="res://testing_stuff_kaen/my_trim1/door_test/door_rounded_test.tscn" id="15_lcj41"]
+[ext_resource type="PackedScene" uid="uid://nmy3836cgxpo" path="res://testing_stuff_kaen/test_lightmap_level/placeholders/kryt_oblouku.tscn" id="16_qdwjc"]
 
-[sub_resource type="Environment" id="Environment_p3qlj"]
-background_mode = 1
-background_color = Color(0.309804, 0.309804, 0.309804, 1)
-ambient_light_source = 2
-ambient_light_color = Color(0.321569, 0.321569, 0.321569, 1)
-ambient_light_energy = 0.1
+[sub_resource type="Environment" id="Environment_vsq5b"]
+background_energy_multiplier = 0.1
 tonemap_mode = 2
 tonemap_exposure = 1.2
 tonemap_white = 0.75
@@ -35,49 +30,30 @@ glow_enabled = true
 glow_normalized = true
 glow_blend_mode = 4
 fog_enabled = true
-fog_light_color = Color(0.607843, 0.639216, 0.694118, 1)
 fog_light_energy = 0.05
-fog_density = 0.0075
+fog_density = 0.025
 volumetric_fog_enabled = true
-volumetric_fog_density = 0.0275
+volumetric_fog_albedo = Color(0.513726, 0.513726, 0.513726, 1)
+adjustment_enabled = true
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_aaqwk"]
 size = Vector3(5, 5, 5)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m0dme"]
-metallic = 1.0
-roughness = 0.68
-roughness_texture = ExtResource("16_bc7c1")
-emission_enabled = true
-emission = Color(0.827451, 0, 0.00784314, 1)
-emission_energy_multiplier = 10.0
-normal_enabled = true
-normal_scale = 2.0
-normal_texture = ExtResource("5_ljcbc")
-
-[sub_resource type="SphereMesh" id="SphereMesh_k8caf"]
-material = SubResource("StandardMaterial3D_m0dme")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ssr74"]
-emission_enabled = true
-emission = Color(0.117647, 0.8, 1, 1)
-emission_energy_multiplier = 10.0
-
-[sub_resource type="SphereMesh" id="SphereMesh_vqar0"]
-material = SubResource("StandardMaterial3D_ssr74")
+[sub_resource type="FogMaterial" id="FogMaterial_nb5qj"]
+density = 0.0805
 
 [node name="worldlevel" type="Node3D"]
 script = ExtResource("1_crawn")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_p3qlj")
+environment = SubResource("Environment_vsq5b")
 
 [node name="worldlevel_occluderculling" type="OccluderInstance3D" parent="."]
-occluder = ExtResource("2_1utdh")
+occluder = ExtResource("2_c4bsc")
 metadata/_edit_lock_ = true
 
 [node name="PlayerStart" parent="." instance=ExtResource("3_3h7yv")]
-transform = Transform3D(-1, 0, 5.96046e-08, 0, 1, 0, -5.96046e-08, 0, -1, -0.721933, -1.47101, 19.9228)
+transform = Transform3D(-1, 0, 5.96046e-08, 0, 1, 0, -5.96046e-08, 0, -1, 7.31823, 0.0483053, 2.56016)
 
 [node name="Level" type="Node3D" parent="."]
 metadata/_edit_lock_ = true
@@ -1069,343 +1045,47 @@ distance_fade_length = 20.0
 [node name="Lights" type="Node3D" parent="Level"]
 metadata/_edit_lock_ = true
 
-[node name="OmniLight3D19" type="OmniLight3D" parent="Level/Lights"]
-transform = Transform3D(0.612466, 0.790479, 0.00535267, 0.548843, -0.420353, -0.722548, -0.568909, 0.445474, -0.6913, -0.619076, 1.22831, 29.2901)
-light_energy = 0.2
-light_indirect_energy = 10.0
+[node name="OmniLight3D" type="OmniLight3D" parent="Level/Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.35838, 2.16061, 2.66192)
 light_bake_mode = 1
 shadow_enabled = true
-distance_fade_enabled = true
-distance_fade_begin = 10.0
-distance_fade_shadow = 10.0
-distance_fade_length = 12.0
-omni_range = 8.0
+omni_range = 10.0
 
-[node name="OmniLight3D30" type="OmniLight3D" parent="Level/Lights"]
-transform = Transform3D(0.612466, 0.790479, 0.00535267, 0.548843, -0.420353, -0.722548, -0.568909, 0.445474, -0.6913, -0.804133, 1.20113, 16.4765)
-light_energy = 0.05
+[node name="OmniLight3D2" type="OmniLight3D" parent="Level/Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.98601, 2.16061, 23.3014)
+light_energy = 0.3
+shadow_enabled = true
+omni_range = 10.0
+
+[node name="OmniLight3D4" type="OmniLight3D" parent="Level/Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.01399, 2.16061, 16.3014)
+light_energy = 0.2
 light_indirect_energy = 5.0
-light_bake_mode = 1
+light_volumetric_fog_energy = 2.0
+light_specular = 2.05
 shadow_enabled = true
-distance_fade_enabled = true
-distance_fade_begin = 7.0
-distance_fade_shadow = 10.0
-omni_range = 7.0
-omni_attenuation = 1.27456
-
-[node name="OmniLight3D29" type="OmniLight3D" parent="Level/Lights"]
-transform = Transform3D(0.612466, 0.790479, 0.00535267, 0.548843, -0.420353, -0.722548, -0.568909, 0.445474, -0.6913, -0.777861, 0.65474, 1.95394)
-light_color = Color(1, 0.854902, 0.811765, 1)
-light_energy = 0.2
-light_indirect_energy = 15.0
-light_bake_mode = 1
-shadow_enabled = true
-distance_fade_enabled = true
-distance_fade_begin = 25.0
-distance_fade_shadow = 25.0
-distance_fade_length = 25.0
-omni_range = 25.0
-omni_attenuation = 0.189465
-
-[node name="OmniLight3D20" type="OmniLight3D" parent="Level/Lights"]
-transform = Transform3D(0.612466, 0.790479, 0.00535268, 0.548843, -0.420353, -0.722548, -0.568909, 0.445474, -0.6913, -13.3964, 2.58877, 28.1584)
-light_energy = 0.1
-light_indirect_energy = 10.0
-light_bake_mode = 1
-shadow_enabled = true
-distance_fade_enabled = true
-distance_fade_begin = 10.0
-distance_fade_shadow = 10.0
-omni_range = 10.0
-omni_attenuation = 1.51572
-
-[node name="OmniLight3D26" type="OmniLight3D" parent="Level/Lights"]
-transform = Transform3D(0.612466, 0.790479, 0.00535267, 0.548843, -0.420353, -0.722548, -0.568909, 0.445474, -0.6913, -5.14273, 0.103739, 31.4864)
-light_energy = 0.2
-light_indirect_energy = 10.0
-light_bake_mode = 1
-shadow_enabled = true
-distance_fade_enabled = true
-distance_fade_begin = 10.0
-distance_fade_shadow = 10.0
-omni_range = 3.0
-
-[node name="OmniLight3D27" type="OmniLight3D" parent="Level/Lights"]
-transform = Transform3D(0.612466, 0.790479, 0.00535267, 0.548843, -0.420353, -0.722548, -0.568909, 0.445474, -0.6913, -5.14273, 0.103739, 34.2292)
-light_energy = 0.2
-light_indirect_energy = 10.0
-light_bake_mode = 1
-shadow_enabled = true
-distance_fade_enabled = true
-distance_fade_begin = 5.0
-distance_fade_shadow = 10.0
-omni_range = 3.0
-
-[node name="OmniLight3D22" type="OmniLight3D" parent="Level/Lights"]
-transform = Transform3D(0.612466, 0.790479, 0.00535267, 0.548843, -0.420353, -0.722548, -0.568909, 0.445474, -0.6913, 0.548759, 0.773951, 36.3692)
-light_energy = 0.2
-light_indirect_energy = 10.0
-light_bake_mode = 1
-shadow_enabled = true
-distance_fade_enabled = true
-distance_fade_begin = 8.0
-distance_fade_shadow = 8.0
-distance_fade_length = 8.0
-omni_range = 3.0
-
-[node name="OmniLight3D23" type="OmniLight3D" parent="Level/Lights"]
-transform = Transform3D(0.612466, 0.790479, 0.00535267, 0.548843, -0.420353, -0.722548, -0.568909, 0.445474, -0.6913, -3.22874, 0.51013, 47.0552)
-light_energy = 0.1
-light_indirect_energy = 10.0
-light_size = 0.096
-light_specular = 0.868
-light_bake_mode = 1
-shadow_enabled = true
-distance_fade_enabled = true
-distance_fade_begin = 10.0
-distance_fade_shadow = 10.0
-omni_range = 10.0
-omni_attenuation = 1.23114
-
-[node name="OmniLight3D31" type="OmniLight3D" parent="Level/Lights"]
-transform = Transform3D(0.612466, 0.790479, 0.00535267, 0.548843, -0.420353, -0.722548, -0.568909, 0.445474, -0.6913, -4.01932, 1.60714, 43.2158)
-visible = false
-light_energy = 0.1
-light_indirect_energy = 10.0
-light_size = 0.096
-light_specular = 0.868
-light_bake_mode = 1
-shadow_enabled = true
-distance_fade_enabled = true
-omni_range = 10.0
-omni_attenuation = 1.23114
-
-[node name="OmniLight3D25" type="OmniLight3D" parent="Level/Lights"]
-transform = Transform3D(0.612466, 0.790479, 0.00535272, 0.49485, -0.378114, -0.782402, -0.616449, 0.481843, -0.62275, -3.70787, 2.00353, 42.8698)
-visible = false
-light_color = Color(1, 0.827451, 0.698039, 1)
-light_energy = 0.05
-light_indirect_energy = 10.0
-light_volumetric_fog_energy = 5.0
-light_bake_mode = 1
-shadow_enabled = true
-distance_fade_enabled = true
-omni_range = 8.0
-omni_attenuation = 1.41421
-
-[node name="OmniLight3D24" type="OmniLight3D" parent="Level/Lights"]
-transform = Transform3D(0.819842, 0.101939, 0.563443, 0.548843, -0.420353, -0.722547, 0.163189, 0.901616, -0.400572, 3.97286, 1.01129, 39.1521)
-light_energy = 0.15
-light_indirect_energy = 10.0
-light_bake_mode = 1
-shadow_enabled = true
-distance_fade_enabled = true
-distance_fade_begin = 10.0
-distance_fade_shadow = 7.0
-distance_fade_length = 12.0
-omni_range = 6.0
-omni_attenuation = 1.03526
-
-[node name="OmniLight3D21" type="OmniLight3D" parent="Level/Lights"]
-transform = Transform3D(0.612466, 0.790479, 0.00535267, 0.548843, -0.420353, -0.722548, -0.568909, 0.445474, -0.6913, 4.80546, 0.376503, 29.6668)
-light_energy = 0.15
-light_indirect_energy = 5.0
-light_bake_mode = 1
-shadow_enabled = true
-distance_fade_enabled = true
-distance_fade_begin = 5.0
-distance_fade_shadow = 10.0
 omni_range = 10.0
 
-[node name="OmniLight3D32" type="OmniLight3D" parent="Level/Lights"]
-transform = Transform3D(0.612466, 0.790479, 0.00535269, 0.548843, -0.420353, -0.722548, -0.568909, 0.445474, -0.6913, 23.2423, 0.70818, 27.4058)
-light_energy = 0.05
+[node name="OmniLight3D5" type="OmniLight3D" parent="Level/Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.01399, 2.16061, 31.3014)
+light_energy = 0.2
 light_indirect_energy = 10.0
 light_volumetric_fog_energy = 2.0
-light_size = 0.1
-light_bake_mode = 1
-shadow_enabled = true
-distance_fade_enabled = true
-distance_fade_begin = 5.0
-distance_fade_shadow = 5.0
-distance_fade_length = 5.0
+light_specular = 0.691
+omni_range = 10.0
 
-[node name="OmniLight3D34" type="OmniLight3D" parent="Level/Lights"]
-transform = Transform3D(0.612466, 0.790479, 0.0053527, 0.548843, -0.420353, -0.722548, -0.568909, 0.445474, -0.6913, 32.7219, 1.0465, 28.8132)
-light_energy = 0.15
-light_indirect_energy = 10.0
-light_volumetric_fog_energy = 2.0
-light_size = 0.05
-light_bake_mode = 1
-shadow_enabled = true
-distance_fade_enabled = true
-distance_fade_begin = 5.0
-distance_fade_shadow = 15.0
-distance_fade_length = 15.0
-omni_range = 15.0
-omni_attenuation = 1.27456
-
-[node name="OmniLight3D35" type="OmniLight3D" parent="Level/Lights"]
-transform = Transform3D(0.612466, 0.790479, 0.00535267, 0.548843, -0.420353, -0.722548, -0.568909, 0.445474, -0.6913, 33.4727, 2.45381, 40.8349)
-light_color = Color(1, 0.945098, 0.839216, 1)
-light_energy = 0.25
-light_indirect_energy = 10.0
-light_size = 0.2
-light_specular = 1.0
-light_bake_mode = 1
-shadow_enabled = true
-distance_fade_enabled = true
-distance_fade_begin = 5.0
-distance_fade_shadow = 15.0
-distance_fade_length = 15.0
-omni_range = 6.0
-
-[node name="OmniLight3D42" type="OmniLight3D" parent="Level/Lights"]
-transform = Transform3D(0.612466, 0.790479, 0.00535267, 0.548843, -0.420353, -0.722548, -0.568909, 0.445474, -0.6913, 28.5369, 1.0564, 47.3409)
+[node name="OmniLight3D3" type="OmniLight3D" parent="Level/Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.58601, 2.16061, 6.27546)
 light_energy = 0.25
 light_indirect_energy = 5.0
-light_bake_mode = 1
+light_size = 0.2
 shadow_enabled = true
-distance_fade_enabled = true
-distance_fade_begin = 5.0
-distance_fade_shadow = 15.0
-distance_fade_length = 15.0
-omni_range = 15.0
-
-[node name="OmniLight3D37" type="OmniLight3D" parent="Level/Lights"]
-transform = Transform3D(0.612466, 0.790479, 0.00535267, 0.548843, -0.420353, -0.722548, -0.568909, 0.445474, -0.6913, 45.2586, 0.165703, 12.3168)
-light_color = Color(0.6, 0.831373, 1, 1)
-light_energy = 0.15
-light_size = 0.1
-light_bake_mode = 1
-shadow_enabled = true
-distance_fade_enabled = true
-distance_fade_begin = 5.0
-distance_fade_shadow = 15.0
-distance_fade_length = 15.0
-omni_range = 6.0
-
-[node name="OmniLight3D38" type="OmniLight3D" parent="Level/Lights"]
-transform = Transform3D(0.612466, 0.790479, 0.00535267, 0.548843, -0.420353, -0.722548, -0.568909, 0.445474, -0.6913, 45.2586, 1.0507, 24.6754)
-light_color = Color(0.6, 0.831373, 1, 1)
-light_energy = 0.15
-light_indirect_energy = 10.967
-light_size = 0.1
-light_bake_mode = 1
-shadow_enabled = true
-distance_fade_enabled = true
-distance_fade_begin = 5.0
-distance_fade_shadow = 15.0
-distance_fade_length = 15.0
-omni_range = 8.0
-omni_attenuation = 1.41421
-
-[node name="OmniLight3D39" type="OmniLight3D" parent="Level/Lights"]
-transform = Transform3D(0.612466, 0.790479, 0.00535267, 0.548843, -0.420353, -0.722548, -0.568909, 0.445474, -0.6913, 53.4385, 0.828219, 21.3675)
-visible = false
-light_color = Color(0.6, 0.831373, 1, 1)
-light_energy = 0.15
-light_indirect_energy = 10.0
-light_bake_mode = 1
-shadow_enabled = true
-distance_fade_enabled = true
-distance_fade_begin = 5.0
-distance_fade_shadow = 15.0
-distance_fade_length = 15.0
 omni_range = 10.0
-
-[node name="OmniLight3D36" type="OmniLight3D" parent="Level/Lights"]
-transform = Transform3D(0.612466, 0.790479, 0.00535267, 0.548843, -0.420353, -0.722548, -0.568909, 0.445474, -0.6913, 38.0996, 1.18385, 15.419)
-visible = false
-light_energy = 0.075
-light_indirect_energy = 15.0
-light_volumetric_fog_energy = 2.0
-light_size = 0.2
-light_specular = 2.0
-light_bake_mode = 1
-shadow_enabled = true
-distance_fade_enabled = true
-distance_fade_begin = 5.0
-distance_fade_shadow = 10.0
-omni_range = 15.0
-
-[node name="OmniLight3D40" type="OmniLight3D" parent="Level/Lights"]
-transform = Transform3D(0.612466, 0.790479, 0.00535267, 0.548843, -0.420353, -0.722548, -0.568909, 0.445474, -0.6913, 31.5421, 1.02846, 6.53513)
-light_energy = 0.1
-light_indirect_energy = 8.0
-light_size = 0.2
-light_specular = 2.0
-light_bake_mode = 1
-shadow_enabled = true
-distance_fade_enabled = true
-distance_fade_begin = 12.0
-distance_fade_shadow = 10.0
-omni_range = 9.0
-
-[node name="OmniLight3D41" type="OmniLight3D" parent="Level/Lights"]
-transform = Transform3D(0.612466, 0.790479, 0.00535267, 0.548843, -0.420353, -0.722548, -0.568909, 0.445474, -0.6913, 30.1542, 0.996875, 16.655)
-light_energy = 0.1
-light_indirect_energy = 8.0
-light_size = 0.2
-light_specular = 2.0
-light_bake_mode = 1
-shadow_enabled = true
-distance_fade_enabled = true
-distance_fade_begin = 12.0
-distance_fade_shadow = 10.0
-
-[node name="OmniLight3D33" type="OmniLight3D" parent="Level/Lights"]
-transform = Transform3D(0.612466, 0.790479, 0.00535268, 0.548843, -0.420353, -0.722548, -0.568909, 0.445474, -0.6913, 12.8052, 0.535713, 31.646)
-light_energy = 0.1
-light_indirect_energy = 10.0
-light_volumetric_fog_energy = 5.0
-light_size = 0.1
-light_specular = 2.0
-light_bake_mode = 1
-shadow_enabled = true
-distance_fade_enabled = true
-distance_fade_begin = 5.0
-distance_fade_shadow = 10.0
-omni_range = 10.0
-omni_attenuation = 0.90125
-
-[node name="OmniLight3D28" type="OmniLight3D" parent="Level/Lights"]
-transform = Transform3D(0.612466, 0.790479, 0.00535267, 0.548843, -0.420353, -0.722548, -0.568909, 0.445474, -0.6913, 4.98996, 0.779087, 33.5621)
-light_energy = 0.1
-light_indirect_energy = 6.579
-light_bake_mode = 1
-shadow_enabled = true
-distance_fade_enabled = true
-distance_fade_begin = 3.0
-distance_fade_shadow = 10.0
-
-[node name="SpotLight3D" type="SpotLight3D" parent="Level/Lights"]
-transform = Transform3D(0.9125, -0.233727, 0.335731, -0.408328, -0.570036, 0.712971, 0.0247384, -0.787674, -0.615595, -3.57113, 1.88551, 42.7079)
-visible = false
-light_color = Color(1, 0.823529, 0.733333, 1)
-light_indirect_energy = 10.0
-light_volumetric_fog_energy = 2.0
-light_projector = ExtResource("8_iy7hv")
-light_bake_mode = 1
-shadow_enabled = true
-spot_range = 6.0
-spot_angle = 58.94
-
-[node name="SpotLight3D2" type="SpotLight3D" parent="Level/Lights"]
-transform = Transform3D(-0.618482, -0.652464, -0.437917, -0.293241, -0.325391, 0.898961, -0.729033, 0.684406, 0.00991868, 9.17024, 0.691434, 42.7079)
-light_color = Color(1, 0.823529, 0.733333, 1)
-light_indirect_energy = 2.0
-light_projector = ExtResource("8_iy7hv")
-light_bake_mode = 1
-shadow_enabled = true
-spot_range = 4.707
-spot_angle = 84.46
 
 [node name="LevelScenes" type="Node3D" parent="Level"]
 metadata/_edit_lock_ = true
 
-[node name="levelscene_test1" parent="Level/LevelScenes" instance=ExtResource("9_ofb4n")]
-metadata/_edit_lock_ = true
+[node name="scene" parent="Level/LevelScenes" instance=ExtResource("7_i7oob")]
 
 [node name="Area3D" type="Area3D" parent="Level"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.57313, -0.460283, 42.2246)
@@ -1485,100 +1165,53 @@ autoplay = true
 max_distance = 35.0
 bus = &"Sfx"
 
-[node name="light_small_square13" parent="." instance=ExtResource("15_samlv")]
-transform = Transform3D(-2, -1.74846e-07, 7.64274e-15, 0, -8.74228e-08, -2, 1.74846e-07, -2, 8.74228e-08, 23.3073, 1.28351, 27.3398)
-visible = false
-
-[node name="light_small_square15" parent="." instance=ExtResource("15_samlv")]
-transform = Transform3D(-1.02062, 1.41421, -0.978945, 1.38444, 4.47035e-08, -1.44338, -1.02062, -1.41421, -0.978945, 32.8431, 1.18588, 28.8426)
-
-[node name="light_small_square20" parent="." instance=ExtResource("15_samlv")]
-transform = Transform3D(1.01878, 1.41675, 0.977183, 1.38444, 1.55602e-07, -1.44338, -1.02245, 1.41167, -0.980703, 29.9712, 1.1753, 16.8526)
-
-[node name="light_small_square19" parent="." instance=ExtResource("15_samlv")]
-transform = Transform3D(-1.9999, 0.0193171, 0.00643954, -0.00624786, 0.0192598, -1.9999, -0.0193781, -1.99981, -0.0191984, 31.5289, 1.51567, 6.55246)
-
-[node name="light_small_square14" parent="." instance=ExtResource("15_samlv")]
-transform = Transform3D(-2, -1.74846e-07, 7.64274e-15, 0, -8.74228e-08, -2, 1.74846e-07, -2, 8.74228e-08, 12.9929, 1.4292, 30.9276)
-
-[node name="light_small_square16" parent="." instance=ExtResource("15_samlv")]
-transform = Transform3D(0.000250727, -2.03612, 8.74228e-08, 0, -8.90016e-08, -2, 1.59491, 0.000320077, -1.37428e-11, 38.0922, 1.40498, 15.3912)
-
-[node name="light_small_square17" parent="." instance=ExtResource("15_samlv")]
-transform = Transform3D(0.000250727, -2.03612, 8.74228e-08, 0, -8.90016e-08, -2, 1.59491, 0.000320077, -1.37428e-11, 45.4061, 1.27938, 25.0288)
-
-[node name="light_small_square18" parent="." instance=ExtResource("15_samlv")]
-transform = Transform3D(0.000250727, -2.03612, 8.74228e-08, 0, -8.90016e-08, -2, 1.59491, 0.000320077, -1.37428e-11, 53.4123, 1.29348, 21.3558)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.819892, -0.572518, 0, 0.572518, 0.819892, 45.2461, -0.293828, 35.1703)
-gi_mode = 0
-mesh = SubResource("SphereMesh_k8caf")
-
-[node name="OmniLight3D37" type="OmniLight3D" parent="MeshInstance3D"]
-transform = Transform3D(0.612466, 0.790479, 0.00535263, 0.124281, -0.0896022, -0.988193, -0.780666, 0.6059, -0.15312, -0.019249, 0.00509644, -0.00889969)
-light_color = Color(0.913725, 0, 0.156863, 1)
-light_energy = 0.2
-light_indirect_energy = 5.0
-light_volumetric_fog_energy = 12.824
-light_size = 0.2
-shadow_enabled = true
-distance_fade_enabled = true
-distance_fade_begin = 5.0
-distance_fade_shadow = 15.0
-distance_fade_length = 15.0
-omni_range = 6.0
-
-[node name="AudioStreamPlayer3D_sfc_electricity_red" type="AudioStreamPlayer3D" parent="MeshInstance3D"]
-transform = Transform3D(1, 0, 0, 0, 0.819892, 0.572518, 0, -0.572518, 0.819892, 0, 0, 0)
-stream = ExtResource("14_m64im")
-attenuation_model = 1
-volume_db = -10.0
-unit_size = 1.5
-max_db = 0.0
-pitch_scale = 0.8
-autoplay = true
-max_distance = 50.0
-bus = &"Sfx"
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.819892, -0.572518, 0, 0.572518, 0.819892, 45.5265, -0.0343122, 6.99951)
-gi_mode = 2
-mesh = SubResource("SphereMesh_vqar0")
-
-[node name="OmniLight3D37" type="OmniLight3D" parent="MeshInstance3D2"]
-transform = Transform3D(0.612466, 0.790479, 0.00535263, 0.124281, -0.0896022, -0.988193, -0.780666, 0.6059, -0.15312, -0.019249, 0.00509644, -0.00889969)
-light_color = Color(0, 0.52549, 0.752941, 1)
-light_energy = 0.2
-light_indirect_energy = 5.0
-light_volumetric_fog_energy = 12.824
-light_size = 0.2
-shadow_enabled = true
-distance_fade_enabled = true
-distance_fade_begin = 5.0
-distance_fade_shadow = 15.0
-distance_fade_length = 15.0
-omni_range = 6.0
-
-[node name="AudioStreamPlayer3D_sfc_electricity_blue" type="AudioStreamPlayer3D" parent="MeshInstance3D2"]
-transform = Transform3D(1, 0, 0, 0, 0.819892, 0.572518, 0, -0.572518, 0.819892, 0, 0, 0)
-stream = ExtResource("14_m64im")
-attenuation_model = 1
-volume_db = -10.0
-unit_size = 1.5
-max_db = 0.0
-autoplay = true
-max_distance = 50.0
-bus = &"Sfx"
-
 [node name="LightmapGI" type="LightmapGI" parent="."]
+quality = 2
 interior = true
-light_data = ExtResource("17_gv13v")
+generate_probes_subdiv = 3
+light_data = ExtResource("13_ksxko")
 
-[node name="ReflectionProbe" type="ReflectionProbe" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.35, -0.0726586, 40.1881)
+[node name="ReflectionProbe2" type="ReflectionProbe" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.84028, 0, 21)
+intensity = 0.1
+size = Vector3(50, 50, 50)
 box_projection = true
 interior = true
 enable_shadows = true
+
+[node name="Door_rounded_test" parent="." instance=ExtResource("15_lcj41")]
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 6.00518, 1.2125, 8.81519)
+
+[node name="kryt_oblouku2" parent="Door_rounded_test" instance=ExtResource("16_qdwjc")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.0833316, 0, -0.251303)
+
+[node name="kryt_oblouku3" parent="Door_rounded_test" instance=ExtResource("16_qdwjc")]
+transform = Transform3D(-7.54979e-08, 6.60024e-15, 1, 8.74228e-08, 1, 0, 1, -8.74228e-08, 7.54979e-08, 0.0833349, 0, -0.251303)
+
+[node name="kryt_oblouku4" parent="Door_rounded_test" instance=ExtResource("16_qdwjc")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.0833349, 0, 0.248697)
+
+[node name="kryt_oblouku5" parent="Door_rounded_test" instance=ExtResource("16_qdwjc")]
+transform = Transform3D(-1.19248e-08, 1.0425e-15, -1, 8.74228e-08, 1, 0, -1, 8.74228e-08, 1.19248e-08, -0.0833316, 0, 0.248697)
+
+[node name="Door_rounded_test2" parent="." instance=ExtResource("15_lcj41")]
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 6.00518, 1.2125, 18.8152)
+
+[node name="kryt_oblouku2" parent="Door_rounded_test2" instance=ExtResource("16_qdwjc")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.0833316, 0, -0.251303)
+
+[node name="kryt_oblouku3" parent="Door_rounded_test2" instance=ExtResource("16_qdwjc")]
+transform = Transform3D(-7.54979e-08, 6.60024e-15, 1, 8.74228e-08, 1, 0, 1, -8.74228e-08, 7.54979e-08, 0.0833349, 0, -0.251303)
+
+[node name="kryt_oblouku4" parent="Door_rounded_test2" instance=ExtResource("16_qdwjc")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.0833349, 0, 0.248697)
+
+[node name="kryt_oblouku5" parent="Door_rounded_test2" instance=ExtResource("16_qdwjc")]
+transform = Transform3D(-1.19248e-08, 1.0425e-15, -1, 8.74228e-08, 1, 0, -1, 8.74228e-08, 1.19248e-08, -0.0833316, 0, 0.248697)
+
+[node name="FogVolume" type="FogVolume" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 21)
+size = Vector3(10, 10, 10)
+material = SubResource("FogMaterial_nb5qj")
 
 [connection signal="body_entered" from="Level/Area3D" to="Level/Area3D" method="_on_body_entered"]

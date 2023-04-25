@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://bumno08nbco4r"]
+
+[ext_resource type="PackedScene" uid="uid://ww1fr4i58det" path="res://testing_stuff_kaen/test_lightmap_level/models/strop.glb" id="1_1i5yp"]
+[ext_resource type="Material" uid="uid://75g41m3tp8pj" path="res://testing_stuff_kaen/my_trim1/trim1_mat.tres" id="2_j1qpg"]
+
+[node name="strop" instance=ExtResource("1_1i5yp")]
+
+[node name="strop2" parent="." index="0"]
+material_override = ExtResource("2_j1qpg")
+gi_lightmap_scale = 2
