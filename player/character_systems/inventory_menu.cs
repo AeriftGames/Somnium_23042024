@@ -1,14 +1,26 @@
 using Godot;
+using Godot.Collections;
 using System;
+
 
 public partial class inventory_menu : Control
 {
+    public enum EActiveTypeEffect {instant,anim}
 	private bool _active = false;
     private bool active_nextFrame = false;
-	// Called when the node enters the scene tree for the first time.
 
-	public override void _Ready()
+    private AnimationPlayer anim = null;
+    private AudioStreamPlayer audio = null;
+
+    [Export] public EActiveTypeEffect ActiveTypeEffect = EActiveTypeEffect.anim;
+    [Export] public Array<AudioStream> InventoryOpenAudios = null;
+    [Export] public Array<AudioStream> InventoryCloseAudios = null;
+
+    public override void _Ready()
 	{
+        anim = GetNode<AnimationPlayer>("AnimationPlayer");
+        audio = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
+
         SetActive(false);
 	}
 
@@ -25,7 +37,22 @@ public partial class inventory_menu : Control
             SetActive(false);
 	}
 
-	public void SetActive(bool newActive) 
+    public void SetActive(bool newActive)
+    {
+        switch (ActiveTypeEffect)
+        {
+            case EActiveTypeEffect.instant:
+                SetActiveInstant(newActive);
+                break;
+            case EActiveTypeEffect.anim:
+                SetActiveAnim(newActive);
+                break;
+            default:
+                break;
+        }
+    }
+
+	public void SetActiveInstant(bool newActive) 
 	{ 
 		_active = newActive;
         Visible = newActive;
@@ -44,8 +71,6 @@ public partial class inventory_menu : Control
             // zakaze char_inputs a zobrazi mys
             interChar.SetInputEnable(false);
             interChar.SetMouseVisible(true);
-
-            //SetActiveFocusButtonID(0);
         }
         else
         {
@@ -55,5 +80,54 @@ public partial class inventory_menu : Control
         }
     }
 
+    public void SetActiveAnim(bool newActive)
+    {
+        _active = newActive;
+
+        // ziskame interact charactera
+        FPSCharacter_Interaction interChar = (FPSCharacter_Interaction)GameMaster.GM.GetFPSCharacter();
+        if (interChar == null) return;
+
+        // ostatni akce pri zmene
+        if (_active)
+        {
+            Visible = newActive;
+            // vyresetuje lean a zoom hrace
+            interChar.GetObjectCamera().SetActualLean(ObjectCamera.ELeanType.Center);
+            interChar.SetCameraZoom(false);
+
+            // zakaze char_inputs a zobrazi mys
+            interChar.SetInputEnable(false);
+            interChar.SetMouseVisible(true);
+
+            // audio
+            UniversalFunctions.PlayRandomSound(audio, InventoryOpenAudios, 0, 1);
+
+            // anim
+            anim.Play("open_inventory");
+        }
+        else
+        {
+            // povoli char_inputs + captured mouse (uvnitr funkce SetInputEnable)
+            interChar.SetInputEnable(true);
+            active_nextFrame = false;
+
+            // audio
+            UniversalFunctions.PlayRandomSound(audio, InventoryCloseAudios, 0, 1);
+
+            // anim
+            anim.PlayBackwards("open_inventory");
+        }
+    }
+
     public bool GetActive() { return _active; }
+
+    public void _on_animation_player_animation_finished(string animName)
+    {
+        if (!_active)
+        {
+            Visible = false;
+            GD.Print("anim dohrala");
+        }
+    }
 }
