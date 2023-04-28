@@ -32,6 +32,7 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
 
 	public enum ECharacterMode { FlyMode, WalkMode }
 	public enum ECharacterPosture { Stand, Crunch }
+	public enum ECharacterReasonDead { NoHealth, FallFromHeight, KilledFromEnemy}
 
 	[ExportGroupAttribute("Movement Settings")]
 	[Export] public ECharacterMode CharacterMode = ECharacterMode.WalkMode;
@@ -486,7 +487,8 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
 	}
 
 	// Event when character become actual dead
-	public virtual void EventDead(string reasonDead)
+	public virtual void EventDead(ECharacterReasonDead newReasonDead, string newAdditionalData = "",
+		bool newPrintToConsole = false)
 	{
 		//GameMaster.GM.Log.WriteLog(this, LogSystem.ELogMsgType.INFO, "character is dead");
 	}

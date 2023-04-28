@@ -446,7 +446,7 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
             speedmod = 10.0f;
 
             // call event dead
-            EventDead("fall from height: " + heightfall + " m");
+            EventDead(ECharacterReasonDead.FallFromHeight, heightfall + " m");
             lerpHeadLandY = lerpHeight;
             lerpHeadLandRotX = lerpRot;
             lerpLandingSpeedModifier = speedmod;
@@ -463,11 +463,23 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
     }
 
     // EVENT Dead
-    public override void EventDead(string reasonDead)
+    public override void EventDead(ECharacterReasonDead newReasonDead, string newAdditionalData = "", 
+        bool newPrintToConsole = false)
     {
-        base.EventDead(reasonDead);
+        base.EventDead(newReasonDead, newAdditionalData, newPrintToConsole);
 
-        GameMaster.GM.Log.WriteLog(this,LogSystem.ELogMsgType.INFO,"Your character dead becouse: " + reasonDead);
+        GameMaster.GM.Log.WriteLog(this,LogSystem.ELogMsgType.INFO,"Your character dead becouse: " +
+            newReasonDead + "( " + newAdditionalData + ")");
+
+        switch (newReasonDead)
+        {
+            case ECharacterReasonDead.NoHealth:
+                break;
+            case ECharacterReasonDead.FallFromHeight:
+                break;
+            default:
+                break;
+        }
 
         // DisableInputs for character
         SetInputEnable(false);

@@ -71,6 +71,9 @@ public partial class ObjectCamera : Node3D
 		LerpObject_CameraZoom.SetTarget(65.0f);     // Initial setup = normal fov
 		lookingPoint = GetNode<Node3D>("NodeRotY/GimbalLand/NodeRotX/NodeLean/CameraLookPoint");
 		LerpObject_CameraZoomToObject.EnableUpdate(true);
+
+		// povoli lerping k characteru
+		SetLerpToCharacterEnable(true);
 	}
 
 	public void SetCharacterOwner(FPSCharacter_BasicMoving newFPSCharacter_BasicMoving)
@@ -155,12 +158,17 @@ public partial class ObjectCamera : Node3D
 		else if (ownerCharacter.IsInputEnable() && GetCameraLookInputEnable())
             UpdateCameraLookMouse(_MouseMotion, delta);
 
-		// new lerp object camera pos to player head
-		LerpObject_ObjectCameraPos.SetAllParam(GlobalPosition,
-			ownerCharacter.HeadHolderCamera.GlobalPosition, ownerCharacter.LerpSpeedPosObjectCamera);
+		// UPDATE LERP TO CHARACTER
+		if(GetIsEnableLerpToCharacter())
+		{
+            // new lerp object camera pos to player head
+            LerpObject_ObjectCameraPos.SetAllParam(GlobalPosition,
+                ownerCharacter.HeadHolderCamera.GlobalPosition, ownerCharacter.LerpSpeedPosObjectCamera);
 
-		GlobalPosition = LerpObject_ObjectCameraPos.Update(delta);
+            GlobalPosition = LerpObject_ObjectCameraPos.Update(delta);
+        }
 
+		// reset mouse to center
 		_MouseMotion = new Vector2(0, 0);
 	}
 
@@ -549,6 +557,11 @@ public partial class ObjectCamera : Node3D
 			}
 		}
 
+	}
+
+	public bool GetIsEnableLerpToCharacter()
+	{
+		return LerpObject_ObjectCameraPos.IsEnableUpdate();
 	}
 
 	public Marker3D GetHandGrabMarker()

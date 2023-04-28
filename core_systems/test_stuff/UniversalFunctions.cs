@@ -122,4 +122,16 @@ public partial class UniversalFunctions
 
         //GD.Print(audioStreams[id].ResourcePath);
     }
+    public static Vector3 GetNodeForwardVector(Node3D node3D)
+    {
+        return node3D.GlobalTransform.Basis.Z.Normalized();
+    }
+    public static Vector3 GetNodeRightVector(Node3D node3D)
+    {
+        return node3D.GlobalTransform.Basis.X.Normalized();
+    }
+    public static Vector3 GetNodeUpVector(Node3D node3D)
+    {
+        return node3D.GlobalTransform.Basis.Y.Normalized();
+    }
 }

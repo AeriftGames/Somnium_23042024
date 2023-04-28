@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://daxlyxpkjss0g"]
+
+[ext_resource type="Script" path="res://placeholders/zones/DamageZone.cs" id="1_6v1pl"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ewnmv"]
+
+[node name="DamageZone" type="Area3D"]
+collision_mask = 3
+script = ExtResource("1_6v1pl")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_ewnmv")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
