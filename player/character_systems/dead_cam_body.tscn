@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://c0ev53hpj0vs3"]
+
+[ext_resource type="Script" path="res://player/character_systems/dead_cam_body.cs" id="1_lwet5"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_adm7j"]
+size = Vector3(0.4, 0.4, 0.4)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4n5hl"]
+transparency = 1
+cull_mode = 2
+albedo_color = Color(0.922349, 0, 0.157024, 0.588235)
+grow = true
+grow_amount = 0.01
+
+[sub_resource type="BoxMesh" id="BoxMesh_1p3v3"]
+material = SubResource("StandardMaterial3D_4n5hl")
+size = Vector3(0.4, 0.4, 0.4)
+
+[node name="DeadCamBody" type="RigidBody3D"]
+mass = 5.0
+gravity_scale = 0.8
+script = ExtResource("1_lwet5")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_adm7j")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
+gi_mode = 0
+mesh = SubResource("BoxMesh_1p3v3")

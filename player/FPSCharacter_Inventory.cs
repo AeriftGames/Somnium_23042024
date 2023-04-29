@@ -4,8 +4,6 @@ using System.Linq.Expressions;
 
 public partial class FPSCharacter_Inventory : FPSCharacter_Interaction
 {
-    public bool isDead = false;
-
     private inventory_menu ourInventoryMenu = null;
 
     public override void _Ready()
@@ -22,16 +20,6 @@ public partial class FPSCharacter_Inventory : FPSCharacter_Interaction
         // opem inventory menu
         if(IsInputEnable() && !GetInventoryMenu().GetActive() && Input.IsActionJustPressed("toggleInventory"))
                 GetInventoryMenu().SetActive(true);
-
-        // Move Dead Camera to floor
-        if(isDead)
-        {
-            GD.Print("sdasdasdsad");
-
-            GetObjectCamera().GlobalPosition = GetObjectCamera().GlobalPosition.MoveToward(
-                UniversalFunctions.GetNodeUpVector(GetObjectCamera())*10,
-                (float)delta);
-        }
     }
 
     public inventory_menu GetInventoryMenu(){ return ourInventoryMenu; }
@@ -57,8 +45,13 @@ public partial class FPSCharacter_Inventory : FPSCharacter_Interaction
 
     private void ApplyNoHealthEffect()
     {
-        // vypne lerping kamery k characteru
-        GetObjectCamera().SetLerpToCharacterEnable(false);
-        isDead = true;
+        // vytvorime (spawn) DeadCamBody do levelu na misto kde se aktualne nachazela kamera
+        dead_cam_body dcb = 
+            GD.Load<PackedScene>("res://player/character_systems/dead_cam_body.tscn").Instantiate() as dead_cam_body;
+        GameMaster.GM.LevelLoader.GetActualLevelScene().AddChild(dcb);
+
+        // aktivujeme DeadCam
+        dcb.ActivateDeadCam();
+        dcb.ApplyCentralImpulse(GetLastMotion()*50f);
     }
 }
