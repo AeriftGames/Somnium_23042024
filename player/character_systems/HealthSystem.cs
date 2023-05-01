@@ -13,6 +13,8 @@ public partial class HealthSystem : Godot.GodotObject
 
     Godot.Timer timerHealthRegenTimer = null;
 
+    private bool isAlive = true;
+
     public HealthSystem(FPSCharacter_Inventory ownerInstance) 
     {
         ownnCharacter = ownerInstance;
@@ -32,6 +34,7 @@ public partial class HealthSystem : Godot.GodotObject
     public float GetHealthRegenVal() { return healthRegenVal; }
     public float GetHealthRegenTick() { return healthRegenTick; }
     public bool GetHealthRegenEnable() { return healthRegenEnable; }
+    public bool GetAlive() { return isAlive; }
     public void SetHealth(float value) { actualHealth = value; ChangeUpdate(); }
     public void SetMaxHealth(float value) { maxHealth = value; ChangeUpdate(); }
     public void SetHealthRegenVal(float value) { healthRegenVal = value; }
@@ -44,6 +47,7 @@ public partial class HealthSystem : Godot.GodotObject
         else
             timerHealthRegenTimer.Stop();
     }
+    public void SetAlive(bool value) { isAlive= value;}
 
     public void SetAllData(float newActualHealth,float newMaxHealth,float newHealthRegenVal,float newHealthRegenTick,
         bool newHealthRegenEnable)
@@ -56,7 +60,9 @@ public partial class HealthSystem : Godot.GodotObject
     }
 
     public void AddHealth(float value) 
-    { 
+    {
+        if (!isAlive) return;
+
         actualHealth += value;
         if(actualHealth > maxHealth)
             actualHealth = maxHealth;
@@ -66,6 +72,8 @@ public partial class HealthSystem : Godot.GodotObject
 
     public void RemoveHealth(float value) 
     {
+        if (!isAlive) return;
+
         actualHealth -= value;
         if(actualHealth < 0)
             actualHealth = 0;
@@ -75,6 +83,8 @@ public partial class HealthSystem : Godot.GodotObject
 
     public void RegenTick()
     {
+        if (!isAlive) return;
+
         actualHealth += healthRegenVal;
 
         if(actualHealth > maxHealth)
@@ -88,8 +98,12 @@ public partial class HealthSystem : Godot.GodotObject
         if (ownnCharacter == null) return;
         if (ownnCharacter.GetCharacterInfoHud() == null) return;
 
-        if (actualHealth < 1.0f)
+        // DEAD
+        if (actualHealth < 1.0f && isAlive)
+        {
+            isAlive = false;
             ownnCharacter.EventDead(FPSCharacter_BasicMoving.ECharacterReasonDead.NoHealth);
+        }
 
         ownnCharacter.GetCharacterInfoHud().SetDataFromPlayer();
     }
