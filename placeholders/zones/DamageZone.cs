@@ -71,6 +71,9 @@ public partial class DamageZone : Area3D
             {
                 if(!isFinished)
                 {
+                    if (printDebugToConsole)
+                        GD.Print("OneShot Damage");
+
                     characterInZone.GetHealthSystem().RemoveHealth(damageValue);
                     isFinished = true;
                 }
@@ -83,6 +86,9 @@ public partial class DamageZone : Area3D
             }
             case EDamageZoneType.DeathDamage:
             {
+                if (printDebugToConsole)
+                    GD.Print("Death Damage");
+
                 characterInZone.GetHealthSystem().RemoveHealth(characterInZone.GetHealthSystem().GetMaxHealth()*10);
                 break;
             }
@@ -102,7 +108,10 @@ public partial class DamageZone : Area3D
         {
             case EDamageZoneType.TickDamage:
             {
-                damageTick_timer.Stop();
+                if (printDebugToConsole)
+                    GD.Print("Stop Tick Damage");
+
+                    damageTick_timer.Stop();
                 break;
             }
         }
@@ -113,11 +122,17 @@ public partial class DamageZone : Area3D
     }
     public void ResetDamageZone()
     {
+        if (printDebugToConsole)
+            GD.Print("Reset Damage Zone");
+
         isFinished = false;
     }
 
     public void StartTickDamage()
     {
+        if (printDebugToConsole)
+            GD.Print("Start Tick Damage");
+
         OneTickDamage();    // prvni damage, pak uz podle timeru
         damageTick_timer.Start();
     }
@@ -125,6 +140,9 @@ public partial class DamageZone : Area3D
     public void OneTickDamage()
     {
         if (characterInZone == null) return;
+
+        if (printDebugToConsole)
+            GD.Print("One Tick Damage");
 
         characterInZone.GetHealthSystem().RemoveHealth(damageValue);
     }
