@@ -83,7 +83,7 @@ public partial class DamageZone : Area3D
             }
             case EDamageZoneType.DeathDamage:
             {
-                characterInZone.EventDead(FPSCharacter_BasicMoving.ECharacterReasonDead.NoHealth);
+                characterInZone.GetHealthSystem().RemoveHealth(characterInZone.GetHealthSystem().GetMaxHealth()*10);
                 break;
             }
         }
