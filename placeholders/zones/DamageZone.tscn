@@ -1,8 +1,20 @@
-[gd_scene load_steps=3 format=3 uid="uid://daxlyxpkjss0g"]
+[gd_scene load_steps=5 format=3 uid="uid://daxlyxpkjss0g"]
 
 [ext_resource type="Script" path="res://placeholders/zones/DamageZone.cs" id="1_6v1pl"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ewnmv"]
+resource_local_to_scene = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6u61w"]
+transparency = 1
+albedo_color = Color(0.768627, 0.262745, 0, 0.137255)
+emission_enabled = true
+emission = Color(0.117647, 0.0156863, 0, 1)
+emission_energy_multiplier = 3.66
+
+[sub_resource type="BoxMesh" id="BoxMesh_kd6hr"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_6u61w")
 
 [node name="DamageZone" type="Area3D"]
 collision_mask = 3
@@ -10,6 +22,10 @@ script = ExtResource("1_6v1pl")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_ewnmv")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("BoxMesh_kd6hr")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]
