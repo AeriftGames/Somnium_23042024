@@ -12,6 +12,8 @@ public partial class DamageZone : Area3D
     [Export] public float damageTickSeconds = 1.0f;
     [Export] public bool resetOnLeave = true;
 
+    private FPSCharacter_Inventory characterInZone = null;
+
     [Export] public bool _debugVisible { 
         get { return debugVisible; }
         set { debugVisible = value; SetDebugVisible(debugVisible); } }
@@ -42,7 +44,7 @@ public partial class DamageZone : Area3D
 
         damageTick_timer = new Godot.Timer();
         // Create timer for delaying spawn if start game
-        var callable_damageTick = new Callable(this, "TickDamage");
+        var callable_damageTick = new Callable(this, "OneTickDamage");
         damageTick_timer.Connect("timeout", callable_damageTick);
         damageTick_timer.WaitTime = damageTickSeconds;
         damageTick_timer.OneShot = false;
@@ -57,11 +59,11 @@ public partial class DamageZone : Area3D
     public void _on_body_entered(Node3D body)
     {
         // Je to hrac ?
-        FPSCharacter_BasicMoving character = body as FPSCharacter_BasicMoving;
-        if (character == null) return;
+        characterInZone = body as FPSCharacter_Inventory;
+        if (characterInZone == null) return;
 
         if(printDebugToConsole)
-            GD.Print("hrac vstoupil do DamageZone");
+            GD.Print("character vstoupil do DamageZone");
 
         switch(damageZoneType)
         {
@@ -69,7 +71,7 @@ public partial class DamageZone : Area3D
             {
                 if(!isFinished)
                 {
-                    //TODO DoDamage
+                    characterInZone.GetHealthSystem().RemoveHealth(damageValue);
                     isFinished = true;
                 }
                 break;
@@ -81,7 +83,7 @@ public partial class DamageZone : Area3D
             }
             case EDamageZoneType.DeathDamage:
             {
-                character.EventDead(FPSCharacter_BasicMoving.ECharacterReasonDead.NoHealth);
+                characterInZone.EventDead(FPSCharacter_BasicMoving.ECharacterReasonDead.NoHealth);
                 break;
             }
         }
@@ -90,11 +92,11 @@ public partial class DamageZone : Area3D
     public void _on_body_exited(Node3D body)
     {
         // Je to hrac ?
-        FPSCharacter_BasicMoving character = body as FPSCharacter_BasicMoving;
-        if (character == null) return;
+        characterInZone = body as FPSCharacter_Inventory;
+        if (characterInZone == null) return;
 
         if (printDebugToConsole)
-            GD.Print("hrac odesel z DamageZone");
+            GD.Print("character odesel z DamageZone");
 
         switch (damageZoneType)
         {
@@ -116,13 +118,15 @@ public partial class DamageZone : Area3D
 
     public void StartTickDamage()
     {
-        //TODO DoDamage
+        OneTickDamage();    // prvni damage, pak uz podle timeru
         damageTick_timer.Start();
     }
 
     public void OneTickDamage()
     {
-        //TODO DoDamage
+        if (characterInZone == null) return;
+
+        characterInZone.GetHealthSystem().RemoveHealth(damageValue);
     }
 
     public void UpdateBoxSize(Vector3 newSize)

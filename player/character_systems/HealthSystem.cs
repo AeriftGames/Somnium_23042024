@@ -88,6 +88,9 @@ public partial class HealthSystem : Godot.GodotObject
         if (ownnCharacter == null) return;
         if (ownnCharacter.GetCharacterInfoHud() == null) return;
 
+        if (actualHealth < 1.0f)
+            ownnCharacter.EventDead(FPSCharacter_BasicMoving.ECharacterReasonDead.NoHealth);
+
         ownnCharacter.GetCharacterInfoHud().SetDataFromPlayer();
     }
 }
