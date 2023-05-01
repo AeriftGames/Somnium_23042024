@@ -15,6 +15,9 @@ public partial class DamageZone : Area3D
     [Export] public bool _debugVisible { 
         get { return debugVisible; }
         set { debugVisible = value; SetDebugVisible(debugVisible); } }
+
+    [Export] public bool printDebugToConsole = false;
+
     [Export] public Vector3 _boxSize { 
         get {return boxSize;} 
         set {boxSize = value; UpdateBoxSize(value); } }
@@ -57,7 +60,8 @@ public partial class DamageZone : Area3D
         FPSCharacter_BasicMoving character = body as FPSCharacter_BasicMoving;
         if (character == null) return;
 
-        GD.Print("hrac vstoupil do DamageZone");
+        if(printDebugToConsole)
+            GD.Print("hrac vstoupil do DamageZone");
 
         switch(damageZoneType)
         {
@@ -89,7 +93,8 @@ public partial class DamageZone : Area3D
         FPSCharacter_BasicMoving character = body as FPSCharacter_BasicMoving;
         if (character == null) return;
 
-        GD.Print("hrac odesel z DamageZone");
+        if (printDebugToConsole)
+            GD.Print("hrac odesel z DamageZone");
 
         switch (damageZoneType)
         {
@@ -122,7 +127,8 @@ public partial class DamageZone : Area3D
 
     public void UpdateBoxSize(Vector3 newSize)
     {
-        GD.Print(newSize);
+        if (printDebugToConsole)
+            GD.Print("update DamageZone box size: " + newSize);
 
         // zkusime cast na boxshape
         BoxShape3D boxShape = GetNode<CollisionShape3D>("CollisionShape3D").Shape as BoxShape3D;

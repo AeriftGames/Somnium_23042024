@@ -4,13 +4,30 @@ using System.Linq.Expressions;
 
 public partial class FPSCharacter_Inventory : FPSCharacter_Interaction
 {
+    private CharacterInfoHud characterInfoHud = null;
     private inventory_menu ourInventoryMenu = null;
+
+    private HealthSystem healthSystem = null;
+
+    [ExportGroupAttribute("HealthSystem")]
+    [Export] public float StartActualHealth = 100.0f;
+    [Export] public float StartMaxHealth = 100.0f;
+    [Export] public float StartHealthRegenVal = 1.0f;
+    [Export] public float StartHealthRegenTick = 0.5f;
+    [Export] public bool StartHealthRegenEnable = false;
 
     public override void _Ready()
     {
         base._Ready();
 
+        //
+        characterInfoHud = GetNode<CharacterInfoHud>("AllHuds/CharacterInfoHud");
         ourInventoryMenu = GetNode<inventory_menu>("AllHuds/InventoryMenu");
+
+        // vytvori healthSystem a nastavime aktualni(startovni) hodnoty
+        healthSystem = new HealthSystem(this);
+        healthSystem.SetAllData(StartActualHealth,StartMaxHealth,StartHealthRegenVal,StartHealthRegenTick,
+            StartHealthRegenEnable);
     }
 
     public override void _PhysicsProcess(double delta)
@@ -19,7 +36,13 @@ public partial class FPSCharacter_Inventory : FPSCharacter_Interaction
 
         // opem inventory menu
         if(IsInputEnable() && !GetInventoryMenu().GetActive() && Input.IsActionJustPressed("toggleInventory"))
-                GetInventoryMenu().SetActive(true);
+            GetInventoryMenu().SetActive(true);
+
+        if (IsInputEnable() && Input.IsActionJustPressed("test_damage"))
+            GetHealthSystem().RemoveHealth(10);
+
+        if (IsInputEnable() && Input.IsActionJustPressed("test_regen"))
+            GetHealthSystem().AddHealth(10);
     }
 
     public inventory_menu GetInventoryMenu(){ return ourInventoryMenu; }
@@ -54,4 +77,7 @@ public partial class FPSCharacter_Inventory : FPSCharacter_Interaction
         dcb.ActivateDeadCam();
         dcb.ApplyCentralImpulse(GetLastMotion()*50f);
     }
+
+    public HealthSystem GetHealthSystem() { return healthSystem; }
+    public CharacterInfoHud GetCharacterInfoHud() { return characterInfoHud; }
 }

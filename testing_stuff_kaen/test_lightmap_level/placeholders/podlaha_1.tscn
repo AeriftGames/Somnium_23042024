@@ -12,7 +12,7 @@ size = Vector3(2, 0.025, 4)
 material_override = ExtResource("2_5ox3y")
 gi_lightmap_scale = 2
 
-[node name="StaticBody3D" type="StaticBody3D" parent="podlaha12" index="0" groups=["material_surface_metal"]]
+[node name="StaticBody3D" type="StaticBody3D" parent="podlaha12" index="0" groups=["material_surface_wood"]]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="podlaha12/StaticBody3D" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.74846e-07, 0, -1)
