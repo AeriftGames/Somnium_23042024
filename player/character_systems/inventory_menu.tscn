@@ -9,7 +9,7 @@
 shader = ExtResource("1_au2fw")
 shader_parameter/color = Color(0, 0, 0, 1)
 shader_parameter/multiplier = 0.0
-shader_parameter/softness = 0.727
+shader_parameter/softness = 0.7
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4gi5n"]
 bg_color = Color(0.192157, 0.192157, 0.192157, 0.784314)
@@ -24,9 +24,9 @@ corner_radius_top_right = 40
 corner_radius_bottom_right = 40
 corner_radius_bottom_left = 40
 corner_detail = 5
-expand_margin_left = 100.0
+expand_margin_left = 20.0
 expand_margin_top = 20.0
-expand_margin_right = 100.0
+expand_margin_right = 20.0
 shadow_size = 10
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_efwch"]
@@ -198,7 +198,7 @@ tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
 "handle_modes": PackedInt32Array(0, 0, 0),
-"points": PackedFloat32Array(658, -0.25, 0, 0.25, 0, 660, -0.25, 0, 0.25, 0, 658, -0.25, 0, 0.25, 0),
+"points": PackedFloat32Array(658, -0.25, 0, 0.25, 0, 658, -0.25, 0, 0.25, 0, 658, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0, 0.8, 1)
 }
 tracks/6/type = "bezier"
@@ -209,8 +209,8 @@ tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
 "handle_modes": PackedInt32Array(0, 0, 0),
-"points": PackedFloat32Array(1000, -0.25, 0, 0.25, 0, 445, -0.25, 0, 0.25, 0, 450, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 0.8, 1)
+"points": PackedFloat32Array(1000, -0.25, 0, 0.25, 0, 600, -0.25, 0, 0.25, 0, 550, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.6, 1)
 }
 tracks/7/type = "bezier"
 tracks/7/imported = false
@@ -250,9 +250,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
+metadata/_edit_lock_ = true
 
 [node name="Panel" type="Panel" parent="."]
 modulate = Color(1, 1, 1, 0)
+self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -262,10 +264,11 @@ anchor_bottom = 0.5
 offset_left = 658.0
 offset_top = 1000.0
 offset_right = 1262.0
-offset_bottom = 1665.99
+offset_bottom = 1484.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_4gi5n")
+metadata/_edit_lock_ = true
 
 [node name="Label" type="Label" parent="Panel"]
 layout_mode = 1
@@ -278,6 +281,7 @@ offset_bottom = 45.0
 grow_horizontal = 2
 theme_override_font_sizes/font_size = 30
 text = "Inventory"
+metadata/_edit_lock_ = true
 
 [node name="GridContainer" type="GridContainer" parent="Panel"]
 layout_mode = 1
@@ -291,6 +295,7 @@ offset_bottom = -51.9919
 grow_horizontal = 2
 grow_vertical = 2
 columns = 5
+metadata/_edit_lock_ = true
 
 [node name="Button" type="Button" parent="Panel/GridContainer"]
 custom_minimum_size = Vector2(120, 120)
@@ -366,6 +371,63 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_efwch")
 custom_minimum_size = Vector2(120, 120)
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_efwch")
+
+[node name="Button_L" type="Button" parent="Panel"]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -75.0
+offset_right = -50.0
+offset_bottom = 75.0
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_efwch")
+metadata/_edit_lock_ = true
+
+[node name="Label" type="Label" parent="Panel/Button_L"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -35.0
+offset_top = -30.0
+offset_right = 35.0
+offset_bottom = -4.0
+grow_horizontal = 2
+text = "Left hand"
+horizontal_alignment = 1
+
+[node name="Button_R" type="Button" parent="Panel"]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 50.0
+offset_top = -75.0
+offset_right = 200.0
+offset_bottom = 75.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_efwch")
+metadata/_edit_lock_ = true
+
+[node name="Label2" type="Label" parent="Panel/Button_R"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -37.0
+offset_top = -30.0
+offset_right = 37.0
+offset_bottom = -4.0
+grow_horizontal = 2
+text = "Right hand"
+horizontal_alignment = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
