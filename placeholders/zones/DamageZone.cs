@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 [Tool]
 public partial class DamageZone : Area3D
 {
-    public enum EDamageZoneType { OneShotDamage,TickDamage,DeathDamage}
+    public enum EDamageZoneType { OneShotDamage, TickDamage, DeathDamage }
 
     [Export] public EDamageZoneType damageZoneType = EDamageZoneType.OneShotDamage;
     [Export] public float damageValue = 10.0f;
@@ -14,10 +14,13 @@ public partial class DamageZone : Area3D
 
     private FPSCharacter_Inventory characterInZone = null;
 
-    [Export] public bool _debugVisible { 
+    [Export] public bool _debugVisible {
         get { return debugVisible; }
         set { debugVisible = value; SetDebugVisible(debugVisible); } }
 
+    [Export] public Color _debugBoxColor { 
+        get { return debugBoxColor; } 
+        set {debugBoxColor = value; SetDebugMeshColor(value); } }
     [Export] public bool printDebugToConsole = false;
 
     [Export] public Vector3 _boxSize { 
@@ -25,6 +28,7 @@ public partial class DamageZone : Area3D
         set {boxSize = value; UpdateBoxSize(value); } }
 
     bool debugVisible = false;
+    Color debugBoxColor = Color.Color8(255, 0, 0,100);
     Vector3 boxSize = new Vector3(1,1,1);
 
     private bool isFinished = false;
@@ -166,5 +170,12 @@ public partial class DamageZone : Area3D
     public void SetDebugVisible(bool newVisible)
     {
         GetNode<MeshInstance3D>("MeshInstance3D").Visible = newVisible;
+    }
+
+    public void SetDebugMeshColor(Color color)
+    {
+        StandardMaterial3D mat = GetNode<MeshInstance3D>("MeshInstance3D").GetActiveMaterial(0) as StandardMaterial3D;
+        if (mat == null) return;
+        mat.AlbedoColor = color;
     }
 }

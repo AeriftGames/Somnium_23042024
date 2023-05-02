@@ -241,6 +241,8 @@ font_size = 60
 
 [node name="Label3D_info" type="Label3D" parent="Label3D_3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7, -0.2, 0)
+text = "Damage Zone:
+test zranění charactera"
 font_size = 20
 outline_size = 10
 horizontal_alignment = 0
@@ -255,11 +257,62 @@ font_size = 60
 [node name="Label3D_info" type="Label3D" parent="Label3D_4"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.700001, -0.2, 0)
 text = "Damage Zone:
-v této oblasti hráč obdrží
-zranění [ instantní zabití ]"
+test zranění charactera"
 font_size = 20
 outline_size = 10
 horizontal_alignment = 0
+vertical_alignment = 0
+
+[node name="Label3D_6" type="Label3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -11.9872, 1.83105, 32.286)
+modulate = Color(0, 0.4, 0.635294, 1)
+text = "Damage Zone 3"
+font_size = 60
+
+[node name="Label3D_info" type="Label3D" parent="Label3D_6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)
+text = "tick damage (10 dmg/sec)"
+font_size = 20
+outline_size = 10
+vertical_alignment = 0
+
+[node name="Label3D_7" type="Label3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -11.9872, 1.83105, 29.286)
+modulate = Color(0, 0.4, 0.635294, 1)
+text = "Damage Zone 4"
+font_size = 60
+
+[node name="Label3D_info" type="Label3D" parent="Label3D_7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)
+text = "death damage (max damage)"
+font_size = 20
+outline_size = 10
+vertical_alignment = 0
+
+[node name="Label3D_8" type="Label3D" parent="."]
+transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 0.0127611, 1.83105, 29.386)
+modulate = Color(0, 0.4, 0.635294, 1)
+text = "Damage Zone 1"
+font_size = 60
+
+[node name="Label3D_info" type="Label3D" parent="Label3D_8"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)
+text = "one shot damage 15 (restart off)"
+font_size = 20
+outline_size = 10
+vertical_alignment = 0
+
+[node name="Label3D_9" type="Label3D" parent="."]
+transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 0.0127611, 1.83105, 32.386)
+modulate = Color(0, 0.4, 0.635294, 1)
+text = "Damage Zone 2"
+font_size = 60
+
+[node name="Label3D_info" type="Label3D" parent="Label3D_9"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)
+text = "one shot damage 15 (restart on)"
+font_size = 20
+outline_size = 10
 vertical_alignment = 0
 
 [node name="room1_feature" type="Node3D" parent="."]
@@ -363,7 +416,31 @@ AllUseObjectsNodePaths = Array[NodePath]([NodePath("../Door_rounded_test")])
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -9, 0, 31)
 
 [node name="DamageZone" parent="room4_feature" instance=ExtResource("17_vbyj0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 1, 9.53674e-06)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 1.4, 1.60003)
+damageZoneType = 2
 _debugVisible = true
 printDebugToConsole = true
-_boxSize = Vector3(5, 3, 5)
+_boxSize = Vector3(4, 4, 3)
+
+[node name="DamageZone2" parent="room4_feature" instance=ExtResource("17_vbyj0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 1, -1.39999)
+damageZoneType = 1
+_debugVisible = true
+_debugBoxColor = Color(0, 0.533333, 0.972549, 0.392157)
+_boxSize = Vector3(4, 4, 3)
+
+[node name="DamageZone3" parent="room4_feature" instance=ExtResource("17_vbyj0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 1.4, 1.60002)
+damageValue = 15.0
+resetOnLeave = false
+_debugVisible = true
+_debugBoxColor = Color(0.980392, 0.12549, 0, 0.392157)
+printDebugToConsole = true
+_boxSize = Vector3(4, 4, 3)
+
+[node name="DamageZone4" parent="room4_feature" instance=ExtResource("17_vbyj0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 1, -1.39999)
+damageValue = 15.0
+_debugVisible = true
+_debugBoxColor = Color(0.643137, 0.486275, 0, 0.576471)
+_boxSize = Vector3(4, 4, 3)

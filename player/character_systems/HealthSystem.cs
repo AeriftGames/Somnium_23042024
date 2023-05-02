@@ -47,7 +47,6 @@ public partial class HealthSystem : Godot.GodotObject
         else
             timerHealthRegenTimer.Stop();
     }
-    public void SetAlive(bool value) { isAlive= value;}
 
     public void SetAllData(float newActualHealth,float newMaxHealth,float newHealthRegenVal,float newHealthRegenTick,
         bool newHealthRegenEnable)
