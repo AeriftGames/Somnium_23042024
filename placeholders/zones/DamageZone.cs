@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 [Tool]
 public partial class DamageZone : Area3D
 {
-    public enum EDamageZoneType { OneShotDamage, TickDamage, DeathDamage }
+    public enum EDamageZoneType { OneShotDamage, TickDamage, DeathDamage, OneAddHealth, TickHealth}
 
     [Export] public EDamageZoneType damageZoneType = EDamageZoneType.OneShotDamage;
     [Export] public float damageValue = 10.0f;
@@ -33,6 +33,7 @@ public partial class DamageZone : Area3D
 
     private bool isFinished = false;
     Godot.Timer damageTick_timer = null;
+    Godot.Timer healthTick_timer = null;
 
     CollisionShape3D collisionShape3D = null;
     MeshInstance3D meshInstance3D = null;
@@ -46,14 +47,23 @@ public partial class DamageZone : Area3D
 
         SetDebugVisible(debugVisible);
 
-        damageTick_timer = new Godot.Timer();
         // Create timer for delaying spawn if start game
+        damageTick_timer = new Godot.Timer();
         var callable_damageTick = new Callable(this, "OneTickDamage");
         damageTick_timer.Connect("timeout", callable_damageTick);
         damageTick_timer.WaitTime = damageTickSeconds;
         damageTick_timer.OneShot = false;
         AddChild(damageTick_timer);
         damageTick_timer.Stop();
+
+        // Create timer for delaying spawn if start game
+        healthTick_timer = new Godot.Timer();
+        var callable_healthTick = new Callable(this, "OneTickHealth");
+        healthTick_timer.Connect("timeout", callable_healthTick);
+        healthTick_timer.WaitTime = damageTickSeconds;
+        healthTick_timer.OneShot = false;
+        AddChild(healthTick_timer);
+        healthTick_timer.Stop();
     }
     public override void _Process(double delta)
     {
@@ -75,10 +85,7 @@ public partial class DamageZone : Area3D
             {
                 if(!isFinished)
                 {
-                    if (printDebugToConsole)
-                        GD.Print("OneShot Damage");
-
-                    characterInZone.GetHealthSystem().RemoveHealth(damageValue);
+                    OneTickDamage();
                     isFinished = true;
                 }
                 break;
@@ -94,6 +101,20 @@ public partial class DamageZone : Area3D
                     GD.Print("Death Damage");
 
                 characterInZone.GetHealthSystem().RemoveHealth(characterInZone.GetHealthSystem().GetMaxHealth()*10);
+                break;
+            }
+            case EDamageZoneType.OneAddHealth:
+            {
+                if(!isFinished)
+                {
+                    OneTickHealth();
+                    isFinished = true;
+                }
+                break;
+            }
+            case EDamageZoneType.TickHealth:
+            {
+                StartTickHealth();
                 break;
             }
         }
@@ -115,7 +136,15 @@ public partial class DamageZone : Area3D
                 if (printDebugToConsole)
                     GD.Print("Stop Tick Damage");
 
-                    damageTick_timer.Stop();
+                damageTick_timer.Stop();
+                break;
+            }
+            case EDamageZoneType.TickHealth:
+            {
+                if (printDebugToConsole)
+                    GD.Print("Stop Tick Health");
+
+                healthTick_timer.Stop();
                 break;
             }
         }
@@ -141,6 +170,15 @@ public partial class DamageZone : Area3D
         damageTick_timer.Start();
     }
 
+    public void StartTickHealth()
+    {
+        if (printDebugToConsole)
+            GD.Print("Start Tick Damage");
+
+        OneTickHealth();    // prvni damage, pak uz podle timeru
+        healthTick_timer.Start();
+    }
+
     public void OneTickDamage()
     {
         if (characterInZone == null) return;
@@ -149,6 +187,16 @@ public partial class DamageZone : Area3D
             GD.Print("One Tick Damage");
 
         characterInZone.GetHealthSystem().RemoveHealth(damageValue);
+    }
+
+    public void OneTickHealth()
+    {
+        if (characterInZone == null) return;
+
+        if (printDebugToConsole)
+            GD.Print("One Tick Health");
+
+        characterInZone.GetHealthSystem().AddHealth(damageValue);
     }
 
     public void UpdateBoxSize(Vector3 newSize)

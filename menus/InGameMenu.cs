@@ -54,7 +54,11 @@ public partial class InGameMenu : Control
 		else
 		{
 			// povoli char_inputs + captured mouse (uvnitr funkce SetInputEnable)
-            interChar.SetInputEnable(true);
+			// jen pokud je hrac typu: (inventory a vys) a pokud je nazivu
+			FPSCharacter_Inventory invChar = interChar as FPSCharacter_Inventory;
+			if (invChar != null)
+				if(invChar.GetHealthSystem().GetAlive())
+					interChar.SetInputEnable(true);
         }
 	}
 
