@@ -90,7 +90,7 @@ public partial class HealthSystem : Godot.GodotObject
             damageHud.ApplyCentralDamageEffect(GetDamageIntensityFromDamageValue(value));
 
         // shake
-        ownnCharacter.GetObjectCamera().ShakeCameraTest(GetDamageIntensityFromDamageValue(value));
+        ownnCharacter.GetObjectCamera().ShakeCameraTest(GetDamageIntensityFromDamageValue(value),0.2f,5.0f,4.0f);
     }
 
     public void RegenTick()

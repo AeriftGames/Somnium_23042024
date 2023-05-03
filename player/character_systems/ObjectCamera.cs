@@ -49,9 +49,14 @@ public partial class ObjectCamera : Node3D
 	private bool isOnHitTargetZoomToNormal = false;
 
 	// shake
-	private Vector3 needShakeRot = Vector3.Zero;	// zero = no shake
+	private Vector3 actualShakeRot = Vector3.Zero;
+	private Vector3 needShakeRot = Vector3.Zero;    // zero = no shake
+    private float shakeSpeedBack = 2.0f;
+    private float shakeSpeed = 3.0f;
+	Godot.Timer shakeTimer = null;
 
-	public override void _Ready()
+
+    public override void _Ready()
 	{
 		NodeRotY = GetNode<Node3D>("NodeRotY");
 		GimbalLand = GetNode<Node3D>("NodeRotY/GimbalLand");
@@ -79,7 +84,16 @@ public partial class ObjectCamera : Node3D
 
 		// povoli lerping k characteru
 		SetLerpToCharacterEnable(true);
-	}
+
+		shakeTimer = new Godot.Timer();
+
+        var callable_shake = new Callable(this, "ResetShake");
+        shakeTimer.Connect("timeout", callable_shake);
+        shakeTimer.WaitTime = 0.2;
+        shakeTimer.OneShot = true;
+        AddChild(shakeTimer);
+        shakeTimer.Stop();
+    }
 
 	public void SetCharacterOwner(FPSCharacter_BasicMoving newFPSCharacter_BasicMoving)
 	{
@@ -93,8 +107,8 @@ public partial class ObjectCamera : Node3D
 		FPSCharacter_Interaction character_Interaction = (FPSCharacter_Interaction)ownerCharacter;
 
 		// shake interp
-		needShakeRot = needShakeRot.Lerp(Vector3.Zero, 3.0f*(float)delta);
-		ShakeNode.Rotation = needShakeRot;
+		actualShakeRot = actualShakeRot.Lerp(needShakeRot, shakeSpeed*(float)delta);
+		ShakeNode.Rotation = actualShakeRot;
 
 		// CameraZoom Process
 		if (Mathf.Abs(LerpObject_CameraZoom.GetTarget() - Camera.Fov) > 0.15f)
@@ -599,7 +613,7 @@ public partial class ObjectCamera : Node3D
 		tweenLeanRot.Dispose();
 	}
 
-	public void ShakeCameraTest(float newIntensity)
+	public void ShakeCameraTest(float newIntensity,float newTime,float newShakeSpeedTo,float newShakeSpeedBack)
 	{
 		RandomNumberGenerator random = new RandomNumberGenerator();
 		random.Randomize();
@@ -620,5 +634,17 @@ public partial class ObjectCamera : Node3D
 
 		GD.Print(a+","+b+","+c);
 		needShakeRot = new Vector3(a,b,c) * newIntensity;
+		shakeSpeed = newShakeSpeedTo;
+		shakeSpeedBack = newShakeSpeedBack;
+
+		shakeTimer.WaitTime = newTime;
+		shakeTimer.Start();
     }
+
+	public void ResetShake()
+	{
+		needShakeRot = Vector3.Zero;
+		shakeSpeed = shakeSpeedBack;
+		shakeTimer.Stop();
+	}
 }
