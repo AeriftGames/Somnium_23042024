@@ -88,6 +88,9 @@ public partial class HealthSystem : Godot.GodotObject
         // pokud existuje damageHud - aplikujeme damage effect
         if (damageHud != null)
             damageHud.ApplyCentralDamageEffect(GetDamageIntensityFromDamageValue(value));
+
+        // shake
+        ownnCharacter.GetObjectCamera().ShakeCameraTest(GetDamageIntensityFromDamageValue(value));
     }
 
     public void RegenTick()
@@ -124,6 +127,6 @@ public partial class HealthSystem : Godot.GodotObject
         else if (value > 19)
             return 0.6f;
         else
-            return 0.0f;
+            return 0.15f;
     }
 }

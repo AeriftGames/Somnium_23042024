@@ -48,6 +48,9 @@ public partial class ObjectCamera : Node3D
 	private bool isZoomRotSetDirection = false;
 	private bool isOnHitTargetZoomToNormal = false;
 
+	// shake
+	private Vector3 needShakeRot = Vector3.Zero;	// zero = no shake
+
 	public override void _Ready()
 	{
 		NodeRotY = GetNode<Node3D>("NodeRotY");
@@ -88,6 +91,10 @@ public partial class ObjectCamera : Node3D
 		if (GameMaster.GM.GetIsQuitting()) return;
 
 		FPSCharacter_Interaction character_Interaction = (FPSCharacter_Interaction)ownerCharacter;
+
+		// shake interp
+		needShakeRot = needShakeRot.Lerp(Vector3.Zero, 3.0f*(float)delta);
+		ShakeNode.Rotation = needShakeRot;
 
 		// CameraZoom Process
 		if (Mathf.Abs(LerpObject_CameraZoom.GetTarget() - Camera.Fov) > 0.15f)
@@ -594,6 +601,24 @@ public partial class ObjectCamera : Node3D
 
 	public void ShakeCameraTest(float newIntensity)
 	{
+		RandomNumberGenerator random = new RandomNumberGenerator();
+		random.Randomize();
 
-	}
+        FastNoiseLite noise = new FastNoiseLite();
+        noise.Seed = (int)random.Randi();
+		noise.FractalOctaves = 4;
+		noise.Frequency = 5.0f;
+		noise.FractalGain = 1.0f;
+
+        random.Randomize();
+        float a = noise.GetNoise1D(random.Randf());
+        random.Randomize();
+        float b = noise.GetNoise1D(random.Randf());
+        random.Randomize();
+        float c = noise.GetNoise1D(random.Randf());
+		//
+
+		GD.Print(a+","+b+","+c);
+		needShakeRot = new Vector3(a,b,c) * newIntensity;
+    }
 }
