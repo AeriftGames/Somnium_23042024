@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://u0vw3ohp0vjn"]
+[gd_scene load_steps=7 format=3 uid="uid://u0vw3ohp0vjn"]
 
 [ext_resource type="PackedScene" uid="uid://0g1u2jvnfbpy" path="res://player/FPSCharacter_Interaction.tscn" id="1_ywg5i"]
 [ext_resource type="Script" path="res://player/FPSCharacter_Inventory.cs" id="2_k43co"]
 [ext_resource type="PackedScene" uid="uid://cchvrg3orswki" path="res://player/character_systems/inventory_menu.tscn" id="3_ru8m1"]
 [ext_resource type="Script" path="res://player/character_systems/CharacterInfoHud.cs" id="4_nvx4w"]
+[ext_resource type="PackedScene" uid="uid://dhhnra4i7t74r" path="res://player/character_systems/damage_hud.tscn" id="5_dhy04"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_enw7f"]
 bg_color = Color(1, 0.164706, 0, 1)
@@ -66,5 +67,8 @@ grow_vertical = 2
 text = "100"
 horizontal_alignment = 3
 metadata/_edit_lock_ = true
+
+[node name="DamageHud" parent="AllHuds" index="3" instance=ExtResource("5_dhy04")]
+layout_mode = 1
 
 [connection signal="value_changed" from="AllHuds/CharacterInfoHud/HBoxContainer_Health/ProgressBar_Health" to="AllHuds/CharacterInfoHud" method="_on_progress_bar_health_value_changed"]

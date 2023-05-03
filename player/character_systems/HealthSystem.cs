@@ -15,9 +15,13 @@ public partial class HealthSystem : Godot.GodotObject
 
     private bool isAlive = true;
 
+    DamageHud damageHud = null;
+
     public HealthSystem(FPSCharacter_Inventory ownerInstance) 
     {
         ownnCharacter = ownerInstance;
+
+        DamageHud damageHud = ownnCharacter.GetNodeOrNull<DamageHud>("AllHuds/DamageHud");
 
         //RegenTickTimer init
         timerHealthRegenTimer = new Godot.Timer();
@@ -78,6 +82,12 @@ public partial class HealthSystem : Godot.GodotObject
             actualHealth = 0;
 
         ChangeUpdate();
+
+        // Effects
+
+        // pokud existuje damageHud - aplikujeme damage effect
+        if (damageHud != null)
+            damageHud.ApplyCentralDamageEffect(GetDamageIntensityFromDamageValue(value));
     }
 
     public void RegenTick()
@@ -105,5 +115,15 @@ public partial class HealthSystem : Godot.GodotObject
         }
 
         ownnCharacter.GetCharacterInfoHud().SetDataFromPlayer();
+    }
+
+    public float GetDamageIntensityFromDamageValue(float value)
+    {
+        if (value > 49)
+            return 1.0f;
+        else if (value > 19)
+            return 0.6f;
+        else
+            return 0.0f;
     }
 }
