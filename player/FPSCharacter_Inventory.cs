@@ -15,6 +15,9 @@ public partial class FPSCharacter_Inventory : FPSCharacter_Interaction
     [Export] public float StartHealthRegenVal = 1.0f;
     [Export] public float StartHealthRegenTick = 0.5f;
     [Export] public bool StartHealthRegenEnable = false;
+    [Export] public Godot.Collections.Array<AudioStream> HurtAudios;
+
+    AudioStreamPlayer hurtPlayer = null;
 
     public override void _Ready()
     {
@@ -28,6 +31,8 @@ public partial class FPSCharacter_Inventory : FPSCharacter_Interaction
         healthSystem = new HealthSystem(this);
         healthSystem.SetAllData(StartActualHealth,StartMaxHealth,StartHealthRegenVal,StartHealthRegenTick,
             StartHealthRegenEnable);
+
+        hurtPlayer = GetNode<AudioStreamPlayer>("AudioStreamPlayer_Hurts");
     }
 
     public override void _PhysicsProcess(double delta)
@@ -80,4 +85,6 @@ public partial class FPSCharacter_Inventory : FPSCharacter_Interaction
 
     public HealthSystem GetHealthSystem() { return healthSystem; }
     public CharacterInfoHud GetCharacterInfoHud() { return characterInfoHud; }
+    public Godot.Collections.Array<AudioStream> GetHurtAudios(){return HurtAudios;}
+    public AudioStreamPlayer GetHurtPlayer() { return hurtPlayer; }
 }

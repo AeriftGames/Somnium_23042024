@@ -91,6 +91,9 @@ public partial class HealthSystem : Godot.GodotObject
 
         // shake
         ownnCharacter.GetObjectCamera().ShakeCameraTest(GetDamageIntensityFromDamageValue(value),0.2f,5.0f,4.0f);
+
+        // audio
+        UniversalFunctions.PlayRandomSound(ownnCharacter.GetHurtPlayer(), ownnCharacter.GetHurtAudios(), 0, 1);
     }
 
     public void RegenTick()
