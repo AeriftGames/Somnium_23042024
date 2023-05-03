@@ -21,7 +21,7 @@ public partial class HealthSystem : Godot.GodotObject
     {
         ownnCharacter = ownerInstance;
 
-        DamageHud damageHud = ownnCharacter.GetNodeOrNull<DamageHud>("AllHuds/DamageHud");
+        damageHud = ownnCharacter.GetNodeOrNull<DamageHud>("AllHuds/DamageHud");
 
         //RegenTickTimer init
         timerHealthRegenTimer = new Godot.Timer();

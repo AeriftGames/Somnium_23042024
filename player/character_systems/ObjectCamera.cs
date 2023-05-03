@@ -10,6 +10,7 @@ public partial class ObjectCamera : Node3D
 	public Node3D NodeRotY = null;
 	public Node3D NodeRotX = null;
 	public Node3D NodeLean = null;
+	public Node3D ShakeNode = null;
 	public Camera3D Camera = null;
 	public Marker3D HandGrabMarker;
 	public Generic6DofJoint3D HandGrabJoint = null;
@@ -53,11 +54,12 @@ public partial class ObjectCamera : Node3D
 		GimbalLand = GetNode<Node3D>("NodeRotY/GimbalLand");
 		NodeRotX = GetNode<Node3D>("NodeRotY/GimbalLand/NodeRotX");
 		NodeLean = GetNode<Node3D>("NodeRotY/GimbalLand/NodeRotX/NodeLean");
-		Camera = GetNode<Camera3D>("NodeRotY/GimbalLand/NodeRotX/NodeLean/Camera");
-		HandGrabMarker = GetNode<Marker3D>("NodeRotY/GimbalLand/NodeRotX/NodeLean/Camera/HandGrabMarker");
-		HandGrabJoint = GetNode<Generic6DofJoint3D>("NodeRotY/GimbalLand/NodeRotX/NodeLean/Camera/HandGrabJoint");
+		ShakeNode = GetNode<Node3D>("NodeRotY/GimbalLand/NodeRotX/NodeLean/ShakeNode");
+        Camera = GetNode<Camera3D>("NodeRotY/GimbalLand/NodeRotX/NodeLean/ShakeNode/Camera");
+		HandGrabMarker = GetNode<Marker3D>("NodeRotY/GimbalLand/NodeRotX/NodeLean/ShakeNode/Camera/HandGrabMarker");
+		HandGrabJoint = GetNode<Generic6DofJoint3D>("NodeRotY/GimbalLand/NodeRotX/NodeLean/ShakeNode/Camera/HandGrabJoint");
 		HandStaticBody = GetNode<StaticBody3D>("NodeRotY/GimbalLand/NodeRotX/" +
-			"NodeLean/Camera/HandGrabMarker/HandStaticBody");
+            "NodeLean/ShakeNode/Camera/HandGrabMarker/HandStaticBody");
 
 		//lean
 		LerpPos_LeanCenter = GetNode<Node3D>("NodeRotY/GimbalLand/NodeRotX/LerpPos_LeanCenter");
@@ -69,7 +71,7 @@ public partial class ObjectCamera : Node3D
 		LerpObject_ObjectCameraPos.EnableUpdate(true);
 		LerpObject_CameraZoom.EnableUpdate(true);
 		LerpObject_CameraZoom.SetTarget(65.0f);     // Initial setup = normal fov
-		lookingPoint = GetNode<Node3D>("NodeRotY/GimbalLand/NodeRotX/NodeLean/CameraLookPoint");
+		lookingPoint = GetNode<Node3D>("NodeRotY/GimbalLand/NodeRotX/NodeLean/ShakeNode/CameraLookPoint");
 		LerpObject_CameraZoomToObject.EnableUpdate(true);
 
 		// povoli lerping k characteru
@@ -588,5 +590,10 @@ public partial class ObjectCamera : Node3D
 		tweenLeanRot.Kill();
 		tweenLeanPos.Dispose();
 		tweenLeanRot.Dispose();
+	}
+
+	public void ShakeCameraTest(float newIntensity)
+	{
+
 	}
 }

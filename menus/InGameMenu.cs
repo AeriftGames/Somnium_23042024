@@ -86,7 +86,7 @@ public partial class InGameMenu : Control
 			{
 				if(a.ButtonFocusID == newButtonID)
 				{
-                    GD.Print("FOCUS");
+                    //GD.Print("FOCUS");
                     a.GrabFocus();
 				}
 			}
