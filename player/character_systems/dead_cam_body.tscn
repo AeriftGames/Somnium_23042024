@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://c0ev53hpj0vs3"]
+[gd_scene load_steps=11 format=3 uid="uid://c0ev53hpj0vs3"]
 
 [ext_resource type="Script" path="res://player/character_systems/dead_cam_body.cs" id="1_lwet5"]
 [ext_resource type="Shader" path="res://player/character_systems/vignete.gdshader" id="2_t7kaj"]
+[ext_resource type="AudioStream" uid="uid://cuirkbqnpyhli" path="res://audio/audio_streams/music/516907__zhr__sad-outro.mp3" id="3_fj1hp"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_adm7j"]
 size = Vector3(0.4, 0.4, 0.4)
@@ -77,19 +78,41 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("ColorRect_Vignette/Label_YouAreDead:position")
+tracks/4/path = NodePath("ColorRect_Vignette/Label_HintEscape:self_modulate")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(904.5, 527)]
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/5/type = "bezier"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("ColorRect_Vignette/Label_HintEscape:scale:x")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/6/type = "bezier"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("ColorRect_Vignette/Label_HintEscape:scale:y")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
 }
 
 [sub_resource type="Animation" id="Animation_tr4s0"]
 resource_name = "death"
-length = 5.0
+length = 35.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -97,7 +120,7 @@ tracks/0/path = NodePath("ColorRect_Vignette:material:shader_parameter/multiplie
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 3, 4.5, 5),
+"times": PackedFloat32Array(0, 6.1, 7.9, 8.4),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [0.7, 0.1, -1.0, -10.0]
@@ -109,7 +132,7 @@ tracks/1/path = NodePath("ColorRect_Vignette:material:shader_parameter/softness"
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 4.5, 5),
+"times": PackedFloat32Array(0, 7.9, 8.4),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [0.833, 0.563, 0.563]
@@ -121,7 +144,7 @@ tracks/2/path = NodePath(".")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(4.5),
+"times": PackedFloat32Array(30),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
@@ -135,10 +158,10 @@ tracks/3/path = NodePath("ColorRect_Vignette/Label_YouAreDead:self_modulate")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(1.4, 4.5),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0.1, 10.1, 15),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.784314)]
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.526385), Color(0.898039, 0.137255, 0, 0.784314)]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -147,23 +170,60 @@ tracks/4/path = NodePath("ColorRect_Vignette/Label_YouAreDead:scale")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 4.5),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 13.9, 18.6),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(1, 1), Vector2(2, 2)]
+"values": [Vector2(1, 1), Vector2(1.9, 1.9), Vector2(2, 2)]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("ColorRect_Vignette/Label_YouAreDead:position")
+tracks/5/path = NodePath("ColorRect_Vignette/Label_HintEscape:self_modulate")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0, 4.5),
+"times": PackedFloat32Array(0.1, 10.1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(904.5, 527), Vector2(904.5, 450)]
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.670588)]
 }
+tracks/6/type = "bezier"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("ColorRect_Vignette/Label_HintEscape:scale:x")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 1.1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1.1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1.1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1.1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1.1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1.1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 2.5, 5, 7.5, 10.1, 12.6, 15.2, 17.7, 20.2, 22.7, 25.3, 27.8, 30.2)
+}
+tracks/7/type = "bezier"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("ColorRect_Vignette/Label_HintEscape:scale:y")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 2.5, 5, 7.5, 10.1, 12.6, 15.2, 17.7, 20.2, 22.7, 25.3, 27.8, 30.2)
+}
+tracks/8/type = "audio"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("AudioStreamPlayer2")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("3_fj1hp")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/8/use_blend = true
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_kg8ox"]
 _data = {
@@ -205,14 +265,35 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 904.5
-offset_top = 527.0
-offset_right = 1016.5
-offset_bottom = 553.0
+offset_left = -56.0
+offset_top = -90.0
+offset_right = 56.0
+offset_bottom = -63.9998
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(56, 13)
 text = "You are dead !"
+horizontal_alignment = 1
+
+[node name="Label_HintEscape" type="Label" parent="ColorRect_Vignette"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -84.5
+offset_top = -80.0
+offset_right = 84.5
+offset_bottom = -54.0
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset = Vector2(100, 13)
+theme_override_font_sizes/font_size = 16
+text = "-press [escape] to menu-"
+horizontal_alignment = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -220,6 +301,11 @@ libraries = {
 }
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+volume_db = -5.0
+max_polyphony = 2
+bus = &"Sfx"
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="."]
 volume_db = -5.0
 max_polyphony = 2
 bus = &"Sfx"

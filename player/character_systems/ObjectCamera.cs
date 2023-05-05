@@ -611,6 +611,8 @@ public partial class ObjectCamera : Node3D
 		tweenLeanRot.Kill();
 		tweenLeanPos.Dispose();
 		tweenLeanRot.Dispose();
+		shakeTimer.Stop();
+		shakeTimer.QueueFree();
 	}
 
 	public void ShakeCameraTest(float newIntensity,float newTime,float newShakeSpeedTo,float newShakeSpeedBack)
