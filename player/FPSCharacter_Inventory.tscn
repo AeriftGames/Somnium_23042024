@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://u0vw3ohp0vjn"]
+[gd_scene load_steps=13 format=3 uid="uid://u0vw3ohp0vjn"]
 
 [ext_resource type="PackedScene" uid="uid://0g1u2jvnfbpy" path="res://player/FPSCharacter_Interaction.tscn" id="1_ywg5i"]
 [ext_resource type="Script" path="res://player/FPSCharacter_Inventory.cs" id="2_k43co"]
@@ -9,6 +9,8 @@
 [ext_resource type="PackedScene" uid="uid://dhhnra4i7t74r" path="res://player/character_systems/damage_hud.tscn" id="5_dhy04"]
 [ext_resource type="AudioStream" uid="uid://df78oaoqlbkh3" path="res://audio/audio_streams/hurts_test/413184__micahlg__male_hurt6.ogg" id="5_dlixv"]
 [ext_resource type="AudioStream" uid="uid://u7gx1or5kywy" path="res://audio/audio_streams/hurts_test/413185__micahlg__male_hurt8.ogg" id="6_7ci7t"]
+[ext_resource type="AudioStream" uid="uid://c1cwof3u3h31f" path="res://audio/audio_streams/hurts_test/195954__minian89__death_blood_splatter.mp3" id="7_7o86q"]
+[ext_resource type="AudioStream" uid="uid://bg6cpkkewyfuv" path="res://audio/audio_streams/hurts_test/325269__deleted_user_2104797__body-fall-2.wav" id="8_omyuk"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_enw7f"]
 bg_color = Color(1, 0.164706, 0, 1)
@@ -21,9 +23,12 @@ StartHealthRegenVal = 1.0
 StartHealthRegenTick = 0.5
 StartHealthRegenEnable = true
 HurtAudios = Array[AudioStream]([ExtResource("3_51q7g"), ExtResource("4_m4gkb"), ExtResource("5_dlixv"), ExtResource("6_7ci7t")])
+DeathAudios = Array[AudioStream]([ExtResource("7_7o86q"), ExtResource("7_7o86q")])
+BodyFallAudios = Array[AudioStream]([ExtResource("8_omyuk")])
 
 [node name="AudioStreamPlayer_Hurts" type="AudioStreamPlayer" parent="." index="8"]
 stream = ExtResource("3_51q7g")
+max_polyphony = 2
 bus = &"Sfx"
 
 [node name="InventoryMenu" parent="AllHuds" index="1" instance=ExtResource("3_ru8m1")]

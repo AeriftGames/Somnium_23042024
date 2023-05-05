@@ -15,7 +15,11 @@ public partial class FPSCharacter_Inventory : FPSCharacter_Interaction
     [Export] public float StartHealthRegenVal = 1.0f;
     [Export] public float StartHealthRegenTick = 0.5f;
     [Export] public bool StartHealthRegenEnable = false;
+
+    [ExportGroupAttribute("DamageAndDeath")]
     [Export] public Godot.Collections.Array<AudioStream> HurtAudios;
+    [Export] public Godot.Collections.Array<AudioStream> DeathAudios;
+    [Export] public Godot.Collections.Array<AudioStream> BodyFallAudios;
 
     AudioStreamPlayer hurtPlayer = null;
 
@@ -86,5 +90,8 @@ public partial class FPSCharacter_Inventory : FPSCharacter_Interaction
     public HealthSystem GetHealthSystem() { return healthSystem; }
     public CharacterInfoHud GetCharacterInfoHud() { return characterInfoHud; }
     public Godot.Collections.Array<AudioStream> GetHurtAudios(){return HurtAudios;}
+    public Godot.Collections.Array<AudioStream> GetDeathAudios() { return DeathAudios;}
+    public Godot.Collections.Array<AudioStream> GetBodyFallAudios() { return BodyFallAudios; }
+
     public AudioStreamPlayer GetHurtPlayer() { return hurtPlayer; }
 }

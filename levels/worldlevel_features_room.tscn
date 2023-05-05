@@ -189,6 +189,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 23)
 
 [node name="Door_rounded_test" parent="room1_feature" instance=ExtResource("15_qy6qt")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 2, 1.4, 0)
+_open = true
 
 [node name="kryt_oblouku" parent="room1_feature" instance=ExtResource("16_amh0m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.71604, 1.5, 0.120489)
@@ -249,7 +250,8 @@ vertical_alignment = 0
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -9, 0, 23)
 
 [node name="Door_rounded_test" parent="room2_feature" instance=ExtResource("15_qy6qt")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 2, 1.4, 0)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 2, 1.4, 7.62939e-06)
+_open = true
 doorActionType = 1
 
 [node name="kryt_oblouku" parent="room2_feature" instance=ExtResource("16_amh0m")]

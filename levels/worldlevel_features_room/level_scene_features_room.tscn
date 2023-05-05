@@ -1,12 +1,16 @@
-[gd_scene load_steps=6 format=3 uid="uid://c0735musls8mr"]
+[gd_scene load_steps=7 format=3 uid="uid://c0735musls8mr"]
 
 [ext_resource type="PackedScene" uid="uid://d1kxvrrrbh1og" path="res://testing_stuff_kaen/test_lightmap_level/placeholders/podlaha_1.tscn" id="1_b8qmx"]
+[ext_resource type="ArrayOccluder3D" uid="uid://c65wjv3xfahhw" path="res://levels/worldlevel_features_room/level_scene_features_room.occ" id="1_j27c2"]
 [ext_resource type="PackedScene" uid="uid://d4rpdofxdtc7" path="res://testing_stuff_kaen/test_lightmap_level/placeholders/podlaha_2.tscn" id="2_ws7d0"]
 [ext_resource type="PackedScene" uid="uid://iaj0tbig7mx3" path="res://testing_stuff_kaen/test_lightmap_level/placeholders/rovna_zed2.tscn" id="4_g0b0d"]
 [ext_resource type="PackedScene" uid="uid://bumno08nbco4r" path="res://testing_stuff_kaen/test_lightmap_level/placeholders/strop.tscn" id="5_uhpqk"]
 [ext_resource type="PackedScene" uid="uid://c4tdjkvwgsep7" path="res://testing_stuff_kaen/test_lightmap_level/placeholders/sloup_rohovy.tscn" id="8_8wh66"]
 
 [node name="level_scene_feature_room" type="Node3D"]
+
+[node name="OccluderInstance3D" type="OccluderInstance3D" parent="."]
+occluder = ExtResource("1_j27c2")
 
 [node name="podlaha53" parent="." instance=ExtResource("1_b8qmx")]
 transform = Transform3D(-3.93402e-07, 0, 1, 0, 1, 0, -1, 0, -3.93402e-07, -11, 0, 20)

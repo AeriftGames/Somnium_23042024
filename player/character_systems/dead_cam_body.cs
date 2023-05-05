@@ -49,4 +49,11 @@ public partial class dead_cam_body : RigidBody3D
         // Physics Process logika zapnuta
         isActivate = true;
     }
+
+    public void _on_body_entered(Node body)
+    {
+        GD.Print("death effect");
+        FPSCharacter_Inventory char_inv = GameMaster.GM.GetFPSCharacter() as FPSCharacter_Inventory;
+        UniversalFunctions.PlayRandomSound(char_inv.GetHurtPlayer(),char_inv.GetBodyFallAudios(),0,1);
+    }
 }

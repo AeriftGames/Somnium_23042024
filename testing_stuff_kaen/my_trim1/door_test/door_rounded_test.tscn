@@ -312,7 +312,6 @@ closeDoorAudioStream = ExtResource("3_arfav")
 
 [node name="door_frame" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.734439, 6.85453e-07, 0.678675, 0.678675, 0, -0.734439, -5.06639e-07, 1, -4.76837e-07, 0, 0, 0)
-ignore_occlusion_culling = true
 mesh = SubResource("ArrayMesh_nhbdg")
 skeleton = NodePath("")
 

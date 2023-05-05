@@ -81,8 +81,6 @@ public partial class HealthSystem : Godot.GodotObject
         if(actualHealth < 0)
             actualHealth = 0;
 
-        ChangeUpdate();
-
         // Effects
 
         // pokud existuje damageHud - aplikujeme damage effect
@@ -94,6 +92,9 @@ public partial class HealthSystem : Godot.GodotObject
 
         // audio
         UniversalFunctions.PlayRandomSound(ownnCharacter.GetHurtPlayer(), ownnCharacter.GetHurtAudios(), 0, 1);
+
+        //
+        ChangeUpdate();
     }
 
     public void RegenTick()
@@ -116,7 +117,13 @@ public partial class HealthSystem : Godot.GodotObject
         // DEAD
         if (actualHealth < 1.0f && isAlive)
         {
+            GD.Print("you are dead test");
             isAlive = false;
+
+            // audio
+            UniversalFunctions.PlayRandomSound(ownnCharacter.GetHurtPlayer(), ownnCharacter.GetDeathAudios(), 0, 0.9f);
+
+            // event dead
             ownnCharacter.EventDead(FPSCharacter_BasicMoving.ECharacterReasonDead.NoHealth);
         }
 

@@ -28,3 +28,5 @@ shape = SubResource("BoxShape3D_adm7j")
 visible = false
 gi_mode = 0
 mesh = SubResource("BoxMesh_1p3v3")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
