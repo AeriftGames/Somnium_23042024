@@ -4,6 +4,7 @@ using System;
 public partial class dead_cam_body : RigidBody3D
 {
     AudioStreamPlayer audioPlayer = null;
+    AnimationPlayer animationPlayer = null;
 
     public bool isActivate = false;
     public float lerpSpeed = 100.0f;
@@ -13,6 +14,7 @@ public partial class dead_cam_body : RigidBody3D
         base._Ready();
 
         audioPlayer = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
+        animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
     }
 
     public override void _PhysicsProcess(double delta)
@@ -60,5 +62,14 @@ public partial class dead_cam_body : RigidBody3D
         GD.Print("deac cam body land");
         FPSCharacter_Inventory char_inv = GameMaster.GM.GetFPSCharacter() as FPSCharacter_Inventory;
         UniversalFunctions.PlayRandomSound(audioPlayer,char_inv.GetBodyFallAudios(),0,1);
+        animationPlayer.Play("death");
+    }
+
+    public void OpenInGameMenu()
+    {
+        FPSCharacter_Inventory char_inv = GameMaster.GM.GetFPSCharacter() as FPSCharacter_Inventory;
+
+        if(!char_inv.GetInGameMenu().GetActive())
+            char_inv.GetInGameMenu().SetActive(true);
     }
 }
