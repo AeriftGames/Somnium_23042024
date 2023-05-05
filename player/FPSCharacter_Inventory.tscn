@@ -25,6 +25,12 @@ HurtAudios = Array[AudioStream]([ExtResource("3_51q7g"), ExtResource("4_m4gkb"),
 DeathAudios = Array[AudioStream]([ExtResource("3_51q7g")])
 BodyFallAudios = Array[AudioStream]([ExtResource("7_0hcda")])
 
+[node name="AudioStreamPlayer_Footsteps" parent="." index="5"]
+max_polyphony = 3
+
+[node name="AudioStreamPlayer_JumpLand" parent="." index="6"]
+max_polyphony = 3
+
 [node name="AudioStreamPlayer_Hurts" type="AudioStreamPlayer" parent="." index="8"]
 stream = ExtResource("3_51q7g")
 max_polyphony = 4

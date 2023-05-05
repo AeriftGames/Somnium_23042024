@@ -641,6 +641,38 @@ public partial class ObjectCamera : Node3D
 		shakeTimer.Start();
     }
 
+	public void ShakeCameraRotation(float newIntensity, float newTime, float newShakeSpeedTo, float newShakeSpeedBack,
+		bool newApplyRotX = true,bool newApplyRotY = true,bool newApplyRotZ = true)
+	{
+        RandomNumberGenerator random = new RandomNumberGenerator();
+        random.Randomize();
+
+        FastNoiseLite noise = new FastNoiseLite();
+        noise.Seed = (int)random.Randi();
+        noise.FractalOctaves = 4;
+        noise.Frequency = 5.0f;
+        noise.FractalGain = 1.0f;
+
+        random.Randomize();
+        float a = noise.GetNoise1D(random.Randf());
+        random.Randomize();
+        float b = noise.GetNoise1D(random.Randf());
+        random.Randomize();
+        float c = noise.GetNoise1D(random.Randf());
+
+		Vector3 noiseVector = new Vector3(0f, 0f, 0f);
+		if(newApplyRotX) noiseVector.X = a;
+		if(newApplyRotY) noiseVector.Y = b;
+		if(newApplyRotZ) noiseVector.Z = c;
+
+        needShakeRot = noiseVector * newIntensity;
+        shakeSpeed = newShakeSpeedTo;
+        shakeSpeedBack = newShakeSpeedBack;
+
+        shakeTimer.WaitTime = newTime;
+        shakeTimer.Start();
+    }
+
 	public void ResetShake()
 	{
 		needShakeRot = Vector3.Zero;

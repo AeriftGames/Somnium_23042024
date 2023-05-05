@@ -13,8 +13,8 @@ public partial class inventory_menu : Control
     private AudioStreamPlayer audio = null;
 
     [Export] public EActiveTypeEffect ActiveTypeEffect = EActiveTypeEffect.anim;
-    [Export] public Array<AudioStream> InventoryOpenAudios = null;
-    [Export] public Array<AudioStream> InventoryCloseAudios = null;
+    [Export] public Array<AudioStream> InventoryOpenAudios;
+    [Export] public Array<AudioStream> InventoryCloseAudios;
 
     public override void _Ready()
 	{
