@@ -121,7 +121,7 @@ public partial class HealthSystem : Godot.GodotObject
             isAlive = false;
 
             // audio
-            UniversalFunctions.PlayRandomSound(ownnCharacter.GetHurtPlayer(), ownnCharacter.GetDeathAudios(), 0, 0.9f);
+            UniversalFunctions.PlayRandomSound(ownnCharacter.GetHurtPlayer(), ownnCharacter.GetDeathAudios(), 1.0f, 0.75f);
 
             // event dead
             ownnCharacter.EventDead(FPSCharacter_BasicMoving.ECharacterReasonDead.NoHealth);

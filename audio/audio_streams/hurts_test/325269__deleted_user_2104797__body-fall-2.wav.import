@@ -2,7 +2,7 @@
 
 importer="wav"
 type="AudioStreamWAV"
-uid="uid://bg6cpkkewyfuv"
+uid="uid://dcsxua2341g8"
 path="res://.godot/imported/325269__deleted_user_2104797__body-fall-2.wav-96aff524f7aa5a0eced94ba07b8e2a3f.sample"
 
 [deps]
@@ -16,7 +16,7 @@ force/8_bit=false
 force/mono=false
 force/max_rate=false
 force/max_rate_hz=44100
-edit/trim=true
+edit/trim=false
 edit/normalize=false
 edit/loop_mode=0
 edit/loop_begin=0
