@@ -105,6 +105,9 @@ public partial class inventory_menu : Control
 
             // anim
             anim.Play("open_inventory");
+
+            // camera chake
+            interChar.GetObjectCamera().ShakeCameraTest(0.3f, 0.35f, 1.0f, 2.0f);
         }
         else
         {
@@ -117,6 +120,9 @@ public partial class inventory_menu : Control
 
             // anim
             anim.PlayBackwards("open_inventory");
+
+            // camera shake
+            interChar.GetObjectCamera().ShakeCameraTest(0.3f, 0.35f, 1.0f, 2.0f);
         }
     }
 

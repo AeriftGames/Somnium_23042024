@@ -9,6 +9,8 @@ public partial class dead_cam_body : RigidBody3D
     public bool isActivate = false;
     public float lerpSpeed = 100.0f;
 
+    private bool isOnceLand = false;
+
     public override void _Ready()
     {
         base._Ready();
@@ -58,11 +60,14 @@ public partial class dead_cam_body : RigidBody3D
 
     public void _on_body_entered(Node body)
     {
-        
-        GD.Print("deac cam body land");
+        if (isOnceLand) return;
+        if (body as FPSCharacter_Interaction != null) return;
+
         FPSCharacter_Inventory char_inv = GameMaster.GM.GetFPSCharacter() as FPSCharacter_Inventory;
         UniversalFunctions.PlayRandomSound(audioPlayer,char_inv.GetBodyFallAudios(),0,1);
+        //audioPlayer.Play();
         animationPlayer.Play("death");
+        isOnceLand = true;
     }
 
     public void OpenInGameMenu()

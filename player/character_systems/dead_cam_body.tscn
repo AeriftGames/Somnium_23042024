@@ -24,6 +24,69 @@ shader_parameter/color = Color(0, 0, 0, 1)
 shader_parameter/multiplier = 0.7
 shader_parameter/softness = 0.833
 
+[sub_resource type="Animation" id="Animation_kw3xb"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect_Vignette:material:shader_parameter/multiplier")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.7]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ColorRect_Vignette:material:shader_parameter/softness")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.833]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ColorRect_Vignette/Label_YouAreDead:self_modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ColorRect_Vignette/Label_YouAreDead:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("ColorRect_Vignette/Label_YouAreDead:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(904.5, 527)]
+}
+
 [sub_resource type="Animation" id="Animation_tr4s0"]
 resource_name = "death"
 length = 5.0
@@ -102,69 +165,6 @@ tracks/5/keys = {
 "values": [Vector2(904.5, 527), Vector2(904.5, 450)]
 }
 
-[sub_resource type="Animation" id="Animation_kw3xb"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("ColorRect_Vignette:material:shader_parameter/multiplier")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.7]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("ColorRect_Vignette:material:shader_parameter/softness")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.833]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("ColorRect_Vignette/Label_YouAreDead:self_modulate")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 0)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("ColorRect_Vignette/Label_YouAreDead:scale")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("ColorRect_Vignette/Label_YouAreDead:position")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(904.5, 527)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_kg8ox"]
 _data = {
 "RESET": SubResource("Animation_kw3xb"),
@@ -185,8 +185,6 @@ shape = SubResource("BoxShape3D_adm7j")
 visible = false
 gi_mode = 0
 mesh = SubResource("BoxMesh_1p3v3")
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 
 [node name="ColorRect_Vignette" type="ColorRect" parent="."]
 z_index = -1
@@ -220,5 +218,10 @@ text = "You are dead !"
 libraries = {
 "": SubResource("AnimationLibrary_kg8ox")
 }
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+volume_db = -5.0
+max_polyphony = 2
+bus = &"Sfx"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
