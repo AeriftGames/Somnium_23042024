@@ -632,7 +632,7 @@ public partial class ObjectCamera : Node3D
         float c = noise.GetNoise1D(random.Randf());
 		//
 
-		GD.Print(a+","+b+","+c);
+		// GD.Print(a+","+b+","+c);
 		needShakeRot = new Vector3(a,b,c) * newIntensity;
 		shakeSpeed = newShakeSpeedTo;
 		shakeSpeedBack = newShakeSpeedBack;

@@ -28,7 +28,7 @@ BodyFallAudios = Array[AudioStream]([ExtResource("8_omyuk")])
 
 [node name="AudioStreamPlayer_Hurts" type="AudioStreamPlayer" parent="." index="8"]
 stream = ExtResource("3_51q7g")
-max_polyphony = 2
+max_polyphony = 4
 bus = &"Sfx"
 
 [node name="InventoryMenu" parent="AllHuds" index="1" instance=ExtResource("3_ru8m1")]
