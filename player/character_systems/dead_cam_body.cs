@@ -11,6 +11,8 @@ public partial class dead_cam_body : RigidBody3D
 
     private bool isOnceLand = false;
 
+    ShakeLerp deadCamShakeLerp = null;
+
     public override void _Ready()
     {
         base._Ready();
@@ -31,6 +33,10 @@ public partial class dead_cam_body : RigidBody3D
                 GameMaster.GM.GetFPSCharacter().GetFPSCharacterCamera().
                 GlobalPosition.Lerp(GlobalPosition, lerpSpeed * (float)delta);
         }
+
+        // deadCamShake update
+        if(deadCamShakeLerp != null)
+            deadCamShakeLerp.Update(delta);
     }
 
     public void ActivateDeadCam()
@@ -47,15 +53,18 @@ public partial class dead_cam_body : RigidBody3D
         GameMaster.GM.GetFPSCharacter().GetObjectCamera().SetLerpToCharacterEnable(false);
 
         // zrusi stary child kamery s hracem
-       characterCamera.GetParent().RemoveChild(characterCamera);
+        characterCamera.GetParent().RemoveChild(characterCamera);
 
-        // kamera se nove prida jako child do levelu na puvodni globalni pozici a pohled
-        GameMaster.GM.LevelLoader.GetActualLevelScene().AddChild(characterCamera);
-        characterCamera.GlobalPosition = oldGlobalPosition;
-        characterCamera.LookAtFromPosition(characterCamera.GlobalPosition,oldDirectionPoint);
+        // nastavi nas dead_cam_body na puvodni pozici kamery a attachne ma sebe kameru
+        LookAtFromPosition(GlobalPosition,oldDirectionPoint);
+        AddChild(characterCamera);
 
         // Physics Process logika zapnuta
         isActivate = true;
+        
+        // deadCamShake init
+        deadCamShakeLerp = new ShakeLerp();
+        deadCamShakeLerp.Init(characterCamera);
     }
 
     public void _on_body_entered(Node body)
@@ -68,6 +77,10 @@ public partial class dead_cam_body : RigidBody3D
         
         animationPlayer.Play("death");
         char_inv.GetHealthSystem().GetDamageHud().StartBloodDeathHud();
+
+        //deadCamShake start shake
+        if(deadCamShakeLerp != null)
+            deadCamShakeLerp.StartBasicShake(0.7f, 0.15f, 5.0f, 1f);
 
         isOnceLand = true;
     }

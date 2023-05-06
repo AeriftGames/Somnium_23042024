@@ -49,12 +49,7 @@ public partial class ObjectCamera : Node3D
 	private bool isOnHitTargetZoomToNormal = false;
 
 	// shake
-	private Vector3 actualShakeRot = Vector3.Zero;
-	private Vector3 needShakeRot = Vector3.Zero;    // zero = no shake
-    private float shakeSpeedBack = 2.0f;
-    private float shakeSpeed = 3.0f;
-	Godot.Timer shakeTimer = null;
-
+	ShakeLerp camShakeLerp = null;
 
     public override void _Ready()
 	{
@@ -85,14 +80,9 @@ public partial class ObjectCamera : Node3D
 		// povoli lerping k characteru
 		SetLerpToCharacterEnable(true);
 
-		shakeTimer = new Godot.Timer();
-
-        var callable_shake = new Callable(this, "ResetShake");
-        shakeTimer.Connect("timeout", callable_shake);
-        shakeTimer.WaitTime = 0.2;
-        shakeTimer.OneShot = true;
-        AddChild(shakeTimer);
-        shakeTimer.Stop();
+		// init camShakeLerp
+		camShakeLerp = new ShakeLerp();
+		camShakeLerp.Init(ShakeNode);
     }
 
 	public void SetCharacterOwner(FPSCharacter_BasicMoving newFPSCharacter_BasicMoving)
@@ -106,9 +96,8 @@ public partial class ObjectCamera : Node3D
 
 		FPSCharacter_Interaction character_Interaction = (FPSCharacter_Interaction)ownerCharacter;
 
-		// shake interp
-		actualShakeRot = actualShakeRot.Lerp(needShakeRot, shakeSpeed*(float)delta);
-		ShakeNode.Rotation = actualShakeRot;
+		// camShakeLerp logic update
+		camShakeLerp.Update(delta);
 
 		// CameraZoom Process
 		if (Mathf.Abs(LerpObject_CameraZoom.GetTarget() - Camera.Fov) > 0.15f)
@@ -611,74 +600,19 @@ public partial class ObjectCamera : Node3D
 		tweenLeanRot.Kill();
 		tweenLeanPos.Dispose();
 		tweenLeanRot.Dispose();
-		shakeTimer.Stop();
-		shakeTimer.QueueFree();
-	}
 
+		camShakeLerp.FreeAll();
+	}
+	
 	public void ShakeCameraTest(float newIntensity,float newTime,float newShakeSpeedTo,float newShakeSpeedBack)
 	{
-		RandomNumberGenerator random = new RandomNumberGenerator();
-		random.Randomize();
-
-        FastNoiseLite noise = new FastNoiseLite();
-        noise.Seed = (int)random.Randi();
-		noise.FractalOctaves = 4;
-		noise.Frequency = 5.0f;
-		noise.FractalGain = 1.0f;
-
-        random.Randomize();
-        float a = noise.GetNoise1D(random.Randf());
-        random.Randomize();
-        float b = noise.GetNoise1D(random.Randf());
-        random.Randomize();
-        float c = noise.GetNoise1D(random.Randf());
-		//
-
-		// GD.Print(a+","+b+","+c);
-		needShakeRot = new Vector3(a,b,c) * newIntensity;
-		shakeSpeed = newShakeSpeedTo;
-		shakeSpeedBack = newShakeSpeedBack;
-
-		shakeTimer.WaitTime = newTime;
-		shakeTimer.Start();
+		camShakeLerp.StartBasicShake(newIntensity,newTime,newShakeSpeedTo,newShakeSpeedBack);
     }
 
 	public void ShakeCameraRotation(float newIntensity, float newTime, float newShakeSpeedTo, float newShakeSpeedBack,
 		bool newApplyRotX = true,bool newApplyRotY = true,bool newApplyRotZ = true)
 	{
-        RandomNumberGenerator random = new RandomNumberGenerator();
-        random.Randomize();
-
-        FastNoiseLite noise = new FastNoiseLite();
-        noise.Seed = (int)random.Randi();
-        noise.FractalOctaves = 4;
-        noise.Frequency = 5.0f;
-        noise.FractalGain = 1.0f;
-
-        random.Randomize();
-        float a = noise.GetNoise1D(random.Randf());
-        random.Randomize();
-        float b = noise.GetNoise1D(random.Randf());
-        random.Randomize();
-        float c = noise.GetNoise1D(random.Randf());
-
-		Vector3 noiseVector = new Vector3(0f, 0f, 0f);
-		if(newApplyRotX) noiseVector.X = a;
-		if(newApplyRotY) noiseVector.Y = b;
-		if(newApplyRotZ) noiseVector.Z = c;
-
-        needShakeRot = noiseVector * newIntensity;
-        shakeSpeed = newShakeSpeedTo;
-        shakeSpeedBack = newShakeSpeedBack;
-
-        shakeTimer.WaitTime = newTime;
-        shakeTimer.Start();
+        camShakeLerp.StartBasicShake(newIntensity, newTime, newShakeSpeedTo, newShakeSpeedBack,
+			newApplyRotX,newApplyRotY,newApplyRotZ);
     }
-
-	public void ResetShake()
-	{
-		needShakeRot = Vector3.Zero;
-		shakeSpeed = shakeSpeedBack;
-		shakeTimer.Stop();
-	}
 }
