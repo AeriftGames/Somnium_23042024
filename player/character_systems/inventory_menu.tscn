@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cchvrg3orswki"]
+[gd_scene load_steps=16 format=3 uid="uid://cchvrg3orswki"]
 
 [ext_resource type="Shader" path="res://player/character_systems/vignete.gdshader" id="1_au2fw"]
 [ext_resource type="Script" path="res://player/character_systems/inventory_menu.cs" id="1_psfyt"]
@@ -11,26 +11,27 @@ shader_parameter/color = Color(0, 0, 0, 1)
 shader_parameter/multiplier = 0.0
 shader_parameter/softness = 0.7
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4gi5n"]
-bg_color = Color(0.192157, 0.192157, 0.192157, 0.784314)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q4stf"]
+bg_color = Color(0.192157, 0.192157, 0.192157, 0)
+draw_center = false
 border_width_left = 10
 border_width_top = 10
 border_width_right = 10
 border_width_bottom = 10
 border_color = Color(1, 1, 1, 0.184314)
 border_blend = true
-corner_radius_top_left = 40
-corner_radius_top_right = 40
-corner_radius_bottom_right = 40
-corner_radius_bottom_left = 40
-corner_detail = 5
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 20
 expand_margin_left = 20.0
-expand_margin_top = 20.0
-expand_margin_right = 20.0
-shadow_size = 10
+expand_margin_top = 189.0
+expand_margin_right = 18.0
+expand_margin_bottom = 70.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_efwch"]
-bg_color = Color(0.27451, 0.27451, 0.27451, 0.541176)
+bg_color = Color(0.27451, 0.27451, 0.27451, 0.196078)
 border_width_left = 5
 border_width_top = 10
 border_width_right = 5
@@ -41,6 +42,47 @@ corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nlry6"]
+bg_color = Color(0.27451, 0.27451, 0.27451, 0.196078)
+border_width_left = 5
+border_width_top = 10
+border_width_right = 5
+border_width_bottom = 10
+border_color = Color(1, 1, 1, 0.478431)
+border_blend = true
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 50
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u4lpn"]
+bg_color = Color(0.27451, 0.27451, 0.27451, 0.196078)
+border_width_left = 5
+border_width_top = 10
+border_width_right = 5
+border_width_bottom = 10
+border_color = Color(1, 1, 1, 0.478431)
+border_blend = true
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uj0vl"]
+bg_color = Color(0.27451, 0.27451, 0.27451, 0.196078)
+draw_center = false
+border_width_left = 5
+border_width_top = 10
+border_width_right = 5
+border_width_bottom = 10
+border_color = Color(1, 1, 1, 0.478431)
+border_blend = true
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+corner_detail = 1
 
 [sub_resource type="Animation" id="Animation_y8yo1"]
 length = 0.001
@@ -133,6 +175,42 @@ tracks/7/keys = {
 "update": 1,
 "values": [7]
 }
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("TabContainer:modulate")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("TabContainer:anchors_preset")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [5]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("TabContainer:position")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(660, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_pbvvi"]
 resource_name = "open_inventory"
@@ -199,8 +277,8 @@ tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
 "handle_modes": PackedInt32Array(0, 0, 0),
-"points": PackedFloat32Array(1000, -0.25, 0, 0.25, 0, 600, -0.25, 0, 0.25, 0, 550, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 0.6, 1)
+"points": PackedFloat32Array(1000, -0.25, 0, 0.25, 0, 550, -0.25, 0, 0.25, 0, 600, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1, 1.5)
 }
 tracks/6/type = "bezier"
 tracks/6/imported = false
@@ -225,12 +303,70 @@ tracks/7/keys = {
 "update": 1,
 "values": [7, 7]
 }
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("TabContainer:modulate")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("TabContainer:anchors_preset")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [5, 5]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("TabContainer:position:y")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-150.0, 0.0]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_gvsnl"]
 _data = {
 "RESET": SubResource("Animation_y8yo1"),
 "open_inventory": SubResource("Animation_pbvvi")
 }
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n470u"]
+bg_color = Color(0.6, 0.6, 0.6, 0.294118)
+border_width_left = 10
+border_width_right = 10
+border_width_bottom = 10
+border_blend = true
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7dfki"]
+content_margin_left = 0.0
+content_margin_right = 0.0
+bg_color = Color(0, 0, 0, 0.294118)
+border_width_left = 5
+border_width_right = 5
+border_width_bottom = 5
+border_blend = true
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+corner_detail = 1
 
 [node name="InventoryMenu" type="Control"]
 layout_mode = 3
@@ -242,6 +378,7 @@ grow_vertical = 2
 script = ExtResource("1_psfyt")
 InventoryOpenAudios = Array[AudioStream]([ExtResource("2_2hhuh")])
 InventoryCloseAudios = Array[AudioStream]([ExtResource("3_521e5")])
+metadata/_edit_lock_ = true
 
 [node name="ColorRect_Vignette" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_stuy7")
@@ -270,21 +407,23 @@ offset_bottom = 1484.0
 grow_horizontal = 2
 grow_vertical = 0
 pivot_offset = Vector2(302, 242)
-theme_override_styles/panel = SubResource("StyleBoxFlat_4gi5n")
+theme_override_styles/panel = SubResource("StyleBoxFlat_q4stf")
 metadata/_edit_lock_ = true
 
 [node name="Label" type="Label" parent="Panel"]
+visible = false
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -69.5
-offset_right = 69.5
-offset_bottom = 45.0
+offset_left = -69.0
+offset_top = -462.0
+offset_right = 70.0
+offset_bottom = -417.0
 grow_horizontal = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.501961)
 theme_override_font_sizes/font_size = 30
 text = "Inventory"
-metadata/_edit_lock_ = true
 
 [node name="GridContainer" type="GridContainer" parent="Panel"]
 layout_mode = 1
@@ -305,25 +444,130 @@ custom_minimum_size = Vector2(120, 120)
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_efwch")
 
+[node name="Label_1" type="Label" parent="Panel/GridContainer/Button"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.470588)
+theme_override_colors/font_outline_color = Color(0.172549, 0.172549, 0.172549, 1)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 20
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Button2" type="Button" parent="Panel/GridContainer"]
 custom_minimum_size = Vector2(120, 120)
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_efwch")
+
+[node name="Label_2" type="Label" parent="Panel/GridContainer/Button2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.470588)
+theme_override_colors/font_outline_color = Color(0.172549, 0.172549, 0.172549, 1)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 20
+text = "2"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Button3" type="Button" parent="Panel/GridContainer"]
 custom_minimum_size = Vector2(120, 120)
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_efwch")
 
+[node name="Label_3" type="Label" parent="Panel/GridContainer/Button3"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.470588)
+theme_override_colors/font_outline_color = Color(0.172549, 0.172549, 0.172549, 1)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 20
+text = "3"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Button4" type="Button" parent="Panel/GridContainer"]
 custom_minimum_size = Vector2(120, 120)
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_efwch")
 
+[node name="Label_4" type="Label" parent="Panel/GridContainer/Button4"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.470588)
+theme_override_colors/font_outline_color = Color(0.172549, 0.172549, 0.172549, 1)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 20
+text = "4"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Button5" type="Button" parent="Panel/GridContainer"]
 custom_minimum_size = Vector2(120, 120)
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_efwch")
+
+[node name="Label_5" type="Label" parent="Panel/GridContainer/Button5"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.470588)
+theme_override_colors/font_outline_color = Color(0.172549, 0.172549, 0.172549, 1)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 20
+text = "5"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Button7" type="Button" parent="Panel/GridContainer"]
 custom_minimum_size = Vector2(120, 120)
@@ -382,14 +626,15 @@ anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
 offset_left = -200.0
-offset_top = -75.0
+offset_top = -142.0
 offset_right = -50.0
-offset_bottom = 75.0
+offset_bottom = 7.99985
 grow_vertical = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_efwch")
+theme_override_styles/normal = SubResource("StyleBoxFlat_nlry6")
 metadata/_edit_lock_ = true
 
-[node name="Label" type="Label" parent="Panel/Button_L"]
+[node name="Label_leftHand" type="Label" parent="Panel/Button_L"]
+visible = false
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -402,6 +647,27 @@ grow_horizontal = 2
 text = "Left hand"
 horizontal_alignment = 1
 
+[node name="Label_LH" type="Label" parent="Panel/Button_L"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.470588)
+theme_override_colors/font_outline_color = Color(0.172549, 0.172549, 0.172549, 1)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 20
+text = "L H"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Button_R" type="Button" parent="Panel"]
 custom_minimum_size = Vector2(150, 150)
 layout_mode = 1
@@ -411,15 +677,16 @@ anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
 offset_left = 50.0
-offset_top = -75.0
+offset_top = -142.0
 offset_right = 200.0
-offset_bottom = 75.0
+offset_bottom = 7.99985
 grow_horizontal = 0
 grow_vertical = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_efwch")
+theme_override_styles/normal = SubResource("StyleBoxFlat_u4lpn")
 metadata/_edit_lock_ = true
 
 [node name="Label2" type="Label" parent="Panel/Button_R"]
+visible = false
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -432,6 +699,87 @@ grow_horizontal = 2
 text = "Right hand"
 horizontal_alignment = 1
 
+[node name="Label_RH" type="Label" parent="Panel/Button_R"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.470588)
+theme_override_colors/font_outline_color = Color(0.192157, 0.192157, 0.192157, 1)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 20
+text = "R H"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Panel" type="Panel" parent="Panel"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -309.0
+offset_top = -28.0
+offset_right = 303.0
+offset_bottom = 49.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_uj0vl")
+metadata/_edit_lock_ = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Panel/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 6.0
+offset_top = 4.0
+offset_right = -7.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Lze vzít do ruky nebo hodit ve směru výhledu
+po pár minutách vyhasne"
+fit_content = true
+metadata/_edit_lock_ = true
+
+[node name="Label" type="Label" parent="Panel/Panel"]
+custom_minimum_size = Vector2(620, 30)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -310.0
+offset_top = -43.0
+offset_right = 310.0
+offset_bottom = -8.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 23
+text = "- světlice -"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="ColorRect" type="ColorRect" parent="Panel/Panel"]
+custom_minimum_size = Vector2(400, 2)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -300.0
+offset_top = -6.0
+offset_right = 300.0
+offset_bottom = -4.0
+grow_horizontal = 2
+color = Color(1, 1, 1, 0.498039)
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_gvsnl")
@@ -441,5 +789,30 @@ libraries = {
 stream = ExtResource("2_2hhuh")
 max_polyphony = 3
 bus = &"Sfx"
+
+[node name="TabContainer" type="TabContainer" parent="."]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(600, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 660.0
+offset_right = 1260.0
+offset_bottom = 65.0
+grow_horizontal = 2
+pivot_offset = Vector2(300, 0)
+theme_override_font_sizes/font_size = 40
+theme_override_styles/tab_selected = SubResource("StyleBoxFlat_n470u")
+theme_override_styles/tab_unselected = SubResource("StyleBoxFlat_7dfki")
+tab_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="inventory" type="TabBar" parent="TabContainer"]
+layout_mode = 2
+
+[node name="notes" type="TabBar" parent="TabContainer"]
+visible = false
+layout_mode = 2
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

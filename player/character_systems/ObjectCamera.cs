@@ -600,19 +600,22 @@ public partial class ObjectCamera : Node3D
 		tweenLeanRot.Kill();
 		tweenLeanPos.Dispose();
 		tweenLeanRot.Dispose();
-
+		/*
 		camShakeLerp.FreeAll();
+		camShakeLerp = null;*/
 	}
 	
 	public void ShakeCameraTest(float newIntensity,float newTime,float newShakeSpeedTo,float newShakeSpeedBack)
 	{
-		camShakeLerp.StartBasicShake(newIntensity,newTime,newShakeSpeedTo,newShakeSpeedBack);
+		if(camShakeLerp != null)
+			camShakeLerp.StartBasicShake(newIntensity,newTime,newShakeSpeedTo,newShakeSpeedBack);
     }
 
 	public void ShakeCameraRotation(float newIntensity, float newTime, float newShakeSpeedTo, float newShakeSpeedBack,
 		bool newApplyRotX = true,bool newApplyRotY = true,bool newApplyRotZ = true)
 	{
-        camShakeLerp.StartBasicShake(newIntensity, newTime, newShakeSpeedTo, newShakeSpeedBack,
-			newApplyRotX,newApplyRotY,newApplyRotZ);
+		if(camShakeLerp != null)
+			camShakeLerp.StartBasicShake(newIntensity, newTime, newShakeSpeedTo, newShakeSpeedBack,
+				newApplyRotX,newApplyRotY,newApplyRotZ);
     }
 }

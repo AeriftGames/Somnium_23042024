@@ -92,4 +92,11 @@ public partial class dead_cam_body : RigidBody3D
         if(!char_inv.GetInGameMenu().GetActive())
             char_inv.GetInGameMenu().SetActive(true);
     }
+
+    public void FreeAll()
+    {
+        deadCamShakeLerp.QueueFree();
+        deadCamShakeLerp.FreeAll(); //stop and freeing
+        QueueFree();
+    }
 }

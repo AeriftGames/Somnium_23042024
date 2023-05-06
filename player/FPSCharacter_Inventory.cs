@@ -23,6 +23,8 @@ public partial class FPSCharacter_Inventory : FPSCharacter_Interaction
 
     AudioStreamPlayer hurtPlayer = null;
 
+    private dead_cam_body deadCamBody = null;
+
     public override void _Ready()
     {
         base._Ready();
@@ -78,13 +80,13 @@ public partial class FPSCharacter_Inventory : FPSCharacter_Interaction
     private void ApplyNoHealthEffect()
     {
         // vytvorime (spawn) DeadCamBody do levelu na misto kde se aktualne nachazela kamera
-        dead_cam_body dcb = 
+        deadCamBody = 
             GD.Load<PackedScene>("res://player/character_systems/dead_cam_body.tscn").Instantiate() as dead_cam_body;
-        GameMaster.GM.LevelLoader.GetActualLevelScene().AddChild(dcb);
+        GameMaster.GM.LevelLoader.GetActualLevelScene().AddChild(deadCamBody);
 
         // aktivujeme DeadCam
-        dcb.ActivateDeadCam();
-        dcb.ApplyCentralImpulse(GetLastMotion()*50f);
+        deadCamBody.ActivateDeadCam();
+        deadCamBody.ApplyCentralImpulse(GetLastMotion()*50f);
     }
 
     public HealthSystem GetHealthSystem() { return healthSystem; }
@@ -94,4 +96,10 @@ public partial class FPSCharacter_Inventory : FPSCharacter_Interaction
     public Godot.Collections.Array<AudioStream> GetBodyFallAudios() { return BodyFallAudios; }
 
     public AudioStreamPlayer GetHurtPlayer() { return hurtPlayer; }
+
+    public override void FreeAll()
+    {
+        base.FreeAll();
+        //deadCamBody.FreeAll();
+    }
 }

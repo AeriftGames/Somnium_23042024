@@ -44,9 +44,11 @@ public partial class ShakeLerp : Node
 
 	public void FreeAll()
 	{
+        SetActive(false);
 		shakeTimer.Stop();
 		shakeTimer.QueueFree();
-		QueueFree();
+        shakeTimer.Free();
+        shakeTimer = null;
 	}
 
 	public void SetActive(bool newActive) { isActive = newActive; }
@@ -55,6 +57,7 @@ public partial class ShakeLerp : Node
         bool newApplyRotX = true, bool newApplyRotY = true, bool newApplyRotZ = true)
 	{
 		if (!isActive) return;
+        if (shakeTimer == null) return;
 
         RandomNumberGenerator random = new RandomNumberGenerator();
         random.Randomize();
@@ -83,6 +86,7 @@ public partial class ShakeLerp : Node
 
         shakeTimer.WaitTime = newTime;
         shakeTimer.Start();
+
     }
 
 	public void ResetShake()

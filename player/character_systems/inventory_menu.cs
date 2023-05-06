@@ -21,7 +21,7 @@ public partial class inventory_menu : Control
         anim = GetNode<AnimationPlayer>("AnimationPlayer");
         audio = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
 
-        SetActive(false);
+        SetActiveInstant(false);
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -135,5 +135,11 @@ public partial class inventory_menu : Control
             Visible = false;
             GD.Print("anim dohrala");
         }
+    }
+
+    public void SetTabsToCenter()
+    {
+        TabContainer tabs = GetNode<TabContainer>("TabContainer") as TabContainer;
+        tabs.SetAnchorsPreset(LayoutPreset.Center);
     }
 }
