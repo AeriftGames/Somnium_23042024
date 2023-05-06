@@ -166,8 +166,8 @@ public partial class CharacterInteractiveSystem : Godot.GodotObject
             character.objectCamera.SetCameraLookInputEnable(false);
 
             /* Nacte hodnoty (axis right) gamepadu */
-            Vector2 JoyLook = new Vector2(Input.GetActionStrength("LookJoyRight") - Input.GetActionStrength("LookJoyLeft"),
-            -(Input.GetActionStrength("LookJoyUp") - Input.GetActionStrength("LookJoyDown")));
+            Vector2 JoyLook = new Vector2(Input.GetActionStrength("RightStick_Right") - Input.GetActionStrength("RightStick_Left"),
+            -(Input.GetActionStrength("RightStick_Up") - Input.GetActionStrength("RightStick_Down")));
 
             /* Pokud JoyLook ma nejakou hodnotu (pohnuto packou na gamepadu) = gamepad jinak mys */
             if (JoyLook.Length() > 0 && character.IsInputEnable())

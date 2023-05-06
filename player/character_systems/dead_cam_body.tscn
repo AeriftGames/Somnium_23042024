@@ -232,10 +232,13 @@ _data = {
 }
 
 [node name="DeadCamBody" type="RigidBody3D"]
-mass = 5.0
+mass = 2.0
+inertia = Vector3(0.1, 0.1, 0.1)
 gravity_scale = 0.8
 max_contacts_reported = 1
 contact_monitor = true
+linear_damp = 1.0
+angular_damp = 1.0
 script = ExtResource("1_lwet5")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

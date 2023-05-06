@@ -4,6 +4,8 @@ using System;
 public partial class DamageHud : Control
 {
     ShaderMaterial damageShader = null;
+    AnimationPlayer animationPlayer = null;
+    TextureRect bloodTextureRect = null;
 
     [Export] float speedEffect = 1.0f;
     [Export] float defaultVal = 0.8f;
@@ -16,11 +18,18 @@ public partial class DamageHud : Control
         base._Ready();
 
         damageShader = GetNode<ColorRect>("ColorRect_Vignette").Material as ShaderMaterial;
+        animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+        bloodTextureRect = GetNode<TextureRect>("TextureRect_blood");
     }
 
     public void ApplyCentralDamageEffect(float newIntensity)
     {
         actualVal = GetEffectMultiplierFromIntensity(Mathf.Clamp(newIntensity, 0.0f, 1.0f));
+    }
+
+    public void StartBloodDeathHud()
+    {
+        animationPlayer.Play("start_blood_death_hud");
     }
 
     public override void _Process(double delta)
@@ -37,5 +46,10 @@ public partial class DamageHud : Control
     private float GetEffectMultiplierFromIntensity(float newIntensity)
     {
         return minMultitiplier - (newIntensity * (minMultitiplier-maxMutliplier));
+    }
+
+    public void SetInitBloodScreen()
+    {
+        bloodTextureRect.PivotOffset = bloodTextureRect.Size / 2;
     }
 }

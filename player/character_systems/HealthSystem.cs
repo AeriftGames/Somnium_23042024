@@ -139,4 +139,9 @@ public partial class HealthSystem : Godot.GodotObject
         else
             return 0.15f;
     }
+
+    public DamageHud GetDamageHud()
+    {
+        return damageHud;
+    }
 }

@@ -65,8 +65,10 @@ public partial class dead_cam_body : RigidBody3D
 
         FPSCharacter_Inventory char_inv = GameMaster.GM.GetFPSCharacter() as FPSCharacter_Inventory;
         UniversalFunctions.PlayRandomSound(audioPlayer,char_inv.GetBodyFallAudios(),0,1);
-        //audioPlayer.Play();
+        
         animationPlayer.Play("death");
+        char_inv.GetHealthSystem().GetDamageHud().StartBloodDeathHud();
+
         isOnceLand = true;
     }
 
