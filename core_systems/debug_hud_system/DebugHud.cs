@@ -114,7 +114,13 @@ public partial class DebugHud : Control
 			// PANEL DISABLED
 			DebugEnabledLabel.Text = "F1 for edit debug hud";
 			OptionsPanel.Visible = false;
-			GameMaster.GM.GetFPSCharacter().SetInputEnable(true);
+
+			// TRY CAST TO FPSCHARACTER INVENTORY a pokud mame aktualne otevreny inventory, preskocime zbytek kodu
+			FPSCharacter_Inventory charInventory = GameMaster.GM.GetFPSCharacter() as FPSCharacter_Inventory;
+			if(charInventory != null)
+				if (charInventory.GetInventoryMenu().GetActive()) return;
+
+            GameMaster.GM.GetFPSCharacter().SetInputEnable(true);
 			GameMaster.GM.GetFPSCharacter().SetMouseVisible(false);
 			Input.MouseMode = Input.MouseModeEnum.Captured;
 		}

@@ -124,6 +124,7 @@ layout_mode = 2
 text = "CL(9)"
 
 [node name="OptionsPanel" type="Panel" parent="."]
+top_level = true
 custom_minimum_size = Vector2(320, 170)
 layout_mode = 0
 anchor_top = 1.0
