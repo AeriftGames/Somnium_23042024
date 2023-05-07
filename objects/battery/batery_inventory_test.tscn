@@ -1,0 +1,48 @@
+[gd_scene load_steps=10 format=3 uid="uid://nourevm361bt"]
+
+[ext_resource type="PackedScene" uid="uid://byqahiy2lfr15" path="res://objects/battery/batery_new.glb" id="1_okfpk"]
+[ext_resource type="Script" path="res://core_systems/item_pickup/item_pickup.gd" id="2_2v377"]
+[ext_resource type="AudioStream" uid="uid://dl0t67nmxyl05" path="res://objects/battery/pickup.wav" id="3_p8xue"]
+[ext_resource type="PackedScene" uid="uid://dbnevtbu1g7uy" path="res://core_systems/interactive_system/interactive_object.tscn" id="5_4f1pf"]
+[ext_resource type="ArrayMesh" uid="uid://fxl3wl4n5ew8" path="res://objects/battery/battery_mesh.tres" id="5_5ybvn"]
+[ext_resource type="Script" path="res://objects/battery/battery_use.gd" id="6_6r87c"]
+[ext_resource type="PackedScene" uid="uid://culc1s4yyddk0" path="res://testing_stuff_kaen/inventory_items/InventoryItemDataNode.tscn" id="7_svdmm"]
+[ext_resource type="Script" path="res://testing_stuff_kaen/inventory_items/InventoryItemData.cs" id="8_1ry8h"]
+
+[sub_resource type="Resource" id="Resource_lbjg0"]
+script = ExtResource("8_1ry8h")
+itemName = "battery"
+itemInfoText = "tato baterie je použitelná pro mohno přístrojů včetně naší svítilny"
+itemMeshPreview = ExtResource("5_5ybvn")
+rotateInInventoryPreview = false
+canUseInHand = false
+mustBothHandsOnly = false
+canPutToWorld = false
+canUse = false
+canCombine = false
+canInspect = false
+canDelete = false
+spawnObjectScenePath = ""
+
+[node name="batery_new" node_paths=PackedStringArray("node_interact", "use_node") instance=ExtResource("1_okfpk")]
+script = ExtResource("2_2v377")
+node_interact = NodePath("interactive_object")
+use_node = NodePath("use")
+sfx = ExtResource("3_p8xue")
+
+[node name="Battery" parent="." index="0"]
+transform = Transform3D(0.04, 0, 0, 0, 0.04, 0, 0, 0, 0.04, 0, 0, 0)
+mesh = ExtResource("5_5ybvn")
+
+[node name="interactive_object" parent="." index="1" instance=ExtResource("5_4f1pf")]
+
+[node name="CollisionShape3D" parent="interactive_object/StaticBody3D" index="0"]
+transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0.0101934, 0)
+
+[node name="use" type="Node3D" parent="." index="2"]
+script = ExtResource("6_6r87c")
+
+[node name="InventoryItemDataNode" parent="." index="3" instance=ExtResource("7_svdmm")]
+Data = SubResource("Resource_lbjg0")
+
+[editable path="interactive_object"]

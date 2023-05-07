@@ -1,5 +1,4 @@
 class_name item_pickup extends Node3D
-@icon("res://core_systems/item_pickup/item_pickup_icon.svg")
 
 ## A GDSCript template used for items that can be picked up.
 ##

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://u0vw3ohp0vjn"]
+[gd_scene load_steps=13 format=3 uid="uid://u0vw3ohp0vjn"]
 
 [ext_resource type="PackedScene" uid="uid://0g1u2jvnfbpy" path="res://player/FPSCharacter_Interaction.tscn" id="1_ywg5i"]
 [ext_resource type="Script" path="res://player/FPSCharacter_Inventory.cs" id="2_k43co"]
@@ -10,6 +10,7 @@
 [ext_resource type="AudioStream" uid="uid://df78oaoqlbkh3" path="res://audio/audio_streams/hurts_test/413184__micahlg__male_hurt6.ogg" id="5_dlixv"]
 [ext_resource type="AudioStream" uid="uid://u7gx1or5kywy" path="res://audio/audio_streams/hurts_test/413185__micahlg__male_hurt8.ogg" id="6_7ci7t"]
 [ext_resource type="AudioStream" uid="uid://dcsxua2341g8" path="res://audio/audio_streams/hurts_test/325269__deleted_user_2104797__body-fall-2.wav" id="7_0hcda"]
+[ext_resource type="Script" path="res://player/character_systems/InventorySystem.cs" id="8_1wcpl"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_enw7f"]
 bg_color = Color(1, 0.164706, 0, 1)
@@ -25,13 +26,16 @@ HurtAudios = Array[AudioStream]([ExtResource("3_51q7g"), ExtResource("4_m4gkb"),
 DeathAudios = Array[AudioStream]([ExtResource("3_51q7g")])
 BodyFallAudios = Array[AudioStream]([ExtResource("7_0hcda")])
 
-[node name="AudioStreamPlayer_Footsteps" parent="." index="5"]
+[node name="InventorySystem" type="Node" parent="." index="0"]
+script = ExtResource("8_1wcpl")
+
+[node name="AudioStreamPlayer_Footsteps" parent="." index="6"]
 max_polyphony = 3
 
-[node name="AudioStreamPlayer_JumpLand" parent="." index="6"]
+[node name="AudioStreamPlayer_JumpLand" parent="." index="7"]
 max_polyphony = 3
 
-[node name="AudioStreamPlayer_Hurts" type="AudioStreamPlayer" parent="." index="8"]
+[node name="AudioStreamPlayer_Hurts" type="AudioStreamPlayer" parent="." index="9"]
 stream = ExtResource("3_51q7g")
 max_polyphony = 4
 bus = &"Sfx"

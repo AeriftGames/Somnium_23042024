@@ -8,6 +8,7 @@ public partial class FPSCharacter_Inventory : FPSCharacter_Interaction
     private inventory_menu ourInventoryMenu = null;
 
     private HealthSystem healthSystem = null;
+    private InventorySystem inventorySystem = null;
 
     [ExportGroupAttribute("HealthSystem")]
     [Export] public float StartActualHealth = 100.0f;
@@ -37,6 +38,9 @@ public partial class FPSCharacter_Inventory : FPSCharacter_Interaction
         healthSystem = new HealthSystem(this);
         healthSystem.SetAllData(StartActualHealth,StartMaxHealth,StartHealthRegenVal,StartHealthRegenTick,
             StartHealthRegenEnable);
+
+        //
+        inventorySystem = GetNode<InventorySystem>("InventorySystem");
 
         hurtPlayer = GetNode<AudioStreamPlayer>("AudioStreamPlayer_Hurts");
     }
@@ -96,6 +100,7 @@ public partial class FPSCharacter_Inventory : FPSCharacter_Interaction
     public Godot.Collections.Array<AudioStream> GetBodyFallAudios() { return BodyFallAudios; }
 
     public AudioStreamPlayer GetHurtPlayer() { return hurtPlayer; }
+    public InventorySystem GetInventorySystem() { return inventorySystem; }
 
     public override void FreeAll()
     {

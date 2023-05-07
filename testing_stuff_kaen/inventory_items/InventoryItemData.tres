@@ -1,0 +1,16 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://bknphb2dcqwp7"]
+
+[ext_resource type="Script" path="res://testing_stuff_kaen/inventory_items/InventoryItemData.cs" id="1_06mqv"]
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("1_06mqv")
+itemName = ""
+itemInfoText = 0
+rotateInInventoryPreview = false
+canUseInHand = false
+mustBothHandsOnly = false
+canPutToWorld = false
+canUse = false
+canCombine = false
+canInspect = false
