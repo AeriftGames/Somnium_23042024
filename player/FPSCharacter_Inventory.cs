@@ -33,7 +33,7 @@ public partial class FPSCharacter_Inventory : FPSCharacter_Interaction
         //
         characterInfoHud = GetNode<CharacterInfoHud>("AllHuds/CharacterInfoHud");
         ourInventoryMenu = GetNode<inventory_menu>("AllHuds/InventoryMenu");
-
+        
         // vytvori healthSystem a nastavime aktualni(startovni) hodnoty
         healthSystem = new HealthSystem(this);
         healthSystem.SetAllData(StartActualHealth,StartMaxHealth,StartHealthRegenVal,StartHealthRegenTick,
@@ -41,8 +41,10 @@ public partial class FPSCharacter_Inventory : FPSCharacter_Interaction
 
         //
         inventorySystem = GetNode<InventorySystem>("InventorySystem");
-
         hurtPlayer = GetNode<AudioStreamPlayer>("AudioStreamPlayer_Hurts");
+
+        // inits
+        ourInventoryMenu.Init(GetInventorySystem());
     }
 
     public override void _PhysicsProcess(double delta)

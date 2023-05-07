@@ -1,9 +1,10 @@
-[gd_scene load_steps=16 format=3 uid="uid://cchvrg3orswki"]
+[gd_scene load_steps=16 format=3 uid="uid://dek7jejp4kkiw"]
 
 [ext_resource type="Shader" path="res://player/character_systems/vignete.gdshader" id="1_au2fw"]
 [ext_resource type="Script" path="res://player/character_systems/inventory_menu.cs" id="1_psfyt"]
 [ext_resource type="AudioStream" uid="uid://m7ikqivarlhf" path="res://audio/audio_streams/inventory/backpack_open1.wav" id="2_2hhuh"]
 [ext_resource type="AudioStream" uid="uid://bo3chsomqpexu" path="res://audio/audio_streams/inventory/backpack_open2.wav" id="3_521e5"]
+[ext_resource type="PackedScene" uid="uid://7u800n5mhs5v" path="res://player/character_systems/inventory_menu/InventorySlot.tscn" id="5_mpnmc"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_stuy7"]
 shader = ExtResource("1_au2fw")
@@ -29,19 +30,6 @@ expand_margin_left = 20.0
 expand_margin_top = 189.0
 expand_margin_right = 18.0
 expand_margin_bottom = 70.0
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_efwch"]
-bg_color = Color(0.27451, 0.27451, 0.27451, 0.196078)
-border_width_left = 5
-border_width_top = 10
-border_width_right = 5
-border_width_bottom = 10
-border_color = Color(1, 1, 1, 0.478431)
-border_blend = true
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nlry6"]
 bg_color = Color(0.27451, 0.27451, 0.27451, 0.196078)
@@ -528,185 +516,60 @@ grow_vertical = 2
 columns = 5
 metadata/_edit_lock_ = true
 
-[node name="Button" type="Button" parent="Panel/GridContainer"]
-custom_minimum_size = Vector2(120, 120)
+[node name="InventorySlot1" parent="Panel/GridContainer" instance=ExtResource("5_mpnmc")]
 layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_efwch")
+_showNameSlot = true
+_nameSlotText = "1"
 
-[node name="Label_1" type="Label" parent="Panel/GridContainer/Button"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -11.5
-offset_right = 20.0
-offset_bottom = 11.5
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(1, 1, 1, 0.470588)
-theme_override_colors/font_outline_color = Color(0.172549, 0.172549, 0.172549, 1)
-theme_override_constants/outline_size = 3
-theme_override_font_sizes/font_size = 20
-text = "1"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Button2" type="Button" parent="Panel/GridContainer"]
-custom_minimum_size = Vector2(120, 120)
+[node name="InventorySlot2" parent="Panel/GridContainer" instance=ExtResource("5_mpnmc")]
 layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_efwch")
+_showNameSlot = true
+_nameSlotText = "2"
 
-[node name="Label_2" type="Label" parent="Panel/GridContainer/Button2"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -11.5
-offset_right = 20.0
-offset_bottom = 11.5
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(1, 1, 1, 0.470588)
-theme_override_colors/font_outline_color = Color(0.172549, 0.172549, 0.172549, 1)
-theme_override_constants/outline_size = 3
-theme_override_font_sizes/font_size = 20
-text = "2"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Button3" type="Button" parent="Panel/GridContainer"]
-custom_minimum_size = Vector2(120, 120)
+[node name="InventorySlot3" parent="Panel/GridContainer" instance=ExtResource("5_mpnmc")]
 layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_efwch")
+_showNameSlot = true
+_nameSlotText = "3"
 
-[node name="Label_3" type="Label" parent="Panel/GridContainer/Button3"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -11.5
-offset_right = 20.0
-offset_bottom = 11.5
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(1, 1, 1, 0.470588)
-theme_override_colors/font_outline_color = Color(0.172549, 0.172549, 0.172549, 1)
-theme_override_constants/outline_size = 3
-theme_override_font_sizes/font_size = 20
-text = "3"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Button4" type="Button" parent="Panel/GridContainer"]
-custom_minimum_size = Vector2(120, 120)
+[node name="InventorySlot4" parent="Panel/GridContainer" instance=ExtResource("5_mpnmc")]
 layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_efwch")
+_showNameSlot = true
+_nameSlotText = "4"
 
-[node name="Label_4" type="Label" parent="Panel/GridContainer/Button4"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -11.5
-offset_right = 20.0
-offset_bottom = 11.5
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(1, 1, 1, 0.470588)
-theme_override_colors/font_outline_color = Color(0.172549, 0.172549, 0.172549, 1)
-theme_override_constants/outline_size = 3
-theme_override_font_sizes/font_size = 20
-text = "4"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Button5" type="Button" parent="Panel/GridContainer"]
-custom_minimum_size = Vector2(120, 120)
+[node name="InventorySlot5" parent="Panel/GridContainer" instance=ExtResource("5_mpnmc")]
 layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_efwch")
+_showNameSlot = true
+_nameSlotText = "5"
 
-[node name="Label_5" type="Label" parent="Panel/GridContainer/Button5"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -11.5
-offset_right = 20.0
-offset_bottom = 11.5
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(1, 1, 1, 0.470588)
-theme_override_colors/font_outline_color = Color(0.172549, 0.172549, 0.172549, 1)
-theme_override_constants/outline_size = 3
-theme_override_font_sizes/font_size = 20
-text = "5"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Button7" type="Button" parent="Panel/GridContainer"]
-custom_minimum_size = Vector2(120, 120)
+[node name="InventorySlot6" parent="Panel/GridContainer" instance=ExtResource("5_mpnmc")]
 layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_efwch")
 
-[node name="Button8" type="Button" parent="Panel/GridContainer"]
-custom_minimum_size = Vector2(120, 120)
+[node name="InventorySlot7" parent="Panel/GridContainer" instance=ExtResource("5_mpnmc")]
 layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_efwch")
 
-[node name="Button9" type="Button" parent="Panel/GridContainer"]
-custom_minimum_size = Vector2(120, 120)
+[node name="InventorySlot8" parent="Panel/GridContainer" instance=ExtResource("5_mpnmc")]
 layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_efwch")
 
-[node name="Button10" type="Button" parent="Panel/GridContainer"]
-custom_minimum_size = Vector2(120, 120)
+[node name="InventorySlot9" parent="Panel/GridContainer" instance=ExtResource("5_mpnmc")]
 layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_efwch")
 
-[node name="Button11" type="Button" parent="Panel/GridContainer"]
-custom_minimum_size = Vector2(120, 120)
+[node name="InventorySlot10" parent="Panel/GridContainer" instance=ExtResource("5_mpnmc")]
 layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_efwch")
 
-[node name="Button13" type="Button" parent="Panel/GridContainer"]
-custom_minimum_size = Vector2(120, 120)
+[node name="InventorySlot11" parent="Panel/GridContainer" instance=ExtResource("5_mpnmc")]
 layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_efwch")
 
-[node name="Button14" type="Button" parent="Panel/GridContainer"]
-custom_minimum_size = Vector2(120, 120)
+[node name="InventorySlot12" parent="Panel/GridContainer" instance=ExtResource("5_mpnmc")]
 layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_efwch")
 
-[node name="Button15" type="Button" parent="Panel/GridContainer"]
-custom_minimum_size = Vector2(120, 120)
+[node name="InventorySlot13" parent="Panel/GridContainer" instance=ExtResource("5_mpnmc")]
 layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_efwch")
 
-[node name="Button16" type="Button" parent="Panel/GridContainer"]
-custom_minimum_size = Vector2(120, 120)
+[node name="InventorySlot14" parent="Panel/GridContainer" instance=ExtResource("5_mpnmc")]
 layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_efwch")
 
-[node name="Button17" type="Button" parent="Panel/GridContainer"]
-custom_minimum_size = Vector2(120, 120)
+[node name="InventorySlot15" parent="Panel/GridContainer" instance=ExtResource("5_mpnmc")]
 layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_efwch")
 
 [node name="Button_L" type="Button" parent="Panel"]
 custom_minimum_size = Vector2(150, 150)

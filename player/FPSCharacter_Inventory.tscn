@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://0g1u2jvnfbpy" path="res://player/FPSCharacter_Interaction.tscn" id="1_ywg5i"]
 [ext_resource type="Script" path="res://player/FPSCharacter_Inventory.cs" id="2_k43co"]
 [ext_resource type="AudioStream" uid="uid://d1h0024d0d7i3" path="res://audio/audio_streams/hurts_test/413178__micahlg__male_hurt2.ogg" id="3_51q7g"]
-[ext_resource type="PackedScene" uid="uid://cchvrg3orswki" path="res://player/character_systems/inventory_menu.tscn" id="3_ru8m1"]
+[ext_resource type="PackedScene" uid="uid://dek7jejp4kkiw" path="res://player/character_systems/inventory_menu.tscn" id="3_ru8m1"]
 [ext_resource type="AudioStream" uid="uid://csol82irfc2by" path="res://audio/audio_streams/hurts_test/413181__micahlg__male_hurt5.ogg" id="4_m4gkb"]
 [ext_resource type="Script" path="res://player/character_systems/CharacterInfoHud.cs" id="4_nvx4w"]
 [ext_resource type="PackedScene" uid="uid://dhhnra4i7t74r" path="res://player/character_systems/damage_hud.tscn" id="5_dhy04"]

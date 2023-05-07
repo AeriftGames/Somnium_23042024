@@ -1,0 +1,47 @@
+[gd_scene load_steps=4 format=3 uid="uid://7u800n5mhs5v"]
+
+[ext_resource type="Script" path="res://player/character_systems/inventory_menu/InventorySlot.cs" id="1_mxmja"]
+[ext_resource type="PackedScene" uid="uid://c234nkumyct80" path="res://player/character_systems/inventory_menu/inventory_item_icon_object.tscn" id="2_a0mps"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_efwch"]
+bg_color = Color(0.27451, 0.27451, 0.27451, 0.196078)
+border_width_left = 5
+border_width_top = 10
+border_width_right = 5
+border_width_bottom = 10
+border_color = Color(1, 1, 1, 0.478431)
+border_blend = true
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[node name="InventorySlot" type="Button"]
+custom_minimum_size = Vector2(120, 120)
+theme_override_styles/normal = SubResource("StyleBoxFlat_efwch")
+script = ExtResource("1_mxmja")
+
+[node name="LabelNameSlot" type="Label" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.470588)
+theme_override_colors/font_outline_color = Color(0.172549, 0.172549, 0.172549, 1)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 20
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="InventoryItemIconObject" parent="." instance=ExtResource("2_a0mps")]
+layout_mode = 1
+metadata/_edit_use_anchors_ = true

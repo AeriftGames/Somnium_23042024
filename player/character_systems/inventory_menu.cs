@@ -5,6 +5,8 @@ using System;
 
 public partial class inventory_menu : Control
 {
+    private InventorySystem inventorySystem = null;
+
     public enum EActiveTypeEffect {instant,anim}
 	private bool _active = false;
     private bool active_nextFrame = false;
@@ -16,12 +18,18 @@ public partial class inventory_menu : Control
     [Export] public Array<AudioStream> InventoryOpenAudios;
     [Export] public Array<AudioStream> InventoryCloseAudios;
 
+    // inventory slots
+    private Array<InventorySlot> allInventorySlots;
+
     public override void _Ready()
 	{
         anim = GetNode<AnimationPlayer>("AnimationPlayer");
         audio = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
 
         SetActiveInstant(false);
+
+        allInventorySlots = new Array<InventorySlot>();
+        LoadAllSlots();     // load slots from scene to array
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -36,6 +44,8 @@ public partial class inventory_menu : Control
         if(Input.IsActionJustPressed("toggleInventory"))
             SetActive(false);
 	}
+
+    public void Init(InventorySystem newInventorySystem){inventorySystem= newInventorySystem;}
 
     public void SetActive(bool newActive)
     {
@@ -108,6 +118,9 @@ public partial class inventory_menu : Control
 
             // camera chake
             interChar.GetObjectCamera().ShakeCameraTest(0.3f, 0.35f, 1.0f, 2.0f);
+
+            // try update items (add)
+            AddAllItemsToSlots();
         }
         else
         {
@@ -134,6 +147,9 @@ public partial class inventory_menu : Control
         {
             Visible = false;
             GD.Print("anim dohrala");
+
+            // try update items destroy
+            DestroyAllUIItemsInSlots();
         }
     }
 
@@ -141,5 +157,38 @@ public partial class inventory_menu : Control
     {
         TabContainer tabs = GetNode<TabContainer>("TabContainer") as TabContainer;
         tabs.SetAnchorsPreset(LayoutPreset.Center);
+    }
+
+    /* ITEMS */
+
+    public InventorySystem GetInventorySystem(){return inventorySystem;}
+
+    public void LoadAllSlots()
+    {
+        foreach (var slotNode in GetNode("Panel/GridContainer").GetChildren())
+            allInventorySlots.Add(slotNode as InventorySlot);
+    }
+
+    //  START
+    public void AddAllItemsToSlots()
+    {
+        for (int i = 0; i < GetInventorySystem().GetAllInventoryItems().Count; i++)
+        {
+            GD.Print("TryAddItemToSlot");
+            GetAllInventoryItemSlots()[i].SetItem(GetInventorySystem().GetAllInventoryItems()[i]);
+            //GetAllInventoryItemSlots()[i].
+        }
+    }
+
+    public Array<InventorySlot> GetAllInventoryItemSlots() { return allInventorySlots; }
+
+    // END
+    public void DestroyAllUIItemsInSlots()
+    {
+        foreach (InventorySlot slot in GetAllInventoryItemSlots())
+        {
+            if(slot.HasUIItem())
+                slot.DestroyUIItem();
+        }
     }
 }
