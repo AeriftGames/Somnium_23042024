@@ -1,8 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://c234nkumyct80"]
+[gd_scene load_steps=5 format=3 uid="uid://c234nkumyct80"]
 
 [ext_resource type="Script" path="res://player/character_systems/inventory_menu/InventoryItemIconObject.cs" id="1_htkfp"]
 [ext_resource type="Script" path="res://player/character_systems/InventoryItemPreview.cs" id="2_hsjhn"]
-[ext_resource type="ArrayMesh" uid="uid://fxl3wl4n5ew8" path="res://objects/battery/battery_mesh.tres" id="3_gbs8c"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0x23u"]
 bg_color = Color(0, 0, 0, 0.156863)
@@ -19,6 +18,7 @@ corner_radius_bottom_left = 25
 blend_mode = 1
 
 [node name="InventoryItemIconObject" type="Panel"]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -30,17 +30,16 @@ script = ExtResource("1_htkfp")
 
 [node name="ItemName" type="Label" parent="."]
 layout_mode = 1
-anchors_preset = 8
+anchors_preset = 7
 anchor_left = 0.5
-anchor_top = 0.5
+anchor_top = 1.0
 anchor_right = 0.5
-anchor_bottom = 0.5
+anchor_bottom = 1.0
 offset_left = -20.0
-offset_top = -11.5
+offset_top = -26.0
 offset_right = 20.0
-offset_bottom = 11.5
 grow_horizontal = 2
-grow_vertical = 2
+grow_vertical = 0
 text = "item"
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
@@ -60,14 +59,13 @@ transparent_bg = true
 handle_input_locally = false
 size = Vector2i(1920, 1080)
 size_2d_override = Vector2i(350, 350)
-render_target_update_mode = 4
+render_target_update_mode = 0
 
 [node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 5)
 fov = 71.9
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport"]
-mesh = ExtResource("3_gbs8c")
 
 [node name="SpotLight3D" type="SpotLight3D" parent="SubViewportContainer/SubViewport"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.68253, 7.62594)

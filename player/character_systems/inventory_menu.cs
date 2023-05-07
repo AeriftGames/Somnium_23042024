@@ -208,7 +208,7 @@ public partial class inventory_menu : Control
             GetNode<RichTextLabel>("Panel/Panel/RichTextLabel").Text =
                 pressedInventorySlot.GetInventoryItemData().itemInfoText;
 
-            itemPreview.Activate(pressedInventorySlot.GetInventoryItemData().itemMeshPreview);
+            itemPreview.Activate(pressedInventorySlot.GetInventoryItemData().itemMeshPreview,true);
         }
         else
         {
