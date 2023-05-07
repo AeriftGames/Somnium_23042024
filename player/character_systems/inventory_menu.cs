@@ -21,10 +21,13 @@ public partial class inventory_menu : Control
     // inventory slots
     private Array<InventorySlot> allInventorySlots;
 
+    private InventoryItemPreview itemPreview = null;
+
     public override void _Ready()
 	{
         anim = GetNode<AnimationPlayer>("AnimationPlayer");
         audio = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
+        itemPreview = GetNode<InventoryItemPreview>("Panel/Panel_ItemPreview/SubViewportContainer");
 
         SetActiveInstant(false);
 
@@ -166,7 +169,11 @@ public partial class inventory_menu : Control
     public void LoadAllSlots()
     {
         foreach (var slotNode in GetNode("Panel/GridContainer").GetChildren())
-            allInventorySlots.Add(slotNode as InventorySlot);
+        {
+            InventorySlot slot = slotNode as InventorySlot;
+            slot.Init(this);
+            allInventorySlots.Add(slot);
+        }
     }
 
     //  START
@@ -189,6 +196,25 @@ public partial class inventory_menu : Control
         {
             if(slot.HasUIItem())
                 slot.DestroyUIItem();
+        }
+    }
+
+    public void FocusUIItem(InventorySlot pressedInventorySlot)
+    {
+        if(pressedInventorySlot.HasUIItem())
+        {
+            GetNode<Label>("Panel/Panel/Label").Text = pressedInventorySlot.GetInventoryItemData().itemName;
+
+            GetNode<RichTextLabel>("Panel/Panel/RichTextLabel").Text =
+                pressedInventorySlot.GetInventoryItemData().itemInfoText;
+
+            itemPreview.Activate(pressedInventorySlot.GetInventoryItemData().itemMeshPreview);
+        }
+        else
+        {
+            GetNode<Label>("Panel/Panel/Label").Text = "";
+            GetNode<RichTextLabel>("Panel/Panel/RichTextLabel").Text = "";
+            itemPreview.Deactivate();
         }
     }
 }

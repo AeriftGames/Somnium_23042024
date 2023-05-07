@@ -1,10 +1,12 @@
-[gd_scene load_steps=16 format=3 uid="uid://dek7jejp4kkiw"]
+[gd_scene load_steps=19 format=3 uid="uid://dek7jejp4kkiw"]
 
 [ext_resource type="Shader" path="res://player/character_systems/vignete.gdshader" id="1_au2fw"]
 [ext_resource type="Script" path="res://player/character_systems/inventory_menu.cs" id="1_psfyt"]
 [ext_resource type="AudioStream" uid="uid://m7ikqivarlhf" path="res://audio/audio_streams/inventory/backpack_open1.wav" id="2_2hhuh"]
 [ext_resource type="AudioStream" uid="uid://bo3chsomqpexu" path="res://audio/audio_streams/inventory/backpack_open2.wav" id="3_521e5"]
 [ext_resource type="PackedScene" uid="uid://7u800n5mhs5v" path="res://player/character_systems/inventory_menu/InventorySlot.tscn" id="5_mpnmc"]
+[ext_resource type="ArrayMesh" uid="uid://fxl3wl4n5ew8" path="res://objects/battery/battery_mesh.tres" id="6_omrto"]
+[ext_resource type="Script" path="res://player/character_systems/InventoryItemPreview.cs" id="6_xggco"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_stuy7"]
 shader = ExtResource("1_au2fw")
@@ -71,6 +73,9 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 corner_detail = 1
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_o6mop"]
+blend_mode = 1
 
 [sub_resource type="Animation" id="Animation_y8yo1"]
 length = 0.001
@@ -478,9 +483,9 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -302.0
-offset_top = 1000.0
+offset_top = -80.0
 offset_right = 302.0
-offset_bottom = 1484.0
+offset_bottom = 404.0
 grow_horizontal = 2
 grow_vertical = 0
 pivot_offset = Vector2(302, 242)
@@ -732,6 +737,53 @@ offset_bottom = -4.0
 grow_horizontal = 2
 color = Color(1, 1, 1, 0.498039)
 
+[node name="Panel_ItemPreview" type="Panel" parent="Panel"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -309.0
+offset_top = -387.0
+offset_right = 303.0
+offset_bottom = -37.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_uj0vl")
+metadata/_edit_lock_ = true
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Panel/Panel_ItemPreview"]
+material = SubResource("CanvasItemMaterial_o6mop")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("6_xggco")
+
+[node name="SubViewport" type="SubViewport" parent="Panel/Panel_ItemPreview/SubViewportContainer"]
+own_world_3d = true
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(612, 350)
+size_2d_override = Vector2i(773, 382)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="Panel/Panel_ItemPreview/SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.382, 6)
+fov = 71.9
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Panel/Panel_ItemPreview/SubViewportContainer/SubViewport"]
+mesh = ExtResource("6_omrto")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Panel/Panel_ItemPreview/SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.68253, 7.62594)
+light_energy = 2.0
+light_indirect_energy = 2.0
+light_size = 0.114
+light_bake_mode = 1
+spot_range = 15.0
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_gvsnl")
@@ -749,8 +801,8 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = 660.0
-offset_right = 1260.0
+offset_left = -300.0
+offset_right = 300.0
 offset_bottom = 65.0
 grow_horizontal = 2
 pivot_offset = Vector2(300, 0)

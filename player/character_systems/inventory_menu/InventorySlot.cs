@@ -11,15 +11,11 @@ public partial class InventorySlot : Button
 	private string nameSlotText = "";
 
 	private bool hasItem = false;
-	// Called when the node enters the scene tree for the first time.
-	public override void _Ready()
-	{
-	}
+	private inventory_menu inventoryMenu = null;
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
-	{
-	}
+	private InventoryItemData inventoryItemData = null;
+
+	public void Init(inventory_menu newInventoryMenu){inventoryMenu = newInventoryMenu;}
 
 	public void SetShowNameSlot(bool newShow)
 	{
@@ -36,18 +32,25 @@ public partial class InventorySlot : Button
 
 	public void SetItem(InventoryItemData newInventoryItemData)
 	{
-		GetInventoryIconObject().EnableItemData(newInventoryItemData);
+		GetNode<InventoryItemIconObject>("InventoryItemIconObject").EnableItemData(newInventoryItemData);
+		inventoryItemData = newInventoryItemData;
 		hasItem = true;
 	}
 
 	public void DestroyUIItem()
 	{
-		GetInventoryIconObject().DisableItemData();
+        GetNode<InventoryItemIconObject>("InventoryItemIconObject").DisableItemData();
+		inventoryItemData = null;
 		hasItem = false;
 	}
 
-	private InventoryItemIconObject GetInventoryIconObject()
+	public InventoryItemData GetInventoryItemData()
 	{
-		return GetNode<InventoryItemIconObject>("InventoryItemIconObject");
+		return inventoryItemData;
+	}
+
+	public void _on_pressed()
+	{
+		inventoryMenu.FocusUIItem(this);
 	}
 }
