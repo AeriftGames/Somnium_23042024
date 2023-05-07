@@ -1,0 +1,87 @@
+[gd_scene load_steps=14 format=3 uid="uid://d0ntqcsu51spk"]
+
+[ext_resource type="Script" path="res://core_systems/item_pickup/item_pickup.gd" id="2_bukrt"]
+[ext_resource type="AudioStream" uid="uid://dl0t67nmxyl05" path="res://objects/battery/pickup.wav" id="3_2e6tq"]
+[ext_resource type="PackedScene" uid="uid://dbnevtbu1g7uy" path="res://core_systems/interactive_system/interactive_object.tscn" id="5_tah07"]
+[ext_resource type="Script" path="res://objects/battery/battery_use.gd" id="6_3rmb8"]
+[ext_resource type="PackedScene" uid="uid://culc1s4yyddk0" path="res://testing_stuff_kaen/inventory_items/InventoryItemDataNode.tscn" id="7_j2tci"]
+[ext_resource type="Script" path="res://testing_stuff_kaen/inventory_items/ItemSubViewportSetting.cs" id="8_8b457"]
+[ext_resource type="Script" path="res://testing_stuff_kaen/inventory_items/InventoryItemData.cs" id="9_8l0og"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_y440p"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_k0i78"]
+size = Vector3(1.2, 1.2, 1.2)
+
+[sub_resource type="Resource" id="Resource_pqpg6"]
+script = ExtResource("8_8b457")
+cameraPos = Vector3(0, 0, 2)
+cameraFov = 60.0
+lightPos = Vector3(5, 3, 10)
+lightPower = 2.0
+lightSize = 0.0
+lightRange = 20.0
+lightColor = Color(1, 1, 1, 1)
+meshPos = Vector3(0, 0, 0)
+meshRot = Vector3(0, 45, 0)
+meshScale = Vector3(1, 1, 1)
+
+[sub_resource type="Resource" id="Resource_4c00y"]
+script = ExtResource("8_8b457")
+cameraPos = Vector3(0, 0, 3)
+cameraFov = 60.0
+lightPos = Vector3(0, 0, 5)
+lightPower = 2.0
+lightSize = 0.0
+lightRange = 20.0
+lightColor = Color(1, 1, 1, 1)
+meshPos = Vector3(0, 0, 0)
+meshRot = Vector3(0, 30, 0)
+meshScale = Vector3(1, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_gl00w"]
+
+[sub_resource type="Resource" id="Resource_g8mpi"]
+script = ExtResource("9_8l0og")
+itemName = "kostka"
+itemInfoText = "Toto je kostka která má 6 stran"
+itemMeshPreview = SubResource("BoxMesh_gl00w")
+rotateInInventoryPreview = true
+canUseInHand = false
+mustBothHandsOnly = false
+canPutToWorld = false
+canUse = false
+canCombine = false
+canInspect = false
+canDelete = false
+canStackable = false
+showNameInSlot = true
+spawnObjectScenePath = ""
+SettingsForPreview = SubResource("Resource_pqpg6")
+SettingsForSlot = SubResource("Resource_4c00y")
+
+[node name="cube_inventory_test" type="Node3D" node_paths=PackedStringArray("node_interact", "use_node")]
+script = ExtResource("2_bukrt")
+item_name = "cube"
+node_interact = NodePath("interactive_object")
+use_node = NodePath("use")
+sfx = ExtResource("3_2e6tq")
+
+[node name="Battery" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0, 0)
+mesh = SubResource("BoxMesh_y440p")
+skeleton = NodePath("")
+
+[node name="interactive_object" parent="." instance=ExtResource("5_tah07")]
+
+[node name="CollisionShape3D" parent="interactive_object/StaticBody3D" index="0"]
+transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0.00154323, 0)
+shape = SubResource("BoxShape3D_k0i78")
+
+[node name="use" type="Node3D" parent="."]
+script = ExtResource("6_3rmb8")
+
+[node name="InventoryItemDataNode" parent="." instance=ExtResource("7_j2tci")]
+Data = SubResource("Resource_g8mpi")
+
+[editable path="interactive_object"]

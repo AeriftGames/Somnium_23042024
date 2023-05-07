@@ -23,12 +23,12 @@ public partial class InventoryItemPreview : SubViewportContainer
 		itemPreviewMesh.Rotate(Vector3.Up, speedRotation*(float)delta);
 	}
 
-	public void Activate(Mesh newMesh,bool newRotation = false)
+	public void Activate(bool newStartRotation = false,bool onlyFirstRender = false)
 	{
-		itemPreviewMesh.Mesh = newMesh;
+		isRotation = false;
 		Visible = true;
 
-		if(newRotation)
+		if(newStartRotation)
 			isRotation = true;
 	}
 

@@ -701,8 +701,6 @@ offset_right = -7.0
 offset_bottom = -4.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "Lze vzít do ruky nebo hodit ve směru výhledu
-po pár minutách vyhasne"
 fit_content = true
 metadata/_edit_lock_ = true
 
@@ -718,7 +716,6 @@ offset_right = 310.0
 offset_bottom = -8.0
 grow_horizontal = 2
 theme_override_font_sizes/font_size = 23
-text = "- světlice -"
 horizontal_alignment = 1
 vertical_alignment = 1
 uppercase = true
@@ -759,6 +756,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("6_xggco")
+metadata/_edit_lock_ = true
 
 [node name="SubViewport" type="SubViewport" parent="Panel/Panel_ItemPreview/SubViewportContainer"]
 own_world_3d = true
@@ -774,13 +772,7 @@ fov = 71.9
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Panel/Panel_ItemPreview/SubViewportContainer/SubViewport"]
 
-[node name="SpotLight3D" type="SpotLight3D" parent="Panel/Panel_ItemPreview/SubViewportContainer/SubViewport"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.68253, 7.62594)
-light_energy = 2.0
-light_indirect_energy = 2.0
-light_size = 0.114
-light_bake_mode = 1
-spot_range = 15.0
+[node name="OmniLight3D" type="OmniLight3D" parent="Panel/Panel_ItemPreview/SubViewportContainer/SubViewport"]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

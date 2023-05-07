@@ -1,12 +1,41 @@
-[gd_resource type="Resource" load_steps=2 format=3 uid="uid://bknphb2dcqwp7"]
+[gd_resource type="Resource" load_steps=5 format=3 uid="uid://bknphb2dcqwp7"]
 
 [ext_resource type="Script" path="res://testing_stuff_kaen/inventory_items/InventoryItemData.cs" id="1_06mqv"]
+[ext_resource type="Script" path="res://testing_stuff_kaen/inventory_items/ItemSubViewportSetting.cs" id="1_7fxkd"]
+
+[sub_resource type="Resource" id="Resource_tm465"]
+resource_local_to_scene = true
+script = ExtResource("1_7fxkd")
+cameraPos = Vector3(0, 0.8, 5)
+cameraFov = 60.0
+lightPos = Vector3(1, 2.5, 5)
+lightPower = 2.0
+lightSize = 0.0
+lightRange = 15.0
+lightColor = Color(1, 1, 1, 1)
+meshPos = Vector3(0, 0, 0)
+meshRot = Vector3(0, 30, 0)
+meshScale = Vector3(1, 1, 1)
+
+[sub_resource type="Resource" id="Resource_7rqwc"]
+resource_local_to_scene = true
+script = ExtResource("1_7fxkd")
+cameraPos = Vector3(0, 0.8, 5.5)
+cameraFov = 60.0
+lightPos = Vector3(1, 2.5, 7)
+lightPower = 2.0
+lightSize = 0.0
+lightRange = 15.0
+lightColor = Color(1, 1, 1, 1)
+meshPos = Vector3(0, 0, 0)
+meshRot = Vector3(0, 10, 0)
+meshScale = Vector3(1, 1, 1)
 
 [resource]
 resource_local_to_scene = true
 script = ExtResource("1_06mqv")
 itemName = ""
-itemInfoText = 0
+itemInfoText = ""
 rotateInInventoryPreview = false
 canUseInHand = false
 mustBothHandsOnly = false
@@ -14,3 +43,9 @@ canPutToWorld = false
 canUse = false
 canCombine = false
 canInspect = false
+canDelete = false
+canStackable = false
+showNameInSlot = false
+spawnObjectScenePath = ""
+SettingsForPreview = SubResource("Resource_tm465")
+SettingsForSlot = SubResource("Resource_7rqwc")

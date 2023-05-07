@@ -3,14 +3,20 @@ using System;
 
 public partial class InventoryItemIconObject : Panel
 {
-
 	public void EnableItemData(InventoryItemData newInventoryItemData)
 	{
 		GetNode<Label>("ItemName").Text = newInventoryItemData.itemName;
-		Visible = true;
+		GetNode<Label>("ItemName").Visible = newInventoryItemData.showNameInSlot;
 
-		GetNode<InventoryItemPreview>("SubViewportContainer").Activate(newInventoryItemData.itemMeshPreview);
-	}
+		testing_render_inventory_items.ApplyItemSubViewportSetting(
+			GetNode<SubViewport>("SubViewportContainer/SubViewport"),
+			newInventoryItemData.SettingsForSlot,
+			newInventoryItemData.itemMeshPreview);
+
+		GetNode<InventoryItemPreview>("SubViewportContainer").Activate();
+
+        Visible = true;
+    }
 
 	public void DisableItemData()
 	{
