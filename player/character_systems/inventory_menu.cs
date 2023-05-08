@@ -1,14 +1,14 @@
 using Godot;
 using Godot.Collections;
 using System;
-
+using System.Net.Sockets;
 
 public partial class inventory_menu : Control
 {
     private InventorySystem inventorySystem = null;
 
-    public enum EActiveTypeEffect {instant,anim}
-	private bool _active = false;
+    public enum EActiveTypeEffect { instant, anim }
+    private bool _active = false;
     private bool active_nextFrame = false;
 
     private AnimationPlayer anim = null;
@@ -22,9 +22,10 @@ public partial class inventory_menu : Control
     private Array<InventorySlot> allInventorySlots;
 
     private InventoryItemPreview itemPreview = null;
+    private int actualFocusSlotID = -1;
 
     public override void _Ready()
-	{
+    {
         anim = GetNode<AnimationPlayer>("AnimationPlayer");
         audio = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
         itemPreview = GetNode<InventoryItemPreview>("Panel/Panel_ItemPreview/SubViewportContainer");
@@ -32,23 +33,27 @@ public partial class inventory_menu : Control
         SetActiveInstant(false);
 
         allInventorySlots = new Array<InventorySlot>();
-        LoadAllSlots();     // load slots from scene to array
-	}
+    }
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
-	{
+    // Called every frame. 'delta' is the elapsed time since the previous frame.
+    public override void _Process(double delta)
+    {
         if (!GetActive()) return;
 
         // dovoli tento update az dalsi frame (kvuli inputu)
         if (!active_nextFrame) { active_nextFrame = true; return; }
-        
-        // close this inventory
-        if(Input.IsActionJustPressed("toggleInventory"))
-            SetActive(false);
-	}
 
-    public void Init(InventorySystem newInventorySystem){inventorySystem= newInventorySystem;}
+        // close this inventory
+        if (Input.IsActionJustPressed("toggleInventory"))
+            SetActive(false);
+    }
+
+    public void Init(InventorySystem newInventorySystem) 
+    {
+        inventorySystem = newInventorySystem;
+
+        RecreateAllSlotsWithItems();
+    }
 
     public void SetActive(bool newActive)
     {
@@ -65,9 +70,9 @@ public partial class inventory_menu : Control
         }
     }
 
-	public void SetActiveInstant(bool newActive) 
-	{ 
-		_active = newActive;
+    public void SetActiveInstant(bool newActive)
+    {
+        _active = newActive;
         Visible = newActive;
 
         // ziskame interact charactera
@@ -123,7 +128,7 @@ public partial class inventory_menu : Control
             interChar.GetObjectCamera().ShakeCameraTest(0.3f, 0.35f, 1.0f, 2.0f);
 
             // try update items (add)
-            AddAllItemsToSlots();
+            //AddAllItemsToSlots();
         }
         else
         {
@@ -150,9 +155,9 @@ public partial class inventory_menu : Control
         {
             Visible = false;
             GD.Print("anim dohrala");
-
-            // try update items destroy
-            DestroyAllUIItemsInSlots();
+            
+            /*// try update items destroy
+            DestroyAllUIItemsInSlots();*/
         }
     }
 
@@ -164,27 +169,32 @@ public partial class inventory_menu : Control
 
     /* ITEMS */
 
-    public InventorySystem GetInventorySystem(){return inventorySystem;}
+    public InventorySystem GetInventorySystem() { return inventorySystem; }
 
-    public void LoadAllSlots()
+    public void RecreateAllSlotsWithItems()
     {
-        foreach (var slotNode in GetNode("Panel/GridContainer").GetChildren())
-        {
-            InventorySlot slot = slotNode as InventorySlot;
-            slot.Init(this);
-            allInventorySlots.Add(slot);
-        }
+        // vytvori sloty a nacte do array allInventorySlots
+        CreateSlots(inventorySystem.MaxInventoryCapacity);
+
+        // nacte vsechny itemy ktere hrac vlastni do ui inventory(do jednotlivych slotu)
+        AddAllItemsToSlots();
     }
 
     //  START
     public void AddAllItemsToSlots()
     {
+        // projede postupne kazdy item u hrace a ziska jeho pripsany slotID (ktery dostal pri uspesnem pridanim)
+        // ziskame konkretni slot kteremu nastavime nas item (jeho inventory data)
         for (int i = 0; i < GetInventorySystem().GetAllInventoryItems().Count; i++)
         {
-            GD.Print("TryAddItemToSlot");
-            GetAllInventoryItemSlots()[i].SetItem(GetInventorySystem().GetAllInventoryItems()[i]);
-            //GetAllInventoryItemSlots()[i].
+            AddItemToSlot(GetInventorySystem().GetAllInventoryItems()[i],
+                GetInventorySystem().GetAllInventoryItems()[i].InventoryHoldingSlotID);
         }
+    }
+
+    public void AddItemToSlot(InventoryItemData newItemData, int slotID)
+    {
+        GetAllInventoryItemSlots()[slotID].SetItem(newItemData);
     }
 
     public Array<InventorySlot> GetAllInventoryItemSlots() { return allInventorySlots; }
@@ -194,14 +204,14 @@ public partial class inventory_menu : Control
     {
         foreach (InventorySlot slot in GetAllInventoryItemSlots())
         {
-            if(slot.HasUIItem())
+            if (slot.HasUIItem())
                 slot.DestroyUIItem();
         }
     }
 
     public void FocusUIItem(InventorySlot pressedInventorySlot)
     {
-        if(pressedInventorySlot.HasUIItem())
+        if (pressedInventorySlot.HasUIItem())
         {
             GetNode<Label>("Panel/Panel/Label").Text = pressedInventorySlot.GetInventoryItemData().itemName;
 
@@ -214,6 +224,7 @@ public partial class inventory_menu : Control
             pressedInventorySlot.GetInventoryItemData().itemMeshPreview);
 
             itemPreview.Activate(true);
+            actualFocusSlotID = pressedInventorySlot.GetID();
         }
         else
         {
@@ -238,10 +249,51 @@ public partial class inventory_menu : Control
         // Call Put to world
         inventorySystem.PutItemFromInventoryToWorld(pressedInventorySlot.GetInventoryItemData());
 
-        // disable show preview and texts
-        DisableLastFocusUIItem();
+        // pokud nas aktualni focusovany slot je stejny jako ten na kterem je item ktery chceme vyhodt
+        // prerusime jeho focus
+        if(pressedInventorySlot.GetID() == actualFocusSlotID)
+            DisableLastFocusUIItem();
 
         // Destroy ui
         pressedInventorySlot.DestroyUIItem();
+    }
+
+    public int GetFirstFreeSlot()
+    {
+        // projde cele pole iventory slots a zjisti prvni volny
+        for (int i = 0; i < GetAllInventoryItemSlots().Count; i++)
+        {
+            if (!GetAllInventoryItemSlots()[i].HasUIItem())
+                return i;
+        }
+
+        // pokud neni zadny volny slot nalezen, vracime chybovy kod -1
+        return -1;
+    }
+
+    private void CreateSlots(int newNumber, int newNumberHasNumberText = 5)
+    {
+        // Nacte prefab sceny slotu
+        PackedScene newSlotPackedScene =
+            GD.Load<PackedScene>("res://player/character_systems/inventory_menu/InventorySlot.tscn");
+
+        // vytvori potrebny pocet instanci
+        for (int i = 0; i < newNumber; i++)
+        {
+            InventorySlot newSlot = newSlotPackedScene.Instantiate() as InventorySlot;
+            GetNode("Panel/GridContainer").AddChild(newSlot);
+
+            // nastavi text cisla
+            if (i < (newNumberHasNumberText))
+            {
+                int a = i + 1;
+                newSlot.SetNameSlotText(a.ToString());
+                newSlot.SetShowNameSlot(true);
+            }
+
+            newSlot.Init(this);
+            newSlot.SetID(i);
+            allInventorySlots.Add(newSlot);
+        }
     }
 }

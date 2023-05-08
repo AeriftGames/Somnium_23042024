@@ -40,10 +40,11 @@ public partial class FPSCharacter_Inventory : FPSCharacter_Interaction
             StartHealthRegenEnable);
 
         //
-        inventorySystem = GetNode<InventorySystem>("InventorySystem");
+        inventorySystem = GetNode<InventorySystem>("InventorySystem");   
         hurtPlayer = GetNode<AudioStreamPlayer>("AudioStreamPlayer_Hurts");
 
         // inits
+        inventorySystem.Init(this);
         ourInventoryMenu.Init(GetInventorySystem());
     }
 

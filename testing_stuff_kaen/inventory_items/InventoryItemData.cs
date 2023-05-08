@@ -24,4 +24,7 @@ public partial class InventoryItemData : Resource
     [ExportGroupAttribute("SettingsSceneForRendering")]
     [Export] public ItemSubViewportSetting SettingsForPreview { get; set; } = new ItemSubViewportSetting();
     [Export] public ItemSubViewportSetting SettingsForSlot { get; set;} = new ItemSubViewportSetting();
+
+    [ExportGroupAttribute("HoldingInventory")]
+    [Export] public int InventoryHoldingSlotID { get; set; } = -1;
 }

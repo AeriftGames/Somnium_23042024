@@ -1,10 +1,9 @@
-[gd_scene load_steps=18 format=3 uid="uid://dek7jejp4kkiw"]
+[gd_scene load_steps=17 format=3 uid="uid://dek7jejp4kkiw"]
 
 [ext_resource type="Shader" path="res://player/character_systems/vignete.gdshader" id="1_au2fw"]
 [ext_resource type="Script" path="res://player/character_systems/inventory_menu.cs" id="1_psfyt"]
 [ext_resource type="AudioStream" uid="uid://m7ikqivarlhf" path="res://audio/audio_streams/inventory/backpack_open1.wav" id="2_2hhuh"]
 [ext_resource type="AudioStream" uid="uid://bo3chsomqpexu" path="res://audio/audio_streams/inventory/backpack_open2.wav" id="3_521e5"]
-[ext_resource type="PackedScene" uid="uid://7u800n5mhs5v" path="res://player/character_systems/inventory_menu/InventorySlot.tscn" id="5_mpnmc"]
 [ext_resource type="Script" path="res://player/character_systems/InventoryItemPreview.cs" id="6_xggco"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_stuy7"]
@@ -482,9 +481,9 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -302.0
-offset_top = 1000.0
+offset_top = -80.0
 offset_right = 302.0
-offset_bottom = 1484.0
+offset_bottom = 404.0
 grow_horizontal = 2
 grow_vertical = 0
 pivot_offset = Vector2(302, 242)
@@ -519,61 +518,6 @@ grow_horizontal = 2
 grow_vertical = 2
 columns = 5
 metadata/_edit_lock_ = true
-
-[node name="InventorySlot1" parent="Panel/GridContainer" instance=ExtResource("5_mpnmc")]
-layout_mode = 2
-_showNameSlot = true
-_nameSlotText = "1"
-
-[node name="InventorySlot2" parent="Panel/GridContainer" instance=ExtResource("5_mpnmc")]
-layout_mode = 2
-_showNameSlot = true
-_nameSlotText = "2"
-
-[node name="InventorySlot3" parent="Panel/GridContainer" instance=ExtResource("5_mpnmc")]
-layout_mode = 2
-_showNameSlot = true
-_nameSlotText = "3"
-
-[node name="InventorySlot4" parent="Panel/GridContainer" instance=ExtResource("5_mpnmc")]
-layout_mode = 2
-_showNameSlot = true
-_nameSlotText = "4"
-
-[node name="InventorySlot5" parent="Panel/GridContainer" instance=ExtResource("5_mpnmc")]
-layout_mode = 2
-_showNameSlot = true
-_nameSlotText = "5"
-
-[node name="InventorySlot6" parent="Panel/GridContainer" instance=ExtResource("5_mpnmc")]
-layout_mode = 2
-
-[node name="InventorySlot7" parent="Panel/GridContainer" instance=ExtResource("5_mpnmc")]
-layout_mode = 2
-
-[node name="InventorySlot8" parent="Panel/GridContainer" instance=ExtResource("5_mpnmc")]
-layout_mode = 2
-
-[node name="InventorySlot9" parent="Panel/GridContainer" instance=ExtResource("5_mpnmc")]
-layout_mode = 2
-
-[node name="InventorySlot10" parent="Panel/GridContainer" instance=ExtResource("5_mpnmc")]
-layout_mode = 2
-
-[node name="InventorySlot11" parent="Panel/GridContainer" instance=ExtResource("5_mpnmc")]
-layout_mode = 2
-
-[node name="InventorySlot12" parent="Panel/GridContainer" instance=ExtResource("5_mpnmc")]
-layout_mode = 2
-
-[node name="InventorySlot13" parent="Panel/GridContainer" instance=ExtResource("5_mpnmc")]
-layout_mode = 2
-
-[node name="InventorySlot14" parent="Panel/GridContainer" instance=ExtResource("5_mpnmc")]
-layout_mode = 2
-
-[node name="InventorySlot15" parent="Panel/GridContainer" instance=ExtResource("5_mpnmc")]
-layout_mode = 2
 
 [node name="Button_L" type="Button" parent="Panel"]
 custom_minimum_size = Vector2(150, 150)
@@ -791,8 +735,8 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = 660.0
-offset_right = 1260.0
+offset_left = -300.0
+offset_right = 300.0
 offset_bottom = 65.0
 grow_horizontal = 2
 pivot_offset = Vector2(300, 0)

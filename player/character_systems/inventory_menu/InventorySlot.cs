@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Reflection.Metadata.Ecma335;
 
 [Tool]
 public partial class InventorySlot : Button
@@ -15,12 +16,15 @@ public partial class InventorySlot : Button
 
 	private InventoryItemData inventoryItemData = null;
 	private bool isMouseOver = false;
+	private int id = -999;
 
 	public void Init(inventory_menu newInventoryMenu){inventoryMenu = newInventoryMenu;}
 
     public override void _Process(double delta)
     {
         base._Process(delta);
+
+		if (!hasItem) return;
 
 		if(Input.IsActionJustPressed("mouseRightClick") && isMouseOver)
 		{
@@ -76,4 +80,8 @@ public partial class InventorySlot : Button
 	{
 		isMouseOver = false;
 	}
+
+	public void SetID(int newID){id = newID;}
+
+	public int GetID(){ return id; }
 }

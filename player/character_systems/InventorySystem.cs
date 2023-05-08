@@ -1,35 +1,60 @@
 using Godot;
 using Godot.Collections;
 using System;
+using System.Reflection.Metadata.Ecma335;
 
 public partial class InventorySystem : Node
 {
-	[Export] public Array<InventoryItemData> inventoryItems = new Array<InventoryItemData>();
+    [Export] public int MaxInventoryCapacity = 15;
+    [Export] public Array<InventoryItemData> inventoryItems = new Array<InventoryItemData>();
+
+	private FPSCharacter_Inventory inventoryCharacter = null;
 
 	public override void _Ready()
 	{
-	}
+    }
 
 	public override void _Process(double delta)
 	{
 	}
 
+	public void Init(FPSCharacter_Inventory ownCharacter)
+	{
+		inventoryCharacter = ownCharacter;
+
+        SetMaxInventoryCapacity(MaxInventoryCapacity);
+    }
+
 	public bool AddItemToInventory(InventoryItemData newInventoryItemData)
 	{
-		inventoryItems.Add(newInventoryItemData);
-        GD.Print("item byl uspesne pridan do inventare");
+		// mame vubec volno v inventari ? jestli ne opustime funkci
+		if(!HasInventoryFreeSlot())
+			return false;
 
+		// nastavi inventory item data prvni volny (slot id) a prida item do inventare, pokud je -1 = neni misto
+		newInventoryItemData.InventoryHoldingSlotID = inventoryCharacter.GetInventoryMenu().GetFirstFreeSlot();
+		if (newInventoryItemData.InventoryHoldingSlotID == -1) return false;
+
+        inventoryItems.Add(newInventoryItemData);
+
+		// prida ui na dany slot
+		inventoryCharacter.GetInventoryMenu().AddItemToSlot(newInventoryItemData,
+			newInventoryItemData.InventoryHoldingSlotID);
+
+        GD.Print("item byl uspesne pridan do inventare");
         return true;
 	}
 
     public Array<InventoryItemData> GetAllInventoryItems() { return inventoryItems; }
 
+	public bool HasInventoryFreeSlot()
+	{
+		return GetAllInventoryItems().Count < MaxInventoryCapacity ? true : false;
+	}
+
 	public bool PutItemFromInventoryToWorld(InventoryItemData newInventoryItemData)
 	{
-		FPSCharacter_Inventory charInventory = GameMaster.GM.GetFPSCharacter() as FPSCharacter_Inventory;
-		if (charInventory == null) return false;
-
-		InventoryObjectCamera invCam = charInventory.objectCamera as InventoryObjectCamera;
+		InventoryObjectCamera invCam = inventoryCharacter.objectCamera as InventoryObjectCamera;
 		if (invCam == null) return false;
 
         // Spawn
@@ -41,6 +66,14 @@ public partial class InventorySystem : Node
         // Destroy from InventorySystem
         GetAllInventoryItems().Remove(newInventoryItemData);
 
-		return true;
+        // nastaveni pro informaci ze se item nachazi mimo inventar, tedy ve svete
+        newInventoryItemData.InventoryHoldingSlotID = -1;
+
+        return true;
+	}
+
+	public void SetMaxInventoryCapacity(int newMaxCapacity)
+	{
+		MaxInventoryCapacity = newMaxCapacity;
 	}
 }

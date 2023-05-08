@@ -59,6 +59,7 @@ showNameInSlot = true
 spawnObjectScenePath = "res://objects/battery/batery_inventory_test.tscn"
 SettingsForPreview = SubResource("Resource_b3l4d")
 SettingsForSlot = SubResource("Resource_u7flc")
+InventoryHoldingSlotID = -1
 
 [node name="batery_new" node_paths=PackedStringArray("node_interact", "use_node") instance=ExtResource("1_okfpk")]
 script = ExtResource("2_2v377")

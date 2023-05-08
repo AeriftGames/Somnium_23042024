@@ -26,22 +26,25 @@ public partial class InventoryItemDataNode : Node3D
 	{
 		if (isUsed) return;
 
-        StartTweenPickup();
-        UseWantAddToInventory("");
-
-		isUsed = true;
+        UseWantAddToInventory();
 	}
 
-	public void UseWantAddToInventory(string itemForSpawn_sceneFilePath)
+	public void UseWantAddToInventory()
 	{
 		FPSCharacter_Inventory charInventory = GameMaster.GM.GetFPSCharacter() as FPSCharacter_Inventory;
 		if (charInventory == null) return;
 
 		// pokusime se pridat item do inventare hrace
-		charInventory.GetInventorySystem().AddItemToInventory(Data);
+		if(charInventory.GetInventorySystem().AddItemToInventory(Data) == false)
+		{
+			// inventar je plny
+			GD.Print("Inventar je plny");
+			return;
+		}
 
 		// spustime tween animaci pickup
         StartTweenPickup();
+		isUsed = true;
     }
 
 	public void StartTweenPickup()

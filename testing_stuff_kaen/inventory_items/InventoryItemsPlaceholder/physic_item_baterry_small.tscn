@@ -67,6 +67,7 @@ showNameInSlot = true
 spawnObjectScenePath = "res://testing_stuff_kaen/inventory_items/InventoryItemsPlaceholder/physic_item_baterry_small.tscn"
 SettingsForPreview = SubResource("Resource_r3h6n")
 SettingsForSlot = SubResource("Resource_3sisl")
+InventoryHoldingSlotID = -1
 
 [node name="PhysicItem_battery_small" type="RigidBody3D"]
 collision_layer = 8
