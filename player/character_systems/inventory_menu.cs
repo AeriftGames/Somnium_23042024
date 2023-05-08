@@ -222,4 +222,26 @@ public partial class inventory_menu : Control
             itemPreview.Deactivate();
         }
     }
+
+    public void DisableLastFocusUIItem()
+    {
+        GetNode<Label>("Panel/Panel/Label").Text = "";
+        GetNode<RichTextLabel>("Panel/Panel/RichTextLabel").Text = "";
+
+        itemPreview.Deactivate();
+    }
+
+    public void PutFromInventory(InventorySlot pressedInventorySlot)
+    {
+        if (!pressedInventorySlot.HasUIItem()) return;
+
+        // Call Put to world
+        inventorySystem.PutItemFromInventoryToWorld(pressedInventorySlot.GetInventoryItemData());
+
+        // disable show preview and texts
+        DisableLastFocusUIItem();
+
+        // Destroy ui
+        pressedInventorySlot.DestroyUIItem();
+    }
 }

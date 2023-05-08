@@ -13,6 +13,8 @@ public partial class physic_item_test : RigidBody3D
 
     [Export] public bool DisableCollisionToPlayer = true;
 
+    [Export] public Array<NodePath> callUseNodes = null;
+
     //
     bool isGrab = false;
 
@@ -35,6 +37,9 @@ public partial class physic_item_test : RigidBody3D
     public void UseAction(FPSCharacter_Interaction character)
     {
         GameMaster.GM.Log.WriteLog(this, LogSystem.ELogMsgType.INFO, "USE");
+
+        foreach (NodePath callNode in callUseNodes)
+            GetNode(callNode).Call("Use");
     }
 
     public void ApplyGrab(bool newGrab,FPSCharacter_Interaction character)

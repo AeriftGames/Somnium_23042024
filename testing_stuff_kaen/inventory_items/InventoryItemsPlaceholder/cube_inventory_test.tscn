@@ -13,7 +13,7 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_k0i78"]
 size = Vector3(1.2, 1.2, 1.2)
 
-[sub_resource type="Resource" id="Resource_pqpg6"]
+[sub_resource type="Resource" id="Resource_nprea"]
 script = ExtResource("8_8b457")
 cameraPos = Vector3(0, 0, 2)
 cameraFov = 60.0
@@ -26,7 +26,7 @@ meshPos = Vector3(0, 0, 0)
 meshRot = Vector3(0, 45, 0)
 meshScale = Vector3(1, 1, 1)
 
-[sub_resource type="Resource" id="Resource_4c00y"]
+[sub_resource type="Resource" id="Resource_5eg0j"]
 script = ExtResource("8_8b457")
 cameraPos = Vector3(0, 0, 3)
 cameraFov = 60.0
@@ -39,13 +39,13 @@ meshPos = Vector3(0, 0, 0)
 meshRot = Vector3(0, 30, 0)
 meshScale = Vector3(1, 1, 1)
 
-[sub_resource type="BoxMesh" id="BoxMesh_gl00w"]
+[sub_resource type="BoxMesh" id="BoxMesh_pyfef"]
 
 [sub_resource type="Resource" id="Resource_g8mpi"]
 script = ExtResource("9_8l0og")
 itemName = "kostka"
 itemInfoText = "Toto je kostka která má 6 stran"
-itemMeshPreview = SubResource("BoxMesh_gl00w")
+itemMeshPreview = SubResource("BoxMesh_pyfef")
 rotateInInventoryPreview = true
 canUseInHand = false
 mustBothHandsOnly = false
@@ -56,9 +56,9 @@ canInspect = false
 canDelete = false
 canStackable = false
 showNameInSlot = true
-spawnObjectScenePath = ""
-SettingsForPreview = SubResource("Resource_pqpg6")
-SettingsForSlot = SubResource("Resource_4c00y")
+spawnObjectScenePath = "res://testing_stuff_kaen/inventory_items/InventoryItemsPlaceholder/cube_inventory_test.tscn"
+SettingsForPreview = SubResource("Resource_nprea")
+SettingsForSlot = SubResource("Resource_5eg0j")
 
 [node name="cube_inventory_test" type="Node3D" node_paths=PackedStringArray("node_interact", "use_node")]
 script = ExtResource("2_bukrt")

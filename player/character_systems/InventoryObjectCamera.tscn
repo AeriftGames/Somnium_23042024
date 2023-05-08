@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://clqk3l37h2fvt"]
+
+[ext_resource type="PackedScene" uid="uid://c6ki47gved626" path="res://player/character_systems/ObjectCamera.tscn" id="1_awg8g"]
+[ext_resource type="Script" path="res://player/character_systems/InventoryObjectCamera.cs" id="2_ppf8y"]
+
+[node name="InventoryObjectCamera" instance=ExtResource("1_awg8g")]
+script = ExtResource("2_ppf8y")
+
+[node name="InventoryPutItemPoint" type="Node3D" parent="NodeRotY/GimbalLand/NodeRotX/NodeLean/ShakeNode/CameraLookPoint" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.322608)

@@ -127,8 +127,8 @@ public partial class PlayerStart : Node3D
 	public void SpawnPlayerInventory()
 	{
         // Instance from scenefile and cast to specific class
-        var objectCamera_Instance = (ObjectCamera)GD.Load<PackedScene>(
-            "res://player/character_systems/ObjectCamera.tscn").Instantiate();
+        var objectCamera_Instance = GD.Load<PackedScene>(
+            "res://player/character_systems/InventoryObjectCamera.tscn").Instantiate() as InventoryObjectCamera;
 
         var characterInventory_Instance = (FPSCharacter_Inventory)GD.Load<PackedScene>(
             "res://player/FPSCharacter_Inventory.tscn").Instantiate();

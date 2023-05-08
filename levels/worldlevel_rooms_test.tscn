@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://b0t7u4n2xaokh"]
+[gd_scene load_steps=44 format=3]
 
 [ext_resource type="Script" path="res://levels/worldlevel.cs" id="1_ugy1o"]
 [ext_resource type="PackedScene" uid="uid://ck8mt4y4gfqmk" path="res://placeholders/modular_walls/ground_large.tscn" id="2_lls1c"]
@@ -21,7 +21,7 @@
 [ext_resource type="PackedScene" uid="uid://x5o6n083ax2a" path="res://placeholders/PhysicsItems/physic_item_test.tscn" id="18_yjjgq"]
 [ext_resource type="PackedScene" uid="uid://ttxrafhid6rv" path="res://placeholders/PhysicsItems/physic_crate.tscn" id="20_mdus6"]
 [ext_resource type="PackedScene" uid="uid://bfuhid56fgfje" path="res://placeholders/PhysicsItems/physic_crate1.tscn" id="21_uemld"]
-[ext_resource type="PackedScene" uid="uid://dgse04gq5at0" path="res://placeholders/PhysicsItems/physic_item_test_small.tscn" id="22_0tcas"]
+[ext_resource type="PackedScene" uid="uid://dgse04gq5at0" path="res://testing_stuff_kaen/inventory_items/InventoryItemsPlaceholder/physic_item_test_small.tscn" id="22_0tcas"]
 [ext_resource type="PackedScene" uid="uid://dim74o3ajko3e" path="res://testing_stuff_kaen/drawer_table.tscn" id="23_yga7f"]
 [ext_resource type="PackedScene" uid="uid://ipic8k4uwyqr" path="res://testing_stuff_kaen/wardrobe_small.tscn" id="24_lbp1k"]
 [ext_resource type="PackedScene" path="res://models/shelves/shelf_1/shelf_big_back.tscn" id="24_oow61"]

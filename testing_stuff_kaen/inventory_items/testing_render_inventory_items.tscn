@@ -4,22 +4,9 @@
 [ext_resource type="Script" path="res://testing_stuff_kaen/inventory_items/ItemSubViewportSetting.cs" id="2_2p74t"]
 [ext_resource type="Script" path="res://testing_stuff_kaen/inventory_items/InventoryItemData.cs" id="3_idwdt"]
 
-[sub_resource type="Resource" id="Resource_pqpg6"]
+[sub_resource type="Resource" id="Resource_2kvuj"]
 script = ExtResource("2_2p74t")
-cameraPos = Vector3(0, 0, 2)
-cameraFov = 60.0
-lightPos = Vector3(5, 3, 10)
-lightPower = 2.0
-lightSize = 0.0
-lightRange = 20.0
-lightColor = Color(1, 1, 1, 1)
-meshPos = Vector3(0, 0, 0)
-meshRot = Vector3(0, 45, 0)
-meshScale = Vector3(1, 1, 1)
-
-[sub_resource type="Resource" id="Resource_4c00y"]
-script = ExtResource("2_2p74t")
-cameraPos = Vector3(0, 0, 3)
+cameraPos = Vector3(0, 0, 6)
 cameraFov = 60.0
 lightPos = Vector3(0, 0, 5)
 lightPower = 2.0
@@ -27,17 +14,27 @@ lightSize = 0.0
 lightRange = 20.0
 lightColor = Color(1, 1, 1, 1)
 meshPos = Vector3(0, 0, 0)
-meshRot = Vector3(0, 30, 0)
+meshRot = Vector3(0, 0, 0)
 meshScale = Vector3(1, 1, 1)
 
-[sub_resource type="BoxMesh" id="BoxMesh_gl00w"]
+[sub_resource type="Resource" id="Resource_ll1cs"]
+script = ExtResource("2_2p74t")
+cameraPos = Vector3(0, 0, 6)
+cameraFov = 60.0
+lightPos = Vector3(0, 0, 5)
+lightPower = 2.0
+lightSize = 0.0
+lightRange = 20.0
+lightColor = Color(1, 1, 1, 1)
+meshPos = Vector3(0, 0, 0)
+meshRot = Vector3(0, 0, 0)
+meshScale = Vector3(1, 1, 1)
 
-[sub_resource type="Resource" id="Resource_hpa6s"]
+[sub_resource type="Resource" id="Resource_wgvpw"]
 script = ExtResource("3_idwdt")
-itemName = "kostka"
-itemInfoText = "Toto je kostka která má 6 stran"
-itemMeshPreview = SubResource("BoxMesh_gl00w")
-rotateInInventoryPreview = true
+itemName = ""
+itemInfoText = ""
+rotateInInventoryPreview = false
 canUseInHand = false
 mustBothHandsOnly = false
 canPutToWorld = false
@@ -46,10 +43,10 @@ canCombine = false
 canInspect = false
 canDelete = false
 canStackable = false
-showNameInSlot = true
+showNameInSlot = false
 spawnObjectScenePath = ""
-SettingsForPreview = SubResource("Resource_pqpg6")
-SettingsForSlot = SubResource("Resource_4c00y")
+SettingsForPreview = SubResource("Resource_2kvuj")
+SettingsForSlot = SubResource("Resource_ll1cs")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0x23u"]
 bg_color = Color(0, 0, 0, 0.156863)
@@ -64,6 +61,8 @@ corner_radius_bottom_left = 25
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_xm6u6"]
 blend_mode = 1
+
+[sub_resource type="BoxMesh" id="BoxMesh_gl00w"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_waqsy"]
 bg_color = Color(0.27451, 0.27451, 0.27451, 0.196078)
@@ -106,7 +105,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ruio4")
-inventoryItemData = SubResource("Resource_hpa6s")
+inventoryItemData = SubResource("Resource_wgvpw")
 
 [node name="InventoryItemIconObject" type="Panel" parent="."]
 layout_mode = 1
@@ -151,6 +150,7 @@ stretch = true
 metadata/_edit_lock_ = true
 
 [node name="SubViewport" type="SubViewport" parent="InventoryItemIconObject/SubViewportContainer"]
+own_world_3d = true
 transparent_bg = true
 handle_input_locally = false
 size = Vector2i(100, 100)

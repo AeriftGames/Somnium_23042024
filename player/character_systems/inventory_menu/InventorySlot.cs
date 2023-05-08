@@ -14,10 +14,21 @@ public partial class InventorySlot : Button
 	private inventory_menu inventoryMenu = null;
 
 	private InventoryItemData inventoryItemData = null;
+	private bool isMouseOver = false;
 
 	public void Init(inventory_menu newInventoryMenu){inventoryMenu = newInventoryMenu;}
 
-	public void SetShowNameSlot(bool newShow)
+    public override void _Process(double delta)
+    {
+        base._Process(delta);
+
+		if(Input.IsActionJustPressed("mouseRightClick") && isMouseOver)
+		{
+            inventoryMenu.PutFromInventory(this);
+        }
+    }
+
+    public void SetShowNameSlot(bool newShow)
 	{
 		showNameSlot = newShow;
 		GetNode<Label>("LabelNameSlot").Visible = newShow;
@@ -42,6 +53,8 @@ public partial class InventorySlot : Button
         GetNode<InventoryItemIconObject>("InventoryItemIconObject").DisableItemData();
 		inventoryItemData = null;
 		hasItem = false;
+
+		GD.Print("Destroy ui item");
 	}
 
 	public InventoryItemData GetInventoryItemData()
@@ -52,5 +65,15 @@ public partial class InventorySlot : Button
 	public void _on_pressed()
 	{
 		inventoryMenu.FocusUIItem(this);
+	}
+
+	public void _on_mouse_entered()
+	{
+		isMouseOver = true;
+	}
+
+    public void _on_mouse_exited()
+	{
+		isMouseOver = false;
 	}
 }

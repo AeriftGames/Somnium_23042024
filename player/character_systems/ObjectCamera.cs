@@ -618,4 +618,6 @@ public partial class ObjectCamera : Node3D
 			camShakeLerp.StartBasicShake(newIntensity, newTime, newShakeSpeedTo, newShakeSpeedBack,
 				newApplyRotX,newApplyRotY,newApplyRotZ);
     }
+
+	public Node3D GetCameraLookingPoint() { return lookingPoint; }
 }

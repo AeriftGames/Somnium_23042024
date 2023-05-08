@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://b477tn66b8n2b"]
+[gd_scene load_steps=22 format=3]
 
 [ext_resource type="ArrayOccluder3D" uid="uid://d25pcacpuv734" path="res://levels/worldlevel_testing_physics_room/worldlevel_testing_physics_room.occ" id="1_3ep4w"]
 [ext_resource type="Script" path="res://levels/worldlevel.cs" id="1_hstvh"]
@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" path="res://testing_stuff_kaen/test_light.tscn" id="8_t4ks3"]
 [ext_resource type="PackedScene" uid="uid://ttxrafhid6rv" path="res://placeholders/PhysicsItems/physic_crate.tscn" id="9_hcax0"]
 [ext_resource type="PackedScene" uid="uid://x5o6n083ax2a" path="res://placeholders/PhysicsItems/physic_item_test.tscn" id="10_18ehc"]
-[ext_resource type="PackedScene" uid="uid://dgse04gq5at0" path="res://placeholders/PhysicsItems/physic_item_test_small.tscn" id="10_frolm"]
+[ext_resource type="PackedScene" uid="uid://dgse04gq5at0" path="res://testing_stuff_kaen/inventory_items/InventoryItemsPlaceholder/physic_item_test_small.tscn" id="10_frolm"]
 [ext_resource type="PackedScene" uid="uid://dim74o3ajko3e" path="res://testing_stuff_kaen/drawer_table.tscn" id="11_sgvvf"]
 [ext_resource type="PackedScene" uid="uid://ipic8k4uwyqr" path="res://testing_stuff_kaen/wardrobe_small.tscn" id="13_5c36d"]
 [ext_resource type="PackedScene" uid="uid://dljia5htthib2" path="res://testing_stuff_kaen/wardrobe_rdoor_small.tscn" id="14_yfxhm"]

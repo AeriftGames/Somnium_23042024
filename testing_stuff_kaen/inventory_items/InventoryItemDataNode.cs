@@ -4,28 +4,91 @@ using System;
 public partial class InventoryItemDataNode : Node3D
 {
 	[Export] public InventoryItemData Data = new InventoryItemData();
+	[Export] public float pickupSpeed = 0.2f;
+	[Export] public float pickupHeight = 0.8f;
+	[Export] public AudioStream sfx;
+
+	private AudioStreamPlayer audioStreamPlayer = null;
+
+	private bool isUsed = false;
 	public override void _Ready()
 	{
-	}
+		audioStreamPlayer = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
+		audioStreamPlayer.Stream = sfx;
+    }
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
 	}
 
+	public void Use()
+	{
+		if (isUsed) return;
+
+        StartTweenPickup();
+        UseWantAddToInventory("");
+
+		isUsed = true;
+	}
+
 	public void UseWantAddToInventory(string itemForSpawn_sceneFilePath)
 	{
-		//GD.Print("add to inventory: scenefilepath: "+itemForSpawn_sceneFilePath);
-
 		FPSCharacter_Inventory charInventory = GameMaster.GM.GetFPSCharacter() as FPSCharacter_Inventory;
 		if (charInventory == null) return;
 
-		// pokud neni vyplnena manualne cesta k souboru ktery se ma spawnout pri PUT TO WORLD,
-		// nastavime ho automaticky z parenta
-		if(Data.spawnObjectScenePath != "")
-			Data.spawnObjectScenePath = itemForSpawn_sceneFilePath;
-
 		// pokusime se pridat item do inventare hrace
 		charInventory.GetInventorySystem().AddItemToInventory(Data);
+
+		// spustime tween animaci pickup
+        StartTweenPickup();
+    }
+
+	public void StartTweenPickup()
+	{
+        RigidBody3D b = GetParent() as RigidBody3D;
+        if (b != null)
+        {
+            GD.Print("tento objekt je RigidBody3D");
+
+            FPSCharacter_Inventory charInventory = GameMaster.GM.GetFPSCharacter() as FPSCharacter_Inventory;
+            if (charInventory == null) return;
+
+			Vector3 playerPos = charInventory.GlobalPosition;
+            float playerHeight = playerPos.Y + pickupHeight;
+
+			audioStreamPlayer.Play();
+
+			b.SetPhysicsProcess(false);
+
+			Tween tweenPos = CreateTween();
+			tweenPos.TweenProperty(b, "global_position", 
+				new Vector3(playerPos.X, playerHeight, playerPos.Z), pickupSpeed);
+
+			// kdyz se dokonci tweeb - spusti se funkce
+			tweenPos.Finished += TweenFinish;
+
+            return;
+        }
+
+        Node3D a = GetParent() as Node3D;
+		if(a != null)
+		{
+			GD.Print("tento objekt je Node3D");
+			return;
+		}
+    }
+
+	public void TweenFinish()
+	{
+		// skryjeme objekt
+		Node3D parent = GetParent() as Node3D;
+		parent.Hide();
+    }
+
+    public void _on_audio_stream_player_finished()
+	{
+		// znicime objekt
+       GetParent().QueueFree();
 	}
 }
