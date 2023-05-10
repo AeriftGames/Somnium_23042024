@@ -14,6 +14,7 @@ public partial class InventoryItemIconObject : Panel
 			newInventoryItemData.itemMeshPreview);
 
 		GetNode<InventoryItemPreview>("SubViewportContainer").Activate();
+		GetNode<Label>("LabelID").Text = newInventoryItemData.InventoryHoldingSlotID.ToString();
 
         Visible = true;
     }

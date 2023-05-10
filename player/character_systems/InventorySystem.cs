@@ -31,15 +31,18 @@ public partial class InventorySystem : Node
 		if(!HasInventoryFreeSlot())
 			return false;
 
-		// nastavi inventory item data prvni volny (slot id) a prida item do inventare, pokud je -1 = neni misto
-		newInventoryItemData.InventoryHoldingSlotID = inventoryCharacter.GetInventoryMenu().GetFirstFreeSlot();
-		if (newInventoryItemData.InventoryHoldingSlotID == -1) return false;
+		// udela kopii naseho item data (prerusi vazby resource souboru
+		InventoryItemData copiedItemData = newInventoryItemData.Duplicate() as InventoryItemData;
 
-        inventoryItems.Add(newInventoryItemData);
+        // nastavi inventory item data prvni volny (slot id) a prida item do inventare, pokud je -1 = neni misto
+        copiedItemData.InventoryHoldingSlotID = inventoryCharacter.GetInventoryMenu().GetFirstFreeSlot();
+		if (copiedItemData.InventoryHoldingSlotID == -1) return false;
+
+        inventoryItems.Add(copiedItemData);
 
 		// prida ui na dany slot
-		inventoryCharacter.GetInventoryMenu().AddItemToSlot(newInventoryItemData,
-			newInventoryItemData.InventoryHoldingSlotID);
+		inventoryCharacter.GetInventoryMenu().AddItemToSlot(copiedItemData,
+            copiedItemData.InventoryHoldingSlotID);
 
         GD.Print("item byl uspesne pridan do inventare");
         return true;

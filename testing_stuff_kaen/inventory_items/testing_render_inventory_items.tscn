@@ -1,10 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://berq1iifklgw0"]
+[gd_scene load_steps=12 format=3 uid="uid://berq1iifklgw0"]
 
 [ext_resource type="Script" path="res://testing_stuff_kaen/inventory_items/testing_render_inventory_items.cs" id="1_ruio4"]
 [ext_resource type="Script" path="res://testing_stuff_kaen/inventory_items/ItemSubViewportSetting.cs" id="2_2p74t"]
 [ext_resource type="Script" path="res://testing_stuff_kaen/inventory_items/InventoryItemData.cs" id="3_idwdt"]
 
-[sub_resource type="Resource" id="Resource_2kvuj"]
+[sub_resource type="Resource" id="Resource_02y1s"]
 script = ExtResource("2_2p74t")
 cameraPos = Vector3(0, 0, 6)
 cameraFov = 60.0
@@ -17,7 +17,7 @@ meshPos = Vector3(0, 0, 0)
 meshRot = Vector3(0, 0, 0)
 meshScale = Vector3(1, 1, 1)
 
-[sub_resource type="Resource" id="Resource_ll1cs"]
+[sub_resource type="Resource" id="Resource_qncmo"]
 script = ExtResource("2_2p74t")
 cameraPos = Vector3(0, 0, 6)
 cameraFov = 60.0
@@ -30,7 +30,7 @@ meshPos = Vector3(0, 0, 0)
 meshRot = Vector3(0, 0, 0)
 meshScale = Vector3(1, 1, 1)
 
-[sub_resource type="Resource" id="Resource_wgvpw"]
+[sub_resource type="Resource" id="Resource_a6wp6"]
 script = ExtResource("3_idwdt")
 itemName = ""
 itemInfoText = ""
@@ -45,8 +45,9 @@ canDelete = false
 canStackable = false
 showNameInSlot = false
 spawnObjectScenePath = ""
-SettingsForPreview = SubResource("Resource_2kvuj")
-SettingsForSlot = SubResource("Resource_ll1cs")
+SettingsForPreview = SubResource("Resource_02y1s")
+SettingsForSlot = SubResource("Resource_qncmo")
+InventoryHoldingSlotID = -1
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0x23u"]
 bg_color = Color(0, 0, 0, 0.156863)
@@ -61,8 +62,6 @@ corner_radius_bottom_left = 25
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_xm6u6"]
 blend_mode = 1
-
-[sub_resource type="BoxMesh" id="BoxMesh_gl00w"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_waqsy"]
 bg_color = Color(0.27451, 0.27451, 0.27451, 0.196078)
@@ -105,7 +104,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ruio4")
-inventoryItemData = SubResource("Resource_wgvpw")
+inventoryItemData = SubResource("Resource_a6wp6")
 
 [node name="InventoryItemIconObject" type="Panel" parent="."]
 layout_mode = 1
@@ -124,6 +123,7 @@ mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_0x23u")
 
 [node name="ItemName" type="Label" parent="InventoryItemIconObject"]
+visible = false
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -135,7 +135,6 @@ offset_top = -26.0
 offset_right = 20.0
 grow_horizontal = 2
 grow_vertical = 0
-text = "kostka"
 metadata/_edit_lock_ = true
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="InventoryItemIconObject"]
@@ -158,12 +157,10 @@ size_2d_override = Vector2i(350, 350)
 render_target_update_mode = 4
 
 [node name="Camera3D" type="Camera3D" parent="InventoryItemIconObject/SubViewportContainer/SubViewport"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6)
 fov = 60.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="InventoryItemIconObject/SubViewportContainer/SubViewport"]
-transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, 0, 0, 0)
-mesh = SubResource("BoxMesh_gl00w")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="InventoryItemIconObject/SubViewportContainer/SubViewport"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
@@ -201,15 +198,13 @@ size_2d_override = Vector2i(773, 382)
 render_target_update_mode = 4
 
 [node name="Camera3D" type="Camera3D" parent="Panel_ItemPreview/SubViewportContainer/SubViewport"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6)
 fov = 60.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Panel_ItemPreview/SubViewportContainer/SubViewport"]
-transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 0, 0, 0)
-mesh = SubResource("BoxMesh_gl00w")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Panel_ItemPreview/SubViewportContainer/SubViewport"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 3, 10)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
 light_energy = 2.0
 light_bake_mode = 0
 omni_range = 20.0
@@ -238,7 +233,6 @@ offset_right = 310.0
 offset_bottom = -8.0
 grow_horizontal = 2
 theme_override_font_sizes/font_size = 23
-text = "kostka"
 horizontal_alignment = 1
 vertical_alignment = 1
 uppercase = true

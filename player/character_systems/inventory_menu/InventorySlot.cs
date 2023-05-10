@@ -20,16 +20,40 @@ public partial class InventorySlot : Button
 
 	public void Init(inventory_menu newInventoryMenu){inventoryMenu = newInventoryMenu;}
 
-    public override void _Process(double delta)
-    {
-        base._Process(delta);
+	public override void _Process(double delta)
+	{
+		base._Process(delta);
 
 		if (!hasItem) return;
 
-		if(Input.IsActionJustPressed("mouseRightClick") && isMouseOver)
+
+		if (Input.IsActionJustPressed("mouseRightClick") && isMouseOver)
 		{
-            inventoryMenu.PutFromInventory(this);
+			inventoryMenu.PutFromInventory(this);
+		}
+		else if (Input.IsActionJustPressed("mouseClickLeft") && isMouseOver)
+		{
+			// pouze kratky mouse left click
+
+			// focus item
+			GD.Print("FOCUS ITEM");
+			inventoryMenu.FocusUIItem(this);
+		}
+		/*
+		else if (Input.IsActionPressed("mouseClickLeft") && isMouseOver)
+		{
+			// pouze staly mouse left click
+
+			// prepne na drag and drop
+			GD.Print("DRAG AND DROP START");
+		}
+		else if (Input.IsActionJustReleased("mouseClickLeft"))
+		{
+            // opusteni mouse left click
+            GD.Print("DRAG AND DROP END");
         }
+		*/
+		
     }
 
     public void SetShowNameSlot(bool newShow)
@@ -68,7 +92,7 @@ public partial class InventorySlot : Button
 
 	public void _on_pressed()
 	{
-		inventoryMenu.FocusUIItem(this);
+		//inventoryMenu.FocusUIItem(this);
 	}
 
 	public void _on_mouse_entered()
@@ -84,4 +108,6 @@ public partial class InventorySlot : Button
 	public void SetID(int newID){id = newID;}
 
 	public int GetID(){ return id; }
+
+	public bool GetIsMouseHover() { return isMouseOver; }
 }

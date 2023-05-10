@@ -59,6 +59,7 @@ showNameInSlot = true
 spawnObjectScenePath = "res://testing_stuff_kaen/inventory_items/InventoryItemsPlaceholder/cube_inventory_test.tscn"
 SettingsForPreview = SubResource("Resource_nprea")
 SettingsForSlot = SubResource("Resource_5eg0j")
+InventoryHoldingSlotID = -1
 
 [node name="cube_inventory_test" type="Node3D" node_paths=PackedStringArray("node_interact", "use_node")]
 script = ExtResource("2_bukrt")

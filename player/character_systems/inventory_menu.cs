@@ -24,6 +24,10 @@ public partial class inventory_menu : Control
     private InventoryItemPreview itemPreview = null;
     private int actualFocusSlotID = -1;
 
+    // drag and drop
+    private float mouseLeftClickTime = 0.0f;
+    DragAndDropItem dragAndDropItem = null;
+
     public override void _Ready()
     {
         anim = GetNode<AnimationPlayer>("AnimationPlayer");
@@ -46,6 +50,25 @@ public partial class inventory_menu : Control
         // close this inventory
         if (Input.IsActionJustPressed("toggleInventory"))
             SetActive(false);
+
+        // DragAndDrop Test = Start
+        if (Input.IsActionJustPressed("DragAndDropTest") && GetActualDragAndDropItem() == null)
+            foreach (var slot in GetAllInventoryItemSlots())
+                if (slot.GetIsMouseHover() && slot.HasUIItem())
+                {
+                    StartDragAndDropItem(slot);
+                    return;
+                }
+
+        // DragAndDrop Test = End
+        if (Input.IsActionJustReleased("DragAndDropTest") && GetActualDragAndDropItem() != null)
+            foreach (var slot in GetAllInventoryItemSlots())
+                if (slot.GetIsMouseHover())
+                {
+                    DragItemChangeToNewSlot(slot);
+                    EndDragAndDropItem();
+                    return;
+                }
     }
 
     public void Init(InventorySystem newInventorySystem) 
@@ -294,6 +317,70 @@ public partial class inventory_menu : Control
             newSlot.Init(this);
             newSlot.SetID(i);
             allInventorySlots.Add(newSlot);
+        }
+    }
+
+    public void StartDragAndDropItem(InventorySlot slot)
+    {
+        if (dragAndDropItem != null) return;
+
+        GD.Print("StartDragAndDrop");
+        // Nacte prefab sceny slotu
+        PackedScene newDragAndDropPackedScene =
+            GD.Load<PackedScene>("res://player/character_systems/inventory_menu/DragAndDropItem.tscn");
+
+        dragAndDropItem = newDragAndDropPackedScene.Instantiate() as DragAndDropItem;
+        AddChild(dragAndDropItem);
+        dragAndDropItem.Init(slot.GetInventoryItemData());
+        dragAndDropItem.SetDragUpdate(true);
+    }
+
+    public void EndDragAndDropItem()
+    {
+        GD.Print("EndDragAndDrop");
+        dragAndDropItem.SetDragUpdate(false);
+        dragAndDropItem.Destroy();
+        dragAndDropItem = null;
+    }
+
+    public DragAndDropItem GetActualDragAndDropItem()
+    {
+        return dragAndDropItem;
+    }
+
+    public void DragItemChangeToNewSlot(InventorySlot newSlot)
+    {
+        if (dragAndDropItem == null || newSlot == null) return;
+
+        if (newSlot.HasUIItem())
+        {
+            var holdSecond = newSlot.GetInventoryItemData();
+            var holdFirst = dragAndDropItem.GetInventoryItemData();
+
+            var a = holdFirst.InventoryHoldingSlotID;
+            holdFirst.InventoryHoldingSlotID = holdSecond.InventoryHoldingSlotID;
+            holdSecond.InventoryHoldingSlotID = a;
+
+            GetAllInventoryItemSlots()[holdFirst.InventoryHoldingSlotID].DestroyUIItem();
+            GetAllInventoryItemSlots()[holdSecond.InventoryHoldingSlotID].DestroyUIItem();
+
+            GetAllInventoryItemSlots()[holdFirst.InventoryHoldingSlotID].SetItem(holdFirst);
+            GetAllInventoryItemSlots()[holdSecond.InventoryHoldingSlotID].SetItem(holdSecond);
+        }
+        else
+        {
+            // vlozime do noveho slotu a stary znicime
+            // pokud je potreba prerusime focus a znicime puvodni item ve slotu
+            int id = dragAndDropItem.GetInventoryItemData().InventoryHoldingSlotID;
+
+            if (GetAllInventoryItemSlots()[id].GetID() == actualFocusSlotID)
+                DisableLastFocusUIItem();
+
+            dragAndDropItem.GetInventoryItemData().InventoryHoldingSlotID = newSlot.GetID();
+            // pridame na nove misto
+            newSlot.SetItem(dragAndDropItem.GetInventoryItemData());
+
+            GetAllInventoryItemSlots()[id].DestroyUIItem();
         }
     }
 }

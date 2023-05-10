@@ -49,3 +49,4 @@ showNameInSlot = false
 spawnObjectScenePath = ""
 SettingsForPreview = SubResource("Resource_tm465")
 SettingsForSlot = SubResource("Resource_7rqwc")
+InventoryHoldingSlotID = -1

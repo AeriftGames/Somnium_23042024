@@ -1,11 +1,10 @@
-[gd_scene load_steps=16 format=3 uid="uid://dgse04gq5at0"]
+[gd_scene load_steps=11 format=3 uid="uid://dgse04gq5at0"]
 
 [ext_resource type="Script" path="res://placeholders/PhysicsItems/physic_item_test.cs" id="1_tooom"]
 [ext_resource type="AudioStream" uid="uid://i5s8a8274bq6" path="res://audio/audio_streams/interactive_basic/36787__farbin__drop-cardboard-box.wav" id="2_y3rxp"]
 [ext_resource type="Script" path="res://core_systems/interactive_system/interactive_object.cs" id="3_nngnb"]
 [ext_resource type="PackedScene" uid="uid://culc1s4yyddk0" path="res://testing_stuff_kaen/inventory_items/InventoryItemDataNode.tscn" id="4_7pttu"]
-[ext_resource type="Script" path="res://testing_stuff_kaen/inventory_items/ItemSubViewportSetting.cs" id="5_u2266"]
-[ext_resource type="Script" path="res://testing_stuff_kaen/inventory_items/InventoryItemData.cs" id="6_4dxvp"]
+[ext_resource type="Resource" uid="uid://baj7vf7ihdsxo" path="res://testing_stuff_kaen/inventory_items/InventoryItemsPlaceholder/kostka_InventoryData.tres" id="5_nu1jr"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_l84ni"]
 friction = 0.3
@@ -21,53 +20,6 @@ size = Vector3(0.127, 0.127, 0.127)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_d42n3"]
 radius = 2.5
-
-[sub_resource type="Resource" id="Resource_pqpg6"]
-script = ExtResource("5_u2266")
-cameraPos = Vector3(0, 0, 2)
-cameraFov = 60.0
-lightPos = Vector3(5, 3, 10)
-lightPower = 2.0
-lightSize = 0.0
-lightRange = 20.0
-lightColor = Color(1, 1, 1, 1)
-meshPos = Vector3(0, 0, 0)
-meshRot = Vector3(0, 45, 0)
-meshScale = Vector3(1, 1, 1)
-
-[sub_resource type="Resource" id="Resource_4c00y"]
-script = ExtResource("5_u2266")
-cameraPos = Vector3(0, 0, 3)
-cameraFov = 60.0
-lightPos = Vector3(0, 0, 5)
-lightPower = 2.0
-lightSize = 0.0
-lightRange = 20.0
-lightColor = Color(1, 1, 1, 1)
-meshPos = Vector3(0, 0, 0)
-meshRot = Vector3(0, 30, 0)
-meshScale = Vector3(1, 1, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_gl00w"]
-
-[sub_resource type="Resource" id="Resource_8mjhk"]
-script = ExtResource("6_4dxvp")
-itemName = "kostka"
-itemInfoText = "Toto je kostka která má 6 stran"
-itemMeshPreview = SubResource("BoxMesh_gl00w")
-rotateInInventoryPreview = true
-canUseInHand = false
-mustBothHandsOnly = false
-canPutToWorld = false
-canUse = false
-canCombine = false
-canInspect = false
-canDelete = false
-canStackable = false
-showNameInSlot = true
-spawnObjectScenePath = "res://testing_stuff_kaen/inventory_items/InventoryItemsPlaceholder/physic_item_test_small.tscn"
-SettingsForPreview = SubResource("Resource_pqpg6")
-SettingsForSlot = SubResource("Resource_4c00y")
 
 [node name="PhysicItem_test" type="RigidBody3D"]
 collision_layer = 8
@@ -117,7 +69,7 @@ metadata/_edit_lock_ = true
 [node name="AudioPlayer_PhysicEffects" type="AudioStreamPlayer3D" parent="."]
 
 [node name="InventoryItemDataNode" parent="." instance=ExtResource("4_7pttu")]
-Data = SubResource("Resource_8mjhk")
+Data = ExtResource("5_nu1jr")
 
 [connection signal="body_entered" from="interactive_object/StaticBody3D/interactive_object_area3D" to="interactive_object" method="_on_interactive_object_area_3d_body_entered"]
 [connection signal="body_exited" from="interactive_object/StaticBody3D/interactive_object_area3D" to="interactive_object" method="_on_interactive_object_area_3d_body_exited"]

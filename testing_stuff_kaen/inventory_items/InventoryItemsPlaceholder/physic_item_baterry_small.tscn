@@ -1,73 +1,23 @@
-[gd_scene load_steps=15 format=3 uid="uid://dx7bvg35rat5y"]
+[gd_scene load_steps=11 format=3 uid="uid://dx7bvg35rat5y"]
 
 [ext_resource type="Script" path="res://placeholders/PhysicsItems/physic_item_test.cs" id="1_10fht"]
 [ext_resource type="AudioStream" uid="uid://i5s8a8274bq6" path="res://audio/audio_streams/interactive_basic/36787__farbin__drop-cardboard-box.wav" id="2_uwmj5"]
 [ext_resource type="ArrayMesh" uid="uid://fxl3wl4n5ew8" path="res://objects/battery/battery_mesh.tres" id="3_5lkx0"]
 [ext_resource type="Script" path="res://core_systems/interactive_system/interactive_object.cs" id="3_wdg6s"]
 [ext_resource type="PackedScene" uid="uid://culc1s4yyddk0" path="res://testing_stuff_kaen/inventory_items/InventoryItemDataNode.tscn" id="4_150nw"]
-[ext_resource type="Script" path="res://testing_stuff_kaen/inventory_items/ItemSubViewportSetting.cs" id="5_yfeny"]
-[ext_resource type="Script" path="res://testing_stuff_kaen/inventory_items/InventoryItemData.cs" id="6_npe5j"]
+[ext_resource type="Resource" uid="uid://cje0dr0dnqklq" path="res://testing_stuff_kaen/inventory_items/InventoryItemsPlaceholder/batery_InventoryData.tres" id="6_y4im4"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_l84ni"]
 friction = 0.3
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_lhlql"]
-height = 0.144629
-radius = 0.041317
+[sub_resource type="BoxShape3D" id="BoxShape3D_wscud"]
+size = Vector3(0.0833712, 0.145, 0.0797377)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gdpv1"]
 size = Vector3(0.122741, 0.180992, 0.127)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_d42n3"]
 radius = 2.5
-
-[sub_resource type="Resource" id="Resource_r3h6n"]
-resource_local_to_scene = true
-script = ExtResource("5_yfeny")
-cameraPos = Vector3(0, 0.8, 5)
-cameraFov = 60.0
-lightPos = Vector3(1, 2.5, 5)
-lightPower = 2.0
-lightSize = 0.0
-lightRange = 15.0
-lightColor = Color(1, 1, 1, 1)
-meshPos = Vector3(0, 0, 0)
-meshRot = Vector3(0, 30, 0)
-meshScale = Vector3(1, 1, 1)
-
-[sub_resource type="Resource" id="Resource_3sisl"]
-resource_local_to_scene = true
-script = ExtResource("5_yfeny")
-cameraPos = Vector3(0, 0.8, 5.5)
-cameraFov = 60.0
-lightPos = Vector3(1, 2.5, 7)
-lightPower = 2.0
-lightSize = 0.0
-lightRange = 15.0
-lightColor = Color(1, 1, 1, 1)
-meshPos = Vector3(0, 0, 0)
-meshRot = Vector3(0, 10, 0)
-meshScale = Vector3(1, 1, 1)
-
-[sub_resource type="Resource" id="Resource_valp1"]
-script = ExtResource("6_npe5j")
-itemName = "baterry"
-itemInfoText = "Tato baterie je použitelná pro mohno přístrojů včetně naší svítilny. Má malou kapacitu."
-itemMeshPreview = ExtResource("3_5lkx0")
-rotateInInventoryPreview = true
-canUseInHand = false
-mustBothHandsOnly = false
-canPutToWorld = false
-canUse = false
-canCombine = false
-canInspect = false
-canDelete = false
-canStackable = false
-showNameInSlot = true
-spawnObjectScenePath = "res://testing_stuff_kaen/inventory_items/InventoryItemsPlaceholder/physic_item_baterry_small.tscn"
-SettingsForPreview = SubResource("Resource_r3h6n")
-SettingsForSlot = SubResource("Resource_3sisl")
-InventoryHoldingSlotID = -1
 
 [node name="PhysicItem_battery_small" type="RigidBody3D"]
 collision_layer = 8
@@ -89,7 +39,7 @@ callUseNodes = Array[NodePath]([NodePath("InventoryItemDataNode")])
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0294062, 0)
-shape = SubResource("CylinderShape3D_lhlql")
+shape = SubResource("BoxShape3D_wscud")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.04, 0, 0, 0, 0.04, 0, 0, 0, 0.04, 0, 0, 0)
@@ -122,7 +72,7 @@ metadata/_edit_lock_ = true
 [node name="AudioPlayer_PhysicEffects" type="AudioStreamPlayer3D" parent="."]
 
 [node name="InventoryItemDataNode" parent="." instance=ExtResource("4_150nw")]
-Data = SubResource("Resource_valp1")
+Data = ExtResource("6_y4im4")
 
 [connection signal="body_entered" from="interactive_object/StaticBody3D/interactive_object_area3D" to="interactive_object" method="_on_interactive_object_area_3d_body_entered"]
 [connection signal="body_exited" from="interactive_object/StaticBody3D/interactive_object_area3D" to="interactive_object" method="_on_interactive_object_area_3d_body_exited"]

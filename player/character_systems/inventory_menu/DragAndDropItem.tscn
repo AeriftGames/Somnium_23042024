@@ -1,0 +1,74 @@
+[gd_scene load_steps=5 format=3 uid="uid://basepmnvvwhvr"]
+
+[ext_resource type="Script" path="res://player/character_systems/inventory_menu/DragAndDropItem.cs" id="1_gp52r"]
+[ext_resource type="Script" path="res://player/character_systems/InventoryItemPreview.cs" id="2_g35f4"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0x23u"]
+bg_color = Color(0, 0, 0, 0.156863)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_xm6u6"]
+blend_mode = 1
+
+[node name="DragAndDropItem" type="Panel"]
+custom_minimum_size = Vector2(120, 120)
+offset_right = 120.0
+offset_bottom = 120.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_0x23u")
+script = ExtResource("1_gp52r")
+metadata/_edit_use_anchors_ = true
+
+[node name="ItemName" type="Label" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -26.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "item"
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+material = SubResource("CanvasItemMaterial_xm6u6")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+stretch = true
+script = ExtResource("2_g35f4")
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+own_world_3d = true
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(120, 120)
+size_2d_override = Vector2i(350, 350)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 5)
+fov = 71.9
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport"]
+
+[node name="OmniLight3D" type="OmniLight3D" parent="SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.68253, 7.62594)
+light_energy = 2.0
+light_indirect_energy = 2.0
+omni_range = 15.0

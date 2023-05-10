@@ -3,7 +3,7 @@ using System;
 
 public partial class InventoryItemDataNode : Node3D
 {
-	[Export] public InventoryItemData Data = new InventoryItemData();
+	[Export] public InventoryItemData Data;
 	[Export] public float pickupSpeed = 0.2f;
 	[Export] public float pickupHeight = 0.8f;
 	[Export] public AudioStream sfx;
