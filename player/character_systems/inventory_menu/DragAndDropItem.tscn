@@ -1,7 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://basepmnvvwhvr"]
+[gd_scene load_steps=5 format=3 uid="uid://cxdxqcubeqsrm"]
 
 [ext_resource type="Script" path="res://player/character_systems/inventory_menu/DragAndDropItem.cs" id="1_gp52r"]
-[ext_resource type="Script" path="res://player/character_systems/InventoryItemPreview.cs" id="2_g35f4"]
+[ext_resource type="Script" path="res://player/character_systems/inventory_menu/InventoryItemPreview.cs" id="2_nmi70"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0x23u"]
 bg_color = Color(0, 0, 0, 0.156863)
@@ -51,7 +51,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 stretch = true
-script = ExtResource("2_g35f4")
+script = ExtResource("2_nmi70")
 
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
 own_world_3d = true

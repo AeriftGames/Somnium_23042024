@@ -1,10 +1,10 @@
-[gd_scene load_steps=17 format=3 uid="uid://dek7jejp4kkiw"]
+[gd_scene load_steps=17 format=3]
 
 [ext_resource type="Shader" path="res://player/character_systems/vignete.gdshader" id="1_au2fw"]
-[ext_resource type="Script" path="res://player/character_systems/inventory_menu.cs" id="1_psfyt"]
+[ext_resource type="Script" path="res://player/character_systems/inventory_menu/inventory_menu.cs" id="1_psfyt"]
 [ext_resource type="AudioStream" uid="uid://m7ikqivarlhf" path="res://audio/audio_streams/inventory/backpack_open1.wav" id="2_2hhuh"]
 [ext_resource type="AudioStream" uid="uid://bo3chsomqpexu" path="res://audio/audio_streams/inventory/backpack_open2.wav" id="3_521e5"]
-[ext_resource type="Script" path="res://player/character_systems/InventoryItemPreview.cs" id="6_xggco"]
+[ext_resource type="Script" path="res://player/character_systems/inventory_menu/InventoryItemPreview.cs" id="6_xggco"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_stuy7"]
 shader = ExtResource("1_au2fw")
