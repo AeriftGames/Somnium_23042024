@@ -1,0 +1,265 @@
+[gd_scene load_steps=12 format=3 uid="uid://ih1k71vne6rf"]
+
+[ext_resource type="Script" path="res://player/character_systems/inventory_menu/testing_render_inventory_items.cs" id="1_wm21r"]
+[ext_resource type="Script" path="res://player/character_systems/inventory_menu/ItemSubViewportSetting.cs" id="2_gxm74"]
+[ext_resource type="Script" path="res://player/character_systems/inventory_menu/InventoryItemData.cs" id="3_cgneg"]
+
+[sub_resource type="Resource" id="Resource_3niro"]
+script = ExtResource("2_gxm74")
+cameraPos = Vector3(0, 0, 6)
+cameraFov = 60.0
+lightPos = Vector3(0, 0, 5)
+lightPower = 2.0
+lightSize = 0.0
+lightRange = 20.0
+lightColor = Color(1, 1, 1, 1)
+meshPos = Vector3(0, 0, 0)
+meshRot = Vector3(0, 0, 0)
+meshScale = Vector3(1, 1, 1)
+
+[sub_resource type="Resource" id="Resource_6tfcs"]
+script = ExtResource("2_gxm74")
+cameraPos = Vector3(0, 0, 6)
+cameraFov = 60.0
+lightPos = Vector3(0, 0, 5)
+lightPower = 2.0
+lightSize = 0.0
+lightRange = 20.0
+lightColor = Color(1, 1, 1, 1)
+meshPos = Vector3(0, 0, 0)
+meshRot = Vector3(0, 0, 0)
+meshScale = Vector3(1, 1, 1)
+
+[sub_resource type="Resource" id="Resource_gwf2w"]
+script = ExtResource("3_cgneg")
+itemName = ""
+itemInfoText = ""
+rotateInInventoryPreview = false
+canUseInHand = false
+mustBothHandsOnly = false
+canPutToWorld = false
+canUse = false
+canCombine = false
+canInspect = false
+canDelete = false
+canStackable = false
+showNameInSlot = false
+spawnObjectScenePath = ""
+SettingsForPreview = SubResource("Resource_3niro")
+SettingsForSlot = SubResource("Resource_6tfcs")
+InventoryHoldingSlotID = -1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0x23u"]
+bg_color = Color(0, 0, 0, 0.156863)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_xm6u6"]
+blend_mode = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_waqsy"]
+bg_color = Color(0.27451, 0.27451, 0.27451, 0.196078)
+draw_center = false
+border_width_left = 5
+border_width_top = 10
+border_width_right = 5
+border_width_bottom = 10
+border_color = Color(1, 1, 1, 0.478431)
+border_blend = true
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+corner_detail = 1
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_njhxs"]
+blend_mode = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8bvme"]
+bg_color = Color(0.27451, 0.27451, 0.27451, 0.196078)
+draw_center = false
+border_width_left = 5
+border_width_top = 10
+border_width_right = 5
+border_width_bottom = 10
+border_color = Color(1, 1, 1, 0.478431)
+border_blend = true
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+corner_detail = 1
+
+[node name="Testing_Render_Inventory_Items" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_wm21r")
+inventoryItemData = SubResource("Resource_gwf2w")
+
+[node name="InventoryItemIconObject" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -49.0
+offset_top = -13.0
+offset_right = 51.0
+offset_bottom = 87.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_0x23u")
+
+[node name="ItemName" type="Label" parent="InventoryItemIconObject"]
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -26.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+metadata/_edit_lock_ = true
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="InventoryItemIconObject"]
+material = SubResource("CanvasItemMaterial_xm6u6")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+metadata/_edit_lock_ = true
+
+[node name="SubViewport" type="SubViewport" parent="InventoryItemIconObject/SubViewportContainer"]
+own_world_3d = true
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(100, 100)
+size_2d_override = Vector2i(350, 350)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="InventoryItemIconObject/SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6)
+fov = 60.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="InventoryItemIconObject/SubViewportContainer/SubViewport"]
+
+[node name="OmniLight3D" type="OmniLight3D" parent="InventoryItemIconObject/SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
+light_energy = 2.0
+omni_range = 20.0
+
+[node name="Panel_ItemPreview" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -309.0
+offset_top = 56.0
+offset_right = 303.0
+offset_bottom = 406.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_waqsy")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Panel_ItemPreview"]
+material = SubResource("CanvasItemMaterial_njhxs")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="Panel_ItemPreview/SubViewportContainer"]
+own_world_3d = true
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(612, 350)
+size_2d_override = Vector2i(773, 382)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="Panel_ItemPreview/SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6)
+fov = 60.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Panel_ItemPreview/SubViewportContainer/SubViewport"]
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Panel_ItemPreview/SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
+light_energy = 2.0
+light_bake_mode = 0
+omni_range = 20.0
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -309.0
+offset_top = 416.0
+offset_right = 303.0
+offset_bottom = 493.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_8bvme")
+
+[node name="Label" type="Label" parent="Panel"]
+custom_minimum_size = Vector2(620, 30)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -310.0
+offset_top = -43.0
+offset_right = 310.0
+offset_bottom = -8.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 23
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 6.0
+offset_top = 4.0
+offset_right = -7.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+fit_content = true
+metadata/_edit_lock_ = true
+
+[node name="ColorRect" type="ColorRect" parent="Panel"]
+custom_minimum_size = Vector2(400, 2)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -300.0
+offset_top = -6.0
+offset_right = 300.0
+offset_bottom = -4.0
+grow_horizontal = 2
+color = Color(1, 1, 1, 0.498039)

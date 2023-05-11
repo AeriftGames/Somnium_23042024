@@ -25,7 +25,9 @@ public partial class inventory_menu : Control
     private int actualFocusSlotID = -1;
 
     // drag and drop
+    private float needClickTimeForDrag = 0.2f;
     private float mouseLeftClickTime = 0.0f;
+    private int lastSlotClickedForTime = -1;
     DragAndDropItem dragAndDropItem = null;
 
     public override void _Ready()
@@ -51,24 +53,66 @@ public partial class inventory_menu : Control
         if (Input.IsActionJustPressed("toggleInventory"))
             SetActive(false);
 
-        // DragAndDrop Test = Start
-        if (Input.IsActionJustPressed("DragAndDropTest") && GetActualDragAndDropItem() == null)
+        // Inputs update pro (drag and drop) a (Click)
+        UpdateDragEndDropInputs("mouseClickLeft", delta);
+    }
+
+    private void UpdateDragEndDropInputs(StringName newDragAndDropAndFocusAction,double delta)
+    {
+        // DragAndDrop Start
+        if (Input.IsActionPressed(newDragAndDropAndFocusAction) && GetActualDragAndDropItem() == null)
             foreach (var slot in GetAllInventoryItemSlots())
                 if (slot.GetIsMouseHover() && slot.HasUIItem())
                 {
-                    StartDragAndDropItem(slot);
-                    return;
+                    // podminky pro spusteni dragu
+                    if (mouseLeftClickTime >= needClickTimeForDrag)
+                    {
+                        // Start Drag
+                        StartDragAndDropItem(slot);
+
+                        mouseLeftClickTime = 0.0f;
+                        return;
+                    }
+
+                    // zajisteni aby se pricital cas jen na stejnem slotu, pokud neni = reset time
+                    if (lastSlotClickedForTime == slot.GetID())
+                        mouseLeftClickTime += (float)delta;
+                    else
+                        mouseLeftClickTime = 0.0f;
+
+                    // pro zajisteni pocitani
+                    lastSlotClickedForTime = slot.GetID();
                 }
 
-        // DragAndDrop Test = End
-        if (Input.IsActionJustReleased("DragAndDropTest") && GetActualDragAndDropItem() != null)
-            foreach (var slot in GetAllInventoryItemSlots())
-                if (slot.GetIsMouseHover())
-                {
-                    DragItemChangeToNewSlot(slot);
-                    EndDragAndDropItem();
-                    return;
-                }
+        // Released tlacitko Drag/Focus
+        if (Input.IsActionJustReleased(newDragAndDropAndFocusAction))
+        {
+            if (GetActualDragAndDropItem() != null)
+            {
+                foreach (var slot in GetAllInventoryItemSlots())
+                    if (slot.GetIsMouseHover())
+                    {
+                        //end drag item
+                        DragItemChangeToNewSlot(slot);
+                        EndDragAndDropItem();
+
+                        mouseLeftClickTime = 0.0f;
+                        return;
+                    }
+            }
+            else
+            {
+                foreach (var slot in GetAllInventoryItemSlots())
+                    if (slot.GetIsMouseHover())
+                    {
+                        //focus item (click)
+                        FocusUIItem(slot);
+
+                        mouseLeftClickTime = 0.0f;
+                        return;
+                    }
+            }
+        }
     }
 
     public void Init(InventorySystem newInventorySystem) 
