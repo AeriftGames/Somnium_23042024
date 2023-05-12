@@ -9,9 +9,13 @@ script = ExtResource("1_4juct")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.42563, 0, -0.0494044)
+visible = false
+light_bake_mode = 0
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 2.04175, 0, 0)
+visible = false
+far = 100.0
 
 [node name="Area3D" type="Area3D" parent="Camera3D"]
 

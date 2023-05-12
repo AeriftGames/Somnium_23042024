@@ -1,0 +1,756 @@
+[gd_scene load_steps=17 format=3 uid="uid://dek7jejp4kkiw"]
+
+[ext_resource type="Shader" path="res://player/character_systems/vignete.gdshader" id="1_au2fw"]
+[ext_resource type="Script" path="res://player/character_systems/inventory_menu.cs" id="1_psfyt"]
+[ext_resource type="AudioStream" uid="uid://m7ikqivarlhf" path="res://audio/audio_streams/inventory/backpack_open1.wav" id="2_2hhuh"]
+[ext_resource type="AudioStream" uid="uid://bo3chsomqpexu" path="res://audio/audio_streams/inventory/backpack_open2.wav" id="3_521e5"]
+[ext_resource type="Script" path="res://player/character_systems/InventoryItemPreview.cs" id="6_xggco"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_stuy7"]
+shader = ExtResource("1_au2fw")
+shader_parameter/color = Color(0, 0, 0, 1)
+shader_parameter/multiplier = 0.0
+shader_parameter/softness = 0.7
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q4stf"]
+bg_color = Color(0.192157, 0.192157, 0.192157, 0)
+draw_center = false
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(1, 1, 1, 0.184314)
+border_blend = true
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 20
+expand_margin_left = 20.0
+expand_margin_top = 189.0
+expand_margin_right = 18.0
+expand_margin_bottom = 70.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nlry6"]
+bg_color = Color(0.27451, 0.27451, 0.27451, 0.196078)
+border_width_left = 5
+border_width_top = 10
+border_width_right = 5
+border_width_bottom = 10
+border_color = Color(1, 1, 1, 0.478431)
+border_blend = true
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 50
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u4lpn"]
+bg_color = Color(0.27451, 0.27451, 0.27451, 0.196078)
+border_width_left = 5
+border_width_top = 10
+border_width_right = 5
+border_width_bottom = 10
+border_color = Color(1, 1, 1, 0.478431)
+border_blend = true
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uj0vl"]
+bg_color = Color(0.27451, 0.27451, 0.27451, 0.196078)
+draw_center = false
+border_width_left = 5
+border_width_top = 10
+border_width_right = 5
+border_width_bottom = 10
+border_color = Color(1, 1, 1, 0.478431)
+border_blend = true
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+corner_detail = 1
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_o6mop"]
+blend_mode = 1
+
+[sub_resource type="Animation" id="Animation_y8yo1"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect_Vignette:material:shader_parameter/multiplier")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Panel:modulate:r")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Panel:modulate:g")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Panel:modulate:b")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Panel:modulate:a")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/5/type = "bezier"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Panel:position:y")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1000, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/6/type = "bezier"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Panel:rotation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Panel:anchors_preset")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [7]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("TabContainer:modulate")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("TabContainer:anchors_preset")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [5]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("TabContainer:position")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(660, 0)]
+}
+tracks/11/type = "bezier"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("Panel:scale:x")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/12/type = "bezier"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("Panel:scale:y")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/13/type = "bezier"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("TabContainer:scale:x")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/14/type = "bezier"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("TabContainer:scale:y")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_pbvvi"]
+resource_name = "open_inventory"
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect_Vignette:material:shader_parameter/multiplier")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0.7, -0.25, 0, 0.25, 0, 0.1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Panel:modulate:r")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.3, 1)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Panel:modulate:g")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.3, 1)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Panel:modulate:b")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.3, 1)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Panel:modulate:a")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.3, 1)
+}
+tracks/5/type = "bezier"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Panel:position:y")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(1000, -0.25, 0, 0.25, 0, 555, -0.25, 0, 0.25, 0, 550, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.8, 1)
+}
+tracks/6/type = "bezier"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Panel:rotation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0.261799, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Panel:anchors_preset")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [7, 7]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("TabContainer:modulate")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("TabContainer:anchors_preset")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [5, 5]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("TabContainer:position:y")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-150.0, 0.0]
+}
+tracks/11/type = "bezier"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("Panel:scale:x")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 1.15, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.6, 1)
+}
+tracks/12/type = "bezier"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("Panel:scale:y")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 1.1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.6, 1)
+}
+tracks/13/type = "bezier"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("TabContainer:scale:x")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 1.3, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.5, 1.3)
+}
+tracks/14/type = "bezier"
+tracks/14/imported = false
+tracks/14/enabled = false
+tracks/14/path = NodePath("TabContainer:scale:y")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 1.2, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.5, 1.3)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gvsnl"]
+_data = {
+"RESET": SubResource("Animation_y8yo1"),
+"open_inventory": SubResource("Animation_pbvvi")
+}
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n470u"]
+bg_color = Color(0.6, 0.6, 0.6, 0.294118)
+border_width_left = 10
+border_width_right = 10
+border_width_bottom = 10
+border_blend = true
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7dfki"]
+content_margin_left = 0.0
+content_margin_right = 0.0
+bg_color = Color(0, 0, 0, 0.294118)
+border_width_left = 5
+border_width_right = 5
+border_width_bottom = 5
+border_blend = true
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+corner_detail = 1
+
+[node name="InventoryMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_psfyt")
+InventoryOpenAudios = Array[AudioStream]([ExtResource("2_2hhuh")])
+InventoryCloseAudios = Array[AudioStream]([ExtResource("3_521e5")])
+metadata/_edit_lock_ = true
+
+[node name="ColorRect_Vignette" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_stuy7")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+metadata/_edit_lock_ = true
+
+[node name="Panel" type="Panel" parent="."]
+modulate = Color(1, 1, 1, 0)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -302.0
+offset_top = 1000.0
+offset_right = 302.0
+offset_bottom = 1484.0
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset = Vector2(302, 242)
+theme_override_styles/panel = SubResource("StyleBoxFlat_q4stf")
+metadata/_edit_lock_ = true
+
+[node name="Label" type="Label" parent="Panel"]
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -69.0
+offset_top = -462.0
+offset_right = 70.0
+offset_bottom = -417.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.501961)
+theme_override_font_sizes/font_size = 30
+text = "Inventory"
+
+[node name="GridContainer" type="GridContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -8.0
+offset_top = 67.0
+offset_right = 8.0
+offset_bottom = -51.9919
+grow_horizontal = 2
+grow_vertical = 2
+columns = 5
+metadata/_edit_lock_ = true
+
+[node name="Button_L" type="Button" parent="Panel"]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -142.0
+offset_right = -50.0
+offset_bottom = 7.99985
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_nlry6")
+metadata/_edit_lock_ = true
+
+[node name="Label_leftHand" type="Label" parent="Panel/Button_L"]
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -35.0
+offset_top = -30.0
+offset_right = 35.0
+offset_bottom = -4.0
+grow_horizontal = 2
+text = "Left hand"
+horizontal_alignment = 1
+
+[node name="Label_LH" type="Label" parent="Panel/Button_L"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.470588)
+theme_override_colors/font_outline_color = Color(0.172549, 0.172549, 0.172549, 1)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 20
+text = "L H"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button_R" type="Button" parent="Panel"]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 50.0
+offset_top = -142.0
+offset_right = 200.0
+offset_bottom = 7.99985
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_u4lpn")
+metadata/_edit_lock_ = true
+
+[node name="Label2" type="Label" parent="Panel/Button_R"]
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -37.0
+offset_top = -30.0
+offset_right = 37.0
+offset_bottom = -4.0
+grow_horizontal = 2
+text = "Right hand"
+horizontal_alignment = 1
+
+[node name="Label_RH" type="Label" parent="Panel/Button_R"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.470588)
+theme_override_colors/font_outline_color = Color(0.192157, 0.192157, 0.192157, 1)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 20
+text = "R H"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Panel" type="Panel" parent="Panel"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -309.0
+offset_top = -28.0
+offset_right = 303.0
+offset_bottom = 49.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_uj0vl")
+metadata/_edit_lock_ = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Panel/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 6.0
+offset_top = 4.0
+offset_right = -7.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+fit_content = true
+metadata/_edit_lock_ = true
+
+[node name="Label" type="Label" parent="Panel/Panel"]
+custom_minimum_size = Vector2(620, 30)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -310.0
+offset_top = -43.0
+offset_right = 310.0
+offset_bottom = -8.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 23
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="ColorRect" type="ColorRect" parent="Panel/Panel"]
+custom_minimum_size = Vector2(400, 2)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -300.0
+offset_top = -6.0
+offset_right = 300.0
+offset_bottom = -4.0
+grow_horizontal = 2
+color = Color(1, 1, 1, 0.498039)
+
+[node name="Panel_ItemPreview" type="Panel" parent="Panel"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -309.0
+offset_top = -387.0
+offset_right = 303.0
+offset_bottom = -37.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_uj0vl")
+metadata/_edit_lock_ = true
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Panel/Panel_ItemPreview"]
+material = SubResource("CanvasItemMaterial_o6mop")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("6_xggco")
+metadata/_edit_lock_ = true
+
+[node name="SubViewport" type="SubViewport" parent="Panel/Panel_ItemPreview/SubViewportContainer"]
+own_world_3d = true
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(612, 350)
+size_2d_override = Vector2i(773, 382)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="Panel/Panel_ItemPreview/SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.382, 6)
+fov = 71.9
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Panel/Panel_ItemPreview/SubViewportContainer/SubViewport"]
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Panel/Panel_ItemPreview/SubViewportContainer/SubViewport"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_gvsnl")
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_2hhuh")
+max_polyphony = 3
+bus = &"Sfx"
+
+[node name="TabContainer" type="TabContainer" parent="."]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(600, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 660.0
+offset_right = 1260.0
+offset_bottom = 65.0
+grow_horizontal = 2
+pivot_offset = Vector2(300, 0)
+theme_override_font_sizes/font_size = 40
+theme_override_styles/tab_selected = SubResource("StyleBoxFlat_n470u")
+theme_override_styles/tab_unselected = SubResource("StyleBoxFlat_7dfki")
+tab_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="inventory" type="TabBar" parent="TabContainer"]
+layout_mode = 2
+
+[node name="notes" type="TabBar" parent="TabContainer"]
+visible = false
+layout_mode = 2
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

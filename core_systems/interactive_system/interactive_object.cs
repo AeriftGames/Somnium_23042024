@@ -10,9 +10,11 @@ public partial class interactive_object : Node3D
 
 	public enum EInteractiveLevel { Disable, OnlyUse, OnlyPhysic, UseAndPhysic}
 	public enum EInteractivePhysicType { GrabItem, GrabJoint, GrabAction}
+	public enum EUseInteractVisibleBy { Text, HandClick, HandClickAndText}
 
 	[Export] public EInteractiveLevel InteractiveLevel = EInteractiveLevel.OnlyUse;
 	[Export] public EInteractivePhysicType InteractivePhysicType = EInteractivePhysicType.GrabItem;
+	[Export] public EUseInteractVisibleBy InteractVisibleBy = EUseInteractVisibleBy.Text;
 	[Export] public NodePath InteractCenterPath = null;
 	[Export] public bool UseOffsetHitInteract = false;
 

@@ -3,10 +3,10 @@ using System;
 
 public partial class PlayerStart : Node3D
 {
-	public enum EPlayerCharacterType { WalkingEffects, Interaction}
+	public enum EPlayerCharacterType {Interaction, Inventory}
 
 	// Which type of player character spawn ?
-	[Export] public EPlayerCharacterType SpawnCharacterType = EPlayerCharacterType.Interaction;
+	[Export] public EPlayerCharacterType SpawnCharacterType = EPlayerCharacterType.Inventory;
 
 	// Node contains meshes, which we need visible in editor and unvisible in the game
 	public Node3D EditorMesh = null;
@@ -42,13 +42,14 @@ public partial class PlayerStart : Node3D
 
 		switch (newPlayerCharacterType)
 		{
-			case EPlayerCharacterType.WalkingEffects:
-				{
-					break;
-				}
 			case EPlayerCharacterType.Interaction:
 				{
 					SpawnPlayerInteraction();
+					break;
+				}
+			case EPlayerCharacterType.Inventory:
+				{
+					SpawnPlayerInventory();
 					break;
 				}
 			default:
@@ -58,8 +59,8 @@ public partial class PlayerStart : Node3D
 
 	public void SpawnPlayerInteraction()
 	{
-		// Instance from scenefile and cast to specific class
-		var objectCamera_Instance = (ObjectCamera)GD.Load<PackedScene>(
+        // Instance from scenefile and cast to specific class
+        var objectCamera_Instance = (ObjectCamera)GD.Load<PackedScene>(
 			"res://player/character_systems/ObjectCamera.tscn").Instantiate();
 		
 		var characterInteraction_Instance = (FPSCharacter_Interaction)GD.Load<PackedScene>(
@@ -116,9 +117,77 @@ public partial class PlayerStart : Node3D
 			GameMaster.GM.GetDebugHud().ApplyAllMainControls();
 
 			GameMaster.GM.EnableBlackScreen(false);
-			//delete
-			spawn_timer.Stop();
+
+            //delete
+            spawn_timer.Stop();
 			spawn_timer.QueueFree();
 		}
 	}
+
+	public void SpawnPlayerInventory()
+	{
+        // Instance from scenefile and cast to specific class
+        var objectCamera_Instance = GD.Load<PackedScene>(
+            "res://player/character_systems/InventoryObjectCamera.tscn").Instantiate() as InventoryObjectCamera;
+
+        var characterInventory_Instance = (FPSCharacter_Inventory)GD.Load<PackedScene>(
+            "res://player/FPSCharacter_Inventory.tscn").Instantiate();
+
+        var objectHands_instance = (ObjectHands)GD.Load<PackedScene>(
+            "res://player/character_systems/ObjectHands.tscn").Instantiate();
+
+        // Initial settings - link objectCamera to character
+        characterInventory_Instance.objectCamera = objectCamera_Instance;
+        characterInventory_Instance.objectHands = objectHands_instance;
+
+        // Spawn to worldlevel node
+        Node level = GetNode("/root/worldlevel");
+        if (level == null)
+        {
+            // If worldlevel for spawn dont finded
+            GameMaster.GM.Log.WriteLog(this, LogSystem.ELogMsgType.ERROR,
+                "Not find /root/worldlevel for spawn player");
+        }
+        else
+        {
+            // Add childs to worldlevel node (Spawn)
+            level.AddChild(objectCamera_Instance);
+            level.AddChild(characterInventory_Instance);
+            level.AddChild(objectHands_instance);
+
+            // Set Positions for objectCamera,character and objectHands as Player Start GlobalPosition
+            objectCamera_Instance.GlobalPosition = GlobalPosition;
+            characterInventory_Instance.GlobalPosition = GlobalPosition;
+            objectHands_instance.GlobalPosition = GlobalPosition;
+
+            // Set new rotation for objectCamera.NodeRotY (look rotation horizontal)
+            Vector3 newRotation = objectCamera_Instance.NodeRotY.Rotation;
+            newRotation.Y = GlobalRotation.Y;
+            objectCamera_Instance.NodeRotY.Rotation = newRotation;
+
+            // Set new rotation for character just for case
+            newRotation = characterInventory_Instance.GlobalRotation;
+            newRotation.Y = GlobalRotation.Y;
+            characterInventory_Instance.GlobalRotation = newRotation;
+
+            // Set new rotation for objectHands just for case
+            newRotation = objectHands_instance.GlobalRotation;
+            newRotation.Y = GlobalRotation.Y;
+            objectHands_instance.GlobalRotation = newRotation;
+
+            // !!! SHADER PRECOMPILATION PROCESS START !!!
+            if (GameMaster.GM.LevelLoader.isPrecompiledShaders)
+                GameMaster.GM.LevelLoader.StartPrecompileShaderProcess();
+
+            // Apply Settings
+            GameMaster.GM.GetSettings().LoadAndApply_AllGraphicsSettings();
+            GameMaster.GM.GetDebugHud().ApplyAllMainControls();
+
+            GameMaster.GM.EnableBlackScreen(false);
+
+            //delete
+            spawn_timer.Stop();
+            spawn_timer.QueueFree();
+        }
+    }
 }

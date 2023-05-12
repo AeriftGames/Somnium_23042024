@@ -1,23 +1,22 @@
 [gd_resource type="StandardMaterial3D" load_steps=5 format=3 uid="uid://75g41m3tp8pj"]
 
-[ext_resource type="Texture2D" uid="uid://d2etv503jvjbd" path="res://testing_stuff_kaen/my_trim1/textures/textures_3variant/trimsheet_3_low_DefaultMaterial_BaseColor.png" id="1_30gk1"]
-[ext_resource type="Texture2D" uid="uid://mo0i6bwr4tfy" path="res://testing_stuff_kaen/my_trim1/textures/textures_3variant/trimsheet_3_low_DefaultMaterial_Metallic.png" id="2_egont"]
-[ext_resource type="Texture2D" uid="uid://haeabuenaqdf" path="res://testing_stuff_kaen/my_trim1/textures/textures_3variant/trimsheet_3_low_DefaultMaterial_Normal.png" id="3_7mqy1"]
-[ext_resource type="Texture2D" uid="uid://rs1g7wwtam3c" path="res://testing_stuff_kaen/my_trim1/textures/textures_3variant/trimsheet_3_low_DefaultMaterial_Roughness.png" id="4_ksv4j"]
+[ext_resource type="Texture2D" uid="uid://bnibepuxqsqj6" path="res://testing_stuff_kaen/my_trim1/trimsheet_walls_4k/trimsheet_3_low_DefaultMaterial_BaseColor.png" id="1_7k2xx"]
+[ext_resource type="Texture2D" uid="uid://fsjh0clh263m" path="res://testing_stuff_kaen/my_trim1/trimsheet_walls_4k/trimsheet_3_low_DefaultMaterial_Metallic.png" id="2_0uk0x"]
+[ext_resource type="Texture2D" uid="uid://d0irhkysh1wse" path="res://testing_stuff_kaen/my_trim1/trimsheet_walls_4k/trimsheet_3_low_DefaultMaterial_Normal.png" id="3_pqc65"]
+[ext_resource type="Texture2D" uid="uid://crwbtol5xnlfb" path="res://testing_stuff_kaen/my_trim1/trimsheet_walls_4k/trimsheet_3_low_DefaultMaterial_Roughness.png" id="4_gi451"]
 
 [resource]
 resource_name = "trim"
-cull_mode = 2
 vertex_color_use_as_albedo = true
-albedo_texture = ExtResource("1_30gk1")
-metallic = 0.8
-metallic_texture = ExtResource("2_egont")
+albedo_texture = ExtResource("1_7k2xx")
+metallic = 0.4
+metallic_texture = ExtResource("2_0uk0x")
 metallic_texture_channel = 2
-roughness = 0.95
-roughness_texture = ExtResource("4_ksv4j")
+roughness = 0.85
+roughness_texture = ExtResource("4_gi451")
 roughness_texture_channel = 1
 normal_enabled = true
-normal_texture = ExtResource("3_7mqy1")
+normal_texture = ExtResource("3_pqc65")
 ao_light_affect = 0.12
 heightmap_scale = 1.0
 heightmap_deep_parallax = true

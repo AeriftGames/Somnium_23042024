@@ -59,6 +59,14 @@ public partial class DebugHud : Control
 		// vypne/zapne tento debug
 		if (Input.IsActionJustPressed("ToggleDebugHud"))
 			SetOptionsEnable(!isOptionsPanelEnabled);
+
+        // prepne hud page vpred
+        if (Input.IsActionJustPressed("NextPageInHud"))
+			SetCurrentTab(GetCurrentTabID() + 1, true);
+
+		// prepne hud page vzad
+		if(Input.IsActionJustPressed("PreviousPageInHud"))
+            SetCurrentTab(GetCurrentTabID() - 1, true);
 	}
 
 	// Enable/Disahlbe DebugHud (on off include all updates)
@@ -96,17 +104,60 @@ public partial class DebugHud : Control
 			// updatuje vsechny controls prvky
 			ApplyAllVideoControls();
 			ApplyAllAudioControls();
+			ApplyAllInputsControls();
+
+			// nastavi vzdy v nove spusteni aktivni prvni tab a focusneme prvni element v tabu pro navigaci
+			SetCurrentTab(0,true);
 		}
 		else
 		{
 			// PANEL DISABLED
 			DebugEnabledLabel.Text = "F1 for edit debug hud";
 			OptionsPanel.Visible = false;
-			GameMaster.GM.GetFPSCharacter().SetInputEnable(true);
+
+			// TRY CAST TO FPSCHARACTER INVENTORY a pokud mame aktualne otevreny inventory, preskocime zbytek kodu
+			FPSCharacter_Inventory charInventory = GameMaster.GM.GetFPSCharacter() as FPSCharacter_Inventory;
+			if(charInventory != null)
+				if (charInventory.GetInventoryMenu().GetActive()) return;
+
+            GameMaster.GM.GetFPSCharacter().SetInputEnable(true);
 			GameMaster.GM.GetFPSCharacter().SetMouseVisible(false);
 			Input.MouseMode = Input.MouseModeEnum.Captured;
 		}
 	}
+
+	private void SetCurrentTab(int newTabID,bool focusOnFirstChild = false)
+	{
+        TabContainer debugHudTabs = GetNode<TabContainer>("OptionsPanel/TabContainer");
+        if (debugHudTabs == null) return;
+
+		if(newTabID < debugHudTabs.GetTabCount() && newTabID > -1)
+		{
+            debugHudTabs.GetCurrentTabControl().Hide();
+            debugHudTabs.CurrentTab = newTabID;
+            debugHudTabs.GetCurrentTabControl().Show();
+        }
+
+		// Focus on first element in tab (manualy)
+		if(focusOnFirstChild)
+		{
+			if (debugHudTabs.GetCurrentTabControl().Name == "main")
+				GetNode<CheckBox>("OptionsPanel/TabContainer/main/ShowFps_CheckBox").GrabFocus();
+			else if (debugHudTabs.GetCurrentTabControl().Name == "level")
+				debugHudTabs.GetCurrentTabControl().GetChild<Control>(0).GrabFocus();
+			else if (debugHudTabs.GetCurrentTabControl().Name == "video")
+				GetNode<OptionButton>("OptionsPanel/TabContainer/video/ScreenMode_HBoxContainer/ScreenMode_OptionButton").GrabFocus();
+			else if (debugHudTabs.GetCurrentTabControl().Name == "audio")
+				GetNode<HSlider>("OptionsPanel/TabContainer/audio/audio_HBoxContainer/mainVolume_HSlider").GrabFocus();
+			else if (debugHudTabs.GetCurrentTabControl().Name == "inputs")
+				GetNode<HSlider>("OptionsPanel/TabContainer/inputs/input_HBoxContainer/mouseSmooth_HSlider").GrabFocus();
+        }
+    }
+
+	private int GetCurrentTabID()
+	{
+        return GetNode<TabContainer>("OptionsPanel/TabContainer").CurrentTab;
+    }
 
 	// je spousten podle timeru
 	private void UpdateTimer()
@@ -420,7 +471,88 @@ public partial class DebugHud : Control
 		GameMaster.GM.GetSettings().SaveActual_AllAudioSettings();
 	}
 
-	public void ApplyAllMainControls()
+	public void _on_mouse_smooth_h_slider_value_changed(float newValue)
+	{
+        // only apply
+        GameMaster.GM.GetSettings().Apply_LookMouseSmooth(newValue,true,false);
+
+        // update label
+        Label label = GetNode<Label>("OptionsPanel/TabContainer/inputs/input_HBoxContainer/mouseSmooth_Label");
+		label.Text = newValue.ToString();
+    }
+
+	public void _on_mouse_sensitivity_h_slider_value_changed(float newValue)
+	{
+        // only apply
+        GameMaster.GM.GetSettings().Apply_LookMouseSensitivity(newValue,true,false);
+
+        // update label
+        Label label = GetNode<Label>("OptionsPanel/TabContainer/inputs/input_HBoxContainer2/mouseSensitivity_Label");
+        label.Text = newValue.ToString();
+    }
+
+	public void _on_gamepad_smooth_h_slider_value_changed(float newValue)
+	{
+        // only apply
+        GameMaster.GM.GetSettings().Apply_LookGamepadSmooth(newValue, true, false);
+
+        // update label
+        Label label = GetNode<Label>("OptionsPanel/TabContainer/inputs/input_HBoxContainer3/gamepadSmooth_Label");
+        label.Text = newValue.ToString();
+    }
+
+	public void _on_gamepad_sensitivity_h_slider_value_changed(float newValue)
+	{
+        // only apply
+        GameMaster.GM.GetSettings().Apply_LookGamepadSensitivity(newValue, true, false);
+
+        // update label
+        Label label = GetNode<Label>("OptionsPanel/TabContainer/inputs/input_HBoxContainer4/gamepadSensitivity_Label");
+        label.Text = newValue.ToString();
+    }
+
+	public void _on_inverse_vertical_look_check_box_toggled(bool newValue)
+	{
+		// only apply
+		GameMaster.GM.GetSettings().Apply_InverseVerticalLook(newValue, true, false);
+	}
+
+
+    public void ApplyAllInputsControls()
+	{
+		HSlider msmooth = GetNode<HSlider>("OptionsPanel/TabContainer/inputs/input_HBoxContainer/mouseSmooth_HSlider");
+		msmooth.Value = GameMaster.GM.GetSettings().GetActual_LookMouseSmooth();
+		Label msmooth_l = GetNode<Label>("OptionsPanel/TabContainer/inputs/input_HBoxContainer/mouseSmooth_Label");
+		msmooth_l.Text = msmooth.Value.ToString();
+
+        HSlider msens = GetNode<HSlider>("OptionsPanel/TabContainer/inputs/input_HBoxContainer2/mouseSensitivity_HSlider");
+        msens.Value = GameMaster.GM.GetSettings().GetActual_LookMouseSensitivity();
+        Label msens_l = GetNode<Label>("OptionsPanel/TabContainer/inputs/input_HBoxContainer2/mouseSensitivity_Label");
+        msens_l.Text = msens.Value.ToString();
+
+        HSlider gsens = GetNode<HSlider>("OptionsPanel/TabContainer/inputs/input_HBoxContainer4/gamepadSensitivity_HSlider");
+        gsens.Value = GameMaster.GM.GetSettings().GetActual_LookGamepadSensitivity();
+        Label gsens_l = GetNode<Label>("OptionsPanel/TabContainer/inputs/input_HBoxContainer4/gamepadSensitivity_Label");
+        gsens_l.Text = gsens.Value.ToString();
+
+        HSlider gsmooth = GetNode<HSlider>("OptionsPanel/TabContainer/inputs/input_HBoxContainer3/gamepadSmooth_HSlider");
+        gsmooth.Value = GameMaster.GM.GetSettings().GetActual_LookGamepadSmooth();
+        Label gsmooth_l = GetNode<Label>("OptionsPanel/TabContainer/inputs/input_HBoxContainer3/gamepadSmooth_Label");
+        gsmooth_l.Text = gsmooth.Value.ToString();
+
+		CheckBox inverselook = 
+			GetNode<CheckBox>("OptionsPanel/TabContainer/inputs/input_HBoxContainer5/inverseVerticalLook_CheckBox");
+		inverselook.ButtonPressed = GameMaster.GM.GetSettings().GetActual_InverseVerticalLook();
+
+    }
+
+	public void _on_save_inputs_as_default_button_pressed()
+    {
+		GameMaster.GM.GetSettings().SaveActual_AllInputsSettings();
+	}
+
+
+    public void ApplyAllMainControls()
 	{
 		// ziskame ulozena data
 		global_settings_data data = GameMaster.GM.GetSettings().GetData();

@@ -81,8 +81,12 @@ public partial class GameMaster : Node
 	{
 		if (@event is InputEventKey eventKey)
 		{
+            /*
 			if (eventKey.Pressed && eventKey.Keycode == Key.Escape)
-				QuitGame();
+				QuitGame();*/
+
+            if (eventKey.Pressed && eventKey.Keycode == Key.Minus)
+				GetSettings().Apply_GlobalIlumination(0, true, false);
 		}
 	}
 
@@ -95,6 +99,15 @@ public partial class GameMaster : Node
 		await TaskQuitGame();
 	}
 
+	public void ToggleInGameMenu()
+	{
+		FPSCharacter_Interaction interactCharacter = (FPSCharacter_Interaction)GetFPSCharacter();
+		if (interactCharacter == null) return;
+
+		// toggle stav InGameMenu
+		interactCharacter.GetInGameMenu().SetActive(!interactCharacter.GetInGameMenu().GetActive());
+	}
+
 	async Task TaskQuitGame()
 	{
 		// Unload level process
@@ -104,15 +117,9 @@ public partial class GameMaster : Node
 
 		// zapneme cernou obrazovku
 		EnableBlackScreen(true);
-
+		/*
 		Node level = GetNode("/root/worldlevel");
 		var a = level.FindChildren("*", "RigidBody3D", true, true);
-		/*
-		GD.Print(a.Count);
-		foreach (var item in a)
-		{
-			GD.Print(item.Name);
-		}
 		*/
 		msgObject.FreeAll();
 		LevelLoader.Free();
@@ -146,7 +153,13 @@ public partial class GameMaster : Node
 
 	public override void _Process(double delta)
 	{
-		LevelLoader.Update(delta);
+		// INPUTS
+
+        if (Input.IsActionJustPressed("EscapeAction"))
+            ToggleInGameMenu();
+
+		// pro async level load
+        LevelLoader.Update(delta);
 	}
 
 	public void message_update()

@@ -1,0 +1,442 @@
+[gd_scene load_steps=16 format=3 uid="uid://chd486qswefu8"]
+
+[ext_resource type="Script" path="res://levels/worldlevel.cs" id="1_o47if"]
+[ext_resource type="ArrayOccluder3D" uid="uid://ddbbu8yrsch5x" path="res://levels/worldlevel_features_room/worldlevel_features_room.occ" id="2_7t1eb"]
+[ext_resource type="PackedScene" uid="uid://bet3idvc4fg0n" path="res://placeholders/PlayerStart.tscn" id="3_441ln"]
+[ext_resource type="PackedScene" uid="uid://c0735musls8mr" path="res://levels/worldlevel_features_room/level_scene_features_room.tscn" id="4_v2mb6"]
+[ext_resource type="LightmapGIData" uid="uid://dbs4ww3ckp7ed" path="res://levels/worldlevel_features_room/worldlevel_features_room.lmbake" id="10_e4dnc"]
+[ext_resource type="AudioStream" uid="uid://ct5irbpao1b4g" path="res://audio/audio_streams/ambient new/Atmosphere_Hallways.wav" id="11_df7xd"]
+[ext_resource type="PackedScene" uid="uid://wosfssim603s" path="res://testing_stuff_kaen/test_lightmap_level/placeholders/rovna_zed.tscn" id="12_pf8s6"]
+[ext_resource type="AudioStream" uid="uid://c22q66lwj2uvk" path="res://audio/audio_streams/510485__lydmakeren__industrial-hall-ambience.wav" id="12_qdkp1"]
+[ext_resource type="AudioStream" uid="uid://cxsmbnv4gvuui" path="res://audio/audio_streams/sfx_stuff/Electricity_loop.wav" id="13_jsimw"]
+[ext_resource type="PackedScene" uid="uid://c4tdjkvwgsep7" path="res://testing_stuff_kaen/test_lightmap_level/placeholders/sloup_rohovy.tscn" id="13_qa3ij"]
+[ext_resource type="PackedScene" uid="uid://b0p7cpttoqb2h" path="res://testing_stuff_kaen/my_trim1/button_door_test.tscn" id="14_mk2wy"]
+[ext_resource type="PackedScene" uid="uid://feghnu7g52ju" path="res://testing_stuff_kaen/my_trim1/door_test/door_rounded_test.tscn" id="15_qy6qt"]
+[ext_resource type="PackedScene" uid="uid://nmy3836cgxpo" path="res://testing_stuff_kaen/test_lightmap_level/placeholders/kryt_oblouku.tscn" id="16_amh0m"]
+[ext_resource type="PackedScene" uid="uid://daxlyxpkjss0g" path="res://placeholders/zones/DamageZone.tscn" id="17_vbyj0"]
+
+[sub_resource type="Environment" id="Environment_r8d6j"]
+background_energy_multiplier = 0.1
+tonemap_mode = 2
+tonemap_exposure = 1.2
+tonemap_white = 0.75
+ssao_enabled = true
+ssil_enabled = true
+sdfgi_use_occlusion = true
+sdfgi_read_sky_light = false
+glow_enabled = true
+glow_normalized = true
+glow_blend_mode = 4
+fog_enabled = true
+fog_light_energy = 0.05
+fog_density = 0.025
+volumetric_fog_enabled = true
+volumetric_fog_albedo = Color(0.513726, 0.513726, 0.513726, 1)
+adjustment_enabled = true
+
+[node name="worldlevel" type="Node3D"]
+script = ExtResource("1_o47if")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_r8d6j")
+
+[node name="worldlevel_occluderculling" type="OccluderInstance3D" parent="."]
+occluder = ExtResource("2_7t1eb")
+metadata/_edit_lock_ = true
+
+[node name="PlayerStart" parent="." instance=ExtResource("3_441ln")]
+transform = Transform3D(-1, 0, 5.96046e-08, 0, 1, 0, -5.96046e-08, 0, -1, -6.08177, 0.0483053, 13.5602)
+
+[node name="Level" type="Node3D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="Decals" type="Node3D" parent="Level"]
+visible = false
+metadata/_edit_lock_ = true
+
+[node name="Lights" type="Node3D" parent="Level"]
+metadata/_edit_lock_ = true
+
+[node name="OmniLight3D4" type="OmniLight3D" parent="Level/Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.01399, 2.16061, 16.3014)
+light_energy = 0.2
+light_indirect_energy = 5.0
+light_volumetric_fog_energy = 2.0
+light_specular = 2.05
+shadow_enabled = true
+omni_range = 10.0
+
+[node name="OmniLight3D5" type="OmniLight3D" parent="Level/Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.01399, 2.26061, 31.3014)
+light_energy = 0.2
+light_indirect_energy = 10.0
+light_volumetric_fog_energy = 2.0
+light_specular = 0.691
+shadow_enabled = true
+omni_range = 10.0
+
+[node name="OmniLight3D6" type="OmniLight3D" parent="Level/Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.014, 2.26061, 31.3014)
+light_energy = 0.2
+light_indirect_energy = 10.0
+light_volumetric_fog_energy = 2.0
+light_specular = 0.691
+shadow_enabled = true
+omni_range = 10.0
+
+[node name="OmniLight3D7" type="OmniLight3D" parent="Level/Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.01399, 2.26061, 23.3014)
+light_energy = 0.2
+light_indirect_energy = 10.0
+light_volumetric_fog_energy = 2.0
+light_specular = 0.691
+shadow_enabled = true
+omni_range = 10.0
+
+[node name="OmniLight3D8" type="OmniLight3D" parent="Level/Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.01399, 2.26061, 23.3014)
+light_energy = 0.2
+light_indirect_energy = 10.0
+light_volumetric_fog_energy = 2.0
+light_specular = 0.691
+shadow_enabled = true
+omni_range = 10.0
+
+[node name="LevelScenes" type="Node3D" parent="Level"]
+metadata/_edit_lock_ = true
+
+[node name="level_scene_feature_room" parent="Level/LevelScenes" instance=ExtResource("4_v2mb6")]
+
+[node name="Audio" type="Node3D" parent="Level"]
+
+[node name="AudioStreamPlayer_backgroundmusic" type="AudioStreamPlayer" parent="Level/Audio"]
+stream = ExtResource("11_df7xd")
+volume_db = -25.0
+bus = &"Music"
+
+[node name="AudioStreamPlayer3D_ambient" type="AudioStreamPlayer3D" parent="Level/Audio"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.34336, 0, 29.5884)
+stream = ExtResource("12_qdkp1")
+volume_db = 2.0
+unit_size = 15.0
+max_db = 2.0
+pitch_scale = 0.5
+autoplay = true
+max_distance = 20.0
+panning_strength = 2.0
+bus = &"Sfx"
+
+[node name="AudioStreamPlayer3D_ambient2" type="AudioStreamPlayer3D" parent="Level/Audio"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.42618, 0, 46.2419)
+stream = ExtResource("12_qdkp1")
+volume_db = 4.0
+max_db = 0.0
+pitch_scale = 0.2
+autoplay = true
+max_distance = 35.0
+panning_strength = 2.0
+bus = &"Sfx"
+
+[node name="AudioStreamPlayer3D_ambient3" type="AudioStreamPlayer3D" parent="Level/Audio"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.4951, 3.11542, 24.1619)
+stream = ExtResource("11_df7xd")
+volume_db = -15.0
+max_db = 0.0
+autoplay = true
+max_distance = 35.0
+bus = &"Sfx"
+
+[node name="AudioStreamPlayer3D_ambient4" type="AudioStreamPlayer3D" parent="Level/Audio"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.852701, 1.96115, 5.93914)
+stream = ExtResource("11_df7xd")
+volume_db = -10.0
+unit_size = 30.0
+max_db = 0.0
+pitch_scale = 0.2
+autoplay = true
+max_distance = 35.0
+bus = &"Sfx"
+
+[node name="AudioStreamPlayer3D_sfc_electricity" type="AudioStreamPlayer3D" parent="Level/Audio"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.67563, -2.34527, 43.3994)
+stream = ExtResource("13_jsimw")
+attenuation_model = 1
+volume_db = -10.0
+unit_size = 1.0
+max_db = 0.0
+pitch_scale = 0.8
+autoplay = true
+max_distance = 35.0
+bus = &"Sfx"
+
+[node name="LightmapGI" type="LightmapGI" parent="."]
+quality = 2
+directional = true
+interior = true
+generate_probes_subdiv = 3
+light_data = ExtResource("10_e4dnc")
+
+[node name="ReflectionProbe2" type="ReflectionProbe" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 22)
+intensity = 0.1
+size = Vector3(50, 50, 50)
+box_projection = true
+interior = true
+enable_shadows = true
+
+[node name="room1_feature" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 23)
+
+[node name="Door_rounded_test" parent="room1_feature" instance=ExtResource("15_qy6qt")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 2, 1.4, 0)
+_open = true
+
+[node name="kryt_oblouku" parent="room1_feature" instance=ExtResource("16_amh0m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.71604, 1.5, 0.120489)
+
+[node name="kryt_oblouku2" parent="room1_feature" instance=ExtResource("16_amh0m")]
+transform = Transform3D(1, 0, 0, 0, 1, 1.50996e-07, 0, 1.50996e-07, -1, 1.71604, 1.5, -0.11343)
+
+[node name="rovna_zed" parent="room1_feature" instance=ExtResource("12_pf8s6")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 1.5, 1.5129, -3.1)
+visible = false
+
+[node name="rovna_zed2" parent="room1_feature" instance=ExtResource("12_pf8s6")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 1.5, 1.5129, 3.1)
+visible = false
+
+[node name="sloup_rohovy" parent="room1_feature" instance=ExtResource("13_qa3ij")]
+transform = Transform3D(-0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, 1.4, 1.58747, -2.1)
+
+[node name="sloup_rohovy2" parent="room1_feature" instance=ExtResource("13_qa3ij")]
+transform = Transform3D(-0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, 1.4, 1.58747, 2.1)
+
+[node name="kryt_oblouku3" parent="room1_feature" instance=ExtResource("16_amh0m")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 2.2887, 1.5, -0.118135)
+
+[node name="kryt_oblouku4" parent="room1_feature" instance=ExtResource("16_amh0m")]
+transform = Transform3D(-1, 1.32005e-14, -8.74228e-08, 0, 1, 1.50996e-07, -8.74228e-08, -1.50996e-07, 1, 2.2887, 1.5, 0.115784)
+
+[node name="rovna_zed3" parent="room1_feature" instance=ExtResource("12_pf8s6")]
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, 2.50473, 1.5129, 3.10235)
+visible = false
+
+[node name="rovna_zed4" parent="room1_feature" instance=ExtResource("12_pf8s6")]
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, 2.50473, 1.5129, -3.09765)
+visible = false
+
+[node name="sloup_rohovy3" parent="room1_feature" instance=ExtResource("13_qa3ij")]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 2.60473, 1.58747, 2.10235)
+
+[node name="sloup_rohovy4" parent="room1_feature" instance=ExtResource("13_qa3ij")]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 2.60473, 1.58747, -2.09765)
+
+[node name="Label3D_1" type="Label3D" parent="room1_feature"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.88724, 1.83105, 3.086)
+modulate = Color(0, 0.4, 0.635294, 1)
+text = "room 1"
+font_size = 60
+
+[node name="Label3D_info" type="Label3D" parent="room1_feature/Label3D_1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7, -0.2, 0)
+text = "Zde máme vysouvací dveře:
+- automatická detekce"
+font_size = 20
+outline_size = 10
+horizontal_alignment = 0
+vertical_alignment = 0
+
+[node name="room2_feature" type="Node3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -9, 0, 23)
+
+[node name="Door_rounded_test" parent="room2_feature" instance=ExtResource("15_qy6qt")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 2, 1.4, 7.62939e-06)
+_open = true
+doorActionType = 1
+
+[node name="kryt_oblouku" parent="room2_feature" instance=ExtResource("16_amh0m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.71604, 1.5, 0.120489)
+
+[node name="kryt_oblouku2" parent="room2_feature" instance=ExtResource("16_amh0m")]
+transform = Transform3D(1, 0, 0, 0, 1, 1.50996e-07, 0, 1.50996e-07, -1, 1.71604, 1.5, -0.11343)
+
+[node name="rovna_zed" parent="room2_feature" instance=ExtResource("12_pf8s6")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 1.5, 1.5129, -3.1)
+visible = false
+
+[node name="rovna_zed2" parent="room2_feature" instance=ExtResource("12_pf8s6")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 1.5, 1.5129, 3.1)
+visible = false
+
+[node name="sloup_rohovy" parent="room2_feature" instance=ExtResource("13_qa3ij")]
+transform = Transform3D(-0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, 1.4, 1.58747, -2.1)
+
+[node name="sloup_rohovy2" parent="room2_feature" instance=ExtResource("13_qa3ij")]
+transform = Transform3D(-0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, 1.4, 1.58747, 2.1)
+
+[node name="kryt_oblouku3" parent="room2_feature" instance=ExtResource("16_amh0m")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 2.2887, 1.5, -0.118135)
+
+[node name="kryt_oblouku4" parent="room2_feature" instance=ExtResource("16_amh0m")]
+transform = Transform3D(-1, 1.32005e-14, -8.74228e-08, 0, 1, 1.50996e-07, -8.74228e-08, -1.50996e-07, 1, 2.2887, 1.5, 0.115784)
+
+[node name="rovna_zed3" parent="room2_feature" instance=ExtResource("12_pf8s6")]
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, 2.50473, 1.5129, 3.10235)
+visible = false
+
+[node name="rovna_zed4" parent="room2_feature" instance=ExtResource("12_pf8s6")]
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, 2.50473, 1.5129, -3.09765)
+visible = false
+
+[node name="sloup_rohovy3" parent="room2_feature" instance=ExtResource("13_qa3ij")]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 2.60473, 1.58747, 2.10235)
+
+[node name="sloup_rohovy4" parent="room2_feature" instance=ExtResource("13_qa3ij")]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 2.60473, 1.58747, -2.09765)
+
+[node name="button_door_test" parent="room2_feature" instance=ExtResource("14_mk2wy")]
+transform = Transform3D(-0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, -0.5, -0.0999994, 0.4, 1.8)
+AllUseObjectsNodePaths = Array[NodePath]([NodePath("../Door_rounded_test")])
+
+[node name="Label3D_2" type="Label3D" parent="room2_feature"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.18724, 1.83105, -3.086)
+modulate = Color(0, 0.4, 0.635294, 1)
+text = "room 2"
+font_size = 60
+
+[node name="Label3D_info" type="Label3D" parent="room2_feature/Label3D_2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.700001, -0.2, 0)
+text = "Zde máme dveře na tlačítko:
+- manuální interakce - tlačítko"
+font_size = 20
+outline_size = 10
+horizontal_alignment = 0
+vertical_alignment = 0
+
+[node name="room3_feature" type="Node3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -3, 0, 31)
+
+[node name="Label3D_3" type="Label3D" parent="room3_feature"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.11276, 1.83105, -3.086)
+modulate = Color(0, 0.4, 0.635294, 1)
+text = "room 3"
+font_size = 60
+
+[node name="Label3D_info" type="Label3D" parent="room3_feature/Label3D_3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7, -0.2, 0)
+text = "Damage Zone:
+test zranění charactera"
+font_size = 20
+outline_size = 10
+horizontal_alignment = 0
+vertical_alignment = 0
+
+[node name="Label3D_8" type="Label3D" parent="room3_feature"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -3.01276, 1.83105, 1.614)
+modulate = Color(0, 0.4, 0.635294, 1)
+text = "Damage Zone 1"
+font_size = 60
+
+[node name="Label3D_info" type="Label3D" parent="room3_feature/Label3D_8"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)
+text = "one shot damage 15 (restart off)"
+font_size = 20
+outline_size = 10
+vertical_alignment = 0
+
+[node name="Label3D_9" type="Label3D" parent="room3_feature"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -3.01276, 1.83105, -1.386)
+modulate = Color(0, 0.4, 0.635294, 1)
+text = "Damage Zone 2"
+font_size = 60
+
+[node name="Label3D_info" type="Label3D" parent="room3_feature/Label3D_9"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)
+text = "one shot damage 15 (restart on)"
+font_size = 20
+outline_size = 10
+vertical_alignment = 0
+
+[node name="DamageZone_1" parent="room3_feature" instance=ExtResource("17_vbyj0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 1.4, 1.60002)
+damageZoneType = 1
+_debugVisible = true
+_debugBoxColor = Color(0.980392, 0.12549, 0, 0.392157)
+printDebugToConsole = true
+_boxSize = Vector3(4, 4, 3)
+
+[node name="DamageZone_2" parent="room3_feature" instance=ExtResource("17_vbyj0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 1, -1.39999)
+damageZoneType = 1
+damageValue = 20.0
+_debugVisible = true
+_debugBoxColor = Color(0.643137, 0.486275, 0, 0.576471)
+_boxSize = Vector3(4, 4, 3)
+
+[node name="room4_feature" type="Node3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -9, 0, 31)
+
+[node name="DamageZone_3" parent="room4_feature" instance=ExtResource("17_vbyj0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 1, -1.39999)
+damageZoneType = 1
+damageValue = 50.0
+_debugVisible = true
+_debugBoxColor = Color(0, 0.533333, 0.972549, 0.392157)
+_boxSize = Vector3(4, 4, 3)
+
+[node name="DamageZone_4" parent="room4_feature" instance=ExtResource("17_vbyj0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 1.4, 1.60003)
+damageZoneType = 2
+_debugVisible = true
+printDebugToConsole = true
+_boxSize = Vector3(4, 4, 3)
+
+[node name="Label3D_4" type="Label3D" parent="room4_feature"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.18724, 1.83105, -3.086)
+modulate = Color(0, 0.4, 0.635294, 1)
+text = "room 4"
+font_size = 60
+
+[node name="Label3D_info" type="Label3D" parent="room4_feature/Label3D_4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.700001, -0.2, 0)
+text = "Damage Zone:
+test zranění charactera"
+font_size = 20
+outline_size = 10
+horizontal_alignment = 0
+vertical_alignment = 0
+
+[node name="Label3D_6" type="Label3D" parent="room4_feature"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 2.98724, 1.83105, -1.286)
+modulate = Color(0, 0.4, 0.635294, 1)
+text = "Damage Zone 3"
+font_size = 60
+
+[node name="Label3D_info" type="Label3D" parent="room4_feature/Label3D_6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)
+text = "tick damage (10 dmg/sec)"
+font_size = 20
+outline_size = 10
+vertical_alignment = 0
+
+[node name="Label3D_7" type="Label3D" parent="room4_feature"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 2.98724, 1.83105, 1.714)
+modulate = Color(0, 0.4, 0.635294, 1)
+text = "Damage Zone 4"
+font_size = 60
+
+[node name="Label3D_info" type="Label3D" parent="room4_feature/Label3D_7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)
+text = "death damage (max damage)"
+font_size = 20
+outline_size = 10
+vertical_alignment = 0
+
+[node name="DamageZone" parent="room4_feature" instance=ExtResource("17_vbyj0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 1, -4.7)
+damageZoneType = 4
+damageValue = 5.0
+damageTickSeconds = 0.25
+_debugVisible = true
+_debugBoxColor = Color(0, 0.533333, 0.117647, 0.501961)
+_boxSize = Vector3(5, 5, 3)

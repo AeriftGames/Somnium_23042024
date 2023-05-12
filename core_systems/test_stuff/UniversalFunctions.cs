@@ -1,4 +1,5 @@
 using Godot;
+using Godot.Collections;
 using System;
 using System.IO;
 
@@ -51,7 +52,6 @@ public partial class UniversalFunctions
         
         return a;
     }
-
     public static string GetStringBetween(string strSource, string strStart, string strEnd)
     {
         if (strSource.Contains(strStart) && strSource.Contains(strEnd))
@@ -63,5 +63,75 @@ public partial class UniversalFunctions
         }
 
         return "";
+    }
+    public static void PlayRandomSound(AudioStreamPlayer audioPlayer, Array<AudioStream> audioStreams, float volumeDB, float pitch)
+    {
+        if (audioPlayer == null) return;
+        if (audioStreams.Count < 1) return;
+
+        // random pick sound from array and play it
+        RandomNumberGenerator random = new RandomNumberGenerator();
+        int id = 0;
+
+        // 20 chances
+        for (int i = 0; i < 20; i++)
+        {
+            // randomize sound id from array
+            random.Randomize();
+            id = random.RandiRange(0, audioStreams.Count - 1);
+
+            // if is not same, break for loop
+            if (audioPlayer.Stream != audioStreams[id])
+                break;
+        }
+
+        // play sounds
+        audioPlayer.VolumeDb = volumeDB;
+        audioPlayer.PitchScale = pitch;
+        audioPlayer.Stream = audioStreams[id];
+        audioPlayer.Play();
+
+        //GD.Print(audioStreams[id].ResourcePath);
+    }
+    public static void PlayRandom3DSound(AudioStreamPlayer3D audioPlayer, Array<AudioStream> audioStreams, float volumeDB, float pitch)
+    {
+        if (audioPlayer == null) return;
+        if (audioStreams.Count < 1) return;
+
+        // random pick sound from array and play it
+        RandomNumberGenerator random = new RandomNumberGenerator();
+        int id = 0;
+
+        // 20 chances
+        for (int i = 0; i < 20; i++)
+        {
+            // randomize sound id from array
+            random.Randomize();
+            id = random.RandiRange(0, audioStreams.Count - 1);
+
+            // if is not same, break for loop
+            if (audioPlayer.Stream != audioStreams[id])
+                break;
+        }
+
+        // play sounds
+        audioPlayer.VolumeDb = volumeDB;
+        audioPlayer.PitchScale = pitch;
+        audioPlayer.Stream = audioStreams[id];
+        audioPlayer.Play();
+
+        //GD.Print(audioStreams[id].ResourcePath);
+    }
+    public static Vector3 GetNodeForwardVector(Node3D node3D)
+    {
+        return node3D.GlobalTransform.Basis.Z.Normalized();
+    }
+    public static Vector3 GetNodeRightVector(Node3D node3D)
+    {
+        return node3D.GlobalTransform.Basis.X.Normalized();
+    }
+    public static Vector3 GetNodeUpVector(Node3D node3D)
+    {
+        return node3D.GlobalTransform.Basis.Y.Normalized();
     }
 }

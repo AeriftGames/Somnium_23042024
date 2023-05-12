@@ -13,3 +13,8 @@ func _process(delta):
 
 func use():
 	print("Battery picked up")
+	
+	# Inventory test
+	var inventoryItemDataNode = get_node_or_null("../InventoryItemDataNode")
+	if(inventoryItemDataNode != null):
+		inventoryItemDataNode.call("UseWantAddToInventory",get_parent().scene_file_path)

@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://daxlyxpkjss0g"]
+
+[ext_resource type="Script" path="res://placeholders/zones/DamageZone.cs" id="1_6v1pl"]
+[ext_resource type="Material" uid="uid://ctq0wwohvhv73" path="res://placeholders/zones/DamageZone_mat.tres" id="2_r1w1v"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ewnmv"]
+resource_local_to_scene = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_kd6hr"]
+resource_local_to_scene = true
+material = ExtResource("2_r1w1v")
+
+[node name="DamageZone" type="Area3D"]
+collision_mask = 3
+script = ExtResource("1_6v1pl")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_ewnmv")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("BoxMesh_kd6hr")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

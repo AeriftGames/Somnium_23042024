@@ -1,0 +1,97 @@
+[gd_scene load_steps=13 format=3 uid="uid://u0vw3ohp0vjn"]
+
+[ext_resource type="PackedScene" uid="uid://0g1u2jvnfbpy" path="res://player/FPSCharacter_Interaction.tscn" id="1_ywg5i"]
+[ext_resource type="Script" path="res://player/FPSCharacter_Inventory.cs" id="2_k43co"]
+[ext_resource type="AudioStream" uid="uid://d1h0024d0d7i3" path="res://audio/audio_streams/hurts_test/413178__micahlg__male_hurt2.ogg" id="3_51q7g"]
+[ext_resource type="PackedScene" uid="uid://dek7jejp4kkiw" path="res://player/character_systems/inventory_menu.tscn" id="3_ru8m1"]
+[ext_resource type="AudioStream" uid="uid://csol82irfc2by" path="res://audio/audio_streams/hurts_test/413181__micahlg__male_hurt5.ogg" id="4_m4gkb"]
+[ext_resource type="Script" path="res://player/character_systems/CharacterInfoHud.cs" id="4_nvx4w"]
+[ext_resource type="PackedScene" uid="uid://dhhnra4i7t74r" path="res://player/character_systems/damage_hud.tscn" id="5_dhy04"]
+[ext_resource type="AudioStream" uid="uid://df78oaoqlbkh3" path="res://audio/audio_streams/hurts_test/413184__micahlg__male_hurt6.ogg" id="5_dlixv"]
+[ext_resource type="AudioStream" uid="uid://u7gx1or5kywy" path="res://audio/audio_streams/hurts_test/413185__micahlg__male_hurt8.ogg" id="6_7ci7t"]
+[ext_resource type="AudioStream" uid="uid://dcsxua2341g8" path="res://audio/audio_streams/hurts_test/325269__deleted_user_2104797__body-fall-2.wav" id="7_0hcda"]
+[ext_resource type="Script" path="res://player/character_systems/InventorySystem.cs" id="8_1wcpl"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_enw7f"]
+bg_color = Color(1, 0.164706, 0, 1)
+
+[node name="FPSCharacter_Inventory" instance=ExtResource("1_ywg5i")]
+script = ExtResource("2_k43co")
+StartActualHealth = 50.0
+StartMaxHealth = 100.0
+StartHealthRegenVal = 1.0
+StartHealthRegenTick = 0.5
+StartHealthRegenEnable = true
+HurtAudios = Array[AudioStream]([ExtResource("3_51q7g"), ExtResource("4_m4gkb"), ExtResource("5_dlixv"), ExtResource("6_7ci7t")])
+DeathAudios = Array[AudioStream]([ExtResource("3_51q7g")])
+BodyFallAudios = Array[AudioStream]([ExtResource("7_0hcda")])
+
+[node name="InventorySystem" type="Node" parent="." index="0"]
+script = ExtResource("8_1wcpl")
+
+[node name="AudioStreamPlayer_Footsteps" parent="." index="6"]
+max_polyphony = 3
+
+[node name="AudioStreamPlayer_JumpLand" parent="." index="7"]
+max_polyphony = 3
+
+[node name="AudioStreamPlayer_Hurts" type="AudioStreamPlayer" parent="." index="9"]
+stream = ExtResource("3_51q7g")
+max_polyphony = 4
+bus = &"Sfx"
+
+[node name="InventoryMenu" parent="AllHuds" index="1" instance=ExtResource("3_ru8m1")]
+visible = false
+layout_mode = 1
+
+[node name="CharacterInfoHud" type="Control" parent="AllHuds" index="2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("4_nvx4w")
+
+[node name="HBoxContainer_Health" type="HBoxContainer" parent="AllHuds/CharacterInfoHud" index="0"]
+layout_mode = 0
+offset_top = 60.0
+offset_right = 266.0
+offset_bottom = 87.0
+
+[node name="Label" type="Label" parent="AllHuds/CharacterInfoHud/HBoxContainer_Health" index="0"]
+layout_mode = 2
+text = "HEALTH"
+vertical_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="ProgressBar_Health" type="ProgressBar" parent="AllHuds/CharacterInfoHud/HBoxContainer_Health" index="1"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_styles/fill = SubResource("StyleBoxFlat_enw7f")
+value = 4.71
+show_percentage = false
+metadata/_edit_lock_ = true
+
+[node name="Label_HealthValue" type="Label" parent="AllHuds/CharacterInfoHud/HBoxContainer_Health/ProgressBar_Health" index="0"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -11.5
+offset_bottom = 11.5
+grow_horizontal = 0
+grow_vertical = 2
+text = "100"
+horizontal_alignment = 3
+metadata/_edit_lock_ = true
+
+[node name="DamageHud" parent="AllHuds" index="3" instance=ExtResource("5_dhy04")]
+layout_mode = 1
+
+[connection signal="value_changed" from="AllHuds/CharacterInfoHud/HBoxContainer_Health/ProgressBar_Health" to="AllHuds/CharacterInfoHud" method="_on_progress_bar_health_value_changed"]

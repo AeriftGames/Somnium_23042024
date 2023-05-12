@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://nmy3836cgxpo"]
+
+[ext_resource type="PackedScene" uid="uid://w8mkorlp8fp5" path="res://testing_stuff_kaen/test_lightmap_level/models/kryt_oblouku.glb" id="1_7v4h0"]
+[ext_resource type="Material" uid="uid://75g41m3tp8pj" path="res://testing_stuff_kaen/my_trim1/trim1_mat.tres" id="2_hs125"]
+
+[node name="kryt_oblouku" instance=ExtResource("1_7v4h0")]
+
+[node name="Cylinder295" parent="." index="0"]
+material_override = ExtResource("2_hs125")

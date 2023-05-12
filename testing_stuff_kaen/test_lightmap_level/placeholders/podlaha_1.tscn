@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://d1kxvrrrbh1og"]
+
+[ext_resource type="PackedScene" uid="uid://bg807t4gxvt25" path="res://testing_stuff_kaen/test_lightmap_level/models/podlaha1.glb" id="1_mjml8"]
+[ext_resource type="Material" uid="uid://bn8sxi7cy42vo" path="res://testing_stuff_kaen/my_trim1/trim_floor_3_mat.tres" id="2_5ox3y"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kl2a0"]
+size = Vector3(2, 0.025, 4)
+
+[node name="podlaha1" instance=ExtResource("1_mjml8")]
+
+[node name="podlaha12" parent="." index="0"]
+material_override = ExtResource("2_5ox3y")
+gi_lightmap_scale = 2
+
+[node name="StaticBody3D" type="StaticBody3D" parent="podlaha12" index="0" groups=["material_surface_wood"]]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="podlaha12/StaticBody3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.74846e-07, 0, -1)
+shape = SubResource("BoxShape3D_kl2a0")

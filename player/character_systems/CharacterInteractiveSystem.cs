@@ -43,6 +43,7 @@ public partial class CharacterInteractiveSystem : Godot.GodotObject
         basicHud.SetHandGrabState(false, false);
         basicHud.SetUseLabelText("");
         basicHud.SetUseVisible(false);
+        basicHud.SetHandClickVisible(false);
 
         // neexistuje zadny interactive objekt ? = opustit update
         if (actualInteractiveObject == null)
@@ -92,8 +93,29 @@ public partial class CharacterInteractiveSystem : Godot.GodotObject
         if (newInteractiveObject.InteractiveLevel == interactive_object.EInteractiveLevel.OnlyUse ||
             newInteractiveObject.InteractiveLevel == interactive_object.EInteractiveLevel.UseAndPhysic)
         {
-            basicHud.SetUseLabelText(newInteractiveObject.GetUseActionName());
-            basicHud.SetUseVisible(true);
+            switch (newInteractiveObject.InteractVisibleBy)
+            {
+                case interactive_object.EUseInteractVisibleBy.Text:
+                    {
+                        basicHud.SetUseLabelText(newInteractiveObject.GetUseActionName());
+                        basicHud.SetUseVisible(true);
+                        break;
+                    }
+                case interactive_object.EUseInteractVisibleBy.HandClick:
+                    {
+                        basicHud.SetHandClickVisible(true);
+                        break;
+                    }
+                case interactive_object.EUseInteractVisibleBy.HandClickAndText:
+                    {
+                        basicHud.SetUseLabelText(newInteractiveObject.GetUseActionName());
+                        basicHud.SetUseVisible(true);
+                        basicHud.SetHandClickVisible(true);
+                        break;
+                    }
+                default:
+                    break;
+            }
 
             // Pokud je momentalne od hrace input zadost pro USE, pouzijeme vnitrni funkci objektu pro USE
             if (newUseNow)
@@ -136,6 +158,26 @@ public partial class CharacterInteractiveSystem : Godot.GodotObject
                     UpdatePhysic_GrabAction(newGrabNow, delta);
                     break;
                 }
+        }
+
+        // Rotate Grabbed Object via gamepad
+        if (pickedBody != null && wantRotateNow)
+        {
+            character.objectCamera.SetCameraLookInputEnable(false);
+
+            /* Nacte hodnoty (axis right) gamepadu */
+            Vector2 JoyLook = new Vector2(Input.GetActionStrength("RightStick_Right") - Input.GetActionStrength("RightStick_Left"),
+            -(Input.GetActionStrength("RightStick_Up") - Input.GetActionStrength("RightStick_Down")));
+
+            /* Pokud JoyLook ma nejakou hodnotu (pohnuto packou na gamepadu) = gamepad jinak mys */
+            if (JoyLook.Length() > 0 && character.IsInputEnable())
+            {
+                character.objectCamera.HandStaticBody.RotateX(
+                Mathf.DegToRad(JoyLook.Y * character.RotateObjectStep));
+
+                character.objectCamera.HandStaticBody.RotateY(
+                Mathf.DegToRad(JoyLook.X * character.RotateObjectStep));
+            }
         }
 
         // Reset pro novy grab, napriklad po hodu, donuti hrace pustit tlacitko pro grab, i kdyby na jeden frame

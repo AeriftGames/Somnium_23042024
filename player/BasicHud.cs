@@ -7,6 +7,7 @@ public partial class BasicHud : Control
 	Label UseLabel = null;
 	TextureRect handGrabbedTexture = null;
 	TextureRect handCanGrabTexture = null;
+	TextureRect handClickTexture = null;
 
 	public override void _Ready()
 	{
@@ -14,9 +15,12 @@ public partial class BasicHud : Control
 		UseLabel = GetNode<Label>("UseLabel");
 		handGrabbedTexture = GetNode<TextureRect>("HandGrabbedTexture");
 		handCanGrabTexture = GetNode<TextureRect>("HandCanGrabTexture");
+		handClickTexture = GetNode<TextureRect>("HandClickTexture");
 
 		// visible = false , grabbed = false
 		SetHandGrabState(false,false);
+
+		SetHandClickVisible(false);
 	}
 
 	public void SetCrosshairVisible(bool newVisible)
@@ -57,6 +61,16 @@ public partial class BasicHud : Control
 	public bool GetHandCanGrabVisible()
 	{
 		return handCanGrabTexture.Visible;
+	}
+
+	public void SetHandClickVisible(bool newVisible)
+	{
+		handClickTexture.Visible = newVisible;
+	}
+
+	public bool GetHandClickVisible()
+	{
+		return handClickTexture.Visible;
 	}
 
 	// grabbed true = texture grabbed and false = texture normal

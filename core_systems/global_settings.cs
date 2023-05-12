@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Threading.Tasks;
 using System.Windows;
 
 public partial class global_settings : Godot.GodotObject
@@ -15,7 +16,6 @@ public partial class global_settings : Godot.GodotObject
 
         // Audio volumes init
         LoadAndApply_AllAudioSettings();
-        //SaveActual_AllAudioSettings();
 	}
 
 	// tady ziskavame pristup k hodnotam ulozenych v global_settings_data.tres
@@ -96,6 +96,39 @@ public partial class global_settings : Godot.GodotObject
         Apply_MusicVolume(GetActual_MusicVolume(), false, true);
 
         gm.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "all audio data is saved");
+    }
+
+    // Spoustime zde v global_settings pri konstrukci (init)
+    public void LoadAndApply_AllInputsSettings()
+    {
+        // nacteme veskera data ulozena ze souboru
+        global_settings_data data = GetData();
+
+        // pouze aplikujeme jednotliva nastaveni = neukladame do souboru
+        Apply_LookMouseSmooth(data.LookMouseSmooth, true, false);
+        Apply_LookMouseSensitivity(data.LookMouseSensitivity, true, false);
+        Apply_LookGamepadSmooth(data.LookGamepadSmooth, true, false);
+        Apply_LookGamepadSensitivity(data.LookGamepadSensitivity, true, false);
+        Apply_InverseVerticalLook(data.InverseVerticalLook, true, false);
+
+        gm.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "all inputs data is apply");
+    }
+
+    // Toto volani projede veskera aktualni aplikovana inputs nastaveni a
+    // ulozi je do souboru global_settings_data.tres
+    public void SaveActual_AllInputsSettings()
+    {
+        // nacteme veskera data ulozena ze souboru
+        global_settings_data data = GetData();
+
+        // pouze aplikujeme jednotliva nastaveni = neukladame do souboru
+        Apply_LookMouseSmooth(GetActual_LookMouseSmooth(), false, true);
+        Apply_LookMouseSensitivity(GetActual_LookMouseSensitivity(), false, true);
+        Apply_LookGamepadSmooth(GetActual_LookGamepadSmooth(), false, true);
+        Apply_LookGamepadSensitivity(GetActual_LookGamepadSensitivity(), false, true);
+        Apply_InverseVerticalLook(GetActual_InverseVerticalLook(), false, true);
+
+        gm.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "all inputs data is saved");
     }
 
     /**************************************************************************/
@@ -256,6 +289,42 @@ public partial class global_settings : Godot.GodotObject
                 " nejspis je jiny nastaveni screen size nez dane id presety");
             return -1;
         }
+    }
+
+    // Aplikuje ruzna GI
+    public void Apply_GlobalIlumination(int newValue,bool newApplyNow = false, bool newSaveNow = false)
+    {
+        if(newApplyNow)
+        {
+            if(newValue == 0)
+            {
+                GD.Print("test");
+                // disable
+                VoxelGI voxelGI = gm.LevelLoader.GetActualLevelScene().GetNode<VoxelGI>("VoxelGI");
+                if(voxelGI != null)
+                    voxelGI.Visible = false;
+
+                Apply_Sdfgi(false, true, false);
+            }
+            else if(newValue == 1) 
+            {
+                // sdfgi
+                VoxelGI voxelGI = gm.LevelLoader.GetActualLevelScene().GetNode<VoxelGI>("VoxelGI");
+                if (voxelGI != null)
+                    voxelGI.Visible = false;
+                Apply_Sdfgi(true, true, false);
+            }
+            else if(newValue == 2) 
+            {
+                // voxel
+                Apply_Sdfgi(false, true, false);
+                VoxelGI voxelGI = gm.LevelLoader.GetActualLevelScene().GetNode<VoxelGI>("VoxelGI");
+                if (voxelGI != null)
+                    voxelGI.Visible = false;
+            }
+        }
+
+        RefreshShaders();
     }
 
     // settings SSAO
@@ -663,5 +732,144 @@ public partial class global_settings : Godot.GodotObject
         // Save now
         GetData().ShowDebugHud = newValue;
         GetData().Save();
+    }
+
+    /**************************************************************************/
+    // INPUTS
+
+    // settings Mouse Smooth
+    public void Apply_LookMouseSmooth(float newValue, bool newApplyNow = false, bool newSaveNow = false)
+    {
+        // Apply now
+        if (newApplyNow)
+        {
+            if (GameMaster.GM.GetFPSCharacter() == null) return;
+                GameMaster.GM.GetFPSCharacter().MouseSmooth = newValue;
+        }
+
+        // Save nowj
+        if (newSaveNow)
+        {
+            GetData().LookMouseSmooth = newValue;
+            GetData().Save();
+        }
+    }
+
+    public float GetActual_LookMouseSmooth()
+    {
+        if (GameMaster.GM.GetFPSCharacter() == null) return 1f;
+        return GameMaster.GM.GetFPSCharacter().MouseSmooth;
+    }
+
+    // settings Mouse Sensitivity
+    public void Apply_LookMouseSensitivity(float newValue, bool newApplyNow = false, bool newSaveNow = false)
+    {
+        // Apply now
+        if (newApplyNow)
+        {
+            if (GameMaster.GM.GetFPSCharacter() == null) return;
+            GameMaster.GM.GetFPSCharacter().MouseSensitivity = newValue;
+        }
+
+        // Save nowj
+        if (newSaveNow)
+        {
+            GetData().LookMouseSensitivity = newValue;
+            GetData().Save();
+        }
+    }
+
+    public float GetActual_LookMouseSensitivity()
+    {
+        if (GameMaster.GM.GetFPSCharacter() == null) return 1f;
+        return GameMaster.GM.GetFPSCharacter().MouseSensitivity;
+    }
+
+    // settings Gamepad Smooth
+    public void Apply_LookGamepadSmooth(float newValue, bool newApplyNow = false, bool newSaveNow = false)
+    {
+        // Apply now
+        if (newApplyNow)
+        {
+            if (GameMaster.GM.GetFPSCharacter() == null) return;
+            GameMaster.GM.GetFPSCharacter().GamepadSmooth = newValue;
+        }
+
+        // Save nowj
+        if (newSaveNow)
+        {
+            GetData().LookGamepadSmooth = newValue;
+            GetData().Save();
+        }
+    }
+
+    public float GetActual_LookGamepadSmooth()
+    {
+        if (GameMaster.GM.GetFPSCharacter() == null) return 1f;
+        return GameMaster.GM.GetFPSCharacter().GamepadSmooth;
+    }
+
+    // settings Gamepad Sensitivity
+    public void Apply_LookGamepadSensitivity(float newValue, bool newApplyNow = false, bool newSaveNow = false)
+    {
+        // Apply now
+        if (newApplyNow)
+        {
+            if (GameMaster.GM.GetFPSCharacter() == null) return;
+            GameMaster.GM.GetFPSCharacter().GamepadSensitvity = newValue;
+        }
+
+        // Save nowj
+        if (newSaveNow)
+        {
+            GetData().LookGamepadSensitivity = newValue;
+            GetData().Save();
+        }
+    }
+
+    public float GetActual_LookGamepadSensitivity()
+    {
+        if (GameMaster.GM.GetFPSCharacter() == null) return 1f;
+        return GameMaster.GM.GetFPSCharacter().GamepadSensitvity;
+    }
+
+    // settings InverseVerticalLook
+    public void Apply_InverseVerticalLook(bool newValue, bool newApplyNow = false, bool newSaveNow = false)
+    {
+        // Apply now
+        if (newApplyNow)
+        {
+            if (GameMaster.GM.GetFPSCharacter() == null) return;
+            GameMaster.GM.GetFPSCharacter().InverseVerticalLook = newValue;
+        }
+
+        // Save nowj
+        if (newSaveNow)
+        {
+            GetData().InverseVerticalLook = newValue;
+            GetData().Save();
+        }
+    }
+
+    public bool GetActual_InverseVerticalLook()
+    {
+        if (GameMaster.GM.GetFPSCharacter() == null) return false;
+        return GameMaster.GM.GetFPSCharacter().InverseVerticalLook;
+    }
+
+    /**************************************************************************/
+    // OTHERS
+
+    // refresh antialising (working as impulse refresh shaders)
+    public async void RefreshShaders()
+    {
+        await RefreshShadersBackTask(GetActual_AntialiasID());
+        Apply_AntialiasID(0,true,false);
+    }
+
+    private async Task RefreshShadersBackTask(int value)
+    {
+        await Task.Delay(100);
+        Apply_AntialiasID(value,true,false);
     }
 }

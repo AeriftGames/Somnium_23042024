@@ -1,0 +1,78 @@
+[gd_scene load_steps=3 format=3 uid="uid://wlh0gi2r057f"]
+
+[ext_resource type="Script" path="res://menus/InGameMenu.cs" id="1_k4aci"]
+[ext_resource type="PackedScene" uid="uid://d1xpbdilt7rk1" path="res://menus/BaseFocusedMenuButton.tscn" id="2_10o54"]
+
+[node name="InGameMenu" type="Control"]
+top_level = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_k4aci")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.705882)
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
+custom_minimum_size = Vector2(300, 300)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -150.0
+offset_right = 150.0
+offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 2
+
+[node name="Button_BackToGame" parent="Control/VBoxContainer" instance=ExtResource("2_10o54")]
+layout_mode = 2
+ButtonFocusID = 0
+
+[node name="Button_QuitGame" parent="Control/VBoxContainer" instance=ExtResource("2_10o54")]
+layout_mode = 2
+text = "quit game"
+ButtonFocusID = 1
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -150.0
+offset_right = 150.0
+offset_bottom = 26.0
+grow_horizontal = 2
+text = "In Game Menu"
+horizontal_alignment = 1
+
+[connection signal="pressed" from="Control/VBoxContainer/Button_BackToGame" to="." method="_on_button_back_to_game_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer/Button_QuitGame" to="." method="_on_button_quit_game_pressed"]

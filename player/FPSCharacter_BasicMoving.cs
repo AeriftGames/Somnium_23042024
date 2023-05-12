@@ -32,6 +32,7 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
 
 	public enum ECharacterMode { FlyMode, WalkMode }
 	public enum ECharacterPosture { Stand, Crunch }
+	public enum ECharacterReasonDead { NoHealth, FallFromHeight, KilledFromEnemy}
 
 	[ExportGroupAttribute("Movement Settings")]
 	[Export] public ECharacterMode CharacterMode = ECharacterMode.WalkMode;
@@ -50,9 +51,12 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
 	[ExportGroupAttribute("Looking Settings")]
 	[Export] public float MouseSensitivity = 0.15f;
 	[Export] public float MouseSmooth = 15f;
+	[Export] public float GamepadSensitvity = 0.15f;
+	[Export] public float GamepadSmooth = 15f;
 	[Export] public float CameraVerticalLookMin = -80f;
 	[Export] public float CameraVerticalLookMax = 80f;
 	[Export] public float LerpSpeedPosObjectCamera = 15.0f;
+	[Export] public bool InverseVerticalLook = false;
 
 	[ExportGroupAttribute("Others Settings")]
 	[Export] public float CrunchLerpSpeed = 5.0f;
@@ -103,7 +107,9 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
 		objectCamera.SetCharacterOwner(this);
 
 		allHuds = GetNode<Control>("AllHuds");
-	}
+
+        GameMaster.GM.GetSettings().LoadAndApply_AllInputsSettings();
+    }
 
 	// Update Physical updated process
 	public override void _PhysicsProcess(double delta)
@@ -292,7 +298,7 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
 	}
 
 	// Change character posture like stand,crunch.. its also change player movement speed
-	public void ChangeCharacterPosture(ECharacterPosture newCharacterPosture)
+	public virtual void ChangeCharacterPosture(ECharacterPosture newCharacterPosture)
 	{
 		switch (newCharacterPosture)
 		{
@@ -412,7 +418,6 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
 			Input.MouseMode = Input.MouseModeEnum.Hidden;
 	
 		SetMoveInputEnable(_isInputEnable);
-		//objectCamera.IsCameraLookInputEnable(_isInputEnable);
 	}
 
 	public void SetMoveInputEnable(bool newEnable)
@@ -482,15 +487,27 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
 	}
 
 	// Event when character become actual dead
-	public virtual void EventDead(string reasonDead)
+	public virtual void EventDead(ECharacterReasonDead newReasonDead, string newAdditionalData = "",
+		bool newPrintToConsole = false)
 	{
 		//GameMaster.GM.Log.WriteLog(this, LogSystem.ELogMsgType.INFO, "character is dead");
+	}
+
+	public Vector3 GetCharacterLegPosition()
+	{
+		return CharacterCollisionCrunch.GlobalPosition;
 	}
 
 	// Return by linked ObjectCamera->Camera
 	public Camera3D GetFPSCharacterCamera()
 	{
 		return objectCamera.Camera;
+	}
+
+	// Return ObjectCamera
+	public ObjectCamera GetObjectCamera()
+	{
+		return objectCamera;
 	}
 
 	public Control GetAllHudsControlNode()
