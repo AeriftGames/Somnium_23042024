@@ -35,7 +35,7 @@ public partial class InventorySystem : Node
 		InventoryItemData copiedItemData = newInventoryItemData.Duplicate() as InventoryItemData;
 
         // nastavi inventory item data prvni volny (slot id) a prida item do inventare, pokud je -1 = neni misto
-        copiedItemData.InventoryHoldingSlotID = inventoryCharacter.GetInventoryMenu().GetFirstFreeSlot();
+        copiedItemData.InventoryHoldingSlotID = inventoryCharacter.GetInventoryMenu().GetFirstFreeSlotInInventory();
 		if (copiedItemData.InventoryHoldingSlotID == -1) return false;
 
         inventoryItems.Add(copiedItemData);

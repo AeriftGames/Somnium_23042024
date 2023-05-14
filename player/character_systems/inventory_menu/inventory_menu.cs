@@ -57,13 +57,17 @@ public partial class inventory_menu : Control
         UpdateDragEndDropInputs("mouseClickLeft", delta);
     }
 
-    private void UpdateDragEndDropInputs(StringName newDragAndDropAndFocusAction,double delta)
+    private void UpdateDragEndDropInputs(StringName newDragAndDropAndFocusAction, double delta)
     {
         // DragAndDrop Start
         if (Input.IsActionPressed(newDragAndDropAndFocusAction) && GetActualDragAndDropItem() == null)
-            foreach (var slot in GetAllInventoryItemSlots())
+            foreach (var slot in GetAllSlots())
                 if (slot.GetIsMouseHover() && slot.HasUIItem())
                 {
+                    // pokud slot se kterym chceme dragovat je typ attach, nechceme dragovat !
+                    if (slot.inventorySlotType == InventorySlot.EInventorySlotType.socketAttach)
+                        return;
+
                     // podminky pro spusteni dragu
                     if (mouseLeftClickTime >= needClickTimeForDrag)
                     {
@@ -89,11 +93,26 @@ public partial class inventory_menu : Control
         {
             if (GetActualDragAndDropItem() != null)
             {
-                foreach (var slot in GetAllInventoryItemSlots())
+                foreach (var slot in GetAllSlots())
                     if (slot.GetIsMouseHover())
                     {
-                        //end drag item
-                        DragItemChangeToNewSlot(slot);
+                        // filtrujeme typ slotu a podle toho spustime funkce
+                        switch (slot.inventorySlotType)
+                        {
+                            case InventorySlot.EInventorySlotType.socketInventory:
+                                DragItemChangeToNewSlot(slot);
+                                break;
+                            case InventorySlot.EInventorySlotType.socketPlace:
+                                DragItemChangeToNewSlot(slot);
+                                break;
+                            case InventorySlot.EInventorySlotType.socketAttach:
+                                AttachItemAsHotkeyToSlot(slot);
+                                break;
+                            default:
+                                break;
+                        }
+ 
+                        // zrusi drag and drop
                         EndDragAndDropItem();
 
                         mouseLeftClickTime = 0.0f;
@@ -102,7 +121,7 @@ public partial class inventory_menu : Control
             }
             else
             {
-                foreach (var slot in GetAllInventoryItemSlots())
+                foreach (var slot in GetAllSlots())
                     if (slot.GetIsMouseHover())
                     {
                         //focus item (click)
@@ -114,12 +133,12 @@ public partial class inventory_menu : Control
             }
         }
     }
-
-    public void Init(InventorySystem newInventorySystem) 
+    
+    public void Init(InventorySystem newInventorySystem)
     {
         inventorySystem = newInventorySystem;
 
-        RecreateAllSlotsWithItems();
+        CreateAllSlotsWithItems();
     }
 
     public void SetActive(bool newActive)
@@ -222,7 +241,7 @@ public partial class inventory_menu : Control
         {
             Visible = false;
             GD.Print("anim dohrala");
-            
+
             /*// try update items destroy
             DestroyAllUIItemsInSlots();*/
         }
@@ -238,10 +257,13 @@ public partial class inventory_menu : Control
 
     public InventorySystem GetInventorySystem() { return inventorySystem; }
 
-    public void RecreateAllSlotsWithItems()
+    public void CreateAllSlotsWithItems()
     {
-        // vytvori sloty a nacte do array allInventorySlots
-        CreateSlots(inventorySystem.MaxInventoryCapacity);
+        // vytvori sloty pro inventar a nacte do array allInventorySlots
+        CreateInventorySlots(inventorySystem.MaxInventoryCapacity);
+
+        //
+        InitAllSocketSlots(GetNode("Panel/AllSocketSlots"));
 
         // nacte vsechny itemy ktere hrac vlastni do ui inventory(do jednotlivych slotu)
         AddAllItemsToSlots();
@@ -261,15 +283,13 @@ public partial class inventory_menu : Control
 
     public void AddItemToSlot(InventoryItemData newItemData, int slotID)
     {
-        GetAllInventoryItemSlots()[slotID].SetItem(newItemData);
+        GetAllSlots()[slotID].SetItem(newItemData);
     }
-
-    public Array<InventorySlot> GetAllInventoryItemSlots() { return allInventorySlots; }
 
     // END
     public void DestroyAllUIItemsInSlots()
     {
-        foreach (InventorySlot slot in GetAllInventoryItemSlots())
+        foreach (InventorySlot slot in GetAllSlots())
         {
             if (slot.HasUIItem())
                 slot.DestroyUIItem();
@@ -325,12 +345,12 @@ public partial class inventory_menu : Control
         pressedInventorySlot.DestroyUIItem();
     }
 
-    public int GetFirstFreeSlot()
+    public int GetFirstFreeSlotInInventory()
     {
         // projde cele pole iventory slots a zjisti prvni volny
-        for (int i = 0; i < GetAllInventoryItemSlots().Count; i++)
+        for (int i = 0; i < GetAllInventorySlotsOnly().Count; i++)
         {
-            if (!GetAllInventoryItemSlots()[i].HasUIItem())
+            if (!GetAllInventorySlotsOnly()[i].HasUIItem())
                 return i;
         }
 
@@ -338,7 +358,7 @@ public partial class inventory_menu : Control
         return -1;
     }
 
-    private void CreateSlots(int newNumber, int newNumberHasNumberText = 5)
+    private void CreateInventorySlots(int newNumber, int newNumberHasNumberText = 5)
     {
         // Nacte prefab sceny slotu
         PackedScene newSlotPackedScene =
@@ -359,8 +379,25 @@ public partial class inventory_menu : Control
             }
 
             newSlot.Init(this);
+            newSlot.inventorySlotType = InventorySlot.EInventorySlotType.socketInventory;
             newSlot.SetID(i);
             allInventorySlots.Add(newSlot);
+        }
+    }
+
+    private void InitAllSocketSlots(Node parentOfAllSockets)
+    {
+        // prida do array nase sockety
+        foreach (var socketNode in parentOfAllSockets.GetChildren())
+        {
+            InventorySlot socket = socketNode as InventorySlot;
+            if (socket != null)
+                if(socket.inventorySlotType == InventorySlot.EInventorySlotType.socketPlace ||
+                    socket.inventorySlotType == InventorySlot.EInventorySlotType.socketAttach)
+                {
+                    GetAllSlots().Add(socket);
+                    socket.Init(this);
+                }
         }
     }
 
@@ -405,11 +442,11 @@ public partial class inventory_menu : Control
             holdFirst.InventoryHoldingSlotID = holdSecond.InventoryHoldingSlotID;
             holdSecond.InventoryHoldingSlotID = a;
 
-            GetAllInventoryItemSlots()[holdFirst.InventoryHoldingSlotID].DestroyUIItem();
-            GetAllInventoryItemSlots()[holdSecond.InventoryHoldingSlotID].DestroyUIItem();
+            GetSlotByID(holdFirst.InventoryHoldingSlotID).DestroyUIItem();
+            GetSlotByID(holdSecond.InventoryHoldingSlotID).DestroyUIItem();
 
-            GetAllInventoryItemSlots()[holdFirst.InventoryHoldingSlotID].SetItem(holdFirst);
-            GetAllInventoryItemSlots()[holdSecond.InventoryHoldingSlotID].SetItem(holdSecond);
+            GetSlotByID(holdFirst.InventoryHoldingSlotID).SetItem(holdFirst);
+            GetSlotByID(holdSecond.InventoryHoldingSlotID).SetItem(holdSecond);
         }
         else
         {
@@ -417,14 +454,62 @@ public partial class inventory_menu : Control
             // pokud je potreba prerusime focus a znicime puvodni item ve slotu
             int id = dragAndDropItem.GetInventoryItemData().InventoryHoldingSlotID;
 
-            if (GetAllInventoryItemSlots()[id].GetID() == actualFocusSlotID)
+            if (GetSlotByID(id).GetID() == actualFocusSlotID)
                 DisableLastFocusUIItem();
 
             dragAndDropItem.GetInventoryItemData().InventoryHoldingSlotID = newSlot.GetID();
             // pridame na nove misto
             newSlot.SetItem(dragAndDropItem.GetInventoryItemData());
 
-            GetAllInventoryItemSlots()[id].DestroyUIItem();
+            GetSlotByID(id).DestroyUIItem();
         }
+    }
+
+    public void AttachItemAsHotkeyToSlot(InventorySlot newSlot)
+    {
+        GD.Print("test");
+        newSlot.SetItem(dragAndDropItem.GetInventoryItemData());
+    }
+
+    public void DeatachItemAsHotkey(InventorySlot newSlot)
+    {
+        newSlot.DestroyUIItem();
+    }
+
+    //
+    public Array<InventorySlot> GetAllSlots()
+    {
+        return allInventorySlots;
+    }
+
+    public Array<InventorySlot> GetAllInventorySlotsOnly()
+    {
+        Array<InventorySlot> allInventorySlotsOnly= new Array<InventorySlot>();
+
+        foreach (InventorySlot slot in GetAllSlots())
+            if(slot.inventorySlotType == InventorySlot.EInventorySlotType.socketInventory)
+                allInventorySlotsOnly.Add(slot);
+
+        return allInventorySlotsOnly;
+    }
+
+    public Array<InventorySlot> GetAllSocketSlotsOnly()
+    {
+        Array<InventorySlot> allSocketSlotsOnly = new Array<InventorySlot>();
+
+        foreach (InventorySlot slot in GetAllSlots())
+            if (slot.inventorySlotType == InventorySlot.EInventorySlotType.socketPlace)
+                allSocketSlotsOnly.Add(slot);
+
+        return allSocketSlotsOnly;
+    }
+
+    public InventorySlot GetSlotByID(int id)
+    {
+        foreach (var slot in GetAllSlots())
+            if (slot.id == id)
+                return slot;
+
+        return null;
     }
 }

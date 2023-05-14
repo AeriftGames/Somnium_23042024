@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=5 format=3 uid="uid://desymkwc53rrf"]
 
 [ext_resource type="Script" path="res://player/character_systems/inventory_menu/InventoryItemIconObject.cs" id="1_htkfp"]
 [ext_resource type="Script" path="res://player/character_systems/inventory_menu/InventoryItemPreview.cs" id="2_hsjhn"]
@@ -74,6 +74,7 @@ light_indirect_energy = 2.0
 omni_range = 15.0
 
 [node name="LabelID" type="Label" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

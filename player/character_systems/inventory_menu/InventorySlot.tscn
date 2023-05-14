@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://7u800n5mhs5v"]
 
 [ext_resource type="Script" path="res://player/character_systems/inventory_menu/InventorySlot.cs" id="1_mxmja"]
-[ext_resource type="PackedScene" uid="uid://c234nkumyct80" path="res://player/character_systems/inventory_menu/inventory_item_icon_object.tscn" id="2_a0mps"]
+[ext_resource type="PackedScene" uid="uid://desymkwc53rrf" path="res://player/character_systems/inventory_menu/inventory_item_icon_object.tscn" id="2_a0mps"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nqw3i"]
 bg_color = Color(0.27451, 0.27451, 0.27451, 0.196078)
@@ -77,6 +77,7 @@ vertical_alignment = 1
 [node name="InventoryItemIconObject" parent="." instance=ExtResource("2_a0mps")]
 visible = false
 layout_mode = 1
+_showLabelID = true
 metadata/_edit_use_anchors_ = true
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]

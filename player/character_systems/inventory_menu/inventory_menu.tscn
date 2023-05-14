@@ -1,9 +1,10 @@
-[gd_scene load_steps=17 format=3]
+[gd_scene load_steps=16 format=3 uid="uid://c1px6alv8nd8s"]
 
 [ext_resource type="Shader" path="res://player/character_systems/vignete.gdshader" id="1_au2fw"]
 [ext_resource type="Script" path="res://player/character_systems/inventory_menu/inventory_menu.cs" id="1_psfyt"]
 [ext_resource type="AudioStream" uid="uid://m7ikqivarlhf" path="res://audio/audio_streams/inventory/backpack_open1.wav" id="2_2hhuh"]
 [ext_resource type="AudioStream" uid="uid://bo3chsomqpexu" path="res://audio/audio_streams/inventory/backpack_open2.wav" id="3_521e5"]
+[ext_resource type="PackedScene" uid="uid://7u800n5mhs5v" path="res://player/character_systems/inventory_menu/InventorySlot.tscn" id="6_574yt"]
 [ext_resource type="Script" path="res://player/character_systems/inventory_menu/InventoryItemPreview.cs" id="6_xggco"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_stuy7"]
@@ -30,32 +31,6 @@ expand_margin_left = 20.0
 expand_margin_top = 189.0
 expand_margin_right = 18.0
 expand_margin_bottom = 70.0
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nlry6"]
-bg_color = Color(0.27451, 0.27451, 0.27451, 0.196078)
-border_width_left = 5
-border_width_top = 10
-border_width_right = 5
-border_width_bottom = 10
-border_color = Color(1, 1, 1, 0.478431)
-border_blend = true
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 50
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u4lpn"]
-bg_color = Color(0.27451, 0.27451, 0.27451, 0.196078)
-border_width_left = 5
-border_width_top = 10
-border_width_right = 5
-border_width_bottom = 10
-border_color = Color(1, 1, 1, 0.478431)
-border_blend = true
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 50
-corner_radius_bottom_left = 10
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uj0vl"]
 bg_color = Color(0.27451, 0.27451, 0.27451, 0.196078)
@@ -519,107 +494,6 @@ grow_vertical = 2
 columns = 5
 metadata/_edit_lock_ = true
 
-[node name="Button_L" type="Button" parent="Panel"]
-custom_minimum_size = Vector2(150, 150)
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = -200.0
-offset_top = -142.0
-offset_right = -50.0
-offset_bottom = 7.99985
-grow_vertical = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_nlry6")
-metadata/_edit_lock_ = true
-
-[node name="Label_leftHand" type="Label" parent="Panel/Button_L"]
-visible = false
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -35.0
-offset_top = -30.0
-offset_right = 35.0
-offset_bottom = -4.0
-grow_horizontal = 2
-text = "Left hand"
-horizontal_alignment = 1
-
-[node name="Label_LH" type="Label" parent="Panel/Button_L"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -11.5
-offset_right = 20.0
-offset_bottom = 11.5
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(1, 1, 1, 0.470588)
-theme_override_colors/font_outline_color = Color(0.172549, 0.172549, 0.172549, 1)
-theme_override_constants/outline_size = 3
-theme_override_font_sizes/font_size = 20
-text = "L H"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Button_R" type="Button" parent="Panel"]
-custom_minimum_size = Vector2(150, 150)
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = 50.0
-offset_top = -142.0
-offset_right = 200.0
-offset_bottom = 7.99985
-grow_horizontal = 0
-grow_vertical = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_u4lpn")
-metadata/_edit_lock_ = true
-
-[node name="Label2" type="Label" parent="Panel/Button_R"]
-visible = false
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -37.0
-offset_top = -30.0
-offset_right = 37.0
-offset_bottom = -4.0
-grow_horizontal = 2
-text = "Right hand"
-horizontal_alignment = 1
-
-[node name="Label_RH" type="Label" parent="Panel/Button_R"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -11.5
-offset_right = 20.0
-offset_bottom = 11.5
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(1, 1, 1, 0.470588)
-theme_override_colors/font_outline_color = Color(0.192157, 0.192157, 0.192157, 1)
-theme_override_constants/outline_size = 3
-theme_override_font_sizes/font_size = 20
-text = "R H"
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="Panel" type="Panel" parent="Panel"]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
@@ -717,6 +591,46 @@ fov = 71.9
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Panel/Panel_ItemPreview/SubViewportContainer/SubViewport"]
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Panel/Panel_ItemPreview/SubViewportContainer/SubViewport"]
+
+[node name="AllSocketSlots" type="Control" parent="Panel"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="SocketSlot" parent="Panel/AllSocketSlots" instance=ExtResource("6_574yt")]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = 80.0
+offset_right = -50.0
+offset_bottom = 230.0
+grow_vertical = 2
+inventorySlotType = 2
+_showNameSlot = true
+_nameSlotText = "left hand"
+id = 101
+
+[node name="SocketSlot2" parent="Panel/AllSocketSlots" instance=ExtResource("6_574yt")]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 614.0
+offset_top = 80.0
+offset_right = 764.0
+offset_bottom = 230.0
+grow_horizontal = 0
+grow_vertical = 2
+inventorySlotType = 2
+_showNameSlot = true
+_nameSlotText = "right hand"
+id = 102
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

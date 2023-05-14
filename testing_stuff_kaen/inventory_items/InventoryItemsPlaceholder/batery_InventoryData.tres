@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=6 format=3]
+[gd_resource type="Resource" load_steps=6 format=3 uid="uid://bwwmotyils2yn"]
 
 [ext_resource type="Script" path="res://player/character_systems/inventory_menu/ItemSubViewportSetting.cs" id="1_pyfme"]
 [ext_resource type="ArrayMesh" uid="uid://fxl3wl4n5ew8" path="res://objects/battery/battery_mesh.tres" id="2_037vq"]
