@@ -39,8 +39,8 @@ public partial class FPSCharacter_Inventory : FPSCharacter_Interaction
         healthSystem.SetAllData(StartActualHealth,StartMaxHealth,StartHealthRegenVal,StartHealthRegenTick,
             StartHealthRegenEnable);
 
-        //
-        inventorySystem = GetNode<InventorySystem>("InventorySystem");   
+        inventorySystem = GetNode<InventorySystem>("InventorySystem");
+
         hurtPlayer = GetNode<AudioStreamPlayer>("AudioStreamPlayer_Hurts");
 
         // inits

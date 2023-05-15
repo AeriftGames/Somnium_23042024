@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://dxumv4dw6y6ps"]
+
+[ext_resource type="PackedScene" uid="uid://c1px6alv8nd8s" path="res://player/character_systems/inventory_menu/inventory_menu.tscn" id="1_to5o7"]
+[ext_resource type="Script" path="res://player/character_systems/inventory_menu/inventory_menu_number_two.cs" id="2_bww8y"]
+
+[node name="InventoryMenu" instance=ExtResource("1_to5o7")]
+script = ExtResource("2_bww8y")
+InventoryOpenAudios = null
+InventoryCloseAudios = null
+
+[node name="Panel" parent="." index="1"]
+offset_top = -80.0
+offset_bottom = 404.0
+
+[node name="TabContainer" parent="." index="4"]
+offset_left = -300.0
+offset_right = 300.0

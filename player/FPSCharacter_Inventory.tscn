@@ -3,7 +3,6 @@
 [ext_resource type="PackedScene" uid="uid://0g1u2jvnfbpy" path="res://player/FPSCharacter_Interaction.tscn" id="1_ywg5i"]
 [ext_resource type="Script" path="res://player/FPSCharacter_Inventory.cs" id="2_k43co"]
 [ext_resource type="AudioStream" uid="uid://d1h0024d0d7i3" path="res://audio/audio_streams/hurts_test/413178__micahlg__male_hurt2.ogg" id="3_51q7g"]
-[ext_resource type="PackedScene" uid="uid://c1px6alv8nd8s" path="res://player/character_systems/inventory_menu/inventory_menu.tscn" id="3_ru8m1"]
 [ext_resource type="AudioStream" uid="uid://csol82irfc2by" path="res://audio/audio_streams/hurts_test/413181__micahlg__male_hurt5.ogg" id="4_m4gkb"]
 [ext_resource type="Script" path="res://player/character_systems/CharacterInfoHud.cs" id="4_nvx4w"]
 [ext_resource type="PackedScene" uid="uid://dhhnra4i7t74r" path="res://player/character_systems/damage_hud.tscn" id="5_dhy04"]
@@ -11,6 +10,7 @@
 [ext_resource type="AudioStream" uid="uid://u7gx1or5kywy" path="res://audio/audio_streams/hurts_test/413185__micahlg__male_hurt8.ogg" id="6_7ci7t"]
 [ext_resource type="AudioStream" uid="uid://dcsxua2341g8" path="res://audio/audio_streams/hurts_test/325269__deleted_user_2104797__body-fall-2.wav" id="7_0hcda"]
 [ext_resource type="Script" path="res://player/character_systems/inventory_menu/InventorySystem.cs" id="8_1wcpl"]
+[ext_resource type="PackedScene" uid="uid://dxumv4dw6y6ps" path="res://player/character_systems/inventory_menu/inventory_menu_number_two.tscn" id="9_bfvnj"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_enw7f"]
 bg_color = Color(1, 0.164706, 0, 1)
@@ -41,8 +41,7 @@ stream = ExtResource("3_51q7g")
 max_polyphony = 4
 bus = &"Sfx"
 
-[node name="InventoryMenu" parent="AllHuds" index="1" instance=ExtResource("3_ru8m1")]
-visible = false
+[node name="InventoryMenu" parent="AllHuds" index="1" instance=ExtResource("9_bfvnj")]
 layout_mode = 1
 
 [node name="CharacterInfoHud" type="Control" parent="AllHuds" index="2"]
