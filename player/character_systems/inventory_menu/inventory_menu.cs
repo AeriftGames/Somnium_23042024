@@ -68,6 +68,10 @@ public partial class inventory_menu : Control
                     if (slot.inventorySlotType == InventorySlot.EInventorySlotType.socketAttach)
                         return;
 
+                    // ochrana proti presouvani itemu ktery je jiz nekde attachnuty
+                    if (slot.inventorySlotType == InventorySlot.EInventorySlotType.socketInventory &&
+                        slot.GetIsAttachSlotEffectEnable()) return;
+
                     // podminky pro spusteni dragu
                     if (mouseLeftClickTime >= needClickTimeForDrag)
                     {
@@ -100,8 +104,13 @@ public partial class inventory_menu : Control
                         switch (slot.inventorySlotType)
                         {
                             case InventorySlot.EInventorySlotType.socketInventory:
-                                DragItemChangeToNewSlot(slot);
-                                break;
+                                {
+                                    // ochrana proti presouvani itemu ktery je jiz nekde attachnuty
+                                    if (slot.GetIsAttachSlotEffectEnable()) return;
+
+                                    DragItemChangeToNewSlot(slot);
+                                    break;
+                                }
                             case InventorySlot.EInventorySlotType.socketPlace:
                                 DragItemChangeToNewSlot(slot);
                                 break;
@@ -513,8 +522,7 @@ public partial class inventory_menu : Control
                     return true;
                 }
         }
-
-        return true;
+        return false;
     }
 
     //
