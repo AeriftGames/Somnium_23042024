@@ -20,7 +20,12 @@ public partial class InventorySlot : Button
 	private bool isMouseOver = false;
 	[Export] public int id = -999;
 
-	public void Init(inventory_menu newInventoryMenu){inventoryMenu = newInventoryMenu;}
+	private bool isAttachSlotEffectEnable = false;
+
+	public void Init(inventory_menu newInventoryMenu)
+	{
+		inventoryMenu = newInventoryMenu;
+	}
 
 	public override void _Process(double delta)
 	{
@@ -39,12 +44,13 @@ public partial class InventorySlot : Button
                     inventoryMenu.PutFromInventory(this);
                     break;
 				case EInventorySlotType.socketAttach:
-					inventoryMenu.DeatachItemAsHotkey(this);
+					inventoryMenu.GetSlotByID(GetInventoryItemData().InventoryHoldingSlotID).
+						EnableAttachSlotEffect(false, "");
+					DestroyUIItem();
 					break;
 				default:
 					break;
 			}
-
 		}
     }
 
@@ -58,6 +64,8 @@ public partial class InventorySlot : Button
 		nameSlotText = newText;
         GetNode<Label>("LabelNameSlot").Text = nameSlotText;
     }
+
+	public string GetNameSlotText() { return nameSlotText; }
 
 	public bool HasUIItem() { return hasItem; }
 
@@ -76,6 +84,18 @@ public partial class InventorySlot : Button
 
 		GD.Print("Destroy ui item");
 	}
+
+	public void EnableAttachSlotEffect(bool enable,string attachLabelText) 
+	{
+		isAttachSlotEffectEnable = enable;
+
+		Control a = GetNode<Control>("AttachSlotEffect");
+		a.Visible = enable;
+
+		a.GetNode<Label>("AttachLabel").Text = attachLabelText;
+	}
+
+	public bool GetIsAttachSlotEffectEnable() { return isAttachSlotEffectEnable; }
 
 	public InventoryItemData GetInventoryItemData(){return inventoryItemData;}
 	public void _on_pressed(){/*inventoryMenu.FocusUIItem(this)*/;}

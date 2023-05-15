@@ -107,6 +107,11 @@ public partial class inventory_menu : Control
                                 break;
                             case InventorySlot.EInventorySlotType.socketAttach:
                                 AttachItemAsHotkeyToSlot(slot);
+                                InventorySlot a =
+                                    GetSlotByID(dragAndDropItem.GetInventoryItemData().InventoryHoldingSlotID);
+                                if (a != null)
+                                    a.EnableAttachSlotEffect(true,slot.GetNameSlotText());
+
                                 break;
                             default:
                                 break;
@@ -333,6 +338,10 @@ public partial class inventory_menu : Control
     {
         if (!pressedInventorySlot.HasUIItem()) return;
 
+        // testovani pokud vyhazujeme item ktery je attachnut nekde ve slotu, musime napred znicit attach
+        if (pressedInventorySlot.GetIsAttachSlotEffectEnable())
+            ApplyDeteachItem(pressedInventorySlot);
+
         // Call Put to world
         inventorySystem.PutItemFromInventoryToWorld(pressedInventorySlot.GetInventoryItemData());
 
@@ -343,6 +352,19 @@ public partial class inventory_menu : Control
 
         // Destroy ui
         pressedInventorySlot.DestroyUIItem();
+    }
+
+    public void ApplyDeteachItem(InventorySlot deteachSlot)
+    {
+            int press_id = deteachSlot.GetInventoryItemData().InventoryHoldingSlotID;
+            foreach (var slot in GetAllSocketAttachSlotsOnly())
+                if (slot.HasUIItem())
+                    if (slot.GetInventoryItemData().InventoryHoldingSlotID == press_id)
+                    {
+                        slot.DestroyUIItem();
+                        deteachSlot.EnableAttachSlotEffect(false, "");
+                        break;
+                    }
     }
 
     public int GetFirstFreeSlotInInventory()
@@ -467,13 +489,32 @@ public partial class inventory_menu : Control
 
     public void AttachItemAsHotkeyToSlot(InventorySlot newSlot)
     {
+        // pokud ma attachSlot item
+        if(newSlot.HasUIItem())
+        {
+            GetSlotByID(newSlot.GetInventoryItemData().InventoryHoldingSlotID).
+                EnableAttachSlotEffect(false, "");
+        }
+
+        CheckIfItemIsSomwhereAlreadyAttached(dragAndDropItem.GetInventoryItemData());
+
         GD.Print("test");
         newSlot.SetItem(dragAndDropItem.GetInventoryItemData());
     }
 
-    public void DeatachItemAsHotkey(InventorySlot newSlot)
+    private bool CheckIfItemIsSomwhereAlreadyAttached(InventoryItemData itemData)
     {
-        newSlot.DestroyUIItem();
+        foreach (InventorySlot attachSlot in GetAllSocketAttachSlotsOnly())
+        {
+            if (attachSlot.HasUIItem())
+                if(attachSlot.GetInventoryItemData().InventoryHoldingSlotID == itemData.InventoryHoldingSlotID)
+                {
+                    attachSlot.DestroyUIItem();
+                    return true;
+                }
+        }
+
+        return true;
     }
 
     //
@@ -493,7 +534,7 @@ public partial class inventory_menu : Control
         return allInventorySlotsOnly;
     }
 
-    public Array<InventorySlot> GetAllSocketSlotsOnly()
+    public Array<InventorySlot> GetAllSocketPlaceSlotsOnly()
     {
         Array<InventorySlot> allSocketSlotsOnly = new Array<InventorySlot>();
 
@@ -504,6 +545,17 @@ public partial class inventory_menu : Control
         return allSocketSlotsOnly;
     }
 
+    public Array<InventorySlot> GetAllSocketAttachSlotsOnly()
+    {
+        Array<InventorySlot> allSocketAttachOnly = new Array<InventorySlot>();
+
+        foreach (InventorySlot slot in GetAllSlots())
+            if (slot.inventorySlotType == InventorySlot.EInventorySlotType.socketAttach)
+                allSocketAttachOnly.Add(slot);
+
+        return allSocketAttachOnly;
+    }
+
     public InventorySlot GetSlotByID(int id)
     {
         foreach (var slot in GetAllSlots())
@@ -511,5 +563,17 @@ public partial class inventory_menu : Control
                 return slot;
 
         return null;
+    }
+
+    public Array<InventorySlot> GetAllAttachedSlots()
+    {
+        Array<InventorySlot> allSocketSlotsOnly = new Array<InventorySlot>();
+
+        foreach (var slot in GetAllSlots())
+            if(slot.inventorySlotType == InventorySlot.EInventorySlotType.socketInventory)
+                if(slot.GetIsAttachSlotEffectEnable())
+                    allSocketSlotsOnly.Add(slot);
+
+        return allSocketSlotsOnly;
     }
 }
