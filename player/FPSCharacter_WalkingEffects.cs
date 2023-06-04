@@ -201,7 +201,7 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
         if(IsOnFloor())
             lastHalfFootStepDistance = GlobalPosition.DistanceTo(_LastHalfFootStepPosition);
 
-        if (IsOnFloor() && ActualMovementSpeed <= 5.0f && ActualMovementSpeed > 0.2f && !isActualStopMovement)
+        if (IsOnFloor() && ActualMovementSpeed <= 5.0f && ActualMovementSpeed > 1.0f && !isActualStopMovement)
         {
             _LastHalfFootStepPosition = GlobalPosition;
             halfFootStepLength = 0.02f;
@@ -224,7 +224,7 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
         }
     }
 
-    public void PlayFootstepSound()
+    public void PlayFootstepSound(float addOffsetVolume = 0.0f,float addOffsetPitch = 0.0f)
     {
         // Detect materal surface name and play specific audio set of footsteps
         all_material_surfaces.EMaterialSurface materialSurface =
@@ -240,9 +240,9 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
                 AllMaterialSurfaces.GetAudioArray(
                     materialSurface, all_material_surfaces.EMaterialSurfaceAudio.Footstep),
                 AllMaterialSurfaces.GetMaterialSurfaceAudioVolumeDB(
-                    materialSurface, all_material_surfaces.EMaterialSurfaceAudio.Footstep),
+                    materialSurface, all_material_surfaces.EMaterialSurfaceAudio.Footstep)+addOffsetVolume,
                 AllMaterialSurfaces.GetMaterialSurfaceAudioPitch(
-                    materialSurface, all_material_surfaces.EMaterialSurfaceAudio.Footstep));
+                    materialSurface, all_material_surfaces.EMaterialSurfaceAudio.Footstep)+addOffsetPitch);
         }
     }
 
@@ -313,12 +313,12 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
             actStepsToEffect = 0;
 
         // if actualmove is smaller than testing value, centered headlerpY and speedUP lerp to normal 
-        if (ActualMovementSpeed <= 0.2f)
+        if (ActualMovementSpeed <= 1.0f)
         {   
             // dodatecny zvuk kroku pri zastaveni
             if(!isActualStopMovement)
             {
-                MovementStopEffect();
+                PlayFootstepSound(-5.0f,-0.1f);
                 isActualStopMovement = true;
             }
 
@@ -334,11 +334,6 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
         // Lerp pro head bobbing walk Y
         HeadGimbalA.Position = HeadGimbalA.Position.Lerp(
             new Vector3(0, lerpHeadWalkY, 0), lerpFootstepSpeedModifier * delta);
-    }
-
-    private void MovementStopEffect()
-    {
-        PlayFootstepSound();
     }
 
     private void UpdateLandingHeadBobbing(float delta)
