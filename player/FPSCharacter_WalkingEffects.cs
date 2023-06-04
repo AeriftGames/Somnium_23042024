@@ -16,7 +16,6 @@ using static all_material_surfaces;
  * - jumping sound effect
  * TODO - fix small amount walking/stop no sound - it is weird some times
  * TODO - fix (change) volume,pitch etc footsteps and velocity bobhead when player moves crouched
- * TODO - fix landing/inAir/falling/onGround detect system
 */
 public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
 {
@@ -154,20 +153,11 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
 
         UpdateWalkHeadBobbing((float)delta);
         UpdateLandingHeadBobbing((float)delta);
-
-        UpdateLeaning((float)delta);
     }
 
     public override void EventLanding()
     {
         base.EventLanding();
-        /*
-        PlayRandomSound(AudioStreamPlayerJumpLand, smallHeightLandingSounds, LandingVolumeDB, 0.5f);
-
-        lerpHeadLandY = LandCameraLerpHeight;
-        lerpHeadLandRotX = LandCameraLerpRotation;
-        landing_timer.Start();
-        */
     }
 
     public void FinishLandingEffect()
@@ -198,15 +188,18 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
         float halfFootStepLength = FootStepLength / 2;
         float lastHalfFootStepDistance = 0.0f;
 
+        // pro normal footsteps
         if(IsOnFloor())
             lastHalfFootStepDistance = GlobalPosition.DistanceTo(_LastHalfFootStepPosition);
 
-        if (IsOnFloor() && ActualMovementSpeed <= 5.0f && ActualMovementSpeed > 1.0f && !isActualStopMovement)
+        // pro first footstep
+        if (IsOnFloor() && ActualMovementSpeed <= 5.0f && ActualMovementSpeed > 0.2f && !isActualStopMovement && GetIsAnyMoveInputNow())
         {
             _LastHalfFootStepPosition = GlobalPosition;
             halfFootStepLength = 0.02f;
         }
 
+        // je dostatecna vzdalenost pro provedeni footstepu?
         if (lastHalfFootStepDistance >= halfFootStepLength)
         {
             // half footstep change (foot in air - foot on ground)
@@ -315,11 +308,15 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
         // if actualmove is smaller than testing value, centered headlerpY and speedUP lerp to normal 
         if (ActualMovementSpeed <= 1.0f)
         {   
-            // dodatecny zvuk kroku pri zastaveni
-            if(!isActualStopMovement && !GetIsAnyMoveInputNow())
+            // dodatecny zvuk kroku pri zastaveni, vyresetovani aktualniho footstepu na opacny footstep
+            if(!isActualStopMovement)
             {
                 PlayFootstepSound(-5.0f,-0.1f);
+
                 isActualStopMovement = true;
+                actStepsToEffect= 0;
+                FootstepNow = true;
+                FootstepRight = !FootstepRight;
             }
 
             lerpHeadWalkY = 0.0f;
@@ -537,11 +534,6 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
 
         // DisableInputs for character
         SetInputEnable(false);
-    }
-
-    public void UpdateLeaning(double delta)
-    {
-
     }
 
     // callable when change character posture (crunch,uncrouch=stand)

@@ -447,7 +447,7 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
 		return _isInputEnable;
 	}
 
-	public bool GetIsAnyMoveInputNow() { return _isMoveInputEnable; }
+	public bool GetIsAnyMoveInputNow() { return isAnyMoveInputNow; }
 
 	// Event when character start falling
 	public virtual void EventStartFalling()
