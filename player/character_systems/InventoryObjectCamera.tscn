@@ -7,11 +7,13 @@
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.03591, -3.18117, 2.38353)
 script = ExtResource("2_ppf8y")
 headBobbingWalkValue = 0.2
-headBobbingSprintValue = 0.3
+headBobbingSprintValue = 0.4
+headBobbingCrouchValue = 0.15
 headBobbingDeltaToWalk = 0.5
 headBobbingDeltaToStand = 3.0
 headBobRotDegWalkValue = 2.0
-headBobRotDegSprintValue = 4.0
+headBobRotDegSprintValue = 5.0
+headBobRotDegCrouchValue = 1.5
 headBobRotDeltaToWalk = 0.5
 headBobRotDeltaToStand = 3.0
 

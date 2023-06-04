@@ -6,11 +6,13 @@ public partial class InventoryObjectCamera : ObjectCamera
 	Node3D inventoryPutItemPoint = null;
 	[Export] float headBobbingWalkValue = 0.2f;
     [Export] float headBobbingSprintValue = 0.3f;
+    [Export] float headBobbingCrouchValue = 0.15f;
     [Export] float headBobbingDeltaToWalk = 1.0f;
     [Export] float headBobbingDeltaToStand = 3.0f;
 
 	[Export] float headBobRotDegWalkValue = 2.0f;
     [Export] float headBobRotDegSprintValue = 4.0f;
+    [Export] float headBobRotDegCrouchValue = 1.5f;
     [Export] float headBobRotDeltaToWalk = 1.0f;
 	[Export] float headBobRotDeltaToStand = 3.0f;
 	float lerpTest = 0.0f;
@@ -59,45 +61,57 @@ public partial class InventoryObjectCamera : ObjectCamera
         }
 		else if(actualStepState == 1)
 		{
-            // prava
-			if(GetCharacterOwner().GetIsSprint())
-			{
-				//sprint
-                lerpTest = headBobbingSprintValue;
-                headBobRot = headBobRotDegSprintValue;
-            }
-			else
-			{
-				//walk
-                lerpTest = headBobbingWalkValue;
-                headBobRot = headBobRotDegWalkValue;
-            }
-
-			headBobDelta = headBobbingDeltaToWalk;
-            headBobRot = headBobRotDegWalkValue;
-            headBobRotDelta = headBobRotDeltaToWalk;
-            GD.Print("prava");
-        }
-		else if(actualStepState == 2) 
-		{
-            // leva
-            // prava
-            if (GetCharacterOwner().GetIsSprint())
+            if (GetCharacterOwner().GetCharacterPosture() == FPSCharacter_BasicMoving.ECharacterPosture.Stand)
             {
-                //sprint
-                lerpTest = -headBobbingSprintValue;
-                headBobRot = -headBobRotDegSprintValue;
+                if (GetCharacterOwner().GetIsSprint())
+                {
+                    //sprint
+                    lerpTest = headBobbingSprintValue;
+                    headBobRot = headBobRotDegSprintValue;
+                }
+                else
+                {
+                    //walk
+                    lerpTest = headBobbingWalkValue;
+                    headBobRot = headBobRotDegWalkValue;
+                }
             }
             else
             {
-                //walk
-                lerpTest = -headBobbingWalkValue;
-                headBobRot = -headBobRotDegWalkValue;
+                //crouch
+                lerpTest = headBobbingCrouchValue;
+                headBobRot = headBobRotDegCrouchValue;
             }
 
             headBobDelta = headBobbingDeltaToWalk;
             headBobRotDelta = headBobRotDeltaToWalk;
-            GD.Print("leva");
+        }
+		else if(actualStepState == 2) 
+		{
+            if (GetCharacterOwner().GetCharacterPosture() == FPSCharacter_BasicMoving.ECharacterPosture.Stand)
+            {
+                if (GetCharacterOwner().GetIsSprint())
+                {
+                    //sprint
+                    lerpTest = -headBobbingSprintValue;
+                    headBobRot = -headBobRotDegSprintValue;
+                }
+                else
+                {
+                    //walk
+                    lerpTest = -headBobbingWalkValue;
+                    headBobRot = -headBobRotDegWalkValue;
+                }
+            }
+            else
+            {
+                //crouch
+                lerpTest = -headBobbingCrouchValue;
+                headBobRot = -headBobRotDegCrouchValue;
+            }
+
+            headBobDelta = headBobbingDeltaToWalk;
+            headBobRotDelta = headBobRotDeltaToWalk;
         }
 
         lastFootState = actualStepState;
