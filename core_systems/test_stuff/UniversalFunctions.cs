@@ -148,7 +148,6 @@ public partial class UniversalFunctions
 
         return spawnNode;
     }
-
     public static List<SSpawnObjectInfo> GetAllSpawnObjectsFromDir(string newDir = "res://spawn")
     {
         string spawn_directory = newDir;

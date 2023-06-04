@@ -83,6 +83,10 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
     private bool FootstepRight = false;
     private float lerpHeadWalkY = 0.0f;
 
+    private float lerpHeadWalkX = 0.0f;
+    private int numStepsToEffect = 1;
+    private int actStepsToEffect = 0;
+
     Godot.Timer landing_timer = null;
     private float lerpHeadLandY = 0.0f;
     private float lerpHeadLandRotX = 0.0f;
@@ -229,6 +233,8 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
         }
     }
 
+    public bool GetActualStep() { return FootstepRight; }
+
     private string DetectSurfaceMaterialOfFloor()
     {
         PhysicsDirectSpaceState3D directSpace = GetWorld3D().DirectSpaceState;
@@ -259,24 +265,48 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
         {
             // foot touch ground now
             if (_isSprint)
+            {
                 lerpHeadWalkY = -RunCameraLerpHeight;
+            }
             else
+            {
                 lerpHeadWalkY = -WalkCameraLerpHeight;
+            }
+
+            if (actStepsToEffect == 0)
+            {
+                if (GetActualStep() == true)
+                    GetObjectCamera().UpdateWalkHeadBobbing(1,delta);
+                else
+                    GetObjectCamera().UpdateWalkHeadBobbing(2,delta);
+            }
+
+            actStepsToEffect++;
         }
         else
         {
             // foot is above to ground
             if (_isSprint)
+            {
                 lerpHeadWalkY = RunCameraLerpHeight;
+            }
             else
+            {
                 lerpHeadWalkY = WalkCameraLerpHeight;
+            }
         }
+
+        if (actStepsToEffect >= numStepsToEffect)
+            actStepsToEffect = 0;
 
         // if actualmove is smaller than testing value, centered headlerpY and speedUP lerp to normal 
         if (ActualMovementSpeed <= 0.2f)
         {
             lerpHeadWalkY = 0.0f;
             lerpFootstepSpeedModifier = 3.0f;
+            //
+            GetObjectCamera().UpdateWalkHeadBobbing(0, delta);
+            //lerpHeadWalkX = 0;
         }
         
         // Lerp pro head bobbing walk Y
@@ -290,7 +320,6 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
         HeadGimbalB.Position = HeadGimbalB.Position.Lerp(
             new Vector3(0, lerpHeadLandY, 0), lerpLandingSpeedModifier * delta);
 
-        
         // Lerp pro landing rot
         objectCamera.GimbalLand.Rotation = objectCamera.GimbalLand.Rotation.Lerp(
             new Vector3(lerpHeadLandRotX, 0, 0), lerpLandingSpeedModifier * delta);

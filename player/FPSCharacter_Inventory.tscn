@@ -25,6 +25,7 @@ StartHealthRegenEnable = true
 HurtAudios = Array[AudioStream]([ExtResource("3_51q7g"), ExtResource("4_m4gkb"), ExtResource("5_dlixv"), ExtResource("6_7ci7t")])
 DeathAudios = Array[AudioStream]([ExtResource("3_51q7g")])
 BodyFallAudios = Array[AudioStream]([ExtResource("7_0hcda")])
+WalkCameraLerpHeight = 0.15
 
 [node name="InventorySystem" type="Node" parent="." index="0"]
 script = ExtResource("8_1wcpl")

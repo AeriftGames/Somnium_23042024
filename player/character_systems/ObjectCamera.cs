@@ -58,11 +58,11 @@ public partial class ObjectCamera : Node3D
 		NodeRotX = GetNode<Node3D>("NodeRotY/GimbalLand/NodeRotX");
 		NodeLean = GetNode<Node3D>("NodeRotY/GimbalLand/NodeRotX/NodeLean");
 		ShakeNode = GetNode<Node3D>("NodeRotY/GimbalLand/NodeRotX/NodeLean/ShakeNode");
-        Camera = GetNode<Camera3D>("NodeRotY/GimbalLand/NodeRotX/NodeLean/ShakeNode/Camera");
-		HandGrabMarker = GetNode<Marker3D>("NodeRotY/GimbalLand/NodeRotX/NodeLean/ShakeNode/Camera/HandGrabMarker");
-		HandGrabJoint = GetNode<Generic6DofJoint3D>("NodeRotY/GimbalLand/NodeRotX/NodeLean/ShakeNode/Camera/HandGrabJoint");
+        Camera = GetNode<Camera3D>("NodeRotY/GimbalLand/NodeRotX/NodeLean/ShakeNode/HeadWalkBob/Camera");
+		HandGrabMarker = GetNode<Marker3D>("NodeRotY/GimbalLand/NodeRotX/NodeLean/ShakeNode/HeadWalkBob/Camera/HandGrabMarker");
+		HandGrabJoint = GetNode<Generic6DofJoint3D>("NodeRotY/GimbalLand/NodeRotX/NodeLean/ShakeNode/HeadWalkBob/Camera/HandGrabJoint");
 		HandStaticBody = GetNode<StaticBody3D>("NodeRotY/GimbalLand/NodeRotX/" +
-            "NodeLean/ShakeNode/Camera/HandGrabMarker/HandStaticBody");
+            "NodeLean/ShakeNode/HeadWalkBob/Camera/HandGrabMarker/HandStaticBody");
 
 		//lean
 		LerpPos_LeanCenter = GetNode<Node3D>("NodeRotY/GimbalLand/NodeRotX/LerpPos_LeanCenter");
@@ -74,7 +74,7 @@ public partial class ObjectCamera : Node3D
 		LerpObject_ObjectCameraPos.EnableUpdate(true);
 		LerpObject_CameraZoom.EnableUpdate(true);
 		LerpObject_CameraZoom.SetTarget(65.0f);     // Initial setup = normal fov
-		lookingPoint = GetNode<Node3D>("NodeRotY/GimbalLand/NodeRotX/NodeLean/ShakeNode/CameraLookPoint");
+		lookingPoint = GetNode<Node3D>("NodeRotY/GimbalLand/NodeRotX/NodeLean/ShakeNode/HeadWalkBob/CameraLookPoint");
 		LerpObject_CameraZoomToObject.EnableUpdate(true);
 
 		// povoli lerping k characteru
@@ -89,6 +89,8 @@ public partial class ObjectCamera : Node3D
 	{
 		ownerCharacter = newFPSCharacter_BasicMoving;
 	}
+
+	public FPSCharacter_BasicMoving GetCharacterOwner() { return ownerCharacter; }
 
 	public override void _Process(double delta)
 	{
@@ -620,4 +622,8 @@ public partial class ObjectCamera : Node3D
     }
 
 	public Node3D GetCameraLookingPoint() { return lookingPoint; }
+
+	public virtual void UpdateWalkHeadBobbing(int actualStepState, float delta)
+	{
+	}
 }

@@ -515,6 +515,8 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
 		return allHuds;
 	}
 
+	public bool GetIsSprint() { return _isSprint; }
+
 	public virtual void FreeAll()
 	{
 		QueueFree();
