@@ -33,11 +33,12 @@
 
 [node name="FPSCharacter_WalkingEffects" instance=ExtResource("1_0yate")]
 script = ExtResource("2_y82hk")
-FootStepLengthInWalk = 1.25
-FootStepLengthInSprint = 1.4
-FootStepLengthInCrouch = 0.7
+FootStepLengthInWalk = 1.2
+FootStepLengthInSprint = 1.15
+FootStepLengthInCrouch = 0.9
 WalkCameraLerpHeight = 0.12
 RunCameraLerpHeight = 0.25
+CrouchCameraLerpHeight = 0.08
 lerpFootstepSpeedModifier = 2.0
 FootstepSounds = [ExtResource("3_f5he7"), ExtResource("4_6e4xp"), ExtResource("5_om58m"), ExtResource("6_o8afp"), ExtResource("7_0hbpy"), ExtResource("8_5uoa5"), ExtResource("9_xoopb"), ExtResource("10_6qhob"), ExtResource("11_b1t4g"), ExtResource("12_f73um"), ExtResource("13_6q5lt"), ExtResource("14_lxlc3")]
 FootstepsVolumeDB = -20.0

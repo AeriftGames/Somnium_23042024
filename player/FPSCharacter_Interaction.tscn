@@ -48,9 +48,7 @@ AudioFlashlight_On_VolumeDb = -10.0
 AudioFlashlight_Off = ExtResource("3_ug2fg")
 AudioFlashlight_Off_Pitch = 0.8
 AudioFlashlight_Off_VolumeDb = -10.0
-FootStepLengthInWalk = 1.25
-FootStepLengthInSprint = 1.4
-FootStepLengthInCrouch = 0.7
+CrouchCameraLerpHeight = 0.08
 
 [node name="HolderHands" type="Node3D" parent="HeadMain/HeadGimbalA/HeadGimbalB/HeadHolderCamera" index="0"]
 

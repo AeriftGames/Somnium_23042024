@@ -29,6 +29,7 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
     [Export] public float FootStepLengthInCrouch = 0.7f;
     [Export] public float WalkCameraLerpHeight = 0.12f;
     [Export] public float RunCameraLerpHeight = 0.25f;
+    [Export] public float CrouchCameraLerpHeight = 0.08f;
     [Export] public float lerpFootstepSpeedModifier = 2.0f;
     [Export] public Array<AudioStream> FootstepSounds;
     [Export] public float FootstepsVolumeDB = -20.0f;
@@ -288,14 +289,15 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
         if (FootstepNow)
         {
             // foot touch ground now
-            if (_isSprint)
+            if (GetCharacterPosture() == ECharacterPosture.Stand)
             {
-                lerpHeadWalkY = -RunCameraLerpHeight;
+                if (GetIsSprint())
+                    lerpHeadWalkY = -RunCameraLerpHeight;
+                else
+                    lerpHeadWalkY = -WalkCameraLerpHeight;
             }
             else
-            {
-                lerpHeadWalkY = -WalkCameraLerpHeight;
-            }
+                lerpHeadWalkY = -CrouchCameraLerpHeight;
 
             if (actStepsToEffect == 0)
             {
@@ -309,15 +311,16 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
         }
         else
         {
-            // foot is above to ground
-            if (_isSprint)
+            // noha above on ground
+            if (GetCharacterPosture() == ECharacterPosture.Stand)
             {
-                lerpHeadWalkY = RunCameraLerpHeight;
+                if (GetIsSprint())
+                    lerpHeadWalkY = RunCameraLerpHeight;
+                else
+                    lerpHeadWalkY = WalkCameraLerpHeight;
             }
             else
-            {
-                lerpHeadWalkY = WalkCameraLerpHeight;
-            }
+                lerpHeadWalkY = CrouchCameraLerpHeight;
         }
 
         if (actStepsToEffect >= numStepsToEffect)
@@ -341,7 +344,6 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
             lerpFootstepSpeedModifier = 3.0f;
             //
             GetObjectCamera().UpdateWalkHeadBobbing(0, delta);
-            //lerpHeadWalkX = 0;
         }
         else
         {
