@@ -71,6 +71,8 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
 	private bool _isInputEnable = true;
 	private bool _isMoveInputEnable = true;
 
+	private bool isAnyMoveInputNow = false;
+
 	private bool isFallingStart = false;
 
 	public float ActualMovementSpeed = 0.0f;
@@ -161,8 +163,10 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
 		if (_isInputEnable &&
 			(direction != Vector3.Zero || Input.IsActionPressed("Jump") || Input.IsActionPressed("Crunch")))
 		{
-			// Up ?
-			if (Input.IsActionPressed("Jump"))
+			isAnyMoveInputNow = true;
+
+            // Up ?
+            if (Input.IsActionPressed("Jump"))
 				direction.Y = direction.Y + 1.0f;
 
 			// Down ?
@@ -174,7 +178,8 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
 		// Is not any input ?
 		else
 		{
-			velocity = velocity.Lerp(Vector3.Zero, DeccelerateSmoothStep * (float)delta);
+			isAnyMoveInputNow = false;
+            velocity = velocity.Lerp(Vector3.Zero, DeccelerateSmoothStep * (float)delta);
 		}
 
 		return velocity;
@@ -195,8 +200,10 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
 		// Is any input ?
 		if (_isInputEnable && direction != Vector3.Zero)
 		{
-			// Is character grounded ?
-			if (IsOnFloor())
+			isAnyMoveInputNow = true;
+
+            // Is character grounded ?
+            if (IsOnFloor())
 			{
 
 				if(_ActualCharacterPosture == ECharacterPosture.Stand && _isSprint)
@@ -225,7 +232,7 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
 			}
 			else
 			{
-				if (CanMoveInFall)
+                if (CanMoveInFall)
 				{
 					// add additional move velocity and set limit length for final velocity
 					velocity += (direction * MoveSpeedInFall) * (float)delta;
@@ -236,8 +243,10 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
 		// Is not any input ?
 		else
 		{
-			// Is character on ground ?
-			if (IsOnFloor())
+            isAnyMoveInputNow = false;
+
+            // Is character on ground ?
+            if (IsOnFloor())
 			{
 				velocity = velocity.Lerp(Vector3.Zero, DeccelerateSmoothStep * (float)delta);
 			}
@@ -437,6 +446,8 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
 	{
 		return _isInputEnable;
 	}
+
+	public bool GetIsAnyMoveInputNow() { return _isMoveInputEnable; }
 
 	// Event when character start falling
 	public virtual void EventStartFalling()

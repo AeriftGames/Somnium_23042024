@@ -316,7 +316,7 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
         if (ActualMovementSpeed <= 1.0f)
         {   
             // dodatecny zvuk kroku pri zastaveni
-            if(!isActualStopMovement)
+            if(!isActualStopMovement && !GetIsAnyMoveInputNow())
             {
                 PlayFootstepSound(-5.0f,-0.1f);
                 isActualStopMovement = true;
