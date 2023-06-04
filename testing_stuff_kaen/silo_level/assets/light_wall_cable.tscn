@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://bjjq0q12q0cvm"]
+
+[ext_resource type="PackedScene" uid="uid://c5xm764h3r0fb" path="res://testing_stuff_kaen/silo_level/glb_assets/light_wall_cable.glb" id="1_ofqb1"]
+[ext_resource type="Material" uid="uid://bw5c2g160gs3a" path="res://testing_stuff_kaen/silo_level/silo_trimsheet1_mat.tres" id="2_k3vu6"]
+
+[node name="light_wall_cable" instance=ExtResource("1_ofqb1")]
+
+[node name="lightwall_cable" parent="." index="0"]
+material_override = ExtResource("2_k3vu6")

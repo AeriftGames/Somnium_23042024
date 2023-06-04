@@ -1,6 +1,7 @@
 using Godot;
 using Godot.Collections;
 using System;
+using System.Collections.Generic;
 using System.IO;
 
 public partial class UniversalFunctions
@@ -13,6 +14,11 @@ public partial class UniversalFunctions
         public Node HitNode;
     }
 
+    public struct SSpawnObjectInfo
+    {
+        public string name;
+        public string path;
+    }
     static public HitResult IsSimpleRaycastHit(Node3D owner, Vector3 from, Vector3 to, uint collisionMask)
     {
         HitResult result = new HitResult();
@@ -133,5 +139,68 @@ public partial class UniversalFunctions
     public static Vector3 GetNodeUpVector(Node3D node3D)
     {
         return node3D.GlobalTransform.Basis.Y.Normalized();
+    }
+    public static Node3D SpawnGameObjectToWorld(Node spawnParent,string path,Vector3 spawnPosition)
+    {
+        var spawnNode = GD.Load<PackedScene>(path).Instantiate() as Node3D;
+        spawnParent.AddChild(spawnNode);
+        spawnNode.GlobalPosition = spawnPosition;
+
+        return spawnNode;
+    }
+
+    public static List<SSpawnObjectInfo> GetAllSpawnObjectsFromDir(string newDir = "res://spawn")
+    {
+        string spawn_directory = newDir;
+        List<SSpawnObjectInfo> allSpawnObjects = new List<SSpawnObjectInfo>();
+
+        var a = DirAccess.Open(spawn_directory);
+        var files = a.GetFiles();
+
+        bool is_editor = true;
+
+        string[] levels_files = new string[files.Length];
+
+        // FOR EXPORT
+        foreach (string file_name in files)
+        {
+            if (file_name.Contains(".tscn.remap"))
+            {
+                var file_path = a.GetCurrentDir() + "/" + UniversalFunctions.GetStringBetween(file_name, "", ".remap");
+                var spawn_name = UniversalFunctions.GetStringBetween(file_path, a.GetCurrentDir() + "/", ".tscn");
+
+                SSpawnObjectInfo newSpawnObjectInfo = new SSpawnObjectInfo();
+                newSpawnObjectInfo.path = file_path;
+                newSpawnObjectInfo.name = spawn_name;
+
+                allSpawnObjects.Add(newSpawnObjectInfo);
+
+                // for export/editor check
+                is_editor = false;
+            }
+        }
+
+        // FOR EDITOR
+        if (is_editor)
+        {
+            foreach (string file_name in files)
+            {
+                if (file_name.Contains(".tscn"))
+                {
+                    var file_path = a.GetCurrentDir() + "/" + file_name;
+                    var spawn_name = UniversalFunctions.GetStringBetween(file_path, a.GetCurrentDir() + "/", ".tscn");
+
+                    SSpawnObjectInfo newSpawnObjectInfo= new SSpawnObjectInfo();
+                    newSpawnObjectInfo.path = file_path;
+                    newSpawnObjectInfo.name = spawn_name;
+
+                    allSpawnObjects.Add(newSpawnObjectInfo);
+                }
+            }
+        }
+
+        if (allSpawnObjects.Count == 0) { GameMaster.GM.Log.WriteLog(GameMaster.GM, LogSystem.ELogMsgType.ERROR, "nenacetli jsme zadne LevelInfo"); }
+
+        return allSpawnObjects;
     }
 }

@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://cm0eq27k532cb"]
+
+[ext_resource type="PackedScene" uid="uid://docigl0bvvmsm" path="res://testing_stuff_kaen/silo_level/glb_assets/wallbound_fence_piece.glb" id="1_v1tmf"]
+[ext_resource type="Material" uid="uid://bw5c2g160gs3a" path="res://testing_stuff_kaen/silo_level/silo_trimsheet1_mat.tres" id="2_2griw"]
+
+[node name="wallbound_fence_piece" instance=ExtResource("1_v1tmf")]
+
+[node name="wallbound_fence_piece2" parent="." index="0"]
+material_override = ExtResource("2_2griw")

@@ -12,10 +12,7 @@ public partial class level_button : Button
 		level_name = newLevelName;
 	}
 
-	public string GetLevelPath()
-	{
-		return level_path;
-	}
+	public string GetLevelPath() { return level_path; }
 
     public string GetLevelName()
     {

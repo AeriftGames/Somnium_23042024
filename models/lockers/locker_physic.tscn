@@ -38,7 +38,7 @@ data = PackedVector3Array(0.1285, -0.0292, 0.1977, 0.1285, 0.0004, 0.1779, 0.128
 [node name="locker" type="Node3D"]
 
 [node name="locker_body" type="MeshInstance3D" parent="."]
-transform = Transform3D(-1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 0, 0, 0)
+transform = Transform3D(-1.2, 0, -4.67297e-07, 0, 1.2, 0, 4.67297e-07, 0, -1.2, 0, 0, 0)
 mesh = SubResource("ArrayMesh_sd0s4")
 skeleton = NodePath("")
 
@@ -48,5 +48,5 @@ skeleton = NodePath("")
 shape = SubResource("ConcavePolygonShape3D_rytmt")
 
 [node name="Wardrobe_rdoor_small" parent="." instance=ExtResource("2_wg5gc")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.208229, -0.242231, 0.0639799)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.254, -0.248, 0.029)
 top_level = true

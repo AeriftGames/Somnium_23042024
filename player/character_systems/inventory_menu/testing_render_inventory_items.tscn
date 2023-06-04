@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://player/character_systems/inventory_menu/ItemSubViewportSetting.cs" id="2_gxm74"]
 [ext_resource type="Script" path="res://player/character_systems/inventory_menu/InventoryItemData.cs" id="3_cgneg"]
 
-[sub_resource type="Resource" id="Resource_mtu0g"]
+[sub_resource type="Resource" id="Resource_xxejm"]
 script = ExtResource("2_gxm74")
 cameraPos = Vector3(0, 0, 6)
 cameraFov = 60.0
@@ -17,7 +17,7 @@ meshPos = Vector3(0, 0, 0)
 meshRot = Vector3(0, 0, 0)
 meshScale = Vector3(1, 1, 1)
 
-[sub_resource type="Resource" id="Resource_owpbq"]
+[sub_resource type="Resource" id="Resource_8jx3k"]
 script = ExtResource("2_gxm74")
 cameraPos = Vector3(0, 0, 6)
 cameraFov = 60.0
@@ -30,7 +30,7 @@ meshPos = Vector3(0, 0, 0)
 meshRot = Vector3(0, 0, 0)
 meshScale = Vector3(1, 1, 1)
 
-[sub_resource type="Resource" id="Resource_a2q11"]
+[sub_resource type="Resource" id="Resource_6je18"]
 script = ExtResource("3_cgneg")
 itemName = ""
 itemInfoText = ""
@@ -45,8 +45,8 @@ canDelete = false
 canStackable = false
 showNameInSlot = false
 spawnObjectScenePath = ""
-SettingsForPreview = SubResource("Resource_mtu0g")
-SettingsForSlot = SubResource("Resource_owpbq")
+SettingsForPreview = SubResource("Resource_xxejm")
+SettingsForSlot = SubResource("Resource_8jx3k")
 InventoryHoldingSlotID = -1
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0x23u"]
@@ -104,7 +104,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_wm21r")
-inventoryItemData = SubResource("Resource_a2q11")
+inventoryItemData = SubResource("Resource_6je18")
 
 [node name="InventoryItemIconObject" type="Panel" parent="."]
 layout_mode = 1

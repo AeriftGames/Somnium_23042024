@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://csksvlncxrfav"]
+[gd_scene load_steps=5 format=3 uid="uid://csksvlncxrfav"]
 
 [ext_resource type="Material" uid="uid://bh56vpx0bamhh" path="res://models/boxes/textures/box1_mat.tres" id="1_1n0d6"]
 
@@ -34,7 +34,15 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_rqpii")
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_7dxtw"]
+size = Vector3(2, 2, 2)
+
 [node name="box2_main" type="MeshInstance3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.02548, 0, 0)
 mesh = SubResource("ArrayMesh_yw4ug")
 skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_7dxtw")

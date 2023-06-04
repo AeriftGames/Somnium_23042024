@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://7843qglq04yk"]
+
+[ext_resource type="PackedScene" uid="uid://jp018xwsjm6a" path="res://testing_stuff_kaen/silo_level/glb_assets/wall2.glb" id="1_oa8p4"]
+[ext_resource type="Material" uid="uid://bw5c2g160gs3a" path="res://testing_stuff_kaen/silo_level/silo_trimsheet1_mat.tres" id="2_m7j53"]
+
+[node name="wall2" instance=ExtResource("1_oa8p4")]
+
+[node name="wall22" parent="." index="0"]
+material_override = ExtResource("2_m7j53")

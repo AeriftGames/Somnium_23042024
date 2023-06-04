@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://jyy1my4po5lv"]
+
+[ext_resource type="PackedScene" uid="uid://6l5yhudhguge" path="res://testing_stuff_kaen/silo_level/glb_assets/short_wallbound.glb" id="1_swh2i"]
+[ext_resource type="Material" uid="uid://bw5c2g160gs3a" path="res://testing_stuff_kaen/silo_level/silo_trimsheet1_mat.tres" id="2_upnwm"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0xxvt"]
+size = Vector3(2.9861, 2.33113, 0.440173)
+
+[node name="short_wallbound" instance=ExtResource("1_swh2i")]
+
+[node name="short_wallbound2" parent="." index="0"]
+material_override = ExtResource("2_upnwm")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="short_wallbound2" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="short_wallbound2/StaticBody3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.162859, 0)
+shape = SubResource("BoxShape3D_0xxvt")

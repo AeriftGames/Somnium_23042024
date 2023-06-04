@@ -248,6 +248,10 @@ text = "Save main as default"
 visible = false
 layout_mode = 2
 
+[node name="spawn" type="VBoxContainer" parent="OptionsPanel/TabContainer"]
+visible = false
+layout_mode = 2
+
 [node name="video" type="VBoxContainer" parent="OptionsPanel/TabContainer"]
 visible = false
 layout_mode = 2

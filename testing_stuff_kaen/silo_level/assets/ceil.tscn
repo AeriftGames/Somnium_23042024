@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://dbkka8yqimj5b"]
+
+[ext_resource type="PackedScene" uid="uid://br58r3sjg606w" path="res://testing_stuff_kaen/silo_level/glb_assets/ceil.glb" id="1_q3wci"]
+[ext_resource type="Material" uid="uid://bw5c2g160gs3a" path="res://testing_stuff_kaen/silo_level/silo_trimsheet1_mat.tres" id="2_m8eas"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_pp33r"]
+size = Vector3(12.106, 0.4, 13.283)
+
+[node name="ceil" instance=ExtResource("1_q3wci")]
+
+[node name="ceil2" parent="." index="0"]
+material_override = ExtResource("2_m8eas")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="ceil2" index="0" groups=["material_surface_wood"]]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ceil2/StaticBody3D" index="0"]
+shape = SubResource("BoxShape3D_pp33r")

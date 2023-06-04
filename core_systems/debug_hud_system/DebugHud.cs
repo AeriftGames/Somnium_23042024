@@ -50,6 +50,7 @@ public partial class DebugHud : Control
 		SetEnable(true);
 
 		BuildLevelButtons();
+		BuildSpawnButtons();
 	}
 
 	public override void _Process(double delta)
@@ -268,6 +269,22 @@ public partial class DebugHud : Control
 
 			VBoxContainer LevelButtonContainer = GetNode<VBoxContainer>("OptionsPanel/TabContainer/level");
 			LevelButtonContainer.AddChild(level_button_Instance);
+		}
+	}
+
+	public void BuildSpawnButtons()
+	{
+		var allSpawnsInfo = UniversalFunctions.GetAllSpawnObjectsFromDir();
+		foreach (var spawn in allSpawnsInfo)
+		{
+			spawn_object_button spawnButtonInstance = GD.Load<PackedScene>(
+				"res://core_systems/debug_hud_system/spawn_object_button.tscn").Instantiate() as spawn_object_button;
+
+			spawnButtonInstance.Text = spawn.name;
+			spawnButtonInstance.SetSpawnObjectData(spawn.path, spawn.name);
+
+			VBoxContainer spawnButtonContainer = GetNode<VBoxContainer>("OptionsPanel/TabContainer/spawn");
+			spawnButtonContainer.AddChild(spawnButtonInstance);
 		}
 	}
 

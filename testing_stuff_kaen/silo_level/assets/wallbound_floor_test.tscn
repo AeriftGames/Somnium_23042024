@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://bpqk8t4jlhw1d"]
+
+[ext_resource type="PackedScene" uid="uid://bafq0g1oisn2i" path="res://testing_stuff_kaen/silo_level/glb_assets/wallbound_floor_test.glb" id="1_2m4rx"]
+[ext_resource type="Material" uid="uid://bw5c2g160gs3a" path="res://testing_stuff_kaen/silo_level/silo_trimsheet1_mat.tres" id="2_5le2u"]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_sqlpi"]
+data = PackedVector3Array(12, -0.4, 13.2, -12, 0.4, 13.2, 12, 0.4, 13.2, 12, -0.4, 13.2, -12, -0.4, 13.2, -12, 0.4, 13.2, 12, -0.4, -13.2, 12, 0.4, 13.2, 12, 0.4, -13.2, 12, -0.4, -13.2, 12, -0.4, 13.2, 12, 0.4, 13.2, 6.9238, 0.4, -9.9161, -4.6483, 0.4, -9.6576, -3.7138, 0.4, -9.8962, -4.6483, 0.4, -9.6576, -5.7817, 0.4, -8.2857, -5.2846, 0.4, -9.0015, -4.6483, 0.4, -9.6576, -5.7817, 0.4, -7.3313, -5.7817, 0.4, -8.2857, 12, 0.4, 13.2, 6.9238, 0.4, -9.9161, 12, 0.4, -13.2, 6.9238, 0.4, -9.9161, -5.7817, 0.4, -7.3313, -4.6483, 0.4, -9.6576, 6.9238, 0.4, -9.9161, -5.8215, 0.4, -4.6669, -5.7817, 0.4, -7.3313, -12, 0.4, 8.1662, 12, 0.4, 13.2, -12, 0.4, 13.2, -5.7239, 0.4, 7.9942, 12, 0.4, 13.2, -12, 0.4, 8.1662, 12, 0.4, 13.2, -5.8215, 0.4, -4.6669, 6.9238, 0.4, -9.9161, 12, 0.4, 13.2, -6.6367, 0.4, -3.633, -5.8215, 0.4, -4.6669, -5.7618, 0.4, 5.6128, 12, 0.4, 13.2, -5.7239, 0.4, 7.9942, -5.8215, 0.4, 4.0619, 12, 0.4, 13.2, -5.7618, 0.4, 5.6128, 12, 0.4, 13.2, -7.8695, 0.4, -3.0563, -6.6367, 0.4, -3.633, -7.8695, 0.4, -3.0563, -12, 0.4, 2.6166, -12, 0.4, -3.0563, -7.8695, 0.4, -3.0563, -7.7303, 0.4, 2.69, -12, 0.4, 2.6166, -5.8215, 0.4, 4.0619, -7.8695, 0.4, -3.0563, 12, 0.4, 13.2, -7.8695, 0.4, -3.0563, -6.9349, 0.4, 2.8689, -7.7303, 0.4, 2.69, -7.8695, 0.4, -3.0563, -5.8215, 0.4, 4.0619, -6.9349, 0.4, 2.8689)
+
+[node name="wallbound_floor_test" instance=ExtResource("1_2m4rx")]
+
+[node name="wallbound_floor_test2" parent="." index="0"]
+material_override = ExtResource("2_5le2u")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="wallbound_floor_test2" index="0" groups=["material_surface_wood"]]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="wallbound_floor_test2/StaticBody3D" index="0"]
+shape = SubResource("ConcavePolygonShape3D_sqlpi")
