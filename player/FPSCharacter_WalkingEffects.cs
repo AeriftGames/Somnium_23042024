@@ -30,9 +30,12 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
     [Export] public float WalkCameraLerpHeight = 0.12f;
     [Export] public float RunCameraLerpHeight = 0.25f;
     [Export] public float CrouchCameraLerpHeight = 0.08f;
+
     [Export] public float lerpFootstepSpeedModifier = 2.0f;
     [Export] public Array<AudioStream> FootstepSounds;
-    [Export] public float FootstepsVolumeDB = -20.0f;
+    [Export] public float FootstepsVolumeDBInWalk = -25.0f;
+    [Export] public float FootstepsVolumeDBInSprint = -10.0f;
+    [Export] public float FootstepsVolumeDBInCrouch = -40.0f;
     [Export] public float FootstepsAudioPitch = 1.0f;
 
     [ExportGroupAttribute("Landing Settings")]
@@ -228,7 +231,21 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
             {
                 // change foots (right<->left)
                 FootstepRight = !FootstepRight;
-                PlayFootstepSound();
+
+                // offset volume db
+                float newAddVolumeOffset = 0;
+                if (GetCharacterPosture() == ECharacterPosture.Stand)
+                {
+                    if (GetIsSprint())
+                        newAddVolumeOffset = FootstepsVolumeDBInSprint;
+                    else
+                        newAddVolumeOffset = FootstepsVolumeDBInWalk;
+                }
+                else
+                    newAddVolumeOffset = FootstepsVolumeDBInCrouch;
+
+                // Play Footstep audio
+                PlayFootstepSound(newAddVolumeOffset);
             }
 
             _LastHalfFootStepPosition = GlobalPosition;
