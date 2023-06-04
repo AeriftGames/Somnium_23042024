@@ -92,6 +92,8 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
     private float lerpHeadLandRotX = 0.0f;
 
     public all_material_surfaces AllMaterialSurfaces = null;
+
+    bool isActualStopMovement = false;
     public override void _Ready()
     {
         base._Ready();
@@ -186,50 +188,61 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
 
         // play sounds
         UniversalFunctions.PlayRandomSound(AudioStreamPlayerJumpLand, JumpingSounds, JumpingVolumeDB, PitchScale);
+
+        //Apply camera shake
+        GetObjectCamera().ShakeCameraRotation(0.3f, 0.1f, 1.0f, 1.0f);
     }
 
     private void CalculateFootSteps(float delta)
     {
         float halfFootStepLength = FootStepLength / 2;
-
         float lastHalfFootStepDistance = 0.0f;
 
-        if (IsOnFloor())
+        if(IsOnFloor())
             lastHalfFootStepDistance = GlobalPosition.DistanceTo(_LastHalfFootStepPosition);
+
+        if (IsOnFloor() && ActualMovementSpeed <= 5.0f && ActualMovementSpeed > 0.2f && !isActualStopMovement)
+        {
+            _LastHalfFootStepPosition = GlobalPosition;
+            halfFootStepLength = 0.02f;
+        }
+
         if (lastHalfFootStepDistance >= halfFootStepLength)
         {
             // half footstep change (foot in air - foot on ground)
             FootstepNow = !FootstepNow;
-
             // if any footstep now ? if false = foot is in air
             if (FootstepNow)
             {
                 // change foots (right<->left)
                 FootstepRight = !FootstepRight;
-
-                // Detect materal surface name and play specific audio set of footsteps
-                all_material_surfaces.EMaterialSurface materialSurface = 
-                    AllMaterialSurfaces.GetMaterialSurfaceFromGroup(DetectSurfaceMaterialOfFloor());
-
-                //GD.Print(materialSurface);
-
-                if (materialSurface != all_material_surfaces.EMaterialSurface.None)
-                {
-                    // Play random footsteps sound by material surface
-                    UniversalFunctions.PlayRandomSound(
-                        AudioStreamPlayerFootsteps,
-                        AllMaterialSurfaces.GetAudioArray(
-                            materialSurface, all_material_surfaces.EMaterialSurfaceAudio.Footstep),
-                        AllMaterialSurfaces.GetMaterialSurfaceAudioVolumeDB(
-                            materialSurface, all_material_surfaces.EMaterialSurfaceAudio.Footstep),
-                        AllMaterialSurfaces.GetMaterialSurfaceAudioPitch(
-                            materialSurface, all_material_surfaces.EMaterialSurfaceAudio.Footstep));
-                }
-
+                PlayFootstepSound();
             }
 
             _LastHalfFootStepPosition = GlobalPosition;
             //GD.Print("new footstep");
+        }
+    }
+
+    public void PlayFootstepSound()
+    {
+        // Detect materal surface name and play specific audio set of footsteps
+        all_material_surfaces.EMaterialSurface materialSurface =
+            AllMaterialSurfaces.GetMaterialSurfaceFromGroup(DetectSurfaceMaterialOfFloor());
+
+        //GD.Print(materialSurface);
+
+        if (materialSurface != all_material_surfaces.EMaterialSurface.None)
+        {
+            // Play random footsteps sound by material surface
+            UniversalFunctions.PlayRandomSound(
+                AudioStreamPlayerFootsteps,
+                AllMaterialSurfaces.GetAudioArray(
+                    materialSurface, all_material_surfaces.EMaterialSurfaceAudio.Footstep),
+                AllMaterialSurfaces.GetMaterialSurfaceAudioVolumeDB(
+                    materialSurface, all_material_surfaces.EMaterialSurfaceAudio.Footstep),
+                AllMaterialSurfaces.GetMaterialSurfaceAudioPitch(
+                    materialSurface, all_material_surfaces.EMaterialSurfaceAudio.Footstep));
         }
     }
 
@@ -301,17 +314,31 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
 
         // if actualmove is smaller than testing value, centered headlerpY and speedUP lerp to normal 
         if (ActualMovementSpeed <= 0.2f)
-        {
+        {   
+            // dodatecny zvuk kroku pri zastaveni
+            if(!isActualStopMovement)
+            {
+                MovementStopEffect();
+                isActualStopMovement = true;
+            }
+
             lerpHeadWalkY = 0.0f;
             lerpFootstepSpeedModifier = 3.0f;
             //
             GetObjectCamera().UpdateWalkHeadBobbing(0, delta);
             //lerpHeadWalkX = 0;
         }
-        
+        else
+            isActualStopMovement = false;
+
         // Lerp pro head bobbing walk Y
         HeadGimbalA.Position = HeadGimbalA.Position.Lerp(
             new Vector3(0, lerpHeadWalkY, 0), lerpFootstepSpeedModifier * delta);
+    }
+
+    private void MovementStopEffect()
+    {
+        PlayFootstepSound();
     }
 
     private void UpdateLandingHeadBobbing(float delta)
