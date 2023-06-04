@@ -33,7 +33,9 @@
 
 [node name="FPSCharacter_WalkingEffects" instance=ExtResource("1_0yate")]
 script = ExtResource("2_y82hk")
-FootStepLength = 1.25
+FootStepLengthInWalk = 1.25
+FootStepLengthInSprint = 1.4
+FootStepLengthInCrouch = 0.7
 WalkCameraLerpHeight = 0.12
 RunCameraLerpHeight = 0.25
 lerpFootstepSpeedModifier = 2.0

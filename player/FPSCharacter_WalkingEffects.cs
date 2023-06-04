@@ -24,7 +24,9 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
     AudioStreamPlayer AudioStreamPlayerCrouching = null;
 
     [ExportGroupAttribute("Footsteps Settings")]
-    [Export] public float FootStepLength = 1.25f;
+    [Export] public float FootStepLengthInWalk = 1.25f;
+    [Export] public float FootStepLengthInSprint = 1.4f;
+    [Export] public float FootStepLengthInCrouch = 0.7f;
     [Export] public float WalkCameraLerpHeight = 0.12f;
     [Export] public float RunCameraLerpHeight = 0.25f;
     [Export] public float lerpFootstepSpeedModifier = 2.0f;
@@ -185,8 +187,24 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
 
     private void CalculateFootSteps(float delta)
     {
-        float halfFootStepLength = FootStepLength / 2;
+        float halfFootStepLength = FootStepLengthInWalk / 2;
         float lastHalfFootStepDistance = 0.0f;
+
+        if (GetCharacterPosture() == ECharacterPosture.Stand)
+        {
+            if(GetIsSprint())
+            {
+                halfFootStepLength = FootStepLengthInSprint / 2;
+            }
+            else
+            {
+                halfFootStepLength = FootStepLengthInWalk / 2;
+            }
+        }
+        else
+        {
+            halfFootStepLength = FootStepLengthInCrouch / 2;
+        }
 
         // pro normal footsteps
         if(IsOnFloor())
@@ -326,7 +344,10 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
             //lerpHeadWalkX = 0;
         }
         else
+        {
             isActualStopMovement = false;
+            lerpFootstepSpeedModifier = 2.0f;
+        }
 
         // Lerp pro head bobbing walk Y
         HeadGimbalA.Position = HeadGimbalA.Position.Lerp(

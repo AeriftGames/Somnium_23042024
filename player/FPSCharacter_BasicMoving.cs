@@ -188,7 +188,6 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
 	// Update velocity for walk move and return this velocity
 	public Vector3 UpdateVelocityWalkMove(double delta)
 	{
-
 		// Get input actions and calculate direction
 		Vector2 inputDir = Input.GetVector("moveLeft", "moveRight", "moveForward", "moveBackward");
 		Vector3 direction = (objectCamera.NodeRotY.Transform.Basis * new Vector3(inputDir.X, 0, inputDir.Y)).Normalized();
@@ -295,7 +294,8 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
 			CrunchToggle();
 
 		// want sprint ?
-		if (_isInputEnable && CanSprint && IsOnFloor() && Input.IsActionPressed("Sprint"))
+		if (_isInputEnable && CanSprint && IsOnFloor() && _ActualCharacterPosture == ECharacterPosture.Stand &&
+			Input.IsActionPressed("Sprint"))
 			_isSprint = true;
 		else
 			_isSprint = false;
@@ -508,6 +508,8 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
 	{
 		return CharacterCollisionCrunch.GlobalPosition;
 	}
+
+	public ECharacterPosture GetCharacterPosture() { return _ActualCharacterPosture; }
 
 	// Return by linked ObjectCamera->Camera
 	public Camera3D GetFPSCharacterCamera()
