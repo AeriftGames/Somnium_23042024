@@ -91,10 +91,10 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
 		// pro dostupnost skrze gamemastera
 		GameMaster.GM.SetFPSCharacter(this);
 
-		HeadMain = GetNode<Node3D>("HeadMain");
-		HeadGimbalA = GetNode<Node3D>("HeadMain/HeadGimbalA");
-		HeadGimbalB = GetNode<Node3D>("HeadMain/HeadGimbalA/HeadGimbalB");
-		HeadHolderCamera = GetNode<Node3D>("HeadMain/HeadGimbalA/HeadGimbalB/HeadHolderCamera");
+		HeadMain = GetNode<Node3D>("%HeadMain");
+		HeadGimbalA = GetNode<Node3D>("%HeadGimbalA");
+		HeadGimbalB = GetNode<Node3D>("%HeadGimbalB");
+		HeadHolderCamera = GetNode<Node3D>("%HeadHolderCamera");
 		CharacterCollisionStand = GetNode<CollisionShape3D>("CharacterCollisionStand");
 		CharacterCollisionCrunch = GetNode<CollisionShape3D>("CharacterCollisionCrunch");
 		HeadStandPosition = GetNode<Node3D>("HeadStandPos");

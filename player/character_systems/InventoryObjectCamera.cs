@@ -22,16 +22,21 @@ public partial class InventoryObjectCamera : ObjectCamera
 	float headBobRotDelta = 1.0f;
 
 	Node3D headWalkBobNode;
+    Node3D headBobBreathingNode;
 	int lastFootState = 0;
 
-	public override void _Ready()
+    private HeadBobSystem headBobSystem = null;
+
+    public override void _Ready()
 	{
 		base._Ready();
 
-		headWalkBobNode = GetNode<Node3D>("NodeRotY/GimbalLand/NodeRotX/NodeLean/ShakeNode/HeadWalkBob");
+        headWalkBobNode = GetNode<Node3D>("%HeadWalkBob");
+        headBobBreathingNode = GetNode<Node3D>("%HeadBobBreathing");
+        inventoryPutItemPoint = GetNode<Node3D>("%InventoryPutItemPoint");
 
-		inventoryPutItemPoint = GetCameraLookingPoint().GetNode<Node3D>("InventoryPutItemPoint");
-	}
+        headBobSystem = new HeadBobSystem(this);
+    }
 
 	public override void _Process(double delta)
 	{

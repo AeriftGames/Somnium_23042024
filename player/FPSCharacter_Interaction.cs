@@ -91,7 +91,7 @@ public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
 		InteractiveSystem = new CharacterInteractiveSystem(this,basicHud);
 
 		// hands
-		HolderHands = GetNode<Node3D>("HeadMain/HeadGimbalA/HeadGimbalB/HeadHolderCamera/HolderHands");
+		HolderHands = GetNode<Node3D>("%HolderHands");
 
 		// Simple Flashlight toggle test
 		AudioStreamPlayer_TestItem = GetNode<AudioStreamPlayer>("AudioStreamPlayer_TestItem");

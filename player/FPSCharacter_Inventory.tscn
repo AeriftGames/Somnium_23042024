@@ -52,6 +52,15 @@ stream = ExtResource("3_51q7g")
 max_polyphony = 4
 bus = &"Sfx"
 
+[node name="Item_inspect" parent="." index="11"]
+metadata/_edit_lock_ = true
+
+[node name="report_bug" parent="." index="12"]
+metadata/_edit_lock_ = true
+
+[node name="DebugHud" parent="." index="13"]
+metadata/_edit_lock_ = true
+
 [node name="InventoryMenu" parent="AllHuds" index="1" instance=ExtResource("9_bfvnj")]
 layout_mode = 1
 
@@ -64,6 +73,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("4_nvx4w")
+metadata/_edit_lock_ = true
 
 [node name="HBoxContainer_Health" type="HBoxContainer" parent="AllHuds/CharacterInfoHud" index="0"]
 layout_mode = 0
@@ -104,5 +114,6 @@ metadata/_edit_lock_ = true
 
 [node name="DamageHud" parent="AllHuds" index="3" instance=ExtResource("5_dhy04")]
 layout_mode = 1
+metadata/_edit_lock_ = true
 
 [connection signal="value_changed" from="AllHuds/CharacterInfoHud/HBoxContainer_Health/ProgressBar_Health" to="AllHuds/CharacterInfoHud" method="_on_progress_bar_health_value_changed"]

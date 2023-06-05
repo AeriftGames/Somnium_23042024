@@ -4,50 +4,90 @@
 
 [node name="ObjectCamera" type="Node3D"]
 script = ExtResource("1_uvf2j")
+metadata/_edit_lock_ = true
 
 [node name="NodeRotY" type="Node3D" parent="."]
+unique_name_in_owner = true
+metadata/_edit_lock_ = true
 
 [node name="GimbalLand" type="Node3D" parent="NodeRotY"]
+unique_name_in_owner = true
+metadata/_edit_lock_ = true
 
 [node name="NodeRotX" type="Node3D" parent="NodeRotY/GimbalLand"]
+unique_name_in_owner = true
+metadata/_edit_lock_ = true
 
 [node name="NodeLean" type="Node3D" parent="NodeRotY/GimbalLand/NodeRotX"]
+unique_name_in_owner = true
+metadata/_edit_lock_ = true
 
 [node name="ShakeNode" type="Node3D" parent="NodeRotY/GimbalLand/NodeRotX/NodeLean"]
+unique_name_in_owner = true
+metadata/_edit_lock_ = true
 
 [node name="HeadWalkBob" type="Node3D" parent="NodeRotY/GimbalLand/NodeRotX/NodeLean/ShakeNode"]
+unique_name_in_owner = true
+metadata/_edit_lock_ = true
 
-[node name="Camera" type="Camera3D" parent="NodeRotY/GimbalLand/NodeRotX/NodeLean/ShakeNode/HeadWalkBob"]
+[node name="HeadBobBreathing" type="Node3D" parent="NodeRotY/GimbalLand/NodeRotX/NodeLean/ShakeNode/HeadWalkBob"]
+unique_name_in_owner = true
+metadata/_edit_lock_ = true
+
+[node name="Camera" type="Camera3D" parent="NodeRotY/GimbalLand/NodeRotX/NodeLean/ShakeNode/HeadWalkBob/HeadBobBreathing"]
+unique_name_in_owner = true
 cull_mask = 7
 fov = 65.0
 far = 1000.0
+metadata/_edit_lock_ = true
 
-[node name="HandGrabMarker" type="Marker3D" parent="NodeRotY/GimbalLand/NodeRotX/NodeLean/ShakeNode/HeadWalkBob/Camera"]
+[node name="HandGrabMarker" type="Marker3D" parent="NodeRotY/GimbalLand/NodeRotX/NodeLean/ShakeNode/HeadWalkBob/HeadBobBreathing/Camera"]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.5)
+metadata/_edit_lock_ = true
 
-[node name="HandStaticBody" type="StaticBody3D" parent="NodeRotY/GimbalLand/NodeRotX/NodeLean/ShakeNode/HeadWalkBob/Camera/HandGrabMarker"]
+[node name="HandStaticBody" type="StaticBody3D" parent="NodeRotY/GimbalLand/NodeRotX/NodeLean/ShakeNode/HeadWalkBob/HeadBobBreathing/Camera/HandGrabMarker"]
+unique_name_in_owner = true
 
-[node name="HandGrabJoint" type="Generic6DOFJoint3D" parent="NodeRotY/GimbalLand/NodeRotX/NodeLean/ShakeNode/HeadWalkBob/Camera"]
+[node name="HandGrabJoint" type="Generic6DOFJoint3D" parent="NodeRotY/GimbalLand/NodeRotX/NodeLean/ShakeNode/HeadWalkBob/HeadBobBreathing/Camera"]
+unique_name_in_owner = true
 node_a = NodePath("../HandGrabMarker/HandStaticBody")
 linear_limit_x/enabled = false
 linear_limit_y/enabled = false
 linear_limit_z/enabled = false
+metadata/_edit_lock_ = true
 
-[node name="CameraLookPoint" type="Node3D" parent="NodeRotY/GimbalLand/NodeRotX/NodeLean/ShakeNode/HeadWalkBob"]
+[node name="CameraLookPoint" type="Node3D" parent="NodeRotY/GimbalLand/NodeRotX/NodeLean/ShakeNode/HeadWalkBob/HeadBobBreathing"]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+metadata/_edit_lock_ = true
 
 [node name="LerpPos_LeanCenter" type="Node3D" parent="NodeRotY/GimbalLand/NodeRotX"]
+unique_name_in_owner = true
+metadata/_edit_lock_ = true
 
 [node name="LerpPos_LeanLeft" type="Node3D" parent="NodeRotY/GimbalLand/NodeRotX"]
+unique_name_in_owner = true
 transform = Transform3D(0.965926, -0.258819, 0, 0.258819, 0.965926, 0, 0, 0, 1, -0.4, 0, 0)
+metadata/_edit_lock_ = true
 
 [node name="LerpPos_LeanRight" type="Node3D" parent="NodeRotY/GimbalLand/NodeRotX"]
+unique_name_in_owner = true
 transform = Transform3D(0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 0, 0, 1, 0.4, 0, 0)
+metadata/_edit_lock_ = true
 
 [node name="LeftFrontRayPos" type="Node3D" parent="NodeRotY/GimbalLand/NodeRotX"]
+unique_name_in_owner = true
+metadata/_edit_lock_ = true
 
 [node name="LeftBackRayPos" type="Node3D" parent="NodeRotY/GimbalLand/NodeRotX"]
+unique_name_in_owner = true
+metadata/_edit_lock_ = true
 
 [node name="RighFrontRayPos" type="Node3D" parent="NodeRotY/GimbalLand/NodeRotX"]
+unique_name_in_owner = true
+metadata/_edit_lock_ = true
 
 [node name="RightBackRayPos" type="Node3D" parent="NodeRotY/GimbalLand/NodeRotX"]
+unique_name_in_owner = true
+metadata/_edit_lock_ = true

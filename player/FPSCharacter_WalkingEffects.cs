@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using static all_material_surfaces;
 
 /*
- * *** FPSCharacter_WalkingEffects(0.1) ***
+ * *** FPSCharacter_WalkingEffects(0.2) ***
  * 
  * - this class is inheret from FPSCharacter_WalkingEffects and provide extra walking effects
  * - simulation footsteps
@@ -24,19 +24,19 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
     AudioStreamPlayer AudioStreamPlayerCrouching = null;
 
     [ExportGroupAttribute("Footsteps Settings")]
-    [Export] public float FootStepLengthInWalk = 1.25f;
-    [Export] public float FootStepLengthInSprint = 1.4f;
-    [Export] public float FootStepLengthInCrouch = 0.7f;
-    [Export] public float WalkCameraLerpHeight = 0.12f;
-    [Export] public float RunCameraLerpHeight = 0.25f;
-    [Export] public float CrouchCameraLerpHeight = 0.08f;
+    [Export] public float FootStepLengthInWalk = 1.2f;
+    [Export] public float FootStepLengthInSprint = 1.25f;
+    [Export] public float FootStepLengthInCrouch = 0.85f;
+    [Export] public float WalkCameraLerpHeight = 0.15f;
+    [Export] public float RunCameraLerpHeight = 0.3f;
+    [Export] public float CrouchCameraLerpHeight = 0.1f;
 
     [Export] public float lerpFootstepSpeedModifier = 2.0f;
     [Export] public Array<AudioStream> FootstepSounds;
-    [Export] public float FootstepsVolumeDBInWalk = -25.0f;
-    [Export] public float FootstepsVolumeDBInSprint = -10.0f;
-    [Export] public float FootstepsVolumeDBInCrouch = -40.0f;
-    [Export] public float FootstepsAudioPitch = 1.0f;
+    [Export] public float FootstepsVolumeDBInWalk = -2.0f;
+    [Export] public float FootstepsVolumeDBInSprint = 1.0f;
+    [Export] public float FootstepsVolumeDBInCrouch = -7.0f;
+    [Export] public float FootstepsAudioPitch = 0.75f;
 
     [ExportGroupAttribute("Landing Settings")]
     [Export] public float LandCameraLerpHeight = -0.4f;
@@ -98,7 +98,7 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
 
     public all_material_surfaces AllMaterialSurfaces = null;
 
-    bool isActualStopMovement = false;
+    private bool isActualStopMovement = false;
     public override void _Ready()
     {
         base._Ready();
@@ -136,6 +136,11 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
     public override void _Process(double delta)
     {
         base._Process(delta);
+
+        if(ActualMovementSpeed == 0.0f && !GetIsAnyMoveInputNow())
+        {
+
+        }
     }
 
     public override void _PhysicsProcess(double delta)
@@ -371,6 +376,11 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
         // Lerp pro head bobbing walk Y
         HeadGimbalA.Position = HeadGimbalA.Position.Lerp(
             new Vector3(0, lerpHeadWalkY, 0), lerpFootstepSpeedModifier * delta);
+    }
+
+    private void UpdateNeutralBreatheHeadBobbing(float delta)
+    {
+
     }
 
     private void UpdateLandingHeadBobbing(float delta)
