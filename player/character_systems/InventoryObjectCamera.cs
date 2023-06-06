@@ -4,26 +4,8 @@ using System;
 public partial class InventoryObjectCamera : ObjectCamera
 {
 	Node3D inventoryPutItemPoint = null;
-	[Export] float headBobbingWalkValue = 0.2f;
-    [Export] float headBobbingSprintValue = 0.3f;
-    [Export] float headBobbingCrouchValue = 0.15f;
-    [Export] float headBobbingDeltaToWalk = 1.0f;
-    [Export] float headBobbingDeltaToStand = 3.0f;
-
-	[Export] float headBobRotDegWalkValue = 2.0f;
-    [Export] float headBobRotDegSprintValue = 4.0f;
-    [Export] float headBobRotDegCrouchValue = 1.5f;
-    [Export] float headBobRotDeltaToWalk = 1.0f;
-	[Export] float headBobRotDeltaToStand = 3.0f;
-	float lerpTest = 0.0f;
-	float headBobDelta = 1.0f;
-
-	float headBobRot = 0.0f;
-	float headBobRotDelta = 1.0f;
-
-	Node3D headWalkBobNode;
-    Node3D headBobBreathingNode;
-	int lastFootState = 0;
+    public Node3D headWalkBobNode;
+    public Node3D headBobBreathingNode;
 
     private HeadBobSystem headBobSystem = null;
 
@@ -35,90 +17,26 @@ public partial class InventoryObjectCamera : ObjectCamera
         headBobBreathingNode = GetNode<Node3D>("%HeadBobBreathing");
         inventoryPutItemPoint = GetNode<Node3D>("%InventoryPutItemPoint");
 
-        headBobSystem = new HeadBobSystem(this);
+        headBobSystem = GetNode<HeadBobSystem>("%HeadBobSystem");
+        headBobSystem.Init(this);
     }
 
 	public override void _Process(double delta)
 	{
 		base._Process(delta);
-
-        headWalkBobNode.Position = headWalkBobNode.Position.Lerp(new Vector3(lerpTest, 0, 0), (float)delta * headBobDelta);
-		headWalkBobNode.RotationDegrees = headWalkBobNode.RotationDegrees.Lerp(new Vector3(0, 0, headBobRot), (float)delta * headBobRotDelta);
     }
 
-	public Node3D GetInventoryItemPutPos()
+    public override void _PhysicsProcess(double delta)
+    {
+        base._PhysicsProcess(delta);
+
+        headBobSystem.Update((float)delta);
+    }
+
+    public Node3D GetInventoryItemPutPos()
 	{
 		return inventoryPutItemPoint;
 	}
 
-    public override void UpdateWalkHeadBobbing(int actualStepState, float delta)
-    {
-        base.UpdateWalkHeadBobbing(actualStepState, delta);
-		if (actualStepState == lastFootState) return;
-
-		if (actualStepState == 0) 
-		{
-			// noha ve vzduchu
-            lerpTest = 0.0f;
-			headBobDelta = headBobbingDeltaToStand;
-			headBobRot = 0.0f;
-			headBobRotDelta = headBobRotDeltaToStand;
-        }
-		else if(actualStepState == 1)
-		{
-            if (GetCharacterOwner().GetCharacterPosture() == FPSCharacter_BasicMoving.ECharacterPosture.Stand)
-            {
-                if (GetCharacterOwner().GetIsSprint())
-                {
-                    //sprint
-                    lerpTest = headBobbingSprintValue;
-                    headBobRot = headBobRotDegSprintValue;
-                }
-                else
-                {
-                    //walk
-                    lerpTest = headBobbingWalkValue;
-                    headBobRot = headBobRotDegWalkValue;
-                }
-            }
-            else
-            {
-                //crouch
-                lerpTest = headBobbingCrouchValue;
-                headBobRot = headBobRotDegCrouchValue;
-            }
-
-            headBobDelta = headBobbingDeltaToWalk;
-            headBobRotDelta = headBobRotDeltaToWalk;
-        }
-		else if(actualStepState == 2) 
-		{
-            if (GetCharacterOwner().GetCharacterPosture() == FPSCharacter_BasicMoving.ECharacterPosture.Stand)
-            {
-                if (GetCharacterOwner().GetIsSprint())
-                {
-                    //sprint
-                    lerpTest = -headBobbingSprintValue;
-                    headBobRot = -headBobRotDegSprintValue;
-                }
-                else
-                {
-                    //walk
-                    lerpTest = -headBobbingWalkValue;
-                    headBobRot = -headBobRotDegWalkValue;
-                }
-            }
-            else
-            {
-                //crouch
-                lerpTest = -headBobbingCrouchValue;
-                headBobRot = -headBobRotDegCrouchValue;
-            }
-
-            headBobDelta = headBobbingDeltaToWalk;
-            headBobRotDelta = headBobRotDeltaToWalk;
-        }
-
-        lastFootState = actualStepState;
-    }
+    public HeadBobSystem GetHeadBobSystem() { return headBobSystem; }
 }

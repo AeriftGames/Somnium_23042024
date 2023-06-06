@@ -27,9 +27,6 @@ DeathAudios = Array[AudioStream]([ExtResource("3_51q7g")])
 BodyFallAudios = Array[AudioStream]([ExtResource("7_0hcda")])
 FootStepLengthInSprint = 1.25
 FootStepLengthInCrouch = 0.85
-WalkCameraLerpHeight = 0.15
-RunCameraLerpHeight = 0.3
-CrouchCameraLerpHeight = 0.1
 FootstepsVolumeDBInWalk = -2.0
 FootstepsVolumeDBInSprint = 1.0
 FootstepsVolumeDBInCrouch = -7.0
@@ -40,6 +37,9 @@ DeccelerateSmoothStep = 4.0
 [node name="InventorySystem" type="Node" parent="." index="0"]
 script = ExtResource("8_1wcpl")
 MaxInventoryCapacity = 10
+
+[node name="HeadStandPos" parent="." index="4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 
 [node name="AudioStreamPlayer_Footsteps" parent="." index="6"]
 max_polyphony = 3

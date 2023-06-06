@@ -27,11 +27,7 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
     [Export] public float FootStepLengthInWalk = 1.2f;
     [Export] public float FootStepLengthInSprint = 1.25f;
     [Export] public float FootStepLengthInCrouch = 0.85f;
-    [Export] public float WalkCameraLerpHeight = 0.15f;
-    [Export] public float RunCameraLerpHeight = 0.3f;
-    [Export] public float CrouchCameraLerpHeight = 0.1f;
 
-    [Export] public float lerpFootstepSpeedModifier = 2.0f;
     [Export] public Array<AudioStream> FootstepSounds;
     [Export] public float FootstepsVolumeDBInWalk = -2.0f;
     [Export] public float FootstepsVolumeDBInSprint = 1.0f;
@@ -86,19 +82,12 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
 
     private bool FootstepNow = false;
     private bool FootstepRight = false;
-    private float lerpHeadWalkY = 0.0f;
-
-    private float lerpHeadWalkX = 0.0f;
-    private int numStepsToEffect = 1;
-    private int actStepsToEffect = 0;
 
     Godot.Timer landing_timer = null;
     private float lerpHeadLandY = 0.0f;
     private float lerpHeadLandRotX = 0.0f;
 
     public all_material_surfaces AllMaterialSurfaces = null;
-
-    private bool isActualStopMovement = false;
     public override void _Ready()
     {
         base._Ready();
@@ -156,13 +145,7 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
         GameMaster.GM.GetDebugHud().CustomLabelUpdateText(0, this, "MoveSpeed: " + a);
         GameMaster.GM.GetDebugHud().CustomLabelUpdateText(1, this, "Position: " + GlobalPosition);
 
-        /*
-        GameMaster.GM.Log.WriteLog(this, LogSystem.ELogMsgType.INFO, "MoveSpeed: " +
-            Mathf.Snapped(ActualMovementSpeed, 0.1f));*/
-
         CalculateFootSteps((float)delta);
-
-        UpdateWalkHeadBobbing((float)delta);
         UpdateLandingHeadBobbing((float)delta);
     }
 
@@ -196,31 +179,28 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
 
     private void CalculateFootSteps(float delta)
     {
+        InventoryObjectCamera a = GetObjectCamera() as InventoryObjectCamera;
+
         float halfFootStepLength = FootStepLengthInWalk / 2;
         float lastHalfFootStepDistance = 0.0f;
 
         if (GetCharacterPosture() == ECharacterPosture.Stand)
         {
-            if(GetIsSprint())
-            {
+            if (GetIsSprint())
                 halfFootStepLength = FootStepLengthInSprint / 2;
-            }
             else
-            {
                 halfFootStepLength = FootStepLengthInWalk / 2;
-            }
         }
         else
-        {
             halfFootStepLength = FootStepLengthInCrouch / 2;
-        }
 
         // pro normal footsteps
         if(IsOnFloor())
             lastHalfFootStepDistance = GlobalPosition.DistanceTo(_LastHalfFootStepPosition);
 
         // pro first footstep
-        if (IsOnFloor() && ActualMovementSpeed <= 5.0f && ActualMovementSpeed > 0.2f && !isActualStopMovement && GetIsAnyMoveInputNow())
+        if (IsOnFloor() && ActualMovementSpeed <= 5.0f && ActualMovementSpeed > 0.2f &&
+            !a.GetHeadBobSystem().GetIsActualStopMovement() && GetIsAnyMoveInputNow())
         {
             _LastHalfFootStepPosition = GlobalPosition;
             halfFootStepLength = 0.02f;
@@ -281,6 +261,9 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
     }
 
     public bool GetActualStep() { return FootstepRight; }
+    public void SetActualStep(bool newValue){ FootstepRight = newValue; }
+    public bool GetFootstepNow() { return FootstepNow; }
+    public void SetFootstepNow(bool newValue) { FootstepNow = newValue; }
 
     private string DetectSurfaceMaterialOfFloor()
     {
@@ -304,83 +287,6 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
         }
 
         return "none";
-    }
-
-    private void UpdateWalkHeadBobbing(float delta)
-    {
-        if (FootstepNow)
-        {
-            // foot touch ground now
-            if (GetCharacterPosture() == ECharacterPosture.Stand)
-            {
-                if (GetIsSprint())
-                    lerpHeadWalkY = -RunCameraLerpHeight;
-                else
-                    lerpHeadWalkY = -WalkCameraLerpHeight;
-            }
-            else
-                lerpHeadWalkY = -CrouchCameraLerpHeight;
-
-            if (actStepsToEffect == 0)
-            {
-                if (GetActualStep() == true)
-                    GetObjectCamera().UpdateWalkHeadBobbing(1,delta);
-                else
-                    GetObjectCamera().UpdateWalkHeadBobbing(2,delta);
-            }
-
-            actStepsToEffect++;
-        }
-        else
-        {
-            // noha above on ground
-            if (GetCharacterPosture() == ECharacterPosture.Stand)
-            {
-                if (GetIsSprint())
-                    lerpHeadWalkY = RunCameraLerpHeight;
-                else
-                    lerpHeadWalkY = WalkCameraLerpHeight;
-            }
-            else
-                lerpHeadWalkY = CrouchCameraLerpHeight;
-        }
-
-        if (actStepsToEffect >= numStepsToEffect)
-            actStepsToEffect = 0;
-
-        // if actualmove is smaller than testing value, centered headlerpY and speedUP lerp to normal 
-        if (ActualMovementSpeed <= 1.0f)
-        {   
-            // dodatecny zvuk kroku pri zastaveni, vyresetovani aktualniho footstepu na opacny footstep
-            if(!isActualStopMovement)
-            {
-                PlayFootstepSound(-5.0f,-0.1f);
-
-                isActualStopMovement = true;
-                actStepsToEffect= 0;
-                FootstepNow = true;
-                FootstepRight = !FootstepRight;
-            }
-
-            lerpHeadWalkY = 0.0f;
-            lerpFootstepSpeedModifier = 3.0f;
-            //
-            GetObjectCamera().UpdateWalkHeadBobbing(0, delta);
-        }
-        else
-        {
-            isActualStopMovement = false;
-            lerpFootstepSpeedModifier = 2.0f;
-        }
-
-        // Lerp pro head bobbing walk Y
-        HeadGimbalA.Position = HeadGimbalA.Position.Lerp(
-            new Vector3(0, lerpHeadWalkY, 0), lerpFootstepSpeedModifier * delta);
-    }
-
-    private void UpdateNeutralBreatheHeadBobbing(float delta)
-    {
-
     }
 
     private void UpdateLandingHeadBobbing(float delta)

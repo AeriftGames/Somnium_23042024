@@ -1,25 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://clqk3l37h2fvt"]
+[gd_scene load_steps=4 format=3 uid="uid://clqk3l37h2fvt"]
 
 [ext_resource type="PackedScene" uid="uid://c6ki47gved626" path="res://player/character_systems/ObjectCamera.tscn" id="1_awg8g"]
 [ext_resource type="Script" path="res://player/character_systems/InventoryObjectCamera.cs" id="2_ppf8y"]
+[ext_resource type="Script" path="res://player/character_systems/HeadBobSystem.cs" id="3_7px6r"]
 
 [node name="InventoryObjectCamera" instance=ExtResource("1_awg8g")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.03591, -3.18117, 2.38353)
 script = ExtResource("2_ppf8y")
-headBobbingWalkValue = 0.2
-headBobbingSprintValue = 0.4
-headBobbingCrouchValue = 0.15
-headBobbingDeltaToWalk = 0.5
-headBobbingDeltaToStand = 3.0
-headBobRotDegWalkValue = 2.0
-headBobRotDegSprintValue = 5.0
-headBobRotDegCrouchValue = 1.5
-headBobRotDeltaToWalk = 0.5
-headBobRotDeltaToStand = 3.0
 
-[node name="NodeRotY@GimbalLand@NodeRotX@NodeLean@ShakeNode@HeadWalkBob@CameraLookPoint@InventoryPutItemPoint" type="Node3D" parent="." index="0"]
+[node name="HeadBobSystem" type="Node" parent="." index="0"]
 unique_name_in_owner = true
-metadata/_edit_lock_ = true
+script = ExtResource("3_7px6r")
 
 [node name="InventoryPutItemPoint" type="Node3D" parent="NodeRotY/GimbalLand/NodeRotX/NodeLean/ShakeNode/HeadWalkBob/HeadBobBreathing/CameraLookPoint" index="0"]
 unique_name_in_owner = true

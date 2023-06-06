@@ -621,8 +621,4 @@ public partial class ObjectCamera : Node3D
     }
 
 	public Node3D GetCameraLookingPoint() { return lookingPoint; }
-
-	public virtual void UpdateWalkHeadBobbing(int actualStepState, float delta)
-	{
-	}
 }
