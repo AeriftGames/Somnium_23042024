@@ -32,5 +32,8 @@ public partial class button_door_test : BasicButtonObject
 
         animPlayer.Play("buttonPressed");
         UniversalFunctions.PlayRandom3DSound(audioPlayer,audioStreams,-3,0.8f);
+
+        FPSCharacter_Inventory character = GameMaster.GM.GetFPSCharacter() as FPSCharacter_Inventory;
+        character.GetObjectCamera().ShakeCameraRotation(0.2f,0.1f,2,2);
     }
 }
