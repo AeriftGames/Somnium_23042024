@@ -11,6 +11,12 @@ script = ExtResource("2_ppf8y")
 [node name="HeadBobSystem" type="Node" parent="." index="0"]
 unique_name_in_owner = true
 script = ExtResource("3_7px6r")
+headBobbingWalkValue = 0.12
+headBobbingSprintValue = 0.2
+headBobbingCrouchValue = 0.1
+headBobRotDegWalkValue = 1.5
+headBobRotDegSprintValue = 3.0
+headBobRotDegCrouchValue = 1.0
 
 [node name="InventoryPutItemPoint" type="Node3D" parent="NodeRotY/GimbalLand/NodeRotX/NodeLean/ShakeNode/HeadWalkBob/HeadBobBreathing/CameraLookPoint" index="0"]
 unique_name_in_owner = true

@@ -125,11 +125,6 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
     public override void _Process(double delta)
     {
         base._Process(delta);
-
-        if(ActualMovementSpeed == 0.0f && !GetIsAnyMoveInputNow())
-        {
-
-        }
     }
 
     public override void _PhysicsProcess(double delta)

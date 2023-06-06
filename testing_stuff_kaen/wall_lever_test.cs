@@ -197,6 +197,8 @@ public partial class wall_lever_test : Node3D
                     TestLight(true);
                     PlaySound(true);
                     CallUseActionForAllNodes(true);
+                    if(interactCharacter != null)
+                        interactCharacter.GetObjectCamera().ShakeCameraRotation(0.3f, 0.2f, 1.0f, 1.0f);
                     onceIsReachPoint = true;
                     break;
                 }
@@ -207,6 +209,8 @@ public partial class wall_lever_test : Node3D
                     TestLight(false);
                     PlaySound(true);
                     CallUseActionForAllNodes(false);
+                    if(interactCharacter != null)
+                        interactCharacter.GetObjectCamera().ShakeCameraRotation(0.3f, 0.2f, 1.0f, 1.0f);
                     onceIsReachPoint = true;
                     break;
                 }

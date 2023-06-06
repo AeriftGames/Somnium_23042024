@@ -21,18 +21,17 @@ public partial class HeadBobSystem : Node
     [Export] public float headBobRotDeltaToMove = 1.0f;
     [Export] public float headBobRotDeltaToStop = 3.0f;
     [ExportGroupAttribute("Other")]
-
-    // for moving bob
-    float headBobMovingX = 0.0f;
-    float headBobMovingXDelta = 1.0f;
-    float headBobMovingYDelta = 2.0f;
-    float headBobRot = 0.0f;
-    float headBobRotDelta = 1.0f;
-    int lastFootState = 0;
-
     [Export] public float WalkCameraLerpHeight = 0.15f;
     [Export] public float RunCameraLerpHeight = 0.3f;
     [Export] public float CrouchCameraLerpHeight = 0.1f;
+    [Export] public float headBobMovingXDelta = 1.0f;
+    [Export] public float headBobMovingYDelta = 2.0f;
+
+    // for moving bob
+    float headBobMovingX = 0.0f;
+    float headBobRot = 0.0f;
+    float headBobRotDelta = 1.0f;
+    int lastFootState = 0;
 
     float lerpHeadWalkY=0;
     int actStepsToEffect = 0;
