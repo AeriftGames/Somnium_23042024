@@ -224,7 +224,7 @@ public partial class CLevelLoader : Godot.GodotObject
     public async Task SetLevelWorldEnvironment(bool newSdfgi)
     {
         await Task.Delay(50);
-
+        /*
         Node level = GameMaster.GM.GetNode("/root/worldlevel");
         if (level == null)
         {
@@ -265,7 +265,7 @@ public partial class CLevelLoader : Godot.GodotObject
                     }
                 }
             }
-        }
+        }*/
     }
 
     private async Task SetLight3DBakeModeDelay(Light3D newLight,Light3D.BakeMode newBakeMode)

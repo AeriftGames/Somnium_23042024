@@ -50,7 +50,7 @@ public partial class GameMaster : Node
 		Log = new LogSystem(this);
 
 		// vytvoreni LevelLoaderu, druhy parametr = pouziti ShadersPrecompilation?
-		LevelLoader = new CLevelLoader(this, true);
+		LevelLoader = new CLevelLoader(this, false);
 
 		// vytvoreni Settings - global_settings
 		Settings = new global_settings(this);
