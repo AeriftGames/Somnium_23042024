@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://88r1voaoubi5"]
+[gd_scene load_steps=20 format=3 uid="uid://88r1voaoubi5"]
 
 [ext_resource type="PackedScene" uid="uid://bpqk8t4jlhw1d" path="res://testing_stuff_kaen/silo_level/assets/wallbound_floor_test.tscn" id="1_a1jn2"]
 [ext_resource type="PackedScene" uid="uid://3bb0r6tvk4wy" path="res://testing_stuff_kaen/silo_level/assets/round_wallbound.tscn" id="2_c6je3"]
@@ -18,6 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://b8wjbqorrrcll" path="res://testing_stuff_kaen/silo_level/assets/slim_tall_bound.tscn" id="16_v1bgh"]
 [ext_resource type="PackedScene" uid="uid://cdgkldjfeacws" path="res://testing_stuff_kaen/silo_level/assets/cables_1.tscn" id="17_i7fmf"]
 [ext_resource type="PackedScene" uid="uid://ycpffexcx52e" path="res://testing_stuff_kaen/silo_level/assets/cables_2.tscn" id="18_8l2k2"]
+[ext_resource type="PackedScene" uid="uid://cuuhm0r6yida0" path="res://testing_stuff_kaen/silo_level/test_3.tscn" id="19_dodpd"]
 
 [node name="level" type="Node3D"]
 
@@ -920,3 +921,6 @@ transform = Transform3D(0.944319, 0, 0.329032, 0, 1, 0, -0.329032, 0, 0.944319, 
 
 [node name="cables10" parent="." instance=ExtResource("18_8l2k2")]
 transform = Transform3D(0.329031, 0, -0.944319, 0, 1, 0, 0.944319, 0, 0.329031, 0.792951, 6.1, 12.1948)
+
+[node name="test3" parent="." instance=ExtResource("19_dodpd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.1829, -9.1895, -2.00329)

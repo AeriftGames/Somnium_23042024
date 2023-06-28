@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://cuuhm0r6yida0"]
+
+[ext_resource type="PackedScene" uid="uid://04pvaes7p532" path="res://testing_stuff_kaen/silo_level/glb_assets/test3.glb" id="1_8xs1v"]
+[ext_resource type="Material" uid="uid://bw5c2g160gs3a" path="res://testing_stuff_kaen/silo_level/silo_trimsheet1_mat.tres" id="2_60x2b"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rxqy7"]
+size = Vector3(21.0017, 1, 18.3587)
+
+[node name="test3" instance=ExtResource("1_8xs1v")]
+
+[node name="Cylinder_182" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, -1, 0, 0, 0, 1, 0, 0, 0)
+material_override = ExtResource("2_60x2b")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Cylinder_182" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cylinder_182/StaticBody3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.873258, -9.08972, 0.0670762)
+shape = SubResource("BoxShape3D_rxqy7")
