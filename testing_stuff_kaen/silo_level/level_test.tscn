@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://88r1voaoubi5"]
+[gd_scene load_steps=24 format=3 uid="uid://88r1voaoubi5"]
 
 [ext_resource type="PackedScene" uid="uid://bpqk8t4jlhw1d" path="res://testing_stuff_kaen/silo_level/assets/wallbound_floor_test.tscn" id="1_a1jn2"]
 [ext_resource type="PackedScene" uid="uid://3bb0r6tvk4wy" path="res://testing_stuff_kaen/silo_level/assets/round_wallbound.tscn" id="2_c6je3"]
@@ -7,7 +7,10 @@
 [ext_resource type="PackedScene" uid="uid://2w7fwqd0shrw" path="res://testing_stuff_kaen/silo_level/assets/wall_1.tscn" id="5_dfis4"]
 [ext_resource type="PackedScene" uid="uid://7843qglq04yk" path="res://testing_stuff_kaen/silo_level/assets/wall_2.tscn" id="6_4sr76"]
 [ext_resource type="PackedScene" uid="uid://c57qxgsxn04cf" path="res://testing_stuff_kaen/silo_level/assets/wall_3.tscn" id="7_ptop1"]
+[ext_resource type="ArrayMesh" uid="uid://bhg7npdu7bfpt" path="res://new_array_mesh.tres" id="8_f76ny"]
+[ext_resource type="PackedScene" uid="uid://bbbrxuvjc21x" path="res://csg_mesh_3d.tscn" id="8_imvs0"]
 [ext_resource type="PackedScene" uid="uid://cvbtjgfqqc882" path="res://testing_stuff_kaen/silo_level/assets/wall_4.tscn" id="8_wpyvq"]
+[ext_resource type="Material" uid="uid://bw5c2g160gs3a" path="res://testing_stuff_kaen/silo_level/silo_trimsheet1_mat.tres" id="9_hf5uk"]
 [ext_resource type="PackedScene" uid="uid://b12m3io4h1613" path="res://testing_stuff_kaen/silo_level/assets/wall_dooropen.tscn" id="9_n8h4n"]
 [ext_resource type="PackedScene" uid="uid://2qut50tthswb" path="res://testing_stuff_kaen/silo_level/assets/exterior_rockchair.tscn" id="10_n1d06"]
 [ext_resource type="PackedScene" uid="uid://dy0nsqfb2pk4u" path="res://testing_stuff_kaen/silo_level/assets/halfround_wall.tscn" id="11_7cab4"]
@@ -19,6 +22,9 @@
 [ext_resource type="PackedScene" uid="uid://cdgkldjfeacws" path="res://testing_stuff_kaen/silo_level/assets/cables_1.tscn" id="17_i7fmf"]
 [ext_resource type="PackedScene" uid="uid://ycpffexcx52e" path="res://testing_stuff_kaen/silo_level/assets/cables_2.tscn" id="18_8l2k2"]
 [ext_resource type="PackedScene" uid="uid://cuuhm0r6yida0" path="res://testing_stuff_kaen/silo_level/test_3.tscn" id="19_dodpd"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_loqub"]
+size = Vector3(2, 2, 2)
 
 [node name="level" type="Node3D"]
 
@@ -130,9 +136,6 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, 1, 0, 4.37114e-08, -4.8, 10
 [node name="wall14" parent="." instance=ExtResource("6_4sr76")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 7.2, 10, -12.9)
 
-[node name="wall3" parent="." instance=ExtResource("7_ptop1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 1.1, -21)
-
 [node name="wall5" parent="." instance=ExtResource("7_ptop1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.1, 1.1, 0.3)
 
@@ -145,11 +148,49 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -10.1,
 [node name="wall16" parent="." instance=ExtResource("7_ptop1")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, -1, 0, 4.37114e-08, -16.1, 1.1, 3.3)
 
+[node name="CSGMesh3D" parent="." instance=ExtResource("8_imvs0")]
+transform = Transform3D(1, 0, 0, 0, -1, 0, 0, 0, 1, -16.1, 1.1, -8.69825)
+
+[node name="CSGMesh3D3" type="CSGMesh3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -1, 0, 0, 0, 1, -16.1, 1.1, -21.5002)
+use_collision = true
+mesh = ExtResource("8_f76ny")
+material = ExtResource("9_hf5uk")
+
+[node name="CSGMesh3D2" type="CSGMesh3D" parent="CSGMesh3D3"]
+transform = Transform3D(1.7167, 0, 0, 0, 1.73949, 0, 0, 0, 0.345333, 0.093317, -2.78887, 0.573936)
+operation = 2
+mesh = SubResource("BoxMesh_loqub")
+material = ExtResource("9_hf5uk")
+
+[node name="CSGMesh3D2" parent="." instance=ExtResource("8_imvs0")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, -1, 0, 8.74228e-08, 0, -1, -15.913, 1.1, -9.50457)
+
 [node name="wall7" parent="." instance=ExtResource("7_ptop1")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -16.1, 1.1, -8.7)
+visible = false
 
 [node name="wall15" parent="." instance=ExtResource("7_ptop1")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, 1, 0, 4.37114e-08, -10.1, 1.1, -8.7)
+
+[node name="wall25" parent="." instance=ExtResource("7_ptop1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.1, 1.1, -12.5051)
+
+[node name="wall26" parent="." instance=ExtResource("7_ptop1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, -1, -19.1, 1.1, -18.5051)
+
+[node name="wall33" parent="." instance=ExtResource("7_ptop1")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -10.1, 1.1, -9.50514)
+
+[node name="wall34" parent="." instance=ExtResource("7_ptop1")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, -1, 0, 4.37114e-08, -16.1, 1.1, -9.50514)
+visible = false
+
+[node name="wall36" parent="." instance=ExtResource("7_ptop1")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, 1, 0, 4.37114e-08, -10.1, 1.1, -21.5051)
+
+[node name="wall37" parent="." instance=ExtResource("7_ptop1")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, 1, 0, 4.37114e-08, -7.25927, 1.1, -21.574)
 
 [node name="wall4" parent="." instance=ExtResource("8_wpyvq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -60, 5, 18)
@@ -451,6 +492,9 @@ transform = Transform3D(-2, 0, 0, 0, 2, 0, 0, 0, 2, -22.7, 0, -4)
 [node name="ceil2" parent="." instance=ExtResource("14_dbciq")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -17.6, 6, -4)
 
+[node name="ceil6" parent="." instance=ExtResource("14_dbciq")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -17.6, 6.22905, -30.3123)
+
 [node name="wall17" parent="." instance=ExtResource("7_ptop1")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -1.9, 1.1, -23.95)
 
@@ -471,6 +515,9 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, -8.74228e-08, 0, 1, 7.6, 1
 
 [node name="ceil3" parent="." instance=ExtResource("14_dbciq")]
 transform = Transform3D(8.74228e-08, 0, -2, 0, 2, 0, -2, 0, -8.74228e-08, 2.4, 0, -27.55)
+
+[node name="ceil7" parent="." instance=ExtResource("14_dbciq")]
+transform = Transform3D(8.74228e-08, 0, -2, 0, 2, 0, -2, 0, -8.74228e-08, -24, 0, -29.15)
 
 [node name="ceil5" parent="." instance=ExtResource("14_dbciq")]
 transform = Transform3D(-3.7749e-08, -5.69993e-15, 1, 7.54979e-08, -0.5, 0, 0.5, 7.54979e-08, 7.54979e-08, 19.4, 0.417873, -2.05)

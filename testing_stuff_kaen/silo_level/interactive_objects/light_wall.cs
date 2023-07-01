@@ -21,7 +21,6 @@ public partial class light_wall : Node3D
 
 	public void SetLightOn(bool newLightOn)
 	{
-		GD.Print("halo");
         MeshInstance3D lightWallMesha = GetNode<MeshInstance3D>("lightwall");
         StandardMaterial3D lightGlassMaterial = lightWallMesha.GetActiveMaterial(1) as StandardMaterial3D;
 		if (lightGlassMaterial == null) return;

@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://c57qxgsxn04cf"]
+[gd_scene load_steps=5 format=3 uid="uid://c57qxgsxn04cf"]
 
 [ext_resource type="PackedScene" uid="uid://bn3sqpbgq0isw" path="res://testing_stuff_kaen/silo_level/glb_assets/wall3.glb" id="1_3kk7r"]
 [ext_resource type="Material" uid="uid://bw5c2g160gs3a" path="res://testing_stuff_kaen/silo_level/silo_trimsheet1_mat.tres" id="2_rggyb"]
+[ext_resource type="ArrayMesh" uid="uid://bhg7npdu7bfpt" path="res://new_array_mesh.tres" id="3_31rjo"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_0fke5"]
 size = Vector3(5.9995, 8.99923, 0.880793)
@@ -10,6 +11,7 @@ size = Vector3(5.9995, 8.99923, 0.880793)
 
 [node name="wall32" parent="." index="0"]
 material_override = ExtResource("2_rggyb")
+mesh = ExtResource("3_31rjo")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="wall32" index="0"]
 
