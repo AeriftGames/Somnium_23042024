@@ -1,10 +1,12 @@
-[gd_scene load_steps=4 format=3 uid="uid://bbbrxuvjc21x"]
+[gd_scene load_steps=5 format=3 uid="uid://bbbrxuvjc21x"]
 
 [ext_resource type="ArrayMesh" uid="uid://bhg7npdu7bfpt" path="res://new_array_mesh.tres" id="1_t8yfy"]
 [ext_resource type="Material" uid="uid://bw5c2g160gs3a" path="res://testing_stuff_kaen/silo_level/silo_trimsheet1_mat.tres" id="2_b1cp6"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_4cpu0"]
 size = Vector3(2, 2, 2)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_mhvus"]
 
 [node name="CSGMesh3D" type="CSGMesh3D"]
 transform = Transform3D(1, 0, 0, 0, -1, 0, 0, 0, 1, -16.1, 1.1, -8.7)
@@ -13,7 +15,19 @@ mesh = ExtResource("1_t8yfy")
 material = ExtResource("2_b1cp6")
 
 [node name="CSGMesh3D2" type="CSGMesh3D" parent="."]
-transform = Transform3D(1.7167, 0, 0, 0, 3.04938, 0, 0, 0, 1, 0.093317, -0.849538, 0.0306921)
+transform = Transform3D(1.7167, 0, 0, 0, 1.21614, 0, 0, 0, 0.47492, 0.152832, -0.849538, 0.37093)
 operation = 2
 mesh = SubResource("BoxMesh_4cpu0")
+material = ExtResource("2_b1cp6")
+
+[node name="CSGMesh3D3" type="CSGMesh3D" parent="."]
+transform = Transform3D(1.7167, 0, 0, 0, 0.919401, 0.310868, 0, -0.796045, 0.359041, 0.152832, -2.57855, 1.20814)
+operation = 2
+mesh = SubResource("BoxMesh_4cpu0")
+material = ExtResource("2_b1cp6")
+
+[node name="CSGMesh3D4" type="CSGMesh3D" parent="."]
+transform = Transform3D(1.7167, 0, 0, 0, 1.34825, -0.00151797, 0, 0.00138832, 1.47402, 0.0913734, -3.43212, 0.502208)
+operation = 2
+mesh = SubResource("CylinderMesh_mhvus")
 material = ExtResource("2_b1cp6")
