@@ -321,14 +321,21 @@ public partial class DebugHud : Control
 		GameMaster.GM.GetSettings().Apply_ScreenSizeID(newID, true, false);
 	}
 
-	// Signal pr zmenu antialiasingu skrze option button
+	// Signal pro zmenu antialiasingu skrze option button
 	public void _on_antialias_option_button_item_selected(int newID)
 	{
 		// only apply
 		GameMaster.GM.GetSettings().Apply_AntialiasID(newID, true, false);
 	}
 
-	public void _on_scale_3d_h_slider_value_changed(float newValue)
+    // Signal pro zmenu global ilumination skrze option button
+    public void _on_gi_option_button_item_selected(int newID)
+	{
+		//only apply
+		GameMaster.GM.GetSettings().Apply_GlobalIlumination(newID, true, false);
+    }
+
+    public void _on_scale_3d_h_slider_value_changed(float newValue)
 	{
 		// only apply
 		GameMaster.GM.GetSettings().Apply_Scale3D(newValue / 100.0f,true,false);
@@ -353,12 +360,6 @@ public partial class DebugHud : Control
 	{
 		// only apply
 		GameMaster.GM.GetSettings().Apply_Ssil(newPressed,true,false);
-	}
-
-	public void _on_sdfgi_check_box_toggled(bool newPressed)
-	{
-	   // only apply
-	   GameMaster.GM.GetSettings().Apply_Sdfgi(newPressed,true,false);
 	}
 
 	public void _on_unlock_max_fps_check_box_toggled(bool newPressed)
@@ -397,6 +398,11 @@ public partial class DebugHud : Control
 			"WindowSize_HBoxContainer/WindowSize_OptionButton");
 		windowsize_option.Selected = GameMaster.GM.GetSettings().GetActual_ScreenSizeID();
 
+		// gi
+		OptionButton gi_option = GetNode<OptionButton>("OptionsPanel/TabContainer/video/" +
+			"GI_HBoxContainer/GI_OptionButton");
+		gi_option.Selected = GameMaster.GM.GetSettings().GetActual_GlobalIlumination();
+
 		// scale 3d
 		HSlider scale3d_slider = GetNode<HSlider>("OptionsPanel/TabContainer/video/" +
 			"Scale3d_HBoxContainer/Scale3d_HSlider");
@@ -416,10 +422,6 @@ public partial class DebugHud : Control
 		// ssil
 		CheckBox ssil_checkbox = GetNode<CheckBox>("OptionsPanel/TabContainer/video/Ssil_CheckBox");
 		ssil_checkbox.ButtonPressed = GameMaster.GM.GetSettings().GetActual_Ssil();
-
-		// sdfgi
-		CheckBox sdfgi_checkbox = GetNode<CheckBox>("OptionsPanel/TabContainer/video/Sdfgi_CheckBox");
-		sdfgi_checkbox.ButtonPressed = GameMaster.GM.GetSettings().GetActual_Sdfgi();
 
 		CheckBox unlockmaxfps_checkbox = GetNode<CheckBox>("OptionsPanel/TabContainer/video/UnlockMaxFps_CheckBox");
 		unlockmaxfps_checkbox.ButtonPressed = GameMaster.GM.GetSettings().GetActual_UnlockMaxFps();

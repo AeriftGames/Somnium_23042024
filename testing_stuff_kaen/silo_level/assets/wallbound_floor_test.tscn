@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://bpqk8t4jlhw1d"]
 
 [ext_resource type="PackedScene" uid="uid://bafq0g1oisn2i" path="res://testing_stuff_kaen/silo_level/glb_assets/wallbound_floor_test.glb" id="1_2m4rx"]
-[ext_resource type="Material" uid="uid://bw5c2g160gs3a" path="res://testing_stuff_kaen/silo_level/silo_trimsheet1_mat.tres" id="2_5le2u"]
+[ext_resource type="Material" uid="uid://bw5c2g160gs3a" path="res://testing_stuff_kaen/silo_level/mat/silo_mat_v1/silo_trim01_mat.tres" id="2_svscn"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g5y3x"]
 
@@ -39,7 +39,7 @@ data = PackedVector3Array(12, -0.4, 13.2, -12, 0.4, 13.2, 12, 0.4, 13.2, 12, -0.
 [node name="wallbound_floor_test" instance=ExtResource("1_2m4rx")]
 
 [node name="wallbound_floor_test2" parent="." index="0"]
-material_override = ExtResource("2_5le2u")
+material_override = ExtResource("2_svscn")
 mesh = SubResource("ArrayMesh_jfnbq")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="wallbound_floor_test2" index="0" groups=["material_surface_wood"]]

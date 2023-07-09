@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://dkeyblarlvwg2"]
+
+[ext_resource type="PackedScene" uid="uid://dm0kchsxc5fiw" path="res://testing_stuff_kaen/silo_level/assets/vnitrni_police.tscn" id="1_lpypu"]
+[ext_resource type="PackedScene" uid="uid://6hc3xmqaj5mv" path="res://testing_stuff_kaen/silo_level/assets/vnitrni_vyklenek.tscn" id="2_m1b0m"]
+
+[node name="new_test_vnitrni_police_a_vyklenek" type="Node3D"]
+
+[node name="Cube_952" parent="." instance=ExtResource("1_lpypu")]
+
+[node name="Cube_953" parent="." instance=ExtResource("2_m1b0m")]

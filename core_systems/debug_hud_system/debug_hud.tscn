@@ -331,6 +331,28 @@ popup/item_3/id = 3
 popup/item_4/text = "SS_AA+TAA+MSAA3D_2X"
 popup/item_4/id = 4
 
+[node name="GI_HBoxContainer" type="HBoxContainer" parent="OptionsPanel/TabContainer/video"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="OptionsPanel/TabContainer/video/GI_HBoxContainer"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+text = " global ilumination"
+
+[node name="GI_OptionButton" type="OptionButton" parent="OptionsPanel/TabContainer/video/GI_HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+item_count = 3
+popup/item_0/text = "Disable GI"
+popup/item_0/id = 0
+popup/item_1/text = "Voxel GI"
+popup/item_1/id = 1
+popup/item_2/text = "SDFGI"
+popup/item_2/id = 2
+
 [node name="Scale3d_HBoxContainer" type="HBoxContainer" parent="OptionsPanel/TabContainer/video"]
 layout_mode = 2
 alignment = 1
@@ -372,13 +394,6 @@ icon_alignment = 1
 layout_direction = 3
 layout_mode = 2
 text = "enable SSIL"
-alignment = 2
-icon_alignment = 1
-
-[node name="Sdfgi_CheckBox" type="CheckBox" parent="OptionsPanel/TabContainer/video"]
-layout_direction = 3
-layout_mode = 2
-text = "enable SDFGI"
 alignment = 2
 icon_alignment = 1
 
@@ -695,11 +710,11 @@ text = "video memory used:"
 [connection signal="item_selected" from="OptionsPanel/TabContainer/video/ScreenMode_HBoxContainer/ScreenMode_OptionButton" to="." method="_on_screen_mode_option_button_item_selected"]
 [connection signal="item_selected" from="OptionsPanel/TabContainer/video/WindowSize_HBoxContainer/WindowSize_OptionButton" to="." method="_on_window_size_option_button_item_selected"]
 [connection signal="item_selected" from="OptionsPanel/TabContainer/video/Antialias_HBoxContainer/Antialias_OptionButton" to="." method="_on_antialias_option_button_item_selected"]
+[connection signal="item_selected" from="OptionsPanel/TabContainer/video/GI_HBoxContainer/GI_OptionButton" to="." method="_on_gi_option_button_item_selected"]
 [connection signal="value_changed" from="OptionsPanel/TabContainer/video/Scale3d_HBoxContainer/Scale3d_HSlider" to="." method="_on_scale_3d_h_slider_value_changed"]
 [connection signal="toggled" from="OptionsPanel/TabContainer/video/HalfResGI_CheckBox" to="." method="_on_half_res_gi_check_box_toggled"]
 [connection signal="toggled" from="OptionsPanel/TabContainer/video/Ssao_CheckBox" to="." method="_on_ssao_check_box_toggled"]
 [connection signal="toggled" from="OptionsPanel/TabContainer/video/Ssil_CheckBox" to="." method="_on_ssil_check_box_toggled"]
-[connection signal="toggled" from="OptionsPanel/TabContainer/video/Sdfgi_CheckBox" to="." method="_on_sdfgi_check_box_toggled"]
 [connection signal="toggled" from="OptionsPanel/TabContainer/video/UnlockMaxFps_CheckBox" to="." method="_on_unlock_max_fps_check_box_toggled"]
 [connection signal="toggled" from="OptionsPanel/TabContainer/video/DisableVsync_CheckBox" to="." method="_on_disable_vsync_check_box_toggled"]
 [connection signal="pressed" from="OptionsPanel/TabContainer/video/SaveAsDefaultButton" to="." method="_on_save_as_default_button_pressed"]

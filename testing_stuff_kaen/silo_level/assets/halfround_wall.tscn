@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://dy0nsqfb2pk4u"]
 
 [ext_resource type="PackedScene" uid="uid://be1jt8hjhvylu" path="res://testing_stuff_kaen/silo_level/glb_assets/halfround_wall.glb" id="1_ne4q7"]
-[ext_resource type="Material" uid="uid://bw5c2g160gs3a" path="res://testing_stuff_kaen/silo_level/silo_trimsheet1_mat.tres" id="2_pwkh3"]
+[ext_resource type="Material" uid="uid://6ew1yp8n2l2m" path="res://testing_stuff_kaen/silo_level/mat/silo_var2/silo_var2.material" id="2_suydy"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_75ckh"]
 
@@ -41,7 +41,7 @@ data = PackedVector3Array(-2.4045, -7.497, 2.116, -0.4547, -7.497, -2.116, -2.40
 [node name="halfround_wall" instance=ExtResource("1_ne4q7")]
 
 [node name="halfround_wall2" parent="." index="0"]
-material_override = ExtResource("2_pwkh3")
+material_override = ExtResource("2_suydy")
 mesh = SubResource("ArrayMesh_nytrr")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="halfround_wall2" index="0"]

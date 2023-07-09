@@ -79,15 +79,6 @@ public partial class GameMaster : Node
 
 	public override void _UnhandledInput(InputEvent @event)
 	{
-		if (@event is InputEventKey eventKey)
-		{
-            /*
-			if (eventKey.Pressed && eventKey.Keycode == Key.Escape)
-				QuitGame();*/
-
-            if (eventKey.Pressed && eventKey.Keycode == Key.Minus)
-				GetSettings().Apply_GlobalIlumination(0, true, false);
-		}
 	}
 
 	public async void QuitGame()
