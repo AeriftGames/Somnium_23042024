@@ -1,16 +1,14 @@
 [gd_resource type="StandardMaterial3D" load_steps=5 format=3 uid="uid://b7a41fcgsk2vg"]
 
-[ext_resource type="Texture2D" uid="uid://dxkeylyk4v07h" path="res://testing_stuff_kaen/silo_level/mat/trim03_mat/untitled_DefaultMaterial_BaseColor.png" id="1_vi1ro"]
-[ext_resource type="Texture2D" uid="uid://b2472n5pu16ui" path="res://testing_stuff_kaen/silo_level/mat/trim03_mat/untitled_DefaultMaterial_Metallic.png" id="2_f0vls"]
-[ext_resource type="Texture2D" uid="uid://br44g0cjb6i6b" path="res://testing_stuff_kaen/silo_level/mat/trim03_mat/untitled_DefaultMaterial_Normal.png" id="3_y3aif"]
-[ext_resource type="Texture2D" uid="uid://rvur55oigaeh" path="res://testing_stuff_kaen/silo_level/mat/trim03_mat/untitled_DefaultMaterial_Roughness.png" id="4_bb7nt"]
+[ext_resource type="Texture2D" uid="uid://dxkeylyk4v07h" path="res://testing_stuff_kaen/silo_level/mat/trim03_mat/8k/untitled_DefaultMaterial_BaseColor.png" id="1_vi1ro"]
+[ext_resource type="Texture2D" uid="uid://b2472n5pu16ui" path="res://testing_stuff_kaen/silo_level/mat/trim03_mat/8k/untitled_DefaultMaterial_Metallic.png" id="2_f0vls"]
+[ext_resource type="Texture2D" uid="uid://br44g0cjb6i6b" path="res://testing_stuff_kaen/silo_level/mat/trim03_mat/8k/untitled_DefaultMaterial_Normal.png" id="3_y3aif"]
+[ext_resource type="Texture2D" uid="uid://rvur55oigaeh" path="res://testing_stuff_kaen/silo_level/mat/trim03_mat/8k/untitled_DefaultMaterial_Roughness.png" id="4_bb7nt"]
 
 [resource]
 albedo_texture = ExtResource("1_vi1ro")
-metallic = 0.5
+metallic = 0.7
 metallic_texture = ExtResource("2_f0vls")
-roughness = 0.8
 roughness_texture = ExtResource("4_bb7nt")
 normal_enabled = true
-normal_scale = 2.0
 normal_texture = ExtResource("3_y3aif")

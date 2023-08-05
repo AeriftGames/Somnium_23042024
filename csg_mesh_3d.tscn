@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://bbbrxuvjc21x"]
 
 [ext_resource type="ArrayMesh" uid="uid://bhg7npdu7bfpt" path="res://new_array_mesh.tres" id="1_t8yfy"]
-[ext_resource type="Material" uid="uid://bw5c2g160gs3a" path="res://testing_stuff_kaen/silo_level/mat/silo_mat_v1/silo_trim01_mat.tres" id="2_yqhpr"]
+[ext_resource type="Material" uid="uid://bw5c2g160gs3a" path="res://testing_stuff_kaen/silo_level/mat/silo_mat_v1/silo_trim01_v1_mat.tres" id="2_yqhpr"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_4cpu0"]
 size = Vector3(2, 2, 2)

@@ -3,7 +3,7 @@ using System;
 
 public partial class HealthSystem : Godot.GodotObject
 {
-    FPSCharacter_Inventory ownnCharacter = null;
+    FPSCharacter_Inventory ownCharacter = null;
 
     private float actualHealth = 100;
     private float maxHealth = 100;
@@ -19,9 +19,9 @@ public partial class HealthSystem : Godot.GodotObject
 
     public HealthSystem(FPSCharacter_Inventory ownerInstance) 
     {
-        ownnCharacter = ownerInstance;
+        ownCharacter = ownerInstance;
 
-        damageHud = ownnCharacter.GetNodeOrNull<DamageHud>("AllHuds/DamageHud");
+        damageHud = ownCharacter.GetNodeOrNull<DamageHud>("AllHuds/DamageHud");
 
         //RegenTickTimer init
         timerHealthRegenTimer = new Godot.Timer();
@@ -29,7 +29,7 @@ public partial class HealthSystem : Godot.GodotObject
         timerHealthRegenTimer.Connect("timeout", callable_spawn);
         timerHealthRegenTimer.WaitTime = 0.2;
         timerHealthRegenTimer.OneShot = false;
-        ownnCharacter.AddChild(timerHealthRegenTimer);
+        ownCharacter.AddChild(timerHealthRegenTimer);
         timerHealthRegenTimer.Stop();
     }
 
@@ -88,10 +88,10 @@ public partial class HealthSystem : Godot.GodotObject
             damageHud.ApplyCentralDamageEffect(GetDamageIntensityFromDamageValue(value));
 
         // shake
-        ownnCharacter.GetObjectCamera().ShakeCameraTest(GetDamageIntensityFromDamageValue(value),0.2f,5.0f,4.0f);
+        ownCharacter.GetObjectCamera().ShakeCameraTest(GetDamageIntensityFromDamageValue(value),0.2f,5.0f,4.0f);
 
         // audio
-        UniversalFunctions.PlayRandomSound(ownnCharacter.GetHurtPlayer(), ownnCharacter.GetHurtAudios(), 0, 1);
+        UniversalFunctions.PlayRandomSound(ownCharacter.GetHurtPlayer(), ownCharacter.GetHurtAudios(), 0, 1);
 
         //
         ChangeUpdate();
@@ -111,8 +111,8 @@ public partial class HealthSystem : Godot.GodotObject
 
     private void ChangeUpdate()
     {
-        if (ownnCharacter == null) return;
-        if (ownnCharacter.GetCharacterInfoHud() == null) return;
+        if (ownCharacter == null) return;
+        if (ownCharacter.GetCharacterInfoHud() == null) return;
 
         // DEAD
         if (actualHealth < 1.0f && isAlive)
@@ -121,13 +121,13 @@ public partial class HealthSystem : Godot.GodotObject
             isAlive = false;
 
             // audio
-            UniversalFunctions.PlayRandomSound(ownnCharacter.GetHurtPlayer(), ownnCharacter.GetDeathAudios(), 1.0f, 0.75f);
+            UniversalFunctions.PlayRandomSound(ownCharacter.GetHurtPlayer(), ownCharacter.GetDeathAudios(), 1.0f, 0.75f);
 
             // event dead
-            ownnCharacter.EventDead(FPSCharacter_BasicMoving.ECharacterReasonDead.NoHealth);
+            ownCharacter.EventDead(FPSCharacter_BasicMoving.ECharacterReasonDead.NoHealth);
         }
 
-        ownnCharacter.GetCharacterInfoHud().SetDataFromPlayer();
+        ownCharacter.GetCharacterInfoHud().SetHealthDataFromPlayer();
     }
 
     public float GetDamageIntensityFromDamageValue(float value)

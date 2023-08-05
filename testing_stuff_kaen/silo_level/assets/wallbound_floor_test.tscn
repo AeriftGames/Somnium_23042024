@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://bpqk8t4jlhw1d"]
 
 [ext_resource type="PackedScene" uid="uid://bafq0g1oisn2i" path="res://testing_stuff_kaen/silo_level/glb_assets/wallbound_floor_test.glb" id="1_2m4rx"]
-[ext_resource type="Material" uid="uid://bw5c2g160gs3a" path="res://testing_stuff_kaen/silo_level/mat/silo_mat_v1/silo_trim01_mat.tres" id="2_svscn"]
+[ext_resource type="Material" uid="uid://bw5c2g160gs3a" path="res://testing_stuff_kaen/silo_level/mat/silo_mat_v1/silo_trim01_v1_mat.tres" id="2_svscn"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g5y3x"]
 

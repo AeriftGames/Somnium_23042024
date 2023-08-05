@@ -214,9 +214,13 @@ public partial class CharacterInteractiveSystem : Godot.GodotObject
         // chceme zacit grabovat s novym objektem ?
         if(pickedBody == null && grabbedObject != null)
         {
+            //nove
+            float distance = grabbedObject.GlobalPosition.DistanceTo(character.GetObjectCamera().GlobalPosition);
+
             // Set to original handGrabPosition
             Vector3 actualPosition = character.objectCamera.GetHandGrabMarker().Position;
-            actualPosition.Z = -character.MoveFarOrNearObjectOriginal;
+            //actualPosition.Z = -character.MoveFarOrNearObjectOriginal;
+            actualPosition.Z = - distance;
             character.objectCamera.GetHandGrabMarker().Position = actualPosition;
 
             // Nastavi nas novy Rigidbody object a nastavi mu pozadovane fyzikalni parametry pro grab

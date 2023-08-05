@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bnb3blo4rl83s"]
+[gd_scene load_steps=15 format=3 uid="uid://bnb3blo4rl83s"]
 
 [ext_resource type="PackedScene" uid="uid://0g1u2jvnfbpy" path="res://player/FPSCharacter_Interaction.tscn" id="1_ywg5i"]
 [ext_resource type="Script" path="res://player/FPSCharacter_Inventory.cs" id="2_k43co"]
@@ -11,9 +11,21 @@
 [ext_resource type="AudioStream" uid="uid://dcsxua2341g8" path="res://audio/audio_streams/hurts_test/325269__deleted_user_2104797__body-fall-2.wav" id="7_0hcda"]
 [ext_resource type="Script" path="res://player/character_systems/inventory_menu/InventorySystem.cs" id="8_1wcpl"]
 [ext_resource type="PackedScene" uid="uid://dxumv4dw6y6ps" path="res://player/character_systems/inventory_menu/inventory_menu_number_two.tscn" id="9_bfvnj"]
+[ext_resource type="Script" path="res://player/character_systems/StaminaSystem.cs" id="9_ogpi2"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_enw7f"]
-bg_color = Color(1, 0.164706, 0, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7bbwt"]
+bg_color = Color(0.913319, 0.285158, 0, 0.392157)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w53l8"]
+bg_color = Color(0.929412, 0.929412, 0, 0.392157)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
 
 [node name="FPSCharacter_Inventory" instance=ExtResource("1_ywg5i")]
 script = ExtResource("2_k43co")
@@ -25,6 +37,11 @@ StartHealthRegenEnable = true
 HurtAudios = Array[AudioStream]([ExtResource("3_51q7g"), ExtResource("4_m4gkb"), ExtResource("5_dlixv"), ExtResource("6_7ci7t")])
 DeathAudios = Array[AudioStream]([ExtResource("3_51q7g")])
 BodyFallAudios = Array[AudioStream]([ExtResource("7_0hcda")])
+CanShootProjectile = true
+PowerImpulseShoot = 10.0
+MassProjectile = 5.0
+EnableAutoDestroyProjectile = true
+MSecToDestroyProjectile = 5000
 FootStepLengthInSprint = 1.25
 FootStepLengthInCrouch = 0.85
 FootstepsVolumeDBInWalk = -2.0
@@ -38,27 +55,34 @@ DeccelerateSmoothStep = 4.0
 script = ExtResource("8_1wcpl")
 MaxInventoryCapacity = 10
 
-[node name="HeadStandPos" parent="." index="4"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+[node name="StaminaSystem" type="Node" parent="." index="1"]
+script = ExtResource("9_ogpi2")
+initStaminaRegenVal = 1.0
+initStaminaRegenTick = 0.2
+initStaminaRegenEnable = true
 
-[node name="AudioStreamPlayer_Footsteps" parent="." index="6"]
+[node name="AudioStreamPlayer_Footsteps" parent="." index="7"]
 max_polyphony = 3
 
-[node name="AudioStreamPlayer_JumpLand" parent="." index="7"]
+[node name="AudioStreamPlayer_JumpLand" parent="." index="8"]
 max_polyphony = 3
 
-[node name="AudioStreamPlayer_Hurts" type="AudioStreamPlayer" parent="." index="9"]
+[node name="AudioStreamPlayer_Hurts" type="AudioStreamPlayer" parent="." index="10"]
 stream = ExtResource("3_51q7g")
 max_polyphony = 4
 bus = &"Sfx"
 
-[node name="Item_inspect" parent="." index="11"]
+[node name="AudioStreamPlayer_Universal" type="AudioStreamPlayer" parent="." index="11"]
+max_polyphony = 4
+bus = &"Sfx"
+
+[node name="Item_inspect" parent="." index="13"]
 metadata/_edit_lock_ = true
 
-[node name="report_bug" parent="." index="12"]
+[node name="report_bug" parent="." index="14"]
 metadata/_edit_lock_ = true
 
-[node name="DebugHud" parent="." index="13"]
+[node name="DebugHud" parent="." index="15"]
 metadata/_edit_lock_ = true
 
 [node name="InventoryMenu" parent="AllHuds" index="1" instance=ExtResource("9_bfvnj")]
@@ -75,28 +99,67 @@ mouse_filter = 2
 script = ExtResource("4_nvx4w")
 metadata/_edit_lock_ = true
 
-[node name="HBoxContainer_Health" type="HBoxContainer" parent="AllHuds/CharacterInfoHud" index="0"]
+[node name="VBoxContainer" type="VBoxContainer" parent="AllHuds/CharacterInfoHud" index="0"]
 layout_mode = 0
-offset_top = 60.0
-offset_right = 266.0
-offset_bottom = 87.0
+offset_top = 55.0
+offset_right = 199.0
+offset_bottom = 197.0
 
-[node name="Label" type="Label" parent="AllHuds/CharacterInfoHud/HBoxContainer_Health" index="0"]
+[node name="HBoxContainer_Health" type="HBoxContainer" parent="AllHuds/CharacterInfoHud/VBoxContainer" index="0"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="AllHuds/CharacterInfoHud/VBoxContainer/HBoxContainer_Health" index="0"]
 layout_mode = 2
 text = "HEALTH"
 vertical_alignment = 1
 metadata/_edit_lock_ = true
 
-[node name="ProgressBar_Health" type="ProgressBar" parent="AllHuds/CharacterInfoHud/HBoxContainer_Health" index="1"]
-custom_minimum_size = Vector2(200, 0)
+[node name="ProgressBar_Health" type="ProgressBar" parent="AllHuds/CharacterInfoHud/VBoxContainer/HBoxContainer_Health" index="1"]
+custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
+size_flags_horizontal = 10
 size_flags_vertical = 1
-theme_override_styles/fill = SubResource("StyleBoxFlat_enw7f")
-value = 4.71
-show_percentage = false
+theme_override_styles/fill = SubResource("StyleBoxFlat_7bbwt")
+value = 5.0
 metadata/_edit_lock_ = true
 
-[node name="Label_HealthValue" type="Label" parent="AllHuds/CharacterInfoHud/HBoxContainer_Health/ProgressBar_Health" index="0"]
+[node name="Label_HealthValue" type="Label" parent="AllHuds/CharacterInfoHud/VBoxContainer/HBoxContainer_Health/ProgressBar_Health" index="0"]
+visible = false
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -11.5
+offset_bottom = 11.5
+grow_horizontal = 0
+grow_vertical = 2
+text = "100"
+horizontal_alignment = 3
+metadata/_edit_lock_ = true
+
+[node name="HBoxContainer_Stamina" type="HBoxContainer" parent="AllHuds/CharacterInfoHud/VBoxContainer" index="1"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="AllHuds/CharacterInfoHud/VBoxContainer/HBoxContainer_Stamina" index="0"]
+layout_mode = 2
+text = "STAMINA"
+vertical_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="ProgressBar_Stamina" type="ProgressBar" parent="AllHuds/CharacterInfoHud/VBoxContainer/HBoxContainer_Stamina" index="1"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 1
+theme_override_styles/fill = SubResource("StyleBoxFlat_w53l8")
+value = 5.0
+metadata/_edit_lock_ = true
+
+[node name="Label_StaminaValue" type="Label" parent="AllHuds/CharacterInfoHud/VBoxContainer/HBoxContainer_Stamina/ProgressBar_Stamina" index="0"]
+visible = false
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -116,4 +179,5 @@ metadata/_edit_lock_ = true
 layout_mode = 1
 metadata/_edit_lock_ = true
 
-[connection signal="value_changed" from="AllHuds/CharacterInfoHud/HBoxContainer_Health/ProgressBar_Health" to="AllHuds/CharacterInfoHud" method="_on_progress_bar_health_value_changed"]
+[connection signal="value_changed" from="AllHuds/CharacterInfoHud/VBoxContainer/HBoxContainer_Health/ProgressBar_Health" to="AllHuds/CharacterInfoHud" method="_on_progress_bar_health_value_changed"]
+[connection signal="value_changed" from="AllHuds/CharacterInfoHud/VBoxContainer/HBoxContainer_Stamina/ProgressBar_Stamina" to="AllHuds/CharacterInfoHud" method="_on_progress_bar_stamina_value_changed"]

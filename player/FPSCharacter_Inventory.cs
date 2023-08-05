@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 public partial class FPSCharacter_Inventory : FPSCharacter_Interaction
 {
@@ -8,6 +9,7 @@ public partial class FPSCharacter_Inventory : FPSCharacter_Interaction
     private inventory_menu ourInventoryMenu = null;
 
     private HealthSystem healthSystem = null;
+    private StaminaSystem staminaSystem = null;
     private InventorySystem inventorySystem = null;
 
     [ExportGroupAttribute("HealthSystem")]
@@ -22,7 +24,15 @@ public partial class FPSCharacter_Inventory : FPSCharacter_Interaction
     [Export] public Godot.Collections.Array<AudioStream> DeathAudios;
     [Export] public Godot.Collections.Array<AudioStream> BodyFallAudios;
 
+    [ExportGroupAttribute("ShootProjectile")]
+    [Export] bool CanShootProjectile = true;
+    [Export] float PowerImpulseShoot = 10.0f;
+    [Export] float MassProjectile = 5.0f;
+    [Export] bool EnableAutoDestroyProjectile = true;
+    [Export] int MSecToDestroyProjectile = 5000;
+
     AudioStreamPlayer hurtPlayer = null;
+    AudioStreamPlayer universalPlayer = null;
 
     private dead_cam_body deadCamBody = null;
 
@@ -39,9 +49,14 @@ public partial class FPSCharacter_Inventory : FPSCharacter_Interaction
         healthSystem.SetAllData(StartActualHealth,StartMaxHealth,StartHealthRegenVal,StartHealthRegenTick,
             StartHealthRegenEnable);
 
+        // staminaSystem
+        staminaSystem = GetNode<StaminaSystem>("StaminaSystem");
+        staminaSystem.StartInit(this);
+
         inventorySystem = GetNode<InventorySystem>("InventorySystem");
 
         hurtPlayer = GetNode<AudioStreamPlayer>("AudioStreamPlayer_Hurts");
+        universalPlayer = GetNode<AudioStreamPlayer>("AudioStreamPlayer_Universal");
 
         // inits
         inventorySystem.Init(this);
@@ -61,6 +76,50 @@ public partial class FPSCharacter_Inventory : FPSCharacter_Interaction
 
         if (IsInputEnable() && Input.IsActionJustPressed("test_regen"))
             GetHealthSystem().AddHealth(10);
+
+        // STAMINA Process logic *******************************************************
+
+        // for sprint
+        if(GetStaminaSystem().activeStaminaForSprint)
+        {
+            if (CanSprint && GetIsSprint() && ActualMovementSpeed > 5.0f)
+            {
+                GetStaminaSystem().RemoveStamina(0.15f);
+                GetStaminaSystem().SetStaminaRegenVal(0.0f);
+            }
+            else
+            {
+                GetStaminaSystem().SetStaminaRegenVal(1.0f);
+            }
+
+            if (GetStaminaSystem().GetStamina() <= 1.0f)
+                CanSprint = false;
+            else if(GetStaminaSystem().GetStamina() > 10.0f)
+                CanSprint = true;
+        }
+
+        // for fast stamina regen standing
+        if(GetStaminaSystem().activeFastRegenForStanding)
+        {
+            // stojime na miste ?
+            if (ActualMovementSpeed <= 1.0f)
+                GetStaminaSystem().SetStaminaRegenTick(0.05f);
+            else
+                GetStaminaSystem().SetStaminaRegenTick(0.2f);
+        }
+
+        // for fast stamina regen crouching
+        if (GetStaminaSystem().activeFastRegenForCrouching)
+        {
+            // jsme skrceni ?
+            if (GetCharacterPosture() == ECharacterPosture.Crunch)
+                GetStaminaSystem().SetStaminaRegenTick(0.085f);
+        }
+
+        // Shoot physic projectile **********************************************************
+        bool shootNow = IsInputEnable() && CanShootProjectile && Input.IsActionJustPressed("mouseRightClick");
+        if (shootNow)
+            ShootPhysicProjectile();
     }
 
     public inventory_menu GetInventoryMenu(){ return ourInventoryMenu; }
@@ -84,6 +143,65 @@ public partial class FPSCharacter_Inventory : FPSCharacter_Interaction
         }
     }
 
+    // override for STAMINA proccess
+    public override void EventJumping()
+    {
+        // mame aktivovany stamina system pro skok ?
+        if(GetStaminaSystem().activeStaminaForJump)
+        {
+            // mame dostatek staminy pro skok ?
+            if (GetStaminaSystem().GetStamina() >= 7.0f)
+            {
+                // ubereme staminu a provedeme skok
+                GetStaminaSystem().RemoveStamina(7.0f);
+                base.EventJumping();
+            }
+        }
+        else // pokud ne tak pouzijeme skok vzdy a neovlivnujeme staminu
+        {
+            base.EventJumping();
+        }
+    }
+
+    // override for STAMINA proccess
+    public override void EventLandingEffect(float heightfall)
+    {
+        base.EventLandingEffect(heightfall);
+
+        if(GetStaminaSystem().activeStaminaForLand)
+
+        if (heightfall < 0.15f)
+        {
+            // very mini
+            GetStaminaSystem().RemoveStamina(3.0f);
+        }
+        else if (heightfall <= MiniHeightForLandingEffect)
+        {
+            // mini land
+            GetStaminaSystem().RemoveStamina(5.0f);
+        }
+        else if (heightfall <= SmallHeightForLandingEffect)
+        {
+            // small land
+            GetStaminaSystem().RemoveStamina(10.0f);
+        }
+        else if (heightfall <= MediumHeightForLandingEffect)
+        {
+            // medium land
+            GetStaminaSystem().RemoveStamina(20.0f);
+        }
+        else if (heightfall <= HighHeightForLandingEffect)
+        {
+            // high land
+            GetStaminaSystem().RemoveStamina(50.0f);
+        }
+        else if (heightfall > HighHeightForLandingEffect)
+        {
+            // death land
+            GetStaminaSystem().RemoveStamina(100.0f);
+        }
+    }
+
     private void ApplyNoHealthEffect()
     {
         // vytvorime (spawn) DeadCamBody do levelu na misto kde se aktualne nachazela kamera
@@ -97,6 +215,7 @@ public partial class FPSCharacter_Inventory : FPSCharacter_Interaction
     }
 
     public HealthSystem GetHealthSystem() { return healthSystem; }
+    public StaminaSystem GetStaminaSystem() {  return staminaSystem; }
     public CharacterInfoHud GetCharacterInfoHud() { return characterInfoHud; }
     public Godot.Collections.Array<AudioStream> GetHurtAudios(){return HurtAudios;}
     public Godot.Collections.Array<AudioStream> GetDeathAudios() { return DeathAudios;}
@@ -104,6 +223,40 @@ public partial class FPSCharacter_Inventory : FPSCharacter_Interaction
 
     public AudioStreamPlayer GetHurtPlayer() { return hurtPlayer; }
     public InventorySystem GetInventorySystem() { return inventorySystem; }
+
+    public void ShootPhysicProjectile()
+    {
+        Vector3 start = GetObjectCamera().GlobalPosition;
+        Vector3 end = GetObjectCamera().GetCameraLookingPoint().GlobalPosition;
+
+        RigidBody3D projectile = 
+            GD.Load<PackedScene>("res://testing_stuff_kaen/shootball/ball_projectile.tscn").Instantiate() as RigidBody3D;
+
+        GameMaster.GM.LevelLoader.GetActualLevelScene().AddChild(projectile);
+        projectile.Mass = MassProjectile;
+        projectile.GlobalPosition = start;
+        projectile.ApplyCentralImpulse((end - start) * PowerImpulseShoot);
+
+        if(EnableAutoDestroyProjectile)
+            DestroyProjectile(projectile);
+    }
+
+    public async void DestroyProjectile(RigidBody3D projectile)
+    {
+        await Task.Delay(MSecToDestroyProjectile);
+        projectile.QueueFree();
+    }
+
+    public void PlaySpecificAudioOnPlayer(AudioStream newStream,float volumeDB = 0.0f,float pitchScale = 1.0f)
+    {
+        if(newStream != null && universalPlayer != null)
+        {
+            universalPlayer.Stream = newStream;
+            universalPlayer.VolumeDb = volumeDB;
+            universalPlayer.PitchScale = pitchScale;
+            universalPlayer.Play();
+        }
+    }
 
     public override void FreeAll()
     {

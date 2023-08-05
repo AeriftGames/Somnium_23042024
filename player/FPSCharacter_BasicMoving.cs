@@ -86,6 +86,8 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
 
 	private Control allHuds = null;
 
+	private bool successJump = false;
+
 	public override void _Ready()
 	{
 		// pro dostupnost skrze gamemastera
@@ -285,9 +287,15 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
 		if (_isInputEnable && CanJump && _ActualCharacterPosture == ECharacterPosture.Stand &&
 			IsOnFloor() && Input.IsActionJustPressed("Jump"))
 		{
-			velocity.Y = JumpVelocity;
-			EventJumping();  // override for add effects
-		}
+			EventJumping();  // base logic and override for add effects
+
+			// pokud vsechna logika i v override funckich probehla uspesne - aplikujeme samotny skok
+			if(successJump)
+			{
+                velocity.Y = JumpVelocity;
+				successJump = false;	// zresetujeme logiku pro uspesneho skoku
+            }
+        }
 
 		// Apply crunch
 		if (_isInputEnable && IsOnFloor() && Input.IsActionJustPressed("Crunch"))
@@ -489,8 +497,9 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
 	// Event when character press jump
 	public virtual void EventJumping()
 	{
-		//GameMaster.GM.Log.WriteLog(this, LogSystem.ELogMsgType.INFO, "character jumped");
-	}
+		successJump = true;
+        //GameMaster.GM.Log.WriteLog(this, LogSystem.ELogMsgType.INFO, "character jumped");
+    }
 
 	public virtual void EventMovingStopped()
 	{

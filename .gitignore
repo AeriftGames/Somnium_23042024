@@ -1,3 +1,6 @@
 # Godot 4+ specific ignores
 .godot/
 log/log.txt
+testing_stuff_kaen/silo_level/mat/silo_mat_v1/8k/
+testing_stuff_kaen/silo_level/mat/silo_mat_v2/8k/
+testing_stuff_kaen/silo_level/mat/trim03_mat/8k/

@@ -2,27 +2,26 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b2472n5pu16ui"
-path.bptc="res://.godot/imported/untitled_DefaultMaterial_Metallic.png-bf2dd67683cfe5ad15c15483e288ff03.bptc.ctex"
+uid="uid://0jhe2rds4btd"
+path="res://.godot/imported/untitled_DefaultMaterial_Metallic.png-bf2dd67683cfe5ad15c15483e288ff03.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://testing_stuff_kaen/silo_level/mat/trim03_mat/untitled_DefaultMaterial_Metallic.png"
-dest_files=["res://.godot/imported/untitled_DefaultMaterial_Metallic.png-bf2dd67683cfe5ad15c15483e288ff03.bptc.ctex"]
+dest_files=["res://.godot/imported/untitled_DefaultMaterial_Metallic.png-bf2dd67683cfe5ad15c15483e288ff03.ctex"]
 
 [params]
 
-compress/mode=2
-compress/high_quality=true
+compress/mode=0
+compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=true
+mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
@@ -32,4 +31,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=0
+detect_3d/compress_to=1

@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://dihb444w7jvdy"]
 
 [ext_resource type="Script" path="res://testing_stuff_kaen/silo_level/interactive_objects/light_wall.cs" id="1_1my8h"]
-[ext_resource type="Material" uid="uid://bw5c2g160gs3a" path="res://testing_stuff_kaen/silo_level/mat/silo_mat_v1/silo_trim01_mat.tres" id="2_rjjef"]
+[ext_resource type="Material" uid="uid://bw5c2g160gs3a" path="res://testing_stuff_kaen/silo_level/mat/silo_mat_v1/silo_trim01_v1_mat.tres" id="2_rjjef"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x1xho"]
 transparency = 4

@@ -12,7 +12,7 @@ size = Vector3(21.0017, 1, 18.3587)
 transform = Transform3D(1, 0, 0, 0, -1, 0, 0, 0, 1, 0, 0, 0)
 material_override = ExtResource("2_yd8c0")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Cylinder_182" index="0"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Cylinder_182" index="0" groups=["material_surface_wood"]]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Cylinder_182/StaticBody3D" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.873258, -9.08972, 0.0670762)

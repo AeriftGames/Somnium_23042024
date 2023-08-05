@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://4l8x508y74tj"]
+
+[ext_resource type="PackedScene" uid="uid://cglpalgotybpk" path="res://testing_stuff_kaen/silo_level/glb_assets/test_kov.glb" id="1_xqsqy"]
+
+[node name="test_kov" instance=ExtResource("1_xqsqy")]

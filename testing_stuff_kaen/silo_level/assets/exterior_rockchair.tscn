@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://2qut50tthswb"]
 
 [ext_resource type="PackedScene" uid="uid://3ppprccxw1p0" path="res://testing_stuff_kaen/silo_level/glb_assets/exterior_rockchair.glb" id="1_hooyb"]
-[ext_resource type="Material" uid="uid://bw5c2g160gs3a" path="res://testing_stuff_kaen/silo_level/silo_trimsheet1_mat.tres" id="2_skium"]
+[ext_resource type="Material" uid="uid://bw5c2g160gs3a" path="res://testing_stuff_kaen/silo_level/mat/silo_mat_v1/silo_trim01_v1_mat.tres" id="2_skium"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_1245l"]
 size = Vector3(1.49983, 1.13824, 5.25178)

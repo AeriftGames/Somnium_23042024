@@ -1,0 +1,24 @@
+[gd_resource type="AnimatedTexture" load_steps=5 format=3 uid="uid://c8lfjg881mkj1"]
+
+[sub_resource type="Gradient" id="Gradient_var4b"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_2vtdh"]
+gradient = SubResource("Gradient_var4b")
+
+[sub_resource type="Gradient" id="Gradient_kah8m"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0, 1, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_810qv"]
+gradient = SubResource("Gradient_kah8m")
+
+[resource]
+frames = 2
+speed_scale = 0.5
+frame_0/texture = SubResource("GradientTexture1D_2vtdh")
+frame_1/texture = SubResource("GradientTexture1D_810qv")
+frame_1/duration = 1.0

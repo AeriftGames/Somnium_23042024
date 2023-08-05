@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://1qpyb7wsriep"]
 
 [ext_resource type="PackedScene" uid="uid://dwsvnb78mkflf" path="res://testing_stuff_kaen/silo_level/glb_assets/small_rock.glb" id="1_fhfmw"]
-[ext_resource type="Material" uid="uid://bw5c2g160gs3a" path="res://testing_stuff_kaen/silo_level/mat/silo_mat_v1/silo_trim01_mat.tres" id="2_3osmc"]
+[ext_resource type="Material" uid="uid://bw5c2g160gs3a" path="res://testing_stuff_kaen/silo_level/mat/silo_mat_v1/silo_trim01_v1_mat.tres" id="2_3osmc"]
 
 [node name="small_rock" instance=ExtResource("1_fhfmw")]
 

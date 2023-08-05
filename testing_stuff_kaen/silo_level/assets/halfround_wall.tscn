@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://dy0nsqfb2pk4u"]
 
 [ext_resource type="PackedScene" uid="uid://be1jt8hjhvylu" path="res://testing_stuff_kaen/silo_level/glb_assets/halfround_wall.glb" id="1_ne4q7"]
-[ext_resource type="Material" uid="uid://6ew1yp8n2l2m" path="res://testing_stuff_kaen/silo_level/mat/silo_var2/silo_var2.material" id="2_suydy"]
+[ext_resource type="Material" uid="uid://6ew1yp8n2l2m" path="res://testing_stuff_kaen/silo_level/mat/silo_mat_v2/silo_trim01_v2_mat.material" id="2_suydy"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_75ckh"]
 
