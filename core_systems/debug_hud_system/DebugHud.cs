@@ -288,6 +288,18 @@ public partial class DebugHud : Control
 		}
 	}
 
+    public void _on_h_slider_value_changed(float value)
+	{
+		Label a = GetNode<Label>("OptionsPanel/TabContainer/spawn/amountOfSPawnLabel/HSlider/Label2");
+		a.Text = value.ToString();
+	}
+
+    public int GetNeedNumOfSpawn() 
+	{
+		HSlider a = GetNode<HSlider>("OptionsPanel/TabContainer/spawn/amountOfSPawnLabel/HSlider");
+		return (int) a.Value;
+	}
+
 	public void CheckScreenModeSetting()
 	{
 		// pokud mame vybrany mod windowed, tak povolime moznost vybrat velikost okna, jinak ne

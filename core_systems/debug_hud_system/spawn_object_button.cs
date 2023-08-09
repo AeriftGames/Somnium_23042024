@@ -24,8 +24,11 @@ public partial class spawn_object_button : Button
         InventoryObjectCamera invCam = a.GetObjectCamera() as InventoryObjectCamera;
         if (invCam == null) return;
 
-        UniversalFunctions.SpawnGameObjectToWorld(
+        Godot.Collections.Array<Node3D> allSpawnNodes = UniversalFunctions.SpawnGameObjectToWorld(
             GameMaster.GM.LevelLoader.GetActualLevelScene(),
-            spawnObjectPath, invCam.GetInventoryItemPutPos().GlobalPosition);
+            spawnObjectPath, invCam.GetInventoryItemPutPos().GlobalPosition,
+            GameMaster.GM.GetDebugHud().GetNeedNumOfSpawn());
+
+        GD.Print("Spawn " + allSpawnNodes.Count + " object of: " + allSpawnNodes[0].Name);
     }
 }

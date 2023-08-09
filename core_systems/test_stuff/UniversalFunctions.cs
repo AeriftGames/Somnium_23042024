@@ -140,13 +140,22 @@ public partial class UniversalFunctions
     {
         return node3D.GlobalTransform.Basis.Y.Normalized();
     }
-    public static Node3D SpawnGameObjectToWorld(Node spawnParent,string path,Vector3 spawnPosition)
+    public static Godot.Collections.Array<Node3D> SpawnGameObjectToWorld(Node spawnParent,string path,Vector3 spawnPosition,int amountOfSpawn = 1)
     {
-        var spawnNode = GD.Load<PackedScene>(path).Instantiate() as Node3D;
-        spawnParent.AddChild(spawnNode);
-        spawnNode.GlobalPosition = spawnPosition;
+        Godot.Collections.Array<Node3D> allSpawnNodes = new Godot.Collections.Array<Node3D>();
 
-        return spawnNode;
+        var spawnPackedScene = GD.Load<PackedScene>(path);
+        Node3D spawnNode = null;
+
+        for (int i = 0; i < amountOfSpawn; i++)
+        {
+            spawnNode = spawnPackedScene.Instantiate() as Node3D;
+            spawnParent.AddChild(spawnNode);
+            spawnNode.GlobalPosition = spawnPosition;
+            allSpawnNodes.Add(spawnNode);
+        }
+
+        return allSpawnNodes;
     }
     public static List<SSpawnObjectInfo> GetAllSpawnObjectsFromDir(string newDir = "res://spawn")
     {

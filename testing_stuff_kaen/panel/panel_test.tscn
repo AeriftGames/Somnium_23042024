@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://c80b2o7m4ueb3"]
+[gd_scene load_steps=25 format=3 uid="uid://c80b2o7m4ueb3"]
 
 [ext_resource type="Material" uid="uid://cex82fib42ugi" path="res://testing_stuff_kaen/panel/panel_test.material" id="1_2efcf"]
 [ext_resource type="Texture2D" uid="uid://c8lfjg881mkj1" path="res://testing_stuff_kaen/panel/animated_texture1.tres" id="2_ljmqb"]
@@ -120,6 +120,9 @@ emission_enabled = true
 emission_energy_multiplier = 12.0
 emission_texture = SubResource("AnimatedTexture_gm01f")
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_0fyko"]
+size = Vector3(0.266124, 2.00002, 3.20046)
+
 [node name="panel_test" type="MeshInstance3D"]
 material_override = ExtResource("1_2efcf")
 mesh = SubResource("ArrayMesh_3enfi")
@@ -159,3 +162,8 @@ material_override = SubResource("StandardMaterial3D_7hf5w")
 cast_shadow = 0
 gi_mode = 0
 mesh = SubResource("BoxMesh_8ubcu")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_0fyko")

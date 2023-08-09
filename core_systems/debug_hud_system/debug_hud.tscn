@@ -160,6 +160,7 @@ theme_override_styles/tab_selected = SubResource("StyleBoxFlat_2d7rl")
 theme_override_styles/tab_unselected = SubResource("StyleBoxFlat_yi35b")
 
 [node name="main" type="VBoxContainer" parent="OptionsPanel/TabContainer"]
+visible = false
 layout_mode = 2
 
 [node name="ShowFps_CheckBox" type="CheckBox" parent="OptionsPanel/TabContainer/main"]
@@ -249,8 +250,40 @@ visible = false
 layout_mode = 2
 
 [node name="spawn" type="VBoxContainer" parent="OptionsPanel/TabContainer"]
-visible = false
 layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="OptionsPanel/TabContainer/spawn"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+
+[node name="amountOfSPawnLabel" type="Label" parent="OptionsPanel/TabContainer/spawn"]
+custom_minimum_size = Vector2(8.43, 0)
+layout_mode = 2
+text = " amount"
+vertical_alignment = 1
+
+[node name="HSlider" type="HSlider" parent="OptionsPanel/TabContainer/spawn/amountOfSPawnLabel"]
+custom_minimum_size = Vector2(200, 30)
+layout_mode = 0
+offset_left = 74.0
+offset_right = 274.0
+offset_bottom = 30.0
+size_flags_horizontal = 4
+min_value = 1.0
+max_value = 20.0
+value = 1.0
+ticks_on_borders = true
+
+[node name="Label2" type="Label" parent="OptionsPanel/TabContainer/spawn/amountOfSPawnLabel/HSlider"]
+layout_mode = 2
+offset_left = 204.0
+offset_right = 243.0
+offset_bottom = 26.0
+grow_horizontal = 0
+grow_vertical = 2
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="video" type="VBoxContainer" parent="OptionsPanel/TabContainer"]
 visible = false
@@ -707,6 +740,7 @@ text = "video memory used:"
 [connection signal="toggled" from="OptionsPanel/TabContainer/main/CustomLabelEnable_Checkbox9" to="." method="_on_custom_label_enable_checkbox_toggled" binds= [9]]
 [connection signal="toggled" from="OptionsPanel/TabContainer/main/EnableWorldOcclusionCulling_CheckBox" to="." method="_on_enable_world_occlusion_culling_check_box_toggled"]
 [connection signal="pressed" from="OptionsPanel/TabContainer/main/SaveMainAsDefaultButton" to="." method="_on_save_main_as_default_button_pressed"]
+[connection signal="value_changed" from="OptionsPanel/TabContainer/spawn/amountOfSPawnLabel/HSlider" to="." method="_on_h_slider_value_changed"]
 [connection signal="item_selected" from="OptionsPanel/TabContainer/video/ScreenMode_HBoxContainer/ScreenMode_OptionButton" to="." method="_on_screen_mode_option_button_item_selected"]
 [connection signal="item_selected" from="OptionsPanel/TabContainer/video/WindowSize_HBoxContainer/WindowSize_OptionButton" to="." method="_on_window_size_option_button_item_selected"]
 [connection signal="item_selected" from="OptionsPanel/TabContainer/video/Antialias_HBoxContainer/Antialias_OptionButton" to="." method="_on_antialias_option_button_item_selected"]

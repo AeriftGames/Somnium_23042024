@@ -1,7 +1,7 @@
 [gd_scene load_steps=45 format=3 uid="uid://58nj6eubm861"]
 
 [ext_resource type="Script" path="res://testing_stuff_kaen/drawer_test.cs" id="1_cxruy"]
-[ext_resource type="Material" uid="uid://2cei58gydlnn" path="res://testing_stuff_kaen/new drawers/new_drawers_mat.material" id="3_1f48i"]
+[ext_resource type="Material" uid="uid://2cei58gydlnn" path="res://testing_stuff_kaen/new drawers/new_drawers_metal_mat.material" id="2_td4ee"]
 [ext_resource type="PackedScene" uid="uid://dbnevtbu1g7uy" path="res://core_systems/interactive_system/interactive_object.tscn" id="3_lnqsp"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_0x6da"]
@@ -267,7 +267,7 @@ angular_damp = 5.0
 
 [node name="suplik" type="MeshInstance3D" parent="Drawer_test1/DrawerGrab"]
 transform = Transform3D(-2.40413e-08, 0, -0.55, 0, 0.55, 0, 0.55, 0, -2.40413e-08, 0, 0, 0)
-material_override = ExtResource("3_1f48i")
+material_override = ExtResource("2_td4ee")
 mesh = SubResource("ArrayMesh_fe2dy")
 skeleton = NodePath("")
 
@@ -343,7 +343,7 @@ angular_damp = 5.0
 
 [node name="suplik4" type="MeshInstance3D" parent="Drawer_test2/DrawerGrab"]
 transform = Transform3D(-2.40413e-08, 0, -0.55, 0, 0.55, 0, 0.55, 0, -2.40413e-08, 0, 0, 0)
-material_override = ExtResource("3_1f48i")
+material_override = ExtResource("2_td4ee")
 mesh = SubResource("ArrayMesh_30l0c")
 skeleton = NodePath("")
 
@@ -419,7 +419,7 @@ angular_damp = 5.0
 
 [node name="suplik" type="MeshInstance3D" parent="Drawer_test3/DrawerGrab"]
 transform = Transform3D(-2.40413e-08, 0, -0.55, 0, 0.55, 0, 0.55, 0, -2.40413e-08, 0, 0, 0)
-material_override = ExtResource("3_1f48i")
+material_override = ExtResource("2_td4ee")
 mesh = SubResource("ArrayMesh_lx5xn")
 skeleton = NodePath("")
 
@@ -495,7 +495,7 @@ angular_damp = 5.0
 
 [node name="suplik" type="MeshInstance3D" parent="Drawer_test4/DrawerGrab"]
 transform = Transform3D(-2.40413e-08, 0, -0.55, 0, 0.55, 0, 0.55, 0, -2.40413e-08, 0, 0, 0)
-material_override = ExtResource("3_1f48i")
+material_override = ExtResource("2_td4ee")
 mesh = SubResource("ArrayMesh_5vnm1")
 skeleton = NodePath("")
 
@@ -554,7 +554,7 @@ linear_spring_z/enabled = true
 
 [node name="Cube" type="MeshInstance3D" parent="."]
 transform = Transform3D(-2.40413e-08, 0, -0.55, 0, 0.55, 0, 0.55, 0, -2.40413e-08, -0.0193223, 0, -0.124907)
-material_override = ExtResource("3_1f48i")
+material_override = ExtResource("2_td4ee")
 mesh = SubResource("ArrayMesh_gstoh")
 skeleton = NodePath("")
 
