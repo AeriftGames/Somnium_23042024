@@ -120,6 +120,52 @@ public partial class FPSCharacter_Inventory : FPSCharacter_Interaction
         bool shootNow = IsInputEnable() && CanShootProjectile && Input.IsActionJustPressed("mouseRightClick");
         if (shootNow)
             ShootPhysicProjectile();
+
+        // put inventory item to world
+        TestInventoryItemPutToWorld();
+    }
+
+    public void TestInventoryItemPutToWorld()
+    {
+        // put inventory item to world
+        if (GetInventorySystem().wantPutItem)
+        {
+            //
+            InventoryObjectCamera invObjectCam = GetObjectCamera() as InventoryObjectCamera;
+            if (invObjectCam == null) return;
+
+            Vector3 resA = invObjectCam.GetInventoryItemPutPos().GlobalPosition;
+            Vector3 resB = invObjectCam.GetInventoryItemPutPos().GlobalPosition;
+
+            // A - testujeme kolizi s layer 1 = level collisions
+            // zjisteni bezpecne pozice pro vypusteni itemu
+            UniversalFunctions.HitResult hit = UniversalFunctions.IsSimpleRaycastHit(this,
+                GetFPSCharacterCamera().GlobalPosition,
+                invObjectCam.GetInventoryItemPutPos().GlobalPosition, 1);
+
+            Vector3 spawnPos = invObjectCam.GetInventoryItemPutPos().GlobalPosition;
+
+            if (hit.isHit)
+                resA = hit.HitPosition;
+
+            // B - testujeme kolizi s layer 8 = physics items
+            // zjisteni bezpecne pozice pro vypusteni itemu
+            UniversalFunctions.HitResult hit2 = UniversalFunctions.IsSimpleRaycastHit(this,
+                GetFPSCharacterCamera().GlobalPosition,
+                invObjectCam.GetInventoryItemPutPos().GlobalPosition, 8);
+
+            if (hit2.isHit)
+                resB = hit2.HitPosition;
+
+            if(resA.DistanceTo(GetFPSCharacterCamera().GlobalPosition) < resB.DistanceTo(GetFPSCharacterCamera().GlobalPosition))
+                spawnPos = resA;
+            else
+                spawnPos = resB;
+
+            GetInventorySystem().PutItemFromInventoryToWorld(GetInventorySystem().wantInventoryItemDataPutToWorld,
+                spawnPos);
+            GetInventorySystem().ResetWantItemPutFromInventory();
+        }
     }
 
     public inventory_menu GetInventoryMenu(){ return ourInventoryMenu; }

@@ -10,6 +10,10 @@ public partial class InventorySystem : Node
 
 	private FPSCharacter_Inventory inventoryCharacter = null;
 
+	//
+	public bool wantPutItem = false;
+	public InventoryItemData wantInventoryItemDataPutToWorld = null;
+
 	public override void _Ready()
 	{
     }
@@ -55,7 +59,19 @@ public partial class InventorySystem : Node
 		return GetAllInventoryItems().Count < MaxInventoryCapacity ? true : false;
 	}
 
-	public bool PutItemFromInventoryToWorld(InventoryItemData newInventoryItemData)
+	public void WantPutItemFromInventory(InventoryItemData newInventoryItemData)
+	{
+        wantPutItem = true;
+		wantInventoryItemDataPutToWorld = newInventoryItemData;
+    }
+
+	public void ResetWantItemPutFromInventory()
+	{
+		wantPutItem = false;
+		wantInventoryItemDataPutToWorld = null;
+    }
+
+	public bool PutItemFromInventoryToWorld(InventoryItemData newInventoryItemData,Vector3 safePos)
 	{
 		InventoryObjectCamera invCam = inventoryCharacter.objectCamera as InventoryObjectCamera;
 		if (invCam == null) return false;
@@ -64,7 +80,7 @@ public partial class InventorySystem : Node
         Node3D itemPut = GD.Load<PackedScene>(newInventoryItemData.spawnObjectScenePath).Instantiate() as Node3D;
 		if(itemPut != null)
 		GameMaster.GM.LevelLoader.GetActualLevelScene().AddChild(itemPut);
-        itemPut.GlobalPosition = invCam.GetInventoryItemPutPos().GlobalPosition;
+		itemPut.GlobalPosition = safePos;
 
         // Destroy from InventorySystem
         GetAllInventoryItems().Remove(newInventoryItemData);

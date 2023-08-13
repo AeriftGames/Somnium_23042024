@@ -474,7 +474,7 @@ linear_limit_z/lower_distance = -0.5
 linear_spring_z/enabled = true
 
 [node name="Drawer_test4" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.46058, -0.105981, 0.178503)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.460581, -0.105981, 0.178503)
 script = ExtResource("1_2gcyp")
 drawerInertia = Vector3(0, 0, 0)
 drawerAngularDamp = 3.0

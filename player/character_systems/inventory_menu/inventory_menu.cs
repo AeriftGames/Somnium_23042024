@@ -351,9 +351,8 @@ public partial class inventory_menu : Control
         if (pressedInventorySlot.GetIsAttachSlotEffectEnable())
             ApplyDeteachItem(pressedInventorySlot);
 
-        // Call Put to world
-        inventorySystem.PutItemFromInventoryToWorld(pressedInventorySlot.GetInventoryItemData());
-
+        inventorySystem.WantPutItemFromInventory(pressedInventorySlot.GetInventoryItemData());
+        
         // pokud nas aktualni focusovany slot je stejny jako ten na kterem je item ktery chceme vyhodt
         // prerusime jeho focus
         if(pressedInventorySlot.GetID() == actualFocusSlotID)
