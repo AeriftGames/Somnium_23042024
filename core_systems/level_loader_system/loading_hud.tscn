@@ -1,8 +1,22 @@
-[gd_scene load_steps=2 format=3 uid="uid://tr2dxfjg7wdl"]
+[gd_scene load_steps=4 format=3 uid="uid://tr2dxfjg7wdl"]
 
 [ext_resource type="Script" path="res://core_systems/level_loader_system/LoadingHud.cs" id="1_3ph3u"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s6d1c"]
+bg_color = Color(0.172549, 0.180392, 0.164706, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_23rji"]
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
 [node name="LoadingHud" type="Control"]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -54,6 +68,7 @@ text = "loading, please wait..."
 horizontal_alignment = 1
 
 [node name="ShaderPrecompLabelVBox" type="VBoxContainer" parent="."]
+visible = false
 custom_minimum_size = Vector2(400, 200)
 layout_mode = 0
 anchor_left = 0.5
@@ -72,3 +87,22 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "PRECOMPLILE SHADER 0%"
 horizontal_alignment = 1
+
+[node name="LoadingLevel_ProgressBar" type="ProgressBar" parent="."]
+process_mode = 3
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = 134.0
+offset_right = 150.0
+offset_bottom = 157.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_s6d1c")
+theme_override_styles/fill = SubResource("StyleBoxFlat_23rji")
+step = 5.0

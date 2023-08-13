@@ -117,10 +117,6 @@ public partial class CLevelLoader : Godot.GodotObject
 
     public void StartPrecompileShaderProcess()
     {
-        // vytvorime a nastavime loading hud
-        loadingHud = SpawnLoadingHud();
-        loadingHud.SetInitializeAndVisibleNow(actualLevelName, false);
-
         // TODO - bonus, vytvorit gui scenu pro loading (prekryti vsech tech nesmyslu co se deji za oponou)
         gm.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "START PRECOMPILE SHADER PROCESS...");
 
@@ -285,7 +281,11 @@ public partial class CLevelLoader : Godot.GodotObject
         canUpdate = true;
         loadingScenePath = newLevelScenePath;
 
-        ResourceLoader.LoadThreadedRequest(loadingScenePath,"");
+        // vytvorime a nastavime loading hud
+        loadingHud = SpawnLoadingHud();
+        loadingHud.SetInitializeAndVisibleNow(actualLevelName, false);
+
+        ResourceLoader.LoadThreadedRequest(loadingScenePath,"",true);
     }
 
     public async void Update(double delta)
@@ -294,8 +294,10 @@ public partial class CLevelLoader : Godot.GodotObject
 
         ResourceLoader.ThreadLoadStatus loadingNewWorldLevelStatus = ResourceLoader.LoadThreadedGetStatus(loadingScenePath, progress);
 
+        float c = 0;
+
         // Novy level se nacetl uspesne a lze pouzit
-        if(loadingNewWorldLevelStatus == ResourceLoader.ThreadLoadStatus.Loaded)
+        if (loadingNewWorldLevelStatus == ResourceLoader.ThreadLoadStatus.Loaded)
         {
             GD.Print("loading scene is complete, it is change now");
             gm.GetTree().ChangeSceneToPacked((PackedScene)ResourceLoader.LoadThreadedGet(loadingScenePath));
@@ -308,7 +310,13 @@ public partial class CLevelLoader : Godot.GodotObject
         {
             // Bohuzel nedela co by melo.. ale v tomhle update loopu by jsme mohli treba animovat nejaky loading
             GD.Print("loading bar: " + progress[0]);
+            loadingHud.UpdateProgressBar(((float)progress[0]));
         }
+    }
+
+    public void a(float progress)
+    {
+        loadingHud.UpdateProgressBar(progress);
     }
 
     public Node GetActualLevelScene()
