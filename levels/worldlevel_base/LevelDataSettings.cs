@@ -36,18 +36,18 @@ public partial class LevelDataSettings : Node
     [ExportGroup("High Voxel Settings")]
     [Export] public VoxelGI.SubdivEnum HighVoxelSub = VoxelGI.SubdivEnum.Subdiv512;
     [Export] public float HighVoxelHdr = 2.0f;
-    [Export] public float HighVoxelEnergy = 0.8f;
-    [Export] public float HighVoxelBias = 0.8f;
-    [Export] public float HighVoxelNormalBias = 1.2f;
-    [Export] public float HighVoxelPropag = 0.8f;
+    [Export] public float HighVoxelEnergy = 0.7f;
+    [Export] public float HighVoxelBias = 0.3f;
+    [Export] public float HighVoxelNormalBias = 1.0f;
+    [Export] public float HighVoxelPropag = 0.76f;
 
     [ExportGroup("Highest Voxel Settings")]
     [Export] public VoxelGI.SubdivEnum HighestVoxelSub = VoxelGI.SubdivEnum.Subdiv512;
     [Export] public float HighestVoxelHdr = 2.0f;
-    [Export] public float HighestVoxelEnergy = 0.8f;
-    [Export] public float HighestVoxelBias = 0.8f;
-    [Export] public float HighestVoxelNormalBias = 1.2f;
-    [Export] public float HighestVoxelPropag = 0.8f;
+    [Export] public float HighestVoxelEnergy = 0.7f;
+    [Export] public float HighestVoxelBias = 0.3f;
+    [Export] public float HighestVoxelNormalBias = 1.0f;
+    [Export] public float HighestVoxelPropag = 0.76f;
 
 
     public class SQualityData
@@ -92,7 +92,7 @@ public partial class LevelDataSettings : Node
 
         newPresset.FSRScale = 0.36f;
         newPresset.SSAO = true;
-        newPresset.SSIL = true;
+        newPresset.SSIL = false;
         newPresset.ShadowFilterQuality = RenderingServer.ShadowQuality.SoftLow;
         newPresset.ShadowAtlasSize = 2048;
 
@@ -112,7 +112,7 @@ public partial class LevelDataSettings : Node
 
         newPresset.FSRScale = 0.5f;
         newPresset.SSAO = true;
-        newPresset.SSIL = true;
+        newPresset.SSIL = false;
         newPresset.ShadowFilterQuality = RenderingServer.ShadowQuality.SoftMedium;
         newPresset.ShadowAtlasSize = 4096;
 
@@ -132,7 +132,7 @@ public partial class LevelDataSettings : Node
 
         newPresset.FSRScale = 0.8f;
         newPresset.SSAO = true;
-        newPresset.SSIL = true;
+        newPresset.SSIL = false;
         newPresset.ShadowFilterQuality = RenderingServer.ShadowQuality.SoftHigh;
         newPresset.ShadowAtlasSize = 4096;
 
@@ -152,7 +152,7 @@ public partial class LevelDataSettings : Node
 
         newPresset.FSRScale = 0.98f;
         newPresset.SSAO = true;
-        newPresset.SSIL = true;
+        newPresset.SSIL = false;
         newPresset.VoxelSub = HighestVoxelSub;
         newPresset.VoxelEnergy = HighestVoxelEnergy;
         newPresset.VoxelPropag = HighestVoxelPropag;
