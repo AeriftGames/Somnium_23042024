@@ -394,7 +394,6 @@ limits/multithreaded_server/rid_pool_prealloc=120
 
 [rendering]
 
-driver/threads/thread_model=2
 lights_and_shadows/positional_shadow/soft_shadow_filter_quality=3
 scaling_3d/mode=2
 scaling_3d/scale=0.8

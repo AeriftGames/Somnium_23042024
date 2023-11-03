@@ -6,14 +6,14 @@
 script = ExtResource("1_8rhwy")
 ScreenMode = 0
 ScreenSizeID = 1
-Scale3d = 0.6
-AntialiasID = 1
+Scale3d = 0.8
+AntialiasID = 0
 GlobalIlumination = 1
 Sdfgi = false
 Ssao = true
 Ssil = true
 HalfResolutionGI = false
-UnlockMaxFps = true
+UnlockMaxFps = false
 DisableVsync = false
 MainVolume = 1.0
 MusicVolume = -0.7

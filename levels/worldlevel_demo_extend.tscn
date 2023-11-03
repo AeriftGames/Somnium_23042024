@@ -155,7 +155,6 @@ script = ExtResource("1_ucxcv")
 
 [node name="LevelDataSettings" type="Node" parent="."]
 script = ExtResource("2_u2484")
-ForceQualityOnLevelStart = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_a2asp")
