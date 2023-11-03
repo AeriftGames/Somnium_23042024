@@ -399,4 +399,5 @@ scaling_3d/mode=2
 scaling_3d/scale=0.8
 scaling_3d/fsr_sharpness=0.2
 environment/screen_space_reflection/roughness_quality=2
+anti_aliasing/quality/use_debanding=true
 occlusion_culling/use_occlusion_culling=true

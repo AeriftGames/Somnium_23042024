@@ -40,9 +40,10 @@ ambient_light_source = 2
 ambient_light_color = Color(0.12549, 0.12549, 0.12549, 1)
 tonemap_mode = 2
 ssao_enabled = true
-ssil_enabled = true
-ssil_radius = 1.0
-ssil_intensity = 2.3
+ssao_radius = 2.0
+ssao_intensity = 3.0
+ssao_power = 2.04906
+ssao_detail = 3.0
 sdfgi_use_occlusion = true
 sdfgi_read_sky_light = false
 sdfgi_bounce_feedback = 0.76
@@ -160,9 +161,9 @@ script = ExtResource("2_u2484")
 environment = SubResource("Environment_a2asp")
 
 [node name="VoxelGI" type="VoxelGI" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.9, 2.25, 1.9)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.84739, 2.22975, 1.93333)
 subdiv = 2
-size = Vector3(80, 5.7, 13.8)
+size = Vector3(80.7089, 5.67378, 13.23)
 data = ExtResource("2_d5wgc")
 metadata/_edit_lock_ = true
 
@@ -2052,7 +2053,7 @@ transform = Transform3D(-0.282843, 0, -0.282843, 0, 0.4, 0, 0.282843, 0, -0.2828
 transform = Transform3D(1.23634e-08, -0.4, 1.23634e-08, -0.282843, -1.74846e-08, -0.282843, 0.282843, 0, -0.282843, -9.92156, 2.51363, -3.73485)
 
 [node name="light_wall8" parent="LevelScene/Rooms/Room2/LightEmmisions" instance=ExtResource("8_d8h8b")]
-transform = Transform3D(-0.282843, 0, -0.282843, 0, 0.4, 0, 0.282843, 0, -0.282843, -13.8594, 1.11363, -0.0323115)
+transform = Transform3D(-0.282843, 0, -0.282843, 0, 0.4, 0, 0.282843, 0, -0.282843, -13.8594, 1.11363, -0.03231)
 
 [node name="light_wall17" parent="LevelScene/Rooms/Room2/LightEmmisions" instance=ExtResource("8_d8h8b")]
 transform = Transform3D(-0.282843, 0, -0.282843, 0, 0.4, 0, 0.282843, 0, -0.282843, -17.6594, 1.11363, -4.02849)
@@ -2126,6 +2127,7 @@ transform = Transform3D(-2.18557e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.18557e-08, 
 transform = Transform3D(-2.18557e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.18557e-08, -12, 0.3, 3)
 
 [node name="LevelOcclusion" type="OccluderInstance3D" parent="LevelScene"]
+visible = false
 occluder = ExtResource("3_gksyn")
 metadata/_edit_group_ = true
 metadata/_edit_lock_ = true

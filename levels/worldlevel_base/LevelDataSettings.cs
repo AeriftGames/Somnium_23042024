@@ -7,32 +7,47 @@ public partial class LevelDataSettings : Node
 
     [Export] public bool ForceQualityOnLevelStart = false;
 
-    [Export] public EQualityPresset StartQualityPresset = EQualityPresset.medium;
+    [Export] public EQualityPresset StartQualityPresset = EQualityPresset.high;
 
     [ExportGroup("Lowest Voxel Settings")]
     [Export] public VoxelGI.SubdivEnum LowestVoxelSub = VoxelGI.SubdivEnum.Subdiv128;
-    [Export] public float LowestVoxelEnergy = 0.5f;
-    [Export] public float LowestVoxelPropag = 0.5f;
+    [Export] public float LowestVoxelHdr = 2.0f;
+    [Export] public float LowestVoxelEnergy = 0.6f;
+    [Export] public float LowestVoxelBias = 0.3f;
+    [Export] public float LowestVoxelNormalBias = 0.6f;
+    [Export] public float LowestVoxelPropag = 0.7f;
 
     [ExportGroup("Low Voxel Settings")]
     [Export] public VoxelGI.SubdivEnum LowVoxelSub = VoxelGI.SubdivEnum.Subdiv128;
-    [Export] public float LowVoxelEnergy = 0.7f;
+    [Export] public float LowVoxelHdr = 2.0f;
+    [Export] public float LowVoxelEnergy = 0.6f;
+    [Export] public float LowVoxelBias = 0.3f;
+    [Export] public float LowVoxelNormalBias = 0.6f;
     [Export] public float LowVoxelPropag = 0.7f;
 
     [ExportGroup("Medium Voxel Settings")]
     [Export] public VoxelGI.SubdivEnum MediumVoxelSub = VoxelGI.SubdivEnum.Subdiv256;
-    [Export] public float MediumVoxelEnergy = 0.8f;
+    [Export] public float MediumVoxelHdr = 2.0f;
+    [Export] public float MediumVoxelEnergy = 0.7f;
+    [Export] public float MediumVoxelBias = 0.6f;
+    [Export] public float MediumVoxelNormalBias = 0.6f;
     [Export] public float MediumVoxelPropag = 0.8f;
 
     [ExportGroup("High Voxel Settings")]
     [Export] public VoxelGI.SubdivEnum HighVoxelSub = VoxelGI.SubdivEnum.Subdiv512;
+    [Export] public float HighVoxelHdr = 2.0f;
     [Export] public float HighVoxelEnergy = 0.8f;
-    [Export] public float HighVoxelPropag = 0.82f;
+    [Export] public float HighVoxelBias = 0.8f;
+    [Export] public float HighVoxelNormalBias = 1.2f;
+    [Export] public float HighVoxelPropag = 0.8f;
 
     [ExportGroup("Highest Voxel Settings")]
     [Export] public VoxelGI.SubdivEnum HighestVoxelSub = VoxelGI.SubdivEnum.Subdiv512;
+    [Export] public float HighestVoxelHdr = 2.0f;
     [Export] public float HighestVoxelEnergy = 0.8f;
-    [Export] public float HighestVoxelPropag = 0.82f;
+    [Export] public float HighestVoxelBias = 0.8f;
+    [Export] public float HighestVoxelNormalBias = 1.2f;
+    [Export] public float HighestVoxelPropag = 0.8f;
 
 
     public class SQualityData
@@ -41,7 +56,10 @@ public partial class LevelDataSettings : Node
         public bool SSAO;                   // false - true
         public bool SSIL;                   // false - true
         public VoxelGI.SubdivEnum VoxelSub; // 64,128,256,512
+        public float VoxelHdr;
         public float VoxelEnergy;             // 0-4
+        public float VoxelBias;
+        public float VoxelNormalBias;
         public float VoxelPropag;             // 0-1
         public RenderingServer.ShadowQuality ShadowFilterQuality;
         public int ShadowAtlasSize;         // 1024-8192
@@ -59,7 +77,10 @@ public partial class LevelDataSettings : Node
         newPresset.ShadowAtlasSize = 2048;
 
         newPresset.VoxelSub = LowestVoxelSub;
+        newPresset.VoxelHdr = LowestVoxelHdr;
         newPresset.VoxelEnergy = LowestVoxelEnergy;
+        newPresset.VoxelBias = LowestVoxelBias;
+        newPresset.VoxelNormalBias = LowestVoxelNormalBias;
         newPresset.VoxelPropag = LowestVoxelPropag;
 
         return newPresset;
@@ -76,7 +97,10 @@ public partial class LevelDataSettings : Node
         newPresset.ShadowAtlasSize = 2048;
 
         newPresset.VoxelSub = LowVoxelSub;
+        newPresset.VoxelHdr = LowVoxelHdr;
         newPresset.VoxelEnergy = LowVoxelEnergy;
+        newPresset.VoxelBias = LowVoxelBias;
+        newPresset.VoxelNormalBias = LowVoxelNormalBias;
         newPresset.VoxelPropag = LowVoxelPropag;
 
         return newPresset;
@@ -93,7 +117,10 @@ public partial class LevelDataSettings : Node
         newPresset.ShadowAtlasSize = 4096;
 
         newPresset.VoxelSub = MediumVoxelSub;
+        newPresset.VoxelHdr = MediumVoxelHdr;
         newPresset.VoxelEnergy = MediumVoxelEnergy;
+        newPresset.VoxelBias = MediumVoxelBias;
+        newPresset.VoxelNormalBias = MediumVoxelNormalBias;
         newPresset.VoxelPropag = MediumVoxelPropag;
 
         return newPresset;
@@ -110,7 +137,10 @@ public partial class LevelDataSettings : Node
         newPresset.ShadowAtlasSize = 4096;
 
         newPresset.VoxelSub = HighVoxelSub;
+        newPresset.VoxelHdr = HighVoxelHdr;
         newPresset.VoxelEnergy = HighVoxelEnergy;
+        newPresset.VoxelBias = HighVoxelBias;
+        newPresset.VoxelNormalBias = HighVoxelNormalBias;
         newPresset.VoxelPropag = HighVoxelPropag;
 
         return newPresset;
@@ -129,6 +159,13 @@ public partial class LevelDataSettings : Node
         newPresset.ShadowFilterQuality = RenderingServer.ShadowQuality.SoftUltra;
         newPresset.ShadowAtlasSize = 8192;
 
+        newPresset.VoxelSub = HighestVoxelSub;
+        newPresset.VoxelHdr = HighestVoxelHdr;
+        newPresset.VoxelEnergy = HighestVoxelEnergy;
+        newPresset.VoxelBias = HighestVoxelBias;
+        newPresset.VoxelNormalBias = HighestVoxelNormalBias;
+        newPresset.VoxelPropag = HighestVoxelPropag;
+
         return newPresset;
     }
 
@@ -143,6 +180,8 @@ public partial class LevelDataSettings : Node
 
         GameMaster.GM.LevelLoader.GetActualLevelScene().GetVoxelGI().Data.Energy = newLevelData.VoxelEnergy;
         GameMaster.GM.LevelLoader.GetActualLevelScene().GetVoxelGI().Data.Propagation = newLevelData.VoxelPropag;
+        GameMaster.GM.LevelLoader.GetActualLevelScene().GetVoxelGI().Data.Bias = newLevelData.VoxelBias;
+        GameMaster.GM.LevelLoader.GetActualLevelScene().GetVoxelGI().Data.NormalBias = newLevelData.VoxelNormalBias;
 
         GameMaster.GM.LevelLoader.GetActualLevelScene().GetVoxelGI().CallDeferred("bake");
         GameMaster.GM.LevelLoader.GetActualLevelScene().GetVoxelGI().Data.EmitChanged();
