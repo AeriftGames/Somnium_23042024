@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=4 format=3 uid="uid://bcra4xogyimkc"]
 
 [ext_resource type="Script" path="res://testing_stuff_kaen/test_light.cs" id="1_382yx"]
 

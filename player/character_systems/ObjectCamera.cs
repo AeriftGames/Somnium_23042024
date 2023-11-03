@@ -11,6 +11,7 @@ public partial class ObjectCamera : Node3D
 	public Node3D NodeRotX = null;
 	public Node3D NodeLean = null;
 	public Node3D ShakeNode = null;
+	public Node3D DangerShake = null;
 	public Camera3D Camera = null;
 	public Marker3D HandGrabMarker;
 	public Generic6DofJoint3D HandGrabJoint = null;
@@ -58,6 +59,7 @@ public partial class ObjectCamera : Node3D
 		NodeRotX = GetNode<Node3D>("%NodeRotX");
 		NodeLean = GetNode<Node3D>("%NodeLean");
 		ShakeNode = GetNode<Node3D>("%ShakeNode");
+		DangerShake = GetNode<Node3D>("%HeadDangerShake");
         Camera = GetNode<Camera3D>("%Camera");
 		HandGrabMarker = GetNode<Marker3D>("%HandGrabMarker");
 		HandGrabJoint = GetNode<Generic6DofJoint3D>("%HandGrabJoint");

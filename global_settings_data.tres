@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=2 format=3 uid="uid://cphpd0xhc81c6"]
+[gd_resource type="Resource" load_steps=2 format=3]
 
 [ext_resource type="Script" path="res://core_systems/global_settings_data.cs" id="1_8rhwy"]
 
@@ -6,14 +6,14 @@
 script = ExtResource("1_8rhwy")
 ScreenMode = 0
 ScreenSizeID = 1
-Scale3d = 0.8
+Scale3d = 0.6
 AntialiasID = 1
 GlobalIlumination = 1
 Sdfgi = false
 Ssao = true
 Ssil = true
 HalfResolutionGI = false
-UnlockMaxFps = false
+UnlockMaxFps = true
 DisableVsync = false
 MainVolume = 1.0
 MusicVolume = -0.7

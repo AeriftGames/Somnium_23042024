@@ -13,6 +13,7 @@ public partial class CharacterInteractiveSystem : Godot.GodotObject
     bool isCanNewGrab = true;
     bool wantRotateNow = false;
 
+    bool canUse = true;
     //only for GrabActions
     bool isFirstGrabAction = true;
     Vector2 originalHandGrabbedTex = Vector2.Zero;
@@ -118,8 +119,16 @@ public partial class CharacterInteractiveSystem : Godot.GodotObject
             }
 
             // Pokud je momentalne od hrace input zadost pro USE, pouzijeme vnitrni funkci objektu pro USE
-            if (newUseNow)
-                newInteractiveObject.Use(character);
+            if (newUseNow && canUse)
+            {
+                if(newInteractiveObject != null && pickedBody != null)
+                {
+                    StopGrabbing();
+                    newInteractiveObject.Use(character);
+                    pickedBody = null;
+                    newInteractiveObject = null;
+                }
+            }
         }
     }
     public void UpdateForPhysic(interactive_object newInteractiveObject, bool newUseNow,bool newGrabNow, double delta)
@@ -245,7 +254,9 @@ public partial class CharacterInteractiveSystem : Godot.GodotObject
 
     public void SetRigidBodyParamForGrab(RigidBody3D grabbedObject, bool newGrab)
     {
-        if(newGrab)
+        if (grabbedObject == null) return;
+
+        if (newGrab)
         {
             // ulozime si originalni fyzikalni data
             lastGrabbedItemOriginalParams.inertia = grabbedObject.Inertia;
@@ -270,23 +281,23 @@ public partial class CharacterInteractiveSystem : Godot.GodotObject
                         grabbedObject.PhysicsMaterialOverride.Friction = character.RBPhysicInGrab_Friction;
                         grabbedObject.PhysicsMaterialOverride.Bounce = character.RBPhysicInGrab_Bounce;
                         grabbedObject.Mass = character.RBPhysicInGrab_Mass;
-                        break; 
+                        break;
                     }
                 case interactive_object.EInteractivePhysicType.GrabAction:
                     {
                         break;
                     }
-            }  
+            }
         }
         else
         {
-            // pri opusteni grab, nahrajeme objektu puvodni data
-            grabbedObject.Inertia = lastGrabbedItemOriginalParams.inertia;
-            grabbedObject.AngularDamp = lastGrabbedItemOriginalParams.angularDamp;
-            grabbedObject.LinearDamp = lastGrabbedItemOriginalParams.linearDamp;
-            grabbedObject.PhysicsMaterialOverride.Friction = lastGrabbedItemOriginalParams.friction;
-            grabbedObject.PhysicsMaterialOverride.Bounce = lastGrabbedItemOriginalParams.bounce;
-            grabbedObject.Mass = lastGrabbedItemOriginalParams.mass;
+
+                // pri opusteni grab, nahrajeme objektu puvodni data
+                grabbedObject.Inertia = lastGrabbedItemOriginalParams.inertia;
+                grabbedObject.AngularDamp = lastGrabbedItemOriginalParams.angularDamp;
+                grabbedObject.LinearDamp = lastGrabbedItemOriginalParams.linearDamp;
+                grabbedObject.Mass = lastGrabbedItemOriginalParams.mass;
+
         }
     }
 
@@ -450,5 +461,10 @@ public partial class CharacterInteractiveSystem : Godot.GodotObject
             isFirstGrabAction = true;
             actualInteractiveObject.GrabActionEnd(character);
         }
+    }
+
+    public void ResetNeedGrabbing()
+    {
+        canUse = true;
     }
 }

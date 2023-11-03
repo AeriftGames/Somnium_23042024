@@ -1,9 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://cdgkldjfeacws"]
-
-[ext_resource type="PackedScene" uid="uid://nqd1o1kkhqov" path="res://testing_stuff_kaen/silo_level/glb_assets/cables1.glb" id="1_mvs5i"]
-[ext_resource type="Material" uid="uid://bw5c2g160gs3a" path="res://testing_stuff_kaen/silo_level/silo_trimsheet1_mat.tres" id="2_dqle6"]
-
-[node name="cables1" instance=ExtResource("1_mvs5i")]
-
-[node name="cables12" parent="." index="0"]
-material_override = ExtResource("2_dqle6")

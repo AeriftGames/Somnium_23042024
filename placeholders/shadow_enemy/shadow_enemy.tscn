@@ -1,0 +1,167 @@
+[gd_scene load_steps=21 format=3 uid="uid://u8ybmbqvih8v"]
+
+[ext_resource type="Script" path="res://placeholders/shadow_enemy/ShadowEnemy.cs" id="1_hyg57"]
+[ext_resource type="AudioStream" uid="uid://bihar5jfwxaj4" path="res://audio/audio_streams/enemy_test/503554__robinhood76__08191-heavy-stones-falling.wav" id="2_3mntt"]
+[ext_resource type="AudioStream" uid="uid://bbtnp12vpotm8" path="res://audio/audio_streams/enemy_test/514381__zatar__earthquake3.wav" id="3_2v2qo"]
+[ext_resource type="AudioStream" uid="uid://rfmstp0uuvpg" path="res://audio/audio_streams/enemy_test/567723__iut_paris8__boriero_nolwen_2020_2021_monster-breathing.wav" id="4_mh2w3"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_f7wrg"]
+
+[sub_resource type="NoiseTexture3D" id="NoiseTexture3D_2x74w"]
+invert = true
+noise = SubResource("FastNoiseLite_f7wrg")
+
+[sub_resource type="FogMaterial" id="FogMaterial_f3vbj"]
+density = 1.5
+albedo = Color(0, 0, 0, 1)
+height_falloff = 0.100856
+edge_fade = 0.119938
+density_texture = SubResource("NoiseTexture3D_2x74w")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_15fbi"]
+albedo_color = Color(0, 0, 0, 1)
+metallic_specular = 0.0
+
+[sub_resource type="Curve" id="Curve_6654u"]
+min_value = -360.0
+max_value = 360.0
+_data = [Vector2(0, -352.088), 0.0, 0.0, 0, 0, Vector2(0.268041, -83.0769), 0.0, 0.0, 0, 0, Vector2(0.660944, 249.231), 0.0, 0.0, 0, 0, Vector2(1, -130.549), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_4icor"]
+curve = SubResource("Curve_6654u")
+
+[sub_resource type="Curve" id="Curve_2m5i6"]
+min_value = -500.0
+max_value = 500.0
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_gwk1l"]
+curve = SubResource("Curve_2m5i6")
+
+[sub_resource type="Curve" id="Curve_rffvk"]
+_data = [Vector2(0, 0.010989), 0.0, 0.0, 0, 0, Vector2(0.587379, 0.758242), 0.0, 0.0, 0, 0, Vector2(1, 0.120879), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_jpuqr"]
+curve = SubResource("Curve_rffvk")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_irkeu"]
+lifetime_randomness = 0.21
+emission_shape = 1
+emission_sphere_radius = 2.5
+angular_velocity_min = -50.0
+angular_velocity_max = 50.0
+angular_velocity_curve = SubResource("CurveTexture_4icor")
+orbit_velocity_min = -50.0
+orbit_velocity_max = 50.0
+orbit_velocity_curve = SubResource("CurveTexture_gwk1l")
+scale_min = 0.02
+scale_max = 0.5
+scale_over_velocity_max = 27.02
+turbulence_noise_strength = 3.91
+turbulence_noise_scale = 3.87
+turbulence_noise_speed_random = 2.79
+turbulence_influence_min = 0.07
+turbulence_influence_max = 0.75
+turbulence_initial_displacement_min = 2.5
+turbulence_initial_displacement_max = 5.0
+turbulence_influence_over_life = SubResource("CurveTexture_jpuqr")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nd6cu"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_oj2gk"]
+material = SubResource("StandardMaterial3D_nd6cu")
+size = Vector2(0.1, 0.1)
+orientation = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tsdhq"]
+albedo_color = Color(0.760784, 0.133333, 0, 1)
+metallic = 0.39
+metallic_specular = 0.45
+roughness = 0.43
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_4b6up"]
+radius = 5.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_m4202"]
+radius = 20.0
+
+[node name="ShadowEnemy" type="Node3D"]
+script = ExtResource("1_hyg57")
+
+[node name="FogVolume" type="FogVolume" parent="."]
+size = Vector3(6, 6, 6)
+shape = 0
+material = SubResource("FogMaterial_f3vbj")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="FogVolume"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
+material_override = SubResource("StandardMaterial3D_15fbi")
+amount = 2000
+preprocess = 1.8
+explosiveness = 0.48
+randomness = 0.56
+fixed_fps = 60
+local_coords = true
+transform_align = 1
+trail_lifetime = 2.45
+process_material = SubResource("ParticleProcessMaterial_irkeu")
+draw_pass_1 = SubResource("PlaneMesh_oj2gk")
+
+[node name="GPUParticles3D2" type="GPUParticles3D" parent="FogVolume"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
+material_override = SubResource("StandardMaterial3D_tsdhq")
+amount = 2000
+preprocess = 7.13
+speed_scale = 1.5
+explosiveness = 0.17
+randomness = 0.34
+fixed_fps = 60
+local_coords = true
+transform_align = 1
+trail_lifetime = 2.45
+process_material = SubResource("ParticleProcessMaterial_irkeu")
+draw_pass_1 = SubResource("PlaneMesh_oj2gk")
+
+[node name="DamagePlayerArea" type="Area3D" parent="."]
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DamagePlayerArea"]
+shape = SubResource("SphereShape3D_4b6up")
+
+[node name="DetectPlayerArea" type="Area3D" parent="."]
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DetectPlayerArea"]
+shape = SubResource("SphereShape3D_m4202")
+
+[node name="AudioStreamPlayer3D_Moving" type="AudioStreamPlayer3D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("2_3mntt")
+volume_db = -10.0
+pitch_scale = 0.9
+bus = &"Sfx"
+
+[node name="AudioStreamPlayer3D_Effect" type="AudioStreamPlayer3D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("3_2v2qo")
+autoplay = true
+bus = &"Sfx"
+
+[node name="AudioStreamPlayer3D_Monster" type="AudioStreamPlayer3D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("4_mh2w3")
+volume_db = 5.0
+max_db = 5.0
+pitch_scale = 0.8
+autoplay = true
+bus = &"Sfx"
+
+[connection signal="body_entered" from="DamagePlayerArea" to="." method="_on_damage_player_area_body_entered"]
+[connection signal="body_exited" from="DamagePlayerArea" to="." method="_on_damage_player_area_body_exited"]
+[connection signal="body_entered" from="DetectPlayerArea" to="." method="_on_detect_player_area_body_entered"]
+[connection signal="body_exited" from="DetectPlayerArea" to="." method="_on_detect_player_area_body_exited"]

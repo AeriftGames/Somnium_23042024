@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://c4afkwk2krabh"]
-
-[ext_resource type="PackedScene" uid="uid://b8mn71t1vy8m1" path="res://testing_stuff_kaen/leather_test/gauce_test.glb" id="1_ew4du"]
-
-[node name="gauce_test" instance=ExtResource("1_ew4du")]
-
-[node name="Cube_038" parent="." index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)

@@ -74,7 +74,7 @@ public partial class PlayerStart : Node3D
 		characterInteraction_Instance.objectHands = objectHands_instance;
 
 		// Spawn to worldlevel node
-		Node level = GetNode("/root/worldlevel");
+		Node level = GameMaster.GM.LevelLoader.GetActualLevelScene();
 		if (level == null)
 		{
 			// If worldlevel for spawn dont finded
@@ -141,7 +141,7 @@ public partial class PlayerStart : Node3D
         characterInventory_Instance.objectHands = objectHands_instance;
 
         // Spawn to worldlevel node
-        Node level = GetNode("/root/worldlevel");
+        Node level = GameMaster.GM.LevelLoader.GetActualLevelScene();
         if (level == null)
         {
             // If worldlevel for spawn dont finded

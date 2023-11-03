@@ -1,0 +1,46 @@
+[gd_scene load_steps=5 format=3 uid="uid://5ahry7gwynjv"]
+
+[ext_resource type="Material" uid="uid://lah0omlue113" path="res://placeholders/modular_level_builds/my_trim1/trim_floor1_mat.tres" id="1_hcy48"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_abjfe"]
+_surfaces = [{
+"aabb": AABB(-1, 0, -1, 2, 1e-05, 2.00001),
+"format": 34359742465,
+"index_count": 24,
+"index_data": PackedByteArray(8, 0, 2, 0, 6, 0, 8, 0, 4, 0, 2, 0, 7, 0, 4, 0, 8, 0, 7, 0, 0, 0, 4, 0, 1, 0, 8, 0, 5, 0, 1, 0, 7, 0, 8, 0, 5, 0, 6, 0, 3, 0, 5, 0, 8, 0, 6, 0),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 9,
+"vertex_data": PackedByteArray(0, 0, 128, 191, 0, 0, 0, 0, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 0, 0, 0, 0, 128, 63, 0, 0, 128, 191, 0, 0, 0, 0, 0, 0, 128, 191, 0, 0, 128, 63, 0, 0, 0, 0, 0, 0, 128, 191, 0, 0, 128, 191, 0, 0, 0, 0, 0, 0, 0, 128, 0, 0, 128, 63, 0, 0, 0, 0, 0, 0, 0, 128, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 191, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128)
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_lxmb0"]
+resource_name = "podlaha_new_Plane120"
+_surfaces = [{
+"aabb": AABB(-1, 0, -1, 2, 1e-05, 2.00001),
+"attribute_data": PackedByteArray(124, 96, 84, 63, 83, 178, 56, 63, 124, 96, 84, 63, 192, 30, 229, 62, 137, 61, 14, 63, 85, 178, 56, 63, 135, 61, 14, 63, 192, 30, 229, 62, 2, 79, 49, 63, 84, 178, 56, 63, 2, 79, 49, 63, 192, 30, 229, 62, 135, 61, 14, 63, 219, 160, 21, 63, 124, 96, 84, 63, 218, 160, 21, 63, 2, 79, 49, 63, 219, 160, 21, 63),
+"format": 34359742487,
+"index_count": 24,
+"index_data": PackedByteArray(8, 0, 2, 0, 6, 0, 8, 0, 4, 0, 2, 0, 7, 0, 4, 0, 8, 0, 7, 0, 0, 0, 4, 0, 1, 0, 8, 0, 5, 0, 1, 0, 7, 0, 8, 0, 5, 0, 6, 0, 3, 0, 5, 0, 8, 0, 6, 0),
+"material": ExtResource("1_hcy48"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 9,
+"vertex_data": PackedByteArray(0, 0, 128, 191, 0, 0, 0, 0, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 0, 0, 0, 0, 128, 63, 0, 0, 128, 191, 0, 0, 0, 0, 0, 0, 128, 191, 0, 0, 128, 63, 0, 0, 0, 0, 0, 0, 128, 191, 0, 0, 128, 191, 0, 0, 0, 0, 0, 0, 0, 128, 0, 0, 128, 63, 0, 0, 0, 0, 0, 0, 0, 128, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 191, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 255, 127, 255, 255, 255, 127, 255, 191, 255, 127, 255, 255, 255, 127, 255, 191, 255, 127, 255, 255, 255, 127, 255, 191, 255, 127, 255, 255, 255, 127, 255, 191, 255, 127, 255, 255, 255, 127, 255, 191, 255, 127, 255, 255, 255, 127, 255, 191, 255, 127, 255, 255, 255, 127, 255, 191, 255, 127, 255, 255, 255, 127, 255, 191, 255, 127, 255, 255, 255, 127, 255, 191)
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_abjfe")
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_rbg8i"]
+data = PackedVector3Array(0, 0, 0, -1, 0, -1, 0, 0, -1, 0, 0, 0, -1, 0, 0, -1, 0, -1, 0, 0, 1, -1, 0, 0, 0, 0, 0, 0, 0, 1, -1, 0, 1, -1, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, -1, 1, 0, -1, 1, 0, 0, 0, 0, 0, 0, 0, -1)
+
+[node name="floor_2x2m_variant1" type="MeshInstance3D"]
+mesh = SubResource("ArrayMesh_lxmb0")
+skeleton = NodePath("")
+metadata/_edit_group_ = true
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." groups=["material_surface_metal"]]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_rbg8i")

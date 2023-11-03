@@ -1,0 +1,22 @@
+[gd_resource type="StandardMaterial3D" load_steps=5 format=3 uid="uid://bw5c2g160gs3a"]
+
+[ext_resource type="Texture2D" uid="uid://p1pyu57uirvu" path="res://placeholders/modular_level_builds/silo_level/mat/silo_mat_v1/untitled_DefaultMaterial_BaseColor.png" id="1_pjbv5"]
+[ext_resource type="Texture2D" uid="uid://dfobrwcphg888" path="res://placeholders/modular_level_builds/silo_level/mat/silo_mat_v1/untitled_DefaultMaterial_Metallic.png" id="2_upxmf"]
+[ext_resource type="Texture2D" uid="uid://cvg5jpmk1q3uw" path="res://placeholders/modular_level_builds/silo_level/mat/silo_mat_v1/untitled_DefaultMaterial_Normal.png" id="3_obao6"]
+[ext_resource type="Texture2D" uid="uid://d0603c6welkoa" path="res://placeholders/modular_level_builds/silo_level/mat/silo_mat_v1/untitled_DefaultMaterial_Roughness.png" id="4_iw4qy"]
+
+[resource]
+albedo_texture = ExtResource("1_pjbv5")
+metallic_texture = ExtResource("2_upxmf")
+roughness_texture = ExtResource("4_iw4qy")
+normal_enabled = true
+normal_texture = ExtResource("3_obao6")
+rim = 0.15
+clearcoat = 0.01
+clearcoat_roughness = 0.33
+heightmap_scale = 0.1
+heightmap_deep_parallax = true
+heightmap_min_layers = 8
+heightmap_max_layers = 32
+backlight = Color(1, 1, 1, 1)
+texture_filter = 5

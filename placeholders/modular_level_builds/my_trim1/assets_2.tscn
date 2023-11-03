@@ -1,0 +1,32 @@
+[gd_scene load_steps=10 format=3 uid="uid://b0gut35snwek1"]
+
+[ext_resource type="PackedScene" uid="uid://bjdhoa03pe30n" path="res://placeholders/modular_level_builds/placeholder/sloup_ram_dvere.tscn" id="1_a7yxw"]
+[ext_resource type="PackedScene" uid="uid://d07re6331eshb" path="res://placeholders/modular_level_builds/placeholder/sloup_zed_maly_1.tscn" id="1_tiixs"]
+[ext_resource type="PackedScene" uid="uid://b1cxvlq1aqvku" path="res://placeholders/modular_level_builds/placeholder/floor_mriz.tscn" id="1_vkcd4"]
+[ext_resource type="PackedScene" uid="uid://wii6ds0a3paq" path="res://placeholders/modular_level_builds/placeholder/ram_nad_dvermi.tscn" id="2_cncf1"]
+[ext_resource type="PackedScene" uid="uid://cxwl746peb1ue" path="res://placeholders/modular_level_builds/placeholder/sloup_zed_maly_2.tscn" id="2_kawwi"]
+[ext_resource type="PackedScene" uid="uid://cuse6rxfycur7" path="res://placeholders/modular_level_builds/placeholder/sloup_zed_maly_3.tscn" id="3_fi8q8"]
+[ext_resource type="PackedScene" uid="uid://du5bd7h5g43h0" path="res://placeholders/modular_level_builds/placeholder/sloup_zed_maly_4.tscn" id="4_rnxob"]
+[ext_resource type="PackedScene" uid="uid://d1pd11l078w8e" path="res://placeholders/modular_level_builds/placeholder/sloup_zed_maly_5.tscn" id="5_rhx6g"]
+[ext_resource type="PackedScene" uid="uid://cju6fexh02ye3" path="res://placeholders/modular_level_builds/placeholder/sloup_zed_velky_1.tscn" id="6_qv1kx"]
+
+[node name="assets_2" type="Node3D"]
+
+[node name="sloup_zed_maly1" parent="." instance=ExtResource("1_tiixs")]
+
+[node name="sloup_zed_maly2" parent="." instance=ExtResource("2_kawwi")]
+
+[node name="sloup_zed_maly3" parent="." instance=ExtResource("3_fi8q8")]
+
+[node name="sloup_zed_maly4" parent="." instance=ExtResource("4_rnxob")]
+
+[node name="sloup_zed_maly5" parent="." instance=ExtResource("5_rhx6g")]
+
+[node name="sloup_zed_velky1" parent="." instance=ExtResource("6_qv1kx")]
+
+[node name="sloup_ram_dvere" parent="." instance=ExtResource("1_a7yxw")]
+
+[node name="ram_nad_dvermi" parent="." instance=ExtResource("2_cncf1")]
+transform = Transform3D(0, 0, -1.85956, 2.34721, -1.95369e-07, 0, -2.79809e-07, -1.63887, 0, 0, 0, -5)
+
+[node name="floor_mriz" parent="." instance=ExtResource("1_vkcd4")]

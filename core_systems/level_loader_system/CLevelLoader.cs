@@ -190,7 +190,7 @@ public partial class CLevelLoader : Godot.GodotObject
 
         GameMaster.GM.Log.WriteLog(GameMaster.GM, LogSystem.ELogMsgType.INFO, "unload lights");
 
-        Node level = GameMaster.GM.GetNode("/root/worldlevel");
+        Node level = GameMaster.GM.LevelLoader.GetActualLevelScene();
         if (level == null)
         {
             // If worldlevel for spawn dont finded
@@ -221,7 +221,7 @@ public partial class CLevelLoader : Godot.GodotObject
     {
         await Task.Delay(50);
         /*
-        Node level = GameMaster.GM.GetNode("/root/worldlevel");
+        Node level = GameMaster.GM.GetNode("/root/WorldLevel");
         if (level == null)
         {
             // If worldlevel dosnt finded
@@ -319,14 +319,14 @@ public partial class CLevelLoader : Godot.GodotObject
         loadingHud.UpdateProgressBar(progress);
     }
 
-    public Node GetActualLevelScene()
+    public WorldLevel GetActualLevelScene()
     {
-        Node level = GameMaster.GM.GetNode("/root/worldlevel");
+        WorldLevel level = GameMaster.GM.GetNode<WorldLevel>("/root/WorldLevel");
         if (level == null)
         {
             // pokud nemuzeme level najit, napiseme chybu do logu
             GameMaster.GM.Log.WriteLog(GameMaster.GM, LogSystem.ELogMsgType.ERROR,
-                "GetActualLevelScene() - Not find /root/worldlevel");
+                "GetActualLevelScene() - Not find /root/WorldLevel");
         }
 
         return level;

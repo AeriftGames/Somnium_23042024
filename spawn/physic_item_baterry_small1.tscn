@@ -1,11 +1,12 @@
-[gd_scene load_steps=11 format=3 uid="uid://bhgc78t68skle"]
+[gd_scene load_steps=15 format=3 uid="uid://bhgc78t68skle"]
 
 [ext_resource type="Script" path="res://placeholders/PhysicsItems/physic_item_test.cs" id="1_jit8a"]
 [ext_resource type="AudioStream" uid="uid://i5s8a8274bq6" path="res://audio/audio_streams/interactive_basic/36787__farbin__drop-cardboard-box.wav" id="2_2e5nr"]
 [ext_resource type="ArrayMesh" uid="uid://fxl3wl4n5ew8" path="res://objects/battery/battery_mesh.tres" id="3_u8vqw"]
 [ext_resource type="Script" path="res://core_systems/interactive_system/interactive_object.cs" id="4_066eq"]
 [ext_resource type="PackedScene" uid="uid://cp5th5lop1w7k" path="res://player/character_systems/inventory_menu/InventoryItemDataNode.tscn" id="5_gg4kt"]
-[ext_resource type="Resource" uid="uid://bwwmotyils2yn" path="res://testing_stuff_kaen/inventory_items/InventoryItemsPlaceholder/batery_InventoryData.tres" id="6_rg8x0"]
+[ext_resource type="Script" path="res://player/character_systems/inventory_menu/ItemSubViewportSetting.cs" id="6_yg0j0"]
+[ext_resource type="Script" path="res://player/character_systems/inventory_menu/InventoryItemData.cs" id="7_t6exq"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_l84ni"]
 friction = 0.3
@@ -19,13 +20,60 @@ size = Vector3(0.122741, 0.180992, 0.127)
 [sub_resource type="SphereShape3D" id="SphereShape3D_d42n3"]
 radius = 2.5
 
+[sub_resource type="Resource" id="Resource_sh0wb"]
+script = ExtResource("6_yg0j0")
+cameraPos = Vector3(0, 0, 6)
+cameraFov = 60.0
+lightPos = Vector3(0, 0, 5)
+lightPower = 2.0
+lightSize = 0.0
+lightRange = 20.0
+lightColor = Color(1, 1, 1, 1)
+meshPos = Vector3(0, 0, 0)
+meshRot = Vector3(0, 0, 0)
+meshScale = Vector3(1, 1, 1)
+
+[sub_resource type="Resource" id="Resource_cj6bo"]
+script = ExtResource("6_yg0j0")
+cameraPos = Vector3(0, 0, 6)
+cameraFov = 60.0
+lightPos = Vector3(0, 0, 5)
+lightPower = 2.0
+lightSize = 0.0
+lightRange = 20.0
+lightColor = Color(1, 1, 1, 1)
+meshPos = Vector3(0, 0, 0)
+meshRot = Vector3(0, 0, 0)
+meshScale = Vector3(1, 1, 1)
+
+[sub_resource type="Resource" id="Resource_djig5"]
+resource_local_to_scene = true
+script = ExtResource("7_t6exq")
+itemName = "baterie"
+itemInfoText = "Toto je baterie"
+itemMeshPreview = ExtResource("3_u8vqw")
+rotateInInventoryPreview = true
+canUseInHand = false
+mustBothHandsOnly = false
+canPutToWorld = false
+canUse = false
+canCombine = false
+canInspect = false
+canDelete = false
+canStackable = false
+showNameInSlot = true
+spawnObjectScenePath = "res://testing_stuff_kaen/inventory_items/InventoryItemsPlaceholder/physic_item_baterry_small.tscn"
+SettingsForPreview = SubResource("Resource_sh0wb")
+SettingsForSlot = SubResource("Resource_cj6bo")
+InventoryHoldingSlotID = -1
+
 [node name="PhysicItem_battery_small" type="RigidBody3D"]
 collision_layer = 8
 collision_mask = 9
 mass = 0.5
-inertia = Vector3(0.01, 0.01, 0.01)
 physics_material_override = SubResource("PhysicsMaterial_l84ni")
 gravity_scale = 0.75
+inertia = Vector3(0.01, 0.01, 0.01)
 continuous_cd = true
 max_contacts_reported = 2
 contact_monitor = true
@@ -72,7 +120,7 @@ metadata/_edit_lock_ = true
 [node name="AudioPlayer_PhysicEffects" type="AudioStreamPlayer3D" parent="."]
 
 [node name="InventoryItemDataNode" parent="." instance=ExtResource("5_gg4kt")]
-Data = ExtResource("6_rg8x0")
+Data = SubResource("Resource_djig5")
 
 [connection signal="body_entered" from="interactive_object/StaticBody3D/interactive_object_area3D" to="interactive_object" method="_on_interactive_object_area_3d_body_entered"]
 [connection signal="body_exited" from="interactive_object/StaticBody3D/interactive_object_area3D" to="interactive_object" method="_on_interactive_object_area_3d_body_exited"]

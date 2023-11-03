@@ -8,6 +8,7 @@ public partial class InventoryObjectCamera : ObjectCamera
     public Node3D headBobBreathingNode;
 
     private HeadBobSystem headBobSystem = null;
+    private HeadDangerShakeSystem headDangerShakeSystem = null;
 
     public override void _Ready()
 	{
@@ -18,6 +19,7 @@ public partial class InventoryObjectCamera : ObjectCamera
         inventoryPutItemPoint = GetNode<Node3D>("%InventoryPutItemPoint");
 
         headBobSystem = GetNode<HeadBobSystem>("%HeadBobSystem");
+        headDangerShakeSystem = GetNode<HeadDangerShakeSystem>("%HeadDangerShakeSystem");
         headBobSystem.Init(this);
     }
 
@@ -39,4 +41,5 @@ public partial class InventoryObjectCamera : ObjectCamera
 	}
 
     public HeadBobSystem GetHeadBobSystem() { return headBobSystem; }
+    public HeadDangerShakeSystem GetHeadDangerShakeSystem() { return headDangerShakeSystem; }
 }
