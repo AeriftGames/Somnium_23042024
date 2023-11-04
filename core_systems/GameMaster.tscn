@@ -13,8 +13,6 @@ script = ExtResource("2_dgyoo")
 
 [node name="BenchmarkSystem" type="Node" parent="."]
 script = ExtResource("2_ketqv")
-EnableLowest = false
-EnableHighest = false
 
 [node name="BlackScreen" type="Control" parent="."]
 layout_mode = 3

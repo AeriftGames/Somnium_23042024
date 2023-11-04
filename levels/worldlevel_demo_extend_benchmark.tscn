@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://dywdghrvadkxg"]
+[gd_scene load_steps=44 format=3 uid="uid://dywdghrvadkxg"]
 
 [ext_resource type="Script" path="res://levels/worldlevel_base/WorldLevel.cs" id="1_ikoab"]
 [ext_resource type="Script" path="res://levels/worldlevel_base/LevelDataSettings.cs" id="2_x020f"]
@@ -27,6 +27,8 @@
 [ext_resource type="PackedScene" uid="uid://dv26x01is3wew" path="res://spawn/physic_object_ball_light.tscn" id="25_0w160"]
 [ext_resource type="Script" path="res://testing_stuff_kaen/BenchmarkPoints.cs" id="25_1kp43"]
 [ext_resource type="Script" path="res://core_systems/benchmark_system/BenchmarkCamera.cs" id="26_5wh76"]
+[ext_resource type="Script" path="res://core_systems/benchmark_system/InBenchmarkMenu.cs" id="27_wwjxq"]
+[ext_resource type="PackedScene" uid="uid://d1xpbdilt7rk1" path="res://menus/BaseFocusedMenuButton.tscn" id="28_rkirg"]
 
 [sub_resource type="Animation" id="Animation_3ll5r"]
 length = 0.001
@@ -155,6 +157,90 @@ corner_radius_bottom_right = 50
 corner_radius_bottom_left = 50
 corner_detail = 1
 shadow_size = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yuy2j"]
+bg_color = Color(0.415686, 0.368627, 0.32549, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 10
+shadow_color = Color(0, 0, 0, 0.470588)
+shadow_size = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1md6j"]
+bg_color = Color(0.262745, 0.227451, 0.2, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 10
+shadow_color = Color(0, 0, 0, 0.470588)
+shadow_size = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vxwi3"]
+bg_color = Color(0.262745, 0.227451, 0.2, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 10
+shadow_color = Color(0, 0, 0, 0.470588)
+shadow_size = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rvyj6"]
+bg_color = Color(0.415686, 0.368627, 0.32549, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 10
+shadow_color = Color(0, 0, 0, 0.470588)
+shadow_size = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_28045"]
+bg_color = Color(0.262745, 0.227451, 0.2, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 10
+shadow_color = Color(0, 0, 0, 0.470588)
+shadow_size = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_323qg"]
+bg_color = Color(0.262745, 0.227451, 0.2, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 10
+shadow_color = Color(0, 0, 0, 0.470588)
+shadow_size = 5
 
 [node name="WorldLevel" type="Node"]
 script = ExtResource("1_ikoab")
@@ -2252,5 +2338,89 @@ theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 20
 horizontal_alignment = 1
 
+[node name="InBenchmarkMenu" type="Control" parent="BenchmarkPoints/BenchmarkCamera/Control"]
+top_level = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("27_wwjxq")
+
+[node name="ColorRect" type="ColorRect" parent="BenchmarkPoints/BenchmarkCamera/Control/InBenchmarkMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.705882)
+
+[node name="Control" type="Control" parent="BenchmarkPoints/BenchmarkCamera/Control/InBenchmarkMenu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="BenchmarkPoints/BenchmarkCamera/Control/InBenchmarkMenu/Control"]
+custom_minimum_size = Vector2(300, 200)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -94.0
+offset_right = 150.0
+offset_bottom = 106.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Button_BackToGame" parent="BenchmarkPoints/BenchmarkCamera/Control/InBenchmarkMenu/Control/VBoxContainer" instance=ExtResource("28_rkirg")]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_yuy2j")
+theme_override_styles/hover = SubResource("StyleBoxFlat_1md6j")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_vxwi3")
+text = "continue"
+ButtonFocusID = 0
+
+[node name="Button_QuitGame" parent="BenchmarkPoints/BenchmarkCamera/Control/InBenchmarkMenu/Control/VBoxContainer" instance=ExtResource("28_rkirg")]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_rvyj6")
+theme_override_styles/hover = SubResource("StyleBoxFlat_28045")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_323qg")
+text = "exit benchmark"
+ButtonFocusID = 1
+
+[node name="Label" type="Label" parent="BenchmarkPoints/BenchmarkCamera/Control/InBenchmarkMenu/Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -150.0
+offset_top = -42.0
+offset_right = 150.0
+offset_bottom = -7.0
+grow_horizontal = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 25
+text = "Benchmark Menu"
+horizontal_alignment = 1
+
 [node name="ball_projectile" parent="." instance=ExtResource("25_0w160")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27, 1, 1)
+
+[connection signal="pressed" from="BenchmarkPoints/BenchmarkCamera/Control/InBenchmarkMenu/Control/VBoxContainer/Button_BackToGame" to="BenchmarkPoints/BenchmarkCamera/Control/InBenchmarkMenu" method="_on_button_back_to_game_pressed"]
+[connection signal="pressed" from="BenchmarkPoints/BenchmarkCamera/Control/InBenchmarkMenu/Control/VBoxContainer/Button_QuitGame" to="BenchmarkPoints/BenchmarkCamera/Control/InBenchmarkMenu" method="_on_button_quit_game_pressed"]
