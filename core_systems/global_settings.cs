@@ -299,7 +299,7 @@ public partial class global_settings : Godot.GodotObject
             if (newValue == 0)
             {
                 // disable
-                VoxelGI voxelGI = gm.LevelLoader.GetActualLevelScene().GetVoxelGI();
+                VoxelGI voxelGI = GameMaster.GM.GetLevelLoader().GetActualLevelScene().GetVoxelGI();
                 if (voxelGI != null)
                     voxelGI.Visible = false;
 
@@ -310,7 +310,7 @@ public partial class global_settings : Godot.GodotObject
             {
                 // voxel
                 Apply_Sdfgi(false, true, false);
-                VoxelGI voxelGI = gm.LevelLoader.GetActualLevelScene().GetVoxelGI();
+                VoxelGI voxelGI = GameMaster.GM.GetLevelLoader().GetActualLevelScene().GetVoxelGI();
                 if (voxelGI != null)
                     voxelGI.Visible = true;
 
@@ -324,7 +324,7 @@ public partial class global_settings : Godot.GodotObject
             else if (newValue == 2)
             {
                 // sdfgi
-                VoxelGI voxelGI = gm.LevelLoader.GetActualLevelScene().GetVoxelGI();
+                VoxelGI voxelGI = GameMaster.GM.GetLevelLoader().GetActualLevelScene().GetVoxelGI();
                 if (voxelGI != null)
                     voxelGI.Visible = false;
                 Apply_Sdfgi(true, true, false);
@@ -346,7 +346,7 @@ public partial class global_settings : Godot.GodotObject
     {
         // 0 - disable,1 - voxel, 2 - sdfgi
         int a = 0;
-        VoxelGI voxelGI = gm.LevelLoader.GetActualLevelScene().GetVoxelGI();
+        VoxelGI voxelGI = GameMaster.GM.GetLevelLoader().GetActualLevelScene().GetVoxelGI();
         if (voxelGI != null)
             if (voxelGI.Visible)
                 a = 1;
@@ -361,10 +361,10 @@ public partial class global_settings : Godot.GodotObject
     public void Apply_Ssao(bool newValue, bool newApplyNow = false, bool newSaveNow = false)
 	{
 		// Apply now
-		if(newApplyNow && gm.LevelLoader.GetActualLevelScene() != null)
+		if(newApplyNow && GameMaster.GM.GetLevelLoader().GetActualLevelScene() != null)
 		{
 			Godot.Environment env = 
-                gm.LevelLoader.GetActualLevelScene().GetWorldEnvironment().Environment;
+                GameMaster.GM.GetLevelLoader().GetActualLevelScene().GetWorldEnvironment().Environment;
 
 			env.SsaoEnabled = newValue;
             gm.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "apply video settings: ssao = " + newValue);
@@ -382,7 +382,7 @@ public partial class global_settings : Godot.GodotObject
     public bool GetActual_Ssao()
     {
         Godot.Environment env = 
-            gm.LevelLoader.GetActualLevelScene().GetWorldEnvironment().Environment;
+            GameMaster.GM.GetLevelLoader().GetActualLevelScene().GetWorldEnvironment().Environment;
 
         return env.SsaoEnabled;
     }
@@ -391,10 +391,10 @@ public partial class global_settings : Godot.GodotObject
     public void Apply_Ssil(bool newValue, bool newApplyNow = false, bool newSaveNow = false)
     {
         // Apply now
-        if (newApplyNow && gm.LevelLoader.GetActualLevelScene() != null)
+        if (newApplyNow && GameMaster.GM.GetLevelLoader().GetActualLevelScene() != null)
         {
             Godot.Environment env = 
-                gm.LevelLoader.GetActualLevelScene().GetWorldEnvironment().Environment;
+                GameMaster.GM.GetLevelLoader().GetActualLevelScene().GetWorldEnvironment().Environment;
 
             env.SsilEnabled = newValue;
             gm.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "apply video settings: ssil = " + newValue);
@@ -412,7 +412,7 @@ public partial class global_settings : Godot.GodotObject
     public bool GetActual_Ssil()
     {
         Godot.Environment env = 
-            gm.LevelLoader.GetActualLevelScene().GetWorldEnvironment().Environment;
+            GameMaster.GM.GetLevelLoader().GetActualLevelScene().GetWorldEnvironment().Environment;
 
         return env.SsilEnabled;
     }
@@ -421,10 +421,10 @@ public partial class global_settings : Godot.GodotObject
     private void Apply_Sdfgi(bool newValue, bool newApplyNow = false, bool newSaveNow = false)
     {
         // Apply now
-        if (newApplyNow && gm.LevelLoader.GetActualLevelScene() != null)
+        if (newApplyNow && GameMaster.GM.GetLevelLoader().GetActualLevelScene() != null)
         {
             Godot.Environment env = 
-                gm.LevelLoader.GetActualLevelScene().GetWorldEnvironment().Environment;
+                GameMaster.GM.GetLevelLoader().GetActualLevelScene().GetWorldEnvironment().Environment;
 
             env.SdfgiEnabled = newValue;
             gm.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "apply video settings: sdfgi = " + newValue);
@@ -442,7 +442,7 @@ public partial class global_settings : Godot.GodotObject
     public bool GetActual_Sdfgi()
     {
         Godot.Environment env = 
-            gm.LevelLoader.GetActualLevelScene().GetWorldEnvironment().Environment;
+            GameMaster.GM.GetLevelLoader().GetActualLevelScene().GetWorldEnvironment().Environment;
 
         return env.SdfgiEnabled;
     }

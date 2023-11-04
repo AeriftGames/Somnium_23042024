@@ -239,7 +239,7 @@ public partial class DebugHud : Control
 	public void _on_enable_world_occlusion_culling_check_box_toggled(bool isPressed)
 	{
 		Node3D worldlevel_occluderculling =
-			GameMaster.GM.LevelLoader.GetActualLevelScene().GetLevelScene().GetLevelOcclusion();
+			GameMaster.GM.GetLevelLoader().GetActualLevelScene().GetLevelScene().GetLevelOcclusion();
 		worldlevel_occluderculling.Visible = isPressed;
 
 		GameMaster.GM.Log.WriteLog(this, LogSystem.ELogMsgType.INFO,
@@ -258,7 +258,7 @@ public partial class DebugHud : Control
 
 	public void BuildLevelButtons()
 	{
-		var allLevelsInfo = GameMaster.GM.LevelLoader.GetAllLevelsInfo();
+		var allLevelsInfo = GameMaster.GM.GetLevelLoader().GetAllLevelsInfo();
 		foreach (var level in allLevelsInfo)
 		{
 			// Instance Button

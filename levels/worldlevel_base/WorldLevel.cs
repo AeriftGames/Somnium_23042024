@@ -1,16 +1,22 @@
 using Godot;
 using System;
+using System.Reflection.Metadata.Ecma335;
 using System.Transactions;
 
 public partial class WorldLevel : Node
 {
+	public enum ELevelType { GameLevel,BenchmarkLevel}
+
 	[Export] bool WithoutPlayer = false;
+	[Export] public ELevelType LevelType = ELevelType.GameLevel;
 
 	private LevelScene levelScene;
 
     public WorldEnvironment GetWorldEnvironment() { return GetNode<WorldEnvironment>("WorldEnvironment"); }
     public VoxelGI GetVoxelGI() { return GetNode<VoxelGI>("VoxelGI"); }
     public LevelScene GetLevelScene() { return levelScene; }
+	public ELevelType GetLevelType() { return LevelType; }
+	public LevelDataSettings GetLevelDataSettings() { return GetNode<LevelDataSettings>("LevelDataSettings");}
 
 	public override void _Ready()
 	{

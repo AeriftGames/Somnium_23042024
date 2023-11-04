@@ -7,15 +7,13 @@ using System.Linq;
 using System.Reflection.Emit;
 using System.Threading.Tasks;
 
-public partial class CLevelLoader : Godot.GodotObject
+public partial class CLevelLoader : Node
 {
     public bool isPrecompiledShaders = true;
 
     public string actualLevelName = (string)ProjectSettings.GetSetting("application/run/main_scene");
     public LoadingHud loadingHud = null;
-    public bool SDFGI = false;
 
-    //
     public string loadingScenePath ="";
     Godot.Collections.Array progress;
     bool canUpdate = false;
@@ -26,11 +24,11 @@ public partial class CLevelLoader : Godot.GodotObject
         public string path;
     }
 
-    private GameMaster gm;
+    bool isBenchmark = true;
 
-    public CLevelLoader(Node ownerInstance, bool newIsPrecompiledShaders)
+    public void PostInit(bool newIsPrecompiledShaders)
     {
-        gm = (GameMaster)ownerInstance;
+        base._Ready();
         isPrecompiledShaders = newIsPrecompiledShaders;
 
         // threaded
@@ -39,9 +37,6 @@ public partial class CLevelLoader : Godot.GodotObject
 
     public async void LoadNewWorldLevel(string newLevelScenePath, string newLevelName)
     {
-        // funkce ktera prepne veskera svetla v levelu na hidden
-        UnloadLevelProcess();
-
         // Spusti async task pro zmenu levelu
         await ChangeLevelSceneWithDelay(newLevelScenePath,newLevelName,1000);
     }
@@ -52,11 +47,10 @@ public partial class CLevelLoader : Godot.GodotObject
         await Task.Delay(delay);
 
         // zapneme cernou obrazovku
-        gm.EnableBlackScreen(true);
+        GameMaster.GM.EnableBlackScreen(true);
 
         // zmenime level
         actualLevelName = newLevelName;
-        //gm.GetTree().ChangeSceneToFile(newLevelScenePath);
         LoadNewWorldLevel_Threaded(newLevelScenePath, newLevelName);
     }
 
@@ -110,7 +104,7 @@ public partial class CLevelLoader : Godot.GodotObject
             }
         }
 
-        if (allLevels.Count == 0) { GameMaster.GM.Log.WriteLog(gm, LogSystem.ELogMsgType.ERROR, "nenacetli jsme zadne LevelInfo"); }
+        if (allLevels.Count == 0) { GameMaster.GM.Log.WriteLog(GameMaster.GM, LogSystem.ELogMsgType.ERROR, "nenacetli jsme zadne LevelInfo"); }
 
         return allLevels;
     }
@@ -118,7 +112,7 @@ public partial class CLevelLoader : Godot.GodotObject
     public void StartPrecompileShaderProcess()
     {
         // TODO - bonus, vytvorit gui scenu pro loading (prekryti vsech tech nesmyslu co se deji za oponou)
-        gm.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "START PRECOMPILE SHADER PROCESS...");
+        GameMaster.GM.Log.WriteLog(GameMaster.GM, LogSystem.ELogMsgType.INFO, "START PRECOMPILE SHADER PROCESS...");
 
         Vector3 precompGlobalPosCenter = new Vector3(500, 0, 500);
 
@@ -133,7 +127,7 @@ public partial class CLevelLoader : Godot.GodotObject
         // instancovat all_this_shaders scenu
         var all_this_shaders_need_precomp_Instance = (all_this_shaders_need_compiled)GD.Load<PackedScene>(
             "res://core_systems/level_loader_system/all_this_shaders_need_compiled.tscn").Instantiate();
-        gm.GetTree().Root.AddChild(all_this_shaders_need_precomp_Instance);
+        GameMaster.GM.GetTree().Root.AddChild(all_this_shaders_need_precomp_Instance);
         all_this_shaders_need_precomp_Instance.GlobalPosition = new Vector3(450, 0, 450);
 
         // ted se spusti all_this_shader_need_compiled ready funkce a po par vterinach
@@ -155,21 +149,21 @@ public partial class CLevelLoader : Godot.GodotObject
         objectCamera.SetLerpToCharacterEnable(true);
         character_basic.SetInputEnable(true);
 
-        gm.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "END PRECOMPILE SHADER PROCESS...");
-        gm.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "GAME START...");
+        GameMaster.GM.Log.WriteLog(GameMaster.GM, LogSystem.ELogMsgType.INFO, "END PRECOMPILE SHADER PROCESS...");
+        GameMaster.GM.Log.WriteLog(GameMaster.GM, LogSystem.ELogMsgType.INFO, "GAME START...");
 
         // loading hud dokonci svoji ulohu a znici se
         loadingHud.LoadingIsComplete(false);
     }
 
     // instantiate a addchild loading hud to fpscharacter/allhuds and return it
-    private LoadingHud SpawnLoadingHud()
+   public LoadingHud SpawnLoadingHud()
     {
         // instancovat all_this_shaders scenu
         var loading_hud_Instance = (LoadingHud)GD.Load<PackedScene>(
             "res://core_systems/level_loader_system/loading_hud.tscn").Instantiate();
 
-        gm.GetFPSCharacter().GetAllHudsControlNode().AddChild(loading_hud_Instance);
+        GameMaster.GM.GetFPSCharacter().GetAllHudsControlNode().AddChild(loading_hud_Instance);
 
         return loading_hud_Instance;
     }
@@ -179,53 +173,7 @@ public partial class CLevelLoader : Godot.GodotObject
         GameMaster.GM.Log.WriteLog(GameMaster.GM, LogSystem.ELogMsgType.INFO, newInfo);
         loadingHud.SetShaderProcessValueText(process.ToString());
     }
-
-    public void UnloadLevelProcess()
-    {
-        // funkce ktera proleze cely level a najde vsechny svetla, ktera nasledne nastavime na visible = false
-        // melo by to vyresit problem s GI a prepinani levelu
-
-        GameMaster.GM.Log.WriteLog(GameMaster.GM, LogSystem.ELogMsgType.INFO, "unload lights");
-
-        Node level = GameMaster.GM.LevelLoader.GetActualLevelScene();
-        if (level == null)
-        {
-            // If worldlevel for spawn dont finded
-            GameMaster.GM.Log.WriteLog(GameMaster.GM, LogSystem.ELogMsgType.ERROR,
-                "Not find /root/worldlevel for set unvisible all lights from LevelLoader");
-        }
-        else
-        {
-            var allLights = level.FindChildren("", "Light3D", true, false);
-
-            if (allLights.Count > 0)
-            {
-                GameMaster.GM.Log.WriteLog(GameMaster.GM, LogSystem.ELogMsgType.INFO, "number of lights: " + allLights.Count);
-
-                foreach (var a in allLights)
-                {
-                    Light3D light = a as Light3D;
-                    if (light != null)
-                    {
-                        light.Visible = false;
-                    }
-                }
-            }
-        }
-    }
-
-    private async Task SetLight3DBakeModeDelay(Light3D newLight,Light3D.BakeMode newBakeMode)
-    {
-        // za 200ms nastav originalni nastaveni bake
-        await Task.Delay(10);
-        newLight.LightBakeMode = newBakeMode;
-
-        GD.Print(newLight.Name + "set bake mode: " + newBakeMode.ToString() +" path:"+ newLight.GetPath());
-
-        // vypneme cernou obrazovku
-        GameMaster.GM.EnableBlackScreen(false);
-    }
-
+    
     public void LoadNewWorldLevel_Threaded(string newLevelScenePath, string newLevelName)
     {
         canUpdate = true;
@@ -238,7 +186,7 @@ public partial class CLevelLoader : Godot.GodotObject
         ResourceLoader.LoadThreadedRequest(loadingScenePath,"",true);
     }
 
-    public void Update(double delta)
+    public async void Update(double delta)
     {
         if (canUpdate == false) return;
 
@@ -247,24 +195,20 @@ public partial class CLevelLoader : Godot.GodotObject
         // Novy level se nacetl uspesne a lze pouzit
         if (loadingNewWorldLevelStatus == ResourceLoader.ThreadLoadStatus.Loaded)
         {
+
             GD.Print("loading scene is complete, it is change now");
-            gm.GetTree().ChangeSceneToPacked((PackedScene)ResourceLoader.LoadThreadedGet(loadingScenePath));
+            GameMaster.GM.GetTree().ChangeSceneToPacked((PackedScene)ResourceLoader.LoadThreadedGet(loadingScenePath));
 
             canUpdate = false;
 
+            await ToSignal(GameMaster.GM.GetTree(), "process_frame");
 
         }
         else if(loadingNewWorldLevelStatus == ResourceLoader.ThreadLoadStatus.InProgress)
         {
-            // Bohuzel nedela co by melo.. ale v tomhle update loopu by jsme mohli treba animovat nejaky loading
-            GD.Print("loading bar: " + progress[0]);
+            //GD.Print("loading bar: " + progress[0]);
             loadingHud.UpdateProgressBar(((float)progress[0]));
         }
-    }
-
-    public void a(float progress)
-    {
-        loadingHud.UpdateProgressBar(progress);
     }
 
     public WorldLevel GetActualLevelScene()

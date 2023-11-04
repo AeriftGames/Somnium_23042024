@@ -176,24 +176,24 @@ public partial class LevelDataSettings : Node
         GameMaster.GM.GetSettings().Apply_Ssao(newLevelData.SSAO, true, newSave);
         GameMaster.GM.GetSettings().Apply_Ssil(newLevelData.SSIL,true, newSave);
 
-        GameMaster.GM.LevelLoader.GetActualLevelScene().GetVoxelGI().Subdiv = newLevelData.VoxelSub;
+        GameMaster.GM.GetLevelLoader().GetActualLevelScene().GetVoxelGI().Subdiv = newLevelData.VoxelSub;
 
-        GameMaster.GM.LevelLoader.GetActualLevelScene().GetVoxelGI().Data.Energy = newLevelData.VoxelEnergy;
-        GameMaster.GM.LevelLoader.GetActualLevelScene().GetVoxelGI().Data.Propagation = newLevelData.VoxelPropag;
-        GameMaster.GM.LevelLoader.GetActualLevelScene().GetVoxelGI().Data.Bias = newLevelData.VoxelBias;
-        GameMaster.GM.LevelLoader.GetActualLevelScene().GetVoxelGI().Data.NormalBias = newLevelData.VoxelNormalBias;
+        GameMaster.GM.GetLevelLoader().GetActualLevelScene().GetVoxelGI().Data.Energy = newLevelData.VoxelEnergy;
+        GameMaster.GM.GetLevelLoader().GetActualLevelScene().GetVoxelGI().Data.Propagation = newLevelData.VoxelPropag;
+        GameMaster.GM.GetLevelLoader().GetActualLevelScene().GetVoxelGI().Data.Bias = newLevelData.VoxelBias;
+        GameMaster.GM.GetLevelLoader().GetActualLevelScene().GetVoxelGI().Data.NormalBias = newLevelData.VoxelNormalBias;
 
-        GameMaster.GM.LevelLoader.GetActualLevelScene().GetVoxelGI().CallDeferred("bake");
-        GameMaster.GM.LevelLoader.GetActualLevelScene().GetVoxelGI().Data.EmitChanged();
+        GameMaster.GM.GetLevelLoader().GetActualLevelScene().GetVoxelGI().CallDeferred("bake");
+        GameMaster.GM.GetLevelLoader().GetActualLevelScene().GetVoxelGI().Data.EmitChanged();
 
-        GD.Print(GameMaster.GM.LevelLoader.GetActualLevelScene().GetVoxelGI().Data.HasSignal("changed"));
-        await ToSignal(GameMaster.GM.LevelLoader.GetActualLevelScene().GetVoxelGI().Data, "changed");
+        GD.Print(GameMaster.GM.GetLevelLoader().GetActualLevelScene().GetVoxelGI().Data.HasSignal("changed"));
+        await ToSignal(GameMaster.GM.GetLevelLoader().GetActualLevelScene().GetVoxelGI().Data, "changed");
 
         await ToSignal(GetTree().CreateTimer(0.5f), "timeout");
         
-        GameMaster.GM.LevelLoader.GetActualLevelScene().GetVoxelGI().Data.Energy = newLevelData.VoxelEnergy;
-        GameMaster.GM.LevelLoader.GetActualLevelScene().GetVoxelGI().Data.Propagation = newLevelData.VoxelPropag;
-        GameMaster.GM.LevelLoader.GetActualLevelScene().GetVoxelGI().Data.EmitChanged();
+        GameMaster.GM.GetLevelLoader().GetActualLevelScene().GetVoxelGI().Data.Energy = newLevelData.VoxelEnergy;
+        GameMaster.GM.GetLevelLoader().GetActualLevelScene().GetVoxelGI().Data.Propagation = newLevelData.VoxelPropag;
+        GameMaster.GM.GetLevelLoader().GetActualLevelScene().GetVoxelGI().Data.EmitChanged();
 
         ProjectSettings.SetSetting("rendering/lights_and_shadows/positional_shadow/soft_shadow_filter_quality",
             (int)newLevelData.ShadowFilterQuality);
@@ -217,13 +217,13 @@ public partial class LevelDataSettings : Node
             ApplyNewLevelDataSettings(GetHighestPresset());
         else if (Input.IsActionJustPressed("change_energy"))
         {
-            GameMaster.GM.LevelLoader.GetActualLevelScene().GetVoxelGI().Data.Energy = 0.15f;
-            GameMaster.GM.LevelLoader.GetActualLevelScene().GetVoxelGI().Data.EmitChanged();
+            GameMaster.GM.GetLevelLoader().GetActualLevelScene().GetVoxelGI().Data.Energy = 0.15f;
+            GameMaster.GM.GetLevelLoader().GetActualLevelScene().GetVoxelGI().Data.EmitChanged();
         }
         else if (Input.IsActionJustPressed("change_energy_plus"))
         {
-            GameMaster.GM.LevelLoader.GetActualLevelScene().GetVoxelGI().Data.Energy = 1.8f;
-            GameMaster.GM.LevelLoader.GetActualLevelScene().GetVoxelGI().Data.EmitChanged();
+            GameMaster.GM.GetLevelLoader().GetActualLevelScene().GetVoxelGI().Data.Energy = 1.8f;
+            GameMaster.GM.GetLevelLoader().GetActualLevelScene().GetVoxelGI().Data.EmitChanged();
         }
     }
 

@@ -253,7 +253,7 @@ public partial class FPSCharacter_Inventory : FPSCharacter_Interaction
         // vytvorime (spawn) DeadCamBody do levelu na misto kde se aktualne nachazela kamera
         deadCamBody = 
             GD.Load<PackedScene>("res://player/character_systems/dead_cam_body.tscn").Instantiate() as dead_cam_body;
-        GameMaster.GM.LevelLoader.GetActualLevelScene().AddChild(deadCamBody);
+        GameMaster.GM.GetLevelLoader().GetActualLevelScene().AddChild(deadCamBody);
 
         // aktivujeme DeadCam
         deadCamBody.ActivateDeadCam();
@@ -278,7 +278,7 @@ public partial class FPSCharacter_Inventory : FPSCharacter_Interaction
         RigidBody3D projectile = 
             GD.Load<PackedScene>("res://testing_stuff_kaen/shootball/ball_projectile.tscn").Instantiate() as RigidBody3D;
 
-        GameMaster.GM.LevelLoader.GetActualLevelScene().AddChild(projectile);
+        GameMaster.GM.GetLevelLoader().GetActualLevelScene().AddChild(projectile);
         projectile.Mass = MassProjectile;
         projectile.GlobalPosition = start;
         projectile.ApplyCentralImpulse((end - start) * PowerImpulseShoot);

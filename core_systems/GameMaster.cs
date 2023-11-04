@@ -15,13 +15,14 @@ public partial class GameMaster : Node
 	public Node GDNode_Logging;
 
 	// LEVEL LOADER
-	public CLevelLoader LevelLoader = null;
+	private CLevelLoader LevelLoader = null;
 	private global_settings Settings = null;
 
 	// POINTERS
 	private DebugHud _debugHud = null;
 	private LoadingHud loadingHud = null;
 	private FPSCharacter_BasicMoving _fpsCharacter = null;
+	private CBenchmarkSystem BenchmarkSystem = null;
 
 	//
 	private Control blackScreen = null;
@@ -43,18 +44,22 @@ public partial class GameMaster : Node
 		GDNode_CustomSettings = GetTree().Root.GetNode<Node>("CustomSettings");
 		GDNode_Logging = GetTree().Root.GetNode<Node>("Logging");
 
-		// msgObject gamemastera se zapnutym multicommunication
-		msgObject = new MessageObject(this, GDNode_CustomSettings, true);
+        // msgObject gamemastera se zapnutym multicommunication
+        msgObject = new MessageObject(this, GDNode_CustomSettings, true);
 
 		// vytvoreni csharp logging systemu
 		Log = new LogSystem(this);
 
 		// vytvoreni LevelLoaderu, druhy parametr = pouziti ShadersPrecompilation?
-		LevelLoader = new CLevelLoader(this, false);
+		LevelLoader = GetNode<CLevelLoader>("LevelLoader");
+		LevelLoader.PostInit(false);
 
 		// vytvoreni Settings - global_settings
 		Settings = new global_settings(this);
-	}
+
+		BenchmarkSystem = GetNode<CBenchmarkSystem>("BenchmarkSystem");
+
+    }
 
 	// Set/Get FPS Character
 	public void SetFPSCharacter(FPSCharacter_BasicMoving newFpsCharater) { _fpsCharacter = newFpsCharater; }
@@ -68,26 +73,26 @@ public partial class GameMaster : Node
 	public void SetLoadingHud(LoadingHud newLoadingHud) { loadingHud = newLoadingHud; }
 	public LoadingHud GetLoadingHud() { return loadingHud; }
 
+	public CLevelLoader GetLevelLoader() { return LevelLoader; }
+
 	// prekryje veskery hud a 3d svet cernou obrazovkou
 	public void EnableBlackScreen(bool newEnable){ blackScreen.Visible = newEnable; }
 
 	//
-	public global_settings GetSettings()
-	{
-		return Settings;
-	}
+	public global_settings GetSettings(){ return Settings; }
+	public CBenchmarkSystem GetBenchmarkSystem() { return BenchmarkSystem; }
 
 	public override void _UnhandledInput(InputEvent @event)
 	{
 	}
 
-	public async void QuitGame()
+	public void QuitGame()
 	{
 		Log.WriteLog(this,LogSystem.ELogMsgType.INFO,"Quiting Game");
 
 		isQuitting = true;
 
-		await TaskQuitGame();
+		TaskQuitGame();
 	}
 
 	public void ToggleInGameMenu()
@@ -99,19 +104,11 @@ public partial class GameMaster : Node
 		interactCharacter.GetInGameMenu().SetActive(!interactCharacter.GetInGameMenu().GetActive());
 	}
 
-	async Task TaskQuitGame()
+	public void TaskQuitGame()
 	{
-		// Unload level process
-		LevelLoader.UnloadLevelProcess();
-
-		await Task.Delay(1000);
-
 		// zapneme cernou obrazovku
 		EnableBlackScreen(true);
-		/*
-		Node level = GetNode("/root/worldlevel");
-		var a = level.FindChildren("*", "RigidBody3D", true, true);
-		*/
+
 		msgObject.FreeAll();
 		LevelLoader.Free();
 		Settings.Free();

@@ -1,9 +1,17 @@
-[gd_scene load_steps=2 format=3 uid="uid://bfjmbldwhs02n"]
+[gd_scene load_steps=4 format=3 uid="uid://bfjmbldwhs02n"]
 
 [ext_resource type="Script" path="res://core_systems/GameMaster.cs" id="1_mjdjb"]
+[ext_resource type="Script" path="res://core_systems/level_loader_system/CLevelLoader.cs" id="2_dgyoo"]
+[ext_resource type="Script" path="res://core_systems/benchmark_system/CBenchmarkSystem.cs" id="2_ketqv"]
 
 [node name="GameMaster" type="Node"]
 script = ExtResource("1_mjdjb")
+
+[node name="LevelLoader" type="Node" parent="."]
+script = ExtResource("2_dgyoo")
+
+[node name="BenchmarkSystem" type="Node" parent="."]
+script = ExtResource("2_ketqv")
 
 [node name="BlackScreen" type="Control" parent="."]
 layout_mode = 3
@@ -13,6 +21,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+metadata/_edit_lock_ = true
 
 [node name="ColorRect" type="ColorRect" parent="BlackScreen"]
 layout_mode = 0

@@ -40,10 +40,7 @@ ambient_light_source = 2
 ambient_light_color = Color(0.12549, 0.12549, 0.12549, 1)
 tonemap_mode = 2
 ssao_enabled = true
-ssao_radius = 2.0
-ssao_intensity = 3.0
-ssao_power = 2.04906
-ssao_detail = 3.0
+ssao_radius = 3.0
 sdfgi_use_occlusion = true
 sdfgi_read_sky_light = false
 sdfgi_bounce_feedback = 0.76
@@ -1116,6 +1113,9 @@ transform = Transform3D(-0.759673, -0.449839, -0.469619, 0.48901, -0.871195, 0.0
 
 [node name="DrawerTable3" parent="LevelScene/Rooms/Room1/Props" instance=ExtResource("10_33ktw")]
 transform = Transform3D(-2.98023e-08, 0, -1, 0, 1, 0, 1, 0, -2.98023e-08, 3.35881, 0.438359, -2.00398)
+
+[node name="DrawerTable4" parent="LevelScene/Rooms/Room1/Props" instance=ExtResource("10_33ktw")]
+transform = Transform3D(0.0409863, 0, 0.99916, 0, 1, 0, -0.99916, 0, 0.0409863, -30.5566, 0.438359, 5.98297)
 
 [node name="DrawerTable" parent="LevelScene/Rooms/Room1/Props" instance=ExtResource("16_ne61i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.2, 0.432864, -3.4)

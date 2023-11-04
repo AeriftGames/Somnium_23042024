@@ -25,7 +25,7 @@ public partial class spawn_object_button : Button
         if (invCam == null) return;
 
         Godot.Collections.Array<Node3D> allSpawnNodes = UniversalFunctions.SpawnGameObjectToWorld(
-            GameMaster.GM.LevelLoader.GetActualLevelScene(),
+            GameMaster.GM.GetLevelLoader().GetActualLevelScene(),
             spawnObjectPath, invCam.GetInventoryItemPutPos().GlobalPosition,
             GameMaster.GM.GetDebugHud().GetNeedNumOfSpawn());
 
