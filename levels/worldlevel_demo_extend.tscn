@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://1i0rk47y5rfe"]
+[gd_scene load_steps=35 format=3 uid="uid://1i0rk47y5rfe"]
 
 [ext_resource type="Script" path="res://levels/worldlevel_base/WorldLevel.cs" id="1_ucxcv"]
 [ext_resource type="VoxelGIData" uid="uid://b07w76761sd8j" path="res://levels/worldlevel_demo_extend/level_data/worldlevel_demo.VoxelGI_data.res" id="2_d5wgc"]
@@ -25,6 +25,7 @@
 [ext_resource type="PackedScene" uid="uid://2qut50tthswb" path="res://placeholders/modular_level_builds/silo_level/assets/exterior_rockchair.tscn" id="21_ygcd2"]
 [ext_resource type="PackedScene" uid="uid://bndr3up87gn1i" path="res://placeholders/Decals/blood_decal.tscn" id="22_tcmpq"]
 [ext_resource type="PackedScene" uid="uid://dv26x01is3wew" path="res://spawn/physic_object_ball_light.tscn" id="25_u234y"]
+[ext_resource type="AudioStream" uid="uid://cuirkbqnpyhli" path="res://audio/audio_streams/music/516907__zhr__sad-outro.mp3" id="26_q5bcx"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_w3cwh"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -2137,3 +2138,9 @@ visible = false
 
 [node name="ball_projectile" parent="." instance=ExtResource("25_u234y")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27, 1, 1)
+
+[node name="AudioStreamPlayerMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("26_q5bcx")
+volume_db = -15.0
+autoplay = true
+bus = &"Music"
