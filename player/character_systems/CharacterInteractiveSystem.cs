@@ -39,6 +39,8 @@ public partial class CharacterInteractiveSystem : Godot.GodotObject
 
     public void BasicUpdate(bool newUseNow,bool newGrabNow, double delta)
     {
+        if (character.objectCamera == null) return;
+
         // default sets on start this update
         basicHud.SetUseVisible(false);
         basicHud.SetHandGrabState(false, false);
@@ -145,6 +147,7 @@ public partial class CharacterInteractiveSystem : Godot.GodotObject
     public void InteractivePhysicsUpdate(bool newGrabNow, bool newThrowObjectNow, bool newRotateGrabbedObject,
         bool newMoveFarGrabbedObject, bool newMoveNearGrabbedObject, double delta)
     {
+
         // default sets on start this update
         wantRotateNow = false;
         character.objectCamera.SetCameraLookInputEnable(true);

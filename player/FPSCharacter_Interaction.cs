@@ -108,8 +108,9 @@ public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
 	public override void _PhysicsProcess(double delta)
 	{
 		if (GameMaster.GM.GetIsQuitting()) return;
+        if (objectCamera == null) return;
 
-		base._PhysicsProcess(delta);
+        base._PhysicsProcess(delta);
 
 		bool useNow = IsInputEnable() && CanUse && Input.IsActionJustPressed("UseAction");
 		bool grabNow = IsInputEnable() && CanGrabObject && Input.IsActionPressed("mouseClickLeft");

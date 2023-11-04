@@ -15,12 +15,6 @@ public partial class InBenchmarkMenu : Control
         SetActive(false);
     }
 
-    public override void _Process(double delta)
-    {
-        if(Input.IsActionJustPressed("EscapeAction"))
-            SetActive(!GetActive());
-    }
-
     public void SetActive(bool newActive)
     {
         // vnitrni zmena stavu

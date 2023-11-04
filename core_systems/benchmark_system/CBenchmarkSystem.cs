@@ -42,11 +42,14 @@ public partial class CBenchmarkSystem : Node
 
         // start
         LoadBenchmarLevelInQuality(newLevelScenePath, newLevelName, NeedBenchmarkQualityLevel);
+
+        if (GameMaster.GM.GetFPSCharacter != null)
+            GameMaster.GM.QueueCharacterAndCamera();
     }
 
     public void BenchmarkStart(bool success)
     {
-        GD.Print("Benchmark level start in quality presset: " + NeedBenchmarkQualityLevel);
+        //GD.Print("Benchmark level start in quality presset: " + NeedBenchmarkQualityLevel);
 
         GameMaster.GM.GetLoadingHud().Visible = false;
 
@@ -93,7 +96,7 @@ public partial class CBenchmarkSystem : Node
 
         // pockame v teto asynchronni funkci na signal kdy se benchmark level uspesne nacetl
         await ToSignal(GameMaster.GM.GetLevelLoader(), CLevelLoader.SignalName.LevelLoadComplete);
-        GD.Print("Benchmark level Load Complete");
+        //GD.Print("Benchmark level Load Complete");
 
         await ToSignal(GetTree().CreateTimer(1.0f), "timeout");
 

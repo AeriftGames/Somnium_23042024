@@ -1,17 +1,33 @@
-[gd_scene load_steps=5 format=3 uid="uid://babdw2pj0huby"]
+[gd_scene load_steps=6 format=3 uid="uid://babdw2pj0huby"]
 
 [ext_resource type="Script" path="res://core_systems/debug_hud_system/DebugHud.cs" id="1_lrjj0"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xryx5"]
 bg_color = Color(0.156863, 0.164706, 0.188235, 0.913725)
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.576471, 0.27451, 0, 0.584314)
+border_blend = true
 corner_radius_top_right = 25
 corner_radius_bottom_right = 25
-shadow_size = 3
+shadow_color = Color(0, 0, 0, 0.313726)
+shadow_size = 5
+shadow_offset = Vector2(4, 0)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2d7rl"]
 content_margin_left = 2.0
 content_margin_right = 2.0
 bg_color = Color(0.768627, 0.270588, 0, 1)
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+corner_detail = 2
+shadow_size = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l5ewt"]
+content_margin_left = 2.0
+content_margin_right = 2.0
+bg_color = Color(0.266667, 0.0980392, 0.027451, 1)
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 corner_detail = 2
@@ -135,12 +151,15 @@ grow_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_xryx5")
 
 [node name="NadpisLabel" type="Label" parent="OptionsPanel"]
+custom_minimum_size = Vector2(0, 34.23)
 layout_mode = 0
 anchor_right = 1.0
 offset_bottom = 23.0
 grow_horizontal = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 text = "DEBUG HUD OPTIONS"
 horizontal_alignment = 1
+vertical_alignment = 1
 metadata/_edit_lock_ = true
 
 [node name="ColorRect" type="ColorRect" parent="OptionsPanel/NadpisLabel"]
@@ -157,6 +176,7 @@ offset_top = 40.0
 offset_right = 313.0
 offset_bottom = 447.0
 theme_override_styles/tab_selected = SubResource("StyleBoxFlat_2d7rl")
+theme_override_styles/tab_hovered = SubResource("StyleBoxFlat_l5ewt")
 theme_override_styles/tab_unselected = SubResource("StyleBoxFlat_yi35b")
 
 [node name="main" type="VBoxContainer" parent="OptionsPanel/TabContainer"]

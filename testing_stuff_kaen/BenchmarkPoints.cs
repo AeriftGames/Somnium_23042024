@@ -25,7 +25,6 @@ public partial class BenchmarkPoints : Node3D
 		interpPos = pathFollowPos.GlobalPosition;
 		interpLook = pathFollowLook.GlobalPosition;
 
-        //GameMaster.GM.GetBenchmarkSystem().StartBenchmarkLevel("res://levels/worldlevel_demo_extend_benchmark.tscn", "benchmark_level_1");
     }
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -50,7 +49,13 @@ public partial class BenchmarkPoints : Node3D
 			// pokud nejsme na konci benchmarku (mysleno neprobehly vsechny kvality)
 			if (!GameMaster.GM.GetBenchmarkSystem().BenchmarkEnd)
 				GameMaster.GM.GetBenchmarkSystem().NextBenchmarkQuality();
+			else
+			{
+				// score ?
 
+				// aspon spustime in benchmark menu
+				cam.GetInBenchmarkMenu().SetActive(true);
+			}
         }
 	}
 }

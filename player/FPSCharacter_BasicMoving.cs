@@ -190,6 +190,8 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
 	// Update velocity for walk move and return this velocity
 	public Vector3 UpdateVelocityWalkMove(double delta)
 	{
+		if (objectCamera == null) return Vector3.Zero;
+
 		// Get input actions and calculate direction
 		Vector2 inputDir = Input.GetVector("moveLeft", "moveRight", "moveForward", "moveBackward");
 		Vector3 direction = (objectCamera.NodeRotY.Transform.Basis * new Vector3(inputDir.X, 0, inputDir.Y)).Normalized();
@@ -523,6 +525,8 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
 	// Return by linked ObjectCamera->Camera
 	public Camera3D GetFPSCharacterCamera()
 	{
+		if (objectCamera == null) return null;
+
 		return objectCamera.Camera;
 	}
 

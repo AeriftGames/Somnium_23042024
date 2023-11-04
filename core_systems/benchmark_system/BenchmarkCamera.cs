@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Dynamic;
 using System.Threading.Tasks;
 
 public partial class BenchmarkCamera : Camera3D
@@ -7,26 +8,34 @@ public partial class BenchmarkCamera : Camera3D
     Label FPSLabel;
     Label QualityLabel;
 
+    InBenchmarkMenu inBenchmarkMenu;
+
     public override void _Ready()
     {
         base._Ready();
 
         FPSLabel = GetNode<Label>("Control/VBoxContainer/HBoxContainer/FPSLabel");
         QualityLabel = GetNode<Label>("Control/VBoxContainer/HBoxContainer3/QualityText");
+        inBenchmarkMenu = GetNode<InBenchmarkMenu>("Control/InBenchmarkMenu");
 
         PostInit();
     }
+
+    public InBenchmarkMenu GetInBenchmarkMenu() {  return inBenchmarkMenu; }
+
     public override void _Process(double delta)
     {
         base._Process(delta);
 
         FPSLabel.Text = Engine.GetFramesPerSecond().ToString();
+
+        if (Input.IsActionJustPressed("EscapeAction"))
+            inBenchmarkMenu.SetActive(!inBenchmarkMenu.GetActive());
     }
 
     public async void PostInit()
     {
         await ToSignal(GameMaster.GM.GetLevelLoader(), CLevelLoader.SignalName.LevelLoadComplete);
-        GD.Print("TARLALALALALALA");
 
         await Task.Delay(1000);
 

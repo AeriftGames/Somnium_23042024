@@ -5,11 +5,13 @@ public partial class level_button : Button
 {
 	private string level_path = "";
 	private string level_name = "";
+	private WorldLevel.ELevelType levelType;
 
-	public void SetLevelData(string newLevelPath, string newLevelName)
+	public void SetLevelData(string newLevelPath, string newLevelName,WorldLevel.ELevelType newLevelType)
 	{
 		level_path = newLevelPath;
 		level_name = newLevelName;
+		levelType = newLevelType;
 	}
 
 	public string GetLevelPath() { return level_path; }
@@ -21,7 +23,9 @@ public partial class level_button : Button
 
     public void _on_pressed()
 	{
-		GD.Print("test: " + level_path);
-		GameMaster.GM.GetLevelLoader().LoadNewWorldLevel(level_path,level_name);
+		if(levelType == WorldLevel.ELevelType.GameLevel)
+			GameMaster.GM.GetLevelLoader().LoadNewWorldLevel(level_path,level_name);
+		else if(levelType == WorldLevel.ELevelType.BenchmarkLevel)
+			GameMaster.GM.GetBenchmarkSystem().StartBenchmarkLevel(level_path,level_name);
 	}
 }

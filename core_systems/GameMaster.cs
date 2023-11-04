@@ -136,6 +136,23 @@ public partial class GameMaster : Node
 			GD.Print("Game is quit sucesfully");
 	}
 
+	public void QueueCharacterAndCamera()
+	{
+		if (_fpsCharacter != null)
+		{
+            if (_fpsCharacter.objectCamera != null)
+            {
+                _fpsCharacter.objectCamera.FreeAll();
+                _fpsCharacter.objectCamera.QueueFree();
+                _fpsCharacter.objectCamera = null;
+            }
+
+            _fpsCharacter.FreeAll();
+            _fpsCharacter.QueueFree();
+            _fpsCharacter = null;
+        }
+    }
+
 	public bool GetIsQuitting()
 	{
 		return isQuitting;
@@ -145,7 +162,7 @@ public partial class GameMaster : Node
 	{
 		// INPUTS
 
-        if (Input.IsActionJustPressed("EscapeAction"))
+        if (Input.IsActionJustPressed("EscapeAction") && GetFPSCharacter() != null)
             ToggleInGameMenu();
 
 		// pro async level load

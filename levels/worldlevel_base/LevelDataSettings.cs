@@ -249,11 +249,11 @@ public partial class LevelDataSettings : Node
 
     }
 
-    public void Update()
+    public void AfterVoxelGIUpdate()
     {
         if (first_change == false) return;
 
-        GD.Print("AHOJ");
+        //GD.Print("AHOJ");
 
         GameMaster.GM.GetLevelLoader().GetActualLevelScene().GetVoxelGI().Data.Energy = workingQuality.VoxelEnergy;
         GameMaster.GM.GetLevelLoader().GetActualLevelScene().GetVoxelGI().Data.Propagation = workingQuality.VoxelPropag;
@@ -274,7 +274,7 @@ public partial class LevelDataSettings : Node
     {
         base._Ready();
 
-        GameMaster.GM.GetLevelLoader().GetActualLevelScene().GetVoxelGI().Data.Changed += Update;
+        GameMaster.GM.GetLevelLoader().GetActualLevelScene().GetVoxelGI().Data.Changed += AfterVoxelGIUpdate;
 
         if (ForceQualityOnLevelStart)
             SetQualityPresset();

@@ -19,6 +19,7 @@ public partial class CLevelLoader : Node
 
     public struct SLevelInfo
     {
+        public WorldLevel.ELevelType leveltype;
         public string name;
         public string path;
     }
@@ -79,6 +80,12 @@ public partial class CLevelLoader : Node
                 level.path = file_path;
                 level.name = level_name;
 
+                //
+                if (file_name.Contains("benchmark") || file_name.Contains("Benchmark"))
+                    level.leveltype = WorldLevel.ELevelType.BenchmarkLevel;
+                else
+                    level.leveltype = WorldLevel.ELevelType.GameLevel;
+
                 allLevels.Add(level);
 
                 // for export/editor check
@@ -99,6 +106,12 @@ public partial class CLevelLoader : Node
                     SLevelInfo level = new SLevelInfo();
                     level.path = file_path;
                     level.name = level_name;
+
+                    //
+                    if (file_name.Contains("benchmark") || file_name.Contains("Benchmark"))
+                        level.leveltype = WorldLevel.ELevelType.BenchmarkLevel;
+                    else
+                        level.leveltype = WorldLevel.ELevelType.GameLevel;
 
                     allLevels.Add(level);
                 }

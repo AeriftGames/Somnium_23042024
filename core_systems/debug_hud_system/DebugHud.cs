@@ -266,7 +266,7 @@ public partial class DebugHud : Control
 				"res://core_systems/debug_hud_system/level_button.tscn").Instantiate();
 
 			level_button_Instance.Text = level.name;
-			level_button_Instance.SetLevelData(level.path, level.name);
+			level_button_Instance.SetLevelData(level.path, level.name, level.leveltype);
 
 			VBoxContainer LevelButtonContainer = GetNode<VBoxContainer>("OptionsPanel/TabContainer/level");
 			LevelButtonContainer.AddChild(level_button_Instance);

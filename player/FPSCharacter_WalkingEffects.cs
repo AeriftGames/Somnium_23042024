@@ -290,7 +290,10 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
         HeadGimbalB.Position = HeadGimbalB.Position.Lerp(
             new Vector3(0, lerpHeadLandY, 0), lerpLandingSpeedModifier * delta);
 
+
         // Lerp pro landing rot
+        if (objectCamera == null) return;
+
         objectCamera.GimbalLand.Rotation = objectCamera.GimbalLand.Rotation.Lerp(
             new Vector3(lerpHeadLandRotX, 0, 0), lerpLandingSpeedModifier * delta);
     }
