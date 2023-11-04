@@ -2381,9 +2381,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -150.0
-offset_top = -94.0
+offset_top = -54.0
 offset_right = 150.0
-offset_bottom = 106.0
+offset_bottom = 146.0
 grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
@@ -2394,6 +2394,14 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_yuy2j")
 theme_override_styles/hover = SubResource("StyleBoxFlat_1md6j")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_vxwi3")
 text = "continue"
+ButtonFocusID = 0
+
+[node name="Button_RestartBenchmark" parent="BenchmarkPoints/BenchmarkCamera/Control/InBenchmarkMenu/Control/VBoxContainer" instance=ExtResource("28_rkirg")]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_yuy2j")
+theme_override_styles/hover = SubResource("StyleBoxFlat_1md6j")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_vxwi3")
+text = "restart benchmark"
 ButtonFocusID = 0
 
 [node name="Button_QuitGame" parent="BenchmarkPoints/BenchmarkCamera/Control/InBenchmarkMenu/Control/VBoxContainer" instance=ExtResource("28_rkirg")]
@@ -2423,4 +2431,5 @@ horizontal_alignment = 1
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27, 1, 1)
 
 [connection signal="pressed" from="BenchmarkPoints/BenchmarkCamera/Control/InBenchmarkMenu/Control/VBoxContainer/Button_BackToGame" to="BenchmarkPoints/BenchmarkCamera/Control/InBenchmarkMenu" method="_on_button_back_to_game_pressed"]
+[connection signal="pressed" from="BenchmarkPoints/BenchmarkCamera/Control/InBenchmarkMenu/Control/VBoxContainer/Button_RestartBenchmark" to="BenchmarkPoints/BenchmarkCamera/Control/InBenchmarkMenu" method="_on_button_restart_benchmark_pressed"]
 [connection signal="pressed" from="BenchmarkPoints/BenchmarkCamera/Control/InBenchmarkMenu/Control/VBoxContainer/Button_QuitGame" to="BenchmarkPoints/BenchmarkCamera/Control/InBenchmarkMenu" method="_on_button_quit_game_pressed"]

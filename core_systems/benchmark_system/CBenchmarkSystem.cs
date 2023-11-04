@@ -19,7 +19,7 @@ public partial class CBenchmarkSystem : Node
     [Export] public bool EnableHighest = true;  //4
 
     private int ActualBenchmarkQualityLevel = -1;
-    private int NeedBenchmarkQualityLevel = -1;
+    public int NeedBenchmarkQualityLevel = -1;
     public bool BenchmarkEnd = false;
 
     public override void _Ready()
