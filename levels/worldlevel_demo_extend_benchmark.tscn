@@ -24,11 +24,11 @@
 [ext_resource type="PackedScene" uid="uid://qwuepw3e4gkk" path="res://placeholders/modular_level_builds/leather_test/gauc1a.tscn" id="21_lx3mw"]
 [ext_resource type="PackedScene" uid="uid://bndr3up87gn1i" path="res://placeholders/Decals/blood_decal.tscn" id="22_lww2d"]
 [ext_resource type="ArrayOccluder3D" uid="uid://5q8bjy164pq1" path="res://levels/worldlevel_demo_extend_benchmark/level_data/worldlevel_demo_extend_benchmark.occ" id="24_u26mg"]
-[ext_resource type="PackedScene" uid="uid://dv26x01is3wew" path="res://spawn/physic_object_ball_light.tscn" id="25_0w160"]
 [ext_resource type="Script" path="res://testing_stuff_kaen/BenchmarkPoints.cs" id="25_1kp43"]
 [ext_resource type="Script" path="res://core_systems/benchmark_system/BenchmarkCamera.cs" id="26_5wh76"]
 [ext_resource type="Script" path="res://core_systems/benchmark_system/InBenchmarkMenu.cs" id="27_wwjxq"]
 [ext_resource type="PackedScene" uid="uid://d1xpbdilt7rk1" path="res://menus/BaseFocusedMenuButton.tscn" id="28_rkirg"]
+[ext_resource type="AudioStream" uid="uid://bt2cmy83a0gqm" path="res://audio/audio_streams/music/Main_Menu (1).mp3" id="29_jo8ct"]
 
 [sub_resource type="Animation" id="Animation_3ll5r"]
 length = 0.001
@@ -2231,6 +2231,7 @@ metadata/_edit_lock_ = true
 
 [node name="BenchmarkPoints" type="Node3D" parent="."]
 script = ExtResource("25_1kp43")
+speed = 2.0
 
 [node name="Path3D" type="Path3D" parent="BenchmarkPoints"]
 transform = Transform3D(1, 0, 0, 0, 1, 6.98132e-05, 0, -6.98132e-05, 1, -18.0375, 0.99466, 2.00341)
@@ -2240,7 +2241,7 @@ curve = SubResource("Curve3D_8tbx0")
 transform = Transform3D(-0.461871, 0.00460133, -0.886903, -9.31288e-10, 0.999933, 0.00518802, 0.886905, 0.00239622, -0.46187, 0.872206, 0.0870391, -0.489383)
 
 [node name="PathFollow3D_look_point" type="PathFollow3D" parent="BenchmarkPoints/Path3D"]
-transform = Transform3D(-0.461884, 0.00460152, -0.886921, -9.31315e-10, 0.999974, 0.00518812, 0.88693, 0.00239632, -0.461879, 1.5964, 0.0829075, 0.00253335)
+transform = Transform3D(-0.461884, 0.00460151, -0.886921, -9.31315e-10, 0.999974, 0.00518812, 0.88693, 0.00239632, -0.461879, 1.5964, 0.0829075, 0.00253335)
 progress = 1.0
 
 [node name="BenchmarkCamera" type="Camera3D" parent="BenchmarkPoints"]
@@ -2427,8 +2428,11 @@ theme_override_font_sizes/font_size = 25
 text = "Benchmark Menu"
 horizontal_alignment = 1
 
-[node name="ball_projectile" parent="." instance=ExtResource("25_0w160")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27, 1, 1)
+[node name="AudioStreamPlayerMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("29_jo8ct")
+volume_db = -10.0
+autoplay = true
+bus = &"Music"
 
 [connection signal="pressed" from="BenchmarkPoints/BenchmarkCamera/Control/InBenchmarkMenu/Control/VBoxContainer/Button_BackToGame" to="BenchmarkPoints/BenchmarkCamera/Control/InBenchmarkMenu" method="_on_button_back_to_game_pressed"]
 [connection signal="pressed" from="BenchmarkPoints/BenchmarkCamera/Control/InBenchmarkMenu/Control/VBoxContainer/Button_RestartBenchmark" to="BenchmarkPoints/BenchmarkCamera/Control/InBenchmarkMenu" method="_on_button_restart_benchmark_pressed"]
