@@ -54,6 +54,9 @@ public partial class GameMaster : Node
 		LevelLoader = GetNode<CLevelLoader>("LevelLoader");
 		LevelLoader.PostInit(false);
 
+		loadingHud = GetNode<LoadingHud>("LoadingHud");
+		loadingHud.Visible = false;
+
 		// vytvoreni Settings - global_settings
 		Settings = new global_settings(this);
 
@@ -69,8 +72,7 @@ public partial class GameMaster : Node
 	public void SetDebugHud(DebugHud newDebugHud) { _debugHud = newDebugHud; }
 	public DebugHud GetDebugHud() { return _debugHud; }
 
-	// Set/Get Loading Hud
-	public void SetLoadingHud(LoadingHud newLoadingHud) { loadingHud = newLoadingHud; }
+	// Get Loading Hud
 	public LoadingHud GetLoadingHud() { return loadingHud; }
 
 	public CLevelLoader GetLevelLoader() { return LevelLoader; }

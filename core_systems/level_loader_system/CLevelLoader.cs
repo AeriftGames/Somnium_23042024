@@ -12,7 +12,6 @@ public partial class CLevelLoader : Node
     public bool isPrecompiledShaders = true;
 
     public string actualLevelName = (string)ProjectSettings.GetSetting("application/run/main_scene");
-    public LoadingHud loadingHud = null;
 
     public string loadingScenePath ="";
     Godot.Collections.Array progress;
@@ -25,6 +24,8 @@ public partial class CLevelLoader : Node
     }
 
     bool isBenchmark = true;
+
+    [Signal] public delegate void LevelLoadCompleteEventHandler(bool success);
 
     public void PostInit(bool newIsPrecompiledShaders)
     {
@@ -153,25 +154,13 @@ public partial class CLevelLoader : Node
         GameMaster.GM.Log.WriteLog(GameMaster.GM, LogSystem.ELogMsgType.INFO, "GAME START...");
 
         // loading hud dokonci svoji ulohu a znici se
-        loadingHud.LoadingIsComplete(false);
-    }
-
-    // instantiate a addchild loading hud to fpscharacter/allhuds and return it
-   public LoadingHud SpawnLoadingHud()
-    {
-        // instancovat all_this_shaders scenu
-        var loading_hud_Instance = (LoadingHud)GD.Load<PackedScene>(
-            "res://core_systems/level_loader_system/loading_hud.tscn").Instantiate();
-
-        GameMaster.GM.GetFPSCharacter().GetAllHudsControlNode().AddChild(loading_hud_Instance);
-
-        return loading_hud_Instance;
+        GameMaster.GM.GetLoadingHud().LoadingIsComplete(false);
     }
 
     public void SetNewInfoLevelCompilingShader(string newInfo, int process)
     {
         GameMaster.GM.Log.WriteLog(GameMaster.GM, LogSystem.ELogMsgType.INFO, newInfo);
-        loadingHud.SetShaderProcessValueText(process.ToString());
+        GameMaster.GM.GetLoadingHud().SetShaderProcessValueText(process.ToString());
     }
     
     public void LoadNewWorldLevel_Threaded(string newLevelScenePath, string newLevelName)
@@ -179,9 +168,8 @@ public partial class CLevelLoader : Node
         canUpdate = true;
         loadingScenePath = newLevelScenePath;
 
-        // vytvorime a nastavime loading hud
-        loadingHud = SpawnLoadingHud();
-        loadingHud.SetInitializeAndVisibleNow(actualLevelName, false);
+        // nastavime loading hud
+        GameMaster.GM.GetLoadingHud().SetInitializeAndVisibleNow(actualLevelName, false);
 
         ResourceLoader.LoadThreadedRequest(loadingScenePath,"",true);
     }
@@ -195,19 +183,19 @@ public partial class CLevelLoader : Node
         // Novy level se nacetl uspesne a lze pouzit
         if (loadingNewWorldLevelStatus == ResourceLoader.ThreadLoadStatus.Loaded)
         {
+            canUpdate = false;
 
             GD.Print("loading scene is complete, it is change now");
             GameMaster.GM.GetTree().ChangeSceneToPacked((PackedScene)ResourceLoader.LoadThreadedGet(loadingScenePath));
 
-            canUpdate = false;
-
             await ToSignal(GameMaster.GM.GetTree(), "process_frame");
+            EmitSignal(SignalName.LevelLoadComplete,true);
 
         }
         else if(loadingNewWorldLevelStatus == ResourceLoader.ThreadLoadStatus.InProgress)
         {
             //GD.Print("loading bar: " + progress[0]);
-            loadingHud.UpdateProgressBar(((float)progress[0]));
+            GameMaster.GM.GetLoadingHud().UpdateProgressBar(((float)progress[0]));
         }
     }
 

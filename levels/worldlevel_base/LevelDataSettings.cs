@@ -1,8 +1,16 @@
 using Godot;
 using System;
+using System.Data;
+using System.Threading.Tasks;
 
 public partial class LevelDataSettings : Node
 {
+    [Signal] public delegate void ApplyLevelDataSettingsCompleteEventHandler(bool success);
+
+    private SQualityData workingQuality;
+    private bool workingIsBenchmarkMode = false;
+    private bool first_change = true;
+
     public enum EQualityPresset { lowest=0,low=1,medium=2,high=3,highest=4}
 
     [Export] public bool ForceQualityOnLevelStart = false;
@@ -28,9 +36,9 @@ public partial class LevelDataSettings : Node
     [ExportGroup("Medium Voxel Settings")]
     [Export] public VoxelGI.SubdivEnum MediumVoxelSub = VoxelGI.SubdivEnum.Subdiv256;
     [Export] public float MediumVoxelHdr = 2.0f;
-    [Export] public float MediumVoxelEnergy = 0.7f;
-    [Export] public float MediumVoxelBias = 0.6f;
-    [Export] public float MediumVoxelNormalBias = 0.6f;
+    [Export] public float MediumVoxelEnergy = 0.68f;
+    [Export] public float MediumVoxelBias = 0.5f;
+    [Export] public float MediumVoxelNormalBias = 0.73f;
     [Export] public float MediumVoxelPropag = 0.8f;
 
     [ExportGroup("High Voxel Settings")]
@@ -169,8 +177,31 @@ public partial class LevelDataSettings : Node
         return newPresset;
     }
 
-    public async void ApplyNewLevelDataSettings(SQualityData newLevelData,bool newSave = false)
+    public SQualityData GetQualityPressetByID(int newQualityPressetID)
     {
+        SQualityData qualityPresset = null;
+
+        GD.Print("Quality pressset: "+ newQualityPressetID);
+
+        if (newQualityPressetID > 4 || newQualityPressetID < 0)
+            GD.Print("Chybne vybrany GetQualityPressetID");
+
+        switch (newQualityPressetID)
+        {
+            case 0: qualityPresset = GetLowestPresset(); break;
+            case 1: qualityPresset = GetLowPresset(); break;
+            case 2: qualityPresset = GetMediumPresset(); break;
+            case 3: qualityPresset = GetHighPresset(); break;
+            case 4: qualityPresset = GetHighestPresset(); break;
+        }
+
+        return qualityPresset;
+    }
+
+    public async void ApplyNewLevelDataSettings(SQualityData newLevelData,bool newSave = false,bool newBenchmark = false)
+    {
+        workingQuality = newLevelData;
+        workingIsBenchmarkMode = newBenchmark;
 
         GameMaster.GM.GetSettings().Apply_Scale3D(newLevelData.FSRScale, true, newSave);
         GameMaster.GM.GetSettings().Apply_Ssao(newLevelData.SSAO, true, newSave);
@@ -184,21 +215,11 @@ public partial class LevelDataSettings : Node
         GameMaster.GM.GetLevelLoader().GetActualLevelScene().GetVoxelGI().Data.NormalBias = newLevelData.VoxelNormalBias;
 
         GameMaster.GM.GetLevelLoader().GetActualLevelScene().GetVoxelGI().CallDeferred("bake");
+
+        await Task.Delay(500);
+
+        first_change = true;
         GameMaster.GM.GetLevelLoader().GetActualLevelScene().GetVoxelGI().Data.EmitChanged();
-
-        GD.Print(GameMaster.GM.GetLevelLoader().GetActualLevelScene().GetVoxelGI().Data.HasSignal("changed"));
-        await ToSignal(GameMaster.GM.GetLevelLoader().GetActualLevelScene().GetVoxelGI().Data, "changed");
-
-        await ToSignal(GetTree().CreateTimer(0.5f), "timeout");
-        
-        GameMaster.GM.GetLevelLoader().GetActualLevelScene().GetVoxelGI().Data.Energy = newLevelData.VoxelEnergy;
-        GameMaster.GM.GetLevelLoader().GetActualLevelScene().GetVoxelGI().Data.Propagation = newLevelData.VoxelPropag;
-        GameMaster.GM.GetLevelLoader().GetActualLevelScene().GetVoxelGI().Data.EmitChanged();
-
-        ProjectSettings.SetSetting("rendering/lights_and_shadows/positional_shadow/soft_shadow_filter_quality",
-            (int)newLevelData.ShadowFilterQuality);
-
-        ProjectSettings.SetSetting("rendering/lights_and_shadows/positional_shadow/atlas_size", newLevelData.ShadowAtlasSize);
     }
 
     public override void _Process(double delta)
@@ -225,13 +246,37 @@ public partial class LevelDataSettings : Node
             GameMaster.GM.GetLevelLoader().GetActualLevelScene().GetVoxelGI().Data.Energy = 1.8f;
             GameMaster.GM.GetLevelLoader().GetActualLevelScene().GetVoxelGI().Data.EmitChanged();
         }
+
+    }
+
+    public void Update()
+    {
+        if (first_change == false) return;
+
+        GD.Print("AHOJ");
+
+        GameMaster.GM.GetLevelLoader().GetActualLevelScene().GetVoxelGI().Data.Energy = workingQuality.VoxelEnergy;
+        GameMaster.GM.GetLevelLoader().GetActualLevelScene().GetVoxelGI().Data.Propagation = workingQuality.VoxelPropag;
+
+        first_change = false;
+        GameMaster.GM.GetLevelLoader().GetActualLevelScene().GetVoxelGI().Data.EmitChanged();
+
+        ProjectSettings.SetSetting("rendering/lights_and_shadows/positional_shadow/soft_shadow_filter_quality",
+            (int)workingQuality.ShadowFilterQuality);
+
+        ProjectSettings.SetSetting("rendering/lights_and_shadows/positional_shadow/atlas_size", workingQuality.ShadowAtlasSize);
+
+        if (workingIsBenchmarkMode)
+            GameMaster.GM.GetBenchmarkSystem().BenchmarkStart(true);
     }
 
     public override void _Ready()
     {
         base._Ready();
 
-        if(ForceQualityOnLevelStart)
+        GameMaster.GM.GetLevelLoader().GetActualLevelScene().GetVoxelGI().Data.Changed += Update;
+
+        if (ForceQualityOnLevelStart)
             SetQualityPresset();
     }
 

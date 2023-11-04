@@ -18,6 +18,7 @@ public partial class LoadingHud : Control
 	public void SetInitializeAndVisibleNow(string newNameOfLevel, bool newShowShaderProcess)
 	{
 		nameOfLevelLabel.Text = newNameOfLevel;
+		Visible = true;
 	}
 
 	public void LoadingIsComplete(bool newShowPressAnyKeyToStart)
