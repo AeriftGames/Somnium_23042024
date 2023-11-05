@@ -50,6 +50,9 @@ public partial class CBenchmarkSystem : Node
     public void BenchmarkStart(bool success)
     {
         //GD.Print("Benchmark level start in quality presset: " + NeedBenchmarkQualityLevel);
+        //await Task.Delay(1000);
+        // Emit start game from now
+        GameMaster.GM.GetMasterSignals().EmitSignal(MasterSignals.SignalName.GameStart);
 
         GameMaster.GM.GetLoadingHud().Visible = false;
 

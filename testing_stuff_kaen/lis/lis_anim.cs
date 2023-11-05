@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 public partial class lis_anim : Node3D
 {
-    [Export] int DelayMsStartAnim = 1000;
+    [Export] float DelayMsStartAnim = 1;
     [Export] float PowerShake = 2.0f;
     [Export] float ShakeFadeMin = 1.0f;
     [Export] float ShakeFadeMax = 5.0f;
@@ -14,6 +14,7 @@ public partial class lis_anim : Node3D
     AudioStreamPlayer3D AudioStreamPlayer_Touch;
 
     InventoryObjectCamera invObjectCamera = null;
+    BenchmarkCameraBody benchmarkCamBody = null;
 
     private bool isInDetectRange = false;
     public float DistanceFromPlayer = 100.0f;   //0-20
@@ -27,12 +28,14 @@ public partial class lis_anim : Node3D
         AnimPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
         AudioStreamPlayer_Touch = GetNode<AudioStreamPlayer3D>("AudioStreamPlayer3D_Touch");
 
-        DelayStart(DelayMsStartAnim);
+        StartGame();
     }
 
-    public async void DelayStart(int newDelay)
+    public async void StartGame()
     {
-        await Task.Delay(newDelay);
+        await ToSignal(GameMaster.GM.GetMasterSignals(), MasterSignals.SignalName.GameStart);
+
+        await ToSignal(GetTree().CreateTimer(DelayMsStartAnim), "timeout");
         AnimPlayer.Play("work");
     }
 
@@ -48,44 +51,78 @@ public partial class lis_anim : Node3D
     {
         if (isInDetectRange)
         {
-            // audio 
-            if (invObjectCamera == null) return;
-            await ToSignal(GetTree().CreateTimer(Rng.RandfRange(0.0f, 0.25f)), "timeout");
+            //audio
+            await ToSignal(GetTree().CreateTimer(Rng.RandfRange(0.02f, 0.25f)), "timeout");
             AudioStreamPlayer_Touch.PitchScale = GetRandomPitch(0.4f, 0.8f);
             AudioStreamPlayer_Touch.Play();
 
-            // cam shake
-            DistanceFromPlayer =
-                GlobalPosition.DistanceTo(invObjectCamera.GetCharacterOwner().GlobalPosition);
+            // calculate Distance
+            if (invObjectCamera != null)
+            {
+                if (GameMaster.GM.GetFPSCharacter() == null) return;
+
+                // cam shake
+                DistanceFromPlayer =
+                    GlobalPosition.DistanceTo(invObjectCamera.GetCharacterOwner().GlobalPosition);
+            }
+            else if (benchmarkCamBody != null)
+            {
+                DistanceFromPlayer =
+                    GlobalPosition.DistanceTo(benchmarkCamBody.GlobalPosition);
+            }
 
             //GD.Print(DistanceFromPlayer);
             //0.2 = jedno procento
             float procent_distance = 100.0f - (DistanceFromPlayer / 0.2f);
-            GD.Print(procent_distance);
-            //0.01-0.12
-            float final = (0.15f / 100.0f) * procent_distance/PowerShake;
-            invObjectCamera.GetHeadDangerShakeSystem().ApplyUserParamShake(final, Rng.RandfRange(ShakeFadeMin, ShakeFadeMax));
+            //GD.Print(procent_distance);
+            float final = 0.02f * procent_distance * PowerShake;
+            //GD.Print(final);
+
+            if (invObjectCamera != null)
+                invObjectCamera.GetHeadDangerShakeSystem().ApplyUserParamShake(final, Rng.RandfRange(ShakeFadeMin, ShakeFadeMax));
+            else if (benchmarkCamBody != null)
+                benchmarkCamBody.ApplyUserParamShake(final, Rng.RandfRange(ShakeFadeMin, ShakeFadeMax));
         }
     }
 
     public void _on_detect_player_area_body_entered(Node3D body)
     {
+        //GD.Print(body);
         FPSCharacter_Inventory player = body as FPSCharacter_Inventory;
         if (player != null)
         {
 
             invObjectCamera = player.GetObjectCamera() as InventoryObjectCamera;
             isInDetectRange = true;
+            return;
+        }
+
+        BenchmarkCameraBody benchCam = body as BenchmarkCameraBody;
+        if (benchCam != null)
+        {
+            benchmarkCamBody = benchCam;
+            isInDetectRange = true;
+            return;
         }
     }
 
     public void _on_detect_player_area_body_exited(Node3D body)
     {
+        //GD.Print(body);
         FPSCharacter_Inventory player = body as FPSCharacter_Inventory;
         if (player != null)
         {
             invObjectCamera = null;
             isInDetectRange = false;
+            return;
+        }
+
+        BenchmarkCameraBody benchCam = body as BenchmarkCameraBody;
+        if (benchCam != null)
+        {
+            benchmarkCamBody = null;
+            isInDetectRange = false;
+            return;
         }
     }
 }

@@ -22,17 +22,26 @@ public partial class WorldLevel : Node
 	{
 		levelScene = GetNode<LevelScene>("LevelScene");
 
-		StartGameInit();
+		InitGame();
 	}
 
-	public void StartGameInit()
+	public void InitGame()
 	{
+		// Pro moznost benchmarku - tudiz bez playera
 		if(WithoutPlayer)
 		{
 			// Apply Settings
 			GameMaster.GM.GetSettings().LoadAndApply_AllGraphicsSettings();
 			GameMaster.GM.EnableBlackScreen(false);
 		}
+
+		StartGame();
 	}
+
+	public void StartGame()
+	{
+		// Emit Signal StartGame
+        GameMaster.GM.GetMasterSignals().EmitSignal(MasterSignals.SignalName.GameStart);
+    }
 
 }

@@ -2093,6 +2093,9 @@ transform = Transform3D(0.282843, 0, -0.282843, 0, 0.4, 0, 0.282843, 0, 0.282843
 [node name="light_wall24" parent="LevelScene/Rooms/Room2/LightEmmisions" instance=ExtResource("8_d8h8b")]
 transform = Transform3D(-0.282843, 0, 0.282843, -0.282843, -1.74846e-08, -0.282843, 1.23635e-08, -0.4, 1.23635e-08, -24.0171, 1.71363, 2.23768)
 
+[node name="light_wall25" parent="LevelScene/Rooms/Room2/LightEmmisions" instance=ExtResource("8_d8h8b")]
+transform = Transform3D(0.282843, 3.49691e-08, -0.282843, -0.282843, -1.74846e-08, -0.282843, -3.70904e-08, 0.4, 1.23634e-08, -31.1883, 1.71363, 1.6642)
+
 [node name="light_wall9" parent="LevelScene/Rooms/Room2/LightEmmisions" instance=ExtResource("8_d8h8b")]
 transform = Transform3D(0.282843, 0, 0.282843, 0, 0.4, 0, -0.282843, 0, 0.282843, -13.6594, 1.11363, 4.13903)
 
@@ -2169,11 +2172,20 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.653, 0, -3.26422)
 
 [node name="lis3" parent="." instance=ExtResource("29_covdt")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 44.7, 0.10514, 2)
-DelayMsStartAnim = 4500
+DelayMsStartAnim = 2.5
+PowerShake = 1.0
+ShakeFadeMin = 3.0
+ShakeFadeMax = 7.0
 
 [node name="lis4" parent="." instance=ExtResource("29_covdt")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 46.4, 0.10514, 0.6)
+DelayMsStartAnim = 4.5
+PowerShake = 1.0
+ShakeFadeMin = 3.0
+ShakeFadeMax = 7.0
 
 [node name="lis5" parent="." instance=ExtResource("29_covdt")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 46.4, 0.10514, 3.4)
-DelayMsStartAnim = 2500
+PowerShake = 1.0
+ShakeFadeMin = 3.0
+ShakeFadeMax = 7.0

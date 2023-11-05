@@ -6,7 +6,7 @@ public partial class BenchmarkPoints : Node3D
 {
 	PathFollow3D pathFollowPos = null;
 	PathFollow3D pathFollowLook = null;
-	BenchmarkCamera cam = null;
+	BenchmarkCameraBody benchmarkBody = null;
 	Vector3 interpPos;
 	Vector3 interpLook;
 
@@ -20,7 +20,7 @@ public partial class BenchmarkPoints : Node3D
 	{
 		pathFollowPos = GetNode<PathFollow3D>("Path3D/PathFollow3D_pos_point");
 		pathFollowLook = GetNode<PathFollow3D>("Path3D/PathFollow3D_look_point");
-		cam = GetNode<BenchmarkCamera>("BenchmarkCamera");
+		benchmarkBody = GetNode<BenchmarkCameraBody>("BenchmarkCameraBody");
 
 		interpPos = pathFollowPos.GlobalPosition;
 		interpLook = pathFollowLook.GlobalPosition;
@@ -38,8 +38,8 @@ public partial class BenchmarkPoints : Node3D
 		interpPos = interpPos.Lerp(pathFollowPos.GlobalPosition, speed_interp * (float)delta);
         interpLook = interpLook.Lerp(pathFollowLook.GlobalPosition, speed_interp * (float)delta);
 
-        cam.GlobalPosition = interpPos;
-		cam.LookAtFromPosition(cam.GlobalPosition,interpLook);
+        benchmarkBody.GlobalPosition = interpPos;
+		benchmarkBody.LookAtFromPosition(benchmarkBody.GlobalPosition,interpLook);
 
 		// end
 		if(pathFollowPos.ProgressRatio > 0.98f)
@@ -54,7 +54,7 @@ public partial class BenchmarkPoints : Node3D
 				// score ?
 
 				// aspon spustime in benchmark menu
-				cam.GetInBenchmarkMenu().SetActive(true);
+				benchmarkBody.GetInBenchmarkMenu().SetActive(true);
 			}
         }
 	}

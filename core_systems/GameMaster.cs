@@ -23,9 +23,10 @@ public partial class GameMaster : Node
 	private LoadingHud loadingHud = null;
 	private FPSCharacter_BasicMoving _fpsCharacter = null;
 	private CBenchmarkSystem BenchmarkSystem = null;
+    private MasterSignals masterSignals = null;
 
-	//
-	private Control blackScreen = null;
+    //
+    private Control blackScreen = null;
 
 	//
 	private bool isQuitting = false;
@@ -62,6 +63,8 @@ public partial class GameMaster : Node
 
 		BenchmarkSystem = GetNode<CBenchmarkSystem>("BenchmarkSystem");
 
+		masterSignals = GetNode<MasterSignals>("MasterSignals");
+
     }
 
 	// Set/Get FPS Character
@@ -83,6 +86,7 @@ public partial class GameMaster : Node
 	//
 	public global_settings GetSettings(){ return Settings; }
 	public CBenchmarkSystem GetBenchmarkSystem() { return BenchmarkSystem; }
+	public MasterSignals GetMasterSignals() { return masterSignals; }
 
 	public override void _UnhandledInput(InputEvent @event)
 	{
