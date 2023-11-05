@@ -4,7 +4,7 @@
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_6y317"]
 friction = 0.8
-bounce = 0.2
+bounce = 0.3
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8avf3"]
 albedo_color = Color(0.913725, 0, 0.290196, 1)
@@ -16,6 +16,7 @@ roughness = 0.3
 [sub_resource type="SphereShape3D" id="SphereShape3D_p8kbs"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_5mxdj"]
+radius = 0.52
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_rpdal"]
 radius = 2.5
@@ -28,6 +29,7 @@ physics_material_override = SubResource("PhysicsMaterial_6y317")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 material_override = SubResource("StandardMaterial3D_8avf3")
+cast_shadow = 0
 mesh = SubResource("SphereMesh_l7ul3")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -60,6 +62,7 @@ metadata/_edit_lock_ = true
 light_color = Color(0.882353, 0, 0.14902, 1)
 light_indirect_energy = 5.0
 light_volumetric_fog_energy = 5.0
+shadow_enabled = true
 
 [connection signal="body_entered" from="interactive_object/StaticBody3D/interactive_object_area3D" to="interactive_object" method="_on_interactive_object_area_3d_body_entered"]
 [connection signal="body_exited" from="interactive_object/StaticBody3D/interactive_object_area3D" to="interactive_object" method="_on_interactive_object_area_3d_body_exited"]

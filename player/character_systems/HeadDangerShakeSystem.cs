@@ -44,6 +44,7 @@ public partial class HeadDangerShakeSystem : Node
 
     public Vector2 GetRandomOffset()
     {
+        RnGenerator.Randomize();
         return new Vector2(RnGenerator.RandfRange(-ShakeStrenght, ShakeStrenght),
             RnGenerator.RandfRange(-ShakeStrenght,ShakeStrenght));
     }

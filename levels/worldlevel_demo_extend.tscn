@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://1i0rk47y5rfe"]
+[gd_scene load_steps=38 format=3 uid="uid://1i0rk47y5rfe"]
 
 [ext_resource type="Script" path="res://levels/worldlevel_base/WorldLevel.cs" id="1_ucxcv"]
 [ext_resource type="VoxelGIData" uid="uid://b07w76761sd8j" path="res://levels/worldlevel_demo_extend/level_data/worldlevel_demo.VoxelGI_data.res" id="2_d5wgc"]
@@ -26,6 +26,9 @@
 [ext_resource type="PackedScene" uid="uid://bndr3up87gn1i" path="res://placeholders/Decals/blood_decal.tscn" id="22_tcmpq"]
 [ext_resource type="PackedScene" uid="uid://dv26x01is3wew" path="res://spawn/physic_object_ball_light.tscn" id="25_u234y"]
 [ext_resource type="AudioStream" uid="uid://cuirkbqnpyhli" path="res://audio/audio_streams/music/516907__zhr__sad-outro.mp3" id="26_q5bcx"]
+[ext_resource type="PackedScene" uid="uid://cill7wx53gakg" path="res://placeholders/posters/poster2.tscn" id="27_h8jbu"]
+[ext_resource type="PackedScene" uid="uid://bryarwbmvp6pm" path="res://models/lockers/locker_physic.tscn" id="28_g3s4w"]
+[ext_resource type="PackedScene" uid="uid://dk6s7gogdikp7" path="res://testing_stuff_kaen/lis/lis_anim.tscn" id="29_covdt"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_w3cwh"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -1840,6 +1843,15 @@ transform = Transform3D(4.33326e-07, -1.23048e-07, 2.815, -3.635, -2.12527e-07, 
 [node name="sloup_stred_1" parent="LevelScene/Rooms/Room2/walls" instance=ExtResource("11_heeli")]
 transform = Transform3D(-1.09278e-07, -2, 0, 2.5, -8.74228e-08, 0, 0, 0, 2, -2, 1.46403, 0)
 
+[node name="sloup_stred_3" parent="LevelScene/Rooms/Room2/walls" instance=ExtResource("11_heeli")]
+transform = Transform3D(-1.09278e-07, -2, 0, 2.5, -8.74228e-08, 0, 0, 0, 2, -28.7, 4.56403, 2)
+
+[node name="sloup_stred_4" parent="LevelScene/Rooms/Room2/walls" instance=ExtResource("11_heeli")]
+transform = Transform3D(-1.09278e-07, -2, 0, 2.5, -8.74228e-08, 0, 0, 0, 2, -30.4, 4.56403, 0.599999)
+
+[node name="sloup_stred_5" parent="LevelScene/Rooms/Room2/walls" instance=ExtResource("11_heeli")]
+transform = Transform3D(-1.09278e-07, -2, 0, 2.5, -8.74228e-08, 0, 0, 0, 2, -30.4, 4.56403, 3.4)
+
 [node name="sloup_stred_2" parent="LevelScene/Rooms/Room2/walls" instance=ExtResource("11_heeli")]
 transform = Transform3D(-1.09278e-07, -2, 0, 2.5, -8.74228e-08, 0, 0, 0, 2, 1.9, 1.46403, 0)
 
@@ -2104,7 +2116,7 @@ visible = false
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 16, 0, 4)
 
 [node name="small_rock2" parent="LevelScene/Rooms/Room2/Props" instance=ExtResource("20_521tp")]
-transform = Transform3D(-0.642788, 0, 0.766044, 0, 1, 0, -0.766044, 0, -0.642788, -2.6, 0.1, 3.23405)
+transform = Transform3D(-0.906307, 0, -0.422619, 0, 1, 0, 0.422619, 0, -0.906307, -1.4, 0.1, 3.03405)
 
 [node name="small_rock5" parent="LevelScene/Rooms/Room2/Props" instance=ExtResource("20_521tp")]
 transform = Transform3D(-0.422618, 0, 0.906308, 0, 1, 0, -0.906308, 0, -0.422618, -11.7, 0.1, 0.234052)
@@ -2113,7 +2125,7 @@ transform = Transform3D(-0.422618, 0, 0.906308, 0, 1, 0, -0.906308, 0, -0.422618
 transform = Transform3D(-0.422618, 0, 0.906308, 0.906308, -4.37114e-08, 0.422618, 3.9616e-08, 1, 1.84732e-08, -8.7, 0.5, -0.465948)
 
 [node name="small_rock3" parent="LevelScene/Rooms/Room2/Props" instance=ExtResource("20_521tp")]
-transform = Transform3D(-0.0515532, 0.405637, -0.912579, -0.201038, -0.899303, -0.388379, -0.978226, 0.163441, 0.12791, -3.1, 0.4, 3.33405)
+transform = Transform3D(-0.0515532, 0.405637, -0.912579, -0.447371, -0.826358, -0.34204, -0.892861, 0.390629, 0.224071, -2.02599, 0.4, 2.94855)
 
 [node name="DrawerTable" parent="LevelScene/Rooms/Room2/Props" instance=ExtResource("16_ne61i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.2, 0.432864, -3.4)
@@ -2122,7 +2134,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.2, 0.432864, -3.4)
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1, 0.442104, -3.54299)
 
 [node name="gauc1a" parent="LevelScene/Rooms/Room2/Props" instance=ExtResource("12_c4t0y")]
-transform = Transform3D(-2.18557e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.18557e-08, -7, 0.3, 3)
+transform = Transform3D(-2.18557e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.18557e-08, -7, 0.3, 2.92154)
 
 [node name="gauc1a2" parent="LevelScene/Rooms/Room2/Props" instance=ExtResource("12_c4t0y")]
 transform = Transform3D(-2.18557e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.18557e-08, -12, 0.3, 3)
@@ -2134,13 +2146,34 @@ metadata/_edit_group_ = true
 metadata/_edit_lock_ = true
 
 [node name="PlayerStart" parent="." instance=ExtResource("9_xjo8n")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 34, 0, -2)
 visible = false
 
 [node name="ball_projectile" parent="." instance=ExtResource("25_u234y")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27, 1, 1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.6555, 1, 6.2433)
 
 [node name="AudioStreamPlayerMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("26_q5bcx")
 volume_db = -15.0
 autoplay = true
 bus = &"Music"
+
+[node name="poster1" parent="." instance=ExtResource("27_h8jbu")]
+transform = Transform3D(0.499896, -0.0101746, 0, 0.0101746, 0.499896, 0, 0, 0, 0.5, 0.965707, 1.4, -4.24681)
+
+[node name="locker" parent="." instance=ExtResource("28_g3s4w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.653, 0, -2.56422)
+
+[node name="locker2" parent="." instance=ExtResource("28_g3s4w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.653, 0, -3.26422)
+
+[node name="lis3" parent="." instance=ExtResource("29_covdt")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 44.7, 0.10514, 2)
+DelayMsStartAnim = 4500
+
+[node name="lis4" parent="." instance=ExtResource("29_covdt")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 46.4, 0.10514, 0.6)
+
+[node name="lis5" parent="." instance=ExtResource("29_covdt")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 46.4, 0.10514, 3.4)
+DelayMsStartAnim = 2500
