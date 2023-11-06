@@ -2450,6 +2450,7 @@ bus = &"Music"
 
 [node name="lis3" parent="." instance=ExtResource("30_1iyh8")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 44.7, 0.10514, 2)
+Enable = true
 DelayMsStartAnim = 2.5
 PowerShake = 1.0
 ShakeFadeMin = 3.0
@@ -2457,12 +2458,14 @@ ShakeFadeMax = 7.0
 
 [node name="lis4" parent="." instance=ExtResource("30_1iyh8")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 46.4, 0.10514, 0.6)
+Enable = true
 PowerShake = 1.0
 ShakeFadeMin = 3.0
 ShakeFadeMax = 7.0
 
 [node name="lis5" parent="." instance=ExtResource("30_1iyh8")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 46.4, 0.10514, 3.4)
+Enable = true
 DelayMsStartAnim = 4.5
 PowerShake = 1.0
 ShakeFadeMin = 3.0

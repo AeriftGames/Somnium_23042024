@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://1i0rk47y5rfe"]
+[gd_scene load_steps=41 format=3 uid="uid://1i0rk47y5rfe"]
 
 [ext_resource type="Script" path="res://levels/worldlevel_base/WorldLevel.cs" id="1_ucxcv"]
 [ext_resource type="VoxelGIData" uid="uid://b07w76761sd8j" path="res://levels/worldlevel_demo_extend/level_data/worldlevel_demo.VoxelGI_data.res" id="2_d5wgc"]
@@ -32,7 +32,6 @@
 [ext_resource type="PackedScene" uid="uid://c73m0yt3w8nd1" path="res://testing_stuff_kaen/stairs/StairsTest.tscn" id="30_xhesf"]
 [ext_resource type="PackedScene" uid="uid://mngefovqb21k" path="res://testing_stuff_kaen/stairs/StairsNode.tscn" id="31_0bmq3"]
 [ext_resource type="PackedScene" uid="uid://c15bduyvn2ks6" path="res://testing_stuff_kaen/stairs/stair_prefab_1.tscn" id="32_oc053"]
-[ext_resource type="Script" path="res://testing_stuff_kaen/stairs/SimpleStair.cs" id="33_34bhm"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_w3cwh"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -2210,52 +2209,24 @@ transform = Transform3D(-0.8, 0, -1.6232e-07, 0, 0.8, 0, 1.20797e-07, 0, -1.075,
 transform = Transform3D(0.8, 0, 2.563e-07, 0, 0.8, 0, -1.90735e-07, 0, 1.075, 41.7, -0.245913, -2)
 
 [node name="StairsNode" parent="." instance=ExtResource("31_0bmq3")]
+visible = false
 NumStairs = 5
 
-[node name="AllStairsNode" type="Node3D" parent="StairsNode"]
-
-[node name="Stair_0" type="Node3D" parent="StairsNode/AllStairsNode" instance=ExtResource("32_oc053")]
-script = ExtResource("33_34bhm")
-
-[node name="Stair_1" type="Node3D" parent="StairsNode/AllStairsNode" instance=ExtResource("32_oc053")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.3, 0)
-script = ExtResource("33_34bhm")
-
-[node name="Stair_2" type="Node3D" parent="StairsNode/AllStairsNode" instance=ExtResource("32_oc053")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0.6, 0)
-script = ExtResource("33_34bhm")
-
-[node name="Stair_3" type="Node3D" parent="StairsNode/AllStairsNode" instance=ExtResource("32_oc053")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0.9, 0)
-script = ExtResource("33_34bhm")
-
-[node name="Stair_4" type="Node3D" parent="StairsNode/AllStairsNode" instance=ExtResource("32_oc053")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 1.2, 0)
-script = ExtResource("33_34bhm")
+[node name="AllStairsNode2" type="Node3D" parent="StairsNode"]
 
 [node name="StairsNode2" parent="." instance=ExtResource("31_0bmq3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3)
-NumStairs = 3
+visible = false
 
 [node name="@Node3D@55650" type="Node3D" parent="StairsNode2"]
 
 [node name="Stair_0" parent="StairsNode2/@Node3D@55650" instance=ExtResource("32_oc053")]
 
-[node name="AllStairsNode" type="Node3D" parent="StairsNode2"]
-
-[node name="Stair_0" type="Node3D" parent="StairsNode2/AllStairsNode" instance=ExtResource("32_oc053")]
-script = ExtResource("33_34bhm")
-
-[node name="Stair_1" type="Node3D" parent="StairsNode2/AllStairsNode" instance=ExtResource("32_oc053")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.3, 0)
-script = ExtResource("33_34bhm")
-
-[node name="Stair_2" type="Node3D" parent="StairsNode2/AllStairsNode" instance=ExtResource("32_oc053")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0.6, 0)
-script = ExtResource("33_34bhm")
+[node name="AllStairsNode2" type="Node3D" parent="StairsNode2"]
 
 [node name="StairsNode3" parent="." instance=ExtResource("31_0bmq3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+visible = false
 NumStairs = 10
 
 [node name="_Node3D_55650" type="Node3D" parent="StairsNode3"]
@@ -2272,43 +2243,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.3, 0)
 [node name="Stair_2" parent="StairsNode3/@Node3D@55795" instance=ExtResource("32_oc053")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0.6, 0)
 
-[node name="AllStairsNode" type="Node3D" parent="StairsNode3"]
-
-[node name="Stair_0" type="Node3D" parent="StairsNode3/AllStairsNode" instance=ExtResource("32_oc053")]
-script = ExtResource("33_34bhm")
-
-[node name="Stair_1" type="Node3D" parent="StairsNode3/AllStairsNode" instance=ExtResource("32_oc053")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.3, 0)
-script = ExtResource("33_34bhm")
-
-[node name="Stair_2" type="Node3D" parent="StairsNode3/AllStairsNode" instance=ExtResource("32_oc053")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0.6, 0)
-script = ExtResource("33_34bhm")
-
-[node name="Stair_3" type="Node3D" parent="StairsNode3/AllStairsNode" instance=ExtResource("32_oc053")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0.9, 0)
-script = ExtResource("33_34bhm")
-
-[node name="Stair_4" type="Node3D" parent="StairsNode3/AllStairsNode" instance=ExtResource("32_oc053")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 1.2, 0)
-script = ExtResource("33_34bhm")
-
-[node name="Stair_5" type="Node3D" parent="StairsNode3/AllStairsNode" instance=ExtResource("32_oc053")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 1.5, 0)
-script = ExtResource("33_34bhm")
-
-[node name="Stair_6" type="Node3D" parent="StairsNode3/AllStairsNode" instance=ExtResource("32_oc053")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 1.8, 0)
-script = ExtResource("33_34bhm")
-
-[node name="Stair_7" type="Node3D" parent="StairsNode3/AllStairsNode" instance=ExtResource("32_oc053")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 2.1, 0)
-script = ExtResource("33_34bhm")
-
-[node name="Stair_8" type="Node3D" parent="StairsNode3/AllStairsNode" instance=ExtResource("32_oc053")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 2.4, 0)
-script = ExtResource("33_34bhm")
-
-[node name="Stair_9" type="Node3D" parent="StairsNode3/AllStairsNode" instance=ExtResource("32_oc053")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 2.7, 0)
-script = ExtResource("33_34bhm")
+[node name="AllStairsNode2" type="Node3D" parent="StairsNode3"]
