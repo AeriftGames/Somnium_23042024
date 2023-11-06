@@ -1,17 +1,17 @@
-[gd_scene load_steps=15 format=3 uid="uid://bnb3blo4rl83s"]
+[gd_scene load_steps=13 format=3 uid="uid://bnb3blo4rl83s"]
 
 [ext_resource type="PackedScene" uid="uid://0g1u2jvnfbpy" path="res://player/FPSCharacter_Interaction.tscn" id="1_ywg5i"]
 [ext_resource type="Script" path="res://player/FPSCharacter_Inventory.cs" id="2_k43co"]
 [ext_resource type="AudioStream" uid="uid://d1h0024d0d7i3" path="res://audio/audio_streams/hurts_test/413178__micahlg__male_hurt2.ogg" id="3_51q7g"]
-[ext_resource type="AudioStream" uid="uid://csol82irfc2by" path="res://audio/audio_streams/hurts_test/413181__micahlg__male_hurt5.ogg" id="4_m4gkb"]
 [ext_resource type="Script" path="res://player/character_systems/CharacterInfoHud.cs" id="4_nvx4w"]
 [ext_resource type="PackedScene" uid="uid://dhhnra4i7t74r" path="res://player/character_systems/damage_hud.tscn" id="5_dhy04"]
-[ext_resource type="AudioStream" uid="uid://df78oaoqlbkh3" path="res://audio/audio_streams/hurts_test/413184__micahlg__male_hurt6.ogg" id="5_dlixv"]
-[ext_resource type="AudioStream" uid="uid://u7gx1or5kywy" path="res://audio/audio_streams/hurts_test/413185__micahlg__male_hurt8.ogg" id="6_7ci7t"]
-[ext_resource type="AudioStream" uid="uid://dcsxua2341g8" path="res://audio/audio_streams/hurts_test/325269__deleted_user_2104797__body-fall-2.wav" id="7_0hcda"]
+[ext_resource type="Script" path="res://player/character_systems/CharacterStairSystem.cs" id="5_kvnk0"]
 [ext_resource type="Script" path="res://player/character_systems/inventory_menu/InventorySystem.cs" id="8_1wcpl"]
 [ext_resource type="PackedScene" uid="uid://dxumv4dw6y6ps" path="res://player/character_systems/inventory_menu/inventory_menu_number_two.tscn" id="9_bfvnj"]
 [ext_resource type="Script" path="res://player/character_systems/StaminaSystem.cs" id="9_ogpi2"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_f2nug"]
+size = Vector3(0.05, 1, 0.05)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7bbwt"]
 bg_color = Color(0.913319, 0.285158, 0, 0.392157)
@@ -29,27 +29,44 @@ corner_radius_bottom_left = 10
 
 [node name="FPSCharacter_Inventory" instance=ExtResource("1_ywg5i")]
 script = ExtResource("2_k43co")
-StartActualHealth = 50.0
+StartActualHealth = 100.0
 StartMaxHealth = 100.0
 StartHealthRegenVal = 1.0
 StartHealthRegenTick = 0.5
-StartHealthRegenEnable = true
-HurtAudios = Array[AudioStream]([ExtResource("3_51q7g"), ExtResource("4_m4gkb"), ExtResource("5_dlixv"), ExtResource("6_7ci7t")])
-DeathAudios = Array[AudioStream]([ExtResource("3_51q7g")])
-BodyFallAudios = Array[AudioStream]([ExtResource("7_0hcda")])
+StartHealthRegenEnable = false
+HurtAudios = null
+DeathAudios = null
+BodyFallAudios = null
 CanShootProjectile = true
 PowerImpulseShoot = 10.0
 MassProjectile = 5.0
 EnableAutoDestroyProjectile = true
 MSecToDestroyProjectile = 5000
+AudioFlashlight_On = null
+AudioFlashlight_Off = null
 FootStepLengthInSprint = 1.25
 FootStepLengthInCrouch = 0.85
+FootstepSounds = null
 FootstepsVolumeDBInWalk = -2.0
 FootstepsVolumeDBInSprint = 1.0
 FootstepsVolumeDBInCrouch = -7.0
-MoveSpeedInCrunch = 1.3
-MoveSpeedInSprint = 4.25
-DeccelerateSmoothStep = 4.0
+MiniHeightForLandingEffect = 0.35
+miniHeightLandingSounds = null
+smallHeightLandingSounds = null
+mediumHeightLandingSounds = null
+highHeightLandingSounds = null
+deathHeightLandingSounds = null
+JumpingSounds = null
+JumpingAudioPitch = 1.0
+JumpingAudioPitchOffset = 0.2
+CrouchingSounds = null
+CrouchingAudioPitch = 0.65
+CrouchingAudioPitchRandomOffset = 0.05
+CrouchingVolumeDB = -5.0
+UncrouchingSounds = null
+UncrouchingAudioPitch = 0.5
+UncrouchingVolumeDB = -5.0
+CrunchLerpSpeed = 5.0
 
 [node name="InventorySystem" type="Node" parent="." index="0"]
 script = ExtResource("8_1wcpl")
@@ -61,28 +78,67 @@ initStaminaRegenVal = 1.0
 initStaminaRegenTick = 0.2
 initStaminaRegenEnable = true
 
-[node name="AudioStreamPlayer_Footsteps" parent="." index="7"]
+[node name="StairSystem" type="Node3D" parent="." index="2"]
+script = ExtResource("5_kvnk0")
+metadata/_edit_lock_ = true
+
+[node name="RayCast3D_Back" type="RayCast3D" parent="StairSystem" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0.5)
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StairSystem/RayCast3D_Back" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+mesh = SubResource("BoxMesh_f2nug")
+
+[node name="RayCast3D_Front" type="RayCast3D" parent="StairSystem" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -0.42)
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="StairSystem/RayCast3D_Front" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+visible = false
+mesh = SubResource("BoxMesh_f2nug")
+skeleton = NodePath("../../RayCast3D_Back")
+
+[node name="RayCast3D_Right" type="RayCast3D" parent="StairSystem" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.5, 0)
+visible = false
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="StairSystem/RayCast3D_Right" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+mesh = SubResource("BoxMesh_f2nug")
+skeleton = NodePath("../../RayCast3D_Back")
+
+[node name="RayCast3D_Left" type="RayCast3D" parent="StairSystem" index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.5, 0)
+visible = false
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="StairSystem/RayCast3D_Left" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+mesh = SubResource("BoxMesh_f2nug")
+skeleton = NodePath("../../RayCast3D_Back")
+
+[node name="AudioStreamPlayer_Footsteps" parent="." index="8"]
 max_polyphony = 3
 
-[node name="AudioStreamPlayer_JumpLand" parent="." index="8"]
+[node name="AudioStreamPlayer_JumpLand" parent="." index="9"]
 max_polyphony = 3
 
-[node name="AudioStreamPlayer_Hurts" type="AudioStreamPlayer" parent="." index="10"]
+[node name="AudioStreamPlayer_Hurts" type="AudioStreamPlayer" parent="." index="11"]
 stream = ExtResource("3_51q7g")
 max_polyphony = 4
 bus = &"Sfx"
 
-[node name="AudioStreamPlayer_Universal" type="AudioStreamPlayer" parent="." index="11"]
+[node name="AudioStreamPlayer_Universal" type="AudioStreamPlayer" parent="." index="12"]
 max_polyphony = 4
 bus = &"Sfx"
 
-[node name="Item_inspect" parent="." index="13"]
+[node name="Item_inspect" parent="." index="14"]
 metadata/_edit_lock_ = true
 
-[node name="report_bug" parent="." index="14"]
+[node name="report_bug" parent="." index="15"]
 metadata/_edit_lock_ = true
 
-[node name="DebugHud" parent="." index="15"]
+[node name="DebugHud" parent="." index="16"]
 metadata/_edit_lock_ = true
 
 [node name="InventoryMenu" parent="AllHuds" index="1" instance=ExtResource("9_bfvnj")]

@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://c73m0yt3w8nd1"]
+
+[ext_resource type="PackedScene" uid="uid://dcqt4ptrs8dit" path="res://testing_stuff_kaen/stairs/stair_classic.tscn" id="1_dn1st"]
+
+[node name="StairsTest" type="Node3D"]
+
+[node name="stair_classic_1" parent="." instance=ExtResource("1_dn1st")]
+
+[node name="stair_classic_2" parent="." instance=ExtResource("1_dn1st")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8, 0.2, 0)
+
+[node name="stair_classic_3" parent="." instance=ExtResource("1_dn1st")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.6, 0.4, 0)
+
+[node name="stair_classic_4" parent="." instance=ExtResource("1_dn1st")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4, 0.6, 0)

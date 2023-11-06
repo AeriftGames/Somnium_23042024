@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 public partial class lis_anim : Node3D
 {
+    [Export] bool Enable = false;
     [Export] float DelayMsStartAnim = 1;
     [Export] float PowerShake = 2.0f;
     [Export] float ShakeFadeMin = 1.0f;
@@ -36,7 +37,8 @@ public partial class lis_anim : Node3D
         await ToSignal(GameMaster.GM.GetMasterSignals(), MasterSignals.SignalName.GameStart);
 
         await ToSignal(GetTree().CreateTimer(DelayMsStartAnim), "timeout");
-        AnimPlayer.Play("work");
+        if(Enable)
+            AnimPlayer.Play("work");
     }
 
     public override void _Process(double delta)
@@ -49,7 +51,7 @@ public partial class lis_anim : Node3D
 
     public async void PlayTouchSound()
     {
-        if (isInDetectRange)
+        if (Enable && isInDetectRange)
         {
             //audio
             await ToSignal(GetTree().CreateTimer(Rng.RandfRange(0.02f, 0.25f)), "timeout");

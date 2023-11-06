@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://dcqt4ptrs8dit"]
+
+[ext_resource type="PackedScene" uid="uid://qeam3vktj2j1" path="res://testing_stuff_kaen/stairs/stair_classic_1.glb" id="1_02bh1"]
+[ext_resource type="Material" uid="uid://daufacvfln14l" path="res://placeholders/modular_level_builds/placeholder/floor_2x_2m_variant_4.tres" id="2_i81ew"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2j7rt"]
+size = Vector3(2, 0.3, 4)
+
+[node name="stair_classic_1" instance=ExtResource("1_02bh1")]
+
+[node name="Cube" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.143558, 0)
+material_override = ExtResource("2_i81ew")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Cube" index="0" groups=["material_surface_wood", "tag_stair"]]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cube/StaticBody3D" index="0"]
+shape = SubResource("BoxShape3D_2j7rt")

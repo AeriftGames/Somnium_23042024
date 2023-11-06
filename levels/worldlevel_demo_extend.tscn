@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://1i0rk47y5rfe"]
+[gd_scene load_steps=39 format=3 uid="uid://1i0rk47y5rfe"]
 
 [ext_resource type="Script" path="res://levels/worldlevel_base/WorldLevel.cs" id="1_ucxcv"]
 [ext_resource type="VoxelGIData" uid="uid://b07w76761sd8j" path="res://levels/worldlevel_demo_extend/level_data/worldlevel_demo.VoxelGI_data.res" id="2_d5wgc"]
@@ -29,6 +29,7 @@
 [ext_resource type="PackedScene" uid="uid://cill7wx53gakg" path="res://placeholders/posters/poster2.tscn" id="27_h8jbu"]
 [ext_resource type="PackedScene" uid="uid://bryarwbmvp6pm" path="res://models/lockers/locker_physic.tscn" id="28_g3s4w"]
 [ext_resource type="PackedScene" uid="uid://dk6s7gogdikp7" path="res://testing_stuff_kaen/lis/lis_anim.tscn" id="29_covdt"]
+[ext_resource type="PackedScene" uid="uid://c73m0yt3w8nd1" path="res://testing_stuff_kaen/stairs/StairsTest.tscn" id="30_xhesf"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_w3cwh"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -2189,3 +2190,9 @@ transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 46.4, 0.10514, 3.4)
 PowerShake = 1.0
 ShakeFadeMin = 3.0
 ShakeFadeMax = 7.0
+
+[node name="StairsTest" parent="." instance=ExtResource("30_xhesf")]
+transform = Transform3D(-0.8, 0, -1.6232e-07, 0, 0.8, 0, 1.20797e-07, 0, -1.075, 34.7, -0.1, -2)
+
+[node name="StairsTest2" parent="." instance=ExtResource("30_xhesf")]
+transform = Transform3D(0.8, 0, 2.563e-07, 0, 0.8, 0, -1.90735e-07, 0, 1.075, 41.7, -0.1, -2)

@@ -39,7 +39,7 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
     [Export] public float LandCameraLerpRotation = -0.1f;
     [Export] public float lerpLandingSpeedModifier = 3.0f;
 
-    [Export] public float MiniHeightForLandingEffect = 0.3f;
+    [Export] public float MiniHeightForLandingEffect = 0.35f;
     [Export] public float SmallHeightForLandingEffect = 1.2f;
     [Export] public float MediumHeightForLandingEffect = 2.5f;
     [Export] public float HighHeightForLandingEffect = 4.0f;    // For death is more than high
@@ -303,15 +303,16 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
     {
         base.EventLandingEffect(heightfall);
 
-        float lerpHeight = -0.4f;
-        float lerpRot = -0.1f;
-        float speedmod = 3.0f;
-
+        float lerpHeight = 0;//-0.4f;
+        float lerpRot = 0;//-0.1f;
+        float speedmod = 0;//3.0f;
+        
         //Apply camera shake
-        GetObjectCamera().ShakeCameraRotation(0.2f,0.2f,1.0f,1.0f);
+        //GetObjectCamera().ShakeCameraRotation(0.2f,0.2f,1.0f,1.0f);
 
         if (heightfall < 0.15f)
         {
+            /*
             // very mini
             GameMaster.GM.Log.WriteLog(this, LogSystem.ELogMsgType.INFO, "(very mini) noticable land effect");
 
@@ -332,7 +333,7 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
 
             lerpHeight = -0.1f;
             lerpRot = -0.025f;
-
+            */
         }
         else if (heightfall <= MiniHeightForLandingEffect)
         {

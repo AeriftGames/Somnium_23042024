@@ -38,7 +38,7 @@ public partial class HeadDangerShakeSystem : Node
             ShakeStrenght = Mathf.Lerp(ShakeStrenght, 0, ShakeFade * (float)delta);
 
             Vector2 ShakeFinal = GetRandomOffset(ShakeStrenght)/50f;
-            GD.Print("After Random: "+ShakeFinal);
+            //GD.Print("After Random: "+ShakeFinal);
 
             GameMaster.GM.GetFPSCharacter().GetFPSCharacterCamera().HOffset = ShakeFinal.X;
             GameMaster.GM.GetFPSCharacter().GetFPSCharacterCamera().VOffset = ShakeFinal.Y;
