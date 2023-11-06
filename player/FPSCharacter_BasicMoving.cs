@@ -88,6 +88,8 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
 
 	private bool successJump = false;
 
+	public float LerpSpeedCameraY = 0.0f;
+
 	public override void _Ready()
 	{
 		// pro dostupnost skrze gamemastera

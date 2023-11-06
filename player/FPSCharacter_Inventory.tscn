@@ -10,8 +10,8 @@
 [ext_resource type="PackedScene" uid="uid://dxumv4dw6y6ps" path="res://player/character_systems/inventory_menu/inventory_menu_number_two.tscn" id="9_bfvnj"]
 [ext_resource type="Script" path="res://player/character_systems/StaminaSystem.cs" id="9_ogpi2"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_f2nug"]
-size = Vector3(0.05, 1, 0.05)
+[sub_resource type="SphereShape3D" id="SphereShape3D_wsteg"]
+radius = 0.6
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7bbwt"]
 bg_color = Color(0.913319, 0.285158, 0, 0.392157)
@@ -82,40 +82,10 @@ initStaminaRegenEnable = true
 script = ExtResource("5_kvnk0")
 metadata/_edit_lock_ = true
 
-[node name="RayCast3D_Back" type="RayCast3D" parent="StairSystem" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0.5)
-visible = false
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StairSystem/RayCast3D_Back" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("BoxMesh_f2nug")
-
-[node name="RayCast3D_Front" type="RayCast3D" parent="StairSystem" index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -0.42)
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="StairSystem/RayCast3D_Front" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
-visible = false
-mesh = SubResource("BoxMesh_f2nug")
-skeleton = NodePath("../../RayCast3D_Back")
-
-[node name="RayCast3D_Right" type="RayCast3D" parent="StairSystem" index="2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.5, 0)
-visible = false
-
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="StairSystem/RayCast3D_Right" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("BoxMesh_f2nug")
-skeleton = NodePath("../../RayCast3D_Back")
-
-[node name="RayCast3D_Left" type="RayCast3D" parent="StairSystem" index="3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.5, 0)
-visible = false
-
-[node name="MeshInstance3D4" type="MeshInstance3D" parent="StairSystem/RayCast3D_Left" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("BoxMesh_f2nug")
-skeleton = NodePath("../../RayCast3D_Back")
+[node name="ShapeCast3D" type="ShapeCast3D" parent="StairSystem" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.09073, -0.451133)
+shape = SubResource("SphereShape3D_wsteg")
+margin = 0.05
 
 [node name="AudioStreamPlayer_Footsteps" parent="." index="8"]
 max_polyphony = 3

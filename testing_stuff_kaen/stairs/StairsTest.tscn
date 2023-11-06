@@ -14,3 +14,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.6, 0.4, 0)
 
 [node name="stair_classic_4" parent="." instance=ExtResource("1_dn1st")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4, 0.6, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." groups=["material_surface_wood", "tag_stairs"]]
+
+[node name="CollisionPolygon3D" type="CollisionPolygon3D" parent="StaticBody3D"]
+depth = 4.0
+polygon = PackedVector2Array(0.992878, -0.0182856, -2.39908, 0.860306, -4.40656, 0.860306, -4.4, 0)
