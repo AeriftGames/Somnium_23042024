@@ -10,6 +10,8 @@ public partial class ObjectCamera : Node3D
 	public Node3D NodeRotY = null;
 	public Node3D NodeRotX = null;
 	public Node3D NodeLean = null;
+	public Node3D ShakeNode = null;
+	public Node3D DangerShake = null;
 	public Camera3D Camera = null;
 	public Marker3D HandGrabMarker;
 	public Generic6DofJoint3D HandGrabJoint = null;
@@ -47,42 +49,58 @@ public partial class ObjectCamera : Node3D
 	private bool isZoomRotSetDirection = false;
 	private bool isOnHitTargetZoomToNormal = false;
 
-	public override void _Ready()
+	// shake
+	ShakeLerp camShakeLerp = null;
+
+    public override void _Ready()
 	{
-		NodeRotY = GetNode<Node3D>("NodeRotY");
-		GimbalLand = GetNode<Node3D>("NodeRotY/GimbalLand");
-		NodeRotX = GetNode<Node3D>("NodeRotY/GimbalLand/NodeRotX");
-		NodeLean = GetNode<Node3D>("NodeRotY/GimbalLand/NodeRotX/NodeLean");
-		Camera = GetNode<Camera3D>("NodeRotY/GimbalLand/NodeRotX/NodeLean/Camera");
-		HandGrabMarker = GetNode<Marker3D>("NodeRotY/GimbalLand/NodeRotX/NodeLean/Camera/HandGrabMarker");
-		HandGrabJoint = GetNode<Generic6DofJoint3D>("NodeRotY/GimbalLand/NodeRotX/NodeLean/Camera/HandGrabJoint");
-		HandStaticBody = GetNode<StaticBody3D>("NodeRotY/GimbalLand/NodeRotX/" +
-			"NodeLean/Camera/HandGrabMarker/HandStaticBody");
+		NodeRotY = GetNode<Node3D>("%NodeRotY");
+		GimbalLand = GetNode<Node3D>("%GimbalLand");
+		NodeRotX = GetNode<Node3D>("%NodeRotX");
+		NodeLean = GetNode<Node3D>("%NodeLean");
+		ShakeNode = GetNode<Node3D>("%ShakeNode");
+		DangerShake = GetNode<Node3D>("%HeadDangerShake");
+        Camera = GetNode<Camera3D>("%Camera");
+		HandGrabMarker = GetNode<Marker3D>("%HandGrabMarker");
+		HandGrabJoint = GetNode<Generic6DofJoint3D>("%HandGrabJoint");
+		HandStaticBody = GetNode<StaticBody3D>("%HandStaticBody");
 
 		//lean
-		LerpPos_LeanCenter = GetNode<Node3D>("NodeRotY/GimbalLand/NodeRotX/LerpPos_LeanCenter");
-		LerpPos_LeanLeft = GetNode<Node3D>("NodeRotY/GimbalLand/NodeRotX/LerpPos_LeanLeft");
-		LerpPos_LeanRight = GetNode<Node3D>("NodeRotY/GimbalLand/NodeRotX/LerpPos_LeanRight");
+		LerpPos_LeanCenter = GetNode<Node3D>("%LerpPos_LeanCenter");
+		LerpPos_LeanLeft = GetNode<Node3D>("%LerpPos_LeanLeft");
+		LerpPos_LeanRight = GetNode<Node3D>("%LerpPos_LeanRight");
 
 		//Zoom
 		neededZoomValue = Camera.Fov;
 		LerpObject_ObjectCameraPos.EnableUpdate(true);
 		LerpObject_CameraZoom.EnableUpdate(true);
 		LerpObject_CameraZoom.SetTarget(65.0f);     // Initial setup = normal fov
-		lookingPoint = GetNode<Node3D>("NodeRotY/GimbalLand/NodeRotX/NodeLean/CameraLookPoint");
+		lookingPoint = GetNode<Node3D>("%CameraLookPoint");
 		LerpObject_CameraZoomToObject.EnableUpdate(true);
-	}
+
+		// povoli lerping k characteru
+		SetLerpToCharacterEnable(true);
+
+		// init camShakeLerp
+		camShakeLerp = new ShakeLerp();
+		camShakeLerp.Init(ShakeNode);
+    }
 
 	public void SetCharacterOwner(FPSCharacter_BasicMoving newFPSCharacter_BasicMoving)
 	{
 		ownerCharacter = newFPSCharacter_BasicMoving;
 	}
 
+	public FPSCharacter_BasicMoving GetCharacterOwner() { return ownerCharacter; }
+
 	public override void _Process(double delta)
 	{
 		if (GameMaster.GM.GetIsQuitting()) return;
 
 		FPSCharacter_Interaction character_Interaction = (FPSCharacter_Interaction)ownerCharacter;
+
+		// camShakeLerp logic update
+		camShakeLerp.Update(delta);
 
 		// CameraZoom Process
 		if (Mathf.Abs(LerpObject_CameraZoom.GetTarget() - Camera.Fov) > 0.15f)
@@ -148,15 +166,24 @@ public partial class ObjectCamera : Node3D
 
 		base._PhysicsProcess(delta);
 
-		if (ownerCharacter.IsInputEnable())
-			UpdateCameraLook(_MouseMotion, delta);
+        /* Pokud JoyLook ma nejakou hodnotu (pohnuto packou na gamepadu) = gamepad jinak mys */
+        Vector2 JoyLook = PlayerInputs.GetRightStickMotion(15.0f);
+		if(JoyLook.Length() > 0 && ownerCharacter.IsInputEnable() && GetCameraLookInputEnable())
+			UpdateCameraLookGamepad(JoyLook, delta);
+		else if (ownerCharacter.IsInputEnable() && GetCameraLookInputEnable())
+            UpdateCameraLookMouse(_MouseMotion, delta);
 
-		// new lerp object camera pos to player head
-		LerpObject_ObjectCameraPos.SetAllParam(GlobalPosition,
-			ownerCharacter.HeadHolderCamera.GlobalPosition, ownerCharacter.LerpSpeedPosObjectCamera);
+		// UPDATE LERP TO CHARACTER
+		if(GetIsEnableLerpToCharacter())
+		{
+            // new lerp object camera pos to player head
+            LerpObject_ObjectCameraPos.SetAllParam(GlobalPosition,
+                ownerCharacter.HeadHolderCamera.GlobalPosition, ownerCharacter.LerpSpeedPosObjectCamera);
 
-		GlobalPosition = LerpObject_ObjectCameraPos.Update(delta);
+            GlobalPosition = LerpObject_ObjectCameraPos.Update(delta);
+        }
 
+		// reset mouse to center
 		_MouseMotion = new Vector2(0, 0);
 	}
 
@@ -171,7 +198,7 @@ public partial class ObjectCamera : Node3D
 	}
 
 	// Update CameraLook from mouse input and calculating rotation nodeRotY and nodeRotX
-	public void UpdateCameraLook(Vector2 newMouseMotion, double delta)
+	public void UpdateCameraLookMouse(Vector2 newMouseMotion, double delta)
 	{
 		// Lerping mouse motion for smooth look (x,y)
 		_LookVelocity.X = Mathf.Lerp(_LookVelocity.X, newMouseMotion.X * ownerCharacter.MouseSensitivity,
@@ -180,12 +207,17 @@ public partial class ObjectCamera : Node3D
 		_LookVelocity.Y = Mathf.Lerp(_LookVelocity.Y, newMouseMotion.Y * ownerCharacter.MouseSensitivity,
 			(float)delta * ownerCharacter.MouseSmooth);
 
-		// Set new rotates
+		// Set new rotates around Y
 		NodeRotY.RotateY(-Mathf.DegToRad(_LookVelocity.X));
-		NodeRotX.RotateX(-Mathf.DegToRad(_LookVelocity.Y));
 
-		// Set clamp camera vertical look
-		Vector3 actualRotX = NodeRotX.Rotation;
+		// Set new rotates around X (InverseVertical?)
+		if(!ownerCharacter.InverseVerticalLook)
+			NodeRotX.RotateX(-Mathf.DegToRad(_LookVelocity.Y));
+		else
+            NodeRotX.RotateX(Mathf.DegToRad(_LookVelocity.Y));
+
+        // Set clamp camera vertical look
+        Vector3 actualRotX = NodeRotX.Rotation;
 		actualRotX.X = Mathf.Clamp(actualRotX.X,
 			Mathf.DegToRad(ownerCharacter.CameraVerticalLookMin),
 			Mathf.DegToRad(ownerCharacter.CameraVerticalLookMax));
@@ -196,8 +228,39 @@ public partial class ObjectCamera : Node3D
 		_MouseMotion = Vector2.Zero;
 	}
 
-	// Povoli ci zakaze lerp tohoto objektu k characteru hlavy
-	public void SetLerpToCharacterEnable(bool newEnable)
+    // Update CameraLook from gamepad input and calculating rotation nodeRotY and nodeRotX
+    public void UpdateCameraLookGamepad(Vector2 newLookGamepadMotion, double delta)
+    {
+        // Lerping mouse motion for smooth look (x,y)
+        _LookVelocity.X = Mathf.Lerp(_LookVelocity.X, newLookGamepadMotion.X * ownerCharacter.GamepadSensitvity,
+            (float)delta * ownerCharacter.GamepadSmooth);
+
+        _LookVelocity.Y = Mathf.Lerp(_LookVelocity.Y, newLookGamepadMotion.Y * ownerCharacter.GamepadSensitvity,
+            (float)delta * ownerCharacter.GamepadSmooth);
+
+        // Set new rotates
+        NodeRotY.RotateY(-Mathf.DegToRad(_LookVelocity.X));
+
+        // Set new rotates around X (InverseVertical?)
+        if (!ownerCharacter.InverseVerticalLook)
+            NodeRotX.RotateX(-Mathf.DegToRad(_LookVelocity.Y));
+        else
+            NodeRotX.RotateX(Mathf.DegToRad(_LookVelocity.Y));
+
+        // Set clamp camera vertical look
+        Vector3 actualRotX = NodeRotX.Rotation;
+        actualRotX.X = Mathf.Clamp(actualRotX.X,
+            Mathf.DegToRad(ownerCharacter.CameraVerticalLookMin),
+            Mathf.DegToRad(ownerCharacter.CameraVerticalLookMax));
+
+        NodeRotX.Rotation = actualRotX;
+
+        // Reset MouseMotion
+        _MouseMotion = Vector2.Zero;
+    }
+
+    // Povoli ci zakaze lerp tohoto objektu k characteru hlavy
+    public void SetLerpToCharacterEnable(bool newEnable)
 	{
 		LerpObject_ObjectCameraPos.EnableUpdate(newEnable);
 	}
@@ -511,6 +574,11 @@ public partial class ObjectCamera : Node3D
 
 	}
 
+	public bool GetIsEnableLerpToCharacter()
+	{
+		return LerpObject_ObjectCameraPos.IsEnableUpdate();
+	}
+
 	public Marker3D GetHandGrabMarker()
 	{
 		return HandGrabMarker;
@@ -535,5 +603,24 @@ public partial class ObjectCamera : Node3D
 		tweenLeanRot.Kill();
 		tweenLeanPos.Dispose();
 		tweenLeanRot.Dispose();
+		/*
+		camShakeLerp.FreeAll();
+		camShakeLerp = null;*/
 	}
+	
+	public void ShakeCameraTest(float newIntensity,float newTime,float newShakeSpeedTo,float newShakeSpeedBack)
+	{
+		if(camShakeLerp != null)
+			camShakeLerp.StartBasicShake(newIntensity,newTime,newShakeSpeedTo,newShakeSpeedBack);
+    }
+
+	public void ShakeCameraRotation(float newIntensity, float newTime, float newShakeSpeedTo, float newShakeSpeedBack,
+		bool newApplyRotX = true,bool newApplyRotY = true,bool newApplyRotZ = true)
+	{
+		if(camShakeLerp != null)
+			camShakeLerp.StartBasicShake(newIntensity, newTime, newShakeSpeedTo, newShakeSpeedBack,
+				newApplyRotX,newApplyRotY,newApplyRotZ);
+    }
+
+	public Node3D GetCameraLookingPoint() { return lookingPoint; }
 }

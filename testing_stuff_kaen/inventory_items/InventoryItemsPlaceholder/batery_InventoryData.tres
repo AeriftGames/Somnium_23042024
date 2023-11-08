@@ -1,0 +1,52 @@
+[gd_resource type="Resource" load_steps=6 format=3 uid="uid://bwwmotyils2yn"]
+
+[ext_resource type="Script" path="res://player/character_systems/inventory_menu/ItemSubViewportSetting.cs" id="1_pyfme"]
+[ext_resource type="ArrayMesh" uid="uid://fxl3wl4n5ew8" path="res://objects/battery/battery_mesh.tres" id="2_037vq"]
+[ext_resource type="Script" path="res://player/character_systems/inventory_menu/InventoryItemData.cs" id="2_u51d7"]
+
+[sub_resource type="Resource" id="Resource_sh0wb"]
+script = ExtResource("1_pyfme")
+cameraPos = Vector3(0, 0, 6)
+cameraFov = 60.0
+lightPos = Vector3(0, 0, 5)
+lightPower = 2.0
+lightSize = 0.0
+lightRange = 20.0
+lightColor = Color(1, 1, 1, 1)
+meshPos = Vector3(0, 0, 0)
+meshRot = Vector3(0, 0, 0)
+meshScale = Vector3(1, 1, 1)
+
+[sub_resource type="Resource" id="Resource_cj6bo"]
+script = ExtResource("1_pyfme")
+cameraPos = Vector3(0, 0, 6)
+cameraFov = 60.0
+lightPos = Vector3(0, 0, 5)
+lightPower = 2.0
+lightSize = 0.0
+lightRange = 20.0
+lightColor = Color(1, 1, 1, 1)
+meshPos = Vector3(0, 0, 0)
+meshRot = Vector3(0, 0, 0)
+meshScale = Vector3(1, 1, 1)
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("2_u51d7")
+itemName = "baterie"
+itemInfoText = "Toto je baterie"
+itemMeshPreview = ExtResource("2_037vq")
+rotateInInventoryPreview = true
+canUseInHand = false
+mustBothHandsOnly = false
+canPutToWorld = false
+canUse = false
+canCombine = false
+canInspect = false
+canDelete = false
+canStackable = false
+showNameInSlot = true
+spawnObjectScenePath = "res://testing_stuff_kaen/inventory_items/InventoryItemsPlaceholder/physic_item_baterry_small.tscn"
+SettingsForPreview = SubResource("Resource_sh0wb")
+SettingsForSlot = SubResource("Resource_cj6bo")
+InventoryHoldingSlotID = -1

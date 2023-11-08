@@ -1,52 +1,41 @@
-name: 🚥 Status Checks
-on: push
+# Whenever a tag push matching pattern "v*" then run the job
+on: 
+  push:
+    tags:
+      - "v*"
 
 jobs:
-  tests:
-    name: 👀 Evaluate on ${{ matrix.os }}
-    runs-on: ${{ matrix.os }}
-    strategy:
-      # Don't cancel other OS runners if one fails.
-      fail-fast: false
-      matrix:
-        # Put the operating systems you want to run on here.
-        os: [ubuntu-latest, macos-latest, windows-latest]
-    env:
-      DOTNET_CLI_TELEMETRY_OPTOUT: true
-      DOTNET_NOLOGO: true
-    defaults:
-      run:
-        # Use bash shells on all platforms.
-        shell: bash
+  # job id, can be anything
+  export_game:
+    # Always use ubuntu-latest for this action
+    runs-on: ubuntu-latest
+    # Add permission for release creation. Can be made narrower according to your needs
+    permissions: write-all
+    # Job name, can be anything
+    name: Export Game
     steps:
-      - uses: actions/checkout@v3
-        name: 🧾 Checkout
+      # Always include the checkout step so that 
+      # your project is available for Godot to export
+    - name: checkout
+      uses: actions/checkout@v3.0.2
+  
+    - name: export game
+      id: export
+      # Use latest version (see releases for all versions)
+      uses: firebelley/godot-export@v4.7.0
+      with:
+        # Defining all the required inputs
+        godot_executable_download_url: https://github.com/godotengine/godot/releases/download/3.4.4-stable/Godot_v3.4.4-stable_linux_headless.64.zip
+        godot_export_templates_download_url: https://github.com/godotengine/godot/releases/download/3.4.4-stable/Godot_v3.4.4-stable_export_templates.tpz
+        relative_project_path: ./
+        archive_output: true
 
-      - uses: actions/setup-dotnet@v3
-        name: 💽 Setup .NET SDK
-        with:
-          # Use the .NET SDK from global.json in the root of the repository.
-          global-json-file: global.json
-
-      - name: 📦 Restore Dependencies
-        run: dotnet restore
-
-      - uses: chickensoft-games/setup-godot@v1
-        name: 🤖 Setup Godot
-        with:
-          # Version must include major, minor, and patch, and be >= 4.0.0
-          # Pre-release label is optional.
-          version: 4.0.0 # also valid: 4.0.0.rc1 or 4.0.0, etc
-
-      - name: 🔬 Verify Setup
-        run: |
-          dotnet --version
-          godot --version
-
-      - name: 🧑‍🔬 Generate .NET Bindings
-        run: godot --headless --build-solutions --quit || exit 0
-
-      - name: 🦺 Build Projects
-        run: dotnet build
-
-      # Do whatever you want!
+      # This release action has worked well for me. However, you can most likely use any release action of your choosing.
+      # https://github.com/ncipollo/release-action
+    - name: create release
+      uses: ncipollo/release-action@v1.12.0
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        generateReleaseNotes: true
+        tag: ${{ github.ref_name }}
+        artifacts: ${{ steps.export.outputs.archive_directory }}/*

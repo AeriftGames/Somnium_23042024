@@ -1,0 +1,37 @@
+[gd_resource type="AudioBusLayout" load_steps=3 format=3 uid="uid://cumbtyjpkml8o"]
+
+[sub_resource type="AudioEffectReverb" id="AudioEffectReverb_ajupu"]
+resource_name = "Reverb"
+predelay_feedback = 0.15
+room_size = 0.2
+damping = 0.15
+spread = 0.74
+dry = 0.3
+wet = 0.18
+
+[sub_resource type="AudioEffectReverb" id="AudioEffectReverb_fvdiv"]
+resource_name = "Reverb"
+room_size = 0.75
+damping = 0.83
+spread = 0.7
+hipass = 0.09
+wet = 0.29
+
+[resource]
+bus/0/volume_db = 2.25149
+bus/0/effect/0/effect = SubResource("AudioEffectReverb_ajupu")
+bus/0/effect/0/enabled = true
+bus/1/name = &"Sfx"
+bus/1/solo = false
+bus/1/mute = false
+bus/1/bypass_fx = false
+bus/1/volume_db = -0.328256
+bus/1/send = &"Master"
+bus/2/name = &"Music"
+bus/2/solo = false
+bus/2/mute = false
+bus/2/bypass_fx = false
+bus/2/volume_db = -0.130497
+bus/2/send = &"Master"
+bus/2/effect/0/effect = SubResource("AudioEffectReverb_fvdiv")
+bus/2/effect/0/enabled = true

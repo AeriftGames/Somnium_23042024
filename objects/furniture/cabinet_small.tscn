@@ -8,9 +8,8 @@
 [node name="cabinet_small" instance=ExtResource("1_chlpe")]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
 
-[node name="Drawer1" parent="." index="1" node_paths=PackedStringArray("use_node")]
+[node name="Drawer1" parent="." index="1"]
 script = ExtResource("2_vffnc")
-use_node = NodePath("use")
 
 [node name="use" type="Node3D" parent="Drawer1" index="0"]
 script = ExtResource("3_tqkas")
@@ -18,9 +17,8 @@ script = ExtResource("3_tqkas")
 [node name="interactive_object" parent="Drawer1" index="1" instance=ExtResource("3_5jerk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6101, 2.25726, 0)
 
-[node name="Drawer2" parent="." index="2" node_paths=PackedStringArray("use_node")]
+[node name="Drawer2" parent="." index="2"]
 script = ExtResource("2_vffnc")
-use_node = NodePath("use")
 
 [node name="use" type="Node3D" parent="Drawer2" index="0"]
 script = ExtResource("3_tqkas")
@@ -31,9 +29,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6101, 1.25092, 0)
 [node name="CollisionShape3D" parent="Drawer2/interactive_object/StaticBody3D" index="0"]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 4, 0.431566, 0, 0)
 
-[node name="Drawer3" parent="." index="3" node_paths=PackedStringArray("use_node")]
+[node name="Drawer3" parent="." index="3"]
 script = ExtResource("2_vffnc")
-use_node = NodePath("use")
 
 [node name="use" type="Node3D" parent="Drawer3" index="0"]
 script = ExtResource("3_tqkas")
@@ -44,9 +41,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6101, 0.538569, 0)
 [node name="CollisionShape3D" parent="Drawer3/interactive_object/StaticBody3D" index="0"]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 4, 0.431566, 0, 0)
 
-[node name="Drawer4" parent="." index="4" node_paths=PackedStringArray("use_node")]
+[node name="Drawer4" parent="." index="4"]
 script = ExtResource("2_vffnc")
-use_node = NodePath("use")
 
 [node name="use" type="Node3D" parent="Drawer4" index="0"]
 script = ExtResource("3_tqkas")

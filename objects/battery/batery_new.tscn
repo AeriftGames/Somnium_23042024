@@ -17,7 +17,7 @@ use_node = NodePath("use")
 sfx = ExtResource("3_iyy8h")
 
 [node name="Battery" parent="." index="0"]
-transform = Transform3D(0.02, 0, 0, 0, 0.02, 0, 0, 0, 0.02, 0, 0, 0)
+transform = Transform3D(0.04, 0, 0, 0, 0.04, 0, 0, 0, 0.04, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_0bpb1")
 
 [node name="interactive_object" parent="." index="1" instance=ExtResource("4_mdnoa")]

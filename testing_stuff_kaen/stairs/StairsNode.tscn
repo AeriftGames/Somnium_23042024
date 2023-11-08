@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://mngefovqb21k"]
+
+[ext_resource type="Script" path="res://testing_stuff_kaen/stairs/StairNode.cs" id="1_h8mn2"]
+
+[node name="StairsNode" type="Node3D"]
+script = ExtResource("1_h8mn2")
+
+[node name="AllStairsNodeT" type="Node3D" parent="."]

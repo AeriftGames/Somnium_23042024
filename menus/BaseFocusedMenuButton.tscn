@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://d1xpbdilt7rk1"]
+
+[ext_resource type="Script" path="res://menus/BaseFocusedMenuButton.cs" id="1_g1eep"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wxccj"]
+
+[node name="BaseFocusedMenuButton" type="Button"]
+theme_override_styles/normal = SubResource("StyleBoxFlat_wxccj")
+text = "continue game"
+script = ExtResource("1_g1eep")

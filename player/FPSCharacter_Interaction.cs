@@ -5,11 +5,6 @@ using System;
  * *** FPSCharacter_Interaction(0.0) ***
  * 
  * - this class is inheret from FPSCharacter_WalkingEffects and handle interaction with world
- * - TODO 1: pri aktivaci interaction_object_look se musi hrac napred zastavit a byt na zemi, 
- *   teprve pote spustit lerp
- *   (je to z duvodu nacterni rotace kamery pro plynule opetovne nastaveni do puvodniho stavu)
- * - TODO 2: zlepsit vraceni do puvodniho stavu tim ze budeme lerpovat mezi
- *   temp_hitPosition a targetLook(interact_object_look)
 */
 public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
 {
@@ -73,9 +68,13 @@ public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
 	AudioStreamPlayer AudioStreamPlayer_TestItem = null;
 	[ExportGroupAttribute("Simple Flashlight Settings")]
 	[Export] public AudioStream AudioFlashlight_On;
-	[Export] public AudioStream AudioFlashlight_Off;
+    [Export] public float AudioFlashlight_On_Pitch = 1.0f;
+    [Export] public float AudioFlashlight_On_VolumeDb = -10.0f;
+    [Export] public AudioStream AudioFlashlight_Off;
+    [Export] public float AudioFlashlight_Off_Pitch = 0.8f;
+    [Export] public float AudioFlashlight_Off_VolumeDb = -10.0f;
 
-	public override void _Ready()
+    public override void _Ready()
 	{
 		base._Ready();
 
@@ -87,7 +86,7 @@ public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
 		InteractiveSystem = new CharacterInteractiveSystem(this,basicHud);
 
 		// hands
-		HolderHands = GetNode<Node3D>("HeadMain/HeadGimbalA/HeadGimbalB/HeadHolderCamera/HolderHands");
+		HolderHands = GetNode<Node3D>("%HolderHands");
 
 		// Simple Flashlight toggle test
 		AudioStreamPlayer_TestItem = GetNode<AudioStreamPlayer>("AudioStreamPlayer_TestItem");
@@ -109,8 +108,9 @@ public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
 	public override void _PhysicsProcess(double delta)
 	{
 		if (GameMaster.GM.GetIsQuitting()) return;
+        if (objectCamera == null) return;
 
-		base._PhysicsProcess(delta);
+        base._PhysicsProcess(delta);
 
 		bool useNow = IsInputEnable() && CanUse && Input.IsActionJustPressed("UseAction");
 		bool grabNow = IsInputEnable() && CanGrabObject && Input.IsActionPressed("mouseClickLeft");
@@ -128,11 +128,11 @@ public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
 
 		// ---------------------------------------------------------------------------------
 		// Toggle Simple Flashlight
-		if (Input.IsActionJustPressed("ToggleFlashlight"))
+		if (IsInputEnable() && Input.IsActionJustPressed("ToggleFlashlight"))
 			ToggleSimpleFlashlight();
 
 		// Camera Zoom
-		if (Input.IsActionPressed("CameraZoom"))
+		if (IsInputEnable() && Input.IsActionPressed("CameraZoom"))
 			SetCameraZoom(true);
 		else if(Input.IsActionJustReleased("CameraZoom"))
 			SetCameraZoom(false);
@@ -200,6 +200,7 @@ public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
 				isActualOnLerpToNormal = false;
 			}
 		}
+
 	}
 
 	public bool DetectInteractiveObjectWithCameraRay()
@@ -277,8 +278,8 @@ public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
 			objectHands.objectFlashlight.Visible = true;
 
 			// Audio play
-			AudioStreamPlayer_TestItem.VolumeDb = -15f;
-			AudioStreamPlayer_TestItem.PitchScale = 0.9f;
+			AudioStreamPlayer_TestItem.VolumeDb = AudioFlashlight_On_VolumeDb;
+			AudioStreamPlayer_TestItem.PitchScale = AudioFlashlight_On_Pitch;
 			AudioStreamPlayer_TestItem.Stream = AudioFlashlight_On;
 			AudioStreamPlayer_TestItem.Play();
 		}
@@ -289,8 +290,8 @@ public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
 			objectHands.objectFlashlight.Visible = false;
 
 			// Audio play
-			AudioStreamPlayer_TestItem.VolumeDb = -15f;
-			AudioStreamPlayer_TestItem.PitchScale = 0.9f;
+			AudioStreamPlayer_TestItem.VolumeDb = AudioFlashlight_Off_VolumeDb;
+			AudioStreamPlayer_TestItem.PitchScale = AudioFlashlight_Off_Pitch;
 			AudioStreamPlayer_TestItem.Stream = AudioFlashlight_Off;
 			AudioStreamPlayer_TestItem.Play();
 		}
@@ -317,6 +318,11 @@ public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
 	public BasicHud GetBasicHud()
 	{
 		return basicHud;
+	}
+
+	public InGameMenu GetInGameMenu()
+	{
+		return GetAllHudsControlNode().GetNode<InGameMenu>("InGameMenu");
 	}
 
 	public override void FreeAll()

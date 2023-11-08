@@ -1,0 +1,33 @@
+[gd_resource type="Resource" load_steps=15 format=3 uid="uid://vcp8uaxcc0ms"]
+
+[ext_resource type="AudioStream" uid="uid://dlgm2opo2b6g1" path="res://audio/audio_streams/footsteps_new/Wood/Footstep_Wood1.wav" id="1_7es58"]
+[ext_resource type="Script" path="res://player/material_surface/material_surface_data.cs" id="1_xbrnn"]
+[ext_resource type="AudioStream" uid="uid://c1au1yccn5bu2" path="res://audio/audio_streams/footsteps_new/Wood/Footstep_Wood2.wav" id="2_tmgfn"]
+[ext_resource type="AudioStream" uid="uid://r6vvfj1pjyqg" path="res://audio/audio_streams/footsteps_new/Wood/Footstep_Wood3.wav" id="3_istbt"]
+[ext_resource type="AudioStream" uid="uid://civcgq13fpjrg" path="res://audio/audio_streams/footsteps_new/Wood/Footstep_Wood4.wav" id="4_cfpwl"]
+[ext_resource type="AudioStream" uid="uid://q2ikp1eufl68" path="res://audio/audio_streams/footsteps_new/Wood/Footstep_Wood5.wav" id="5_okm2v"]
+[ext_resource type="AudioStream" uid="uid://b18omt0p3i12o" path="res://audio/audio_streams/footsteps_new/Wood/Footstep_Wood6.wav" id="6_ofu3y"]
+[ext_resource type="AudioStream" uid="uid://db0uma48vvoab" path="res://audio/audio_streams/footsteps_new/Wood/Footstep_Wood7.wav" id="7_qhgvd"]
+[ext_resource type="AudioStream" uid="uid://d0goloboxuhux" path="res://audio/audio_streams/footsteps_new/Wood/Footstep_Wood8.wav" id="8_mk48v"]
+[ext_resource type="AudioStream" uid="uid://ua3dac7knbq6" path="res://audio/audio_streams/footsteps_new/Wood/Footstep_Wood9.wav" id="9_r6w66"]
+[ext_resource type="AudioStream" uid="uid://dp8ubjfofpq36" path="res://audio/audio_streams/landing_new/LandSound_Wood1.wav" id="10_pnr20"]
+[ext_resource type="AudioStream" uid="uid://dte32b8hj01pm" path="res://audio/audio_streams/landing_new/LandSound_Wood2.wav" id="11_d730r"]
+[ext_resource type="AudioStream" uid="uid://dxx2l1xtonx3u" path="res://audio/audio_streams/landing_new/LandSound_Wood3.wav" id="12_urud0"]
+[ext_resource type="AudioStream" uid="uid://drh0co7a7o712" path="res://audio/audio_streams/landing_new/LandSound_Wood4.wav" id="13_k00mm"]
+
+[resource]
+script = ExtResource("1_xbrnn")
+MaterialSurfaceNameID = "material_surface_wood"
+MaterialSurface = 2
+FootstepSounds = Array[AudioStream]([ExtResource("1_7es58"), ExtResource("2_tmgfn"), ExtResource("3_istbt"), ExtResource("4_cfpwl"), ExtResource("5_okm2v"), ExtResource("6_ofu3y"), ExtResource("7_qhgvd"), ExtResource("8_mk48v"), ExtResource("9_r6w66")])
+FootstepAudioPitchScale = 0.75
+FootstepAudioVolumeDB = -25.0
+LandingSounds = Array[AudioStream]([ExtResource("10_pnr20"), ExtResource("11_d730r"), ExtResource("12_urud0"), ExtResource("13_k00mm")])
+LandingAudioPitchScale = 0.55
+LandingAudioVolumeDB = -13.0
+HitObjectSounds = null
+HitObjectAudioPitchScale = 1.0
+HitObjectAudioVolumeDB = 0.0
+DragObjectSounds = null
+DragObjectAudioPitchScale = 1.0
+DragObjectAudioVolumeDB = 0.0

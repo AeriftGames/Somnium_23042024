@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://x3cisuu2y483"]
+[gd_scene load_steps=10 format=3 uid="uid://x3cisuu2y483"]
 
 [ext_resource type="PackedScene" uid="uid://ck8mt4y4gfqmk" path="res://placeholders/modular_walls/ground_large.tscn" id="1_07008"]
-[ext_resource type="ArrayOccluder3D" uid="uid://dw8cg0tj6l0v0" path="res://levels/worldlevel_template/worldlevel_template.occ" id="1_j3u1e"]
-[ext_resource type="Script" path="res://levels/worldlevel.cs" id="1_ts4yi"]
+[ext_resource type="Script" path="res://levels/worldlevel_base/WorldLevel.cs" id="1_ts4yi"]
 [ext_resource type="PackedScene" uid="uid://bet3idvc4fg0n" path="res://placeholders/PlayerStart.tscn" id="2_lxoha"]
+[ext_resource type="Script" path="res://levels/worldlevel_base/LevelScene.cs" id="2_pq8ec"]
+[ext_resource type="VoxelGIData" uid="uid://cs2gfnjeo46cl" path="res://levels/worldlevel_template/worldlevel_template.VoxelGI_data.res" id="2_rffyy"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_w3cwh"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -19,31 +20,48 @@ tonemap_mode = 2
 ssao_enabled = true
 ssil_enabled = true
 glow_enabled = true
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.02
 
-[node name="worldlevel" type="Node3D"]
+[sub_resource type="ArrayOccluder3D" id="ArrayOccluder3D_bogft"]
+vertices = PackedVector3Array(-4, 0, 4, 0, 0, 0, 0, 0, 4, -4, 0, 0, 0, 0, 4, 4, 0, 0, 4, 0, 4, 0, 0, 0, -4, 0, 0, 0, 0, -4, 0, 0, 0, -4, 0, -4, 0, 0, 0, 4, 0, -4, 4, 0, 0, 0, 0, -4)
+indices = PackedInt32Array(0, 1, 2, 0, 3, 1, 4, 5, 6, 4, 7, 5, 8, 9, 10, 8, 11, 9, 12, 13, 14, 12, 15, 13)
+
+[node name="WorldLevel" type="Node"]
 script = ExtResource("1_ts4yi")
 
-[node name="worldlevel_occluderculling" type="OccluderInstance3D" parent="."]
-visible = false
-occluder = ExtResource("1_j3u1e")
+[node name="VoxelGI" type="VoxelGI" parent="."]
+data = ExtResource("2_rffyy")
+metadata/_edit_lock_ = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_p3qlj")
 
-[node name="LevelGeometry" type="Node3D" parent="."]
+[node name="LevelScene" type="Node" parent="."]
+script = ExtResource("2_pq8ec")
 
-[node name="Grounds" type="Node3D" parent="LevelGeometry"]
+[node name="Rooms" type="Node" parent="LevelScene"]
 
-[node name="ground_large" parent="LevelGeometry/Grounds" instance=ExtResource("1_07008")]
+[node name="Room1" type="Node3D" parent="LevelScene/Rooms"]
+
+[node name="Grounds" type="Node3D" parent="LevelScene/Rooms/Room1"]
+
+[node name="ground_large" parent="LevelScene/Rooms/Room1/Grounds" instance=ExtResource("1_07008")]
 transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 2, -2, 0, 2)
 
-[node name="ground_large2" parent="LevelGeometry/Grounds" instance=ExtResource("1_07008")]
+[node name="ground_large2" parent="LevelScene/Rooms/Room1/Grounds" instance=ExtResource("1_07008")]
 transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 2, 2, 0, 2)
 
-[node name="ground_large3" parent="LevelGeometry/Grounds" instance=ExtResource("1_07008")]
+[node name="ground_large3" parent="LevelScene/Rooms/Room1/Grounds" instance=ExtResource("1_07008")]
 transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 2, -2, 0, -2)
 
-[node name="ground_large4" parent="LevelGeometry/Grounds" instance=ExtResource("1_07008")]
+[node name="ground_large4" parent="LevelScene/Rooms/Room1/Grounds" instance=ExtResource("1_07008")]
 transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 2, 2, 0, -2)
 
+[node name="LevelOcclusion" type="OccluderInstance3D" parent="LevelScene"]
+occluder = SubResource("ArrayOccluder3D_bogft")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
 [node name="PlayerStart" parent="." instance=ExtResource("2_lxoha")]
+visible = false

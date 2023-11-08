@@ -1,0 +1,119 @@
+[gd_scene load_steps=11 format=3 uid="uid://dk6s7gogdikp7"]
+
+[ext_resource type="PackedScene" uid="uid://cyy77gpejbdxu" path="res://testing_stuff_kaen/lis/lis.tscn" id="1_jtbcy"]
+[ext_resource type="Script" path="res://testing_stuff_kaen/lis/lis_anim.cs" id="2_a0h5k"]
+[ext_resource type="AudioStream" uid="uid://bihar5jfwxaj4" path="res://audio/audio_streams/enemy_test/503554__robinhood76__08191-heavy-stones-falling.wav" id="3_xkxf1"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wg8vu"]
+size = Vector3(1.25, 2.13995, 1.25)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kl86d"]
+size = Vector3(1.25, 3.782, 1.25)
+
+[sub_resource type="Animation" id="Animation_fhqw0"]
+length = 0.001
+
+[sub_resource type="Animation" id="Animation_cbdsh"]
+resource_name = "work"
+length = 8.0
+loop_mode = 1
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Cube_003")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 3.46311, 0, 0.5, 1, 0, 2.22378, 0, 0.7, 1, 0, 2.12132, 0, 3.3, 1, 0, 3.28069, 0, 5.1, 1, 0, 4.07889, 0, 8, 1, 0, 3.46311, 0)
+tracks/1/type = "position_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Cube_002")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0, 0.666294, 0, 0.5, 1, 0, 0.666294, 0, 0.7, 1, 0, 0.602212, 0, 5.1, 1, 0, 0.571571, 0, 8, 1, 0, 0.666294, 0)
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"PlayTouchSound"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2vumu"]
+_data = {
+"RESET": SubResource("Animation_fhqw0"),
+"work": SubResource("Animation_cbdsh")
+}
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_fx4mq"]
+radius = 35.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7hoa4"]
+size = Vector3(2, 2.16354, 2)
+
+[node name="lis" instance=ExtResource("1_jtbcy")]
+script = ExtResource("2_a0h5k")
+
+[node name="Cube_002" parent="." index="2"]
+transform = Transform3D(0.668274, 0, 0, 0, 0.668274, 0, 0, 0, 0.668274, 0, 0.666294, 0)
+
+[node name="StaticBody3D3" type="StaticBody3D" parent="Cube_002" index="0"]
+transform = Transform3D(1.49639, 0, 0, 0, 1.49639, 0, 0, 0, 1.49639, 0, -0.650155, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cube_002/StaticBody3D3" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.140578, 0)
+shape = SubResource("BoxShape3D_wg8vu")
+
+[node name="Cube_003" parent="." index="3"]
+transform = Transform3D(0.668274, 0, 0, 0, -0.668274, 6.53254e-07, 0, -6.53254e-07, -0.668274, 0, 3.46311, 0)
+
+[node name="StaticBody3D4" type="StaticBody3D" parent="Cube_003" index="0"]
+transform = Transform3D(1.49639, 0, 0, 0, -1.49639, -1.46276e-06, 0, 1.46276e-06, -1.49639, 0, -0.230566, 2.25384e-07)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cube_003/StaticBody3D4" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, -1.01373e-17, 0, 1.01373e-17, 1, 0, 0.9616, 6.50521e-19)
+shape = SubResource("BoxShape3D_kl86d")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="4"]
+libraries = {
+"": SubResource("AnimationLibrary_2vumu")
+}
+speed_scale = 2.0
+
+[node name="DetectPlayerArea" type="Area3D" parent="." index="5"]
+collision_mask = 3
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DetectPlayerArea" index="0"]
+shape = SubResource("SphereShape3D_fx4mq")
+
+[node name="AudioStreamPlayer3D_Touch" type="AudioStreamPlayer3D" parent="." index="6"]
+stream = ExtResource("3_xkxf1")
+volume_db = -20.0
+max_db = -5.0
+pitch_scale = 0.8
+max_distance = 40.0
+bus = &"Sfx"
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." index="7"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0706016, 0)
+shape = SubResource("BoxShape3D_7hoa4")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="." index="8"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.1237, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D2" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0706016, 0)
+shape = SubResource("BoxShape3D_7hoa4")
+
+[connection signal="body_entered" from="DetectPlayerArea" to="." method="_on_detect_player_area_body_entered"]
+[connection signal="body_exited" from="DetectPlayerArea" to="." method="_on_detect_player_area_body_exited"]

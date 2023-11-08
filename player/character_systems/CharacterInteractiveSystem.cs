@@ -13,6 +13,7 @@ public partial class CharacterInteractiveSystem : Godot.GodotObject
     bool isCanNewGrab = true;
     bool wantRotateNow = false;
 
+    bool canUse = true;
     //only for GrabActions
     bool isFirstGrabAction = true;
     Vector2 originalHandGrabbedTex = Vector2.Zero;
@@ -38,11 +39,14 @@ public partial class CharacterInteractiveSystem : Godot.GodotObject
 
     public void BasicUpdate(bool newUseNow,bool newGrabNow, double delta)
     {
+        if (character.objectCamera == null) return;
+
         // default sets on start this update
         basicHud.SetUseVisible(false);
         basicHud.SetHandGrabState(false, false);
         basicHud.SetUseLabelText("");
         basicHud.SetUseVisible(false);
+        basicHud.SetHandClickVisible(false);
 
         // neexistuje zadny interactive objekt ? = opustit update
         if (actualInteractiveObject == null)
@@ -92,12 +96,41 @@ public partial class CharacterInteractiveSystem : Godot.GodotObject
         if (newInteractiveObject.InteractiveLevel == interactive_object.EInteractiveLevel.OnlyUse ||
             newInteractiveObject.InteractiveLevel == interactive_object.EInteractiveLevel.UseAndPhysic)
         {
-            basicHud.SetUseLabelText(newInteractiveObject.GetUseActionName());
-            basicHud.SetUseVisible(true);
+            switch (newInteractiveObject.InteractVisibleBy)
+            {
+                case interactive_object.EUseInteractVisibleBy.Text:
+                    {
+                        basicHud.SetUseLabelText(newInteractiveObject.GetUseActionName());
+                        basicHud.SetUseVisible(true);
+                        break;
+                    }
+                case interactive_object.EUseInteractVisibleBy.HandClick:
+                    {
+                        basicHud.SetHandClickVisible(true);
+                        break;
+                    }
+                case interactive_object.EUseInteractVisibleBy.HandClickAndText:
+                    {
+                        basicHud.SetUseLabelText(newInteractiveObject.GetUseActionName());
+                        basicHud.SetUseVisible(true);
+                        basicHud.SetHandClickVisible(true);
+                        break;
+                    }
+                default:
+                    break;
+            }
 
             // Pokud je momentalne od hrace input zadost pro USE, pouzijeme vnitrni funkci objektu pro USE
-            if (newUseNow)
-                newInteractiveObject.Use(character);
+            if (newUseNow && canUse)
+            {
+                if(newInteractiveObject != null && pickedBody != null)
+                {
+                    StopGrabbing();
+                    newInteractiveObject.Use(character);
+                    pickedBody = null;
+                    newInteractiveObject = null;
+                }
+            }
         }
     }
     public void UpdateForPhysic(interactive_object newInteractiveObject, bool newUseNow,bool newGrabNow, double delta)
@@ -114,6 +147,7 @@ public partial class CharacterInteractiveSystem : Godot.GodotObject
     public void InteractivePhysicsUpdate(bool newGrabNow, bool newThrowObjectNow, bool newRotateGrabbedObject,
         bool newMoveFarGrabbedObject, bool newMoveNearGrabbedObject, double delta)
     {
+
         // default sets on start this update
         wantRotateNow = false;
         character.objectCamera.SetCameraLookInputEnable(true);
@@ -136,6 +170,26 @@ public partial class CharacterInteractiveSystem : Godot.GodotObject
                     UpdatePhysic_GrabAction(newGrabNow, delta);
                     break;
                 }
+        }
+
+        // Rotate Grabbed Object via gamepad
+        if (pickedBody != null && wantRotateNow)
+        {
+            character.objectCamera.SetCameraLookInputEnable(false);
+
+            /* Nacte hodnoty (axis right) gamepadu */
+            Vector2 JoyLook = new Vector2(Input.GetActionStrength("RightStick_Right") - Input.GetActionStrength("RightStick_Left"),
+            -(Input.GetActionStrength("RightStick_Up") - Input.GetActionStrength("RightStick_Down")));
+
+            /* Pokud JoyLook ma nejakou hodnotu (pohnuto packou na gamepadu) = gamepad jinak mys */
+            if (JoyLook.Length() > 0 && character.IsInputEnable())
+            {
+                character.objectCamera.HandStaticBody.RotateX(
+                Mathf.DegToRad(JoyLook.Y * character.RotateObjectStep));
+
+                character.objectCamera.HandStaticBody.RotateY(
+                Mathf.DegToRad(JoyLook.X * character.RotateObjectStep));
+            }
         }
 
         // Reset pro novy grab, napriklad po hodu, donuti hrace pustit tlacitko pro grab, i kdyby na jeden frame
@@ -172,9 +226,13 @@ public partial class CharacterInteractiveSystem : Godot.GodotObject
         // chceme zacit grabovat s novym objektem ?
         if(pickedBody == null && grabbedObject != null)
         {
+            //nove
+            float distance = grabbedObject.GlobalPosition.DistanceTo(character.GetObjectCamera().GlobalPosition);
+
             // Set to original handGrabPosition
             Vector3 actualPosition = character.objectCamera.GetHandGrabMarker().Position;
-            actualPosition.Z = -character.MoveFarOrNearObjectOriginal;
+            //actualPosition.Z = -character.MoveFarOrNearObjectOriginal;
+            actualPosition.Z = - distance;
             character.objectCamera.GetHandGrabMarker().Position = actualPosition;
 
             // Nastavi nas novy Rigidbody object a nastavi mu pozadovane fyzikalni parametry pro grab
@@ -199,7 +257,9 @@ public partial class CharacterInteractiveSystem : Godot.GodotObject
 
     public void SetRigidBodyParamForGrab(RigidBody3D grabbedObject, bool newGrab)
     {
-        if(newGrab)
+        if (grabbedObject == null) return;
+
+        if (newGrab)
         {
             // ulozime si originalni fyzikalni data
             lastGrabbedItemOriginalParams.inertia = grabbedObject.Inertia;
@@ -224,23 +284,23 @@ public partial class CharacterInteractiveSystem : Godot.GodotObject
                         grabbedObject.PhysicsMaterialOverride.Friction = character.RBPhysicInGrab_Friction;
                         grabbedObject.PhysicsMaterialOverride.Bounce = character.RBPhysicInGrab_Bounce;
                         grabbedObject.Mass = character.RBPhysicInGrab_Mass;
-                        break; 
+                        break;
                     }
                 case interactive_object.EInteractivePhysicType.GrabAction:
                     {
                         break;
                     }
-            }  
+            }
         }
         else
         {
-            // pri opusteni grab, nahrajeme objektu puvodni data
-            grabbedObject.Inertia = lastGrabbedItemOriginalParams.inertia;
-            grabbedObject.AngularDamp = lastGrabbedItemOriginalParams.angularDamp;
-            grabbedObject.LinearDamp = lastGrabbedItemOriginalParams.linearDamp;
-            grabbedObject.PhysicsMaterialOverride.Friction = lastGrabbedItemOriginalParams.friction;
-            grabbedObject.PhysicsMaterialOverride.Bounce = lastGrabbedItemOriginalParams.bounce;
-            grabbedObject.Mass = lastGrabbedItemOriginalParams.mass;
+
+                // pri opusteni grab, nahrajeme objektu puvodni data
+                grabbedObject.Inertia = lastGrabbedItemOriginalParams.inertia;
+                grabbedObject.AngularDamp = lastGrabbedItemOriginalParams.angularDamp;
+                grabbedObject.LinearDamp = lastGrabbedItemOriginalParams.linearDamp;
+                grabbedObject.Mass = lastGrabbedItemOriginalParams.mass;
+
         }
     }
 
@@ -404,5 +464,10 @@ public partial class CharacterInteractiveSystem : Godot.GodotObject
             isFirstGrabAction = true;
             actualInteractiveObject.GrabActionEnd(character);
         }
+    }
+
+    public void ResetNeedGrabbing()
+    {
+        canUse = true;
     }
 }

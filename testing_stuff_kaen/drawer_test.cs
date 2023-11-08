@@ -14,6 +14,7 @@ public partial class drawer_test : Node3D
 
 	[ExportGroupAttribute("Drawer: set param")]
 	[Export] public float mouseMotionSpeed = 0.003f;
+	[Export] public float gamepadMotionSpeed = 0.1f;
 	[Export] public float linearVelocityLimit = 2.0f;
 	[Export] public EGrabMoveType grabMoveType = EGrabMoveType.Add;
 
@@ -21,6 +22,7 @@ public partial class drawer_test : Node3D
 	private FPSCharacter_Interaction interactCharacter = null;
 	private bool isActionUpdate = false;
 	private Vector2 motionMouse = Vector2.Zero;
+	private float motionSpeed = 0.0f;
 
 	private RigidBody3D drawerGrab = null;
 	private Generic6DofJoint3D genericJoint = null;
@@ -52,26 +54,28 @@ public partial class drawer_test : Node3D
 			mouseUpdated = true;
 		}
 	}
-	/*
-	public override void _Process(double delta)
-	{
-		// pokud jsme v GrabAction pustime update
-		if (isActionUpdate)
-		{
-			UpdateDrawer(delta);
-		}
-
-		// Reset for zero
-		motionMouse = Vector2.Zero;
-		mouseUpdated = false;
-	}*/
 
 	public override void _PhysicsProcess(double delta)
 	{
 		// pokud jsme v GrabAction pustime update
 		if (isActionUpdate)
 		{
-			UpdateDrawer(delta);
+			/* Nacte hodnoty (axis right) gamepadu */
+			Vector2 JoyLook = new Vector2(Input.GetActionStrength("RightStick_Right") - Input.GetActionStrength("RightStick_Left"),
+				-(Input.GetActionStrength("RightStick_Up") - Input.GetActionStrength("RightStick_Down")));
+
+			/* Pokud JoyLook ma nejakou hodnotu (pohnuto packou na gamepadu) = gamepad jinak mys */
+			if (JoyLook.Length() > 0)
+			{
+				mouseUpdated = true;
+				motionSpeed = gamepadMotionSpeed;
+				UpdateDrawer(JoyLook, delta);
+			}
+			else
+			{
+				motionSpeed = mouseMotionSpeed;
+				UpdateDrawer(motionMouse, delta);
+			}
 		}
 
 		// Reset for zero
@@ -79,10 +83,10 @@ public partial class drawer_test : Node3D
 		mouseUpdated = false;
 	}
 
-	public void UpdateDrawer(double delta)
+	public void UpdateDrawer(Vector2 newMotion,double delta)
 	{
 		// nastavime velocity podle motion mouse
-		var newVel = drawerGrab.GlobalTransform.Basis.Z.Normalized() * motionMouse.Y * mouseMotionSpeed;
+		var newVel = drawerGrab.GlobalTransform.Basis.Z.Normalized() * newMotion.Y * motionSpeed;
 
 		switch (grabMoveType) 
 		{

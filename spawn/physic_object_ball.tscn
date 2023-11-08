@@ -1,0 +1,64 @@
+[gd_scene load_steps=8 format=3 uid="uid://bpx5syoy4qjuc"]
+
+[ext_resource type="Script" path="res://core_systems/interactive_system/interactive_object.cs" id="1_w8mc6"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_6y317"]
+friction = 0.8
+bounce = 0.2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kh4os"]
+albedo_color = Color(0, 0.509804, 0.843137, 1)
+metallic = 0.69
+roughness = 0.5
+
+[sub_resource type="SphereMesh" id="SphereMesh_m77n4"]
+radius = 0.1
+height = 0.2
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_x4uno"]
+radius = 0.1
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_82jgj"]
+radius = 0.12
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_rpdal"]
+radius = 2.5
+
+[node name="ball_projectile" type="RigidBody3D"]
+collision_layer = 24
+collision_mask = 9
+mass = 5.0
+physics_material_override = SubResource("PhysicsMaterial_6y317")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_kh4os")
+mesh = SubResource("SphereMesh_m77n4")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_x4uno")
+
+[node name="interactive_object" type="Node3D" parent="." groups=["interactive_object"]]
+script = ExtResource("1_w8mc6")
+InteractiveLevel = 2
+metadata/_edit_lock_ = true
+
+[node name="StaticBody3D" type="StaticBody3D" parent="interactive_object"]
+collision_layer = 4
+collision_mask = 0
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="interactive_object/StaticBody3D"]
+shape = SubResource("SphereShape3D_82jgj")
+
+[node name="interactive_object_area3D" type="Area3D" parent="interactive_object/StaticBody3D"]
+collision_layer = 4
+collision_mask = 2
+monitorable = false
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="interactive_object/StaticBody3D/interactive_object_area3D"]
+shape = SubResource("SphereShape3D_rpdal")
+metadata/_edit_lock_ = true
+
+[connection signal="body_entered" from="interactive_object/StaticBody3D/interactive_object_area3D" to="interactive_object" method="_on_interactive_object_area_3d_body_entered"]
+[connection signal="body_exited" from="interactive_object/StaticBody3D/interactive_object_area3D" to="interactive_object" method="_on_interactive_object_area_3d_body_exited"]

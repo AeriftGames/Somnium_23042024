@@ -1,0 +1,26 @@
+[remap]
+
+importer="2d_array_texture"
+type="CompressedTexture2DArray"
+uid="uid://dbdc1kfekq7y"
+path="res://.godot/imported/worldlevel_test_new_modular1.exr-e9c9ce90d440c9042d4a77c0a78e36e7.ctexarray"
+metadata={
+"vram_texture": false
+}
+
+[deps]
+
+source_file="res://levels/worldlevel_test_new_modular1.exr"
+dest_files=["res://.godot/imported/worldlevel_test_new_modular1.exr-e9c9ce90d440c9042d4a77c0a78e36e7.ctexarray"]
+
+[params]
+
+compress/mode=3
+compress/high_quality=false
+compress/lossy_quality=0.7
+compress/hdr_compression=1
+compress/channel_pack=1
+mipmaps/generate=false
+mipmaps/limit=-1
+slices/horizontal=1
+slices/vertical=4

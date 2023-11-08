@@ -1,4 +1,5 @@
 using Godot;
+using Godot.Collections;
 using System;
 
 public partial class wall_lever_test : Node3D
@@ -38,6 +39,10 @@ public partial class wall_lever_test : Node3D
     //SOUND TEST
     AudioStreamPlayer3D audioStreamPlayer = null;
 
+    // Use Nodes
+    [Export] public Array<NodePath> AllUseObjectsNodePaths;
+    public Array<Node> AllUseObjects = null;
+
     public override void _Ready()
     {
         interactiveObject = GetNode<interactive_object>("LeverGrab/interactive_object");
@@ -55,6 +60,17 @@ public partial class wall_lever_test : Node3D
         //Initial Settings
         hingeJoint3D.SetParam(HingeJoint3D.Param.LimitUpper, Mathf.DegToRad(upperReachEnd));
         hingeJoint3D.SetParam(HingeJoint3D.Param.LimitLower, Mathf.DegToRad(lowerReachEnd));
+
+        if(AllUseObjectsNodePaths != null)
+        {
+            // Add all use objects for this button
+            AllUseObjects = new Godot.Collections.Array<Node>();
+            foreach (var useObjectPath in AllUseObjectsNodePaths)
+            {
+                if (!useObjectPath.IsEmpty)
+                    AllUseObjects.Add(GetNode(useObjectPath));
+            }
+        }
 
         SetReachNow(EReachPointEnd.Bottom);
     }
@@ -180,7 +196,9 @@ public partial class wall_lever_test : Node3D
 
                     TestLight(true);
                     PlaySound(true);
-                    //EmitSignal(SignalName.LeverReachEnd, true);
+                    CallUseActionForAllNodes(true);
+                    if(interactCharacter != null)
+                        interactCharacter.GetObjectCamera().ShakeCameraRotation(0.3f, 0.2f, 1.0f, 1.0f);
                     onceIsReachPoint = true;
                     break;
                 }
@@ -190,7 +208,9 @@ public partial class wall_lever_test : Node3D
 
                     TestLight(false);
                     PlaySound(true);
-                    //EmitSignal(SignalName.LeverReachEnd, false);
+                    CallUseActionForAllNodes(false);
+                    if(interactCharacter != null)
+                        interactCharacter.GetObjectCamera().ShakeCameraRotation(0.3f, 0.2f, 1.0f, 1.0f);
                     onceIsReachPoint = true;
                     break;
                 }
@@ -225,12 +245,10 @@ public partial class wall_lever_test : Node3D
 
     public void ActionStart()
     {
-
     }
 
     public void ActionEnd()
     {
-
     }
 
     public void TestLight(bool newEnable)
@@ -255,6 +273,15 @@ public partial class wall_lever_test : Node3D
     public void PlaySound(bool newTop)
     {
         audioStreamPlayer.Play();
+    }
+
+    public void CallUseActionForAllNodes(bool newParam)
+    {
+        if(AllUseObjects != null)
+        {
+            foreach (var useObject in AllUseObjects)
+                useObject.Call("UseAction", newParam);
+        }
     }
 
     public virtual void message_update()

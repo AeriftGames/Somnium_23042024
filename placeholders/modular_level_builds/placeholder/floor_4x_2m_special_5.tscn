@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://dbmasuyoo2pr8"]
+
+[ext_resource type="Material" uid="uid://lah0omlue113" path="res://placeholders/modular_level_builds/my_trim1/trim_floor1_mat.tres" id="1_fbdd0"]
+[ext_resource type="ArrayMesh" uid="uid://1ubullt2sw5d" path="res://placeholders/modular_level_builds/placeholder/floor_4x_2m_special_5.tres" id="2_nwir6"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4u4f0"]
+size = Vector3(2, 0.05, 4)
+
+[node name="floor_4x2m_special4" type="MeshInstance3D"]
+material_override = ExtResource("1_fbdd0")
+mesh = ExtResource("2_nwir6")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." groups=["material_surface_wood"]]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.025, -1)
+shape = SubResource("BoxShape3D_4u4f0")

@@ -44,6 +44,7 @@ func inspect(state: bool, item: Node, front: bool):
 
 
 func _show_description(state = false):
+	pass
 	item_name_label = self.get_node(\"/root/worldlevel/FPSCharacter_Interaction/Item_inspect/Control/item_name\")
 	item_description_label = self.get_node(\"/root/worldlevel/FPSCharacter_Interaction/Item_inspect/Control/item_description\")
 	if description_active == false and state == true:
@@ -144,11 +145,10 @@ layout_mode = 2
 text = "Press Space to exit"
 
 [node name="SubViewport" parent="." instance=ExtResource("3_swgh1")]
-own_world_3d = true
+disable_3d = true
 transparent_bg = true
 size = Vector2i(1024, 1024)
 size_2d_override = Vector2i(1024, 1024)
-render_target_update_mode = 4
 
 [node name="Control" type="Control" parent="."]
 visible = false

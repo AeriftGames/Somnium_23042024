@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://cp5th5lop1w7k"]
+
+[ext_resource type="Script" path="res://player/character_systems/inventory_menu/InventoryItemDataNode.cs" id="1_ob0m6"]
+[ext_resource type="AudioStream" uid="uid://c3kenhnlcm2ck" path="res://objects/read/paper_test/page_flip.wav" id="2_gbpt3"]
+
+[node name="InventoryItemDataNode" type="Node3D"]
+script = ExtResource("1_ob0m6")
+sfx = ExtResource("2_gbpt3")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
+[connection signal="finished" from="AudioStreamPlayer" to="." method="_on_audio_stream_player_finished"]

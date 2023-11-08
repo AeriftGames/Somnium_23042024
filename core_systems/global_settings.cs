@@ -1,31 +1,31 @@
 using Godot;
 using System;
+using System.Threading.Tasks;
 using System.Windows;
 
 public partial class global_settings : Godot.GodotObject
 {
-	private GameMaster gm;
+    private GameMaster gm;
 
     // promene ktere slouzi pro otestovani aktualniho stavu a nejde to jinak
     private bool actual_halfResolutionGI = false;
 
-	public global_settings(Node ownerInstance)
-	{
-		gm = (GameMaster)ownerInstance;
+    public global_settings(Node ownerInstance)
+    {
+        gm = (GameMaster)ownerInstance;
 
         // Audio volumes init
         LoadAndApply_AllAudioSettings();
-        //SaveActual_AllAudioSettings();
-	}
+    }
 
-	// tady ziskavame pristup k hodnotam ulozenych v global_settings_data.tres
-	public global_settings_data GetData()
-	{
+    // tady ziskavame pristup k hodnotam ulozenych v global_settings_data.tres
+    public global_settings_data GetData()
+    {
         Resource Settings = GD.Load("res://global_settings_data.tres");
         if (Settings != null && Settings is global_settings_data settings_data)
-			return settings_data;
-		else
-			return null;          
+            return settings_data;
+        else
+            return null;
     }
 
     // Spoustime v player startu pri startu hry (aby se mohl nastavit WorldEnvironment)
@@ -42,7 +42,7 @@ public partial class global_settings : Godot.GodotObject
         Apply_Scale3D(data.Scale3d, true, false);
         Apply_HalfResolutionGI(data.HalfResolutionGI, true, false);
         Apply_AntialiasID(data.AntialiasID, true, false);
-        Apply_Sdfgi(data.Sdfgi, true, false);
+        Apply_GlobalIlumination(data.GlobalIlumination, true, false);
         Apply_UnlockMaxFps(data.UnlockMaxFps, true, false);
         Apply_DisableVsync(data.DisableVsync, true, false);
 
@@ -60,7 +60,7 @@ public partial class global_settings : Godot.GodotObject
         Apply_ScreenSizeID(GetActual_ScreenSizeID(), false, true);
         Apply_Ssao(GetActual_Ssao(), false, true);
         Apply_Ssil(GetActual_Ssil(), false, true);
-        Apply_Sdfgi(GetActual_Sdfgi(), false, true);
+        Apply_GlobalIlumination(GetActual_GlobalIlumination(), false, true);
         Apply_AntialiasID(GetActual_AntialiasID(), false, true);
         Apply_Scale3D(GetActual_Scale3D(), false, true);
         Apply_HalfResolutionGI(GetActual_HalfResolutionGI(), false, true);
@@ -98,6 +98,39 @@ public partial class global_settings : Godot.GodotObject
         gm.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "all audio data is saved");
     }
 
+    // Spoustime zde v global_settings pri konstrukci (init)
+    public void LoadAndApply_AllInputsSettings()
+    {
+        // nacteme veskera data ulozena ze souboru
+        global_settings_data data = GetData();
+
+        // pouze aplikujeme jednotliva nastaveni = neukladame do souboru
+        Apply_LookMouseSmooth(data.LookMouseSmooth, true, false);
+        Apply_LookMouseSensitivity(data.LookMouseSensitivity, true, false);
+        Apply_LookGamepadSmooth(data.LookGamepadSmooth, true, false);
+        Apply_LookGamepadSensitivity(data.LookGamepadSensitivity, true, false);
+        Apply_InverseVerticalLook(data.InverseVerticalLook, true, false);
+
+        gm.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "all inputs data is apply");
+    }
+
+    // Toto volani projede veskera aktualni aplikovana inputs nastaveni a
+    // ulozi je do souboru global_settings_data.tres
+    public void SaveActual_AllInputsSettings()
+    {
+        // nacteme veskera data ulozena ze souboru
+        global_settings_data data = GetData();
+
+        // pouze aplikujeme jednotliva nastaveni = neukladame do souboru
+        Apply_LookMouseSmooth(GetActual_LookMouseSmooth(), false, true);
+        Apply_LookMouseSensitivity(GetActual_LookMouseSensitivity(), false, true);
+        Apply_LookGamepadSmooth(GetActual_LookGamepadSmooth(), false, true);
+        Apply_LookGamepadSensitivity(GetActual_LookGamepadSensitivity(), false, true);
+        Apply_InverseVerticalLook(GetActual_InverseVerticalLook(), false, true);
+
+        gm.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "all inputs data is saved");
+    }
+
     /**************************************************************************/
     // GRAPHICS
 
@@ -115,8 +148,8 @@ public partial class global_settings : Godot.GodotObject
 
                 // impulz pro zmenu rozliseni
                 if (GetActual_ScreenSizeID() == 2)
-                    Apply_ScreenSizeID(2,true,false);
-          
+                    Apply_ScreenSizeID(2, true, false);
+
                 GameMaster.GM.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "apply video settings:" +
                     " screen mode id = windowed");
 
@@ -163,7 +196,7 @@ public partial class global_settings : Godot.GodotObject
             //windowed
             return 0;
         }
-        else if (gm.GetTree().Root.Mode == Window.ModeEnum.ExclusiveFullscreen && 
+        else if (gm.GetTree().Root.Mode == Window.ModeEnum.ExclusiveFullscreen &&
             gm.GetTree().Root.ContentScaleAspect == Window.ContentScaleAspectEnum.KeepWidth)
         {
             //fullscreen normal
@@ -209,7 +242,7 @@ public partial class global_settings : Godot.GodotObject
             {
                 // screen size
                 //if(GetActual_ScreenMode() == 0)
-                    gm.GetTree().Root.Size = new Vector2I(DisplayServer.ScreenGetSize().X - 1, DisplayServer.ScreenGetSize().Y - 1);
+                gm.GetTree().Root.Size = new Vector2I(DisplayServer.ScreenGetSize().X - 1, DisplayServer.ScreenGetSize().Y - 1);
 
                 //Apply_ScreenMode(0, true, false);
                 //gm.GetTree().Root.Size = new Vector2i(DisplayServer.ScreenGetSize().x-1, DisplayServer.ScreenGetSize().y-1);
@@ -258,14 +291,80 @@ public partial class global_settings : Godot.GodotObject
         }
     }
 
+    // Aplikuje ruzna GI
+    public void Apply_GlobalIlumination(int newValue, bool newApplyNow = false, bool newSaveNow = false)
+    {
+        if (newApplyNow)
+        {
+            if (newValue == 0)
+            {
+                // disable
+                VoxelGI voxelGI = GameMaster.GM.GetLevelLoader().GetActualLevelScene().GetVoxelGI();
+                if (voxelGI != null)
+                    voxelGI.Visible = false;
+
+                Apply_Sdfgi(false, true, false);
+                gm.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "apply video settings: gi = " + newValue + "(disable)");
+            }
+            else if (newValue == 1)
+            {
+                // voxel
+                Apply_Sdfgi(false, true, false);
+                VoxelGI voxelGI = GameMaster.GM.GetLevelLoader().GetActualLevelScene().GetVoxelGI();
+                if (voxelGI != null)
+                    voxelGI.Visible = true;
+
+                // mozny fix na zmenu to voxel kdy extremne zacne svitit fog
+                // vypada to ze staci prenacist shadery a na to staci zmena screenmode - aktualne asi funguje bez toho
+                //int a = GetActual_ScreenMode();
+                //Apply_ScreenMode(0);
+                //Apply_ScreenMode(a);
+                gm.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "apply video settings: gi = " + newValue + "(voxel)");
+            }
+            else if (newValue == 2)
+            {
+                // sdfgi
+                VoxelGI voxelGI = GameMaster.GM.GetLevelLoader().GetActualLevelScene().GetVoxelGI();
+                if (voxelGI != null)
+                    voxelGI.Visible = false;
+                Apply_Sdfgi(true, true, false);
+                gm.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "apply video settings: gi = " + newValue + "(sdfgi)");
+            }
+        }
+
+        if (newSaveNow)
+        {
+            GetData().GlobalIlumination = newValue;
+            GetData().Save();
+            gm.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "save video settings: gi = " + newValue);
+        }
+
+        RefreshShaders();
+    }
+
+    public int GetActual_GlobalIlumination()
+    {
+        // 0 - disable,1 - voxel, 2 - sdfgi
+        int a = 0;
+        VoxelGI voxelGI = GameMaster.GM.GetLevelLoader().GetActualLevelScene().GetVoxelGI();
+        if (voxelGI != null)
+            if (voxelGI.Visible)
+                a = 1;
+
+        if (GetActual_Sdfgi())
+            a = 2;
+
+        return a;
+    }
+
     // settings SSAO
     public void Apply_Ssao(bool newValue, bool newApplyNow = false, bool newSaveNow = false)
 	{
 		// Apply now
-		if(newApplyNow && gm.LevelLoader.GetActualLevelScene() != null)
+		if(newApplyNow && GameMaster.GM.GetLevelLoader().GetActualLevelScene() != null)
 		{
-			Godot.Environment env = gm.LevelLoader.GetActualLevelScene().GetNode<WorldEnvironment>
-				("WorldEnvironment").Environment;
+			Godot.Environment env = 
+                GameMaster.GM.GetLevelLoader().GetActualLevelScene().GetWorldEnvironment().Environment;
 
 			env.SsaoEnabled = newValue;
             gm.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "apply video settings: ssao = " + newValue);
@@ -282,8 +381,8 @@ public partial class global_settings : Godot.GodotObject
 
     public bool GetActual_Ssao()
     {
-        Godot.Environment env = gm.LevelLoader.GetActualLevelScene().GetNode<WorldEnvironment>
-                ("WorldEnvironment").Environment;
+        Godot.Environment env = 
+            GameMaster.GM.GetLevelLoader().GetActualLevelScene().GetWorldEnvironment().Environment;
 
         return env.SsaoEnabled;
     }
@@ -292,10 +391,10 @@ public partial class global_settings : Godot.GodotObject
     public void Apply_Ssil(bool newValue, bool newApplyNow = false, bool newSaveNow = false)
     {
         // Apply now
-        if (newApplyNow && gm.LevelLoader.GetActualLevelScene() != null)
+        if (newApplyNow && GameMaster.GM.GetLevelLoader().GetActualLevelScene() != null)
         {
-            Godot.Environment env = gm.LevelLoader.GetActualLevelScene().GetNode<WorldEnvironment>
-                ("WorldEnvironment").Environment;
+            Godot.Environment env = 
+                GameMaster.GM.GetLevelLoader().GetActualLevelScene().GetWorldEnvironment().Environment;
 
             env.SsilEnabled = newValue;
             gm.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "apply video settings: ssil = " + newValue);
@@ -312,20 +411,20 @@ public partial class global_settings : Godot.GodotObject
 
     public bool GetActual_Ssil()
     {
-        Godot.Environment env = gm.LevelLoader.GetActualLevelScene().GetNode<WorldEnvironment>
-                ("WorldEnvironment").Environment;
+        Godot.Environment env = 
+            GameMaster.GM.GetLevelLoader().GetActualLevelScene().GetWorldEnvironment().Environment;
 
         return env.SsilEnabled;
     }
 
-    // settings SDFGI
-    public void Apply_Sdfgi(bool newValue, bool newApplyNow = false, bool newSaveNow = false)
+    // settings SDFGI = nepouzivat z venku, misto toho pouzit Apply_GlobalIlumination()
+    private void Apply_Sdfgi(bool newValue, bool newApplyNow = false, bool newSaveNow = false)
     {
         // Apply now
-        if (newApplyNow && gm.LevelLoader.GetActualLevelScene() != null)
+        if (newApplyNow && GameMaster.GM.GetLevelLoader().GetActualLevelScene() != null)
         {
-            Godot.Environment env = gm.LevelLoader.GetActualLevelScene().GetNode<WorldEnvironment>
-                ("WorldEnvironment").Environment;
+            Godot.Environment env = 
+                GameMaster.GM.GetLevelLoader().GetActualLevelScene().GetWorldEnvironment().Environment;
 
             env.SdfgiEnabled = newValue;
             gm.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "apply video settings: sdfgi = " + newValue);
@@ -342,8 +441,8 @@ public partial class global_settings : Godot.GodotObject
 
     public bool GetActual_Sdfgi()
     {
-        Godot.Environment env = gm.LevelLoader.GetActualLevelScene().GetNode<WorldEnvironment>
-                ("WorldEnvironment").Environment;
+        Godot.Environment env = 
+            GameMaster.GM.GetLevelLoader().GetActualLevelScene().GetWorldEnvironment().Environment;
 
         return env.SdfgiEnabled;
     }
@@ -663,5 +762,144 @@ public partial class global_settings : Godot.GodotObject
         // Save now
         GetData().ShowDebugHud = newValue;
         GetData().Save();
+    }
+
+    /**************************************************************************/
+    // INPUTS
+
+    // settings Mouse Smooth
+    public void Apply_LookMouseSmooth(float newValue, bool newApplyNow = false, bool newSaveNow = false)
+    {
+        // Apply now
+        if (newApplyNow)
+        {
+            if (GameMaster.GM.GetFPSCharacter() == null) return;
+                GameMaster.GM.GetFPSCharacter().MouseSmooth = newValue;
+        }
+
+        // Save nowj
+        if (newSaveNow)
+        {
+            GetData().LookMouseSmooth = newValue;
+            GetData().Save();
+        }
+    }
+
+    public float GetActual_LookMouseSmooth()
+    {
+        if (GameMaster.GM.GetFPSCharacter() == null) return 1f;
+        return GameMaster.GM.GetFPSCharacter().MouseSmooth;
+    }
+
+    // settings Mouse Sensitivity
+    public void Apply_LookMouseSensitivity(float newValue, bool newApplyNow = false, bool newSaveNow = false)
+    {
+        // Apply now
+        if (newApplyNow)
+        {
+            if (GameMaster.GM.GetFPSCharacter() == null) return;
+            GameMaster.GM.GetFPSCharacter().MouseSensitivity = newValue;
+        }
+
+        // Save nowj
+        if (newSaveNow)
+        {
+            GetData().LookMouseSensitivity = newValue;
+            GetData().Save();
+        }
+    }
+
+    public float GetActual_LookMouseSensitivity()
+    {
+        if (GameMaster.GM.GetFPSCharacter() == null) return 1f;
+        return GameMaster.GM.GetFPSCharacter().MouseSensitivity;
+    }
+
+    // settings Gamepad Smooth
+    public void Apply_LookGamepadSmooth(float newValue, bool newApplyNow = false, bool newSaveNow = false)
+    {
+        // Apply now
+        if (newApplyNow)
+        {
+            if (GameMaster.GM.GetFPSCharacter() == null) return;
+            GameMaster.GM.GetFPSCharacter().GamepadSmooth = newValue;
+        }
+
+        // Save nowj
+        if (newSaveNow)
+        {
+            GetData().LookGamepadSmooth = newValue;
+            GetData().Save();
+        }
+    }
+
+    public float GetActual_LookGamepadSmooth()
+    {
+        if (GameMaster.GM.GetFPSCharacter() == null) return 1f;
+        return GameMaster.GM.GetFPSCharacter().GamepadSmooth;
+    }
+
+    // settings Gamepad Sensitivity
+    public void Apply_LookGamepadSensitivity(float newValue, bool newApplyNow = false, bool newSaveNow = false)
+    {
+        // Apply now
+        if (newApplyNow)
+        {
+            if (GameMaster.GM.GetFPSCharacter() == null) return;
+            GameMaster.GM.GetFPSCharacter().GamepadSensitvity = newValue;
+        }
+
+        // Save nowj
+        if (newSaveNow)
+        {
+            GetData().LookGamepadSensitivity = newValue;
+            GetData().Save();
+        }
+    }
+
+    public float GetActual_LookGamepadSensitivity()
+    {
+        if (GameMaster.GM.GetFPSCharacter() == null) return 1f;
+        return GameMaster.GM.GetFPSCharacter().GamepadSensitvity;
+    }
+
+    // settings InverseVerticalLook
+    public void Apply_InverseVerticalLook(bool newValue, bool newApplyNow = false, bool newSaveNow = false)
+    {
+        // Apply now
+        if (newApplyNow)
+        {
+            if (GameMaster.GM.GetFPSCharacter() == null) return;
+            GameMaster.GM.GetFPSCharacter().InverseVerticalLook = newValue;
+        }
+
+        // Save nowj
+        if (newSaveNow)
+        {
+            GetData().InverseVerticalLook = newValue;
+            GetData().Save();
+        }
+    }
+
+    public bool GetActual_InverseVerticalLook()
+    {
+        if (GameMaster.GM.GetFPSCharacter() == null) return false;
+        return GameMaster.GM.GetFPSCharacter().InverseVerticalLook;
+    }
+
+    /**************************************************************************/
+    // OTHERS
+
+    // refresh antialising (working as impulse refresh shaders)
+    public async void RefreshShaders()
+    {
+        await RefreshShadersBackTask(GetActual_AntialiasID());
+        Apply_AntialiasID(0,true,false);
+    }
+
+    private async Task RefreshShadersBackTask(int value)
+    {
+        await Task.Delay(100);
+        Apply_AntialiasID(value,true,false);
     }
 }

@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://ct7hsvag0ye8r"]
+
+[ext_resource type="PackedScene" uid="uid://brbg8yac2ahy3" path="res://placeholders/modular_level_builds/silo_level/glb_assets/airvent_poklop.glb" id="1_4b0d7"]
+[ext_resource type="Material" uid="uid://bw5c2g160gs3a" path="res://placeholders/modular_level_builds/silo_level/mat/silo_mat_v1/silo_trim01_v1_mat.tres" id="2_16fly"]
+
+[node name="airvent_poklop" instance=ExtResource("1_4b0d7")]
+
+[node name="airvent_poklop2" parent="." index="0"]
+material_override = ExtResource("2_16fly")

@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://bf6l6qppa4usb"]
+
+[ext_resource type="PackedScene" uid="uid://chyn3mkhsiom7" path="res://placeholders/table_drawers/new drawers/1.glb" id="1_a2prp"]
+[ext_resource type="Material" uid="uid://2cei58gydlnn" path="res://placeholders/table_drawers/new drawers/new_drawers_metal_mat.material" id="2_f6dpj"]
+
+[node name="1" instance=ExtResource("1_a2prp")]
+
+[node name="Cube" parent="." index="0"]
+material_override = ExtResource("2_f6dpj")
+
+[node name="Cube_001" parent="." index="1"]
+material_override = ExtResource("2_f6dpj")
+
+[node name="Cube_002" parent="." index="2"]
+material_override = ExtResource("2_f6dpj")
+
+[node name="Cube_003" parent="." index="3"]
+material_override = ExtResource("2_f6dpj")
+
+[node name="Cube_004" parent="." index="4"]
+material_override = ExtResource("2_f6dpj")
