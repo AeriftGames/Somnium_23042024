@@ -1,5 +1,7 @@
 # Godot 4+ specific ignores
 .godot/
+.idea/
+.vs/
 log/log.txt
 .svn/
 *.mp3
