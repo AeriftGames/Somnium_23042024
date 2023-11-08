@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 public partial class CLevelLoader : Node
 {
-    public bool isPrecompiledShaders = true;
+    public bool isPrecompiledShaders = false;
 
     public string actualLevelName = (string)ProjectSettings.GetSetting("application/run/main_scene");
 
