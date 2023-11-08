@@ -1,3 +1,21 @@
 # Godot 4+ specific ignores
 .godot/
 log/log.txt
+.svn/
+*.mp3
+*.wav
+*.ogg
+*.png
+*.PNG
+*.jpg
+*.JPG
+*.jpeg
+*.JPEG
+*.fbx
+*.FBX
+*.obj
+*.tga
+*.bin
+*.gltf
+*.glb
+*.ttf

@@ -1,0 +1,281 @@
+[gd_scene load_steps=13 format=3 uid="uid://dqrxmxdxekca3"]
+
+[ext_resource type="Script" path="res://levels/worldlevel.cs" id="1_upl47"]
+[ext_resource type="ArrayOccluder3D" uid="uid://1dvpcggr1b7c" path="res://levels/worldlevel_test_new_modular1/worldlevel_test_new_modular1.occ" id="2_d1py7"]
+[ext_resource type="PackedScene" uid="uid://bet3idvc4fg0n" path="res://placeholders/PlayerStart.tscn" id="3_pnsib"]
+[ext_resource type="Texture2D" uid="uid://cxuhj4tqdb5qw" path="res://testing_stuff_kaen/my_trim1/decals_tests2/trimsheet_3_low_DefaultMaterial_BaseColor.png" id="4_wyj4e"]
+[ext_resource type="Texture2D" uid="uid://dgwuv4wnpu3rq" path="res://testing_stuff_kaen/my_trim1/decals_tests2/trimsheet_3_low_DefaultMaterial_Normal.png" id="5_y8852"]
+[ext_resource type="PackedScene" uid="uid://6rotta4x1vn" path="res://testing_stuff_kaen/my_trim1/levelscene_test1.tscn" id="6_gsawf"]
+[ext_resource type="AudioStream" uid="uid://ngmb6mrvsbqc" path="res://audio/audio_streams/613738__punneedsounds__amb-ost1.mp3" id="7_v7756"]
+[ext_resource type="Script" path="res://benchmark/Path3D.gd" id="8_md5l1"]
+[ext_resource type="Script" path="res://benchmark/PathFollow3D_pos.gd" id="9_f433i"]
+
+[sub_resource type="Environment" id="Environment_p3qlj"]
+background_mode = 1
+background_energy_multiplier = 1.67
+ambient_light_source = 2
+ambient_light_color = Color(0.501961, 0.501961, 0.501961, 1)
+ambient_light_energy = 6.81
+tonemap_mode = 2
+ssao_enabled = true
+ssil_enabled = true
+sdfgi_enabled = true
+sdfgi_use_occlusion = true
+sdfgi_read_sky_light = false
+glow_enabled = true
+fog_enabled = true
+fog_light_energy = 0.42
+fog_density = 0.0009
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.0363
+
+[sub_resource type="Curve3D" id="Curve3D_oklwb"]
+
+[sub_resource type="Curve3D" id="Curve3D_p4qst"]
+bake_interval = 10.0
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0.386887, -0.246601, 8.91664, 0, 0, 0, 0, 0, 0, 6.68187, 0.000687167, 9.86584, 0, 0, 0, 0, 0, 0, 6.36563, -0.311747, 3.35865, 0, 0, 0, 0, 0, 0, 2.39016, -0.184084, 3.30063, 0, 0, 0, 0, 0, 0, -2.80709, -0.0617789, 3.61022),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0)
+}
+point_count = 5
+
+[node name="worldlevel" type="Node3D"]
+script = ExtResource("1_upl47")
+InGameStartEnableSDFGI = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_p3qlj")
+
+[node name="worldlevel_occluderculling" type="OccluderInstance3D" parent="."]
+occluder = ExtResource("2_d1py7")
+metadata/_edit_lock_ = true
+
+[node name="PlayerStart" parent="." instance=ExtResource("3_pnsib")]
+transform = Transform3D(-1, 0, 5.96046e-08, 0, 1, 0, -5.96046e-08, 0, -1, -0.721933, -1.47101, 21.5182)
+
+[node name="Level" type="Node3D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="Decals" type="Node3D" parent="Level"]
+metadata/_edit_lock_ = true
+
+[node name="Decal22" type="Decal" parent="Level/Decals"]
+transform = Transform3D(0.279187, 0.271971, -0.920916, 0.0814937, 0.948879, 0.304936, 0.956772, -0.160183, 0.242751, 3.2168, -1.41242, 37.9146)
+texture_albedo = ExtResource("4_wyj4e")
+texture_normal = ExtResource("5_y8852")
+emission_energy = 0.0
+modulate = Color(0.862745, 0, 0, 1)
+upper_fade = 0.791705
+lower_fade = 0.689226
+distance_fade_enabled = true
+distance_fade_begin = 5.0
+
+[node name="Decal23" type="Decal" parent="Level/Decals"]
+transform = Transform3D(0.816672, 0.572628, -0.071721, -0.566054, 0.819028, 0.0936739, 0.112382, -0.0359028, 0.993016, 3.4647, -1.41242, 39.1611)
+size = Vector3(4, 4, 4)
+texture_albedo = ExtResource("4_wyj4e")
+texture_normal = ExtResource("5_y8852")
+emission_energy = 0.0
+modulate = Color(0.862745, 0, 0, 1)
+upper_fade = 0.738688
+lower_fade = 0.382372
+distance_fade_enabled = true
+distance_fade_begin = 5.0
+
+[node name="Decal24" type="Decal" parent="Level/Decals"]
+transform = Transform3D(0.816672, 0.572628, -0.071721, -0.566054, 0.819028, 0.0936739, 0.112382, -0.0359028, 0.993016, 3.4647, -1.41242, 40.2146)
+size = Vector3(4, 4, 4)
+texture_albedo = ExtResource("4_wyj4e")
+texture_normal = ExtResource("5_y8852")
+emission_energy = 0.0
+modulate = Color(0.862745, 0, 0, 1)
+upper_fade = 0.738688
+lower_fade = 0.382372
+distance_fade_enabled = true
+distance_fade_begin = 5.0
+
+[node name="Decal6" type="Decal" parent="Level/Decals"]
+transform = Transform3D(-0.687125, -0.27723, 0.671567, -0.568339, 0.780923, -0.259133, -0.452603, -0.559735, -0.694152, -0.0794005, -1.45712, 28.2308)
+size = Vector3(4, 4, 4)
+texture_albedo = ExtResource("4_wyj4e")
+texture_normal = ExtResource("5_y8852")
+emission_energy = 0.0
+modulate = Color(0.231373, 0.231373, 0.231373, 1)
+upper_fade = 0.219614
+lower_fade = 0.424269
+
+[node name="Decal10" type="Decal" parent="Level/Decals"]
+transform = Transform3D(-0.423496, -0.84599, -0.323963, -0.890561, 0.323268, 0.319996, -0.165986, 0.424027, -0.890309, 1.0372, 0.240935, 29.6722)
+size = Vector3(2, 2, 1.5)
+texture_albedo = ExtResource("4_wyj4e")
+texture_normal = ExtResource("5_y8852")
+emission_energy = 0.0
+modulate = Color(0.0745098, 0.0745098, 0.0745098, 1)
+upper_fade = 0.219614
+lower_fade = 0.424269
+
+[node name="Decal8" type="Decal" parent="Level/Decals"]
+transform = Transform3D(0.3125, 0.496216, 0.810008, -0.56834, 0.780923, -0.259133, -0.76114, -0.37938, 0.526058, 7.3888, -0.937053, 27.2573)
+size = Vector3(4, 4, 4)
+texture_albedo = ExtResource("4_wyj4e")
+texture_normal = ExtResource("5_y8852")
+emission_energy = 0.0
+upper_fade = 0.409814
+lower_fade = 0.600008
+
+[node name="Decal9" type="Decal" parent="Level/Decals"]
+transform = Transform3D(-0.136303, 0.221232, 0.965649, -0.568339, 0.780923, -0.259133, -0.811426, -0.584137, 0.0192933, 7.3888, -0.751871, 30.7569)
+size = Vector3(4, 4, 4)
+texture_albedo = ExtResource("4_wyj4e")
+texture_normal = ExtResource("5_y8852")
+emission_energy = 0.0
+modulate = Color(0.231373, 0.231373, 0.231373, 1)
+upper_fade = 0.848533
+lower_fade = 0.689228
+
+[node name="Decal7" type="Decal" parent="Level/Decals"]
+transform = Transform3D(0.879793, 0.410429, -0.239817, 0.105149, 0.323972, 0.940205, 0.463581, -0.852403, 0.241872, -1.1579, -1.55073, 34.3607)
+size = Vector3(10, 5, 5)
+texture_albedo = ExtResource("4_wyj4e")
+texture_normal = ExtResource("5_y8852")
+emission_energy = 0.0
+modulate = Color(0.231373, 0.231373, 0.231373, 1)
+upper_fade = 0.600003
+lower_fade = 0.68923
+
+[node name="Lights" type="Node3D" parent="Level"]
+metadata/_edit_lock_ = true
+
+[node name="OmniLight3D19" type="OmniLight3D" parent="Level/Lights"]
+transform = Transform3D(0.612466, 0.790479, 0.00535267, 0.548843, -0.420353, -0.722548, -0.568909, 0.445474, -0.6913, -0.491141, 0.850208, 28.7675)
+light_energy = 0.3
+light_indirect_energy = 10.0
+shadow_enabled = true
+omni_range = 8.0
+
+[node name="OmniLight3D22" type="OmniLight3D" parent="Level/Lights"]
+transform = Transform3D(0.612466, 0.790479, 0.00535267, 0.548843, -0.420353, -0.722548, -0.568909, 0.445474, -0.6913, 0.548759, 0.773951, 36.3692)
+light_energy = 0.15
+light_indirect_energy = 10.0
+shadow_enabled = true
+omni_range = 3.0
+
+[node name="OmniLight3D24" type="OmniLight3D" parent="Level/Lights"]
+transform = Transform3D(0.819842, 0.101939, 0.563443, 0.548843, -0.420353, -0.722547, 0.163189, 0.901616, -0.400572, 3.97286, 1.01129, 39.1521)
+light_energy = 0.3
+light_indirect_energy = 10.0
+shadow_enabled = true
+omni_range = 6.0
+omni_attenuation = 1.03526
+
+[node name="OmniLight3D21" type="OmniLight3D" parent="Level/Lights"]
+transform = Transform3D(0.612466, 0.790479, 0.00535267, 0.548843, -0.420353, -0.722548, -0.568909, 0.445474, -0.6913, 12.443, 0.150208, 28.9504)
+light_energy = 0.15
+light_indirect_energy = 5.0
+shadow_enabled = true
+omni_range = 7.0
+
+[node name="LevelScenes" type="Node3D" parent="Level"]
+metadata/_edit_lock_ = true
+
+[node name="levelscene_test1" parent="Level/LevelScenes" instance=ExtResource("6_gsawf")]
+metadata/_edit_lock_ = true
+
+[node name="Benchmark" type="Node3D" parent="Level"]
+
+[node name="Node3D" type="Node3D" parent="Level/Benchmark"]
+transform = Transform3D(-0.996453, 0.0036921, 0.0840682, -0.00150514, 0.998095, -0.0616746, -0.0841358, -0.0615824, -0.99455, -1.16115, 0.533462, 33.5413)
+
+[node name="Node3D2" type="Node3D" parent="Level/Benchmark"]
+transform = Transform3D(-0.996453, 0.0036921, 0.0840682, -0.00150514, 0.998095, -0.0616746, -0.0841357, -0.0615824, -0.99455, 4.601, 0.533462, 33.2721)
+
+[node name="Node3D3" type="Node3D" parent="Level/Benchmark"]
+transform = Transform3D(-0.996453, 0.0036921, 0.0840682, -0.00150514, 0.998095, -0.0616746, -0.0841357, -0.0615824, -0.99455, 4.601, 0.533462, 27.5913)
+
+[node name="Path3D" type="Path3D" parent="Level/Benchmark"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.797985, 0, 21.5118)
+curve = SubResource("Curve3D_oklwb")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="Level/Benchmark/Path3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.48816)
+
+[node name="PathFollow3D2" type="PathFollow3D" parent="Level/Benchmark/Path3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 12.4027)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_v7756")
+autoplay = true
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -350.0
+offset_top = -50.0
+offset_right = 350.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.309804, 0.309804, 0.309804, 0.556863)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ColorRect"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="ColorRect/HBoxContainer"]
+layout_mode = 2
+text = "Enter a nickname of a computer (e.g. oalar notebook):"
+
+[node name="LineEdit" type="LineEdit" parent="ColorRect/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/minimum_character_width = 17
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+offset_right = 40.0
+grow_vertical = 0
+
+[node name="Label" type="Label" parent="ColorRect/HBoxContainer2"]
+layout_mode = 2
+text = "I agree with this test gathering information about my hardware"
+
+[node name="CheckBox" type="CheckBox" parent="ColorRect/HBoxContainer2"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -8.0
+offset_top = -8.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Accept"
+
+[node name="Path3D" type="Path3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.548861, -0.00363843, 23.001)
+curve = SubResource("Curve3D_p4qst")
+script = ExtResource("8_md5l1")
+level_name = "Rooms_sdfgion_xx"
+
+[node name="PathFollow3D_pos" type="PathFollow3D" parent="Path3D"]
+transform = Transform3D(0.149101, -0.038381, 0.988074, 3.72528e-09, 0.999244, 0.0388149, -0.988819, -0.00578735, 0.148989, 0.386887, -0.246601, 8.91664)
+script = ExtResource("9_f433i")
+
+[node name="PathFollow3D_look" type="PathFollow3D" parent="Path3D"]
+transform = Transform3D(0.149101, -0.0383811, 0.988075, 3.72529e-09, 0.999246, 0.0388149, -0.988821, -0.00578736, 0.148989, 1.0925, -0.215766, 9.09012)
+progress = 1.0
+
+[node name="Camera3D" type="Camera3D" parent="Path3D"]
+transform = Transform3D(-0.996453, 0.00369211, 0.0840682, -0.00150514, 0.998095, -0.0616746, -0.0841358, -0.0615824, -0.99455, -0.0957802, 0.00363843, 1.92524)
+current = true
