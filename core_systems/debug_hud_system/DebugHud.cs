@@ -50,6 +50,7 @@ public partial class DebugHud : Control
 		SetEnable(true);
 
 		BuildLevelButtons();
+		BuildSpawnButtons();
 	}
 
 	public override void _Process(double delta)
@@ -237,7 +238,8 @@ public partial class DebugHud : Control
 
 	public void _on_enable_world_occlusion_culling_check_box_toggled(bool isPressed)
 	{
-		Node3D worldlevel_occluderculling = (Node3D)GetNode("/root/worldlevel/worldlevel_occluderculling");
+		Node3D worldlevel_occluderculling =
+			GameMaster.GM.GetLevelLoader().GetActualLevelScene().GetLevelScene().GetLevelOcclusion();
 		worldlevel_occluderculling.Visible = isPressed;
 
 		GameMaster.GM.Log.WriteLog(this, LogSystem.ELogMsgType.INFO,
@@ -256,7 +258,7 @@ public partial class DebugHud : Control
 
 	public void BuildLevelButtons()
 	{
-		var allLevelsInfo = GameMaster.GM.LevelLoader.GetAllLevelsInfo();
+		var allLevelsInfo = GameMaster.GM.GetLevelLoader().GetAllLevelsInfo();
 		foreach (var level in allLevelsInfo)
 		{
 			// Instance Button
@@ -264,11 +266,39 @@ public partial class DebugHud : Control
 				"res://core_systems/debug_hud_system/level_button.tscn").Instantiate();
 
 			level_button_Instance.Text = level.name;
-			level_button_Instance.SetLevelData(level.path, level.name);
+			level_button_Instance.SetLevelData(level.path, level.name, level.leveltype);
 
 			VBoxContainer LevelButtonContainer = GetNode<VBoxContainer>("OptionsPanel/TabContainer/level");
 			LevelButtonContainer.AddChild(level_button_Instance);
 		}
+	}
+
+	public void BuildSpawnButtons()
+	{
+		var allSpawnsInfo = UniversalFunctions.GetAllSpawnObjectsFromDir();
+		foreach (var spawn in allSpawnsInfo)
+		{
+			spawn_object_button spawnButtonInstance = GD.Load<PackedScene>(
+				"res://core_systems/debug_hud_system/spawn_object_button.tscn").Instantiate() as spawn_object_button;
+
+			spawnButtonInstance.Text = spawn.name;
+			spawnButtonInstance.SetSpawnObjectData(spawn.path, spawn.name);
+
+			VBoxContainer spawnButtonContainer = GetNode<VBoxContainer>("OptionsPanel/TabContainer/spawn");
+			spawnButtonContainer.AddChild(spawnButtonInstance);
+		}
+	}
+
+    public void _on_h_slider_value_changed(float value)
+	{
+		Label a = GetNode<Label>("OptionsPanel/TabContainer/spawn/amountOfSPawnLabel/HSlider/Label2");
+		a.Text = value.ToString();
+	}
+
+    public int GetNeedNumOfSpawn() 
+	{
+		HSlider a = GetNode<HSlider>("OptionsPanel/TabContainer/spawn/amountOfSPawnLabel/HSlider");
+		return (int) a.Value;
 	}
 
 	public void CheckScreenModeSetting()
@@ -304,14 +334,21 @@ public partial class DebugHud : Control
 		GameMaster.GM.GetSettings().Apply_ScreenSizeID(newID, true, false);
 	}
 
-	// Signal pr zmenu antialiasingu skrze option button
+	// Signal pro zmenu antialiasingu skrze option button
 	public void _on_antialias_option_button_item_selected(int newID)
 	{
 		// only apply
 		GameMaster.GM.GetSettings().Apply_AntialiasID(newID, true, false);
 	}
 
-	public void _on_scale_3d_h_slider_value_changed(float newValue)
+    // Signal pro zmenu global ilumination skrze option button
+    public void _on_gi_option_button_item_selected(int newID)
+	{
+		//only apply
+		GameMaster.GM.GetSettings().Apply_GlobalIlumination(newID, true, false);
+    }
+
+    public void _on_scale_3d_h_slider_value_changed(float newValue)
 	{
 		// only apply
 		GameMaster.GM.GetSettings().Apply_Scale3D(newValue / 100.0f,true,false);
@@ -336,12 +373,6 @@ public partial class DebugHud : Control
 	{
 		// only apply
 		GameMaster.GM.GetSettings().Apply_Ssil(newPressed,true,false);
-	}
-
-	public void _on_sdfgi_check_box_toggled(bool newPressed)
-	{
-	   // only apply
-	   GameMaster.GM.GetSettings().Apply_Sdfgi(newPressed,true,false);
 	}
 
 	public void _on_unlock_max_fps_check_box_toggled(bool newPressed)
@@ -380,6 +411,11 @@ public partial class DebugHud : Control
 			"WindowSize_HBoxContainer/WindowSize_OptionButton");
 		windowsize_option.Selected = GameMaster.GM.GetSettings().GetActual_ScreenSizeID();
 
+		// gi
+		OptionButton gi_option = GetNode<OptionButton>("OptionsPanel/TabContainer/video/" +
+			"GI_HBoxContainer/GI_OptionButton");
+		gi_option.Selected = GameMaster.GM.GetSettings().GetActual_GlobalIlumination();
+
 		// scale 3d
 		HSlider scale3d_slider = GetNode<HSlider>("OptionsPanel/TabContainer/video/" +
 			"Scale3d_HBoxContainer/Scale3d_HSlider");
@@ -399,10 +435,6 @@ public partial class DebugHud : Control
 		// ssil
 		CheckBox ssil_checkbox = GetNode<CheckBox>("OptionsPanel/TabContainer/video/Ssil_CheckBox");
 		ssil_checkbox.ButtonPressed = GameMaster.GM.GetSettings().GetActual_Ssil();
-
-		// sdfgi
-		CheckBox sdfgi_checkbox = GetNode<CheckBox>("OptionsPanel/TabContainer/video/Sdfgi_CheckBox");
-		sdfgi_checkbox.ButtonPressed = GameMaster.GM.GetSettings().GetActual_Sdfgi();
 
 		CheckBox unlockmaxfps_checkbox = GetNode<CheckBox>("OptionsPanel/TabContainer/video/UnlockMaxFps_CheckBox");
 		unlockmaxfps_checkbox.ButtonPressed = GameMaster.GM.GetSettings().GetActual_UnlockMaxFps();

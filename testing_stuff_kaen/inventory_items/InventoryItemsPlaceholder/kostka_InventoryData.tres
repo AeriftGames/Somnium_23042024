@@ -1,7 +1,7 @@
-[gd_resource type="Resource" load_steps=6 format=3 uid="uid://baj7vf7ihdsxo"]
+[gd_resource type="Resource" load_steps=6 format=3 uid="uid://xux4w3dc630i"]
 
-[ext_resource type="Script" path="res://testing_stuff_kaen/inventory_items/ItemSubViewportSetting.cs" id="1_11ucl"]
-[ext_resource type="Script" path="res://testing_stuff_kaen/inventory_items/InventoryItemData.cs" id="2_iv6yq"]
+[ext_resource type="Script" path="res://player/character_systems/inventory_menu/ItemSubViewportSetting.cs" id="1_11ucl"]
+[ext_resource type="Script" path="res://player/character_systems/inventory_menu/InventoryItemData.cs" id="2_iv6yq"]
 
 [sub_resource type="Resource" id="Resource_vkxun"]
 resource_local_to_scene = true

@@ -74,7 +74,7 @@ public partial class PlayerStart : Node3D
 		characterInteraction_Instance.objectHands = objectHands_instance;
 
 		// Spawn to worldlevel node
-		Node level = GetNode("/root/worldlevel");
+		Node level = GameMaster.GM.GetLevelLoader().GetActualLevelScene();
 		if (level == null)
 		{
 			// If worldlevel for spawn dont finded
@@ -109,8 +109,8 @@ public partial class PlayerStart : Node3D
 			objectHands_instance.GlobalRotation = newRotation;
 			
 			// !!! SHADER PRECOMPILATION PROCESS START !!!
-			if(GameMaster.GM.LevelLoader.isPrecompiledShaders)
-				GameMaster.GM.LevelLoader.StartPrecompileShaderProcess();
+			if(GameMaster.GM.GetLevelLoader().isPrecompiledShaders)
+				GameMaster.GM.GetLevelLoader().StartPrecompileShaderProcess();
 
 			// Apply Settings
 			GameMaster.GM.GetSettings().LoadAndApply_AllGraphicsSettings();
@@ -141,7 +141,7 @@ public partial class PlayerStart : Node3D
         characterInventory_Instance.objectHands = objectHands_instance;
 
         // Spawn to worldlevel node
-        Node level = GetNode("/root/worldlevel");
+        Node level = GameMaster.GM.GetLevelLoader().GetActualLevelScene();
         if (level == null)
         {
             // If worldlevel for spawn dont finded
@@ -176,8 +176,8 @@ public partial class PlayerStart : Node3D
             objectHands_instance.GlobalRotation = newRotation;
 
             // !!! SHADER PRECOMPILATION PROCESS START !!!
-            if (GameMaster.GM.LevelLoader.isPrecompiledShaders)
-                GameMaster.GM.LevelLoader.StartPrecompileShaderProcess();
+            if (GameMaster.GM.GetLevelLoader().isPrecompiledShaders)
+                GameMaster.GM.GetLevelLoader().StartPrecompileShaderProcess();
 
             // Apply Settings
             GameMaster.GM.GetSettings().LoadAndApply_AllGraphicsSettings();

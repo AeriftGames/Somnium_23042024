@@ -1,8 +1,8 @@
-[gd_resource type="Resource" load_steps=6 format=3 uid="uid://cje0dr0dnqklq"]
+[gd_resource type="Resource" load_steps=6 format=3 uid="uid://bwwmotyils2yn"]
 
-[ext_resource type="Script" path="res://testing_stuff_kaen/inventory_items/ItemSubViewportSetting.cs" id="1_pyfme"]
+[ext_resource type="Script" path="res://player/character_systems/inventory_menu/ItemSubViewportSetting.cs" id="1_pyfme"]
 [ext_resource type="ArrayMesh" uid="uid://fxl3wl4n5ew8" path="res://objects/battery/battery_mesh.tres" id="2_037vq"]
-[ext_resource type="Script" path="res://testing_stuff_kaen/inventory_items/InventoryItemData.cs" id="2_u51d7"]
+[ext_resource type="Script" path="res://player/character_systems/inventory_menu/InventoryItemData.cs" id="2_u51d7"]
 
 [sub_resource type="Resource" id="Resource_sh0wb"]
 script = ExtResource("1_pyfme")

@@ -44,6 +44,7 @@ func inspect(state: bool, item: Node, front: bool):
 
 
 func _show_description(state = false):
+	pass
 	item_name_label = self.get_node(\"/root/worldlevel/FPSCharacter_Interaction/Item_inspect/Control/item_name\")
 	item_description_label = self.get_node(\"/root/worldlevel/FPSCharacter_Interaction/Item_inspect/Control/item_description\")
 	if description_active == false and state == true:

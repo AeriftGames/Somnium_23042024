@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=3 format=3 uid="uid://cn42whl43barn"]
 
 [ext_resource type="PackedScene" uid="uid://b2qtqigx4uh6y" path="res://testing_oalar/floor.glb" id="1_wkvhj"]
 

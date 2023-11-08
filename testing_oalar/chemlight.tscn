@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dsqqgpmcwgjvg"]
 
-[ext_resource type="PackedScene" uid="uid://cfi5ijbmkg71t" path="res://chemlight.glb" id="1_7b6f6"]
+[ext_resource type="PackedScene" uid="uid://cfi5ijbmkg71t" path="res://testing_oalar/chemlight.glb" id="1_7b6f6"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vsih8"]
 emission_enabled = true
@@ -18,4 +18,5 @@ cast_shadow = 0
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0.797908, 0)
 light_color = Color(0.345098, 1, 0, 1)
 light_energy = 0.3
+light_bake_mode = 1
 omni_range = 1.4

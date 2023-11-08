@@ -71,6 +71,8 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
 	private bool _isInputEnable = true;
 	private bool _isMoveInputEnable = true;
 
+	private bool isAnyMoveInputNow = false;
+
 	private bool isFallingStart = false;
 
 	public float ActualMovementSpeed = 0.0f;
@@ -84,15 +86,19 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
 
 	private Control allHuds = null;
 
+	private bool successJump = false;
+
+	public float LerpSpeedCameraY = 0.0f;
+
 	public override void _Ready()
 	{
 		// pro dostupnost skrze gamemastera
 		GameMaster.GM.SetFPSCharacter(this);
 
-		HeadMain = GetNode<Node3D>("HeadMain");
-		HeadGimbalA = GetNode<Node3D>("HeadMain/HeadGimbalA");
-		HeadGimbalB = GetNode<Node3D>("HeadMain/HeadGimbalA/HeadGimbalB");
-		HeadHolderCamera = GetNode<Node3D>("HeadMain/HeadGimbalA/HeadGimbalB/HeadHolderCamera");
+		HeadMain = GetNode<Node3D>("%HeadMain");
+		HeadGimbalA = GetNode<Node3D>("%HeadGimbalA");
+		HeadGimbalB = GetNode<Node3D>("%HeadGimbalB");
+		HeadHolderCamera = GetNode<Node3D>("%HeadHolderCamera");
 		CharacterCollisionStand = GetNode<CollisionShape3D>("CharacterCollisionStand");
 		CharacterCollisionCrunch = GetNode<CollisionShape3D>("CharacterCollisionCrunch");
 		HeadStandPosition = GetNode<Node3D>("HeadStandPos");
@@ -161,8 +167,10 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
 		if (_isInputEnable &&
 			(direction != Vector3.Zero || Input.IsActionPressed("Jump") || Input.IsActionPressed("Crunch")))
 		{
-			// Up ?
-			if (Input.IsActionPressed("Jump"))
+			isAnyMoveInputNow = true;
+
+            // Up ?
+            if (Input.IsActionPressed("Jump"))
 				direction.Y = direction.Y + 1.0f;
 
 			// Down ?
@@ -174,7 +182,8 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
 		// Is not any input ?
 		else
 		{
-			velocity = velocity.Lerp(Vector3.Zero, DeccelerateSmoothStep * (float)delta);
+			isAnyMoveInputNow = false;
+            velocity = velocity.Lerp(Vector3.Zero, DeccelerateSmoothStep * (float)delta);
 		}
 
 		return velocity;
@@ -183,6 +192,7 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
 	// Update velocity for walk move and return this velocity
 	public Vector3 UpdateVelocityWalkMove(double delta)
 	{
+		if (objectCamera == null) return Vector3.Zero;
 
 		// Get input actions and calculate direction
 		Vector2 inputDir = Input.GetVector("moveLeft", "moveRight", "moveForward", "moveBackward");
@@ -195,8 +205,10 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
 		// Is any input ?
 		if (_isInputEnable && direction != Vector3.Zero)
 		{
-			// Is character grounded ?
-			if (IsOnFloor())
+			isAnyMoveInputNow = true;
+
+            // Is character grounded ?
+            if (IsOnFloor())
 			{
 
 				if(_ActualCharacterPosture == ECharacterPosture.Stand && _isSprint)
@@ -225,7 +237,7 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
 			}
 			else
 			{
-				if (CanMoveInFall)
+                if (CanMoveInFall)
 				{
 					// add additional move velocity and set limit length for final velocity
 					velocity += (direction * MoveSpeedInFall) * (float)delta;
@@ -236,8 +248,10 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
 		// Is not any input ?
 		else
 		{
-			// Is character on ground ?
-			if (IsOnFloor())
+            isAnyMoveInputNow = false;
+
+            // Is character on ground ?
+            if (IsOnFloor())
 			{
 				velocity = velocity.Lerp(Vector3.Zero, DeccelerateSmoothStep * (float)delta);
 			}
@@ -277,16 +291,23 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
 		if (_isInputEnable && CanJump && _ActualCharacterPosture == ECharacterPosture.Stand &&
 			IsOnFloor() && Input.IsActionJustPressed("Jump"))
 		{
-			velocity.Y = JumpVelocity;
-			EventJumping();  // override for add effects
-		}
+			EventJumping();  // base logic and override for add effects
+
+			// pokud vsechna logika i v override funckich probehla uspesne - aplikujeme samotny skok
+			if(successJump)
+			{
+                velocity.Y = JumpVelocity;
+				successJump = false;	// zresetujeme logiku pro uspesneho skoku
+            }
+        }
 
 		// Apply crunch
 		if (_isInputEnable && IsOnFloor() && Input.IsActionJustPressed("Crunch"))
 			CrunchToggle();
 
 		// want sprint ?
-		if (_isInputEnable && CanSprint && IsOnFloor() && Input.IsActionPressed("Sprint"))
+		if (_isInputEnable && CanSprint && IsOnFloor() && _ActualCharacterPosture == ECharacterPosture.Stand &&
+			Input.IsActionPressed("Sprint"))
 			_isSprint = true;
 		else
 			_isSprint = false;
@@ -438,6 +459,8 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
 		return _isInputEnable;
 	}
 
+	public bool GetIsAnyMoveInputNow() { return isAnyMoveInputNow; }
+
 	// Event when character start falling
 	public virtual void EventStartFalling()
 	{
@@ -478,8 +501,9 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
 	// Event when character press jump
 	public virtual void EventJumping()
 	{
-		//GameMaster.GM.Log.WriteLog(this, LogSystem.ELogMsgType.INFO, "character jumped");
-	}
+		successJump = true;
+        //GameMaster.GM.Log.WriteLog(this, LogSystem.ELogMsgType.INFO, "character jumped");
+    }
 
 	public virtual void EventMovingStopped()
 	{
@@ -498,9 +522,13 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
 		return CharacterCollisionCrunch.GlobalPosition;
 	}
 
+	public ECharacterPosture GetCharacterPosture() { return _ActualCharacterPosture; }
+
 	// Return by linked ObjectCamera->Camera
 	public Camera3D GetFPSCharacterCamera()
 	{
+		if (objectCamera == null) return null;
+
 		return objectCamera.Camera;
 	}
 
@@ -514,6 +542,8 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
 	{
 		return allHuds;
 	}
+
+	public bool GetIsSprint() { return _isSprint; }
 
 	public virtual void FreeAll()
 	{

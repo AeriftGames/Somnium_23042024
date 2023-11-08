@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://ccut2enp44q23"]
+
+[ext_resource type="PackedScene" uid="uid://dfhe0gwlfj0tv" path="res://placeholders/modular_level_builds/silo_level/glb_assets/wide_wallbound.glb" id="1_rpwsk"]
+[ext_resource type="Material" uid="uid://bw5c2g160gs3a" path="res://placeholders/modular_level_builds/silo_level/mat/silo_mat_v1/silo_trim01_v1_mat.tres" id="2_kaxkm"]
+
+[node name="wide_wallbound" instance=ExtResource("1_rpwsk")]
+
+[node name="wide_wallbound2" parent="." index="0"]
+material_override = ExtResource("2_kaxkm")

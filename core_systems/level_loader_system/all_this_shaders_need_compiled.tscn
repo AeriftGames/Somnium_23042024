@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=3]
+[gd_scene load_steps=59 format=3 uid="uid://xsv6scm5owwb"]
 
 [ext_resource type="Script" path="res://core_systems/level_loader_system/all_this_shaders_need_compiled.cs" id="1_o15x1"]
 [ext_resource type="Material" uid="uid://d08tc1iusbqxj" path="res://placeholders/modular_walls/mat/mat_ground1.tres" id="2_2s5p8"]
@@ -37,7 +37,7 @@
 [ext_resource type="PackedScene" uid="uid://cjo25lyaaci44" path="res://models/gas_tanks/small_gas_tank/gas_tank_small.tscn" id="49_qghd4"]
 [ext_resource type="PackedScene" uid="uid://d1nkc036kqahw" path="res://placeholders/modular_walls/cube_hole_big.tscn" id="49_xvu51"]
 [ext_resource type="PackedScene" uid="uid://cqc5yj3p080jq" path="res://placeholders/modular_walls/cube_hole_big_deep.tscn" id="50_aonqr"]
-[ext_resource type="PackedScene" uid="uid://nourevm361bt" path="res://objects/battery/batery_inventory_test.tscn" id="51_kh2n0"]
+[ext_resource type="PackedScene" path="res://objects/battery/batery_inventory_test.tscn" id="51_kh2n0"]
 [ext_resource type="PackedScene" uid="uid://dk1uu1iam0dha" path="res://placeholders/modular_walls/cube_hole_medium.tscn" id="51_ohgpc"]
 [ext_resource type="PackedScene" uid="uid://dc0mmunts8oay" path="res://placeholders/modular_walls/cube_hole_medium_wide.tscn" id="52_pboyt"]
 [ext_resource type="PackedScene" uid="uid://ck8mt4y4gfqmk" path="res://placeholders/modular_walls/ground_large.tscn" id="53_51vfv"]

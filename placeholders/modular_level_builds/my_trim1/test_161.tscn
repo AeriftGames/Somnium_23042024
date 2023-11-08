@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://cdj6x04hg2jt7"]
+
+[ext_resource type="PackedScene" uid="uid://dctgs07p6186" path="res://placeholders/modular_level_builds/placeholder/new_vnitrni_roh.tscn" id="1_muf58"]
+[ext_resource type="PackedScene" uid="uid://xf3vweg4x0x0" path="res://placeholders/modular_level_builds/placeholder/new_dvojty_pruchod.tscn" id="2_anwnv"]
+[ext_resource type="PackedScene" uid="uid://du8kx8eupk24v" path="res://placeholders/modular_level_builds/placeholder/new_venkovni_roh.tscn" id="3_6l8h2"]
+
+[node name="test16" type="Node3D"]
+
+[node name="new_vnitrni_roh" parent="." instance=ExtResource("1_muf58")]
+
+[node name="new_dvojty_pruchod" parent="." instance=ExtResource("2_anwnv")]
+
+[node name="new_venkovni_roh" parent="." instance=ExtResource("3_6l8h2")]

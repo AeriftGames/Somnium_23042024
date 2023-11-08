@@ -3,8 +3,8 @@
 [ext_resource type="Script" path="res://placeholders/PhysicsItems/physic_item_test.cs" id="1_tooom"]
 [ext_resource type="AudioStream" uid="uid://i5s8a8274bq6" path="res://audio/audio_streams/interactive_basic/36787__farbin__drop-cardboard-box.wav" id="2_y3rxp"]
 [ext_resource type="Script" path="res://core_systems/interactive_system/interactive_object.cs" id="3_nngnb"]
-[ext_resource type="PackedScene" uid="uid://culc1s4yyddk0" path="res://testing_stuff_kaen/inventory_items/InventoryItemDataNode.tscn" id="4_7pttu"]
-[ext_resource type="Resource" uid="uid://baj7vf7ihdsxo" path="res://testing_stuff_kaen/inventory_items/InventoryItemsPlaceholder/kostka_InventoryData.tres" id="5_nu1jr"]
+[ext_resource type="PackedScene" uid="uid://cp5th5lop1w7k" path="res://player/character_systems/inventory_menu/InventoryItemDataNode.tscn" id="4_bsbne"]
+[ext_resource type="Resource" uid="uid://xux4w3dc630i" path="res://testing_stuff_kaen/inventory_items/InventoryItemsPlaceholder/kostka_InventoryData.tres" id="5_nu1jr"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_l84ni"]
 friction = 0.3
@@ -68,7 +68,7 @@ metadata/_edit_lock_ = true
 
 [node name="AudioPlayer_PhysicEffects" type="AudioStreamPlayer3D" parent="."]
 
-[node name="InventoryItemDataNode" parent="." instance=ExtResource("4_7pttu")]
+[node name="InventoryItemDataNode" parent="." instance=ExtResource("4_bsbne")]
 Data = ExtResource("5_nu1jr")
 
 [connection signal="body_entered" from="interactive_object/StaticBody3D/interactive_object_area3D" to="interactive_object" method="_on_interactive_object_area_3d_body_entered"]

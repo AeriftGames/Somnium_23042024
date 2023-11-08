@@ -14,8 +14,8 @@ public partial class drawer_test : Node3D
 
 	[ExportGroupAttribute("Drawer: set param")]
 	[Export] public float mouseMotionSpeed = 0.003f;
-    [Export] public float gamepadMotionSpeed = 0.1f;
-    [Export] public float linearVelocityLimit = 2.0f;
+	[Export] public float gamepadMotionSpeed = 0.1f;
+	[Export] public float linearVelocityLimit = 2.0f;
 	[Export] public EGrabMoveType grabMoveType = EGrabMoveType.Add;
 
 	private interactive_object interactiveObject = null;
@@ -57,25 +57,25 @@ public partial class drawer_test : Node3D
 
 	public override void _PhysicsProcess(double delta)
 	{
-        // pokud jsme v GrabAction pustime update
-        if (isActionUpdate)
+		// pokud jsme v GrabAction pustime update
+		if (isActionUpdate)
 		{
-            /* Nacte hodnoty (axis right) gamepadu */
-            Vector2 JoyLook = new Vector2(Input.GetActionStrength("RightStick_Right") - Input.GetActionStrength("RightStick_Left"),
-                -(Input.GetActionStrength("RightStick_Up") - Input.GetActionStrength("RightStick_Down")));
+			/* Nacte hodnoty (axis right) gamepadu */
+			Vector2 JoyLook = new Vector2(Input.GetActionStrength("RightStick_Right") - Input.GetActionStrength("RightStick_Left"),
+				-(Input.GetActionStrength("RightStick_Up") - Input.GetActionStrength("RightStick_Down")));
 
-            /* Pokud JoyLook ma nejakou hodnotu (pohnuto packou na gamepadu) = gamepad jinak mys */
-            if (JoyLook.Length() > 0)
+			/* Pokud JoyLook ma nejakou hodnotu (pohnuto packou na gamepadu) = gamepad jinak mys */
+			if (JoyLook.Length() > 0)
 			{
-                mouseUpdated = true;
+				mouseUpdated = true;
 				motionSpeed = gamepadMotionSpeed;
-                UpdateDrawer(JoyLook, delta);
-            }
+				UpdateDrawer(JoyLook, delta);
+			}
 			else
 			{
-                motionSpeed = mouseMotionSpeed;
-                UpdateDrawer(motionMouse, delta);
-            }
+				motionSpeed = mouseMotionSpeed;
+				UpdateDrawer(motionMouse, delta);
+			}
 		}
 
 		// Reset for zero

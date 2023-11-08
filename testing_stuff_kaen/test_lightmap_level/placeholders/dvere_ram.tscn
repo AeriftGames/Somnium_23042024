@@ -1,9 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://umsffrq52vxp"]
-
-[ext_resource type="PackedScene" uid="uid://c2v1t4h2cbkxn" path="res://testing_stuff_kaen/test_lightmap_level/models/dvere_ram.glb" id="1_s6us7"]
-[ext_resource type="Material" uid="uid://bn8sxi7cy42vo" path="res://testing_stuff_kaen/my_trim1/trim_floor_3_mat.tres" id="2_bl42v"]
-
-[node name="dvere_ram" instance=ExtResource("1_s6us7")]
-
-[node name="dvere_ram2" parent="." index="0"]
-material_override = ExtResource("2_bl42v")

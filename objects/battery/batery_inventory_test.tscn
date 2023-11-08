@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://nourevm361bt"]
+[gd_scene load_steps=14 format=3 uid="uid://dq334ls6wbb51"]
 
 [ext_resource type="PackedScene" uid="uid://byqahiy2lfr15" path="res://objects/battery/batery_new.glb" id="1_okfpk"]
 [ext_resource type="Script" path="res://core_systems/item_pickup/item_pickup.gd" id="2_2v377"]
@@ -6,9 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://dbnevtbu1g7uy" path="res://core_systems/interactive_system/interactive_object.tscn" id="5_4f1pf"]
 [ext_resource type="ArrayMesh" uid="uid://fxl3wl4n5ew8" path="res://objects/battery/battery_mesh.tres" id="5_5ybvn"]
 [ext_resource type="Script" path="res://objects/battery/battery_use.gd" id="6_6r87c"]
-[ext_resource type="PackedScene" uid="uid://culc1s4yyddk0" path="res://testing_stuff_kaen/inventory_items/InventoryItemDataNode.tscn" id="7_svdmm"]
-[ext_resource type="Script" path="res://testing_stuff_kaen/inventory_items/ItemSubViewportSetting.cs" id="8_1rpf8"]
-[ext_resource type="Script" path="res://testing_stuff_kaen/inventory_items/InventoryItemData.cs" id="8_1ry8h"]
+[ext_resource type="PackedScene" uid="uid://cp5th5lop1w7k" path="res://player/character_systems/inventory_menu/InventoryItemDataNode.tscn" id="7_svdmm"]
+[ext_resource type="Script" path="res://player/character_systems/inventory_menu/ItemSubViewportSetting.cs" id="8_1rpf8"]
+[ext_resource type="Script" path="res://player/character_systems/inventory_menu/InventoryItemData.cs" id="8_1ry8h"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_tvs6f"]
 size = Vector3(0.617604, 1.02957, 0.4)

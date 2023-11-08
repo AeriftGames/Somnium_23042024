@@ -27,14 +27,21 @@ disabled = true
 metadata/_edit_lock_ = true
 
 [node name="HeadMain" type="Node3D" parent="."]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 metadata/_edit_lock_ = true
 
 [node name="HeadGimbalA" type="Node3D" parent="HeadMain"]
+unique_name_in_owner = true
+metadata/_edit_lock_ = true
 
 [node name="HeadGimbalB" type="Node3D" parent="HeadMain/HeadGimbalA"]
+unique_name_in_owner = true
+metadata/_edit_lock_ = true
 
 [node name="HeadHolderCamera" type="Node3D" parent="HeadMain/HeadGimbalA/HeadGimbalB"]
+unique_name_in_owner = true
+metadata/_edit_lock_ = true
 
 [node name="HeadStandPos" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
@@ -52,3 +59,4 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+metadata/_edit_lock_ = true

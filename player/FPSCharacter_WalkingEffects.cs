@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using static all_material_surfaces;
 
 /*
- * *** FPSCharacter_WalkingEffects(0.1) ***
+ * *** FPSCharacter_WalkingEffects(0.2) ***
  * 
  * - this class is inheret from FPSCharacter_WalkingEffects and provide extra walking effects
  * - simulation footsteps
@@ -16,7 +16,6 @@ using static all_material_surfaces;
  * - jumping sound effect
  * TODO - fix small amount walking/stop no sound - it is weird some times
  * TODO - fix (change) volume,pitch etc footsteps and velocity bobhead when player moves crouched
- * TODO - fix landing/inAir/falling/onGround detect system
 */
 public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
 {
@@ -25,20 +24,22 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
     AudioStreamPlayer AudioStreamPlayerCrouching = null;
 
     [ExportGroupAttribute("Footsteps Settings")]
-    [Export] public float FootStepLength = 1.25f;
-    [Export] public float WalkCameraLerpHeight = 0.12f;
-    [Export] public float RunCameraLerpHeight = 0.25f;
-    [Export] public float lerpFootstepSpeedModifier = 2.0f;
+    [Export] public float FootStepLengthInWalk = 1.2f;
+    [Export] public float FootStepLengthInSprint = 1.25f;
+    [Export] public float FootStepLengthInCrouch = 0.85f;
+
     [Export] public Array<AudioStream> FootstepSounds;
-    [Export] public float FootstepsVolumeDB = -20.0f;
-    [Export] public float FootstepsAudioPitch = 1.0f;
+    [Export] public float FootstepsVolumeDBInWalk = -2.0f;
+    [Export] public float FootstepsVolumeDBInSprint = 1.0f;
+    [Export] public float FootstepsVolumeDBInCrouch = -7.0f;
+    [Export] public float FootstepsAudioPitch = 0.75f;
 
     [ExportGroupAttribute("Landing Settings")]
     [Export] public float LandCameraLerpHeight = -0.4f;
     [Export] public float LandCameraLerpRotation = -0.1f;
     [Export] public float lerpLandingSpeedModifier = 3.0f;
 
-    [Export] public float MiniHeightForLandingEffect = 0.3f;
+    [Export] public float MiniHeightForLandingEffect = 0.35f;
     [Export] public float SmallHeightForLandingEffect = 1.2f;
     [Export] public float MediumHeightForLandingEffect = 2.5f;
     [Export] public float HighHeightForLandingEffect = 4.0f;    // For death is more than high
@@ -81,7 +82,6 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
 
     private bool FootstepNow = false;
     private bool FootstepRight = false;
-    private float lerpHeadWalkY = 0.0f;
 
     Godot.Timer landing_timer = null;
     private float lerpHeadLandY = 0.0f;
@@ -140,28 +140,13 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
         GameMaster.GM.GetDebugHud().CustomLabelUpdateText(0, this, "MoveSpeed: " + a);
         GameMaster.GM.GetDebugHud().CustomLabelUpdateText(1, this, "Position: " + GlobalPosition);
 
-        /*
-        GameMaster.GM.Log.WriteLog(this, LogSystem.ELogMsgType.INFO, "MoveSpeed: " +
-            Mathf.Snapped(ActualMovementSpeed, 0.1f));*/
-
         CalculateFootSteps((float)delta);
-
-        UpdateWalkHeadBobbing((float)delta);
         UpdateLandingHeadBobbing((float)delta);
-
-        UpdateLeaning((float)delta);
     }
 
     public override void EventLanding()
     {
         base.EventLanding();
-        /*
-        PlayRandomSound(AudioStreamPlayerJumpLand, smallHeightLandingSounds, LandingVolumeDB, 0.5f);
-
-        lerpHeadLandY = LandCameraLerpHeight;
-        lerpHeadLandRotX = LandCameraLerpRotation;
-        landing_timer.Start();
-        */
     }
 
     public void FinishLandingEffect()
@@ -182,52 +167,98 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
 
         // play sounds
         UniversalFunctions.PlayRandomSound(AudioStreamPlayerJumpLand, JumpingSounds, JumpingVolumeDB, PitchScale);
+
+        //Apply camera shake
+        GetObjectCamera().ShakeCameraRotation(0.3f, 0.1f, 1.0f, 1.0f);
     }
 
     private void CalculateFootSteps(float delta)
     {
-        float halfFootStepLength = FootStepLength / 2;
+        InventoryObjectCamera a = GetObjectCamera() as InventoryObjectCamera;
 
+        float halfFootStepLength = FootStepLengthInWalk / 2;
         float lastHalfFootStepDistance = 0.0f;
 
-        if (IsOnFloor())
+        if (GetCharacterPosture() == ECharacterPosture.Stand)
+        {
+            if (GetIsSprint())
+                halfFootStepLength = FootStepLengthInSprint / 2;
+            else
+                halfFootStepLength = FootStepLengthInWalk / 2;
+        }
+        else
+            halfFootStepLength = FootStepLengthInCrouch / 2;
+
+        // pro normal footsteps
+        if(IsOnFloor())
             lastHalfFootStepDistance = GlobalPosition.DistanceTo(_LastHalfFootStepPosition);
+
+        // pro first footstep
+        if (IsOnFloor() && ActualMovementSpeed <= 5.0f && ActualMovementSpeed > 0.2f &&
+            !a.GetHeadBobSystem().GetIsActualStopMovement() && GetIsAnyMoveInputNow())
+        {
+            _LastHalfFootStepPosition = GlobalPosition;
+            halfFootStepLength = 0.02f;
+        }
+
+        // je dostatecna vzdalenost pro provedeni footstepu?
         if (lastHalfFootStepDistance >= halfFootStepLength)
         {
             // half footstep change (foot in air - foot on ground)
             FootstepNow = !FootstepNow;
-
             // if any footstep now ? if false = foot is in air
             if (FootstepNow)
             {
                 // change foots (right<->left)
                 FootstepRight = !FootstepRight;
 
-                // Detect materal surface name and play specific audio set of footsteps
-                all_material_surfaces.EMaterialSurface materialSurface = 
-                    AllMaterialSurfaces.GetMaterialSurfaceFromGroup(DetectSurfaceMaterialOfFloor());
-
-                //GD.Print(materialSurface);
-
-                if (materialSurface != all_material_surfaces.EMaterialSurface.None)
+                // offset volume db
+                float newAddVolumeOffset = 0;
+                if (GetCharacterPosture() == ECharacterPosture.Stand)
                 {
-                    // Play random footsteps sound by material surface
-                    UniversalFunctions.PlayRandomSound(
-                        AudioStreamPlayerFootsteps,
-                        AllMaterialSurfaces.GetAudioArray(
-                            materialSurface, all_material_surfaces.EMaterialSurfaceAudio.Footstep),
-                        AllMaterialSurfaces.GetMaterialSurfaceAudioVolumeDB(
-                            materialSurface, all_material_surfaces.EMaterialSurfaceAudio.Footstep),
-                        AllMaterialSurfaces.GetMaterialSurfaceAudioPitch(
-                            materialSurface, all_material_surfaces.EMaterialSurfaceAudio.Footstep));
+                    if (GetIsSprint())
+                        newAddVolumeOffset = FootstepsVolumeDBInSprint;
+                    else
+                        newAddVolumeOffset = FootstepsVolumeDBInWalk;
                 }
+                else
+                    newAddVolumeOffset = FootstepsVolumeDBInCrouch;
 
+                // Play Footstep audio
+                PlayFootstepSound(newAddVolumeOffset);
             }
 
             _LastHalfFootStepPosition = GlobalPosition;
             //GD.Print("new footstep");
         }
     }
+
+    public void PlayFootstepSound(float addOffsetVolume = 0.0f,float addOffsetPitch = 0.0f)
+    {
+        // Detect materal surface name and play specific audio set of footsteps
+        all_material_surfaces.EMaterialSurface materialSurface =
+            AllMaterialSurfaces.GetMaterialSurfaceFromGroup(DetectSurfaceMaterialOfFloor());
+
+        //GD.Print(materialSurface);
+
+        if (materialSurface != all_material_surfaces.EMaterialSurface.None)
+        {
+            // Play random footsteps sound by material surface
+            UniversalFunctions.PlayRandomSound(
+                AudioStreamPlayerFootsteps,
+                AllMaterialSurfaces.GetAudioArray(
+                    materialSurface, all_material_surfaces.EMaterialSurfaceAudio.Footstep),
+                AllMaterialSurfaces.GetMaterialSurfaceAudioVolumeDB(
+                    materialSurface, all_material_surfaces.EMaterialSurfaceAudio.Footstep)+addOffsetVolume,
+                AllMaterialSurfaces.GetMaterialSurfaceAudioPitch(
+                    materialSurface, all_material_surfaces.EMaterialSurfaceAudio.Footstep)+addOffsetPitch);
+        }
+    }
+
+    public bool GetActualStep() { return FootstepRight; }
+    public void SetActualStep(bool newValue){ FootstepRight = newValue; }
+    public bool GetFootstepNow() { return FootstepNow; }
+    public void SetFootstepNow(bool newValue) { FootstepNow = newValue; }
 
     private string DetectSurfaceMaterialOfFloor()
     {
@@ -253,45 +284,16 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
         return "none";
     }
 
-    private void UpdateWalkHeadBobbing(float delta)
-    {
-        if (FootstepNow)
-        {
-            // foot touch ground now
-            if (_isSprint)
-                lerpHeadWalkY = -RunCameraLerpHeight;
-            else
-                lerpHeadWalkY = -WalkCameraLerpHeight;
-        }
-        else
-        {
-            // foot is above to ground
-            if (_isSprint)
-                lerpHeadWalkY = RunCameraLerpHeight;
-            else
-                lerpHeadWalkY = WalkCameraLerpHeight;
-        }
-
-        // if actualmove is smaller than testing value, centered headlerpY and speedUP lerp to normal 
-        if (ActualMovementSpeed <= 0.2f)
-        {
-            lerpHeadWalkY = 0.0f;
-            lerpFootstepSpeedModifier = 3.0f;
-        }
-        
-        // Lerp pro head bobbing walk Y
-        HeadGimbalA.Position = HeadGimbalA.Position.Lerp(
-            new Vector3(0, lerpHeadWalkY, 0), lerpFootstepSpeedModifier * delta);
-    }
-
     private void UpdateLandingHeadBobbing(float delta)
     {
         // Lerp pro landing pos
         HeadGimbalB.Position = HeadGimbalB.Position.Lerp(
             new Vector3(0, lerpHeadLandY, 0), lerpLandingSpeedModifier * delta);
 
-        
+
         // Lerp pro landing rot
+        if (objectCamera == null) return;
+
         objectCamera.GimbalLand.Rotation = objectCamera.GimbalLand.Rotation.Lerp(
             new Vector3(lerpHeadLandRotX, 0, 0), lerpLandingSpeedModifier * delta);
     }
@@ -301,15 +303,16 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
     {
         base.EventLandingEffect(heightfall);
 
-        float lerpHeight = -0.4f;
-        float lerpRot = -0.1f;
-        float speedmod = 3.0f;
-
+        float lerpHeight = 0;//-0.4f;
+        float lerpRot = 0;//-0.1f;
+        float speedmod = 0;//3.0f;
+        
         //Apply camera shake
-        GetObjectCamera().ShakeCameraRotation(0.2f,0.2f,1.0f,1.0f);
+        //GetObjectCamera().ShakeCameraRotation(0.2f,0.2f,1.0f,1.0f);
 
         if (heightfall < 0.15f)
         {
+            /*
             // very mini
             GameMaster.GM.Log.WriteLog(this, LogSystem.ELogMsgType.INFO, "(very mini) noticable land effect");
 
@@ -330,7 +333,7 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
 
             lerpHeight = -0.1f;
             lerpRot = -0.025f;
-
+            */
         }
         else if (heightfall <= MiniHeightForLandingEffect)
         {
@@ -486,11 +489,6 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
 
         // DisableInputs for character
         SetInputEnable(false);
-    }
-
-    public void UpdateLeaning(double delta)
-    {
-
     }
 
     // callable when change character posture (crunch,uncrouch=stand)

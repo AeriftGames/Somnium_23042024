@@ -47,7 +47,7 @@ public partial class interactive_object : Node3D
 
         if (body.IsClass("CharacterBody3D"))
 		{
-			GameMaster.GM.Log.WriteLog(this, LogSystem.ELogMsgType.INFO, "Player is entered to area");
+			//GameMaster.GM.Log.WriteLog(this, LogSystem.ELogMsgType.INFO, "Player is entered to area");
 			isPlayerInRange = true;
 		}
 	}
@@ -58,7 +58,7 @@ public partial class interactive_object : Node3D
 
         if (body.IsClass("CharacterBody3D"))
 		{
-            GameMaster.GM.Log.WriteLog(this, LogSystem.ELogMsgType.INFO, "Player is exited area");
+            //GameMaster.GM.Log.WriteLog(this, LogSystem.ELogMsgType.INFO, "Player is exited area");
 			isPlayerInRange = false;
 		}
 	}

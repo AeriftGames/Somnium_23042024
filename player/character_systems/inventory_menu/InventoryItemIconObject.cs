@@ -1,8 +1,11 @@
 using Godot;
 using System;
 
+[Tool]
 public partial class InventoryItemIconObject : Panel
 {
+	[Export] public bool _showLabelID { get {return showLabelID;} set {SetShowLabelID(value); } }
+	private bool showLabelID = false;
 	public void EnableItemData(InventoryItemData newInventoryItemData)
 	{
 		GetNode<Label>("ItemName").Text = newInventoryItemData.itemName;
@@ -24,5 +27,11 @@ public partial class InventoryItemIconObject : Panel
 		GetNode<Label>("ItemName").Text = "";
         Visible = false;
 		GetNode<InventoryItemPreview>("SubViewportContainer").Deactivate();
+    }
+
+	private void SetShowLabelID(bool newValue)
+	{
+		showLabelID = newValue;
+        GetNode<Label>("LabelID").Visible = newValue;
     }
 }

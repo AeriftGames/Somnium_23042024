@@ -1,7 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://c234nkumyct80"]
+[gd_scene load_steps=5 format=3 uid="uid://desymkwc53rrf"]
 
 [ext_resource type="Script" path="res://player/character_systems/inventory_menu/InventoryItemIconObject.cs" id="1_htkfp"]
-[ext_resource type="Script" path="res://player/character_systems/InventoryItemPreview.cs" id="2_hsjhn"]
+[ext_resource type="Script" path="res://player/character_systems/inventory_menu/InventoryItemPreview.cs" id="2_hsjhn"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0x23u"]
 bg_color = Color(0, 0, 0, 0.156863)
@@ -74,6 +74,7 @@ light_indirect_energy = 2.0
 omni_range = 15.0
 
 [node name="LabelID" type="Label" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

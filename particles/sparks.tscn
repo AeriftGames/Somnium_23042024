@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3]
+[gd_scene load_steps=7 format=3 uid="uid://bm8yf41336ja"]
 
 [ext_resource type="Texture2D" uid="uid://275vb0bnbp3r" path="res://particles/Spark.png" id="1_dyhhf"]
 
@@ -15,9 +15,9 @@ emission_sphere_radius = 0.6
 direction = Vector3(0, 1, 0)
 spread = 40.0
 flatness = 0.24
-gravity = Vector3(0, -1, 0)
 initial_velocity_min = 1.0
 initial_velocity_max = 1.0
+gravity = Vector3(0, -1, 0)
 linear_accel_min = 1.0
 linear_accel_max = 5.0
 tangential_accel_min = 1.0

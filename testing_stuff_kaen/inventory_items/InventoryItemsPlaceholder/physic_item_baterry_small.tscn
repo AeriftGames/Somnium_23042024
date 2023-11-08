@@ -4,8 +4,8 @@
 [ext_resource type="AudioStream" uid="uid://i5s8a8274bq6" path="res://audio/audio_streams/interactive_basic/36787__farbin__drop-cardboard-box.wav" id="2_uwmj5"]
 [ext_resource type="ArrayMesh" uid="uid://fxl3wl4n5ew8" path="res://objects/battery/battery_mesh.tres" id="3_5lkx0"]
 [ext_resource type="Script" path="res://core_systems/interactive_system/interactive_object.cs" id="3_wdg6s"]
-[ext_resource type="PackedScene" uid="uid://culc1s4yyddk0" path="res://testing_stuff_kaen/inventory_items/InventoryItemDataNode.tscn" id="4_150nw"]
-[ext_resource type="Resource" uid="uid://cje0dr0dnqklq" path="res://testing_stuff_kaen/inventory_items/InventoryItemsPlaceholder/batery_InventoryData.tres" id="6_y4im4"]
+[ext_resource type="PackedScene" uid="uid://cp5th5lop1w7k" path="res://player/character_systems/inventory_menu/InventoryItemDataNode.tscn" id="5_1qps1"]
+[ext_resource type="Resource" uid="uid://bwwmotyils2yn" path="res://testing_stuff_kaen/inventory_items/InventoryItemsPlaceholder/batery_InventoryData.tres" id="6_y4im4"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_l84ni"]
 friction = 0.3
@@ -71,7 +71,7 @@ metadata/_edit_lock_ = true
 
 [node name="AudioPlayer_PhysicEffects" type="AudioStreamPlayer3D" parent="."]
 
-[node name="InventoryItemDataNode" parent="." instance=ExtResource("4_150nw")]
+[node name="InventoryItemDataNode" parent="." instance=ExtResource("5_1qps1")]
 Data = ExtResource("6_y4im4")
 
 [connection signal="body_entered" from="interactive_object/StaticBody3D/interactive_object_area3D" to="interactive_object" method="_on_interactive_object_area_3d_body_entered"]

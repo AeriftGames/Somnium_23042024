@@ -1,9 +1,25 @@
-[gd_scene load_steps=2 format=3 uid="uid://bfjmbldwhs02n"]
+[gd_scene load_steps=6 format=3 uid="uid://bfjmbldwhs02n"]
 
 [ext_resource type="Script" path="res://core_systems/GameMaster.cs" id="1_mjdjb"]
+[ext_resource type="Script" path="res://core_systems/level_loader_system/CLevelLoader.cs" id="2_dgyoo"]
+[ext_resource type="Script" path="res://core_systems/benchmark_system/CBenchmarkSystem.cs" id="2_ketqv"]
+[ext_resource type="Script" path="res://core_systems/MasterSignals.cs" id="2_xs61v"]
+[ext_resource type="PackedScene" uid="uid://tr2dxfjg7wdl" path="res://core_systems/level_loader_system/loading_hud.tscn" id="4_di1bu"]
 
 [node name="GameMaster" type="Node"]
 script = ExtResource("1_mjdjb")
+
+[node name="MasterSignals" type="Node" parent="."]
+script = ExtResource("2_xs61v")
+
+[node name="LevelLoader" type="Node" parent="."]
+script = ExtResource("2_dgyoo")
+
+[node name="BenchmarkSystem" type="Node" parent="."]
+script = ExtResource("2_ketqv")
+EnableLowest = false
+EnableLow = false
+EnableHighest = false
 
 [node name="BlackScreen" type="Control" parent="."]
 layout_mode = 3
@@ -13,6 +29,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+metadata/_edit_lock_ = true
 
 [node name="ColorRect" type="ColorRect" parent="BlackScreen"]
 layout_mode = 0
@@ -21,3 +38,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
+
+[node name="LoadingHud" parent="." instance=ExtResource("4_di1bu")]
+visible = false

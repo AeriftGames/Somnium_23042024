@@ -11,6 +11,7 @@ public partial class ObjectCamera : Node3D
 	public Node3D NodeRotX = null;
 	public Node3D NodeLean = null;
 	public Node3D ShakeNode = null;
+	public Node3D DangerShake = null;
 	public Camera3D Camera = null;
 	public Marker3D HandGrabMarker;
 	public Generic6DofJoint3D HandGrabJoint = null;
@@ -53,28 +54,28 @@ public partial class ObjectCamera : Node3D
 
     public override void _Ready()
 	{
-		NodeRotY = GetNode<Node3D>("NodeRotY");
-		GimbalLand = GetNode<Node3D>("NodeRotY/GimbalLand");
-		NodeRotX = GetNode<Node3D>("NodeRotY/GimbalLand/NodeRotX");
-		NodeLean = GetNode<Node3D>("NodeRotY/GimbalLand/NodeRotX/NodeLean");
-		ShakeNode = GetNode<Node3D>("NodeRotY/GimbalLand/NodeRotX/NodeLean/ShakeNode");
-        Camera = GetNode<Camera3D>("NodeRotY/GimbalLand/NodeRotX/NodeLean/ShakeNode/Camera");
-		HandGrabMarker = GetNode<Marker3D>("NodeRotY/GimbalLand/NodeRotX/NodeLean/ShakeNode/Camera/HandGrabMarker");
-		HandGrabJoint = GetNode<Generic6DofJoint3D>("NodeRotY/GimbalLand/NodeRotX/NodeLean/ShakeNode/Camera/HandGrabJoint");
-		HandStaticBody = GetNode<StaticBody3D>("NodeRotY/GimbalLand/NodeRotX/" +
-            "NodeLean/ShakeNode/Camera/HandGrabMarker/HandStaticBody");
+		NodeRotY = GetNode<Node3D>("%NodeRotY");
+		GimbalLand = GetNode<Node3D>("%GimbalLand");
+		NodeRotX = GetNode<Node3D>("%NodeRotX");
+		NodeLean = GetNode<Node3D>("%NodeLean");
+		ShakeNode = GetNode<Node3D>("%ShakeNode");
+		DangerShake = GetNode<Node3D>("%HeadDangerShake");
+        Camera = GetNode<Camera3D>("%Camera");
+		HandGrabMarker = GetNode<Marker3D>("%HandGrabMarker");
+		HandGrabJoint = GetNode<Generic6DofJoint3D>("%HandGrabJoint");
+		HandStaticBody = GetNode<StaticBody3D>("%HandStaticBody");
 
 		//lean
-		LerpPos_LeanCenter = GetNode<Node3D>("NodeRotY/GimbalLand/NodeRotX/LerpPos_LeanCenter");
-		LerpPos_LeanLeft = GetNode<Node3D>("NodeRotY/GimbalLand/NodeRotX/LerpPos_LeanLeft");
-		LerpPos_LeanRight = GetNode<Node3D>("NodeRotY/GimbalLand/NodeRotX/LerpPos_LeanRight");
+		LerpPos_LeanCenter = GetNode<Node3D>("%LerpPos_LeanCenter");
+		LerpPos_LeanLeft = GetNode<Node3D>("%LerpPos_LeanLeft");
+		LerpPos_LeanRight = GetNode<Node3D>("%LerpPos_LeanRight");
 
 		//Zoom
 		neededZoomValue = Camera.Fov;
 		LerpObject_ObjectCameraPos.EnableUpdate(true);
 		LerpObject_CameraZoom.EnableUpdate(true);
 		LerpObject_CameraZoom.SetTarget(65.0f);     // Initial setup = normal fov
-		lookingPoint = GetNode<Node3D>("NodeRotY/GimbalLand/NodeRotX/NodeLean/ShakeNode/CameraLookPoint");
+		lookingPoint = GetNode<Node3D>("%CameraLookPoint");
 		LerpObject_CameraZoomToObject.EnableUpdate(true);
 
 		// povoli lerping k characteru
@@ -89,6 +90,8 @@ public partial class ObjectCamera : Node3D
 	{
 		ownerCharacter = newFPSCharacter_BasicMoving;
 	}
+
+	public FPSCharacter_BasicMoving GetCharacterOwner() { return ownerCharacter; }
 
 	public override void _Process(double delta)
 	{

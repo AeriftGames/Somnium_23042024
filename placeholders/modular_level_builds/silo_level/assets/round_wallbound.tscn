@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://3bb0r6tvk4wy"]
+
+[ext_resource type="PackedScene" uid="uid://g8gasoa104ol" path="res://placeholders/modular_level_builds/silo_level/glb_assets/round_wallbound.glb" id="1_pvgtm"]
+[ext_resource type="Material" uid="uid://bw5c2g160gs3a" path="res://placeholders/modular_level_builds/silo_level/mat/silo_mat_v1/silo_trim01_v1_mat.tres" id="2_1n5vx"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_wq5vu"]
+points = PackedVector3Array(-0.454569, 0.754185, 0.185421, 1.31331, 1.3002, -0.280391, 1.00418, 1.3536, -0.0545675, 1.4206, -0.938525, -0.149669, -1.27766, -1.02378, -0.530075, -1.42035, 1.40131, -0.482413, 1.2422, -1.02378, -0.530075, -1.08194, -0.921052, 0.0244207, 0.427901, -0.888048, 0.188156, 1.2422, 0.925602, -0.530075, -0.992282, 1.3536, -0.0545675, -1.44281, 0.890319, -0.194836, 0.646336, 0.808048, 0.149316, 1.38041, 1.35724, -0.424532, -1.44142, -0.964604, -0.285325, 0.195706, 1.3536, 0.0880477, 1.41833, 0.828633, -0.149669, -1.27766, 0.925602, -0.530075, -0.454569, -0.87933, 0.185421, -0.975009, 0.807315, 0.0636293, 0.958712, -0.915803, 0.06688, 1.47581, -0.982523, -0.241535, 0.346643, 0.849196, 0.191291, 1.17289, 0.772309, -0.0200163, -1.39418, -0.926962, -0.149669, -0.279132, 1.3536, 0.0880477, -1.37269, 1.3536, -0.244696, 1.46492, 0.895262, -0.195226, -1.08187, 0.819686, 0.0244098, -0.669822, -0.888664, 0.146064, -0.335563, 0.850785, 0.192111, 0.671438, 1.3536, 0.0405341)
+
+[node name="round_wallbound" instance=ExtResource("1_pvgtm")]
+
+[node name="round_wallbound2" parent="." index="0"]
+material_override = ExtResource("2_1n5vx")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="round_wallbound2" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="round_wallbound2/StaticBody3D" index="0"]
+shape = SubResource("ConvexPolygonShape3D_wq5vu")
