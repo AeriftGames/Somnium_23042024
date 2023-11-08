@@ -4,6 +4,5 @@
 
 [node name="StairsNode" type="Node3D"]
 script = ExtResource("1_h8mn2")
-NumStairs = 3
 
-[node name="AllStairsNode" type="Node3D" parent="."]
+[node name="AllStairsNodeT" type="Node3D" parent="."]
