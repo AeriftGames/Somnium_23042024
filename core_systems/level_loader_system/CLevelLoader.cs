@@ -2,6 +2,7 @@ using Godot;
 using Godot.Collections;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection.Emit;
@@ -11,7 +12,7 @@ public partial class CLevelLoader : Node
 {
     public bool isPrecompiledShaders = false;
 
-    public string actualLevelName = (string)ProjectSettings.GetSetting("application/run/main_scene");
+    private string actualLevelName = (string)ProjectSettings.GetSetting("application/run/main_scene");
 
     public string loadingScenePath ="";
     Godot.Collections.Array progress;
@@ -224,4 +225,6 @@ public partial class CLevelLoader : Node
 
         return level;
     }
+
+    public string GetActualLevelName() { return actualLevelName; }
 }

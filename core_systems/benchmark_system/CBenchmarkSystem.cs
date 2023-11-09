@@ -1,7 +1,9 @@
 using Godot;
+using Godot.Collections;
 using Microsoft.VisualBasic;
 using System;
 using System.Diagnostics;
+using System.Diagnostics.Contracts;
 using System.Threading.Tasks;
 using static LevelDataSettings;
 
@@ -18,13 +20,35 @@ public partial class CBenchmarkSystem : Node
     [Export] public bool EnableHigh = true;     //3
     [Export] public bool EnableHighest = true;  //4
 
+    [ExportGroup("BenchmarkOther")]
+    [Export] public float AddFpsDataTimer = 1.0f;
+
     private int ActualBenchmarkQualityLevel = -1;
     public int NeedBenchmarkQualityLevel = -1;
     public bool BenchmarkEnd = false;
 
+    //
+    private Array<int> AllFpsData = new Array<int>();
+
+    private BenchmarkScoreBoard benchmarkScoreBoard;
+    private BenchmarkMenuAndFpsStats benchmarkMenuAndFpsStats;
+
     public override void _Ready()
     {
         base._Ready();
+
+        benchmarkScoreBoard = GetNode<BenchmarkScoreBoard>("BenchmarkScoreBoard");
+        benchmarkMenuAndFpsStats = GetNode<BenchmarkMenuAndFpsStats>("BenchmarkMenuAndFpsStats");
+
+        PostReady();
+    }
+
+    public async void PostReady()
+    {
+        //await ToSignal(GameMaster.GM.GetMasterSignals(), MasterSignals.SignalName.GameStart);
+        await Task.Delay(1000);
+
+        GameMaster.GM.GetMasterSignals().BenchmarkFinishPresset += () => FinishBenchmarkPresset();
     }
 
     public int GetActualQualityBenchmark(){ return ActualBenchmarkQualityLevel; }
@@ -81,15 +105,19 @@ public partial class CBenchmarkSystem : Node
         }
     }
 
-    public void NextBenchmarkQuality()
+    public async void NextBenchmarkQuality()
     {
-        //await Task.Delay(5000);
+        await Task.Delay(5000);
 
-        LoadBenchmarLevelInQuality("res://levels/worldlevel_demo_extend_benchmark.tscn",
-            "benchmark_level_1", NeedBenchmarkQualityLevel);
+        benchmarkScoreBoard.SetVisibleForPlayer(false);
+        AllFpsData.Clear();
+
+        LoadBenchmarLevelInQuality(GameMaster.GM.GetLevelLoader().GetActualLevelScene().SceneFilePath,
+            GameMaster.GM.GetLevelLoader().GetActualLevelName(), NeedBenchmarkQualityLevel);
     }
 
-    public async void LoadBenchmarLevelInQuality(string newLevelScenePath, string newLevelName,int newQualityPresset)
+    public async void LoadBenchmarLevelInQuality(string newLevelScenePath,
+        string newLevelName,int newQualityPresset)
     {
         // normalni process pro (thread) nacteni noveho levelu vcetne loading baru atd
         GameMaster.GM.GetLevelLoader().LoadNewWorldLevel(newLevelScenePath, newLevelName);
@@ -110,11 +138,57 @@ public partial class CBenchmarkSystem : Node
             false,true);
     }
 
-    public override void _Process(double delta)
+    public void FinishBenchmarkPresset()
+    {
+        // spocitame info fps - avg min max
+        UniversalFunctions.SFpsInfo FpsInfo = UniversalFunctions.CalculateFpsInfo(AllFpsData);
+
+        // vypsani vysledku ve scoreboard klientovi
+        benchmarkScoreBoard.SetBenchmarkScoreData(GameMaster.GM.GetBuild(),
+            GameMaster.GM.GetLevelLoader().GetActualLevelName(),
+            UniversalFunctions.GetQualityLevelText(ActualBenchmarkQualityLevel),
+            FpsInfo.avgFps.ToString(), FpsInfo.minFps.ToString(), FpsInfo.maxFps.ToString());
+        benchmarkScoreBoard.SetVisibleForPlayer(true);
+
+        // zkouska poslani dat oalovi
+        SendBenchmarkScoreData(GameMaster.GM.GetBuild(),
+            GameMaster.GM.GetLevelLoader().GetActualLevelName(),
+            FpsInfo.avgFps, FpsInfo.minFps, FpsInfo.maxFps);
+
+        if (BenchmarkEnd == true)
+        {
+            
+        }
+        else
+        {
+            NextBenchmarkQuality();
+        }
+    }
+
+    public void SetPostInitBenchmarkSettings()
+    {
+        benchmarkMenuAndFpsStats.SetQualityLevelText(
+            UniversalFunctions.GetQualityLevelText(ActualBenchmarkQualityLevel));
+
+        GameMaster.GM.GetSettings().Apply_UnlockMaxFps(true, true);
+        GameMaster.GM.GetSettings().Apply_DisableVsync(true, true);
+
+        benchmarkMenuAndFpsStats.Visible = true;
+    }
+
+public override void _Process(double delta)
     {
         base._Process(delta);
+    }
 
-        if (Input.IsActionJustPressed("TestStartBenchmarkLevel"))
-            StartBenchmarkLevel("res://levels/worldlevel_demo_extend_benchmark.tscn", "benchmark_level_1");
+    public void SendBenchmarkScoreData(string newBuild,string newLevelName,int newFpsAvg,int newFpsMin,int newFpsMax)
+    {
+        // poslat oalovi pres funkci
+    }
+
+    // FPS
+    public void AddFpsData(int newFpsData)
+    {
+        AllFpsData.Add(newFpsData);
     }
 }

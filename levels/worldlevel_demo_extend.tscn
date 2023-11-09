@@ -25,7 +25,7 @@
 [ext_resource type="PackedScene" uid="uid://2qut50tthswb" path="res://placeholders/modular_level_builds/silo_level/assets/exterior_rockchair.tscn" id="21_ygcd2"]
 [ext_resource type="PackedScene" uid="uid://bndr3up87gn1i" path="res://placeholders/Decals/blood_decal.tscn" id="22_tcmpq"]
 [ext_resource type="PackedScene" uid="uid://dv26x01is3wew" path="res://spawn/physic_object_ball_light.tscn" id="25_u234y"]
-[ext_resource type="AudioStream" uid="uid://cuirkbqnpyhli" path="res://audio/audio_streams/music/516907__zhr__sad-outro.mp3" id="26_q5bcx"]
+[ext_resource type="AudioStream" uid="uid://u51po736uwlv" path="res://audio/audio_streams/music/SOMNIUM_simple_amb1.wav" id="26_8dvyp"]
 [ext_resource type="PackedScene" uid="uid://cill7wx53gakg" path="res://placeholders/posters/poster2.tscn" id="27_h8jbu"]
 [ext_resource type="PackedScene" uid="uid://bryarwbmvp6pm" path="res://models/lockers/locker_physic.tscn" id="28_g3s4w"]
 [ext_resource type="PackedScene" uid="uid://dk6s7gogdikp7" path="res://testing_stuff_kaen/lis/lis_anim.tscn" id="29_covdt"]
@@ -2157,8 +2157,8 @@ visible = false
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6555, 1, -2.7567)
 
 [node name="AudioStreamPlayerMusic" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("26_q5bcx")
-volume_db = -15.0
+stream = ExtResource("26_8dvyp")
+volume_db = -20.0
 autoplay = true
 bus = &"Music"
 

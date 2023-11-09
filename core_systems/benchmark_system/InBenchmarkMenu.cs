@@ -46,7 +46,8 @@ public partial class InBenchmarkMenu : Control
     {
         GameMaster.GM.GetBenchmarkSystem().NeedBenchmarkQualityLevel = 0;
         GameMaster.GM.GetBenchmarkSystem().StartBenchmarkLevel(
-            "res://levels/worldlevel_demo_extend_benchmark.tscn","benchmark_level_1");
+            GameMaster.GM.GetLevelLoader().GetActualLevelScene().SceneFilePath,
+            GameMaster.GM.GetLevelLoader().GetActualLevelName());
     }
 
     public void _on_button_quit_game_pressed()

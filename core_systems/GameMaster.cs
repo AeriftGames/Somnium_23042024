@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 
 public partial class GameMaster : Node
 {
+	[Export] public string Build;
+
 	// CORE
 	public static GameMaster GM;
 	public MessageObject msgObject;
@@ -66,6 +68,8 @@ public partial class GameMaster : Node
 		masterSignals = GetNode<MasterSignals>("MasterSignals");
 
     }
+
+	public string GetBuild(){return Build;}
 
 	// Set/Get FPS Character
 	public void SetFPSCharacter(FPSCharacter_BasicMoving newFpsCharater) { _fpsCharacter = newFpsCharater; }
