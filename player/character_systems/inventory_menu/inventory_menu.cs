@@ -5,7 +5,7 @@ using System.Net.Sockets;
 
 public partial class inventory_menu : Control
 {
-    private InventorySystem inventorySystem = null;
+    private CharacterInventoryComponent inventorySystem = null;
 
     public enum EActiveTypeEffect { instant, anim }
     private bool _active = false;
@@ -148,7 +148,7 @@ public partial class inventory_menu : Control
         }
     }
     
-    public void Init(InventorySystem newInventorySystem)
+    public void Init(CharacterInventoryComponent newInventorySystem)
     {
         inventorySystem = newInventorySystem;
 
@@ -269,7 +269,7 @@ public partial class inventory_menu : Control
 
     /* ITEMS */
 
-    public InventorySystem GetInventorySystem() { return inventorySystem; }
+    public CharacterInventoryComponent GetInventorySystem() { return inventorySystem; }
 
     public void CreateAllSlotsWithItems()
     {

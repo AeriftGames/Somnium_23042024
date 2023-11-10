@@ -5,9 +5,9 @@
 [ext_resource type="AudioStream" uid="uid://d1h0024d0d7i3" path="res://audio/audio_streams/hurts_test/413178__micahlg__male_hurt2.ogg" id="3_51q7g"]
 [ext_resource type="Script" path="res://player/character_components/CharacterHealthComponent.cs" id="3_aggcm"]
 [ext_resource type="Script" path="res://player/character_systems/CharacterInfoHud.cs" id="4_nvx4w"]
+[ext_resource type="Script" path="res://player/character_components/CharacterInventoryComponent.cs" id="5_8thmx"]
 [ext_resource type="PackedScene" uid="uid://dhhnra4i7t74r" path="res://player/character_systems/damage_hud.tscn" id="5_dhy04"]
 [ext_resource type="Script" path="res://player/character_systems/CharacterStairSystem.cs" id="5_kvnk0"]
-[ext_resource type="Script" path="res://player/character_systems/inventory_menu/InventorySystem.cs" id="8_1wcpl"]
 [ext_resource type="PackedScene" uid="uid://dxumv4dw6y6ps" path="res://player/character_systems/inventory_menu/inventory_menu_number_two.tscn" id="9_bfvnj"]
 [ext_resource type="Script" path="res://player/character_components/CharacterStaminaComponent.cs" id="9_ogpi2"]
 
@@ -70,7 +70,10 @@ script = ExtResource("3_aggcm")
 [node name="CharacterStaminaComponent" type="Node" parent="CharacterComponents" index="1"]
 script = ExtResource("9_ogpi2")
 
-[node name="StairSystem" type="Node3D" parent="CharacterComponents" index="2"]
+[node name="CharacterInventoryComponent" type="Node" parent="CharacterComponents" index="2"]
+script = ExtResource("5_8thmx")
+
+[node name="StairSystem" type="Node3D" parent="CharacterComponents" index="3"]
 script = ExtResource("5_kvnk0")
 metadata/_edit_lock_ = true
 
@@ -79,32 +82,28 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.09073, -0.451133)
 shape = SubResource("SphereShape3D_wsteg")
 margin = 0.05
 
-[node name="InventorySystem" type="Node" parent="." index="1"]
-script = ExtResource("8_1wcpl")
-MaxInventoryCapacity = 10
-
-[node name="AudioStreamPlayer_Footsteps" parent="." index="6"]
+[node name="AudioStreamPlayer_Footsteps" parent="." index="5"]
 max_polyphony = 3
 
-[node name="AudioStreamPlayer_JumpLand" parent="." index="7"]
+[node name="AudioStreamPlayer_JumpLand" parent="." index="6"]
 max_polyphony = 3
 
-[node name="AudioStreamPlayer_Hurts" type="AudioStreamPlayer" parent="." index="9"]
+[node name="AudioStreamPlayer_Hurts" type="AudioStreamPlayer" parent="." index="8"]
 stream = ExtResource("3_51q7g")
 max_polyphony = 4
 bus = &"Sfx"
 
-[node name="AudioStreamPlayer_Universal" type="AudioStreamPlayer" parent="." index="10"]
+[node name="AudioStreamPlayer_Universal" type="AudioStreamPlayer" parent="." index="9"]
 max_polyphony = 4
 bus = &"Sfx"
 
-[node name="Item_inspect" parent="." index="11"]
+[node name="Item_inspect" parent="." index="10"]
 metadata/_edit_lock_ = true
 
-[node name="report_bug" parent="." index="12"]
+[node name="report_bug" parent="." index="11"]
 metadata/_edit_lock_ = true
 
-[node name="DebugHud" parent="." index="13"]
+[node name="DebugHud" parent="." index="12"]
 metadata/_edit_lock_ = true
 
 [node name="InventoryMenu" parent="AllHuds" index="1" instance=ExtResource("9_bfvnj")]

@@ -10,7 +10,7 @@ public partial class FPSCharacter_Inventory : FPSCharacter_Interaction
 
     private CharacterHealthComponent characterHealthComponent = null;
     private CharacterStaminaComponent characterStaminaComponent = null;
-    private InventorySystem inventorySystem = null;
+    private CharacterInventoryComponent characterInventoryComponent = null;
 
     [ExportGroupAttribute("DamageAndDeath")]
     [Export] public Godot.Collections.Array<AudioStream> HurtAudios;
@@ -45,14 +45,15 @@ public partial class FPSCharacter_Inventory : FPSCharacter_Interaction
         characterStaminaComponent = GetNode<CharacterStaminaComponent>("CharacterComponents/CharacterStaminaComponent");
         characterStaminaComponent.StartInit(this);
 
-        inventorySystem = GetNode<InventorySystem>("InventorySystem");
+        // inventory component
+        characterInventoryComponent = GetNode<CharacterInventoryComponent>("CharacterComponents/CharacterInventoryComponent");
+        characterInventoryComponent.StartInit(this);
 
         hurtPlayer = GetNode<AudioStreamPlayer>("AudioStreamPlayer_Hurts");
         universalPlayer = GetNode<AudioStreamPlayer>("AudioStreamPlayer_Universal");
 
         // inits
-        inventorySystem.Init(this);
-        ourInventoryMenu.Init(GetInventorySystem());
+        ourInventoryMenu.Init(GetInventoryComponent());
     }
 
     public override void _PhysicsProcess(double delta)
@@ -120,7 +121,7 @@ public partial class FPSCharacter_Inventory : FPSCharacter_Interaction
     public void TestInventoryItemPutToWorld()
     {
         // put inventory item to world
-        if (GetInventorySystem().wantPutItem)
+        if (GetInventoryComponent().wantPutItem)
         {
             //
             InventoryObjectCamera invObjectCam = GetObjectCamera() as InventoryObjectCamera;
@@ -154,9 +155,9 @@ public partial class FPSCharacter_Inventory : FPSCharacter_Interaction
             else
                 spawnPos = resB;
 
-            GetInventorySystem().PutItemFromInventoryToWorld(GetInventorySystem().wantInventoryItemDataPutToWorld,
+            GetInventoryComponent().PutItemFromInventoryToWorld(GetInventoryComponent().wantInventoryItemDataPutToWorld,
                 spawnPos);
-            GetInventorySystem().ResetWantItemPutFromInventory();
+            GetInventoryComponent().ResetWantItemPutFromInventory();
         }
     }
 
@@ -260,7 +261,7 @@ public partial class FPSCharacter_Inventory : FPSCharacter_Interaction
     public Godot.Collections.Array<AudioStream> GetBodyFallAudios() { return BodyFallAudios; }
 
     public AudioStreamPlayer GetHurtPlayer() { return hurtPlayer; }
-    public InventorySystem GetInventorySystem() { return inventorySystem; }
+    public CharacterInventoryComponent GetInventoryComponent() { return characterInventoryComponent; }
 
     public void ShootPhysicProjectile()
     {
