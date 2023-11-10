@@ -57,7 +57,7 @@ public partial class InGameMenu : Control
 			// jen pokud je hrac typu: (inventory a vys) a pokud je nazivu
 			FPSCharacter_Inventory invChar = interChar as FPSCharacter_Inventory;
 			if (invChar != null)
-				if(invChar.GetHealthSystem().GetAlive())
+				if(invChar.GetCharacterHealthComponent().GetAlive())
 					interChar.SetInputEnable(true);
         }
 	}

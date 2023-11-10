@@ -1,23 +1,28 @@
 using Godot;
 using System;
 
-public partial class HealthSystem : Godot.GodotObject
+public partial class CharacterHealthComponent : Node
 {
+    [Export] public float StartActualHealth = 100.0f;
+    [Export] public float StartMaxHealth = 100.0f;
+    [Export] public float StartHealthRegenVal = 1.0f;
+    [Export] public float StartHealthRegenTick = 0.5f;
+    [Export] public bool StartHealthRegenEnable = false;
+
+    [Export] public float ActualHealth = 100;
+    [Export] public float ActualMaxHealth = 100;
+    [Export] public float ActualHealthRegenVal = 0.1f;
+    [Export] public float ActualHealthRegenTick = 0.5f;
+    [Export] public bool ActualHealthRegenEnable = false;
+
     FPSCharacter_Inventory ownCharacter = null;
-
-    private float actualHealth = 100;
-    private float maxHealth = 100;
-    private float healthRegenVal = 0.1f;
-    private float healthRegenTick = 0.5f;
-    private bool healthRegenEnable = false;
-
     Godot.Timer timerHealthRegenTimer = null;
 
     private bool isAlive = true;
 
     DamageHud damageHud = null;
 
-    public HealthSystem(FPSCharacter_Inventory ownerInstance) 
+    public void StartInit(FPSCharacter_Inventory ownerInstance)
     {
         ownCharacter = ownerInstance;
 
@@ -31,28 +36,32 @@ public partial class HealthSystem : Godot.GodotObject
         timerHealthRegenTimer.OneShot = false;
         ownCharacter.AddChild(timerHealthRegenTimer);
         timerHealthRegenTimer.Stop();
+
+        // First init data
+        SetAllData(StartActualHealth, StartMaxHealth, StartHealthRegenVal, 
+            StartHealthRegenTick, StartHealthRegenEnable);
     }
 
-    public float GetHealth() { return actualHealth; }
-    public float GetMaxHealth() { return maxHealth; }
-    public float GetHealthRegenVal() { return healthRegenVal; }
-    public float GetHealthRegenTick() { return healthRegenTick; }
-    public bool GetHealthRegenEnable() { return healthRegenEnable; }
+    public float GetHealth() { return ActualHealth; }
+    public float GetMaxHealth() { return ActualMaxHealth; }
+    public float GetHealthRegenVal() { return ActualHealthRegenVal; }
+    public float GetHealthRegenTick() { return ActualHealthRegenTick; }
+    public bool GetHealthRegenEnable() { return ActualHealthRegenEnable; }
     public bool GetAlive() { return isAlive; }
-    public void SetHealth(float value) { actualHealth = value; ChangeUpdate(); }
-    public void SetMaxHealth(float value) { maxHealth = value; ChangeUpdate(); }
-    public void SetHealthRegenVal(float value) { healthRegenVal = value; }
-    public void SetHealthRegenTick(float value) { healthRegenTick = value; timerHealthRegenTimer.WaitTime = value; }
-    public void SetHealthRegenEnable(bool value) 
-    { 
-        healthRegenEnable = value; 
-        if(value)
-            timerHealthRegenTimer.Start(); 
+    public void SetHealth(float value) { ActualHealth = value; ChangeUpdate(); }
+    public void SetMaxHealth(float value) { ActualMaxHealth = value; ChangeUpdate(); }
+    public void SetHealthRegenVal(float value) { ActualHealthRegenVal = value; }
+    public void SetHealthRegenTick(float value) { ActualHealthRegenTick = value; timerHealthRegenTimer.WaitTime = value; }
+    public void SetHealthRegenEnable(bool value)
+    {
+        ActualHealthRegenEnable = value;
+        if (value)
+            timerHealthRegenTimer.Start();
         else
             timerHealthRegenTimer.Stop();
     }
 
-    public void SetAllData(float newActualHealth,float newMaxHealth,float newHealthRegenVal,float newHealthRegenTick,
+    public void SetAllData(float newActualHealth, float newMaxHealth, float newHealthRegenVal, float newHealthRegenTick,
         bool newHealthRegenEnable)
     {
         SetHealth(newActualHealth);
@@ -62,24 +71,24 @@ public partial class HealthSystem : Godot.GodotObject
         SetHealthRegenEnable(newHealthRegenEnable);
     }
 
-    public void AddHealth(float value) 
+    public void AddHealth(float value)
     {
         if (!isAlive) return;
 
-        actualHealth += value;
-        if(actualHealth > maxHealth)
-            actualHealth = maxHealth;
+        ActualHealth += value;
+        if (ActualHealth > ActualMaxHealth)
+            ActualHealth = ActualMaxHealth;
 
         ChangeUpdate();
     }
 
-    public void RemoveHealth(float value) 
+    public void RemoveHealth(float value)
     {
         if (!isAlive) return;
 
-        actualHealth -= value;
-        if(actualHealth < 0)
-            actualHealth = 0;
+        ActualHealth -= value;
+        if (ActualHealth < 0)
+            ActualHealth = 0;
 
         // Effects
 
@@ -88,7 +97,7 @@ public partial class HealthSystem : Godot.GodotObject
             damageHud.ApplyCentralDamageEffect(GetDamageIntensityFromDamageValue(value));
 
         // shake
-        ownCharacter.GetObjectCamera().ShakeCameraTest(GetDamageIntensityFromDamageValue(value),0.2f,5.0f,4.0f);
+        ownCharacter.GetObjectCamera().ShakeCameraTest(GetDamageIntensityFromDamageValue(value), 0.2f, 5.0f, 4.0f);
 
         // audio
         UniversalFunctions.PlayRandomSound(ownCharacter.GetHurtPlayer(), ownCharacter.GetHurtAudios(), 0, 1);
@@ -101,10 +110,10 @@ public partial class HealthSystem : Godot.GodotObject
     {
         if (!isAlive) return;
 
-        actualHealth += healthRegenVal;
+        ActualHealth += ActualHealthRegenVal;
 
-        if(actualHealth > maxHealth)
-            actualHealth = maxHealth;
+        if (ActualHealth > ActualMaxHealth)
+            ActualHealth = ActualMaxHealth;
 
         ChangeUpdate();
     }
@@ -115,7 +124,7 @@ public partial class HealthSystem : Godot.GodotObject
         if (ownCharacter.GetCharacterInfoHud() == null) return;
 
         // DEAD
-        if (actualHealth < 1.0f && isAlive)
+        if (ActualHealth < 1.0f && isAlive)
         {
             GD.Print("you are dead test");
             isAlive = false;

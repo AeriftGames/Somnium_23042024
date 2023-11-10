@@ -100,7 +100,7 @@ public partial class DamageZone : Area3D
                 if (printDebugToConsole)
                     GD.Print("Death Damage");
 
-                characterInZone.GetHealthSystem().RemoveHealth(characterInZone.GetHealthSystem().GetMaxHealth()*10);
+                characterInZone.GetCharacterHealthComponent().RemoveHealth(characterInZone.GetCharacterHealthComponent().GetMaxHealth()*10);
                 break;
             }
             case EDamageZoneType.OneAddHealth:
@@ -186,7 +186,7 @@ public partial class DamageZone : Area3D
         if (printDebugToConsole)
             GD.Print("One Tick Damage");
 
-        characterInZone.GetHealthSystem().RemoveHealth(damageValue);
+        characterInZone.GetCharacterHealthComponent().RemoveHealth(damageValue);
     }
 
     public void OneTickHealth()
@@ -196,7 +196,7 @@ public partial class DamageZone : Area3D
         if (printDebugToConsole)
             GD.Print("One Tick Health");
 
-        characterInZone.GetHealthSystem().AddHealth(damageValue);
+        characterInZone.GetCharacterHealthComponent().AddHealth(damageValue);
     }
 
     public void UpdateBoxSize(Vector3 newSize)

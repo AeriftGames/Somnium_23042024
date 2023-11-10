@@ -2134,7 +2134,7 @@ curve = SubResource("Curve3D_8tbx0")
 transform = Transform3D(-0.461871, 0.00460133, -0.886903, -2.32822e-10, 0.999931, 0.00518803, 0.886905, 0.00239622, -0.46187, 0.872206, 0.0870391, -0.489383)
 
 [node name="PathFollow3D_look_point" type="PathFollow3D" parent="BenchmarkPoints/Path3D"]
-transform = Transform3D(-0.461884, 0.00460152, -0.886921, -2.32829e-10, 0.999972, 0.00518813, 0.88693, 0.00239632, -0.461879, 1.5964, 0.0829075, 0.00253433)
+transform = Transform3D(-0.461884, 0.00460151, -0.886921, -2.32829e-10, 0.999972, 0.00518813, 0.88693, 0.00239632, -0.461879, 1.5964, 0.0829075, 0.00253433)
 progress = 1.0
 
 [node name="BenchmarkCameraBody" type="CharacterBody3D" parent="BenchmarkPoints"]

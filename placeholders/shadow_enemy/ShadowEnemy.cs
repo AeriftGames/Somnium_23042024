@@ -75,7 +75,7 @@ public partial class ShadowEnemy : Node3D
             FPSCharacter_Inventory player = invObjectCamera.GetCharacterOwner() as FPSCharacter_Inventory;
             if (player != null)
             {
-                player.GetHealthSystem().RemoveHealth(10.0f);
+                player.GetCharacterHealthComponent().RemoveHealth(10.0f);
             }
         }
     }

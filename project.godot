@@ -57,6 +57,17 @@ project/assembly_name="Somnium"
 
 movie_writer/movie_file="C:/Users/Tomáš/Desktop/SomniumMovies/1.avi"
 
+[file_customization]
+
+folder_colors={
+"res://core_systems/": "red",
+"res://levels/": "yellow",
+"res://player/": "red",
+"res://player/character_components/": "orange",
+"res://player/character_systems/": "orange",
+"res://player/material_surface/": "green"
+}
+
 [filesystem]
 
 import/blender/enabled=false
