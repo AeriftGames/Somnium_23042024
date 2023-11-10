@@ -46,11 +46,14 @@ public partial class CLevelLoader : Node
 
     async Task ChangeLevelSceneWithDelay(string newLevelScenePath, string newLevelName, int delay)
     {
-        // potrebny delay
-        await Task.Delay(delay);
-
         // zapneme cernou obrazovku
         GameMaster.GM.EnableBlackScreen(true);
+
+        // nastavime loading hud
+        GameMaster.GM.GetLoadingHud().SetInitializeAndVisibleNow(actualLevelName, true);
+
+        // potrebny delay
+        await Task.Delay(delay);
 
         // zmenime level
         actualLevelName = newLevelName;
@@ -182,8 +185,6 @@ public partial class CLevelLoader : Node
         canUpdate = true;
         loadingScenePath = newLevelScenePath;
 
-        // nastavime loading hud
-        GameMaster.GM.GetLoadingHud().SetInitializeAndVisibleNow(actualLevelName, false);
 
         ResourceLoader.LoadThreadedRequest(loadingScenePath,"",true);
     }

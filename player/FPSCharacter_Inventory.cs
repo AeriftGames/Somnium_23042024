@@ -11,6 +11,7 @@ public partial class FPSCharacter_Inventory : FPSCharacter_Interaction
     private CharacterHealthComponent characterHealthComponent = null;
     private CharacterStaminaComponent characterStaminaComponent = null;
     private CharacterInventoryComponent characterInventoryComponent = null;
+    private CharacterStairsComponent characterStairsComponent = null;
 
     [ExportGroupAttribute("DamageAndDeath")]
     [Export] public Godot.Collections.Array<AudioStream> HurtAudios;
@@ -48,6 +49,9 @@ public partial class FPSCharacter_Inventory : FPSCharacter_Interaction
         // inventory component
         characterInventoryComponent = GetNode<CharacterInventoryComponent>("CharacterComponents/CharacterInventoryComponent");
         characterInventoryComponent.StartInit(this);
+
+        characterStairsComponent = GetNode<CharacterStairsComponent>("CharacterComponents/CharacterStairsComponent");
+        characterStairsComponent.StartInit(this);
 
         hurtPlayer = GetNode<AudioStreamPlayer>("AudioStreamPlayer_Hurts");
         universalPlayer = GetNode<AudioStreamPlayer>("AudioStreamPlayer_Universal");
@@ -255,13 +259,14 @@ public partial class FPSCharacter_Inventory : FPSCharacter_Interaction
 
     public CharacterHealthComponent GetCharacterHealthComponent() { return characterHealthComponent; }
     public CharacterStaminaComponent GetCharacterStaminaComponent() {  return characterStaminaComponent; }
+    public CharacterInventoryComponent GetInventoryComponent() { return characterInventoryComponent; }
+    public CharacterStairsComponent GetCharacterStairsComponent() { return characterStairsComponent; }
     public CharacterInfoHud GetCharacterInfoHud() { return characterInfoHud; }
     public Godot.Collections.Array<AudioStream> GetHurtAudios(){return HurtAudios;}
     public Godot.Collections.Array<AudioStream> GetDeathAudios() { return DeathAudios;}
     public Godot.Collections.Array<AudioStream> GetBodyFallAudios() { return BodyFallAudios; }
 
     public AudioStreamPlayer GetHurtPlayer() { return hurtPlayer; }
-    public CharacterInventoryComponent GetInventoryComponent() { return characterInventoryComponent; }
 
     public void ShootPhysicProjectile()
     {

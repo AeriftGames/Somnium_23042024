@@ -23,7 +23,7 @@ public partial class LoadingHud : Control
 
 	public void LoadingIsComplete(bool newShowPressAnyKeyToStart)
 	{
-		QueueFree();
+		Visible = false;
 	}
 
 	public void SetShaderProcessValueText(string newShaderProcessValueText)

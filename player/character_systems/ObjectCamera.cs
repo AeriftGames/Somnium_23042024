@@ -158,24 +158,17 @@ public partial class ObjectCamera : Node3D
 				}
 			}
 		}
-	}
-
-	public override void _PhysicsProcess(double delta)
-	{
-		if (GameMaster.GM.GetIsQuitting()) return;
-
-		base._PhysicsProcess(delta);
 
         /* Pokud JoyLook ma nejakou hodnotu (pohnuto packou na gamepadu) = gamepad jinak mys */
         Vector2 JoyLook = PlayerInputs.GetRightStickMotion(15.0f);
-		if(JoyLook.Length() > 0 && ownerCharacter.IsInputEnable() && GetCameraLookInputEnable())
-			UpdateCameraLookGamepad(JoyLook, delta);
-		else if (ownerCharacter.IsInputEnable() && GetCameraLookInputEnable())
+        if (JoyLook.Length() > 0 && ownerCharacter.IsInputEnable() && GetCameraLookInputEnable())
+            UpdateCameraLookGamepad(JoyLook, delta);
+        else if (ownerCharacter.IsInputEnable() && GetCameraLookInputEnable())
             UpdateCameraLookMouse(_MouseMotion, delta);
 
-		// UPDATE LERP TO CHARACTER
-		if(GetIsEnableLerpToCharacter())
-		{
+        // UPDATE LERP TO CHARACTER
+        if (GetIsEnableLerpToCharacter())
+        {
             // new lerp object camera pos to player head
             LerpObject_ObjectCameraPos.SetAllParam(GlobalPosition,
                 ownerCharacter.HeadHolderCamera.GlobalPosition, ownerCharacter.LerpSpeedPosObjectCamera);
@@ -183,8 +176,16 @@ public partial class ObjectCamera : Node3D
             GlobalPosition = LerpObject_ObjectCameraPos.Update(delta);
         }
 
-		// reset mouse to center
-		_MouseMotion = new Vector2(0, 0);
+        // reset mouse to center
+        _MouseMotion = new Vector2(0, 0);
+
+    }
+
+	public override void _PhysicsProcess(double delta)
+	{
+		if (GameMaster.GM.GetIsQuitting()) return;
+
+		base._PhysicsProcess(delta);
 	}
 
 	// Hadle inout for mouse

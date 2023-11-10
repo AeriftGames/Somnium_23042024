@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://wlh0gi2r057f" path="res://menus/InGameMenu.tscn" id="11_8lqy1"]
 
 [node name="FPSCharacter_Interaction" instance=ExtResource("1_0ipjt")]
+collision_mask = 1
 wall_min_slide_angle = 0.0
 script = ExtResource("2_fmih3")
 CameraFovNormal = 65.0

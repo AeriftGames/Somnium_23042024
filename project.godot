@@ -19,6 +19,7 @@ ClassPrefix=""
 config/name="Somnium"
 run/main_scene="res://levels/worldlevel_demo_extend.tscn"
 config/features=PackedStringArray("4.2", "C#")
+run/flush_stdout_on_print=true
 run/max_fps=60
 boot_splash/bg_color=Color(0, 0, 0, 1)
 config/icon="res://icon.svg"
@@ -393,6 +394,7 @@ change_energy_plus={
 3d_physics/layer_2="player_layer"
 3d_physics/layer_3="interactive_layer"
 3d_physics/layer_4="physics_items"
+3d_physics/layer_5="worldphysics_player_layer"
 
 [memory]
 
