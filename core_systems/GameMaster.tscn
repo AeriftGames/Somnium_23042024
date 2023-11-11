@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://bfjmbldwhs02n"]
+[gd_scene load_steps=21 format=3 uid="uid://bfjmbldwhs02n"]
 
 [ext_resource type="Script" path="res://core_systems/GameMaster.cs" id="1_mjdjb"]
 [ext_resource type="Script" path="res://core_systems/level_loader_system/CLevelLoader.cs" id="2_dgyoo"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://core_systems/benchmark_system/BenchmarkMenuAndFpsStats.cs" id="6_hknud"]
 [ext_resource type="Script" path="res://core_systems/benchmark_system/InBenchmarkMenu.cs" id="7_k2x5r"]
 [ext_resource type="PackedScene" uid="uid://d1xpbdilt7rk1" path="res://menus/BaseFocusedMenuButton.tscn" id="8_ccud7"]
+[ext_resource type="PackedScene" uid="uid://btadrfapvd42e" path="res://benchmark/Benchmark.tscn" id="9_c8c2k"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_105xh"]
 bg_color = Color(0.552941, 0.552941, 0.552941, 1)
@@ -175,6 +176,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("5_y5do3")
+metadata/_edit_lock_ = true
 
 [node name="Panel" type="Panel" parent="BenchmarkSystem/BenchmarkScoreBoard"]
 custom_minimum_size = Vector2(400, 300)
@@ -271,6 +273,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("6_hknud")
+metadata/_edit_lock_ = true
 
 [node name="Panel2" type="Panel" parent="BenchmarkSystem/BenchmarkMenuAndFpsStats"]
 custom_minimum_size = Vector2(200, 110)
@@ -441,6 +444,8 @@ theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 25
 text = "Benchmark Menu"
 horizontal_alignment = 1
+
+[node name="Benchmark" parent="BenchmarkSystem" instance=ExtResource("9_c8c2k")]
 
 [node name="BlackScreen" type="Control" parent="."]
 visible = false

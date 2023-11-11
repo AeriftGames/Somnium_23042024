@@ -2125,6 +2125,7 @@ metadata/_edit_lock_ = true
 
 [node name="BenchmarkPoints" type="Node3D" parent="."]
 script = ExtResource("25_1kp43")
+speed = 15.0
 
 [node name="Path3D" type="Path3D" parent="BenchmarkPoints"]
 transform = Transform3D(1, 0, 0, 0, 1, 6.98132e-05, 0, -6.98132e-05, 1, -18.0375, 0.99466, 2.00341)

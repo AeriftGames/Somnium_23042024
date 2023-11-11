@@ -33,12 +33,16 @@ public partial class CBenchmarkSystem : Node
     private BenchmarkScoreBoard benchmarkScoreBoard;
     private BenchmarkMenuAndFpsStats benchmarkMenuAndFpsStats;
 
+    private Node BenchmarkGD;
+
     public override void _Ready()
     {
         base._Ready();
 
         benchmarkScoreBoard = GetNode<BenchmarkScoreBoard>("BenchmarkScoreBoard");
         benchmarkMenuAndFpsStats = GetNode<BenchmarkMenuAndFpsStats>("BenchmarkMenuAndFpsStats");
+
+        BenchmarkGD = GetNode<Node>("Benchmark");
 
         PostReady();
     }
@@ -138,7 +142,7 @@ public partial class CBenchmarkSystem : Node
             false,true);
     }
 
-    public void FinishBenchmarkPresset()
+    public async void FinishBenchmarkPresset()
     {
         // spocitame info fps - avg min max
         UniversalFunctions.SFpsInfo FpsInfo = UniversalFunctions.CalculateFpsInfo(AllFpsData);
@@ -155,9 +159,19 @@ public partial class CBenchmarkSystem : Node
             GameMaster.GM.GetLevelLoader().GetActualLevelName(),
             FpsInfo.avgFps, FpsInfo.minFps, FpsInfo.maxFps);
 
+        //
+        BenchmarkGD.Call("send_test", GameMaster.GM.GetBuild(), GameMaster.GM.GetLevelLoader().GetActualLevelName(),
+            UniversalFunctions.GetQualityLevelText(ActualBenchmarkQualityLevel), FpsInfo.minFps, FpsInfo.maxFps,
+            FpsInfo.avgFps);
+    }
+
+    public void FinishBenchmarkPresset_End(int newResult)
+    {
+        GD.Print("vse ok");
+
         if (BenchmarkEnd == true)
         {
-            
+
         }
         else
         {
@@ -183,7 +197,6 @@ public override void _Process(double delta)
 
     public void SendBenchmarkScoreData(string newBuild,string newLevelName,int newFpsAvg,int newFpsMin,int newFpsMax)
     {
-        // poslat oalovi pres funkci
     }
 
     // FPS
