@@ -30,11 +30,11 @@ func _ready() -> void:
 
 func send_test(build: String, levelname: String, quality: String, fps_min: int, fps_max: int, fps_avg: int):
 	print("BENCHMARK: SEND TEST")
-	self.get_parent().FinishBenchmarkPresset_End(1)
+	self.get_parent().FinishBenchmarkPresset_End(true)
 
 
 func server_check():
-	self.get_parent().ServerCheck_End(1)
+	self.get_parent().ServerCheck_End(true)
 
 
 func _send_test() -> void:
