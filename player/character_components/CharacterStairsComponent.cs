@@ -15,8 +15,8 @@ public partial class CharacterStairsComponent : Node3D
 
     private float LastStairDistance = 0.0f;
     private bool FirstStep = true;
-
     private bool isAlreadyEndStep = true;
+    private bool isMoveOnStairs = false;
 
     public override void _Ready()
     {
@@ -36,6 +36,8 @@ public partial class CharacterStairsComponent : Node3D
 
         if (EnableStairsDetectEffect == false) return;
 
+        isMoveOnStairs = false;
+
         if (rayCast3D.IsColliding())
         {
             Node3D hitnode = rayCast3D.GetCollider() as Node3D;
@@ -47,6 +49,8 @@ public partial class CharacterStairsComponent : Node3D
 
             if (hitnode.IsInGroup("tag_stairs") && GameMaster.GM.GetFPSCharacter().IsOnFloor())
             {
+                isMoveOnStairs = true;
+
                 if (Mathf.Abs(rozdil) > 0.02f)
                 {
                     isAlreadyEndStep = false;
@@ -71,6 +75,8 @@ public partial class CharacterStairsComponent : Node3D
 
             FirstStep = true;
         }
+
+        GD.Print(isMoveOnStairs);
     }
 
     public void EndStep(float new_rozdil)
