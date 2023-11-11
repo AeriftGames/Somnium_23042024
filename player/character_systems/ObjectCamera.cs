@@ -11,6 +11,7 @@ public partial class ObjectCamera : Node3D
 	public Node3D NodeRotX = null;
 	public Node3D NodeLean = null;
 	public Node3D ShakeNode = null;
+	public Node3D HeadStairsBob = null;
 	public Node3D DangerShake = null;
 	public Camera3D Camera = null;
 	public Marker3D HandGrabMarker;
@@ -59,6 +60,7 @@ public partial class ObjectCamera : Node3D
 		NodeRotX = GetNode<Node3D>("%NodeRotX");
 		NodeLean = GetNode<Node3D>("%NodeLean");
 		ShakeNode = GetNode<Node3D>("%ShakeNode");
+		HeadStairsBob = GetNode<Node3D>("%HeadStairsBob");
 		DangerShake = GetNode<Node3D>("%HeadDangerShake");
         Camera = GetNode<Camera3D>("%Camera");
 		HandGrabMarker = GetNode<Marker3D>("%HandGrabMarker");
@@ -169,11 +171,21 @@ public partial class ObjectCamera : Node3D
         // UPDATE LERP TO CHARACTER
         if (GetIsEnableLerpToCharacter())
         {
+			//aaa
+			Vector3 oldPos = GlobalPosition;
+
             // new lerp object camera pos to player head
             LerpObject_ObjectCameraPos.SetAllParam(GlobalPosition,
                 ownerCharacter.HeadHolderCamera.GlobalPosition, ownerCharacter.LerpSpeedPosObjectCamera);
 
             GlobalPosition = LerpObject_ObjectCameraPos.Update(delta);
+
+			//aaa
+			if(ownerCharacter.LerpSpeedCameraY != 0.0f)
+			{
+                oldPos.Y = Mathf.Lerp(oldPos.Y, ownerCharacter.HeadHolderCamera.GlobalPosition.Y, ownerCharacter.LerpSpeedCameraY*(float)delta);
+                GlobalPosition = new Vector3(GlobalPosition.X, oldPos.Y, GlobalPosition.Z);
+            }
         }
 
         // reset mouse to center

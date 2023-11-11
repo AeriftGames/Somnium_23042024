@@ -18,6 +18,8 @@ material_override = ExtResource("2_djt0v")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.156442, 0)
 
 [node name="StaticBody3D_WorldPhysics" type="StaticBody3D" parent="." index="1"]
+collision_layer = 9
+collision_mask = 9
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D_WorldPhysics" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.15, 0)

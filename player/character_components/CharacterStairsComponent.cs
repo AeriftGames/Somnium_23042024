@@ -114,11 +114,19 @@ public partial class CharacterStairsComponent : Node3D
         {
             if(EnableDebugPrint)
                 GD.Print("krok nahoru");
+            /*
+            InventoryObjectCamera a = GameMaster.GM.GetFPSCharacter().GetObjectCamera() as InventoryObjectCamera;
+            a.GetHeadStairsBobComponent().ApplyEffectStairStep(true, 1.0f);
+            */
         }
         else
         {
             if (EnableDebugPrint)
                 GD.Print("krok dolu");
+            /*
+            InventoryObjectCamera a = GameMaster.GM.GetFPSCharacter().GetObjectCamera() as InventoryObjectCamera;
+            a.GetHeadStairsBobComponent().ApplyEffectStairStep(false, 1.0f);
+            */
         }
     }
 
@@ -142,13 +150,53 @@ public partial class CharacterStairsComponent : Node3D
                 (GameMaster.GM.GetFPSCharacter().DefaultMoveSpeedInSprint / 100.0f) * MoveSpeedSprintPercent;
 
             GameMaster.GM.GetFPSCharacter().MoveSpeedInCrunch =
-                (GameMaster.GM.GetFPSCharacter().DefaultMoveSpeedInSprint / 100.0f) * MoveSpeedCrouchPercent;
+                (GameMaster.GM.GetFPSCharacter().DefaultMoveSpeedInCrunch / 100.0f) * MoveSpeedCrouchPercent;
+
+            GameMaster.GM.GetFPSCharacter().LerpSpeedCameraY = 6.0f;
+
+            FPSCharacter_Inventory b = GameMaster.GM.GetFPSCharacter() as FPSCharacter_Inventory;
+            b.FootStepLengthInWalk = 0.9f;
+            b.FootStepLengthInSprint = 1.0f;
+            b.FootStepLengthInCrouch = 0.6f;
+            b.FootstepsAudioPitch = 0.15f;
+
+            //
+            InventoryObjectCamera a = GameMaster.GM.GetFPSCharacter().GetObjectCamera() as InventoryObjectCamera;
+            a.GetHeadBobSystem().headBobbingWalkValue = 0.2f;
+            a.GetHeadBobSystem().headBobbingSprintValue = 0.25f;
+            a.GetHeadBobSystem().headBobRotDegSprintValue = 1.5f;
+
+            a.GetHeadBobSystem().headBobRotDegWalkValue = 0.8f;
+
+            a.GetHeadBobSystem().WalkCameraLerpHeight = 0.2f;
+            a.GetHeadBobSystem().RunCameraLerpHeight = 0.4f;
         }
         else
         {
             GameMaster.GM.GetFPSCharacter().MoveSpeedInStand = GameMaster.GM.GetFPSCharacter().DefaultMoveSpeedInStand;
             GameMaster.GM.GetFPSCharacter().MoveSpeedInSprint = GameMaster.GM.GetFPSCharacter().DefaultMoveSpeedInSprint;
             GameMaster.GM.GetFPSCharacter().MoveSpeedInCrunch = GameMaster.GM.GetFPSCharacter().DefaultMoveSpeedInCrunch;
+
+            GameMaster.GM.GetFPSCharacter().LerpSpeedCameraY = 0.0f;
+
+            FPSCharacter_Inventory b = GameMaster.GM.GetFPSCharacter() as FPSCharacter_Inventory;
+            b.FootStepLengthInWalk = 1.2f;
+            b.FootStepLengthInSprint = 1.25f;
+            b.FootStepLengthInCrouch = 0.85f;
+            b.FootstepsAudioPitch = 0.0f;
+
+            //
+            InventoryObjectCamera a = GameMaster.GM.GetFPSCharacter().GetObjectCamera() as InventoryObjectCamera;
+            a.GetHeadBobSystem().headBobbingWalkValue = a.GetHeadBobSystem().DefaultheadBobbingWalkValue;
+            a.GetHeadBobSystem().headBobbingSprintValue = a.GetHeadBobSystem().DefaultheadBobbingSprintValue;
+            a.GetHeadBobSystem().headBobRotDegSprintValue = a.GetHeadBobSystem().DefaultheadBobRotDegSprintValue;
+
+            a.GetHeadBobSystem().headBobRotDegWalkValue = a.GetHeadBobSystem().DefaultheadBobRotDegWalkValue;
+
+            a.GetHeadBobSystem().WalkCameraLerpHeight = a.GetHeadBobSystem().DefaultWalkCameraLerpHeight;
+            a.GetHeadBobSystem().RunCameraLerpHeight = a.GetHeadBobSystem().DefaultRunCameraLerpHeight;
+
+
         }
     }
 }

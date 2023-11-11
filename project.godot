@@ -64,6 +64,7 @@ folder_colors={
 "res://core_systems/": "red",
 "res://levels/": "yellow",
 "res://player/": "red",
+"res://player/camera_components/": "orange",
 "res://player/character_components/": "orange",
 "res://player/character_systems/": "orange",
 "res://player/material_surface/": "green"

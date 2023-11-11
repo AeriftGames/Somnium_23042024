@@ -225,7 +225,7 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
                     newAddVolumeOffset = FootstepsVolumeDBInCrouch;
 
                 // Play Footstep audio
-                PlayFootstepSound(newAddVolumeOffset);
+                PlayFootstepSound(newAddVolumeOffset, FootstepsAudioPitch);
             }
 
             _LastHalfFootStepPosition = GlobalPosition;
