@@ -1,5 +1,5 @@
-class_name item_use extends Node3D
 @icon("res://core_systems/item_use/item_use_icon.svg")
+class_name item_use extends Node3D
 
 ## A GDSCript template used for items that can be picked up.
 ##
