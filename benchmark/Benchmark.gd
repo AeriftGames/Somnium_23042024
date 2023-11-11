@@ -29,7 +29,8 @@ func _ready() -> void:
 	
 
 func send_test(build: String, levelname: String, quality: String, fps_min: int, fps_max: int, fps_avg: int):
-	post_benchmark_test_received.emit(1)
+	self.get_parent().FinishBenchmarkPresset_End(1)
+	#post_benchmark_test_received.emit(1)
 
 
 func _send_test() -> void:
