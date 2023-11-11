@@ -26,6 +26,10 @@ func _ready() -> void:
 	gpu = RenderingServer.get_video_adapter_name()
 	cpu_name = OS.get_processor_name()
 	cpu_count = OS.get_processor_count()
+	
+
+func send_test(build: String, levelname: String, quality: String, fps_min: int, fps_max: int, fps_avg: int):
+	post_benchmark_test_received.emit(1)
 
 
 func _send_test() -> void:
