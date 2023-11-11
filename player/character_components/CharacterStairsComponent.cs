@@ -36,7 +36,7 @@ public partial class CharacterStairsComponent : Node3D
         if (rayCast3D.IsColliding())
         {
             Node3D hitnode = rayCast3D.GetCollider() as Node3D;
-            if (hitnode == null) return;
+            if (hitnode == null && !GameMaster.GM.GetFPSCharacter().IsOnFloor()) return;
 
             float distance = Mathf.Abs(rayCast3D.GlobalPosition.DistanceTo(rayCast3D.GetCollisionPoint()));
             float rozdil = distance - LastStairDistance;
