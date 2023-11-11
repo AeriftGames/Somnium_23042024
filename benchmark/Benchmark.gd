@@ -34,7 +34,7 @@ func send_test(build: String, levelname: String, quality: String, fps_min: int, 
 
 
 func server_check():
-	self.get_parent().FinishBenchmarkPresset_End(1)
+	self.get_parent().ServerCheck_End(1)
 
 
 func _send_test() -> void:
