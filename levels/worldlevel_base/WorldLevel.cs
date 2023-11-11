@@ -33,15 +33,15 @@ public partial class WorldLevel : Node
 			// Apply Settings
 			GameMaster.GM.GetSettings().LoadAndApply_AllGraphicsSettings();
 			GameMaster.GM.EnableBlackScreen(false);
-            GameMaster.GM.GetLoadingHud().LoadingIsComplete(false);
-        }
+			GameMaster.GM.GetLoadingHud().LoadingIsComplete(false);
+		}
 		else
 		{
-            // Apply Settings
-            GameMaster.GM.GetSettings().LoadAndApply_AllGraphicsSettings();
-            GameMaster.GM.EnableBlackScreen(false);
-            GameMaster.GM.GetLoadingHud().LoadingIsComplete(false);
-        }
+			// Apply Settings
+			GameMaster.GM.GetSettings().LoadAndApply_AllGraphicsSettings();
+			GameMaster.GM.EnableBlackScreen(false);
+			GameMaster.GM.GetLoadingHud().LoadingIsComplete(false);
+		}
 
 		StartGame();
 	}
