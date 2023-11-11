@@ -34,6 +34,8 @@ public partial class global_settings : Godot.GodotObject
         // nacteme veskera data ulozena ze souboru
         global_settings_data data = GetData();
 
+        if (data == null) return;
+
         // pouze aplikujeme jednotliva nastaveni = neukladame do souboru
         Apply_ScreenMode(data.ScreenMode, true, false);
         Apply_ScreenSizeID(data.ScreenSizeID, true, false);

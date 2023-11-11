@@ -180,7 +180,6 @@ theme_override_styles/tab_hovered = SubResource("StyleBoxFlat_l5ewt")
 theme_override_styles/tab_unselected = SubResource("StyleBoxFlat_yi35b")
 
 [node name="main" type="VBoxContainer" parent="OptionsPanel/TabContainer"]
-visible = false
 layout_mode = 2
 
 [node name="ShowFps_CheckBox" type="CheckBox" parent="OptionsPanel/TabContainer/main"]
@@ -307,6 +306,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="video" type="VBoxContainer" parent="OptionsPanel/TabContainer"]
+visible = false
 layout_mode = 2
 
 [node name="HSeparator" type="HSeparator" parent="OptionsPanel/TabContainer/video"]

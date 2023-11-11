@@ -189,6 +189,7 @@ transform = Transform3D(1, 0, 0, 0, 0.575933, -0.817497, 0, 0.817497, 0.575933, 
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.49007, 0, 0.33338)
 mass = 5.0
 inertia = Vector3(0, 0, 0)
+continuous_cd = false
 
 [node name="PhysicItem_test4" parent="LevelScene/Rooms/Room1/TestingStuff" instance=ExtResource("10_18ehc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.20824, 0.44683, 1.33327)
