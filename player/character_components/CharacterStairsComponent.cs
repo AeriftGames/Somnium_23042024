@@ -9,6 +9,15 @@ public partial class CharacterStairsComponent : Node3D
     [Export] public bool EnableStairsDetectEffect = true;
     [Export] public bool EnableDebugPrint = false;
 
+    [Export] public bool EnableCharacterEffects = true;
+    [ExportGroupAttribute("CharacterEffects")]
+    [Export] public bool EnableMoveSpeedEffect = true;
+    [ExportSubgroup("Move Speed Effect")]
+    [Export] public float MoveSpeedStandPercent = 80.0f;
+    [Export] public float MoveSpeedSprintPercent = 80.0f;
+    [Export] public float MoveSpeedCrouchPercent = 90.0f;
+
+
     private FPSCharacter_Inventory inventoryCharacter = null;
 
     private RayCast3D rayCast3D = null;
@@ -34,7 +43,8 @@ public partial class CharacterStairsComponent : Node3D
     {
         base._PhysicsProcess(delta);
 
-        if (EnableStairsDetectEffect == false) return;
+        if (GameMaster.GM.GetIsQuitting()) return;
+        if (!EnableStairsDetectEffect) return;
 
         isMoveOnStairs = false;
 
@@ -76,7 +86,9 @@ public partial class CharacterStairsComponent : Node3D
             FirstStep = true;
         }
 
-        GD.Print(isMoveOnStairs);
+        //GD.Print(isMoveOnStairs);
+
+        ApplyEffects((float)delta);
     }
 
     public void EndStep(float new_rozdil)
@@ -107,6 +119,36 @@ public partial class CharacterStairsComponent : Node3D
         {
             if (EnableDebugPrint)
                 GD.Print("krok dolu");
+        }
+    }
+
+    public void ApplyEffects(float delta)
+    {
+        if(EnableCharacterEffects)
+        {
+            if(EnableMoveSpeedEffect)
+                ApplyMoveSpeedEffect(delta);
+        }
+    }
+
+    public void ApplyMoveSpeedEffect(float delta)
+    {
+        if (isMoveOnStairs)
+        {
+            GameMaster.GM.GetFPSCharacter().MoveSpeedInStand =
+                (GameMaster.GM.GetFPSCharacter().DefaultMoveSpeedInStand / 100.0f) * MoveSpeedStandPercent;
+
+            GameMaster.GM.GetFPSCharacter().MoveSpeedInSprint =
+                (GameMaster.GM.GetFPSCharacter().DefaultMoveSpeedInSprint / 100.0f) * MoveSpeedSprintPercent;
+
+            GameMaster.GM.GetFPSCharacter().MoveSpeedInCrunch =
+                (GameMaster.GM.GetFPSCharacter().DefaultMoveSpeedInSprint / 100.0f) * MoveSpeedCrouchPercent;
+        }
+        else
+        {
+            GameMaster.GM.GetFPSCharacter().MoveSpeedInStand = GameMaster.GM.GetFPSCharacter().DefaultMoveSpeedInStand;
+            GameMaster.GM.GetFPSCharacter().MoveSpeedInSprint = GameMaster.GM.GetFPSCharacter().DefaultMoveSpeedInSprint;
+            GameMaster.GM.GetFPSCharacter().MoveSpeedInCrunch = GameMaster.GM.GetFPSCharacter().DefaultMoveSpeedInCrunch;
         }
     }
 }

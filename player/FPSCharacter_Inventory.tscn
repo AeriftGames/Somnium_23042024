@@ -49,12 +49,14 @@ script = ExtResource("3_aggcm")
 
 [node name="CharacterStaminaComponent" type="Node" parent="CharacterComponents" index="1"]
 script = ExtResource("9_ogpi2")
+InitMaxStamina = 150.0
 
 [node name="CharacterInventoryComponent" type="Node" parent="CharacterComponents" index="2"]
 script = ExtResource("5_8thmx")
 
 [node name="CharacterStairsComponent" type="Node3D" parent="CharacterComponents" index="3"]
 script = ExtResource("6_wo4bu")
+EnableCharacterEffects = false
 metadata/_edit_lock_ = true
 
 [node name="RayCast3D" type="RayCast3D" parent="CharacterComponents/CharacterStairsComponent" index="0"]
