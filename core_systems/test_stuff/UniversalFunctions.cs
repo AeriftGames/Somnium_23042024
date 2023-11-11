@@ -19,6 +19,45 @@ public partial class UniversalFunctions
         public string name;
         public string path;
     }
+
+    public struct SFpsInfo
+    {
+        public int minFps;
+        public int maxFps;
+        public int avgFps;
+    }
+
+    static public SFpsInfo CalculateFpsInfo(Array<int>newAllFpsData)
+    {
+        SFpsInfo FpsInfo = new SFpsInfo();
+
+        int minFps = 10000;     // pro zacatek musi byt nejvyssi
+        int maxFps = 0;         // pro zacatek musi byt nejmensi
+        int avgFps;
+        int w_avgFps = 0;
+
+        // kalkulace min max avg FPS
+        foreach (int fps in newAllFpsData)
+        {
+            if (fps < minFps && fps > 10)
+                minFps = fps;
+
+            if (fps > maxFps)
+                maxFps = fps;
+
+            w_avgFps = w_avgFps + fps;
+        }
+
+        avgFps = w_avgFps / newAllFpsData.Count;
+        GD.Print(avgFps);
+
+        FpsInfo.minFps = minFps;
+        FpsInfo.maxFps = maxFps;
+        FpsInfo.avgFps = avgFps;
+
+        return FpsInfo;
+    }
+
     static public HitResult IsSimpleRaycastHit(Node3D owner, Vector3 from, Vector3 to, uint collisionMask)
     {
         HitResult result = new HitResult();
@@ -210,5 +249,19 @@ public partial class UniversalFunctions
         if (allSpawnObjects.Count == 0) { GameMaster.GM.Log.WriteLog(GameMaster.GM, LogSystem.ELogMsgType.ERROR, "nenacetli jsme zadne LevelInfo"); }
 
         return allSpawnObjects;
+    }
+
+    static public string GetQualityLevelText(int newQualityLevelID)
+    {
+        // vyber textu aktualni kvality
+        switch (newQualityLevelID)
+        {
+            case 0: return "lowest quality";
+            case 1: return "low quality";
+            case 2: return "medium quality";
+            case 3: return "high quality";
+            case 4: return "highest quality";
+            default: return "none";
+        }
     }
 }

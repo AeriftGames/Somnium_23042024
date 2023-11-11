@@ -79,7 +79,7 @@ public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
 		base._Ready();
 
 		// nacteni hudu
-		basicHud = GetNode<BasicHud>("BasicHud");
+		basicHud = GetNode<BasicHud>("AllHuds/BasicHud");
 		basicHud.SetUseVisible(false);
 
 		// vytvoreni grab system
@@ -310,20 +310,9 @@ public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
 			newZoomValue,newZoomInterpSpeed,newZoomRotateSpeed,newOnHitTargetZoomToNormal);
 	}
 
-	public CharacterInteractiveSystem GetInteractiveSystem()
-	{
-		return InteractiveSystem;
-	}
-
-	public BasicHud GetBasicHud()
-	{
-		return basicHud;
-	}
-
-	public InGameMenu GetInGameMenu()
-	{
-		return GetAllHudsControlNode().GetNode<InGameMenu>("InGameMenu");
-	}
+	public CharacterInteractiveSystem GetInteractiveSystem(){return InteractiveSystem;}
+	public BasicHud GetBasicHud(){return basicHud;}
+	public InGameMenu GetInGameMenu(){return GetAllHudsControlNode().GetNode<InGameMenu>("InGameMenu");}
 
 	public override void FreeAll()
 	{

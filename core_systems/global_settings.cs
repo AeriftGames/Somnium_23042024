@@ -34,6 +34,8 @@ public partial class global_settings : Godot.GodotObject
         // nacteme veskera data ulozena ze souboru
         global_settings_data data = GetData();
 
+        if (data == null) return;
+
         // pouze aplikujeme jednotliva nastaveni = neukladame do souboru
         Apply_ScreenMode(data.ScreenMode, true, false);
         Apply_ScreenSizeID(data.ScreenSizeID, true, false);
@@ -472,7 +474,7 @@ public partial class global_settings : Godot.GodotObject
 
     public bool GetActual_UnlockMaxFps()
     {
-        if (Engine.MaxFps == 60)
+        if (Engine.MaxFps > 0)
             return false;
         else
             return true;
@@ -495,7 +497,7 @@ public partial class global_settings : Godot.GodotObject
         // Save now
         if (newSaveNow)
         {
-            GetData().UnlockMaxFps = newValue;
+            //GetData().UnlockMaxFps = newValue;
             GetData().Save();
             gm.Log.WriteLog(gm, LogSystem.ELogMsgType.INFO, "save video settings: disable vsync = " + newValue);
         }

@@ -76,7 +76,7 @@ public partial class dead_cam_body : RigidBody3D
         UniversalFunctions.PlayRandomSound(audioPlayer,char_inv.GetBodyFallAudios(),0,1);
         
         animationPlayer.Play("death");
-        char_inv.GetHealthSystem().GetDamageHud().StartBloodDeathHud();
+        char_inv.GetCharacterHealthComponent().GetDamageHud().StartBloodDeathHud();
 
         //deadCamShake start shake
         if(deadCamShakeLerp != null)

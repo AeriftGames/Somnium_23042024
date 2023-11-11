@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://wlh0gi2r057f" path="res://menus/InGameMenu.tscn" id="11_8lqy1"]
 
 [node name="FPSCharacter_Interaction" instance=ExtResource("1_0ipjt")]
+collision_mask = 1
 wall_min_slide_angle = 0.0
 script = ExtResource("2_fmih3")
 CameraFovNormal = 65.0
@@ -53,9 +54,6 @@ AudioFlashlight_Off_VolumeDb = -10.0
 unique_name_in_owner = true
 metadata/_edit_lock_ = true
 
-[node name="HeadCrunchPos" parent="." index="4"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
-
 [node name="AudioStreamPlayer_Footsteps" parent="." index="5"]
 volume_db = -6.0
 
@@ -67,8 +65,25 @@ stream = ExtResource("3_ug2fg")
 volume_db = -9.723
 bus = &"Sfx"
 
-[node name="BasicHud" type="Control" parent="." index="8"]
-layout_mode = 3
+[node name="Item_inspect" parent="." index="8" instance=ExtResource("5_iw50w")]
+visible = false
+
+[node name="report_bug" parent="." index="9" instance=ExtResource("7_oxteu")]
+visible = false
+
+[node name="DebugHud" parent="." index="10" instance=ExtResource("10_iakih")]
+visible = false
+
+[node name="HeadCrunchPos" parent="." index="12"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
+
+[node name="InGameMenu" parent="AllHuds" index="0" instance=ExtResource("11_8lqy1")]
+visible = false
+layout_mode = 1
+metadata/_edit_lock_ = true
+
+[node name="BasicHud" type="Control" parent="AllHuds" index="1"]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -78,7 +93,7 @@ mouse_filter = 1
 script = ExtResource("3_etvvy")
 metadata/_edit_lock_ = true
 
-[node name="Crosshair" type="ColorRect" parent="BasicHud" index="0"]
+[node name="Crosshair" type="ColorRect" parent="AllHuds/BasicHud" index="0"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -93,7 +108,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 1, 1, 0.32549)
 
-[node name="UseLabel" type="Label" parent="BasicHud" index="1"]
+[node name="UseLabel" type="Label" parent="AllHuds/BasicHud" index="1"]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 1
 anchors_preset = 8
@@ -110,7 +125,7 @@ grow_vertical = 2
 text = "use"
 horizontal_alignment = 1
 
-[node name="HandGrabbedTexture" type="TextureRect" parent="BasicHud" index="2"]
+[node name="HandGrabbedTexture" type="TextureRect" parent="AllHuds/BasicHud" index="2"]
 self_modulate = Color(1, 1, 1, 0.470588)
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 1
@@ -128,7 +143,7 @@ grow_vertical = 2
 texture = ExtResource("6_fb16h")
 expand_mode = 1
 
-[node name="HandClickTexture" type="TextureRect" parent="BasicHud" index="3"]
+[node name="HandClickTexture" type="TextureRect" parent="AllHuds/BasicHud" index="3"]
 self_modulate = Color(1, 1, 1, 0.470588)
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 1
@@ -146,7 +161,7 @@ grow_vertical = 2
 texture = ExtResource("6_to5vr")
 expand_mode = 1
 
-[node name="HandCanGrabTexture" type="TextureRect" parent="BasicHud" index="4"]
+[node name="HandCanGrabTexture" type="TextureRect" parent="AllHuds/BasicHud" index="4"]
 self_modulate = Color(1, 1, 1, 0.470588)
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 1
@@ -163,17 +178,4 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("7_bqbud")
 expand_mode = 1
-
-[node name="Item_inspect" parent="." index="9" instance=ExtResource("5_iw50w")]
-visible = false
-
-[node name="report_bug" parent="." index="10" instance=ExtResource("7_oxteu")]
-visible = false
-
-[node name="DebugHud" parent="." index="11" instance=ExtResource("10_iakih")]
-visible = false
-
-[node name="InGameMenu" parent="AllHuds" index="0" instance=ExtResource("11_8lqy1")]
-visible = false
-layout_mode = 1
-metadata/_edit_lock_ = true
+stretch_mode = 5

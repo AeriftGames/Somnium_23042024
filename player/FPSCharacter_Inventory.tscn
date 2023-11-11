@@ -3,15 +3,13 @@
 [ext_resource type="PackedScene" uid="uid://0g1u2jvnfbpy" path="res://player/FPSCharacter_Interaction.tscn" id="1_ywg5i"]
 [ext_resource type="Script" path="res://player/FPSCharacter_Inventory.cs" id="2_k43co"]
 [ext_resource type="AudioStream" uid="uid://d1h0024d0d7i3" path="res://audio/audio_streams/hurts_test/413178__micahlg__male_hurt2.ogg" id="3_51q7g"]
+[ext_resource type="Script" path="res://player/character_components/CharacterHealthComponent.cs" id="3_aggcm"]
 [ext_resource type="Script" path="res://player/character_systems/CharacterInfoHud.cs" id="4_nvx4w"]
+[ext_resource type="Script" path="res://player/character_components/CharacterInventoryComponent.cs" id="5_8thmx"]
 [ext_resource type="PackedScene" uid="uid://dhhnra4i7t74r" path="res://player/character_systems/damage_hud.tscn" id="5_dhy04"]
-[ext_resource type="Script" path="res://player/character_systems/CharacterStairSystem.cs" id="5_kvnk0"]
-[ext_resource type="Script" path="res://player/character_systems/inventory_menu/InventorySystem.cs" id="8_1wcpl"]
+[ext_resource type="Script" path="res://player/character_components/CharacterStairsComponent.cs" id="6_wo4bu"]
 [ext_resource type="PackedScene" uid="uid://dxumv4dw6y6ps" path="res://player/character_systems/inventory_menu/inventory_menu_number_two.tscn" id="9_bfvnj"]
-[ext_resource type="Script" path="res://player/character_systems/StaminaSystem.cs" id="9_ogpi2"]
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_wsteg"]
-radius = 0.6
+[ext_resource type="Script" path="res://player/character_components/CharacterStaminaComponent.cs" id="9_ogpi2"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7bbwt"]
 bg_color = Color(0.913319, 0.285158, 0, 0.392157)
@@ -28,87 +26,70 @@ corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
 [node name="FPSCharacter_Inventory" instance=ExtResource("1_ywg5i")]
+collision_mask = 33
+floor_constant_speed = true
+floor_max_angle = 0.872665
 script = ExtResource("2_k43co")
-StartActualHealth = 100.0
-StartMaxHealth = 100.0
-StartHealthRegenVal = 1.0
-StartHealthRegenTick = 0.5
-StartHealthRegenEnable = false
-HurtAudios = null
-DeathAudios = null
-BodyFallAudios = null
+HurtAudios = Array[AudioStream]([])
+DeathAudios = Array[AudioStream]([])
+BodyFallAudios = Array[AudioStream]([])
 CanShootProjectile = true
 PowerImpulseShoot = 10.0
 MassProjectile = 5.0
 EnableAutoDestroyProjectile = true
 MSecToDestroyProjectile = 5000
-AudioFlashlight_On = null
-AudioFlashlight_Off = null
 FootStepLengthInSprint = 1.25
 FootStepLengthInCrouch = 0.85
-FootstepSounds = null
 FootstepsVolumeDBInWalk = -2.0
 FootstepsVolumeDBInSprint = 1.0
 FootstepsVolumeDBInCrouch = -7.0
+FootstepsAudioPitch = 0.0
 MiniHeightForLandingEffect = 0.35
-miniHeightLandingSounds = null
-smallHeightLandingSounds = null
-mediumHeightLandingSounds = null
-highHeightLandingSounds = null
-deathHeightLandingSounds = null
-JumpingSounds = null
-JumpingAudioPitch = 1.0
-JumpingAudioPitchOffset = 0.2
-CrouchingSounds = null
-CrouchingAudioPitch = 0.65
-CrouchingAudioPitchRandomOffset = 0.05
-CrouchingVolumeDB = -5.0
-UncrouchingSounds = null
-UncrouchingAudioPitch = 0.5
-UncrouchingVolumeDB = -5.0
 CrunchLerpSpeed = 5.0
 
-[node name="InventorySystem" type="Node" parent="." index="0"]
-script = ExtResource("8_1wcpl")
-MaxInventoryCapacity = 10
+[node name="CharacterHealthComponent" type="Node" parent="CharacterComponents" index="0"]
+script = ExtResource("3_aggcm")
 
-[node name="StaminaSystem" type="Node" parent="." index="1"]
+[node name="CharacterStaminaComponent" type="Node" parent="CharacterComponents" index="1"]
 script = ExtResource("9_ogpi2")
-initStaminaRegenVal = 1.0
-initStaminaRegenTick = 0.2
-initStaminaRegenEnable = true
+InitMaxStamina = 150.0
 
-[node name="StairSystem" type="Node3D" parent="." index="2"]
-script = ExtResource("5_kvnk0")
+[node name="CharacterInventoryComponent" type="Node" parent="CharacterComponents" index="2"]
+script = ExtResource("5_8thmx")
+
+[node name="CharacterStairsComponent" type="Node3D" parent="CharacterComponents" index="3"]
+script = ExtResource("6_wo4bu")
+MoveSpeedStandPercent = 90.0
+MoveSpeedSprintPercent = 90.0
 metadata/_edit_lock_ = true
 
-[node name="ShapeCast3D" type="ShapeCast3D" parent="StairSystem" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.09073, -0.451133)
-shape = SubResource("SphereShape3D_wsteg")
-margin = 0.05
+[node name="RayCast3D" type="RayCast3D" parent="CharacterComponents/CharacterStairsComponent" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+collision_mask = 9
+metadata/_edit_lock_ = true
 
-[node name="AudioStreamPlayer_Footsteps" parent="." index="8"]
+[node name="AudioStreamPlayer_Footsteps" parent="." index="5"]
 max_polyphony = 3
 
-[node name="AudioStreamPlayer_JumpLand" parent="." index="9"]
+[node name="AudioStreamPlayer_JumpLand" parent="." index="6"]
 max_polyphony = 3
 
-[node name="AudioStreamPlayer_Hurts" type="AudioStreamPlayer" parent="." index="11"]
+[node name="AudioStreamPlayer_Hurts" type="AudioStreamPlayer" parent="." index="8"]
 stream = ExtResource("3_51q7g")
 max_polyphony = 4
 bus = &"Sfx"
 
-[node name="AudioStreamPlayer_Universal" type="AudioStreamPlayer" parent="." index="12"]
+[node name="AudioStreamPlayer_Universal" type="AudioStreamPlayer" parent="." index="9"]
 max_polyphony = 4
 bus = &"Sfx"
 
-[node name="Item_inspect" parent="." index="14"]
+[node name="Item_inspect" parent="." index="10"]
 metadata/_edit_lock_ = true
 
-[node name="report_bug" parent="." index="15"]
+[node name="report_bug" parent="." index="11"]
 metadata/_edit_lock_ = true
 
-[node name="DebugHud" parent="." index="16"]
+[node name="DebugHud" parent="." index="12"]
 metadata/_edit_lock_ = true
 
 [node name="InventoryMenu" parent="AllHuds" index="1" instance=ExtResource("9_bfvnj")]
@@ -204,6 +185,9 @@ metadata/_edit_lock_ = true
 [node name="DamageHud" parent="AllHuds" index="3" instance=ExtResource("5_dhy04")]
 layout_mode = 1
 metadata/_edit_lock_ = true
+
+[node name="BasicHud" parent="AllHuds" index="4"]
+mouse_filter = 2
 
 [connection signal="value_changed" from="AllHuds/CharacterInfoHud/VBoxContainer/HBoxContainer_Health/ProgressBar_Health" to="AllHuds/CharacterInfoHud" method="_on_progress_bar_health_value_changed"]
 [connection signal="value_changed" from="AllHuds/CharacterInfoHud/VBoxContainer/HBoxContainer_Stamina/ProgressBar_Stamina" to="AllHuds/CharacterInfoHud" method="_on_progress_bar_stamina_value_changed"]

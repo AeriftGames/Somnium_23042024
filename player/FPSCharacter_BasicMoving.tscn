@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://dhm8txujxj2hn"]
+[gd_scene load_steps=5 format=3 uid="uid://dhm8txujxj2hn"]
 
 [ext_resource type="Script" path="res://player/FPSCharacter_BasicMoving.cs" id="1_sks4r"]
+[ext_resource type="Script" path="res://player/character_components/CharacterComponents.cs" id="2_gxxs4"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0a8eu"]
 radius = 0.4
@@ -12,8 +13,12 @@ height = 0.9
 
 [node name="FPSCharacter_BasicMoving" type="CharacterBody3D"]
 collision_layer = 2
+collision_mask = 17
 script = ExtResource("1_sks4r")
 metadata/_edit_lock_ = true
+
+[node name="CharacterComponents" type="Node3D" parent="."]
+script = ExtResource("2_gxxs4")
 
 [node name="CharacterCollisionStand" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)

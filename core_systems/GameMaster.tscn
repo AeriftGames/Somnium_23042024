@@ -1,13 +1,159 @@
-[gd_scene load_steps=6 format=3 uid="uid://bfjmbldwhs02n"]
+[gd_scene load_steps=20 format=3 uid="uid://bfjmbldwhs02n"]
 
 [ext_resource type="Script" path="res://core_systems/GameMaster.cs" id="1_mjdjb"]
 [ext_resource type="Script" path="res://core_systems/level_loader_system/CLevelLoader.cs" id="2_dgyoo"]
 [ext_resource type="Script" path="res://core_systems/benchmark_system/CBenchmarkSystem.cs" id="2_ketqv"]
 [ext_resource type="Script" path="res://core_systems/MasterSignals.cs" id="2_xs61v"]
 [ext_resource type="PackedScene" uid="uid://tr2dxfjg7wdl" path="res://core_systems/level_loader_system/loading_hud.tscn" id="4_di1bu"]
+[ext_resource type="Script" path="res://core_systems/benchmark_system/BenchmarkScoreBoard.cs" id="5_y5do3"]
+[ext_resource type="Script" path="res://core_systems/benchmark_system/BenchmarkMenuAndFpsStats.cs" id="6_hknud"]
+[ext_resource type="Script" path="res://core_systems/benchmark_system/InBenchmarkMenu.cs" id="7_k2x5r"]
+[ext_resource type="PackedScene" uid="uid://d1xpbdilt7rk1" path="res://menus/BaseFocusedMenuButton.tscn" id="8_ccud7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_105xh"]
+bg_color = Color(0.552941, 0.552941, 0.552941, 1)
+border_width_left = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.258824, 0.258824, 0.258824, 1)
+border_blend = true
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+corner_detail = 1
+shadow_color = Color(0, 0, 0, 0.470588)
+shadow_size = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qdcl0"]
+bg_color = Color(0.337255, 0.337255, 0.337255, 1)
+border_width_left = 3
+border_width_top = 5
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.203922, 0.203922, 0.203922, 1)
+border_blend = true
+corner_radius_top_left = 40
+corner_radius_top_right = 40
+corner_radius_bottom_right = 40
+corner_radius_bottom_left = 40
+corner_detail = 1
+shadow_size = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u2smx"]
+bg_color = Color(0.552941, 0.552941, 0.552941, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.258824, 0.258824, 0.258824, 1)
+border_blend = true
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+corner_detail = 1
+shadow_color = Color(0, 0, 0, 0.470588)
+shadow_size = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2ej5u"]
+bg_color = Color(0.337255, 0.337255, 0.337255, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.203922, 0.203922, 0.203922, 1)
+border_blend = true
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+corner_detail = 1
+shadow_size = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lsx5l"]
+bg_color = Color(0.415686, 0.368627, 0.32549, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 10
+shadow_color = Color(0, 0, 0, 0.470588)
+shadow_size = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vfedd"]
+bg_color = Color(0.262745, 0.227451, 0.2, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 10
+shadow_color = Color(0, 0, 0, 0.470588)
+shadow_size = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aj37x"]
+bg_color = Color(0.262745, 0.227451, 0.2, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 10
+shadow_color = Color(0, 0, 0, 0.470588)
+shadow_size = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7oyyx"]
+bg_color = Color(0.415686, 0.368627, 0.32549, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 10
+shadow_color = Color(0, 0, 0, 0.470588)
+shadow_size = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wi8nc"]
+bg_color = Color(0.262745, 0.227451, 0.2, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 10
+shadow_color = Color(0, 0, 0, 0.470588)
+shadow_size = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oathn"]
+bg_color = Color(0.262745, 0.227451, 0.2, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 10
+shadow_color = Color(0, 0, 0, 0.470588)
+shadow_size = 5
 
 [node name="GameMaster" type="Node"]
 script = ExtResource("1_mjdjb")
+Build = "1"
 
 [node name="MasterSignals" type="Node" parent="."]
 script = ExtResource("2_xs61v")
@@ -21,7 +167,283 @@ EnableLowest = false
 EnableLow = false
 EnableHighest = false
 
+[node name="BenchmarkScoreBoard" type="Control" parent="BenchmarkSystem"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("5_y5do3")
+
+[node name="Panel" type="Panel" parent="BenchmarkSystem/BenchmarkScoreBoard"]
+custom_minimum_size = Vector2(400, 300)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -150.0
+offset_right = 200.0
+offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_105xh")
+
+[node name="Panel2" type="Panel" parent="BenchmarkSystem/BenchmarkScoreBoard"]
+custom_minimum_size = Vector2(380, 280)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -55.0
+offset_right = 100.0
+offset_bottom = 55.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_qdcl0")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="BenchmarkSystem/BenchmarkScoreBoard/Panel2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="BuildLabel" type="Label" parent="BenchmarkSystem/BenchmarkScoreBoard/Panel2/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "build: "
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LevelNameLabel" type="Label" parent="BenchmarkSystem/BenchmarkScoreBoard/Panel2/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "levelname: "
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="QualityLabel" type="Label" parent="BenchmarkSystem/BenchmarkScoreBoard/Panel2/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "quality: "
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MinFpsLabel" type="Label" parent="BenchmarkSystem/BenchmarkScoreBoard/Panel2/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "min fps: "
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MaxFpsLabel" type="Label" parent="BenchmarkSystem/BenchmarkScoreBoard/Panel2/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "max fps: "
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AvgFpsLabel" type="Label" parent="BenchmarkSystem/BenchmarkScoreBoard/Panel2/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "avg fps: "
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BenchmarkMenuAndFpsStats" type="Control" parent="BenchmarkSystem"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("6_hknud")
+
+[node name="Panel2" type="Panel" parent="BenchmarkSystem/BenchmarkMenuAndFpsStats"]
+custom_minimum_size = Vector2(200, 110)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -103.0
+offset_right = 103.0
+offset_bottom = 115.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_u2smx")
+
+[node name="Panel" type="Panel" parent="BenchmarkSystem/BenchmarkMenuAndFpsStats"]
+custom_minimum_size = Vector2(200, 110)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 40.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_2ej5u")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="BenchmarkSystem/BenchmarkMenuAndFpsStats"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -75.0
+offset_right = 75.0
+offset_bottom = 40.0
+grow_horizontal = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="BenchmarkSystem/BenchmarkMenuAndFpsStats/VBoxContainer"]
+custom_minimum_size = Vector2(150, 25)
+layout_mode = 2
+alignment = 1
+
+[node name="Text" type="Label" parent="BenchmarkSystem/BenchmarkMenuAndFpsStats/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 2
+theme_override_font_sizes/font_size = 25
+text = "Benchmark"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="BenchmarkSystem/BenchmarkMenuAndFpsStats/VBoxContainer"]
+custom_minimum_size = Vector2(150, 25)
+layout_mode = 2
+alignment = 1
+
+[node name="QualityText" type="Label" parent="BenchmarkSystem/BenchmarkMenuAndFpsStats/VBoxContainer/HBoxContainer3"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
+
+[node name="HBoxContainer" type="HBoxContainer" parent="BenchmarkSystem/BenchmarkMenuAndFpsStats/VBoxContainer"]
+custom_minimum_size = Vector2(150, 20)
+layout_mode = 2
+alignment = 1
+
+[node name="Text" type="Label" parent="BenchmarkSystem/BenchmarkMenuAndFpsStats/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
+text = "FPS:"
+
+[node name="FPSLabel" type="Label" parent="BenchmarkSystem/BenchmarkMenuAndFpsStats/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(45, 0)
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
+horizontal_alignment = 1
+
+[node name="InBenchmarkMenu" type="Control" parent="BenchmarkSystem/BenchmarkMenuAndFpsStats"]
+top_level = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("7_k2x5r")
+
+[node name="ColorRect" type="ColorRect" parent="BenchmarkSystem/BenchmarkMenuAndFpsStats/InBenchmarkMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.705882)
+
+[node name="Control" type="Control" parent="BenchmarkSystem/BenchmarkMenuAndFpsStats/InBenchmarkMenu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="BenchmarkSystem/BenchmarkMenuAndFpsStats/InBenchmarkMenu/Control"]
+custom_minimum_size = Vector2(300, 200)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -54.0
+offset_right = 150.0
+offset_bottom = 146.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Button_BackToGame" parent="BenchmarkSystem/BenchmarkMenuAndFpsStats/InBenchmarkMenu/Control/VBoxContainer" instance=ExtResource("8_ccud7")]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_lsx5l")
+theme_override_styles/hover = SubResource("StyleBoxFlat_vfedd")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_aj37x")
+text = "continue"
+ButtonFocusID = 0
+
+[node name="Button_RestartBenchmark" parent="BenchmarkSystem/BenchmarkMenuAndFpsStats/InBenchmarkMenu/Control/VBoxContainer" instance=ExtResource("8_ccud7")]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_lsx5l")
+theme_override_styles/hover = SubResource("StyleBoxFlat_vfedd")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_aj37x")
+text = "restart benchmark"
+ButtonFocusID = 0
+
+[node name="Button_QuitGame" parent="BenchmarkSystem/BenchmarkMenuAndFpsStats/InBenchmarkMenu/Control/VBoxContainer" instance=ExtResource("8_ccud7")]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_7oyyx")
+theme_override_styles/hover = SubResource("StyleBoxFlat_wi8nc")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_oathn")
+text = "exit benchmark"
+ButtonFocusID = 1
+
+[node name="Label" type="Label" parent="BenchmarkSystem/BenchmarkMenuAndFpsStats/InBenchmarkMenu/Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -150.0
+offset_top = -42.0
+offset_right = 150.0
+offset_bottom = -7.0
+grow_horizontal = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 25
+text = "Benchmark Menu"
+horizontal_alignment = 1
+
 [node name="BlackScreen" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -41,3 +463,7 @@ color = Color(0, 0, 0, 1)
 
 [node name="LoadingHud" parent="." instance=ExtResource("4_di1bu")]
 visible = false
+
+[connection signal="pressed" from="BenchmarkSystem/BenchmarkMenuAndFpsStats/InBenchmarkMenu/Control/VBoxContainer/Button_BackToGame" to="BenchmarkSystem/BenchmarkMenuAndFpsStats/InBenchmarkMenu" method="_on_button_back_to_game_pressed"]
+[connection signal="pressed" from="BenchmarkSystem/BenchmarkMenuAndFpsStats/InBenchmarkMenu/Control/VBoxContainer/Button_RestartBenchmark" to="BenchmarkSystem/BenchmarkMenuAndFpsStats/InBenchmarkMenu" method="_on_button_restart_benchmark_pressed"]
+[connection signal="pressed" from="BenchmarkSystem/BenchmarkMenuAndFpsStats/InBenchmarkMenu/Control/VBoxContainer/Button_QuitGame" to="BenchmarkSystem/BenchmarkMenuAndFpsStats/InBenchmarkMenu" method="_on_button_quit_game_pressed"]

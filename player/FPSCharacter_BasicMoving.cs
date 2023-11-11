@@ -34,7 +34,16 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
 	public enum ECharacterPosture { Stand, Crunch }
 	public enum ECharacterReasonDead { NoHealth, FallFromHeight, KilledFromEnemy}
 
-	[ExportGroupAttribute("Movement Settings")]
+    [ExportGroupAttribute("Default Movement Settings")]
+    [Export] public float DefaultMoveSpeedInStand = 2.25f;
+    [Export] public float DefaultMoveSpeedInCrunch = 1.4f;
+    [Export] public float DefaultMoveSpeedInSprint = 4.1f;
+    [Export] public float DefaultMoveSpeedInFall = 1.4f;
+    [Export] public float DefaultAccelerateSmoothStep = 6f;
+    [Export] public float DefaultDeccelerateSmoothStep = 6f;
+    [Export] public float DefaultDeccelerateInFallSmoothStep = 1.0f;
+
+    [ExportGroupAttribute("Movement Settings")]
 	[Export] public ECharacterMode CharacterMode = ECharacterMode.WalkMode;
 	[Export] public bool CanSprint = true;
 	[Export] public bool CanJump = true;

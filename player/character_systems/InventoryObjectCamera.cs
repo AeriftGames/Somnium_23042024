@@ -9,6 +9,7 @@ public partial class InventoryObjectCamera : ObjectCamera
 
     private HeadBobSystem headBobSystem = null;
     private HeadDangerShakeSystem headDangerShakeSystem = null;
+    private HeadStairsBobComponent headStairsBobComponent = null;
 
     public override void _Ready()
 	{
@@ -20,7 +21,10 @@ public partial class InventoryObjectCamera : ObjectCamera
 
         headBobSystem = GetNode<HeadBobSystem>("%HeadBobSystem");
         headDangerShakeSystem = GetNode<HeadDangerShakeSystem>("%HeadDangerShakeSystem");
-        headBobSystem.Init(this);
+        headBobSystem.StartInit(this);
+
+        headStairsBobComponent = GetNode<HeadStairsBobComponent>("%HeadStairsBobComponent");
+        headStairsBobComponent.StartInit(this);
     }
 
 	public override void _Process(double delta)
@@ -32,6 +36,7 @@ public partial class InventoryObjectCamera : ObjectCamera
     {
         base._PhysicsProcess(delta);
 
+        headStairsBobComponent.Update((float)delta);
         headBobSystem.Update((float)delta);
     }
 
@@ -42,4 +47,6 @@ public partial class InventoryObjectCamera : ObjectCamera
 
     public HeadBobSystem GetHeadBobSystem() { return headBobSystem; }
     public HeadDangerShakeSystem GetHeadDangerShakeSystem() { return headDangerShakeSystem; }
+
+    public HeadStairsBobComponent GetHeadStairsBobComponent() {  return headStairsBobComponent; }
 }

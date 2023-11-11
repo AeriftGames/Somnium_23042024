@@ -37,8 +37,8 @@ public partial class CharacterInfoHud : Control
         FPSCharacter_Inventory character = GameMaster.GM.GetFPSCharacter() as FPSCharacter_Inventory;
         if (character == null) return;
 
-        progressBarHealth.Value = character.GetHealthSystem().GetHealth();
-        progressBarHealth.MaxValue = character.GetHealthSystem().GetMaxHealth();
+        progressBarHealth.Value = character.GetCharacterHealthComponent().GetHealth();
+        progressBarHealth.MaxValue = character.GetCharacterHealthComponent().GetMaxHealth();
         progressBarHealth.MinValue = 0.0f;
     }
 
@@ -47,8 +47,8 @@ public partial class CharacterInfoHud : Control
         FPSCharacter_Inventory character = GameMaster.GM.GetFPSCharacter() as FPSCharacter_Inventory;
         if (character == null) return;
 
-        progressBarStamina.Value = character.GetStaminaSystem().GetStamina();
-        progressBarStamina.MaxValue = character.GetStaminaSystem().GetMaxStamina();
+        progressBarStamina.Value = character.GetCharacterStaminaComponent().GetStamina();
+        progressBarStamina.MaxValue = character.GetCharacterStaminaComponent().GetMaxStamina();
         progressBarStamina.MinValue = 0.0f;
     }
 }

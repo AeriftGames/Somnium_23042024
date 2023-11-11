@@ -35,7 +35,7 @@ public partial class InventoryItemDataNode : Node3D
 		if (charInventory == null) return;
 
 		// pokusime se pridat item do inventare hrace
-		if(charInventory.GetInventorySystem().AddItemToInventory(Data) == false)
+		if(charInventory.GetInventoryComponent().AddItemToInventory(Data) == false)
 		{
 			// inventar je plny
 			GD.Print("Inventar je plny");
