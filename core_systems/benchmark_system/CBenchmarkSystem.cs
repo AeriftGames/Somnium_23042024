@@ -111,7 +111,7 @@ public partial class CBenchmarkSystem : Node
 
     public async void NextBenchmarkQuality()
     {
-        await Task.Delay(5000);
+        await Task.Delay(10000);
 
         benchmarkScoreBoard.SetVisibleForPlayer(false);
         AllFpsData.Clear();
@@ -142,7 +142,7 @@ public partial class CBenchmarkSystem : Node
             false,true);
     }
 
-    public async void FinishBenchmarkPresset()
+    public void FinishBenchmarkPresset()
     {
         // spocitame info fps - avg min max
         UniversalFunctions.SFpsInfo FpsInfo = UniversalFunctions.CalculateFpsInfo(AllFpsData);
@@ -165,7 +165,7 @@ public partial class CBenchmarkSystem : Node
             FpsInfo.avgFps);
     }
 
-    public void FinishBenchmarkPresset_End(int newResult)
+    public void FinishBenchmarkPresset_End(bool newResult)
     {
         GD.Print("vse ok");
 
@@ -190,7 +190,7 @@ public partial class CBenchmarkSystem : Node
         benchmarkMenuAndFpsStats.Visible = true;
     }
 
-public override void _Process(double delta)
+    public override void _Process(double delta)
     {
         base._Process(delta);
     }
@@ -204,4 +204,12 @@ public override void _Process(double delta)
     {
         AllFpsData.Add(newFpsData);
     }
+
+    // Server Check - Signal from GD
+    public void ServerCheck(){ BenchmarkGD.Call("server_check"); }
+    public void ServerCheck_End(bool newResult)
+    {
+        GameMaster.GM.GetMasterSignals().EmitSignal(MasterSignals.SignalName.BenchmarkServerStatus,newResult);
+    }
+
 }
