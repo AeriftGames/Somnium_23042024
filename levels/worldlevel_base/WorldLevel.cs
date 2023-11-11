@@ -12,9 +12,9 @@ public partial class WorldLevel : Node
 
 	private LevelScene levelScene;
 
-    public WorldEnvironment GetWorldEnvironment() { return GetNode<WorldEnvironment>("WorldEnvironment"); }
-    public VoxelGI GetVoxelGI() { return GetNode<VoxelGI>("VoxelGI"); }
-    public LevelScene GetLevelScene() { return levelScene; }
+	public WorldEnvironment GetWorldEnvironment() { return GetNode<WorldEnvironment>("WorldEnvironment"); }
+	public VoxelGI GetVoxelGI() { return GetNode<VoxelGI>("VoxelGI"); }
+	public LevelScene GetLevelScene() { return levelScene; }
 	public ELevelType GetLevelType() { return LevelType; }
 	public LevelDataSettings GetLevelDataSettings() { return GetNode<LevelDataSettings>("LevelDataSettings");}
 
@@ -41,7 +41,7 @@ public partial class WorldLevel : Node
 	public void StartGame()
 	{
 		// Emit Signal StartGame
-        GameMaster.GM.GetMasterSignals().EmitSignal(MasterSignals.SignalName.GameStart);
-    }
+		GameMaster.GM.GetMasterSignals().EmitSignal(MasterSignals.SignalName.GameStart);
+	}
 
 }
