@@ -17,7 +17,7 @@ collision_mask = 17
 script = ExtResource("1_sks4r")
 metadata/_edit_lock_ = true
 
-[node name="CharacterComponents" type="Node" parent="."]
+[node name="CharacterComponents" type="Node3D" parent="."]
 script = ExtResource("2_gxxs4")
 
 [node name="CharacterCollisionStand" type="CollisionShape3D" parent="."]
