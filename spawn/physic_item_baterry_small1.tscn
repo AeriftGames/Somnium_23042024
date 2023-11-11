@@ -46,7 +46,7 @@ meshPos = Vector3(0, 0, 0)
 meshRot = Vector3(0, 0, 0)
 meshScale = Vector3(1, 1, 1)
 
-[sub_resource type="Resource" id="Resource_djig5"]
+[sub_resource type="Resource" id="Resource_8nr7w"]
 resource_local_to_scene = true
 script = ExtResource("7_t6exq")
 itemName = "baterie"
@@ -120,7 +120,7 @@ metadata/_edit_lock_ = true
 [node name="AudioPlayer_PhysicEffects" type="AudioStreamPlayer3D" parent="."]
 
 [node name="InventoryItemDataNode" parent="." instance=ExtResource("5_gg4kt")]
-Data = SubResource("Resource_djig5")
+Data = SubResource("Resource_8nr7w")
 
 [connection signal="body_entered" from="interactive_object/StaticBody3D/interactive_object_area3D" to="interactive_object" method="_on_interactive_object_area_3d_body_entered"]
 [connection signal="body_exited" from="interactive_object/StaticBody3D/interactive_object_area3D" to="interactive_object" method="_on_interactive_object_area_3d_body_exited"]

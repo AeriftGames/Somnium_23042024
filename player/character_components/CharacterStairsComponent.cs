@@ -7,6 +7,7 @@ public partial class CharacterStairsComponent : Node3D
     // 0.5 konec schodu
 
     [Export] public bool EnableStairsDetectEffect = true;
+    [Export] public bool EnableDebugPrint = false;
 
     private FPSCharacter_Inventory inventoryCharacter = null;
 
@@ -32,6 +33,8 @@ public partial class CharacterStairsComponent : Node3D
     public override void _PhysicsProcess(double delta)
     {
         base._PhysicsProcess(delta);
+
+        if (EnableStairsDetectEffect == false) return;
 
         if (rayCast3D.IsColliding())
         {
@@ -78,8 +81,11 @@ public partial class CharacterStairsComponent : Node3D
         {
             if(new_rozdil > 0.02f)
             {
-                GD.Print("last krok");
-                //GD.Print(new_rozdil);
+                if(EnableDebugPrint)
+                {
+                    GD.Print("last krok");
+                    //GD.Print(new_rozdil);
+                }
             }
         }
     }
@@ -88,11 +94,13 @@ public partial class CharacterStairsComponent : Node3D
     {
         if (newMoveOnStairsUp)
         {
-            GD.Print("krok nahoru");
+            if(EnableDebugPrint)
+                GD.Print("krok nahoru");
         }
         else
         {
-            GD.Print("krok dolu");
+            if (EnableDebugPrint)
+                GD.Print("krok dolu");
         }
     }
 }
