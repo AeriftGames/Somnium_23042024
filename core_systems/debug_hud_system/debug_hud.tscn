@@ -265,8 +265,13 @@ size_flags_horizontal = 4
 text = "Save main as default"
 
 [node name="level" type="VBoxContainer" parent="OptionsPanel/TabContainer"]
-visible = false
 layout_mode = 2
+
+[node name="ColorRect_DontRemove" type="ColorRect" parent="OptionsPanel/TabContainer/level"]
+custom_minimum_size = Vector2(280, 15)
+layout_mode = 2
+mouse_filter = 2
+color = Color(1, 1, 1, 0)
 
 [node name="spawn" type="VBoxContainer" parent="OptionsPanel/TabContainer"]
 visible = false

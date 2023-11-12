@@ -4,6 +4,12 @@
 [ext_resource type="Resource" uid="uid://b537iaq5k3rpy" path="res://levels/all_levels_info_resources/game_levels/levelinfo_demo_extend.tres" id="2_7crgj"]
 
 [node name="MainApp" type="Node"]
+editor_description = "Můžeme nastavit jaký typ aplikace se má spustit:
+
+Game - spustí menu pro hru
+Benchmark - spustí menu pro benchmark
+
+Specific Level - spustí jakýkoliv LevelInfoData nastavený v záložce"
 script = ExtResource("1_d8pml")
 LevelInfo_SpecificLevelInfo = ExtResource("2_7crgj")
 

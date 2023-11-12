@@ -1,6 +1,7 @@
 using Godot;
 using Godot.Collections;
 using System;
+using System.Collections.Generic;
 using System.Threading;
 
 public partial class DebugHud : Control
@@ -258,20 +259,24 @@ public partial class DebugHud : Control
 
 	public void BuildLevelButtons()
 	{
-		var allLevelsInfo = GameMaster.GM.GetLevelLoader().GetAllLevelsInfo();
-		foreach (var level in allLevelsInfo)
-		{
-			// Instance Button
-			level_button level_button_Instance = (level_button)GD.Load<PackedScene>(
-				"res://core_systems/debug_hud_system/level_button.tscn").Instantiate();
+        PackedScene newLevelInfoButton =
+            GD.Load<PackedScene>("res://core_systems/debug_hud_system/level_info_button1.tscn");
 
-			level_button_Instance.Text = level.name;
-			level_button_Instance.SetLevelData(level.path, level.name, level.leveltype);
+        List<levelinfo_base_resource> AllLevelInfos =
+            UniversalFunctions.GetAllLevelInfoDataFromDir("res://levels/all_levels_info_resources/game_levels/");
 
-			VBoxContainer LevelButtonContainer = GetNode<VBoxContainer>("OptionsPanel/TabContainer/level");
-			LevelButtonContainer.AddChild(level_button_Instance);
-		}
-	}
+        foreach (levelinfo_base_resource levelinfo in AllLevelInfos)
+        {
+            GD.Print(levelinfo.LevelPath);
+            level_info_button b = newLevelInfoButton.Instantiate<level_info_button>();
+            b.Text = levelinfo.LevelName;
+
+            VBoxContainer LevelButtonContainer = GetNode<VBoxContainer>("OptionsPanel/TabContainer/level");
+            LevelButtonContainer.AddChild(b);
+            b.SetLevelInfo(levelinfo);
+        }
+
+    }
 
 	public void BuildSpawnButtons()
 	{
