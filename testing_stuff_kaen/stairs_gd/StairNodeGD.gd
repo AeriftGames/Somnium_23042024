@@ -31,6 +31,7 @@ func _ready() -> void:
 	
 
 func start_init():
+	await get_tree().create_timer(0.5).timeout
 	if Engine.is_editor_hint():
 		if get_node("AllStairs") != null:
 			get_node("AllStairs").queue_free()
