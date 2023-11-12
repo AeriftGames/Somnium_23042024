@@ -82,7 +82,8 @@ public partial class CBenchmarkSystem : Node
         // Emit start game from now
         GameMaster.GM.GetMasterSignals().EmitSignal(MasterSignals.SignalName.GameStart);
 
-        GameMaster.GM.GetLoadingHud().Visible = false;
+        GameMaster.GM.GetLoadingHud().LoadingIsComplete(true);
+        GameMaster.GM.EnableBlackScreen(false);
 
         // priprava na dalsi test
 
@@ -131,7 +132,7 @@ public partial class CBenchmarkSystem : Node
 
         // pockame v teto asynchronni funkci na signal kdy se benchmark level uspesne nacetl
         await ToSignal(GameMaster.GM.GetLevelLoader(), CLevelLoader.SignalName.LevelLoadComplete);
-        //GD.Print("Benchmark level Load Complete");
+        GD.Print("Benchmark level Load Complete");
 
         await ToSignal(GetTree().CreateTimer(1.0f), "timeout");
 

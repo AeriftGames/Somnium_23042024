@@ -24,7 +24,6 @@ public partial class WorldLevel : Node
 
 		InitGame();
 	}
-
 	public void InitGame()
 	{
 		// Pro moznost benchmarku - tudiz bez playera
@@ -32,8 +31,10 @@ public partial class WorldLevel : Node
 		{
 			// Apply Settings
 			GameMaster.GM.GetSettings().LoadAndApply_AllGraphicsSettings();
+			/*
 			GameMaster.GM.EnableBlackScreen(false);
 			GameMaster.GM.GetLoadingHud().LoadingIsComplete(false);
+			*/
 		}
 		else
 		{
@@ -41,11 +42,12 @@ public partial class WorldLevel : Node
 			GameMaster.GM.GetSettings().LoadAndApply_AllGraphicsSettings();
 			GameMaster.GM.EnableBlackScreen(false);
 			GameMaster.GM.GetLoadingHud().LoadingIsComplete(false);
-		}
 
-		StartGame();
+            StartGame();
+        }
+
+		//StartGame();
 	}
-
 	public void StartGame()
 	{
 		// Emit Signal StartGame

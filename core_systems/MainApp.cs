@@ -33,7 +33,8 @@ public partial class MainApp : Node
     public void StartAsGame()
     {
         levelinfo_base_resource LevelInfoData = UniversalFunctions.GetLevelInfoData(LevelInfo_StartGame);
-        GameMaster.GM.GetLevelLoader().LoadNewWorldLevel_Threaded(LevelInfoData.LevelPath,LevelInfoData.LevelName);
+        //GameMaster.GM.GetLevelLoader().LoadNewWorldLevel_Threaded(LevelInfoData.LevelPath,LevelInfoData.LevelName);
+        GetTree().ChangeSceneToFile(LevelInfoData.LevelPath);
     }
 
     public void StartAsBenchmark()

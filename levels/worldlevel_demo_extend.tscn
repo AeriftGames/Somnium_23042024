@@ -2884,26 +2884,26 @@ number_of_stairs = 6
 
 [node name="AllStairs" type="Node3D" parent="StairNodeGd2"]
 
-[node name="stair_5" type="Node3D" parent="StairNodeGd2/AllStairs" instance=ExtResource("32_mx7wi")]
+[node name="stair_0" type="Node3D" parent="StairNodeGd2/AllStairs" instance=ExtResource("32_mx7wi")]
 script = ExtResource("33_u2mb3")
 
-[node name="stair_6" type="Node3D" parent="StairNodeGd2/AllStairs" instance=ExtResource("32_mx7wi")]
+[node name="stair_1" type="Node3D" parent="StairNodeGd2/AllStairs" instance=ExtResource("32_mx7wi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.3, 0)
 script = ExtResource("33_u2mb3")
 
-[node name="stair_7" type="Node3D" parent="StairNodeGd2/AllStairs" instance=ExtResource("32_mx7wi")]
+[node name="stair_2" type="Node3D" parent="StairNodeGd2/AllStairs" instance=ExtResource("32_mx7wi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0.6, 0)
 script = ExtResource("33_u2mb3")
 
-[node name="stair_8" type="Node3D" parent="StairNodeGd2/AllStairs" instance=ExtResource("32_mx7wi")]
+[node name="stair_3" type="Node3D" parent="StairNodeGd2/AllStairs" instance=ExtResource("32_mx7wi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0.9, 0)
 script = ExtResource("33_u2mb3")
 
-[node name="stair_9" type="Node3D" parent="StairNodeGd2/AllStairs" instance=ExtResource("32_mx7wi")]
+[node name="stair_4" type="Node3D" parent="StairNodeGd2/AllStairs" instance=ExtResource("32_mx7wi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 1.2, 0)
 script = ExtResource("33_u2mb3")
 
-[node name="stair_10" type="Node3D" parent="StairNodeGd2/AllStairs" instance=ExtResource("32_mx7wi")]
+[node name="stair_5" type="Node3D" parent="StairNodeGd2/AllStairs" instance=ExtResource("32_mx7wi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 1.5, 0)
 script = ExtResource("33_u2mb3")
 

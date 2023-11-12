@@ -14,7 +14,7 @@ public partial class BenchmarkPoints : Node3D
 	[Export] public float speed = 3.0f;
 	[Export] public float speed_interp = 0.8f;
 
-	private bool updateMove = true;
+	private bool updateMove = false;
 
 	Godot.Timer FpsTimer = new Timer();
 
@@ -69,6 +69,11 @@ public partial class BenchmarkPoints : Node3D
     public async void PostInit()
     {
         await ToSignal(GameMaster.GM.GetMasterSignals(), MasterSignals.SignalName.GameStart);
+		GD.Print("GameStart receiverd");
+
 		GameMaster.GM.GetBenchmarkSystem().SetPostInitBenchmarkSettings();
+
+		// start move benchmark camera
+		updateMove = true;
     }
 }

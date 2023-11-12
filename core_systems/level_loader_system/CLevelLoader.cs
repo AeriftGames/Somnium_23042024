@@ -49,6 +49,9 @@ public partial class CLevelLoader : Node
         // zapneme cernou obrazovku
         GameMaster.GM.EnableBlackScreen(true);
 
+        // zmenime level
+        actualLevelName = newLevelName;
+
         // nastavime loading hud
         GameMaster.GM.GetLoadingHud().SetInitializeAndVisibleNow(actualLevelName, true);
 
@@ -56,7 +59,6 @@ public partial class CLevelLoader : Node
         await Task.Delay(delay);
 
         // zmenime level
-        actualLevelName = newLevelName;
         LoadNewWorldLevel_Threaded(newLevelScenePath, newLevelName);
     }
 
