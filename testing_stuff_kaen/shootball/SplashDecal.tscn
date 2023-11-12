@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://b5svedrgrygao"]
+
+[ext_resource type="Texture2D" uid="uid://ctdgo3kg24ivi" path="res://testing_stuff_kaen/shootball/blue_splash.png" id="1_iwnec"]
+
+[node name="Decal" type="Decal"]
+size = Vector3(0.5, 0.5, 0.5)
+texture_albedo = ExtResource("1_iwnec")

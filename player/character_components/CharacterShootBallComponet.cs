@@ -7,6 +7,10 @@ public partial class CharacterShootBallComponet : Node
 {
     [ExportGroupAttribute("ShootProjectile")]
     [Export] bool CanShootProjectile = true;
+
+    [Export] ball_projectile.EShootBallActionType ShootBallActionType = 
+        ball_projectile.EShootBallActionType.RigidBody;
+
     [Export] float PowerImpulseShoot = 10.0f;
     [Export] float MassProjectile = 5.0f;
     [Export] bool EnableAutoDestroyProjectile = true;
@@ -27,6 +31,7 @@ public partial class CharacterShootBallComponet : Node
     {
         base._PhysicsProcess(delta);
 
+        // strelba
         bool shootNow = ownCharacter.IsInputEnable() && CanShootProjectile && Input.IsActionJustPressed("mouseRightClick");
         if (shootNow)
             ShootPhysicProjectile();
@@ -34,20 +39,27 @@ public partial class CharacterShootBallComponet : Node
 
     public void ShootPhysicProjectile()
     {
+        // smer strileni
         Vector3 start = ownCharacter.GetObjectCamera().GlobalPosition - new Vector3(0,0.2f,0);
         Vector3 end = ownCharacter.GetObjectCamera().GetCameraLookingPoint().GlobalPosition;
 
-        RigidBody3D projectile =
-            GD.Load<PackedScene>("res://testing_stuff_kaen/shootball/ball_projectile.tscn").Instantiate() as RigidBody3D;
+        // vytvoreni projektilu - ball
+        ball_projectile projectile =
+            GD.Load<PackedScene>("res://testing_stuff_kaen/shootball/ball_projectile.tscn")
+            .Instantiate() as ball_projectile;
 
         GameMaster.GM.GetLevelLoader().GetActualLevelScene().AddChild(projectile);
+
+        projectile.SetActionType(ShootBallActionType);
         projectile.Mass = MassProjectile;
         projectile.GlobalPosition = start;
         projectile.ApplyCentralImpulse((end - start) * PowerImpulseShoot);
 
+        // zvuk
         AudioStreamPlayer_ShootBall.Play();
 
-        if (EnableAutoDestroyProjectile)
+        // auto destroy - pouze kdyz je action type RigidBody
+        if (EnableAutoDestroyProjectile && ShootBallActionType == ball_projectile.EShootBallActionType.RigidBody)
             DestroyProjectile(projectile);
     }
 
