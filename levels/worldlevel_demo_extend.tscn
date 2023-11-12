@@ -257,6 +257,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19, 0, 3)
 [node name="floor_2x2m_variant48" parent="LevelScene/Rooms/Room1/Grounds" instance=ExtResource("4_7mihh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29, 0, 3)
 
+[node name="floor_2x2m_variant52" parent="LevelScene/Rooms/Room1/Grounds" instance=ExtResource("4_7mihh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29, 0.245, 3)
+
+[node name="floor_2x2m_variant53" parent="LevelScene/Rooms/Room1/Grounds" instance=ExtResource("4_7mihh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29, 0.245, 1)
+
+[node name="floor_2x2m_variant54" parent="LevelScene/Rooms/Room1/Grounds" instance=ExtResource("4_7mihh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31, 0.245, 1)
+
+[node name="floor_2x2m_variant55" parent="LevelScene/Rooms/Room1/Grounds" instance=ExtResource("4_7mihh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31, 0.245, 3)
+
 [node name="floor_2x2m_variant49" parent="LevelScene/Rooms/Room1/Grounds" instance=ExtResource("4_7mihh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31, 0, 3)
 
@@ -309,7 +321,22 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, 3)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, 3)
 
 [node name="floor_4x2m_special16" parent="LevelScene/Rooms/Room1/Grounds" instance=ExtResource("13_sidox")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21, 0, 7)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.6045, 0.244601, 7)
+
+[node name="floor_4x2m_special36" parent="LevelScene/Rooms/Room1/Grounds" instance=ExtResource("13_sidox")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.6045, 0.244601, 7)
+
+[node name="floor_4x2m_special37" parent="LevelScene/Rooms/Room1/Grounds" instance=ExtResource("13_sidox")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.6045, 0.244601, 7)
+
+[node name="floor_4x2m_special38" parent="LevelScene/Rooms/Room1/Grounds" instance=ExtResource("13_sidox")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.6045, 0.244601, 7)
+
+[node name="floor_4x2m_special39" parent="LevelScene/Rooms/Room1/Grounds" instance=ExtResource("13_sidox")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.6045, 0.244601, 7)
+
+[node name="floor_4x2m_special40" parent="LevelScene/Rooms/Room1/Grounds" instance=ExtResource("13_sidox")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31.6045, 0.244601, 7)
 
 [node name="floor_4x2m_special22" parent="LevelScene/Rooms/Room1/Grounds" instance=ExtResource("13_sidox")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21, 0, -1)
@@ -332,8 +359,32 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -25, 0
 [node name="floor_4x2m_special29" parent="LevelScene/Rooms/Room1/Grounds" instance=ExtResource("13_sidox")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -25, 0, 3)
 
+[node name="floor_4x2m_special41" parent="LevelScene/Rooms/Room1/Grounds" instance=ExtResource("13_sidox")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -25, 0.245, 3)
+
+[node name="floor_4x2m_special42" parent="LevelScene/Rooms/Room1/Grounds" instance=ExtResource("13_sidox")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -25, 0.245, 1)
+
 [node name="floor_4x2m_special27" parent="LevelScene/Rooms/Room1/Grounds" instance=ExtResource("13_sidox")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31, 0, -1)
+
+[node name="floor_4x2m_special43" parent="LevelScene/Rooms/Room1/Grounds" instance=ExtResource("13_sidox")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31.6, 0.245, -1)
+
+[node name="floor_4x2m_special44" parent="LevelScene/Rooms/Room1/Grounds" instance=ExtResource("13_sidox")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.6, 0.245, -1)
+
+[node name="floor_4x2m_special45" parent="LevelScene/Rooms/Room1/Grounds" instance=ExtResource("13_sidox")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.6, 0.245, -1)
+
+[node name="floor_4x2m_special46" parent="LevelScene/Rooms/Room1/Grounds" instance=ExtResource("13_sidox")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.6, 0.245, -1)
+
+[node name="floor_4x2m_special47" parent="LevelScene/Rooms/Room1/Grounds" instance=ExtResource("13_sidox")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.6, 0.245, -1)
+
+[node name="floor_4x2m_special48" parent="LevelScene/Rooms/Room1/Grounds" instance=ExtResource("13_sidox")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.6, 0.245, -1)
 
 [node name="floor_4x2m_special17" parent="LevelScene/Rooms/Room1/Grounds" instance=ExtResource("13_sidox")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23, 0, 7)
@@ -406,12 +457,6 @@ transform = Transform3D(4.37114e-08, -1, -1.74846e-07, 1, 4.37114e-08, 1.91069e-
 
 [node name="floor_2x2m_variant60" parent="LevelScene/Rooms/Room1/Ceils" instance=ExtResource("5_54dkv")]
 transform = Transform3D(4.37114e-08, -1, -1.74846e-07, 1, 4.37114e-08, 1.91069e-14, -1.14641e-14, -1.74846e-07, 1, 30.9, -1, 3)
-
-[node name="floor_2x2m_variant25" parent="LevelScene/Rooms/Room1/Ceils" instance=ExtResource("5_54dkv")]
-transform = Transform3D(1.31134e-07, 1, 8.74228e-08, 1, -1.31134e-07, -3.82137e-15, 7.64274e-15, 8.74228e-08, -1, -4, -1, 3)
-
-[node name="floor_2x2m_variant26" parent="LevelScene/Rooms/Room1/Ceils" instance=ExtResource("5_54dkv")]
-transform = Transform3D(1.31134e-07, 1, 8.74228e-08, 1, -1.31134e-07, -3.82137e-15, 7.64274e-15, 8.74228e-08, -1, -4, -1, 1)
 
 [node name="floor_2x2m_variant17" parent="LevelScene/Rooms/Room1/Ceils" instance=ExtResource("5_54dkv")]
 transform = Transform3D(-1, 8.74228e-08, -7.64274e-15, 8.74228e-08, 1, -8.74228e-08, 0, -8.74228e-08, -1, 9.2, 0.0999997, -0.9)
@@ -823,6 +868,9 @@ transform = Transform3D(-4.37114e-08, 1, 0, 0, 0, -1, -1, -4.37114e-08, 0, -1.7,
 [node name="kov_cylinder4" parent="LevelScene/Rooms/Room1/Walls" instance=ExtResource("19_nnnov")]
 transform = Transform3D(-4.37114e-08, 1, 0, 0, 0, -1, -1, -4.37114e-08, 0, 6.3, 2.9, -3.72529e-08)
 
+[node name="kov_cylinder8" parent="LevelScene/Rooms/Room1/Walls" instance=ExtResource("19_nnnov")]
+transform = Transform3D(-4.37114e-08, 1, 0, 0, 0, -1, -1, -4.37114e-08, 0, 14.3, 2.9, -3.72529e-08)
+
 [node name="sloup_end1_3" parent="LevelScene/Rooms/Room1/Walls" instance=ExtResource("14_spof8")]
 transform = Transform3D(4.33326e-07, -1.23048e-07, 2.815, -3.635, -2.12527e-07, 3.35575e-07, -2.74435e-07, 2.815, 1.23048e-07, -4.1, -0.1, 0.0245705)
 
@@ -1109,7 +1157,7 @@ visible = false
 transform = Transform3D(-2.98023e-08, 0, -1, 0, 1, 0, 1, 0, -2.98023e-08, 3.35881, 0.438359, -2.00398)
 
 [node name="DrawerTable4" parent="LevelScene/Rooms/Room1/Props" instance=ExtResource("10_33ktw")]
-transform = Transform3D(0.0409863, 0, 0.99916, 0, 1, 0, -0.99916, 0, 0.0409863, -30.5566, 0.438359, 5.98297)
+transform = Transform3D(0.0409863, 0, 0.99916, 0, 1, 0, -0.99916, 0, 0.0409863, -30.5566, 0.689785, 5.98297)
 
 [node name="DrawerTable" parent="LevelScene/Rooms/Room1/Props" instance=ExtResource("16_ne61i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.2, 0.432864, -3.4)
@@ -3067,82 +3115,34 @@ script = ExtResource("33_u2mb3")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.603114, 0)
 script = ExtResource("33_u2mb3")
 
-[node name="StairNodeGd4" parent="." instance=ExtResource("31_teo4b")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.7, 0, 2)
-number_of_stairs = 8
+[node name="StairNodeGd10" parent="." instance=ExtResource("31_teo4b")]
+transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, -20, 0, 6)
+number_of_stairs = 2
 stair_prefab = ExtResource("34_o3rpm")
 enable_world_col = true
 enable_player_col = true
 
-[node name="AllStairs" type="Node3D" parent="StairNodeGd4"]
+[node name="AllStairs" type="Node3D" parent="StairNodeGd10"]
 
-[node name="stair_0" type="Node3D" parent="StairNodeGd4/AllStairs" instance=ExtResource("34_o3rpm")]
+[node name="stair_0" type="Node3D" parent="StairNodeGd10/AllStairs" instance=ExtResource("34_o3rpm")]
 script = ExtResource("33_u2mb3")
 
-[node name="stair_1" type="Node3D" parent="StairNodeGd4/AllStairs" instance=ExtResource("34_o3rpm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, 0.120623, 0)
+[node name="stair_1" type="Node3D" parent="StairNodeGd10/AllStairs" instance=ExtResource("34_o3rpm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.599998, 0.120623, -4.76837e-07)
 script = ExtResource("33_u2mb3")
 
-[node name="stair_2" type="Node3D" parent="StairNodeGd4/AllStairs" instance=ExtResource("34_o3rpm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, 0.241246, 0)
-script = ExtResource("33_u2mb3")
-
-[node name="stair_3" type="Node3D" parent="StairNodeGd4/AllStairs" instance=ExtResource("34_o3rpm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8, 0.361868, 0)
-script = ExtResource("33_u2mb3")
-
-[node name="stair_4" type="Node3D" parent="StairNodeGd4/AllStairs" instance=ExtResource("34_o3rpm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4, 0.482491, 0)
-script = ExtResource("33_u2mb3")
-
-[node name="stair_5" type="Node3D" parent="StairNodeGd4/AllStairs" instance=ExtResource("34_o3rpm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.603114, 0)
-script = ExtResource("33_u2mb3")
-
-[node name="stair_6" type="Node3D" parent="StairNodeGd4/AllStairs" instance=ExtResource("34_o3rpm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.6, 0.723737, 0)
-script = ExtResource("33_u2mb3")
-
-[node name="stair_7" type="Node3D" parent="StairNodeGd4/AllStairs" instance=ExtResource("34_o3rpm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.2, 0.84436, 0)
-script = ExtResource("33_u2mb3")
-
-[node name="StairNodeGd5" parent="." instance=ExtResource("31_teo4b")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -12.3, 0, 2)
-number_of_stairs = 8
+[node name="StairNodeGd11" parent="." instance=ExtResource("31_teo4b")]
+transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, -20, 0, -2)
+number_of_stairs = 2
 stair_prefab = ExtResource("34_o3rpm")
 enable_world_col = true
 enable_player_col = true
 
-[node name="AllStairs" type="Node3D" parent="StairNodeGd5"]
+[node name="AllStairs" type="Node3D" parent="StairNodeGd11"]
 
-[node name="stair_0" type="Node3D" parent="StairNodeGd5/AllStairs" instance=ExtResource("34_o3rpm")]
+[node name="stair_0" type="Node3D" parent="StairNodeGd11/AllStairs" instance=ExtResource("34_o3rpm")]
 script = ExtResource("33_u2mb3")
 
-[node name="stair_1" type="Node3D" parent="StairNodeGd5/AllStairs" instance=ExtResource("34_o3rpm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, 0.120623, 0)
-script = ExtResource("33_u2mb3")
-
-[node name="stair_2" type="Node3D" parent="StairNodeGd5/AllStairs" instance=ExtResource("34_o3rpm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, 0.241246, -1.19209e-07)
-script = ExtResource("33_u2mb3")
-
-[node name="stair_3" type="Node3D" parent="StairNodeGd5/AllStairs" instance=ExtResource("34_o3rpm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8, 0.361868, -1.19209e-07)
-script = ExtResource("33_u2mb3")
-
-[node name="stair_4" type="Node3D" parent="StairNodeGd5/AllStairs" instance=ExtResource("34_o3rpm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4, 0.482491, -2.38419e-07)
-script = ExtResource("33_u2mb3")
-
-[node name="stair_5" type="Node3D" parent="StairNodeGd5/AllStairs" instance=ExtResource("34_o3rpm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.603114, -2.38419e-07)
-script = ExtResource("33_u2mb3")
-
-[node name="stair_6" type="Node3D" parent="StairNodeGd5/AllStairs" instance=ExtResource("34_o3rpm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.6, 0.723737, -3.57628e-07)
-script = ExtResource("33_u2mb3")
-
-[node name="stair_7" type="Node3D" parent="StairNodeGd5/AllStairs" instance=ExtResource("34_o3rpm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.2, 0.84436, -3.57628e-07)
+[node name="stair_1" type="Node3D" parent="StairNodeGd11/AllStairs" instance=ExtResource("34_o3rpm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.599998, 0.120623, -4.76837e-07)
 script = ExtResource("33_u2mb3")
