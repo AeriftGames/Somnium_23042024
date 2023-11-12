@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dqte75d7q1mdq"]
 
-[ext_resource type="Script" path="res://game/game_menu/base/level_info_button.cs" id="1_s50mw"]
+[ext_resource type="Script" path="res://game/base/level_info_button.cs" id="1_s50mw"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fkrvy"]
 corner_radius_top_left = 10

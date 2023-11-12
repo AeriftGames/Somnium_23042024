@@ -21,7 +21,7 @@ public partial class game_main_menu : Control
     public void LoadAllLevelsAsButtons()
     {
         PackedScene newLevelInfoButton = 
-            GD.Load<PackedScene>("res://game/game_menu/base/level_info_button.tscn");
+            GD.Load<PackedScene>("res://game/base/level_info_button.tscn");
 
         List<levelinfo_base_resource> AllLevelInfos = 
             UniversalFunctions.GetAllLevelInfoDataFromDir("res://levels/all_levels_info_resources/game_levels/");
