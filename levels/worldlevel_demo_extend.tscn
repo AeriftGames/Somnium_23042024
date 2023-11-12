@@ -31,8 +31,8 @@
 [ext_resource type="PackedScene" uid="uid://dk6s7gogdikp7" path="res://testing_stuff_kaen/lis/lis_anim.tscn" id="29_covdt"]
 [ext_resource type="PackedScene" uid="uid://c73m0yt3w8nd1" path="res://testing_stuff_kaen/stairs/StairsTest.tscn" id="30_xhesf"]
 [ext_resource type="PackedScene" uid="uid://dpa62hhmdflgr" path="res://testing_stuff_kaen/stairs_gd/StairNodeGD.tscn" id="31_teo4b"]
-[ext_resource type="PackedScene" uid="uid://wsyiamduvmqd" path="res://testing_stuff_kaen/stairs_gd/stair_classic1.tscn" id="32_mx7wi"]
-[ext_resource type="Script" path="res://testing_stuff_kaen/stairs_gd/stair_classic1.gd" id="33_u2mb3"]
+[ext_resource type="PackedScene" uid="uid://wsyiamduvmqd" path="res://testing_stuff_kaen/stairs_gd/stair_classic1.tscn" id="32_6ew5s"]
+[ext_resource type="Script" path="res://testing_stuff_kaen/stairs_gd/stair_classic1.gd" id="33_bovvl"]
 [ext_resource type="PackedScene" uid="uid://cfw5ieeqmr1ut" path="res://testing_stuff_kaen/stairs_gd/stair_classic_short.tscn" id="34_o3rpm"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_w3cwh"]
@@ -2932,28 +2932,28 @@ number_of_stairs = 6
 
 [node name="AllStairs" type="Node3D" parent="StairNodeGd2"]
 
-[node name="stair_0" type="Node3D" parent="StairNodeGd2/AllStairs" instance=ExtResource("32_mx7wi")]
-script = ExtResource("33_u2mb3")
+[node name="stair_0" type="Node3D" parent="StairNodeGd2/AllStairs" instance=ExtResource("32_6ew5s")]
+script = ExtResource("33_bovvl")
 
-[node name="stair_1" type="Node3D" parent="StairNodeGd2/AllStairs" instance=ExtResource("32_mx7wi")]
+[node name="stair_1" type="Node3D" parent="StairNodeGd2/AllStairs" instance=ExtResource("32_6ew5s")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.3, 0)
-script = ExtResource("33_u2mb3")
+script = ExtResource("33_bovvl")
 
-[node name="stair_2" type="Node3D" parent="StairNodeGd2/AllStairs" instance=ExtResource("32_mx7wi")]
+[node name="stair_2" type="Node3D" parent="StairNodeGd2/AllStairs" instance=ExtResource("32_6ew5s")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0.6, 0)
-script = ExtResource("33_u2mb3")
+script = ExtResource("33_bovvl")
 
-[node name="stair_3" type="Node3D" parent="StairNodeGd2/AllStairs" instance=ExtResource("32_mx7wi")]
+[node name="stair_3" type="Node3D" parent="StairNodeGd2/AllStairs" instance=ExtResource("32_6ew5s")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0.9, 0)
-script = ExtResource("33_u2mb3")
+script = ExtResource("33_bovvl")
 
-[node name="stair_4" type="Node3D" parent="StairNodeGd2/AllStairs" instance=ExtResource("32_mx7wi")]
+[node name="stair_4" type="Node3D" parent="StairNodeGd2/AllStairs" instance=ExtResource("32_6ew5s")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 1.2, 0)
-script = ExtResource("33_u2mb3")
+script = ExtResource("33_bovvl")
 
-[node name="stair_5" type="Node3D" parent="StairNodeGd2/AllStairs" instance=ExtResource("32_mx7wi")]
+[node name="stair_5" type="Node3D" parent="StairNodeGd2/AllStairs" instance=ExtResource("32_6ew5s")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 1.5, 0)
-script = ExtResource("33_u2mb3")
+script = ExtResource("33_bovvl")
 
 [node name="StairNodeGd" parent="." instance=ExtResource("31_teo4b")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.8071, 0, 2)
@@ -2965,27 +2965,27 @@ enable_player_col = true
 [node name="AllStairs" type="Node3D" parent="StairNodeGd"]
 
 [node name="stair_0" type="Node3D" parent="StairNodeGd/AllStairs" instance=ExtResource("34_o3rpm")]
-script = ExtResource("33_u2mb3")
+script = ExtResource("33_bovvl")
 
 [node name="stair_1" type="Node3D" parent="StairNodeGd/AllStairs" instance=ExtResource("34_o3rpm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, 0.120623, 0)
-script = ExtResource("33_u2mb3")
+script = ExtResource("33_bovvl")
 
 [node name="stair_2" type="Node3D" parent="StairNodeGd/AllStairs" instance=ExtResource("34_o3rpm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, 0.241246, 0)
-script = ExtResource("33_u2mb3")
+script = ExtResource("33_bovvl")
 
 [node name="stair_3" type="Node3D" parent="StairNodeGd/AllStairs" instance=ExtResource("34_o3rpm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8, 0.361868, 0)
-script = ExtResource("33_u2mb3")
+script = ExtResource("33_bovvl")
 
 [node name="stair_4" type="Node3D" parent="StairNodeGd/AllStairs" instance=ExtResource("34_o3rpm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4, 0.482491, 0)
-script = ExtResource("33_u2mb3")
+script = ExtResource("33_bovvl")
 
 [node name="stair_5" type="Node3D" parent="StairNodeGd/AllStairs" instance=ExtResource("34_o3rpm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.603114, 0)
-script = ExtResource("33_u2mb3")
+script = ExtResource("33_bovvl")
 
 [node name="StairNodeGd6" parent="." instance=ExtResource("31_teo4b")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 35, 0, -2)
@@ -2997,19 +2997,19 @@ enable_player_col = true
 [node name="AllStairs" type="Node3D" parent="StairNodeGd6"]
 
 [node name="stair_0" type="Node3D" parent="StairNodeGd6/AllStairs" instance=ExtResource("34_o3rpm")]
-script = ExtResource("33_u2mb3")
+script = ExtResource("33_bovvl")
 
 [node name="stair_1" type="Node3D" parent="StairNodeGd6/AllStairs" instance=ExtResource("34_o3rpm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.599998, 0.120623, 0)
-script = ExtResource("33_u2mb3")
+script = ExtResource("33_bovvl")
 
 [node name="stair_2" type="Node3D" parent="StairNodeGd6/AllStairs" instance=ExtResource("34_o3rpm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, 0.241246, -1.19209e-07)
-script = ExtResource("33_u2mb3")
+script = ExtResource("33_bovvl")
 
 [node name="stair_3" type="Node3D" parent="StairNodeGd6/AllStairs" instance=ExtResource("34_o3rpm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8, 0.361868, -1.19209e-07)
-script = ExtResource("33_u2mb3")
+script = ExtResource("33_bovvl")
 
 [node name="StairNodeGd7" parent="." instance=ExtResource("31_teo4b")]
 transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, 41.2, 0, -2)
@@ -3021,19 +3021,19 @@ enable_player_col = true
 [node name="AllStairs" type="Node3D" parent="StairNodeGd7"]
 
 [node name="stair_0" type="Node3D" parent="StairNodeGd7/AllStairs" instance=ExtResource("34_o3rpm")]
-script = ExtResource("33_u2mb3")
+script = ExtResource("33_bovvl")
 
 [node name="stair_1" type="Node3D" parent="StairNodeGd7/AllStairs" instance=ExtResource("34_o3rpm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.599998, 0.120623, 0)
-script = ExtResource("33_u2mb3")
+script = ExtResource("33_bovvl")
 
 [node name="stair_2" type="Node3D" parent="StairNodeGd7/AllStairs" instance=ExtResource("34_o3rpm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, 0.241246, 0)
-script = ExtResource("33_u2mb3")
+script = ExtResource("33_bovvl")
 
 [node name="stair_3" type="Node3D" parent="StairNodeGd7/AllStairs" instance=ExtResource("34_o3rpm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8, 0.361868, 0)
-script = ExtResource("33_u2mb3")
+script = ExtResource("33_bovvl")
 
 [node name="StairNodeGd8" parent="." instance=ExtResource("31_teo4b")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 35, 0, 6)
@@ -3045,19 +3045,19 @@ enable_player_col = true
 [node name="AllStairs" type="Node3D" parent="StairNodeGd8"]
 
 [node name="stair_0" type="Node3D" parent="StairNodeGd8/AllStairs" instance=ExtResource("34_o3rpm")]
-script = ExtResource("33_u2mb3")
+script = ExtResource("33_bovvl")
 
 [node name="stair_1" type="Node3D" parent="StairNodeGd8/AllStairs" instance=ExtResource("34_o3rpm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.599998, 0.120623, -4.76837e-07)
-script = ExtResource("33_u2mb3")
+script = ExtResource("33_bovvl")
 
 [node name="stair_2" type="Node3D" parent="StairNodeGd8/AllStairs" instance=ExtResource("34_o3rpm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, 0.241246, -9.53674e-07)
-script = ExtResource("33_u2mb3")
+script = ExtResource("33_bovvl")
 
 [node name="stair_3" type="Node3D" parent="StairNodeGd8/AllStairs" instance=ExtResource("34_o3rpm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8, 0.361868, -1.43051e-06)
-script = ExtResource("33_u2mb3")
+script = ExtResource("33_bovvl")
 
 [node name="StairNodeGd9" parent="." instance=ExtResource("31_teo4b")]
 transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, 41.2, 0, 6)
@@ -3069,19 +3069,19 @@ enable_player_col = true
 [node name="AllStairs" type="Node3D" parent="StairNodeGd9"]
 
 [node name="stair_0" type="Node3D" parent="StairNodeGd9/AllStairs" instance=ExtResource("34_o3rpm")]
-script = ExtResource("33_u2mb3")
+script = ExtResource("33_bovvl")
 
 [node name="stair_1" type="Node3D" parent="StairNodeGd9/AllStairs" instance=ExtResource("34_o3rpm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.599998, 0.120623, 0)
-script = ExtResource("33_u2mb3")
+script = ExtResource("33_bovvl")
 
 [node name="stair_2" type="Node3D" parent="StairNodeGd9/AllStairs" instance=ExtResource("34_o3rpm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, 0.241246, 0)
-script = ExtResource("33_u2mb3")
+script = ExtResource("33_bovvl")
 
 [node name="stair_3" type="Node3D" parent="StairNodeGd9/AllStairs" instance=ExtResource("34_o3rpm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8, 0.361868, -4.76837e-07)
-script = ExtResource("33_u2mb3")
+script = ExtResource("33_bovvl")
 
 [node name="StairNodeGd3" parent="." instance=ExtResource("31_teo4b")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 4.8, 0, 2)
@@ -3093,27 +3093,27 @@ enable_player_col = true
 [node name="AllStairs" type="Node3D" parent="StairNodeGd3"]
 
 [node name="stair_0" type="Node3D" parent="StairNodeGd3/AllStairs" instance=ExtResource("34_o3rpm")]
-script = ExtResource("33_u2mb3")
+script = ExtResource("33_bovvl")
 
 [node name="stair_1" type="Node3D" parent="StairNodeGd3/AllStairs" instance=ExtResource("34_o3rpm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, 0.120623, 0)
-script = ExtResource("33_u2mb3")
+script = ExtResource("33_bovvl")
 
 [node name="stair_2" type="Node3D" parent="StairNodeGd3/AllStairs" instance=ExtResource("34_o3rpm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, 0.241246, 0)
-script = ExtResource("33_u2mb3")
+script = ExtResource("33_bovvl")
 
 [node name="stair_3" type="Node3D" parent="StairNodeGd3/AllStairs" instance=ExtResource("34_o3rpm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8, 0.361868, 0)
-script = ExtResource("33_u2mb3")
+script = ExtResource("33_bovvl")
 
 [node name="stair_4" type="Node3D" parent="StairNodeGd3/AllStairs" instance=ExtResource("34_o3rpm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4, 0.482491, 0)
-script = ExtResource("33_u2mb3")
+script = ExtResource("33_bovvl")
 
 [node name="stair_5" type="Node3D" parent="StairNodeGd3/AllStairs" instance=ExtResource("34_o3rpm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.603114, 0)
-script = ExtResource("33_u2mb3")
+script = ExtResource("33_bovvl")
 
 [node name="StairNodeGd10" parent="." instance=ExtResource("31_teo4b")]
 transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, -20, 0, 6)
@@ -3125,11 +3125,11 @@ enable_player_col = true
 [node name="AllStairs" type="Node3D" parent="StairNodeGd10"]
 
 [node name="stair_0" type="Node3D" parent="StairNodeGd10/AllStairs" instance=ExtResource("34_o3rpm")]
-script = ExtResource("33_u2mb3")
+script = ExtResource("33_bovvl")
 
 [node name="stair_1" type="Node3D" parent="StairNodeGd10/AllStairs" instance=ExtResource("34_o3rpm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.599998, 0.120623, -4.76837e-07)
-script = ExtResource("33_u2mb3")
+script = ExtResource("33_bovvl")
 
 [node name="StairNodeGd11" parent="." instance=ExtResource("31_teo4b")]
 transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, -20, 0, -2)
@@ -3141,8 +3141,8 @@ enable_player_col = true
 [node name="AllStairs" type="Node3D" parent="StairNodeGd11"]
 
 [node name="stair_0" type="Node3D" parent="StairNodeGd11/AllStairs" instance=ExtResource("34_o3rpm")]
-script = ExtResource("33_u2mb3")
+script = ExtResource("33_bovvl")
 
 [node name="stair_1" type="Node3D" parent="StairNodeGd11/AllStairs" instance=ExtResource("34_o3rpm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.599998, 0.120623, 0)
-script = ExtResource("33_u2mb3")
+script = ExtResource("33_bovvl")
