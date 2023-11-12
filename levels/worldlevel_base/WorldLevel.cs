@@ -5,7 +5,7 @@ using System.Transactions;
 
 public partial class WorldLevel : Node
 {
-	public enum ELevelType { GameLevel,BenchmarkLevel}
+	public enum ELevelType { GameLevel,BenchmarkLevel,Menu}
 
 	[Export] bool WithoutPlayer = false;
 	[Export] public ELevelType LevelType = ELevelType.GameLevel;

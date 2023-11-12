@@ -1,34 +1,44 @@
 using Godot;
-using System;
+using System.Threading.Tasks;
 
 public partial class MainApp : Node
 {
+    public enum EAppType { Game, Benchmark};
+    [Export] public EAppType AppType = EAppType.Game;
+    [ExportGroup("Start Scenes")]
+    [Export] Resource LevelInfo_StartGame;
+    [Export] Resource LevelInfo_StartBenchmark;
+    
     public override void _Ready()
     {
         base._Ready();
+        PostInit();
+    }
 
-        // Podle Game Type
-        switch (GameMaster.GM.AppType)
+    public async void PostInit()
+    {
+        await Task.Delay(1200);
+
+        // Podle App Type
+        switch (AppType)
         {
-            case GameMaster.EAppType.Game:
-                StartAsGame();
-                break;
-            case GameMaster.EAppType.Benchmark:
-                StartAsBenchmark();
-                break;
-            default:
-                break;
+            case EAppType.Game:
+                StartAsGame(); break;
+            case EAppType.Benchmark:
+                StartAsBenchmark(); break;
+            default: break;
         }
     }
 
     public void StartAsGame()
     {
-        //PackedScene StartGamePackedScene
-        //GameMaster.GM.GetTree().ChangeSceneToPacked(StartGamePackedScene);
+        levelinfo_base_resource LevelInfoData = UniversalFunctions.GetLevelInfoData(LevelInfo_StartGame);
+        GameMaster.GM.GetLevelLoader().LoadNewWorldLevel_Threaded(LevelInfoData.LevelPath,LevelInfoData.LevelName);
     }
 
     public void StartAsBenchmark()
     {
-
+        levelinfo_base_resource LevelInfoData = UniversalFunctions.GetLevelInfoData(LevelInfo_StartBenchmark);
+        GetTree().ChangeSceneToFile(LevelInfoData.LevelPath);
     }
 }

@@ -14,7 +14,7 @@ public partial class UniversalFunctions
         public Node HitNode;
     }
 
-    public struct SSpawnObjectInfo
+    public struct SLevelData
     {
         public string name;
         public string path;
@@ -196,10 +196,10 @@ public partial class UniversalFunctions
 
         return allSpawnNodes;
     }
-    public static List<SSpawnObjectInfo> GetAllSpawnObjectsFromDir(string newDir = "res://spawn")
+    public static List<SLevelData> GetAllSpawnObjectsFromDir(string newDir = "res://spawn")
     {
         string spawn_directory = newDir;
-        List<SSpawnObjectInfo> allSpawnObjects = new List<SSpawnObjectInfo>();
+        List<SLevelData> allSpawnObjects = new List<SLevelData>();
 
         var a = DirAccess.Open(spawn_directory);
         var files = a.GetFiles();
@@ -216,7 +216,7 @@ public partial class UniversalFunctions
                 var file_path = a.GetCurrentDir() + "/" + UniversalFunctions.GetStringBetween(file_name, "", ".remap");
                 var spawn_name = UniversalFunctions.GetStringBetween(file_path, a.GetCurrentDir() + "/", ".tscn");
 
-                SSpawnObjectInfo newSpawnObjectInfo = new SSpawnObjectInfo();
+                SLevelData newSpawnObjectInfo = new SLevelData();
                 newSpawnObjectInfo.path = file_path;
                 newSpawnObjectInfo.name = spawn_name;
 
@@ -237,7 +237,7 @@ public partial class UniversalFunctions
                     var file_path = a.GetCurrentDir() + "/" + file_name;
                     var spawn_name = UniversalFunctions.GetStringBetween(file_path, a.GetCurrentDir() + "/", ".tscn");
 
-                    SSpawnObjectInfo newSpawnObjectInfo= new SSpawnObjectInfo();
+                    SLevelData newSpawnObjectInfo= new SLevelData();
                     newSpawnObjectInfo.path = file_path;
                     newSpawnObjectInfo.name = spawn_name;
 
@@ -263,5 +263,72 @@ public partial class UniversalFunctions
             case 4: return "highest quality";
             default: return "none";
         }
+    }
+
+    static public levelinfo_base_resource GetLevelInfoData(Resource newlevelInfo)
+    {
+        Resource data = GD.Load(newlevelInfo.ResourcePath);
+        if (data != null && data is levelinfo_base_resource leveldata)
+            return leveldata;
+        else
+            return null;
+    }
+    
+    static public levelinfo_base_resource GetLevelInfoData(string new_levelInfopath)
+    {
+        Resource data = GD.Load(new_levelInfopath);
+        if (data != null && data is levelinfo_base_resource leveldata)
+            return leveldata;
+        else
+            return null;
+    }
+    
+    
+    public static List<levelinfo_base_resource> GetAllLevelInfoDataFromDir(
+        string newDir = "res://levels/all_levels_info_resources/game_levels/")
+    {
+        string directory = newDir;
+        List<levelinfo_base_resource> AllLevelInfo = new List<levelinfo_base_resource>();
+
+        var a = DirAccess.Open(directory);
+        var files = a.GetFiles();
+
+        bool is_editor = true;
+
+        string[] levels_files = new string[files.Length];
+
+        // FOR EXPORT
+        foreach (string file_name in files)
+        {
+            if (file_name.Contains(".tres.remap"))
+            {
+                string file_path = a.GetCurrentDir() + "/" + UniversalFunctions.GetStringBetween(file_name, "", ".remap");
+
+                levelinfo_base_resource newLevelInfo = GetLevelInfoData(file_path);
+                AllLevelInfo.Add(newLevelInfo);
+
+                // for export/editor check
+                is_editor = false;
+            }
+        }
+
+        // FOR EDITOR
+        if (is_editor)
+        {
+            foreach (string file_name in files)
+            {
+                if (file_name.Contains(".tres"))
+                {
+                    string file_path = a.GetCurrentDir() + "/" + file_name;
+
+                    levelinfo_base_resource newLevelInfo = GetLevelInfoData(file_path);
+                    AllLevelInfo.Add(newLevelInfo);
+                }
+            }
+        }
+
+        if (AllLevelInfo.Count == 0) { GameMaster.GM.Log.WriteLog(GameMaster.GM, LogSystem.ELogMsgType.ERROR, "nenacetli jsme zadne LevelInfo"); }
+
+        return AllLevelInfo;
     }
 }

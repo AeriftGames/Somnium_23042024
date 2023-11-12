@@ -1,0 +1,9 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://chvc3p6o3f1bi"]
+
+[ext_resource type="Script" path="res://levels/all_levels_info_resources/base/levelinfo_base_resource.cs" id="1_mrrsp"]
+
+[resource]
+script = ExtResource("1_mrrsp")
+LevelType = 0
+LevelPath = "res://levels/worldlevel_demo.tscn"
+LevelName = "Demo Basic"

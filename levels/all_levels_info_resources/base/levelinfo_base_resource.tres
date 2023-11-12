@@ -1,0 +1,6 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://bp7gv60dt55tn"]
+
+[ext_resource type="Script" path="res://levels/all_levels_info_resources/base/levelinfo_base_resource.cs" id="1_glj52"]
+
+[resource]
+script = ExtResource("1_glj52")

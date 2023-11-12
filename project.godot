@@ -17,7 +17,7 @@ ClassPrefix=""
 [application]
 
 config/name="Somnium"
-run/main_scene="res://levels/worldlevel_demo_extend.tscn"
+run/main_scene="res://main_app.tscn"
 config/features=PackedStringArray("4.2", "C#")
 run/flush_stdout_on_print=true
 run/max_fps=60

@@ -5,9 +5,6 @@ using System.Threading.Tasks;
 
 public partial class GameMaster : Node
 {
-	public enum EAppType { Game, Benchmark };
-	[Export] public EAppType AppType = EAppType.Game;
-
 	[Export] public string Build;
 
 	// CORE

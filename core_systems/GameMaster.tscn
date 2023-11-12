@@ -468,6 +468,7 @@ color = Color(0, 0, 0, 1)
 
 [node name="LoadingHud" parent="." instance=ExtResource("4_di1bu")]
 visible = false
+metadata/_edit_lock_ = true
 
 [connection signal="pressed" from="BenchmarkSystem/BenchmarkMenuAndFpsStats/InBenchmarkMenu/Control/VBoxContainer/Button_BackToGame" to="BenchmarkSystem/BenchmarkMenuAndFpsStats/InBenchmarkMenu" method="_on_button_back_to_game_pressed"]
 [connection signal="pressed" from="BenchmarkSystem/BenchmarkMenuAndFpsStats/InBenchmarkMenu/Control/VBoxContainer/Button_RestartBenchmark" to="BenchmarkSystem/BenchmarkMenuAndFpsStats/InBenchmarkMenu" method="_on_button_restart_benchmark_pressed"]
