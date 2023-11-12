@@ -29,12 +29,7 @@ func _ready() -> void:
 	
 	start_init()
 	
-	if get_tree() != null:
-		if not Engine.is_editor_hint():
-			for child in get_node("AllStairs").get_children():
-				child.set_stair_world_collision(enable_world_col)
-				child.set_stair_player_collision(enable_player_col)
-	
+
 func start_init():
 	if Engine.is_editor_hint():
 		if get_node("AllStairs") != null:
@@ -49,6 +44,14 @@ func start_init():
 			allstair_node.set_owner(get_tree().edited_scene_root)
 	
 			_generate_stairs(number_of_stairs)
+			
+			
+	if get_tree() != null:
+		if not Engine.is_editor_hint():
+			if get_node("AllStairs") != null:
+				for child in get_node("AllStairs").get_children():
+					child.set_stair_world_collision(enable_world_col)
+					child.set_stair_player_collision(enable_player_col)
 	
 func _generate_stairs(new_number_of_stairs:int):
 	if not Engine.is_editor_hint():

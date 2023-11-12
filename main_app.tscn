@@ -6,6 +6,5 @@
 
 [node name="MainApp" type="Node"]
 script = ExtResource("1_d8pml")
-AppType = 1
 LevelInfo_StartGame = ExtResource("2_3pxl3")
 LevelInfo_StartBenchmark = ExtResource("3_ftogd")

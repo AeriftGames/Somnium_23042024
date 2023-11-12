@@ -28,6 +28,7 @@ public partial class game_main_menu : Control
 
         foreach (levelinfo_base_resource levelinfo in AllLevelInfos)
         {
+            GD.Print(levelinfo.LevelPath);
             level_info_button b = newLevelInfoButton.Instantiate<level_info_button>();
             b.Text = levelinfo.LevelName;
             VBoxContainer_Levels.AddChild(b);
