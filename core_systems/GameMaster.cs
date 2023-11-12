@@ -28,7 +28,7 @@ public partial class GameMaster : Node
     private MasterSignals masterSignals = null;
 
     //
-    private Control blackScreen = null;
+    private BlackScreen blackScreen = null;
 
 	//
 	private bool isQuitting = false;
@@ -38,10 +38,10 @@ public partial class GameMaster : Node
 		GD.Print("GameMaster loaded");
 		GM = this;
 
-		blackScreen = GetNode<Control>("BlackScreen");
+		blackScreen = GetNode<BlackScreen>("BlackScreen");
 
 		// zapnout cernou obrazovku
-		EnableBlackScreen(true);
+		EnableBlackScreen(true,true);
 
 		// nacteme si objekty z autoloadu pro pristup do jejich gdscriptu
 		GDNode_CustomSettings = GetTree().Root.GetNode<Node>("CustomSettings");
@@ -85,7 +85,10 @@ public partial class GameMaster : Node
 	public CLevelLoader GetLevelLoader() { return LevelLoader; }
 
 	// prekryje veskery hud a 3d svet cernou obrazovkou
-	public void EnableBlackScreen(bool newEnable){ blackScreen.Visible = newEnable; }
+	public void EnableBlackScreen(bool newEnable,bool new_instant = false) 
+	{ 
+		blackScreen.SetActive(!newEnable,!new_instant);
+	}
 
 	//
 	public global_settings GetSettings(){ return Settings; }
@@ -114,10 +117,12 @@ public partial class GameMaster : Node
 		interactCharacter.GetInGameMenu().SetActive(!interactCharacter.GetInGameMenu().GetActive());
 	}
 
-	public void TaskQuitGame()
+	public async void TaskQuitGame()
 	{
 		// zapneme cernou obrazovku
 		EnableBlackScreen(true);
+
+		await Task.Delay(1000);
 
 		msgObject.FreeAll();
 		LevelLoader.Free();
@@ -125,7 +130,9 @@ public partial class GameMaster : Node
 		Log.Free();
 
 		SafeQueueAll();
-		GetTree().Quit();
+
+        await Task.Delay(100);
+        GetTree().Quit();
 	}
 
 	public void SafeQueueAll()

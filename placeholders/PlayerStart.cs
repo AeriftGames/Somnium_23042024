@@ -183,7 +183,7 @@ public partial class PlayerStart : Node3D
             GameMaster.GM.GetSettings().LoadAndApply_AllGraphicsSettings();
             GameMaster.GM.GetDebugHud().ApplyAllMainControls();
 
-            GameMaster.GM.EnableBlackScreen(false);
+            //GameMaster.GM.EnableBlackScreen(false);
 
             //delete
             spawn_timer.Stop();

@@ -288,7 +288,8 @@ public partial class FPSCharacter_Inventory : FPSCharacter_Interaction
     public async void DestroyProjectile(RigidBody3D projectile)
     {
         await Task.Delay(MSecToDestroyProjectile);
-        projectile.QueueFree();
+        if(projectile != null)
+            projectile.QueueFree();
     }
 
     public void PlaySpecificAudioOnPlayer(AudioStream newStream,float volumeDB = 0.0f,float pitchScale = 1.0f)

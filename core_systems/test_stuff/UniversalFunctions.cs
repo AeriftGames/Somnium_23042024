@@ -267,6 +267,8 @@ public partial class UniversalFunctions
 
     static public levelinfo_base_resource GetLevelInfoData(Resource newlevelInfo)
     {
+        if (newlevelInfo == null) return null;
+
         Resource data = GD.Load(newlevelInfo.ResourcePath);
         if (data != null && data is levelinfo_base_resource leveldata)
             return leveldata;

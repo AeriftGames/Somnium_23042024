@@ -48,7 +48,6 @@ offset_bottom = -22.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 25
-text = "wordlevel: rooms_test"
 horizontal_alignment = 1
 
 [node name="LoadingLabel2" type="Label" parent="."]

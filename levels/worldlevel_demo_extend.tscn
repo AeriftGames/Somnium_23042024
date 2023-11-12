@@ -3144,5 +3144,5 @@ enable_player_col = true
 script = ExtResource("33_u2mb3")
 
 [node name="stair_1" type="Node3D" parent="StairNodeGd11/AllStairs" instance=ExtResource("34_o3rpm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.599998, 0.120623, -4.76837e-07)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.599998, 0.120623, 0)
 script = ExtResource("33_u2mb3")

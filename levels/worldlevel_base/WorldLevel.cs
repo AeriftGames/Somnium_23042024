@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Reflection.Metadata.Ecma335;
+using System.Threading.Tasks;
 using System.Transactions;
 
 public partial class WorldLevel : Node
@@ -31,27 +32,23 @@ public partial class WorldLevel : Node
 		{
 			// Apply Settings
 			GameMaster.GM.GetSettings().LoadAndApply_AllGraphicsSettings();
-			/*
-			GameMaster.GM.EnableBlackScreen(false);
-			GameMaster.GM.GetLoadingHud().LoadingIsComplete(false);
-			*/
 		}
 		else
 		{
 			// Apply Settings
 			GameMaster.GM.GetSettings().LoadAndApply_AllGraphicsSettings();
-			GameMaster.GM.EnableBlackScreen(false);
 			GameMaster.GM.GetLoadingHud().LoadingIsComplete(false);
 
             StartGame();
         }
-
-		//StartGame();
 	}
-	public void StartGame()
+	public async void StartGame()
 	{
 		// Emit Signal StartGame
 		GameMaster.GM.GetMasterSignals().EmitSignal(MasterSignals.SignalName.GameStart);
-	}
+
+		await Task.Delay(100);
+			GameMaster.GM.EnableBlackScreen(false);
+    }
 
 }

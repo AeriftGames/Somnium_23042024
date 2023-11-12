@@ -1,10 +1,18 @@
-[gd_scene load_steps=4 format=3 uid="uid://ddal074shtj1g"]
+[gd_scene load_steps=3 format=3 uid="uid://ddal074shtj1g"]
 
 [ext_resource type="Script" path="res://core_systems/MainApp.cs" id="1_d8pml"]
-[ext_resource type="Resource" uid="uid://c0u4vsc01an1s" path="res://levels/all_levels_info_resources/menus/levelinfo_game_menu.tres" id="2_3pxl3"]
-[ext_resource type="Resource" uid="uid://dhmydohqelw7x" path="res://levels/all_levels_info_resources/menus/levelinfo_benchmark_menu.tres" id="3_ftogd"]
+[ext_resource type="Resource" uid="uid://b537iaq5k3rpy" path="res://levels/all_levels_info_resources/game_levels/levelinfo_demo_extend.tres" id="2_7crgj"]
 
 [node name="MainApp" type="Node"]
 script = ExtResource("1_d8pml")
-LevelInfo_StartGame = ExtResource("2_3pxl3")
-LevelInfo_StartBenchmark = ExtResource("3_ftogd")
+LevelInfo_SpecificLevelInfo = ExtResource("2_7crgj")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+metadata/_edit_lock_ = true
