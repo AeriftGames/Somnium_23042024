@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bnb3blo4rl83s"]
+[gd_scene load_steps=15 format=3 uid="uid://bnb3blo4rl83s"]
 
 [ext_resource type="PackedScene" uid="uid://0g1u2jvnfbpy" path="res://player/FPSCharacter_Interaction.tscn" id="1_ywg5i"]
 [ext_resource type="Script" path="res://player/FPSCharacter_Inventory.cs" id="2_k43co"]
@@ -8,6 +8,8 @@
 [ext_resource type="Script" path="res://player/character_components/CharacterInventoryComponent.cs" id="5_8thmx"]
 [ext_resource type="PackedScene" uid="uid://dhhnra4i7t74r" path="res://player/character_systems/damage_hud.tscn" id="5_dhy04"]
 [ext_resource type="Script" path="res://player/character_components/CharacterStairsComponent.cs" id="6_wo4bu"]
+[ext_resource type="Script" path="res://player/character_components/CharacterShootBallComponet.cs" id="7_1fieu"]
+[ext_resource type="AudioStream" uid="uid://dxie2xuqywf7d" path="res://audio/audio_streams/downloads/impact_ice.wav" id="8_oiliq"]
 [ext_resource type="PackedScene" uid="uid://dxumv4dw6y6ps" path="res://player/character_systems/inventory_menu/inventory_menu_number_two.tscn" id="9_bfvnj"]
 [ext_resource type="Script" path="res://player/character_components/CharacterStaminaComponent.cs" id="9_ogpi2"]
 
@@ -33,11 +35,6 @@ script = ExtResource("2_k43co")
 HurtAudios = Array[AudioStream]([])
 DeathAudios = Array[AudioStream]([])
 BodyFallAudios = Array[AudioStream]([])
-CanShootProjectile = true
-PowerImpulseShoot = 10.0
-MassProjectile = 5.0
-EnableAutoDestroyProjectile = true
-MSecToDestroyProjectile = 5000
 FootStepLengthInSprint = 1.25
 FootStepLengthInCrouch = 0.85
 FootstepsVolumeDBInWalk = -2.0
@@ -67,6 +64,17 @@ metadata/_edit_lock_ = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 collision_mask = 9
 metadata/_edit_lock_ = true
+
+[node name="CharacterShootBallComponet" type="Node" parent="CharacterComponents" index="4"]
+script = ExtResource("7_1fieu")
+
+[node name="AudioStreamPlayer_ShootBall" type="AudioStreamPlayer" parent="CharacterComponents/CharacterShootBallComponet" index="0"]
+stream = ExtResource("8_oiliq")
+volume_db = -10.0
+pitch_scale = 0.5
+mix_target = 1
+max_polyphony = 4
+bus = &"Sfx"
 
 [node name="AudioStreamPlayer_Footsteps" parent="." index="5"]
 max_polyphony = 3
