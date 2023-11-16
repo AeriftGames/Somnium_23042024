@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://csfr53wgtrnn3"]
+
+[ext_resource type="PackedScene" uid="uid://0bb8mpeqpl3p" path="res://testing_stuff_kaen/locker2/locker2.gltf" id="1_p76ew"]
+[ext_resource type="Material" uid="uid://cbnsad6w0f8o8" path="res://testing_stuff_kaen/locker2/locker_mat.tres" id="2_f8rwm"]
+
+[node name="locker2" instance=ExtResource("1_p76ew")]
+
+[node name="locker_body" parent="." index="0"]
+material_override = ExtResource("2_f8rwm")
+
+[node name="locker_door" parent="." index="1"]
+material_override = ExtResource("2_f8rwm")

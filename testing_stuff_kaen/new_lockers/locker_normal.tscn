@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://vf06hwxc3mje"]
+
+[ext_resource type="PackedScene" uid="uid://b87vninn1p141" path="res://testing_stuff_kaen/new_lockers/locker_normal.glb" id="1_1y0lt"]
+[ext_resource type="Material" uid="uid://cbnsad6w0f8o8" path="res://testing_stuff_kaen/locker2/locker_mat.tres" id="2_22jgs"]
+
+[node name="locker_normal" instance=ExtResource("1_1y0lt")]
+
+[node name="locker_body_normal" parent="." index="0"]
+transform = Transform3D(-1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 0, 0, 0)
+material_override = ExtResource("2_22jgs")
+
+[node name="locker_body_normal_door" parent="." index="1"]
+transform = Transform3D(-1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, -0.372298, 0, 0)
+material_overlay = ExtResource("2_22jgs")
