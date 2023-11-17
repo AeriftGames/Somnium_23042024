@@ -197,5 +197,141 @@ metadata/_edit_lock_ = true
 [node name="BasicHud" parent="AllHuds" index="4"]
 mouse_filter = 2
 
+[node name="Crosshair3" type="ColorRect" parent="AllHuds/BasicHud/Crosshair" index="0"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = 3.0
+offset_right = -5.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.803922, 0.803922, 0.803922, 0.117647)
+
+[node name="Crosshair4" type="ColorRect" parent="AllHuds/BasicHud/Crosshair" index="1"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = 1.0
+offset_right = -7.0
+offset_bottom = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.803922, 0.803922, 0.803922, 0.117647)
+
+[node name="Crosshair5" type="ColorRect" parent="AllHuds/BasicHud/Crosshair" index="2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 5.0
+offset_top = 3.0
+offset_right = 8.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.803922, 0.803922, 0.803922, 0.117647)
+
+[node name="Crosshair6" type="ColorRect" parent="AllHuds/BasicHud/Crosshair" index="3"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 7.0
+offset_top = 1.0
+offset_right = 8.0
+offset_bottom = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.803922, 0.803922, 0.803922, 0.117647)
+
+[node name="Crosshair7" type="ColorRect" parent="AllHuds/BasicHud/Crosshair" index="4"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -4.0
+offset_right = -5.0
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.803922, 0.803922, 0.803922, 0.117647)
+
+[node name="Crosshair8" type="ColorRect" parent="AllHuds/BasicHud/Crosshair" index="5"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -3.0
+offset_right = -7.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.803922, 0.803922, 0.803922, 0.117647)
+
+[node name="Crosshair9" type="ColorRect" parent="AllHuds/BasicHud/Crosshair" index="6"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 5.0
+offset_top = -4.0
+offset_right = 8.0
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.803922, 0.803922, 0.803922, 0.117647)
+
+[node name="Crosshair10" type="ColorRect" parent="AllHuds/BasicHud/Crosshair" index="7"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 7.0
+offset_top = -3.0
+offset_right = 8.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.803922, 0.803922, 0.803922, 0.117647)
+
+[node name="Crosshair2" type="ColorRect" parent="AllHuds/BasicHud" index="1"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1.0
+offset_top = -1.0
+offset_right = 1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0.32549)
+
 [connection signal="value_changed" from="AllHuds/CharacterInfoHud/VBoxContainer/HBoxContainer_Health/ProgressBar_Health" to="AllHuds/CharacterInfoHud" method="_on_progress_bar_health_value_changed"]
 [connection signal="value_changed" from="AllHuds/CharacterInfoHud/VBoxContainer/HBoxContainer_Stamina/ProgressBar_Stamina" to="AllHuds/CharacterInfoHud" method="_on_progress_bar_stamina_value_changed"]

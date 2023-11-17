@@ -1,0 +1,41 @@
+[gd_scene load_steps=10 format=3 uid="uid://bhrrm8yhqyp6t"]
+
+[ext_resource type="PackedScene" uid="uid://dtfa78e85uhmy" path="res://testing_stuff_kaen/light_test/wal__light2.glb" id="1_shgj2"]
+[ext_resource type="Shader" uid="uid://dcjfhlb4ctw65" path="res://testing_stuff_kaen/light_test/testtres.tres" id="2_a1r23"]
+[ext_resource type="Texture2D" uid="uid://j8il6uws6frb" path="res://placeholders/modular_level_builds/silo_level/mat/trim03_mat/untitled_DefaultMaterial_BaseColor_mask.png" id="3_70c0p"]
+[ext_resource type="Texture2D" uid="uid://w2ad8cd7lmut" path="res://placeholders/modular_level_builds/silo_level/mat/trim03_mat/untitled_DefaultMaterial_BaseColor.png" id="3_n7ysc"]
+[ext_resource type="Texture2D" uid="uid://0jhe2rds4btd" path="res://placeholders/modular_level_builds/silo_level/mat/trim03_mat/untitled_DefaultMaterial_Metallic.png" id="4_84lqf"]
+[ext_resource type="Texture2D" uid="uid://cj8y6ue5lbfxy" path="res://placeholders/modular_level_builds/silo_level/mat/trim03_mat/untitled_DefaultMaterial_Normal.png" id="5_csqme"]
+[ext_resource type="Texture2D" uid="uid://bfgh1kbwp4k8p" path="res://placeholders/modular_level_builds/silo_level/mat/trim03_mat/untitled_DefaultMaterial_Roughness.png" id="6_oygi5"]
+[ext_resource type="Material" uid="uid://chbb8klv00e5s" path="res://testing_stuff_kaen/light_test/emissive_mat.tres" id="7_xq457"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_x877q"]
+render_priority = 0
+shader = ExtResource("2_a1r23")
+shader_parameter/point_size = 1.0
+shader_parameter/roughness = 0.8
+shader_parameter/metallic_texture_channel = null
+shader_parameter/specular = 0.2
+shader_parameter/metallic = 0.25
+shader_parameter/normal_scale = 1.0
+shader_parameter/uv1_scale = Vector3(1, 1, 1)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/uv2_scale = Vector3(1, 1, 1)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)
+shader_parameter/paint_color = Color(1, 1, 1, 1)
+shader_parameter/paint_mask_tex = ExtResource("3_70c0p")
+shader_parameter/texture_albedo = ExtResource("3_n7ysc")
+shader_parameter/texture_metallic = ExtResource("4_84lqf")
+shader_parameter/texture_roughness = ExtResource("6_oygi5")
+shader_parameter/texture_normal = ExtResource("5_csqme")
+
+[node name="wal__light2" instance=ExtResource("1_shgj2")]
+transform = Transform3D(1, 5.96046e-08, 0, -5.96046e-08, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Cube_009" parent="." index="0"]
+transform = Transform3D(0.528209, 0.528209, 0, -0.528209, 0.528209, 0, 0, 0, 0.7, 0.0328327, -0.0694337, 0.4)
+material_override = SubResource("ShaderMaterial_x877q")
+
+[node name="Cylinder_012" parent="." index="1"]
+transform = Transform3D(0.505581, -9.15397e-09, -0.473761, -0.505581, -2.20997e-08, -0.473761, -9.15398e-09, 0.715, -2.07088e-08, -0.137001, -0.0486385, -0.362484)
+material_override = ExtResource("7_xq457")

@@ -3,20 +3,21 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b2uokx70c30aq"
-path="res://.godot/imported/trimsheet_3_low_DefaultMaterial_Roughness.png-29be14023dcf384715271ab6132b1a73.ctex"
+path.bptc="res://.godot/imported/trimsheet_3_low_DefaultMaterial_Roughness.png-29be14023dcf384715271ab6132b1a73.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://testing_stuff_kaen/my_trim1/textures/trimsheet_3_low_DefaultMaterial_Roughness.png"
-dest_files=["res://.godot/imported/trimsheet_3_low_DefaultMaterial_Roughness.png-29be14023dcf384715271ab6132b1a73.ctex"]
+dest_files=["res://.godot/imported/trimsheet_3_low_DefaultMaterial_Roughness.png-29be14023dcf384715271ab6132b1a73.bptc.ctex"]
 
 [params]
 
-compress/mode=0
-compress/high_quality=false
+compress/mode=2
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0

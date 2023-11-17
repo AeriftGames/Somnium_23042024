@@ -38,13 +38,13 @@ public partial class CLevelLoader : Node
         progress = new Godot.Collections.Array();
     }
 
-    public async void LoadNewWorldLevel(string newLevelScenePath, string newLevelName)
+    public void LoadNewWorldLevel(string newLevelScenePath, string newLevelName)
     {
         // Spusti async task pro zmenu levelu
-        await ChangeLevelSceneWithDelay(newLevelScenePath,newLevelName,1000);
+        ChangeLevelSceneWithDelay(newLevelScenePath,newLevelName,1000);
     }
 
-    async Task ChangeLevelSceneWithDelay(string newLevelScenePath, string newLevelName, int delay)
+    public async void ChangeLevelSceneWithDelay(string newLevelScenePath, string newLevelName, int delay)
     {
         // zapneme cernou obrazovku
         GameMaster.GM.EnableBlackScreen(true);
@@ -187,8 +187,8 @@ public partial class CLevelLoader : Node
         canUpdate = true;
         loadingScenePath = newLevelScenePath;
 
-
-        ResourceLoader.LoadThreadedRequest(loadingScenePath,"",true);
+        // toto jsem od verze 4.2.rc1 musel nastavit (usethreads) na false, protoze to jinak crashovalo
+        ResourceLoader.LoadThreadedRequest(loadingScenePath,"",false);
     }
 
     public async void Update(double delta)

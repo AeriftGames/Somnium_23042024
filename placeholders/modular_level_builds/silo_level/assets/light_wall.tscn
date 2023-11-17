@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://ctbfdjdrv44o5"]
+[gd_scene load_steps=17 format=3 uid="uid://ctbfdjdrv44o5"]
 
 [ext_resource type="PackedScene" uid="uid://ci6fen6gv7nac" path="res://placeholders/modular_level_builds/silo_level/glb_assets/light_wall.glb" id="1_r0075"]
 [ext_resource type="Texture2D" uid="uid://p1pyu57uirvu" path="res://placeholders/modular_level_builds/silo_level/mat/silo_mat_v1/untitled_DefaultMaterial_BaseColor.png" id="2_4dnfp"]
@@ -6,8 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://cvg5jpmk1q3uw" path="res://placeholders/modular_level_builds/silo_level/mat/silo_mat_v1/untitled_DefaultMaterial_Normal.png" id="4_aa0jp"]
 [ext_resource type="Material" uid="uid://chbb8klv00e5s" path="res://testing_stuff_kaen/light_test/emissive_mat.tres" id="4_vv7iv"]
 [ext_resource type="Texture2D" uid="uid://d0603c6welkoa" path="res://placeholders/modular_level_builds/silo_level/mat/silo_mat_v1/untitled_DefaultMaterial_Roughness.png" id="5_ke1wh"]
-[ext_resource type="Texture2D" uid="uid://bybrpbyf1euit" path="res://textures/NormalMap (3).png" id="6_troyj"]
+[ext_resource type="Texture2D" uid="uid://cuovukpdoti1o" path="res://textures/grid_texture_normal.jpg" id="6_daw7m"]
 [ext_resource type="Texture2D" uid="uid://bq6xqfcmltl3" path="res://placeholders/modular_level_builds/silo_level/mat/glass/a.png" id="8_70qcm"]
+[ext_resource type="PackedScene" uid="uid://bhrrm8yhqyp6t" path="res://testing_stuff_kaen/light_test/wal_light_2.tscn" id="9_0cw53"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nh5lo"]
 albedo_texture = ExtResource("2_4dnfp")
@@ -36,13 +37,13 @@ emission_enabled = true
 emission = Color(0.352941, 0.352941, 0.352941, 1)
 emission_energy_multiplier = 0.44
 normal_enabled = true
-normal_texture = ExtResource("6_troyj")
+normal_scale = 2.0
+normal_texture = ExtResource("6_daw7m")
 anisotropy = 1.0
 ao_light_affect = 0.12
-backlight_enabled = true
 backlight = Color(0.815686, 0.815686, 0.815686, 1)
 refraction_scale = 0.01
-uv1_scale = Vector3(-0.235, -0.235, -0.235)
+uv1_scale = Vector3(2, 2, 2)
 uv1_triplanar = true
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_jplhm"]
@@ -116,6 +117,7 @@ height = 1.5
 [node name="light_wall" instance=ExtResource("1_r0075")]
 
 [node name="lightwall" parent="." index="0"]
+visible = false
 mesh = SubResource("ArrayMesh_hg0xl")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." index="1"]
@@ -127,6 +129,7 @@ skeleton = NodePath("")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="." index="2"]
 transform = Transform3D(-0.706662, 0, -0.707551, 0, 1.15, 0, 0.707551, 0, -0.706662, -0.000971317, 0.696852, 0.00305355)
+visible = false
 material_override = ExtResource("4_vv7iv")
 mesh = SubResource("CapsuleMesh_ml3c6")
 skeleton = NodePath("")
@@ -137,3 +140,6 @@ visible = false
 material_override = ExtResource("4_vv7iv")
 mesh = SubResource("CylinderMesh_xtclo")
 skeleton = NodePath("")
+
+[node name="wal__light2" parent="." index="4" instance=ExtResource("9_0cw53")]
+transform = Transform3D(0.2, 0, 0, 0, -8.74228e-09, -0.2, 0, 0.2, -8.74228e-09, 0, 0.6, 0)

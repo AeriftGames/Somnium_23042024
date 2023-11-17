@@ -1,14 +1,9 @@
 [gd_scene load_steps=3 format=3 uid="uid://cdgkldjfeacws"]
 
 [ext_resource type="PackedScene" uid="uid://nqd1o1kkhqov" path="res://placeholders/modular_level_builds/silo_level/glb_assets/cables1.glb" id="1_mvs5i"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0f52m"]
-albedo_color = Color(0.0941176, 0.0941176, 0.0941176, 1)
-metallic = 0.52
-roughness = 0.73
+[ext_resource type="Material" uid="uid://dy6amb6w4c6id" path="res://placeholders/modular_electric_wires/wire2_mat.tres" id="2_fdas2"]
 
 [node name="cables1" instance=ExtResource("1_mvs5i")]
 
-[node name="cables1" parent="." index="0"]
-material_override = SubResource("StandardMaterial3D_0f52m")
-material_overlay = SubResource("StandardMaterial3D_0f52m")
+[node name="cables12" parent="." index="0"]
+material_override = ExtResource("2_fdas2")
