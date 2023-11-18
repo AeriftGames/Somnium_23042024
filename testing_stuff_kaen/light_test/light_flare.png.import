@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://uhwaa0c5635m"
-path.s3tc="res://.godot/imported/trimsheet_3_low_DefaultMaterial_Roughness.png-d7bde39d56b6bb22ab2dd0b33043d227.s3tc.ctex"
+uid="uid://bwpotmps4b3fj"
+path.s3tc="res://.godot/imported/light_flare.png-59c5abdb9e73840037897a609e166f2b.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://placeholders/modular_level_builds/my_trim1/textures/trimsheet_3_low_DefaultMaterial_Roughness.png"
-dest_files=["res://.godot/imported/trimsheet_3_low_DefaultMaterial_Roughness.png-d7bde39d56b6bb22ab2dd0b33043d227.s3tc.ctex"]
+source_file="res://testing_stuff_kaen/light_test/light_flare.png"
+dest_files=["res://.godot/imported/light_flare.png-59c5abdb9e73840037897a609e166f2b.s3tc.ctex"]
 
 [params]
 

@@ -10,12 +10,25 @@ public partial class level_info_button : Button
     public void _on_pressed()
     {
         if (Levelinfo == null) return;
-
-        if (Levelinfo.LevelType == WorldLevel.ELevelType.GameLevel)
-            GameMaster.GM.GetLevelLoader().LoadNewWorldLevel(Levelinfo.LevelPath, Levelinfo.LevelName);
-        else if (Levelinfo.LevelType == WorldLevel.ELevelType.BenchmarkLevel)
-            GameMaster.GM.GetBenchmarkSystem().StartBenchmarkLevel(Levelinfo.LevelPath, Levelinfo.LevelName);
-        else if (Levelinfo.LevelType == WorldLevel.ELevelType.Menu)
-            GetTree().ChangeSceneToFile(Levelinfo.LevelPath);
+        /*if (OS.HasFeature("editor"))
+        {*/
+            // EDITOR
+            if (Levelinfo.LevelType == WorldLevel.ELevelType.GameLevel)
+                GameMaster.GM.GetLevelLoader().LoadNewWorldLevel(Levelinfo.LevelPath, Levelinfo.LevelName);
+            else if (Levelinfo.LevelType == WorldLevel.ELevelType.BenchmarkLevel)
+                GameMaster.GM.GetBenchmarkSystem().StartBenchmarkLevel(Levelinfo.LevelPath, Levelinfo.LevelName);
+            else if (Levelinfo.LevelType == WorldLevel.ELevelType.Menu)
+                GetTree().ChangeSceneToFile(Levelinfo.LevelPath);
+        /*}
+        else
+        {
+            // EXPORT
+            if (Levelinfo.LevelType == WorldLevel.ELevelType.GameLevel)
+                GameMaster.GM.GetLevelLoader().LoadNewWorldLevel(Levelinfo.LevelPath + ".remap", Levelinfo.LevelName);
+            else if (Levelinfo.LevelType == WorldLevel.ELevelType.BenchmarkLevel)
+                GameMaster.GM.GetBenchmarkSystem().StartBenchmarkLevel(Levelinfo.LevelPath + ".remap", Levelinfo.LevelName);
+            else if (Levelinfo.LevelType == WorldLevel.ELevelType.Menu)
+                GetTree().ChangeSceneToFile(Levelinfo.LevelPath+".remap");
+        }*/
     }
 }

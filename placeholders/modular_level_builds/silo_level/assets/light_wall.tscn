@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://ctbfdjdrv44o5"]
+[gd_scene load_steps=18 format=3 uid="uid://ctbfdjdrv44o5"]
 
 [ext_resource type="PackedScene" uid="uid://ci6fen6gv7nac" path="res://placeholders/modular_level_builds/silo_level/glb_assets/light_wall.glb" id="1_r0075"]
 [ext_resource type="Texture2D" uid="uid://p1pyu57uirvu" path="res://placeholders/modular_level_builds/silo_level/mat/silo_mat_v1/untitled_DefaultMaterial_BaseColor.png" id="2_4dnfp"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://cuovukpdoti1o" path="res://textures/grid_texture_normal.jpg" id="6_daw7m"]
 [ext_resource type="Texture2D" uid="uid://bq6xqfcmltl3" path="res://placeholders/modular_level_builds/silo_level/mat/glass/a.png" id="8_70qcm"]
 [ext_resource type="PackedScene" uid="uid://bhrrm8yhqyp6t" path="res://testing_stuff_kaen/light_test/wal_light_2.tscn" id="9_0cw53"]
+[ext_resource type="Texture2D" uid="uid://bwpotmps4b3fj" path="res://testing_stuff_kaen/light_test/light_flare.png" id="10_v1pfc"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nh5lo"]
 albedo_texture = ExtResource("2_4dnfp")
@@ -143,3 +144,13 @@ skeleton = NodePath("")
 
 [node name="wal__light2" parent="." index="4" instance=ExtResource("9_0cw53")]
 transform = Transform3D(0.2, 0, 0, 0, -8.74228e-09, -0.2, 0, 0.2, -8.74228e-09, 0, 0.6, 0)
+
+[node name="Sprite3D" type="Sprite3D" parent="." index="5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0660909, 0.629949, -0.0392954)
+visible = false
+transparency = 0.32
+cast_shadow = 0
+modulate = Color(1, 1, 1, 0.25098)
+pixel_size = 0.0006
+billboard = 1
+texture = ExtResource("10_v1pfc")
