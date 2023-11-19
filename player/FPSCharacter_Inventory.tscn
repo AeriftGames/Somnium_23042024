@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bnb3blo4rl83s"]
+[gd_scene load_steps=16 format=3 uid="uid://bnb3blo4rl83s"]
 
 [ext_resource type="PackedScene" uid="uid://0g1u2jvnfbpy" path="res://player/FPSCharacter_Interaction.tscn" id="1_ywg5i"]
 [ext_resource type="Script" path="res://player/FPSCharacter_Inventory.cs" id="2_k43co"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://player/character_components/CharacterStairsComponent.cs" id="6_wo4bu"]
 [ext_resource type="Script" path="res://player/character_components/CharacterShootBallComponet.cs" id="7_1fieu"]
 [ext_resource type="AudioStream" uid="uid://dxie2xuqywf7d" path="res://audio/audio_streams/downloads/impact_ice.wav" id="8_oiliq"]
+[ext_resource type="Script" path="res://player/character_components/CharacterUseLadderComponent.cs" id="9_3t5qx"]
 [ext_resource type="PackedScene" uid="uid://dxumv4dw6y6ps" path="res://player/character_systems/inventory_menu/inventory_menu_number_two.tscn" id="9_bfvnj"]
 [ext_resource type="Script" path="res://player/character_components/CharacterStaminaComponent.cs" id="9_ogpi2"]
 
@@ -75,6 +76,147 @@ pitch_scale = 0.5
 mix_target = 1
 max_polyphony = 4
 bus = &"Sfx"
+
+[node name="CharacterUseLadderComponent" type="Node" parent="CharacterComponents" index="5"]
+script = ExtResource("9_3t5qx")
+
+[node name="UseLadderControl" type="Control" parent="CharacterComponents/CharacterUseLadderComponent" index="0"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="LadderSymbol" type="Control" parent="CharacterComponents/CharacterUseLadderComponent/UseLadderControl" index="0"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="ColorRect" type="ColorRect" parent="CharacterComponents/CharacterUseLadderComponent/UseLadderControl/LadderSymbol" index="0"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -9.0
+offset_top = -21.0
+offset_right = -7.0
+offset_bottom = 19.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect3" type="ColorRect" parent="CharacterComponents/CharacterUseLadderComponent/UseLadderControl/LadderSymbol" index="1"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -7.0
+offset_top = 12.0
+offset_right = 7.0
+offset_bottom = 14.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect4" type="ColorRect" parent="CharacterComponents/CharacterUseLadderComponent/UseLadderControl/LadderSymbol" index="2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -7.0
+offset_top = 5.0
+offset_right = 7.0
+offset_bottom = 7.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect5" type="ColorRect" parent="CharacterComponents/CharacterUseLadderComponent/UseLadderControl/LadderSymbol" index="3"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -7.0
+offset_top = -2.0
+offset_right = 7.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect6" type="ColorRect" parent="CharacterComponents/CharacterUseLadderComponent/UseLadderControl/LadderSymbol" index="4"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -7.0
+offset_top = -9.0
+offset_right = 7.0
+offset_bottom = -7.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect7" type="ColorRect" parent="CharacterComponents/CharacterUseLadderComponent/UseLadderControl/LadderSymbol" index="5"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -7.0
+offset_top = -16.0
+offset_right = 7.0
+offset_bottom = -14.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect2" type="ColorRect" parent="CharacterComponents/CharacterUseLadderComponent/UseLadderControl/LadderSymbol" index="6"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 7.0
+offset_top = -21.0
+offset_right = 9.0
+offset_bottom = 19.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="CharacterComponents/CharacterUseLadderComponent/UseLadderControl" index="1"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.0
+offset_top = 23.0
+offset_right = 50.0
+offset_bottom = 41.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 13
+text = "Použít žebřík"
+horizontal_alignment = 1
 
 [node name="AudioStreamPlayer_Footsteps" parent="." index="5"]
 max_polyphony = 3

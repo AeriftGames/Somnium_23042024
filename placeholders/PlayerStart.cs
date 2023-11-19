@@ -4,6 +4,7 @@ using System;
 public partial class PlayerStart : Node3D
 {
 	public enum EPlayerCharacterType {Interaction, Inventory}
+	[Export] public bool PlayerStartEnable = true;
 
 	// Which type of player character spawn ?
 	[Export] public EPlayerCharacterType SpawnCharacterType = EPlayerCharacterType.Inventory;
@@ -16,6 +17,8 @@ public partial class PlayerStart : Node3D
 
 	public override void _Ready()
 	{
+		if (PlayerStartEnable == false) return;
+
 		// Po Startu zneviditelnime a nechame objekt znicit (chceme videt jen v editoru)
 		EditorMesh = GetNode<Node3D>("EditorMesh");
 		EditorMesh.Visible = false;

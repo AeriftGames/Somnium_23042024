@@ -13,6 +13,7 @@ public partial class FPSCharacter_Inventory : FPSCharacter_Interaction
     private CharacterInventoryComponent characterInventoryComponent = null;
     private CharacterStairsComponent characterStairsComponent = null;
     private CharacterShootBallComponet characterShootBallComponet = null;
+    private CharacterUseLadderComponent characterUseLadderComponent = null;
 
     [ExportGroupAttribute("DamageAndDeath")]
     [Export] public Godot.Collections.Array<AudioStream> HurtAudios;
@@ -51,6 +52,10 @@ public partial class FPSCharacter_Inventory : FPSCharacter_Interaction
         // shootball component
         characterShootBallComponet = GetNode<CharacterShootBallComponet>("CharacterComponents/CharacterShootBallComponet");
         characterShootBallComponet.StartInit(this);
+
+        // use ladder component
+        characterUseLadderComponent = GetNode<CharacterUseLadderComponent>("CharacterComponents/CharacterUseLadderComponent");
+        characterUseLadderComponent.StartInit(this);
 
         hurtPlayer = GetNode<AudioStreamPlayer>("AudioStreamPlayer_Hurts");
         universalPlayer = GetNode<AudioStreamPlayer>("AudioStreamPlayer_Universal");
@@ -256,6 +261,7 @@ public partial class FPSCharacter_Inventory : FPSCharacter_Interaction
     public CharacterInventoryComponent GetInventoryComponent() { return characterInventoryComponent; }
     public CharacterStairsComponent GetCharacterStairsComponent() { return characterStairsComponent; }
     public CharacterShootBallComponet GetCharacterShootBallComponet() { return characterShootBallComponet; }
+    public CharacterUseLadderComponent GetCharacterUseLadderComponent() {  return characterUseLadderComponent; }
     public CharacterInfoHud GetCharacterInfoHud() { return characterInfoHud; }
     public Godot.Collections.Array<AudioStream> GetHurtAudios(){return HurtAudios;}
     public Godot.Collections.Array<AudioStream> GetDeathAudios() { return DeathAudios;}

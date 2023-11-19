@@ -1,4 +1,5 @@
 using Godot;
+using Godot.NativeInterop;
 using System;
 using System.Linq;
 using static Godot.TextServer;
@@ -636,4 +637,44 @@ public partial class ObjectCamera : Node3D
     }
 
 	public Node3D GetCameraLookingPoint() { return lookingPoint; }
+
+	// Nastavi spravne pohled kamery na globalni pozici
+    public void SetInstantLookingAt(Vector3 newLookingPoint, bool newCamRotateVertical = true,
+		bool newCamRotateHorizontal = true,bool newCamRotateVerticalZero = false, 
+		bool newCamRotateVerticalClamp = false)
+    {
+		if(newCamRotateHorizontal)
+		{
+            // horizontal look
+            Vector3 oldRotY = NodeRotY.GlobalRotation;
+            NodeRotY.LookAtFromPosition(NodeRotY.GlobalPosition, newLookingPoint);
+            NodeRotY.GlobalRotation = new Vector3(oldRotY.X, NodeRotY.GlobalRotation.Y, oldRotY.Z);
+        }
+        
+		if(newCamRotateVertical)
+		{
+            // vertical look
+            Vector3 oldRotX = NodeRotX.GlobalRotation;
+            NodeRotX.LookAtFromPosition(NodeRotX.GlobalPosition, newLookingPoint);
+            NodeRotX.GlobalRotation = new Vector3(-NodeRotX.GlobalRotation.X, oldRotX.Y, oldRotX.Z);
+        }
+		
+		if (newCamRotateVerticalZero)
+		{
+			// set vertical look to default zero = pohled rovne dopredu
+            Vector3 oldRotX = NodeRotX.Rotation;
+            NodeRotX.Rotation = new Vector3(0.0f, oldRotX.Y, oldRotX.Z);
+        }
+        
+		if(newCamRotateVerticalClamp)
+		{
+            // Set clamp camera vertical look
+            Vector3 actualRotX = NodeRotX.Rotation;
+            actualRotX.X = Mathf.Clamp(actualRotX.X,
+                Mathf.DegToRad(ownerCharacter.CameraVerticalLookMin),
+                Mathf.DegToRad(ownerCharacter.CameraVerticalLookMax));
+
+            NodeRotX.Rotation = actualRotX;
+        }
+    }
 }
