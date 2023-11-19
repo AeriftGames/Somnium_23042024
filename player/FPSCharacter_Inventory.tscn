@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bnb3blo4rl83s"]
+[gd_scene load_steps=17 format=3 uid="uid://bnb3blo4rl83s"]
 
 [ext_resource type="PackedScene" uid="uid://0g1u2jvnfbpy" path="res://player/FPSCharacter_Interaction.tscn" id="1_ywg5i"]
 [ext_resource type="Script" path="res://player/FPSCharacter_Inventory.cs" id="2_k43co"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" path="res://player/character_components/CharacterUseLadderComponent.cs" id="9_3t5qx"]
 [ext_resource type="PackedScene" uid="uid://dxumv4dw6y6ps" path="res://player/character_systems/inventory_menu/inventory_menu_number_two.tscn" id="9_bfvnj"]
 [ext_resource type="Script" path="res://player/character_components/CharacterStaminaComponent.cs" id="9_ogpi2"]
+[ext_resource type="AudioStream" uid="uid://rwntiaix8s3r" path="res://audio/audio_streams/ladder/clim_ladder.wav" id="10_fohp5"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7bbwt"]
 bg_color = Color(0.913319, 0.285158, 0, 0.392157)
@@ -217,6 +218,12 @@ grow_vertical = 2
 theme_override_font_sizes/font_size = 13
 text = "Použít žebřík"
 horizontal_alignment = 1
+
+[node name="AudioStreamPlayer_Ladder" type="AudioStreamPlayer" parent="CharacterComponents/CharacterUseLadderComponent" index="1"]
+stream = ExtResource("10_fohp5")
+mix_target = 1
+max_polyphony = 4
+bus = &"Sfx"
 
 [node name="AudioStreamPlayer_Footsteps" parent="." index="5"]
 max_polyphony = 3

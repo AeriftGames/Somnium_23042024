@@ -7,11 +7,15 @@ public partial class CharacterUseLadderComponent : Node
     Control UseLadderControl = null;
     private bool isCanUseLadder = false;
     private ladder_system canLadderObject = null;
+
+    private AudioStreamPlayer audioStreamPlayerLadder;
     public void StartInit(FPSCharacter_Inventory ownerInstance)
     {
         ownCharacter = ownerInstance;
 
         UseLadderControl = GetNode<Control>("UseLadderControl");
+        audioStreamPlayerLadder = GetNode<AudioStreamPlayer>("AudioStreamPlayer_Ladder");
+
         UseLadderControl.Visible = false;
     }
 
@@ -25,10 +29,11 @@ public partial class CharacterUseLadderComponent : Node
 
     public void SetCanUseLadder(bool newCanUseLadder, ladder_system newCanLadderObject)
     {
+      
         isCanUseLadder = newCanUseLadder;
         canLadderObject = newCanLadderObject;
-
-        if (isCanUseLadder && canLadderObject != null)
+      
+        if (newCanUseLadder && canLadderObject != null)
         {
             UseLadderControl.Visible = true;
         }
@@ -36,5 +41,10 @@ public partial class CharacterUseLadderComponent : Node
         {
             UseLadderControl.Visible = false;
         }
+    }
+
+    public void PlayUseLadderAudio()
+    {
+        audioStreamPlayerLadder.Play();
     }
 }

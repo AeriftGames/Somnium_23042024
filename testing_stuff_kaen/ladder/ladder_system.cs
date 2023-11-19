@@ -179,7 +179,11 @@ public partial class ladder_system : Node3D
     {
         GameMaster.GM.EnableBlackScreen(true);
         GetOurCharacter().SetInputEnable(false);
-        await Task.Delay(500);
+
+        if (GetOurCharacter().GetCharacterUseLadderComponent() != null)
+            GetOurCharacter().GetCharacterUseLadderComponent().PlayUseLadderAudio();
+
+        await Task.Delay(1500);
 
         UseLadder_EffectTeleport();
 
