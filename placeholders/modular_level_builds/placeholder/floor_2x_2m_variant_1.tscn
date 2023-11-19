@@ -36,6 +36,7 @@ shadow_mesh = SubResource("ArrayMesh_abjfe")
 data = PackedVector3Array(0, 0, 0, -1, 0, -1, 0, 0, -1, 0, 0, 0, -1, 0, 0, -1, 0, -1, 0, 0, 1, -1, 0, 0, 0, 0, 0, 0, 0, 1, -1, 0, 1, -1, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, -1, 1, 0, -1, 1, 0, 0, 0, 0, 0, 0, 0, -1)
 
 [node name="floor_2x2m_variant1" type="MeshInstance3D"]
+extra_cull_margin = 1.0
 mesh = SubResource("ArrayMesh_lxmb0")
 skeleton = NodePath("")
 metadata/_edit_group_ = true

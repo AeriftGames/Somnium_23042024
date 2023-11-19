@@ -99,7 +99,7 @@ public partial class ladder_system : Node3D
         if (isCharacterInAreaDown && isLadderVisibleFromDown)
         {
             // jsme dole u zebriku a koukame smerem na nej
-            GD.Print("jsme dole u zebriku a muzeme ho pouzit");
+            //GD.Print("jsme dole u zebriku a muzeme ho pouzit");
             isCharacterCanUseLadder = true;
 
             if (GetOurCharacter().GetCharacterUseLadderComponent() != null)
@@ -108,7 +108,7 @@ public partial class ladder_system : Node3D
         else if (isCharacterInAreaTop && isLadderVisibleFromTop)
         {
             // jsme nahore u zebriku a koukame smerem na nej
-            GD.Print("jsme nahore u zebriku a muzeme ho pouzit");
+            //GD.Print("jsme nahore u zebriku a muzeme ho pouzit");
             isCharacterCanUseLadder = true;
 
             if (GetOurCharacter().GetCharacterUseLadderComponent() != null)
@@ -116,7 +116,7 @@ public partial class ladder_system : Node3D
         }
         else
         {
-            GD.Print("nejsme u zebriku");
+            //GD.Print("nejsme u zebriku");
             isCharacterCanUseLadder = false;
 
             if (GetOurCharacter().GetCharacterUseLadderComponent() != null)
@@ -190,5 +190,13 @@ public partial class ladder_system : Node3D
         GameMaster.GM.EnableBlackScreen(false);
         await Task.Delay(200);
         GetOurCharacter().SetInputEnable(true);
+    }
+
+    public override void _Process(double delta)
+    {
+        base._Process(delta);
+
+        if (isCharacterInAreaDown || isCharacterInAreaTop)
+            UpdateCharacterArea();
     }
 }

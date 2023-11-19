@@ -8,13 +8,13 @@
 [ext_resource type="Material" uid="uid://lah0omlue113" path="res://placeholders/modular_level_builds/my_trim1/trim_floor1_mat.tres" id="7_txtp5"]
 [ext_resource type="PackedScene" uid="uid://5ahry7gwynjv" path="res://placeholders/modular_level_builds/placeholder/floor_2x_2m_variant_1.tscn" id="8_k04l2"]
 [ext_resource type="PackedScene" uid="uid://uh72paleqpy0" path="res://placeholders/modular_level_builds/my_trim1/wall_01.tscn" id="10_2kldw"]
+[ext_resource type="ArrayOccluder3D" uid="uid://dy4upe6tnp3q8" path="res://levels/world_level_ladder/worldlevel_demo_ladder1.occ" id="10_efqvt"]
 [ext_resource type="PackedScene" uid="uid://bmwx2d7mfrba7" path="res://placeholders/modular_level_builds/placeholder/sloup_end_1_2.tscn" id="15_3cwx8"]
 [ext_resource type="PackedScene" uid="uid://c75lvvyxc34b1" path="res://testing_stuff_kaen/ladder/ladder_system.tscn" id="18_d3i2h"]
 [ext_resource type="Texture2D" uid="uid://biime5bqefvd0" path="res://testing_stuff_kaen/level_decals/TexturesCom_DecalsStain0058_1_masked_S.png" id="18_rn8ax"]
 [ext_resource type="PackedScene" uid="uid://ctbfdjdrv44o5" path="res://placeholders/modular_level_builds/silo_level/assets/light_wall.tscn" id="18_tlha4"]
 [ext_resource type="Texture2D" uid="uid://r1yp733qyqh3" path="res://testing_stuff_kaen/level_decals/TexturesCom_DecalLeakingRusty0037_2_masked_L.png" id="19_bbkag"]
 [ext_resource type="Texture2D" uid="uid://d1e2ap8udx8nc" path="res://testing_stuff_kaen/level_decals/TexturesCom_DecalsDamagePlaster0106_1_masked_L.png" id="20_2wvvo"]
-[ext_resource type="ArrayOccluder3D" uid="uid://dh7chen2pdcwe" path="res://levels/world_level_ladder/worldlevel_demo_ladder.occ" id="25_qogf6"]
 [ext_resource type="PackedScene" uid="uid://bet3idvc4fg0n" path="res://placeholders/PlayerStart.tscn" id="26_075js"]
 [ext_resource type="AudioStream" uid="uid://u51po736uwlv" path="res://audio/audio_streams/music/SOMNIUM_simple_amb1.wav" id="28_3d1lc"]
 [ext_resource type="PackedScene" uid="uid://dpa62hhmdflgr" path="res://testing_stuff_kaen/stairs_gd/StairNodeGD.tscn" id="32_s22q8"]
@@ -546,7 +546,7 @@ visible = false
 
 [node name="LevelOcclusion" type="OccluderInstance3D" parent="LevelScene"]
 visible = false
-occluder = ExtResource("25_qogf6")
+occluder = ExtResource("10_efqvt")
 metadata/_edit_group_ = true
 metadata/_edit_lock_ = true
 
