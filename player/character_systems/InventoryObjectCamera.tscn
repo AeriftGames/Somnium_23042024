@@ -27,3 +27,6 @@ headBobRotDegCrouchValue = 1.0
 [node name="HeadDangerShakeSystem" type="Node" parent="." index="2"]
 unique_name_in_owner = true
 script = ExtResource("4_vt8g5")
+
+[node name="Camera" parent="NodeRotY/GimbalLand/NodeRotX/NodeLean/ShakeNode/HeadStairsBob/HeadWalkBob/HeadBobBreathing/HeadDangerShake" index="0"]
+cull_mask = 519

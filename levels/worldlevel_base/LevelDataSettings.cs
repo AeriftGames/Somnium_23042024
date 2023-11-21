@@ -236,16 +236,6 @@ public partial class LevelDataSettings : Node
             ApplyNewLevelDataSettings(GetHighPresset());
         else if (Input.IsActionJustPressed("quality5"))
             ApplyNewLevelDataSettings(GetHighestPresset());
-        else if (Input.IsActionJustPressed("change_energy"))
-        {
-            GameMaster.GM.GetLevelLoader().GetActualLevelScene().GetVoxelGI().Data.Energy = 0.15f;
-            GameMaster.GM.GetLevelLoader().GetActualLevelScene().GetVoxelGI().Data.EmitChanged();
-        }
-        else if (Input.IsActionJustPressed("change_energy_plus"))
-        {
-            GameMaster.GM.GetLevelLoader().GetActualLevelScene().GetVoxelGI().Data.Energy = 1.8f;
-            GameMaster.GM.GetLevelLoader().GetActualLevelScene().GetVoxelGI().Data.EmitChanged();
-        }
 
     }
 

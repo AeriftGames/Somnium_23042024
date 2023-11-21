@@ -1,4 +1,4 @@
-[gd_resource type="AudioBusLayout" load_steps=3 format=3 uid="uid://cumbtyjpkml8o"]
+[gd_resource type="AudioBusLayout" load_steps=4 format=3 uid="uid://cumbtyjpkml8o"]
 
 [sub_resource type="AudioEffectReverb" id="AudioEffectReverb_ajupu"]
 resource_name = "Reverb"
@@ -16,6 +16,10 @@ damping = 0.83
 spread = 0.7
 hipass = 0.09
 wet = 0.29
+
+[sub_resource type="AudioEffectPitchShift" id="AudioEffectPitchShift_rulkb"]
+resource_name = "PitchShift"
+pitch_scale = 0.5
 
 [resource]
 bus/0/volume_db = 0.267241
@@ -35,3 +39,11 @@ bus/2/volume_db = -0.130497
 bus/2/send = &"Master"
 bus/2/effect/0/effect = SubResource("AudioEffectReverb_fvdiv")
 bus/2/effect/0/enabled = true
+bus/3/name = &"HalfPitch"
+bus/3/solo = false
+bus/3/mute = false
+bus/3/bypass_fx = false
+bus/3/volume_db = 0.0
+bus/3/send = &"Sfx"
+bus/3/effect/0/effect = SubResource("AudioEffectPitchShift_rulkb")
+bus/3/effect/0/enabled = true

@@ -1,0 +1,46 @@
+[gd_scene load_steps=6 format=3 uid="uid://bxvtdf4lekbja"]
+
+[ext_resource type="PackedScene" uid="uid://bneufrmim23uu" path="res://testing_stuff_kaen/elevator/elevator_button.glb" id="1_jrjrk"]
+[ext_resource type="Material" uid="uid://n303wu2f8je2" path="res://testing_stuff_kaen/elevator/elevator_mat.tres" id="2_rmvdl"]
+[ext_resource type="Material" uid="uid://ba4qs30jn56xh" path="res://testing_stuff_kaen/elevator/elevator_buttonGreen_mat.tres" id="3_81djw"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lye82"]
+albedo_color = Color(0, 0.329412, 0.0901961, 1)
+roughness = 0.55
+emission_enabled = true
+emission = Color(0, 1, 0, 1)
+emission_energy_multiplier = 2.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2lvxj"]
+albedo_color = Color(0.439216, 0.152941, 0, 1)
+roughness = 0.55
+emission_enabled = true
+emission = Color(1, 0, 0, 1)
+emission_energy_multiplier = 2.0
+
+[node name="elevator_button" instance=ExtResource("1_jrjrk")]
+
+[node name="BasePad" parent="." index="0"]
+material_override = ExtResource("2_rmvdl")
+
+[node name="ButtonUp" parent="." index="1"]
+material_override = ExtResource("3_81djw")
+lod_bias = 3.0
+
+[node name="CounterBase" parent="." index="2"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, -1.37118, 2.45829, -0.275281)
+material_override = ExtResource("2_rmvdl")
+
+[node name="ButtonUpBase" parent="." index="3"]
+transform = Transform3D(1.78814e-07, 1, 0, -1, 1.78814e-07, 0, 0, 0, 1, 0.114886, 0.865726, 0)
+material_override = SubResource("StandardMaterial3D_lye82")
+lod_bias = 3.0
+
+[node name="ButtonDown" parent="." index="4"]
+material_override = ExtResource("3_81djw")
+lod_bias = 3.0
+
+[node name="ButtonDownBase" parent="." index="5"]
+transform = Transform3D(1.78814e-07, 1, 0, -1, 1.78814e-07, 0, 0, 0, 1, 0.114886, -0.113895, 0)
+material_override = SubResource("StandardMaterial3D_2lvxj")
+lod_bias = 3.0
