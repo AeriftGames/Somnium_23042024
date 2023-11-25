@@ -56,6 +56,7 @@ public partial class CDebugHud : Control
 
 	public override void _Process(double delta)
 	{
+		/*
 		if (isEnable == false) return;
 
 		// vypne/zapne tento debug
@@ -68,7 +69,7 @@ public partial class CDebugHud : Control
 
 		// prepne hud page vzad
 		if(Input.IsActionJustPressed("PreviousPageInHud"))
-            SetCurrentTab(GetCurrentTabID() - 1, true);
+            SetCurrentTab(GetCurrentTabID() - 1, true);*/
 	}
 
 	// Enable/Disahlbe DebugHud (on off include all updates)

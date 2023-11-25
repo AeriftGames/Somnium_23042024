@@ -7,6 +7,10 @@ public partial class FpsCharacterBase : CharacterBody3D
     private CCharacterLookComponent CharacterLookComponent;
     private CCharacterCrouchComponent CharacterCrouchComponent;
 
+    public CCharacterMovementComponent GetCharacterMovementComponent() { return CharacterMovementComponent; }
+    public CCharacterLookComponent GetCharacterLookComponent() { return CharacterLookComponent; }
+    public CCharacterCrouchComponent GetCharacterCrouchComponent() { return this.CharacterCrouchComponent; }
+
     public override void _Ready()
     {
         base._Ready();
@@ -24,9 +28,20 @@ public partial class FpsCharacterBase : CharacterBody3D
     public override void _PhysicsProcess(double delta)
 	{
         CharacterLookComponent.UpdateLook(delta);
+
 		CharacterMovementComponent.UpdateMove(delta);
 
-        if(Input.IsActionJustPressed("Crunch"))
-            CharacterCrouchComponent.ToggleCrouch();
-	}
+        CharacterMovementComponent.CheckAndApplyJump("Jump");
+        CharacterCrouchComponent.CheckAndApplyCrouch("Crunch");
+
+        CharacterMovementComponent.ApplyWorkVelocity();
+
+        CGameMaster.GM.GetUniversal().GetDebugLabels().AddProperty("Character Velocity",
+            new Vector3(float.Round(GetRealVelocity().X,1),
+            float.Round(GetRealVelocity().Y, 1), 
+            float.Round(GetRealVelocity().Z, 1)).ToString(),0);
+
+        CGameMaster.GM.GetUniversal().GetDebugLabels().AddProperty("Character Speed",
+            GetCharacterMovementComponent().GetRealSpeed().ToString(), 1);
+    }
 }

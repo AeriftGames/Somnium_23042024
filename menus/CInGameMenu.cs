@@ -7,26 +7,39 @@ public partial class CInGameMenu : Control
 	VBoxContainer InGameMenuButtonsContainer = null;
 
 	private int focusButtonID = 0;
-	private bool active = false;
+	private bool isOpen = false;
 
 	public void PostInit()
 	{
         InGameMenuButtonsContainer = GetNode<VBoxContainer>("Control/VBoxContainer");
-        SetActive(false);
+        SetOpen(false);
 	}
 
     public override void _Process(double delta)
     {
     }
 
-    public void SetActive(bool newActive)
+	public void ToggleOpen() { SetOpen(!isOpen); }
+
+    public void SetOpen(bool newOpen)
 	{
 		// vnitrni zmena stavu
-		active = newActive;
+		isOpen = newOpen;
 
 		// viditelnost InGameMenu
-		Visible = active;
+		Visible = isOpen;
 
+		if(isOpen)
+		{
+            Input.MouseMode = Input.MouseModeEnum.Visible;
+        }
+		else
+		{
+			Input.MouseMode = Input.MouseModeEnum.Captured;
+        }
+
+
+		/*
 		// pokusime se ziskat interact charactera
         FPSCharacter_Interaction interChar = CGameMaster.GM.GetGame().GetFPSCharacter() as FPSCharacter_Interaction;
 		if (interChar == null) return;
@@ -58,15 +71,15 @@ public partial class CInGameMenu : Control
 			if (invChar != null)
 				if(invChar.GetCharacterHealthComponent().GetAlive())
 					interChar.SetInputEnable(true);
-        }
+        }*/
 	}
 
-	public bool GetActive() { return active; }
+	public bool GetActive() { return isOpen; }
 
 	// Button BackToGame - Deaktivuje toto InGameMenu a povoli opet inputs charactera
 	public void _on_button_back_to_game_pressed()
 	{
-		SetActive(false);
+		SetOpen(false);
 	}
 
     public void _on_button_quit_game_pressed()

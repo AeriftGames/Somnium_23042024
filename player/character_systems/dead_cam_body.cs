@@ -87,7 +87,7 @@ public partial class dead_cam_body : RigidBody3D
 
     public void OpenInGameMenu()
     {
-        CGameMaster.GM.GetGame().GetInGameMenu().SetActive(true);
+        CGameMaster.GM.GetGame().GetInGameMenu().SetOpen(true);
     }
 
     public void FreeAll()

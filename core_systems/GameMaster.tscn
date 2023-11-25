@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://bfjmbldwhs02n"]
+[gd_scene load_steps=32 format=3 uid="uid://bfjmbldwhs02n"]
 
 [ext_resource type="Script" path="res://core_systems/CGameMaster.cs" id="1_mjdjb"]
 [ext_resource type="Script" path="res://core_systems/level_loader_system/CLevelLoader.cs" id="2_dgyoo"]
@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://wlh0gi2r057f" path="res://menus/InGameMenu.tscn" id="10_o21ed"]
 [ext_resource type="Script" path="res://core_systems/universal/CUniversal.cs" id="11_udusp"]
 [ext_resource type="PackedScene" uid="uid://babdw2pj0huby" path="res://core_systems/debug_hud_system/debug_hud.tscn" id="17_yfoib"]
+[ext_resource type="PackedScene" uid="uid://c04geamyk5qwa" path="res://core_systems/debug_hud_system/debug_panel.tscn" id="18_cjmce"]
 
 [sub_resource type="Animation" id="Animation_hoq5k"]
 resource_name = "PlayUnvisible"
@@ -603,6 +604,9 @@ metadata/_edit_lock_ = true
 [node name="InGameMenu" parent="Game" instance=ExtResource("10_o21ed")]
 visible = false
 metadata/_edit_lock_ = true
+
+[node name="DebugPanel" parent="Game" instance=ExtResource("18_cjmce")]
+visible = false
 
 [connection signal="pressed" from="Benchmark/BenchmarkMenuAndFpsStats/InBenchmarkMenu/Control/VBoxContainer/Button_BackToGame" to="Benchmark/BenchmarkMenuAndFpsStats/InBenchmarkMenu" method="_on_button_back_to_game_pressed"]
 [connection signal="pressed" from="Benchmark/BenchmarkMenuAndFpsStats/InBenchmarkMenu/Control/VBoxContainer/Button_RestartBenchmark" to="Benchmark/BenchmarkMenuAndFpsStats/InBenchmarkMenu" method="_on_button_restart_benchmark_pressed"]

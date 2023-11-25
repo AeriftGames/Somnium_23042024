@@ -131,10 +131,6 @@ public partial class CGameMaster : Node
 
 	public override void _Process(double delta)
 	{
-		// INPUTS
-        if (Input.IsActionJustPressed("EscapeAction"))
-            GetGame().ToggleInGameMenu();
-
         // pro async level load
         GetGame().GetLevelLoader().Update(delta);
 	}
