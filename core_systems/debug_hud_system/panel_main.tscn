@@ -1,13 +1,13 @@
 [gd_scene load_steps=3 format=3 uid="uid://bn1376tpwykba"]
 
-[ext_resource type="Theme" uid="uid://cd3yvqcy8bus4" path="res://player_character/user_interface/debug_theme.theme" id="1_enpp4"]
-[ext_resource type="Script" path="res://core_systems/debug_hud_system/panel_main.cs" id="2_r0srm"]
+[ext_resource type="Theme" uid="uid://cd3yvqcy8bus4" path="res://core_systems/debug_hud_system/debug_theme.theme" id="1_vry1s"]
+[ext_resource type="Script" path="res://core_systems/debug_hud_system/CPanelMain.cs" id="2_ttkoi"]
 
 [node name="PanelMain" type="PanelContainer"]
 custom_minimum_size = Vector2(300, 500)
 mouse_filter = 2
-theme = ExtResource("1_enpp4")
-script = ExtResource("2_r0srm")
+theme = ExtResource("1_vry1s")
+script = ExtResource("2_ttkoi")
 metadata/_edit_lock_ = true
 
 [node name="VBoxUp" type="VBoxContainer" parent="."]
@@ -17,31 +17,31 @@ mouse_filter = 2
 [node name="MarginContainer" type="MarginContainer" parent="VBoxUp"]
 layout_mode = 2
 mouse_filter = 2
-theme = ExtResource("1_enpp4")
+theme = ExtResource("1_vry1s")
 metadata/_edit_lock_ = true
 
 [node name="VBoxButtons" type="VBoxContainer" parent="VBoxUp/MarginContainer"]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="CheckButton" type="CheckButton" parent="VBoxUp/MarginContainer/VBoxButtons"]
+[node name="CheckButton_ShowFps" type="CheckButton" parent="VBoxUp/MarginContainer/VBoxButtons"]
 layout_mode = 2
-theme = ExtResource("1_enpp4")
+theme = ExtResource("1_vry1s")
 text = " SHOW FPS"
 
-[node name="CheckButton2" type="CheckButton" parent="VBoxUp/MarginContainer/VBoxButtons"]
+[node name="CheckButton_ShowDebugLabels" type="CheckButton" parent="VBoxUp/MarginContainer/VBoxButtons"]
 layout_mode = 2
-theme = ExtResource("1_enpp4")
-text = " SHOW PERFORMANCE"
+theme = ExtResource("1_vry1s")
+text = " SHOW DEBUG LABELS"
 
-[node name="CheckButton3" type="CheckButton" parent="VBoxUp/MarginContainer/VBoxButtons"]
+[node name="CheckButton_ShowPerformance" type="CheckButton" parent="VBoxUp/MarginContainer/VBoxButtons"]
 layout_mode = 2
-theme = ExtResource("1_enpp4")
-text = " ENABLE OCCLUSION CULLING"
+theme = ExtResource("1_vry1s")
+text = " SHOW PERFORMANCE"
 
 [node name="MarginContainer2" type="MarginContainer" parent="VBoxUp"]
 layout_mode = 2
-theme = ExtResource("1_enpp4")
+theme = ExtResource("1_vry1s")
 metadata/_edit_lock_ = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxUp/MarginContainer2"]
@@ -49,7 +49,7 @@ layout_mode = 2
 
 [node name="CheckButton3" type="CheckButton" parent="VBoxUp/MarginContainer2/VBoxContainer"]
 layout_mode = 2
-theme = ExtResource("1_enpp4")
+theme = ExtResource("1_vry1s")
 text = " ENABLE OCCLUSION CULLING"
 
 [node name="VBoxBottom" type="VBoxContainer" parent="."]
@@ -74,3 +74,7 @@ text = "SAVE SETTINGS"
 [node name="Button_QuitGame" type="Button" parent="VBoxBottom/MarginContainer/VBoxButtons"]
 layout_mode = 2
 text = "QUIT GAME"
+
+[connection signal="toggled" from="VBoxUp/MarginContainer/VBoxButtons/CheckButton_ShowFps" to="." method="_on_check_button_show_fps_toggled"]
+[connection signal="toggled" from="VBoxUp/MarginContainer/VBoxButtons/CheckButton_ShowDebugLabels" to="." method="_on_check_button_show_debug_labels_toggled"]
+[connection signal="pressed" from="VBoxBottom/MarginContainer/VBoxButtons/Button_QuitGame" to="." method="_on_button_quit_game_pressed"]

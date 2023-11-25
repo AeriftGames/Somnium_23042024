@@ -46,12 +46,12 @@ public partial class CDebugHud : Control
         update_timer.OneShot = false;
         AddChild(update_timer);
         update_timer.Stop();
-
+		/*
         // On Default = for default visble..
         SetEnable(true);
 
         BuildLevelButtons();
-        BuildSpawnButtons();
+        BuildSpawnButtons();*/
     }
 
 	public override void _Process(double delta)

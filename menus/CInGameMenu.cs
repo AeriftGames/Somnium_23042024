@@ -11,7 +11,7 @@ public partial class CInGameMenu : Control
 
 	public void PostInit()
 	{
-        InGameMenuButtonsContainer = GetNode<VBoxContainer>("Control/VBoxContainer");
+        InGameMenuButtonsContainer = GetNode<VBoxContainer>("Control/PanelContainer/MarginContainer/VBoxContainer");
         SetOpen(false);
 	}
 
@@ -23,8 +23,12 @@ public partial class CInGameMenu : Control
 
     public void SetOpen(bool newOpen)
 	{
-		// vnitrni zmena stavu
-		isOpen = newOpen;
+        // pokud mame otevreny debug panel - zavreme jej = main menu je nadrazene
+        if (newOpen && CGameMaster.GM.GetGame().GetDebugPanel().GetIsOpen())
+                CGameMaster.GM.GetGame().GetDebugPanel().OpenDebugTabs(false);
+
+        // vnitrni zmena stavu
+        isOpen = newOpen;
 
 		// viditelnost InGameMenu
 		Visible = isOpen;
@@ -74,7 +78,7 @@ public partial class CInGameMenu : Control
         }*/
 	}
 
-	public bool GetActive() { return isOpen; }
+	public bool GetIsOpen() { return isOpen; }
 
 	// Button BackToGame - Deaktivuje toto InGameMenu a povoli opet inputs charactera
 	public void _on_button_back_to_game_pressed()

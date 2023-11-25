@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://menus/CInGameMenu.cs" id="1_5yglf"]
 [ext_resource type="PackedScene" uid="uid://d1xpbdilt7rk1" path="res://menus/BaseFocusedMenuButton.tscn" id="2_10o54"]
-[ext_resource type="Theme" uid="uid://cd3yvqcy8bus4" path="res://player_character/user_interface/debug_theme.theme" id="3_wvgby"]
+[ext_resource type="Theme" uid="uid://cd3yvqcy8bus4" path="res://core_systems/debug_hud_system/debug_theme.theme" id="3_wvgby"]
 
 [node name="InGameMenu" type="Control"]
 top_level = true

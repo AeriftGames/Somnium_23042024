@@ -1,5 +1,6 @@
-[gd_scene load_steps=11 format=3 uid="uid://b4mah7ce4ydqd"]
+[gd_scene load_steps=12 format=3 uid="uid://b4mah7ce4ydqd"]
 
+[ext_resource type="Script" path="res://testing_stuff_kaen/test_new_levels/test_level.cs" id="1_1hox6"]
 [ext_resource type="Texture2D" uid="uid://cymo6nrx5cwrm" path="res://testing_stuff_kaen/syferfontein_0d_clear_puresky_2k.hdr" id="1_lf287"]
 [ext_resource type="Material" uid="uid://s8du8kwvqfuc" path="res://testing_stuff_kaen/test_new_levels/prototype_material.tres" id="2_detg4"]
 [ext_resource type="Texture2D" uid="uid://dycfdwyjbsixm" path="res://testing_stuff_kaen/prototype_textures/Dark/texture_01.png" id="3_ly7is"]
@@ -13,7 +14,6 @@ night_sky = ExtResource("1_lf287")
 
 [sub_resource type="Sky" id="Sky_5qm2v"]
 sky_material = SubResource("PhysicalSkyMaterial_8qjl2")
-process_mode = 2
 
 [sub_resource type="Environment" id="Environment_xbcaf"]
 background_mode = 2
@@ -38,9 +38,10 @@ uv1_triplanar = true
 uv1_world_triplanar = true
 
 [node name="TestLevel" type="Node3D"]
+script = ExtResource("1_1hox6")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.866023, -0.433016, 0.250001, 0.250002, 0.0580112, 0.966506, -0.433016, 0.899517, 0.0580157, 0, 0, 0)
+transform = Transform3D(0.812909, -0.49193, -0.311742, 0.573494, 0.769358, 0.281411, 0.101407, -0.407544, 0.907538, 0, 0, 0)
 light_energy = 0.2
 light_indirect_energy = 10.0
 light_volumetric_fog_energy = 5.0

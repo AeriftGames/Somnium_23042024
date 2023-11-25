@@ -6,7 +6,7 @@ public partial class CUniversal : Node
     private BlackScreen blackScreen = null;
     private LoadingHud loadingHud = null;
     private CMasterLog MasterLog = null;
-    private DebugLabels debugLabels = null;
+    private CDebugLabels debugLabels = null;
 
     public void PostInit()
     {
@@ -25,7 +25,4 @@ public partial class CUniversal : Node
     {
         blackScreen.SetActive(!newEnable, !new_instant);
     }
-
-    public DebugLabels GetDebugLabels() {  return debugLabels; }
-    public void SetDebugLabels(DebugLabels newLabels) { debugLabels = newLabels; }
 }

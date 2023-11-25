@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://c04geamyk5qwa"]
 
-[ext_resource type="Theme" uid="uid://cd3yvqcy8bus4" path="res://player_character/user_interface/debug_theme.theme" id="1_gnxtd"]
+[ext_resource type="Theme" uid="uid://cd3yvqcy8bus4" path="res://core_systems/debug_hud_system/debug_theme.theme" id="1_gnxtd"]
 [ext_resource type="Script" path="res://core_systems/debug_hud_system/CDebugPanel.cs" id="1_yf4lg"]
-[ext_resource type="Script" path="res://player_character/user_interface/DebugLabels.cs" id="2_6iq3f"]
+[ext_resource type="Script" path="res://core_systems/debug_hud_system/CDebugLabels.cs" id="2_6iq3f"]
 [ext_resource type="PackedScene" uid="uid://bn1376tpwykba" path="res://core_systems/debug_hud_system/panel_main.tscn" id="2_ftwve"]
 
 [node name="DebugPanel" type="Control"]
@@ -12,10 +12,13 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("1_yf4lg")
 metadata/_edit_lock_ = true
 
 [node name="Background" type="ColorRect" parent="."]
+unique_name_in_owner = true
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -23,8 +26,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.705882)
+metadata/_edit_lock_ = true
 
 [node name="DebugTabs" type="MarginContainer" parent="."]
+unique_name_in_owner = true
+visible = false
 custom_minimum_size = Vector2(280, 600)
 layout_mode = 1
 anchors_preset = 6
@@ -73,6 +79,7 @@ grow_horizontal = 2
 metadata/_edit_lock_ = true
 
 [node name="PanelMain" parent="DebugTabs/MainDebugPanel/MarginContainer/TabContainer/MAIN/MarginContainer" instance=ExtResource("2_ftwve")]
+unique_name_in_owner = true
 layout_mode = 2
 
 [node name="LEVEL" type="TabBar" parent="DebugTabs/MainDebugPanel/MarginContainer/TabContainer"]
@@ -163,26 +170,70 @@ metadata/_edit_lock_ = true
 layout_mode = 2
 metadata/_edit_lock_ = true
 
-[node name="MarginDebugLabels" type="MarginContainer" parent="."]
-layout_mode = 1
-offset_right = 154.0
-offset_bottom = 34.0
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+metadata/_edit_lock_ = true
+
+[node name="MarginFps" type="MarginContainer" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
 theme = ExtResource("1_gnxtd")
 metadata/_edit_lock_ = true
 
-[node name="DebugLabels" type="PanelContainer" parent="MarginDebugLabels"]
+[node name="PanelContainerFps" type="PanelContainer" parent="VBoxContainer/MarginFps"]
+layout_mode = 2
+theme = ExtResource("1_gnxtd")
+metadata/_edit_lock_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/MarginFps/PanelContainerFps"]
+custom_minimum_size = Vector2(50, 30)
+layout_mode = 2
+theme = ExtResource("1_gnxtd")
+metadata/_edit_lock_ = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/MarginFps/PanelContainerFps/MarginContainer"]
+layout_mode = 2
+alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="Label" type="Label" parent="VBoxContainer/MarginFps/PanelContainerFps/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "FPS:"
+metadata/_edit_lock_ = true
+
+[node name="Label_FPS" type="Label" parent="VBoxContainer/MarginFps/PanelContainerFps/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(38, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+text = "120"
+horizontal_alignment = 2
+metadata/_edit_lock_ = true
+
+[node name="MarginDebugLabels" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_gnxtd")
+metadata/_edit_lock_ = true
+
+[node name="DebugLabels" type="PanelContainer" parent="VBoxContainer/MarginDebugLabels"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme = ExtResource("1_gnxtd")
 script = ExtResource("2_6iq3f")
 metadata/_edit_lock_ = true
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginDebugLabels/DebugLabels"]
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/MarginDebugLabels/DebugLabels"]
 custom_minimum_size = Vector2(150, 30)
 layout_mode = 2
 theme = ExtResource("1_gnxtd")
 metadata/_edit_lock_ = true
 
-[node name="PropertyContainer" type="VBoxContainer" parent="MarginDebugLabels/DebugLabels/MarginContainer"]
+[node name="PropertyContainer" type="VBoxContainer" parent="VBoxContainer/MarginDebugLabels/DebugLabels/MarginContainer"]
 layout_mode = 2
 metadata/_edit_lock_ = true

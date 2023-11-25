@@ -96,6 +96,8 @@ public partial class CGameMaster : Node
 		// Vypne _Process GameMastera
 		ProcessMode = ProcessModeEnum.Disabled;
 
+		if (GetGame().GetFPSCharacter() == null) return;
+
         // uvolni kameru a celeho hrace
         GetGame().GetFPSCharacter().objectCamera.FreeAll();
 		GetGame().GetFPSCharacter().QueueFree();
