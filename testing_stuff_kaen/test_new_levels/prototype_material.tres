@@ -1,0 +1,14 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://s8du8kwvqfuc"]
+
+[ext_resource type="Texture2D" uid="uid://dycfdwyjbsixm" path="res://testing_stuff_kaen/prototype_textures/Dark/texture_01.png" id="1_cgfwj"]
+[ext_resource type="Texture2D" uid="uid://cixpao8vecw1l" path="res://testing_stuff_kaen/prototype_textures/Dark/texture_01_normal.png" id="2_bholl"]
+
+[resource]
+albedo_texture = ExtResource("1_cgfwj")
+metallic = 0.2
+normal_enabled = true
+normal_scale = 4.0
+normal_texture = ExtResource("2_bholl")
+uv1_scale = Vector3(0.5, 0.5, 0.5)
+uv1_triplanar = true
+uv1_world_triplanar = true

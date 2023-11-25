@@ -48,7 +48,7 @@ public partial class CharacterShootBallComponet : Node
             GD.Load<PackedScene>("res://testing_stuff_kaen/shootball/ball_projectile.tscn")
             .Instantiate() as ball_projectile;
 
-        GameMaster.GM.GetLevelLoader().GetActualLevelScene().AddChild(projectile);
+        CGameMaster.GM.GetGame().GetLevelLoader().GetActualLevelScene().AddChild(projectile);
 
         projectile.SetActionType(ShootBallActionType);
         projectile.Mass = MassProjectile;

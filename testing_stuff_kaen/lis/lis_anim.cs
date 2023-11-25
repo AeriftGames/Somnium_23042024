@@ -34,7 +34,7 @@ public partial class lis_anim : Node3D
 
     public async void StartGame()
     {
-        await ToSignal(GameMaster.GM.GetMasterSignals(), MasterSignals.SignalName.GameStart);
+        await ToSignal(CGameMaster.GM.GetMasterSignals(), CMasterSignals.SignalName.GameStart);
 
         await ToSignal(GetTree().CreateTimer(DelayMsStartAnim), "timeout");
         if(Enable)
@@ -61,7 +61,7 @@ public partial class lis_anim : Node3D
             // calculate Distance
             if (invObjectCamera != null)
             {
-                if (GameMaster.GM.GetFPSCharacter() == null) return;
+                if (CGameMaster.GM.GetGame().GetFPSCharacter() == null) return;
 
                 // cam shake
                 DistanceFromPlayer =

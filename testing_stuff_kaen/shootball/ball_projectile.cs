@@ -29,9 +29,9 @@ public partial class ball_projectile : RigidBody3D
         PackedScene SplashPrefab = GD.Load<PackedScene>("res://testing_stuff_kaen/shootball/SplashDecal.tscn");
         Node3D SplashNode = SplashPrefab.Instantiate() as Node3D;
 
-        GameMaster.GM.GetLevelLoader().GetActualLevelScene().AddChild(SplashNode);
+        CGameMaster.GM.GetGame().GetLevelLoader().GetActualLevelScene().AddChild(SplashNode);
         SplashNode.GlobalPosition = GlobalPosition;
-        SplashNode.LookAtFromPosition(SplashNode.GlobalPosition, GameMaster.GM.GetFPSCharacter().GlobalPosition);
+        SplashNode.LookAtFromPosition(SplashNode.GlobalPosition, CGameMaster.GM.GetGame().GetFPSCharacter().GlobalPosition);
 
         QueueFree();
     }

@@ -34,7 +34,7 @@ public partial class CharacterInfoHud : Control
 
     public void SetHealthDataFromPlayer()
     {
-        FPSCharacter_Inventory character = GameMaster.GM.GetFPSCharacter() as FPSCharacter_Inventory;
+        FPSCharacter_Inventory character = CGameMaster.GM.GetGame().GetFPSCharacter() as FPSCharacter_Inventory;
         if (character == null) return;
 
         progressBarHealth.Value = character.GetCharacterHealthComponent().GetHealth();
@@ -44,7 +44,7 @@ public partial class CharacterInfoHud : Control
 
     public void SetStaminaDataFromPlayer()
     {
-        FPSCharacter_Inventory character = GameMaster.GM.GetFPSCharacter() as FPSCharacter_Inventory;
+        FPSCharacter_Inventory character = CGameMaster.GM.GetGame().GetFPSCharacter() as FPSCharacter_Inventory;
         if (character == null) return;
 
         progressBarStamina.Value = character.GetCharacterStaminaComponent().GetStamina();

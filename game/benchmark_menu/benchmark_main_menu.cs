@@ -20,7 +20,7 @@ public partial class benchmark_main_menu : Control
         VBoxContainer_Levels = GetNode<VBoxContainer>("PickLevelsControl/Panel2/Panel3/VBoxContainer");
         ServerOffControl = GetNode<Control>("ServerOffControl");
 
-        BuildLabel.Text = "build:"+GameMaster.GM.GetBuild();
+        BuildLabel.Text = "build:"+CGameMaster.GM.GetBuild();
 
 
         ServerOffControl.Visible = false;
@@ -49,7 +49,7 @@ public partial class benchmark_main_menu : Control
 
     public void PostInit()
     {
-        GameMaster.GM.GetMasterSignals().BenchmarkServerStatus += Benchmark_main_menu_BenchmarkServerStatus;
+        CGameMaster.GM.GetMasterSignals().BenchmarkServerStatus += Benchmark_main_menu_BenchmarkServerStatus;
     }
 
     public void _on_start_benchmark_button_pressed()
@@ -73,7 +73,7 @@ public partial class benchmark_main_menu : Control
 
     public void StartNewBenchmark()
     {
-        GameMaster.GM.GetBenchmarkSystem().StartBenchmarkLevel(
+        CGameMaster.GM.GetBenchmark().StartBenchmarkLevel(
             "res://levels/worldlevel_demo_extend_benchmark.tscn", "BenchmarkLevel1");
     }
 

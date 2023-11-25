@@ -31,7 +31,7 @@ public partial class InventoryItemDataNode : Node3D
 
 	public void UseWantAddToInventory()
 	{
-		FPSCharacter_Inventory charInventory = GameMaster.GM.GetFPSCharacter() as FPSCharacter_Inventory;
+		FPSCharacter_Inventory charInventory = CGameMaster.GM.GetGame().GetFPSCharacter() as FPSCharacter_Inventory;
 		if (charInventory == null) return;
 
 		// pokusime se pridat item do inventare hrace
@@ -54,7 +54,7 @@ public partial class InventoryItemDataNode : Node3D
         {
             GD.Print("tento objekt je RigidBody3D");
 
-            FPSCharacter_Inventory charInventory = GameMaster.GM.GetFPSCharacter() as FPSCharacter_Inventory;
+            FPSCharacter_Inventory charInventory = CGameMaster.GM.GetGame().GetFPSCharacter() as FPSCharacter_Inventory;
             if (charInventory == null) return;
 
 			Vector3 playerPos = charInventory.GlobalPosition;

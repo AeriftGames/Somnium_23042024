@@ -246,7 +246,7 @@ public partial class UniversalFunctions
             }
         }
 
-        if (allSpawnObjects.Count == 0) { GameMaster.GM.Log.WriteLog(GameMaster.GM, LogSystem.ELogMsgType.ERROR, "nenacetli jsme zadne LevelInfo"); }
+        if (allSpawnObjects.Count == 0) { CGameMaster.GM.GetUniversal().GetMasterLog().WriteLog(CGameMaster.GM, CMasterLog.ELogMsgType.ERROR, "nenacetli jsme zadne LevelInfo"); }
 
         return allSpawnObjects;
     }
@@ -329,7 +329,7 @@ public partial class UniversalFunctions
             }
         }
 
-        if (AllLevelInfo.Count == 0) { GameMaster.GM.Log.WriteLog(GameMaster.GM, LogSystem.ELogMsgType.ERROR, "nenacetli jsme zadne LevelInfo"); }
+        if (AllLevelInfo.Count == 0) { CGameMaster.GM.GetUniversal().GetMasterLog().WriteLog(CGameMaster.GM, CMasterLog.ELogMsgType.ERROR, "nenacetli jsme zadne LevelInfo"); }
 
         return AllLevelInfo;
     }

@@ -14,9 +14,9 @@ public partial class level_info_button : Button
         {*/
             // EDITOR
             if (Levelinfo.LevelType == WorldLevel.ELevelType.GameLevel)
-                GameMaster.GM.GetLevelLoader().LoadNewWorldLevel(Levelinfo.LevelPath, Levelinfo.LevelName);
+                CGameMaster.GM.GetGame().GetLevelLoader().LoadNewWorldLevel(Levelinfo.LevelPath, Levelinfo.LevelName);
             else if (Levelinfo.LevelType == WorldLevel.ELevelType.BenchmarkLevel)
-                GameMaster.GM.GetBenchmarkSystem().StartBenchmarkLevel(Levelinfo.LevelPath, Levelinfo.LevelName);
+                CGameMaster.GM.GetBenchmark().StartBenchmarkLevel(Levelinfo.LevelPath, Levelinfo.LevelName);
             else if (Levelinfo.LevelType == WorldLevel.ELevelType.Menu)
                 GetTree().ChangeSceneToFile(Levelinfo.LevelPath);
         /*}

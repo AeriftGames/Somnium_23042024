@@ -45,7 +45,7 @@ public partial class all_this_shaders_need_compiled : Node3D
         toggle_timer.Start();
 
         // Prepne baterku na enable
-        FPSCharacter_Interaction a = (FPSCharacter_Interaction)GameMaster.GM.GetFPSCharacter();
+        FPSCharacter_Interaction a = (FPSCharacter_Interaction)CGameMaster.GM.GetGame().GetFPSCharacter();
         a.ToggleSimpleFlashlight();
     }
 
@@ -54,7 +54,7 @@ public partial class all_this_shaders_need_compiled : Node3D
         if(!isAllUnvisible)
         {
             // first timer(visible) cycle
-            GameMaster.GM.GetLevelLoader().SetNewInfoLevelCompilingShader("PRECOMPLILE SHADER PROCESS - ALL SCENES CALL VISIBLE TO FALSE", 75);
+            CGameMaster.GM.GetGame().GetLevelLoader().SetNewInfoLevelCompilingShader("PRECOMPLILE SHADER PROCESS - ALL SCENES CALL VISIBLE TO FALSE", 75);
             Visible = false;
             isAllUnvisible = true;
             visible_timer.Start();
@@ -62,12 +62,12 @@ public partial class all_this_shaders_need_compiled : Node3D
         else
         {
             // Prepne baterku na disable
-            FPSCharacter_Interaction a = (FPSCharacter_Interaction)GameMaster.GM.GetFPSCharacter();
+            FPSCharacter_Interaction a = (FPSCharacter_Interaction)CGameMaster.GM.GetGame().GetFPSCharacter();
             a.ToggleSimpleFlashlight();
 
             // second timer(visible) cycle
-            GameMaster.GM.GetLevelLoader().SetNewInfoLevelCompilingShader("PRECOMPLILE SHADER PROCESS - ALL SCENES CALL QUEUEFREE" , 100);
-            GameMaster.GM.GetLevelLoader().EndPrecompileShaderProcess();
+            CGameMaster.GM.GetGame().GetLevelLoader().SetNewInfoLevelCompilingShader("PRECOMPLILE SHADER PROCESS - ALL SCENES CALL QUEUEFREE" , 100);
+            CGameMaster.GM.GetGame().GetLevelLoader().EndPrecompileShaderProcess();
 
             //
             visible_timer.Stop();
@@ -86,7 +86,7 @@ public partial class all_this_shaders_need_compiled : Node3D
         if(!wasFirstToggle)
         {
             // first timer(toggle) cycle
-            GameMaster.GM.GetLevelLoader().SetNewInfoLevelCompilingShader("PRECOMPLILE SHADER PROCESS - ALL ITEMS(TOGGLED) TOGGLE FIRST", 25);
+            CGameMaster.GM.GetGame().GetLevelLoader().SetNewInfoLevelCompilingShader("PRECOMPLILE SHADER PROCESS - ALL ITEMS(TOGGLED) TOGGLE FIRST", 25);
             foreach (var item in a)
             {
                 item.Call("ToggleEnable");
@@ -97,7 +97,7 @@ public partial class all_this_shaders_need_compiled : Node3D
         else
         {
             // second timer(toggle) cycle
-            GameMaster.GM.GetLevelLoader().SetNewInfoLevelCompilingShader("PRECOMPLILE SHADER PROCESS - ALL ITEMS(TOGGLED) TOGGLE SECOND", 50);
+            CGameMaster.GM.GetGame().GetLevelLoader().SetNewInfoLevelCompilingShader("PRECOMPLILE SHADER PROCESS - ALL ITEMS(TOGGLED) TOGGLE SECOND", 50);
             foreach (var item in a)
             {
                 item.Call("ToggleEnable");

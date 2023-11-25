@@ -2,7 +2,7 @@
 
 [ext_resource type="Material" uid="uid://lah0omlue113" path="res://placeholders/modular_level_builds/my_trim1/trim_floor1_mat.tres" id="1_hcy48"]
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_abjfe"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_87oy7"]
 _surfaces = [{
 "aabb": AABB(-1, 0, -1, 2, 1e-05, 2.00001),
 "format": 34359742465,
@@ -30,7 +30,7 @@ _surfaces = [{
 "vertex_data": PackedByteArray(0, 0, 128, 191, 0, 0, 0, 0, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 0, 0, 0, 0, 128, 63, 0, 0, 128, 191, 0, 0, 0, 0, 0, 0, 128, 191, 0, 0, 128, 63, 0, 0, 0, 0, 0, 0, 128, 191, 0, 0, 128, 191, 0, 0, 0, 0, 0, 0, 0, 128, 0, 0, 128, 63, 0, 0, 0, 0, 0, 0, 0, 128, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 191, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 255, 127, 255, 255, 255, 127, 255, 191, 255, 127, 255, 255, 255, 127, 255, 191, 255, 127, 255, 255, 255, 127, 255, 191, 255, 127, 255, 255, 255, 127, 255, 191, 255, 127, 255, 255, 255, 127, 255, 191, 255, 127, 255, 255, 255, 127, 255, 191, 255, 127, 255, 255, 255, 127, 255, 191, 255, 127, 255, 255, 255, 127, 255, 191, 255, 127, 255, 255, 255, 127, 255, 191)
 }]
 blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_abjfe")
+shadow_mesh = SubResource("ArrayMesh_87oy7")
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_rbg8i"]
 data = PackedVector3Array(0, 0, 0, -1, 0, -1, 0, 0, -1, 0, 0, 0, -1, 0, 0, -1, 0, -1, 0, 0, 1, -1, 0, 0, 0, 0, 0, 0, 0, 1, -1, 0, 1, -1, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, -1, 1, 0, -1, 1, 0, 0, 0, 0, 0, 0, 0, -1)

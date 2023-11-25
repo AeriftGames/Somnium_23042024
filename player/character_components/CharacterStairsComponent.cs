@@ -43,7 +43,7 @@ public partial class CharacterStairsComponent : Node3D
     {
         base._PhysicsProcess(delta);
 
-        if (GameMaster.GM.GetIsQuitting()) return;
+        if (CGameMaster.GM.GetIsQuitting()) return;
         if (!EnableStairsDetectEffect) return;
 
         isMoveOnStairs = false;
@@ -53,13 +53,13 @@ public partial class CharacterStairsComponent : Node3D
             Node3D hitnode = rayCast3D.GetCollider() as Node3D;
 
             if (hitnode == null) return;
-            if(!GameMaster.GM.GetFPSCharacter().IsOnFloor()) return;
+            if(!CGameMaster.GM.GetGame().GetFPSCharacter().IsOnFloor()) return;
 
             float distance = Mathf.Abs(rayCast3D.GlobalPosition.DistanceTo(rayCast3D.GetCollisionPoint()));
             float rozdil = distance - LastStairDistance;
             LastStairDistance = distance;
 
-            if (hitnode.IsInGroup("tag_stairs") && GameMaster.GM.GetFPSCharacter().IsOnFloor())
+            if (hitnode.IsInGroup("tag_stairs") && CGameMaster.GM.GetGame().GetFPSCharacter().IsOnFloor())
             {
                 isMoveOnStairs = true;
 
@@ -97,7 +97,7 @@ public partial class CharacterStairsComponent : Node3D
     {
         isAlreadyEndStep = true;
 
-        if (GameMaster.GM.GetFPSCharacter().IsOnFloor())
+        if (CGameMaster.GM.GetGame().GetFPSCharacter().IsOnFloor())
         {
             if(new_rozdil > 0.02f)
             {
@@ -145,25 +145,25 @@ public partial class CharacterStairsComponent : Node3D
     {
         if (isMoveOnStairs)
         {
-            GameMaster.GM.GetFPSCharacter().MoveSpeedInStand =
-                (GameMaster.GM.GetFPSCharacter().DefaultMoveSpeedInStand / 100.0f) * MoveSpeedStandPercent;
+            CGameMaster.GM.GetGame().GetFPSCharacter().MoveSpeedInStand =
+                (CGameMaster.GM.GetGame().GetFPSCharacter().DefaultMoveSpeedInStand / 100.0f) * MoveSpeedStandPercent;
 
-            GameMaster.GM.GetFPSCharacter().MoveSpeedInSprint =
-                (GameMaster.GM.GetFPSCharacter().DefaultMoveSpeedInSprint / 100.0f) * MoveSpeedSprintPercent;
+            CGameMaster.GM.GetGame().GetFPSCharacter().MoveSpeedInSprint =
+                (CGameMaster.GM.GetGame().GetFPSCharacter().DefaultMoveSpeedInSprint / 100.0f) * MoveSpeedSprintPercent;
 
-            GameMaster.GM.GetFPSCharacter().MoveSpeedInCrunch =
-                (GameMaster.GM.GetFPSCharacter().DefaultMoveSpeedInCrunch / 100.0f) * MoveSpeedCrouchPercent;
+            CGameMaster.GM.GetGame().GetFPSCharacter().MoveSpeedInCrunch =
+                (CGameMaster.GM.GetGame().GetFPSCharacter().DefaultMoveSpeedInCrunch / 100.0f) * MoveSpeedCrouchPercent;
 
-            GameMaster.GM.GetFPSCharacter().LerpSpeedCameraY = 6.0f;
+            CGameMaster.GM.GetGame().GetFPSCharacter().LerpSpeedCameraY = 6.0f;
 
-            FPSCharacter_Inventory b = GameMaster.GM.GetFPSCharacter() as FPSCharacter_Inventory;
+            FPSCharacter_Inventory b = CGameMaster.GM.GetGame().GetFPSCharacter() as FPSCharacter_Inventory;
             b.FootStepLengthInWalk = 0.9f;
             b.FootStepLengthInSprint = 1.0f;
             b.FootStepLengthInCrouch = 0.6f;
             b.FootstepsAudioPitch = 0.15f;
 
             //
-            InventoryObjectCamera a = GameMaster.GM.GetFPSCharacter().GetObjectCamera() as InventoryObjectCamera;
+            InventoryObjectCamera a = CGameMaster.GM.GetGame().GetFPSCharacter().GetObjectCamera() as InventoryObjectCamera;
             a.GetHeadBobSystem().headBobbingWalkValue = 0.2f;
             a.GetHeadBobSystem().headBobbingSprintValue = 0.25f;
             a.GetHeadBobSystem().headBobRotDegSprintValue = 1.5f;
@@ -175,20 +175,20 @@ public partial class CharacterStairsComponent : Node3D
         }
         else
         {
-            GameMaster.GM.GetFPSCharacter().MoveSpeedInStand = GameMaster.GM.GetFPSCharacter().DefaultMoveSpeedInStand;
-            GameMaster.GM.GetFPSCharacter().MoveSpeedInSprint = GameMaster.GM.GetFPSCharacter().DefaultMoveSpeedInSprint;
-            GameMaster.GM.GetFPSCharacter().MoveSpeedInCrunch = GameMaster.GM.GetFPSCharacter().DefaultMoveSpeedInCrunch;
+            CGameMaster.GM.GetGame().GetFPSCharacter().MoveSpeedInStand = CGameMaster.GM.GetGame().GetFPSCharacter().DefaultMoveSpeedInStand;
+            CGameMaster.GM.GetGame().GetFPSCharacter().MoveSpeedInSprint = CGameMaster.GM.GetGame().GetFPSCharacter().DefaultMoveSpeedInSprint;
+            CGameMaster.GM.GetGame().GetFPSCharacter().MoveSpeedInCrunch = CGameMaster.GM.GetGame().GetFPSCharacter().DefaultMoveSpeedInCrunch;
 
-            GameMaster.GM.GetFPSCharacter().LerpSpeedCameraY = 0.0f;
+            CGameMaster.GM.GetGame().GetFPSCharacter().LerpSpeedCameraY = 0.0f;
 
-            FPSCharacter_Inventory b = GameMaster.GM.GetFPSCharacter() as FPSCharacter_Inventory;
+            FPSCharacter_Inventory b = CGameMaster.GM.GetGame().GetFPSCharacter() as FPSCharacter_Inventory;
             b.FootStepLengthInWalk = 1.2f;
             b.FootStepLengthInSprint = 1.25f;
             b.FootStepLengthInCrouch = 0.85f;
             b.FootstepsAudioPitch = 0.0f;
 
             //
-            InventoryObjectCamera a = GameMaster.GM.GetFPSCharacter().GetObjectCamera() as InventoryObjectCamera;
+            InventoryObjectCamera a = CGameMaster.GM.GetGame().GetFPSCharacter().GetObjectCamera() as InventoryObjectCamera;
             a.GetHeadBobSystem().headBobbingWalkValue = a.GetHeadBobSystem().DefaultheadBobbingWalkValue;
             a.GetHeadBobSystem().headBobbingSprintValue = a.GetHeadBobSystem().DefaultheadBobbingSprintValue;
             a.GetHeadBobSystem().headBobRotDegSprintValue = a.GetHeadBobSystem().DefaultheadBobRotDegSprintValue;

@@ -29,7 +29,7 @@ public partial class BenchmarkPoints : Node3D
 		interpLook = pathFollowLook.GlobalPosition;
 
 		// FPS
-		FpsTimer.WaitTime = GameMaster.GM.GetBenchmarkSystem().AddFpsDataTimer;
+		FpsTimer.WaitTime = CGameMaster.GM.GetBenchmark().AddFpsDataTimer;
         FpsTimer.OneShot = false;
 		FpsTimer.Connect("timeout", new Callable(this, "AddFpsNow"));
 		AddChild(FpsTimer);
@@ -59,19 +59,19 @@ public partial class BenchmarkPoints : Node3D
 			FpsTimer.Stop();
 
 			// Posleme globalni signal ze benchmark presset se provedl do konce
-			GameMaster.GM.GetMasterSignals().EmitSignal(MasterSignals.SignalName.BenchmarkFinishPresset);
+			CGameMaster.GM.GetMasterSignals().EmitSignal(CMasterSignals.SignalName.BenchmarkFinishPresset);
 			GD.Print("SendSignal");
 		}
 	}
 
-	public void AddFpsNow(){GameMaster.GM.GetBenchmarkSystem().AddFpsData((int)Engine.GetFramesPerSecond());}
+	public void AddFpsNow(){CGameMaster.GM.GetBenchmark().AddFpsData((int)Engine.GetFramesPerSecond());}
 
     public async void PostInit()
     {
-        await ToSignal(GameMaster.GM.GetMasterSignals(), MasterSignals.SignalName.GameStart);
+        await ToSignal(CGameMaster.GM.GetMasterSignals(), CMasterSignals.SignalName.GameStart);
 		GD.Print("GameStart receiverd");
 
-		GameMaster.GM.GetBenchmarkSystem().SetPostInitBenchmarkSettings();
+		CGameMaster.GM.GetBenchmark().SetPostInitBenchmarkSettings();
 
 		// start move benchmark camera
 		updateMove = true;

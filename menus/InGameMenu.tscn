@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://wlh0gi2r057f"]
 
-[ext_resource type="Script" path="res://menus/InGameMenu.cs" id="1_k4aci"]
+[ext_resource type="Script" path="res://menus/CInGameMenu.cs" id="1_5yglf"]
 [ext_resource type="PackedScene" uid="uid://d1xpbdilt7rk1" path="res://menus/BaseFocusedMenuButton.tscn" id="2_10o54"]
 
 [node name="InGameMenu" type="Control"]
@@ -12,7 +12,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-script = ExtResource("1_k4aci")
+script = ExtResource("1_5yglf")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1

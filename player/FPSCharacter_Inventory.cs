@@ -249,7 +249,7 @@ public partial class FPSCharacter_Inventory : FPSCharacter_Interaction
         // vytvorime (spawn) DeadCamBody do levelu na misto kde se aktualne nachazela kamera
         deadCamBody = 
             GD.Load<PackedScene>("res://player/character_systems/dead_cam_body.tscn").Instantiate() as dead_cam_body;
-        GameMaster.GM.GetLevelLoader().GetActualLevelScene().AddChild(deadCamBody);
+        CGameMaster.GM.GetGame().GetLevelLoader().GetActualLevelScene().AddChild(deadCamBody);
 
         // aktivujeme DeadCam
         deadCamBody.ActivateDeadCam();

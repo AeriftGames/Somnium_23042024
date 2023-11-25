@@ -6,12 +6,9 @@
 resource_name = "trim"
 transparency = 4
 vertex_color_use_as_albedo = true
-albedo_color = Color(0.788235, 0.898039, 1, 0.509804)
-metallic = 0.3
-metallic_specular = 1.0
+albedo_color = Color(0.262745, 0.454902, 0.658824, 0.470588)
 metallic_texture_channel = 2
-roughness = 0.8
-roughness_texture_channel = 1
+roughness = 0.74
 normal_scale = 0.5
 normal_texture = ExtResource("3_sgfpl")
 clearcoat_roughness = 0.13

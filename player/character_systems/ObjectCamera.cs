@@ -98,7 +98,7 @@ public partial class ObjectCamera : Node3D
 
 	public override void _Process(double delta)
 	{
-		if (GameMaster.GM.GetIsQuitting()) return;
+		if (CGameMaster.GM.GetIsQuitting()) return;
 
 		FPSCharacter_Interaction character_Interaction = (FPSCharacter_Interaction)ownerCharacter;
 
@@ -196,7 +196,7 @@ public partial class ObjectCamera : Node3D
 
 	public override void _PhysicsProcess(double delta)
 	{
-		if (GameMaster.GM.GetIsQuitting()) return;
+		if (CGameMaster.GM.GetIsQuitting()) return;
 
 		base._PhysicsProcess(delta);
 	}
@@ -368,7 +368,7 @@ public partial class ObjectCamera : Node3D
 
 				if (hitLength < leanMaxPositionX)
 				{
-					GameMaster.GM.GetDebugHud().CustomLabelUpdateText(4, this, "raycast for lean: " + hitLength);
+					CGameMaster.GM.GetDebugHud().CustomLabelUpdateText(4, this, "raycast for lean: " + hitLength);
 
 					returnedVector = LerpPos_LeanCenter.Position +
 						(NodeRotX.Transform.Basis.Y.Normalized() * (hitLength * direction_x));
@@ -427,7 +427,7 @@ public partial class ObjectCamera : Node3D
 
 				if (nejmensi < leanMaxPositionX)
 				{
-					GameMaster.GM.GetDebugHud().CustomLabelUpdateText(4, this, "raycast for lean: " + nejmensi);
+					CGameMaster.GM.GetDebugHud().CustomLabelUpdateText(4, this, "raycast for lean: " + nejmensi);
 
 					returnedVector = LerpPos_LeanCenter.Position +
 						(NodeRotX.Transform.Basis.X.Normalized() * (nejmensi * direction_x));

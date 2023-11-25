@@ -246,104 +246,7 @@ metadata/_edit_lock_ = true
 [node name="report_bug" parent="." index="11"]
 metadata/_edit_lock_ = true
 
-[node name="DebugHud" parent="." index="12"]
-metadata/_edit_lock_ = true
-
-[node name="InventoryMenu" parent="AllHuds" index="1" instance=ExtResource("9_bfvnj")]
-layout_mode = 1
-
-[node name="CharacterInfoHud" type="Control" parent="AllHuds" index="2"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-script = ExtResource("4_nvx4w")
-metadata/_edit_lock_ = true
-
-[node name="VBoxContainer" type="VBoxContainer" parent="AllHuds/CharacterInfoHud" index="0"]
-layout_mode = 0
-offset_top = 55.0
-offset_right = 199.0
-offset_bottom = 197.0
-
-[node name="HBoxContainer_Health" type="HBoxContainer" parent="AllHuds/CharacterInfoHud/VBoxContainer" index="0"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="AllHuds/CharacterInfoHud/VBoxContainer/HBoxContainer_Health" index="0"]
-layout_mode = 2
-text = "HEALTH"
-vertical_alignment = 1
-metadata/_edit_lock_ = true
-
-[node name="ProgressBar_Health" type="ProgressBar" parent="AllHuds/CharacterInfoHud/VBoxContainer/HBoxContainer_Health" index="1"]
-custom_minimum_size = Vector2(120, 0)
-layout_mode = 2
-size_flags_horizontal = 10
-size_flags_vertical = 1
-theme_override_styles/fill = SubResource("StyleBoxFlat_7bbwt")
-value = 5.0
-metadata/_edit_lock_ = true
-
-[node name="Label_HealthValue" type="Label" parent="AllHuds/CharacterInfoHud/VBoxContainer/HBoxContainer_Health/ProgressBar_Health" index="0"]
-visible = false
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -40.0
-offset_top = -11.5
-offset_bottom = 11.5
-grow_horizontal = 0
-grow_vertical = 2
-text = "100"
-horizontal_alignment = 3
-metadata/_edit_lock_ = true
-
-[node name="HBoxContainer_Stamina" type="HBoxContainer" parent="AllHuds/CharacterInfoHud/VBoxContainer" index="1"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="AllHuds/CharacterInfoHud/VBoxContainer/HBoxContainer_Stamina" index="0"]
-layout_mode = 2
-text = "STAMINA"
-vertical_alignment = 1
-metadata/_edit_lock_ = true
-
-[node name="ProgressBar_Stamina" type="ProgressBar" parent="AllHuds/CharacterInfoHud/VBoxContainer/HBoxContainer_Stamina" index="1"]
-custom_minimum_size = Vector2(120, 0)
-layout_mode = 2
-size_flags_horizontal = 10
-size_flags_vertical = 1
-theme_override_styles/fill = SubResource("StyleBoxFlat_w53l8")
-value = 5.0
-metadata/_edit_lock_ = true
-
-[node name="Label_StaminaValue" type="Label" parent="AllHuds/CharacterInfoHud/VBoxContainer/HBoxContainer_Stamina/ProgressBar_Stamina" index="0"]
-visible = false
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -40.0
-offset_top = -11.5
-offset_bottom = 11.5
-grow_horizontal = 0
-grow_vertical = 2
-text = "100"
-horizontal_alignment = 3
-metadata/_edit_lock_ = true
-
-[node name="DamageHud" parent="AllHuds" index="3" instance=ExtResource("5_dhy04")]
-layout_mode = 1
-metadata/_edit_lock_ = true
-
-[node name="BasicHud" parent="AllHuds" index="4"]
+[node name="BasicHud" parent="AllHuds" index="0"]
 mouse_filter = 2
 
 [node name="Crosshair3" type="ColorRect" parent="AllHuds/BasicHud/Crosshair" index="0"]
@@ -481,6 +384,100 @@ offset_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 1, 1, 0.32549)
+
+[node name="InventoryMenu" parent="AllHuds" index="1" instance=ExtResource("9_bfvnj")]
+layout_mode = 1
+
+[node name="CharacterInfoHud" type="Control" parent="AllHuds" index="2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("4_nvx4w")
+metadata/_edit_lock_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="AllHuds/CharacterInfoHud" index="0"]
+layout_mode = 0
+offset_top = 55.0
+offset_right = 199.0
+offset_bottom = 197.0
+
+[node name="HBoxContainer_Health" type="HBoxContainer" parent="AllHuds/CharacterInfoHud/VBoxContainer" index="0"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="AllHuds/CharacterInfoHud/VBoxContainer/HBoxContainer_Health" index="0"]
+layout_mode = 2
+text = "HEALTH"
+vertical_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="ProgressBar_Health" type="ProgressBar" parent="AllHuds/CharacterInfoHud/VBoxContainer/HBoxContainer_Health" index="1"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 1
+theme_override_styles/fill = SubResource("StyleBoxFlat_7bbwt")
+value = 5.0
+metadata/_edit_lock_ = true
+
+[node name="Label_HealthValue" type="Label" parent="AllHuds/CharacterInfoHud/VBoxContainer/HBoxContainer_Health/ProgressBar_Health" index="0"]
+visible = false
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -11.5
+offset_bottom = 11.5
+grow_horizontal = 0
+grow_vertical = 2
+text = "100"
+horizontal_alignment = 3
+metadata/_edit_lock_ = true
+
+[node name="HBoxContainer_Stamina" type="HBoxContainer" parent="AllHuds/CharacterInfoHud/VBoxContainer" index="1"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="AllHuds/CharacterInfoHud/VBoxContainer/HBoxContainer_Stamina" index="0"]
+layout_mode = 2
+text = "STAMINA"
+vertical_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="ProgressBar_Stamina" type="ProgressBar" parent="AllHuds/CharacterInfoHud/VBoxContainer/HBoxContainer_Stamina" index="1"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 1
+theme_override_styles/fill = SubResource("StyleBoxFlat_w53l8")
+value = 5.0
+metadata/_edit_lock_ = true
+
+[node name="Label_StaminaValue" type="Label" parent="AllHuds/CharacterInfoHud/VBoxContainer/HBoxContainer_Stamina/ProgressBar_Stamina" index="0"]
+visible = false
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -11.5
+offset_bottom = 11.5
+grow_horizontal = 0
+grow_vertical = 2
+text = "100"
+horizontal_alignment = 3
+metadata/_edit_lock_ = true
+
+[node name="DamageHud" parent="AllHuds" index="3" instance=ExtResource("5_dhy04")]
+layout_mode = 1
+metadata/_edit_lock_ = true
 
 [connection signal="value_changed" from="AllHuds/CharacterInfoHud/VBoxContainer/HBoxContainer_Health/ProgressBar_Health" to="AllHuds/CharacterInfoHud" method="_on_progress_bar_health_value_changed"]
 [connection signal="value_changed" from="AllHuds/CharacterInfoHud/VBoxContainer/HBoxContainer_Stamina/ProgressBar_Stamina" to="AllHuds/CharacterInfoHud" method="_on_progress_bar_stamina_value_changed"]

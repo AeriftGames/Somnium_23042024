@@ -43,12 +43,12 @@ public partial class MainApp : Node
     {
         if (newLevelInfo == null) { GD.Print("(CHYBA) MainApp RunLevelInfo - newLevelInfo = null"); return; }
 
-        GameMaster.GM.EnableBlackScreen(true);
+        CGameMaster.GM.GetUniversal().EnableBlackScreen(true);
 
         if (newLevelInfo.LevelType == WorldLevel.ELevelType.GameLevel)
-            GameMaster.GM.GetLevelLoader().LoadNewWorldLevel(newLevelInfo.LevelPath, newLevelInfo.LevelName);
+            CGameMaster.GM.GetGame().GetLevelLoader().LoadNewWorldLevel(newLevelInfo.LevelPath, newLevelInfo.LevelName);
         else if (newLevelInfo.LevelType == WorldLevel.ELevelType.BenchmarkLevel)
-            GameMaster.GM.GetBenchmarkSystem().StartBenchmarkLevel(newLevelInfo.LevelPath, newLevelInfo.LevelName);
+            CGameMaster.GM.GetBenchmark().StartBenchmarkLevel(newLevelInfo.LevelPath, newLevelInfo.LevelName);
         else if (newLevelInfo.LevelType == WorldLevel.ELevelType.Menu)
             GetTree().ChangeSceneToFile(newLevelInfo.LevelPath);
     }

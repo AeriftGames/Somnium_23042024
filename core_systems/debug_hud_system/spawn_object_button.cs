@@ -18,16 +18,16 @@ public partial class spawn_object_button : Button
 	{
         GD.Print("spawn button test: ");
 
-        FPSCharacter_Inventory a = GameMaster.GM.GetFPSCharacter() as FPSCharacter_Inventory;
+        FPSCharacter_Inventory a = CGameMaster.GM.GetGame().GetFPSCharacter() as FPSCharacter_Inventory;
         if (a == null) return;
 
         InventoryObjectCamera invCam = a.GetObjectCamera() as InventoryObjectCamera;
         if (invCam == null) return;
 
         Godot.Collections.Array<Node3D> allSpawnNodes = UniversalFunctions.SpawnGameObjectToWorld(
-            GameMaster.GM.GetLevelLoader().GetActualLevelScene(),
+            CGameMaster.GM.GetGame().GetLevelLoader().GetActualLevelScene(),
             spawnObjectPath, invCam.GetInventoryItemPutPos().GlobalPosition,
-            GameMaster.GM.GetDebugHud().GetNeedNumOfSpawn());
+            CGameMaster.GM.GetDebugHud().GetNeedNumOfSpawn());
 
         GD.Print("Spawn " + allSpawnNodes.Count + " object of: " + allSpawnNodes[0].Name);
     }

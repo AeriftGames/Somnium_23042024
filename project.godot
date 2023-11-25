@@ -20,7 +20,6 @@ config/name="Somnium"
 run/main_scene="res://main_app.tscn"
 config/features=PackedStringArray("4.2", "C#")
 run/flush_stdout_on_print=true
-run/max_fps=60
 boot_splash/bg_color=Color(0, 0, 0, 1)
 config/icon="res://icon.svg"
 
@@ -67,7 +66,8 @@ folder_colors={
 "res://player/camera_components/": "orange",
 "res://player/character_components/": "orange",
 "res://player/character_systems/": "orange",
-"res://player/material_surface/": "green"
+"res://player/material_surface/": "green",
+"res://player_character/": "purple"
 }
 
 [filesystem]
@@ -383,6 +383,11 @@ test_door={
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194447,"key_label":0,"unicode":57,"echo":false,"script":null)
 ]
 }
+test_elevator={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194446,"key_label":0,"unicode":56,"echo":false,"script":null)
+]
+}
 
 [layer_names]
 
@@ -401,7 +406,7 @@ limits/multithreaded_server/rid_pool_prealloc=120
 [physics]
 
 3d/run_on_separate_thread=true
-3d/time_before_sleep=0.75
+common/physics_ticks_per_second=120
 
 [rendering]
 

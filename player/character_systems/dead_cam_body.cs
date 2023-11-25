@@ -29,8 +29,8 @@ public partial class dead_cam_body : RigidBody3D
         if(isActivate)
         {
             // lerp pos of camera
-            GameMaster.GM.GetFPSCharacter().GetFPSCharacterCamera().GlobalPosition = 
-                GameMaster.GM.GetFPSCharacter().GetFPSCharacterCamera().
+            CGameMaster.GM.GetGame().GetFPSCharacter().GetFPSCharacterCamera().GlobalPosition = 
+                CGameMaster.GM.GetGame().GetFPSCharacter().GetFPSCharacterCamera().
                 GlobalPosition.Lerp(GlobalPosition, lerpSpeed * (float)delta);
         }
 
@@ -41,16 +41,16 @@ public partial class dead_cam_body : RigidBody3D
 
     public void ActivateDeadCam()
     {
-        Camera3D characterCamera = GameMaster.GM.GetFPSCharacter().GetFPSCharacterCamera();
+        Camera3D characterCamera = CGameMaster.GM.GetGame().GetFPSCharacter().GetFPSCharacterCamera();
         Vector3 oldGlobalPosition = characterCamera.GlobalPosition;
-        Vector3 oldDirectionPoint = GameMaster.GM.GetFPSCharacter().GlobalPosition + 
+        Vector3 oldDirectionPoint = CGameMaster.GM.GetGame().GetFPSCharacter().GlobalPosition + 
             (characterCamera.GlobalTransform.Basis.Z * -100.0f);
 
         // nastavi aktualni pozici na misto kde ma/mela byt kamera
         GlobalPosition = oldGlobalPosition;
 
         // vypne lerping kamery k characteru
-        GameMaster.GM.GetFPSCharacter().GetObjectCamera().SetLerpToCharacterEnable(false);
+        CGameMaster.GM.GetGame().GetFPSCharacter().GetObjectCamera().SetLerpToCharacterEnable(false);
 
         // zrusi stary child kamery s hracem
         characterCamera.GetParent().RemoveChild(characterCamera);
@@ -72,7 +72,7 @@ public partial class dead_cam_body : RigidBody3D
         if (isOnceLand) return;
         if (body as FPSCharacter_Interaction != null) return;
 
-        FPSCharacter_Inventory char_inv = GameMaster.GM.GetFPSCharacter() as FPSCharacter_Inventory;
+        FPSCharacter_Inventory char_inv = CGameMaster.GM.GetGame().GetFPSCharacter() as FPSCharacter_Inventory;
         UniversalFunctions.PlayRandomSound(audioPlayer,char_inv.GetBodyFallAudios(),0,1);
         
         animationPlayer.Play("death");
@@ -87,10 +87,7 @@ public partial class dead_cam_body : RigidBody3D
 
     public void OpenInGameMenu()
     {
-        FPSCharacter_Inventory char_inv = GameMaster.GM.GetFPSCharacter() as FPSCharacter_Inventory;
-
-        if(!char_inv.GetInGameMenu().GetActive())
-            char_inv.GetInGameMenu().SetActive(true);
+        CGameMaster.GM.GetGame().GetInGameMenu().SetActive(true);
     }
 
     public void FreeAll()

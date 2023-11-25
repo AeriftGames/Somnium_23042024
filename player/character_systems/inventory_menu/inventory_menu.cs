@@ -176,7 +176,7 @@ public partial class inventory_menu : Control
         Visible = newActive;
 
         // ziskame interact charactera
-        FPSCharacter_Interaction interChar = (FPSCharacter_Interaction)GameMaster.GM.GetFPSCharacter();
+        FPSCharacter_Interaction interChar = (FPSCharacter_Interaction)CGameMaster.GM.GetGame().GetFPSCharacter();
         if (interChar == null) return;
 
         // ostatni akce pri zmene
@@ -203,7 +203,7 @@ public partial class inventory_menu : Control
         _active = newActive;
 
         // ziskame interact charactera
-        FPSCharacter_Interaction interChar = (FPSCharacter_Interaction)GameMaster.GM.GetFPSCharacter();
+        FPSCharacter_Interaction interChar = (FPSCharacter_Interaction)CGameMaster.GM.GetGame().GetFPSCharacter();
         if (interChar == null) return;
 
         // ostatni akce pri zmene

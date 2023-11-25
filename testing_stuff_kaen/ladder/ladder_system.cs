@@ -33,7 +33,7 @@ public partial class ladder_system : Node3D
 
     private FPSCharacter_Inventory GetOurCharacter()
     {
-        return GameMaster.GM.GetFPSCharacter() as FPSCharacter_Inventory;
+        return CGameMaster.GM.GetGame().GetFPSCharacter() as FPSCharacter_Inventory;
     }
 
     public bool GetIsCharacterCanUseLadder() { return isCharacterCanUseLadder; }
@@ -177,7 +177,7 @@ public partial class ladder_system : Node3D
 
     private async void UseLadder_EffectTeleportBlackScreen()
     {
-        GameMaster.GM.EnableBlackScreen(true);
+        CGameMaster.GM.GetUniversal().EnableBlackScreen(true);
         GetOurCharacter().SetInputEnable(false);
 
         if (GetOurCharacter().GetCharacterUseLadderComponent() != null)
@@ -187,7 +187,7 @@ public partial class ladder_system : Node3D
 
         UseLadder_EffectTeleport();
 
-        GameMaster.GM.EnableBlackScreen(false);
+        CGameMaster.GM.GetUniversal().EnableBlackScreen(false);
         await Task.Delay(200);
         GetOurCharacter().SetInputEnable(true);
     }

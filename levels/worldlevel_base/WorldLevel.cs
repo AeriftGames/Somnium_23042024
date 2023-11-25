@@ -31,13 +31,13 @@ public partial class WorldLevel : Node
 		if(WithoutPlayer)
 		{
 			// Apply Settings
-			GameMaster.GM.GetSettings().LoadAndApply_AllGraphicsSettings();
+			CGameMaster.GM.GetSettings().LoadAndApply_AllGraphicsSettings();
 		}
 		else
 		{
 			// Apply Settings
-			GameMaster.GM.GetSettings().LoadAndApply_AllGraphicsSettings();
-			GameMaster.GM.GetLoadingHud().LoadingIsComplete(false);
+			CGameMaster.GM.GetSettings().LoadAndApply_AllGraphicsSettings();
+			CGameMaster.GM.GetUniversal().GetLoadingHud().LoadingIsComplete(false);
 
             StartGame();
         }
@@ -45,10 +45,10 @@ public partial class WorldLevel : Node
 	public async void StartGame()
 	{
 		// Emit Signal StartGame
-		GameMaster.GM.GetMasterSignals().EmitSignal(MasterSignals.SignalName.GameStart);
+		CGameMaster.GM.GetMasterSignals().EmitSignal(CMasterSignals.SignalName.GameStart);
 
 		await Task.Delay(100);
-			GameMaster.GM.EnableBlackScreen(false);
+			CGameMaster.GM.GetUniversal().EnableBlackScreen(false);
     }
 
 }

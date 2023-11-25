@@ -1,16 +1,122 @@
-[gd_scene load_steps=25 format=3 uid="uid://bfjmbldwhs02n"]
+[gd_scene load_steps=31 format=3 uid="uid://bfjmbldwhs02n"]
 
-[ext_resource type="Script" path="res://core_systems/GameMaster.cs" id="1_mjdjb"]
+[ext_resource type="Script" path="res://core_systems/CGameMaster.cs" id="1_mjdjb"]
 [ext_resource type="Script" path="res://core_systems/level_loader_system/CLevelLoader.cs" id="2_dgyoo"]
+[ext_resource type="Script" path="res://core_systems/game/CGame.cs" id="2_gdq4k"]
 [ext_resource type="Script" path="res://core_systems/benchmark_system/CBenchmarkSystem.cs" id="2_ketqv"]
-[ext_resource type="Script" path="res://core_systems/MasterSignals.cs" id="2_xs61v"]
+[ext_resource type="Script" path="res://core_systems/CMasterSignals.cs" id="2_xs61v"]
+[ext_resource type="Script" path="res://core_systems/CGlobalSettings.cs" id="3_5mvuo"]
 [ext_resource type="PackedScene" uid="uid://tr2dxfjg7wdl" path="res://core_systems/level_loader_system/loading_hud.tscn" id="4_di1bu"]
 [ext_resource type="Script" path="res://core_systems/benchmark_system/BenchmarkScoreBoard.cs" id="5_y5do3"]
 [ext_resource type="Script" path="res://core_systems/benchmark_system/BenchmarkMenuAndFpsStats.cs" id="6_hknud"]
 [ext_resource type="Script" path="res://core_systems/benchmark_system/InBenchmarkMenu.cs" id="7_k2x5r"]
 [ext_resource type="PackedScene" uid="uid://d1xpbdilt7rk1" path="res://menus/BaseFocusedMenuButton.tscn" id="8_ccud7"]
 [ext_resource type="PackedScene" uid="uid://btadrfapvd42e" path="res://benchmark/Benchmark.tscn" id="9_c8c2k"]
+[ext_resource type="Script" path="res://core_systems/CMasterLog.cs" id="9_fu1fi"]
 [ext_resource type="Script" path="res://core_systems/BlackScreen/BlackScreen.cs" id="10_o1iat"]
+[ext_resource type="PackedScene" uid="uid://wlh0gi2r057f" path="res://menus/InGameMenu.tscn" id="10_o21ed"]
+[ext_resource type="Script" path="res://core_systems/universal/CUniversal.cs" id="11_udusp"]
+[ext_resource type="PackedScene" uid="uid://babdw2pj0huby" path="res://core_systems/debug_hud_system/debug_hud.tscn" id="17_yfoib"]
+
+[sub_resource type="Animation" id="Animation_hoq5k"]
+resource_name = "PlayUnvisible"
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:self_modulate:r")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.5, 1)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ColorRect:self_modulate:g")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.5, 1)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ColorRect:self_modulate:b")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.5, 1)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ColorRect:self_modulate:a")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.5, 1)
+}
+
+[sub_resource type="Animation" id="Animation_h30fm"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:self_modulate:r")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ColorRect:self_modulate:g")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ColorRect:self_modulate:b")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ColorRect:self_modulate:a")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lbn8y"]
+_data = {
+"PlayUnvisible": SubResource("Animation_hoq5k"),
+"RESET": SubResource("Animation_h30fm")
+}
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_105xh"]
 bg_color = Color(0.552941, 0.552941, 0.552941, 1)
@@ -153,106 +259,6 @@ corner_detail = 10
 shadow_color = Color(0, 0, 0, 0.470588)
 shadow_size = 5
 
-[sub_resource type="Animation" id="Animation_hoq5k"]
-resource_name = "PlayUnvisible"
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("ColorRect:self_modulate:r")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(0, 0, 0),
-"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 0.5, 1)
-}
-tracks/1/type = "bezier"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("ColorRect:self_modulate:g")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"handle_modes": PackedInt32Array(0, 0, 0),
-"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 0.5, 1)
-}
-tracks/2/type = "bezier"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("ColorRect:self_modulate:b")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"handle_modes": PackedInt32Array(0, 0, 0),
-"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 0.5, 1)
-}
-tracks/3/type = "bezier"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("ColorRect:self_modulate:a")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"handle_modes": PackedInt32Array(0, 0, 0),
-"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 0.5, 1)
-}
-
-[sub_resource type="Animation" id="Animation_h30fm"]
-length = 0.001
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("ColorRect:self_modulate:r")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/1/type = "bezier"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("ColorRect:self_modulate:g")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/2/type = "bezier"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("ColorRect:self_modulate:b")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/3/type = "bezier"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("ColorRect:self_modulate:a")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_lbn8y"]
-_data = {
-"PlayUnvisible": SubResource("Animation_hoq5k"),
-"RESET": SubResource("Animation_h30fm")
-}
-
 [node name="GameMaster" type="Node"]
 script = ExtResource("1_mjdjb")
 Build = "1"
@@ -260,16 +266,52 @@ Build = "1"
 [node name="MasterSignals" type="Node" parent="."]
 script = ExtResource("2_xs61v")
 
-[node name="LevelLoader" type="Node" parent="."]
-script = ExtResource("2_dgyoo")
+[node name="GlobalSettings" type="Node" parent="."]
+script = ExtResource("3_5mvuo")
 
-[node name="BenchmarkSystem" type="Node" parent="."]
+[node name="Universal" type="Node" parent="."]
+script = ExtResource("11_udusp")
+
+[node name="BlackScreen" type="Control" parent="Universal"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("10_o1iat")
+metadata/_edit_lock_ = true
+
+[node name="ColorRect" type="ColorRect" parent="Universal/BlackScreen"]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Universal/BlackScreen"]
+libraries = {
+"": SubResource("AnimationLibrary_lbn8y")
+}
+
+[node name="LoadingHud" parent="Universal" instance=ExtResource("4_di1bu")]
+visible = false
+metadata/_edit_lock_ = true
+
+[node name="MasterLog" type="Node" parent="Universal"]
+script = ExtResource("9_fu1fi")
+
+[node name="Benchmark" type="Node" parent="."]
 script = ExtResource("2_ketqv")
 EnableLowest = false
 EnableLow = false
 EnableHighest = false
 
-[node name="BenchmarkScoreBoard" type="Control" parent="BenchmarkSystem"]
+[node name="BenchmarkScoreBoard" type="Control" parent="Benchmark"]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -279,7 +321,7 @@ grow_vertical = 2
 script = ExtResource("5_y5do3")
 metadata/_edit_lock_ = true
 
-[node name="Panel" type="Panel" parent="BenchmarkSystem/BenchmarkScoreBoard"]
+[node name="Panel" type="Panel" parent="Benchmark/BenchmarkScoreBoard"]
 custom_minimum_size = Vector2(400, 300)
 layout_mode = 1
 anchors_preset = 8
@@ -296,7 +338,7 @@ grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_105xh")
 
-[node name="Panel2" type="Panel" parent="BenchmarkSystem/BenchmarkScoreBoard"]
+[node name="Panel2" type="Panel" parent="Benchmark/BenchmarkScoreBoard"]
 custom_minimum_size = Vector2(380, 280)
 layout_mode = 1
 anchors_preset = 8
@@ -313,7 +355,7 @@ grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_qdcl0")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="BenchmarkSystem/BenchmarkScoreBoard/Panel2"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Benchmark/BenchmarkScoreBoard/Panel2"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -322,49 +364,49 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="BuildLabel" type="Label" parent="BenchmarkSystem/BenchmarkScoreBoard/Panel2/VBoxContainer"]
+[node name="BuildLabel" type="Label" parent="Benchmark/BenchmarkScoreBoard/Panel2/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "build: "
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="LevelNameLabel" type="Label" parent="BenchmarkSystem/BenchmarkScoreBoard/Panel2/VBoxContainer"]
+[node name="LevelNameLabel" type="Label" parent="Benchmark/BenchmarkScoreBoard/Panel2/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "levelname: "
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="QualityLabel" type="Label" parent="BenchmarkSystem/BenchmarkScoreBoard/Panel2/VBoxContainer"]
+[node name="QualityLabel" type="Label" parent="Benchmark/BenchmarkScoreBoard/Panel2/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "quality: "
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="MinFpsLabel" type="Label" parent="BenchmarkSystem/BenchmarkScoreBoard/Panel2/VBoxContainer"]
+[node name="MinFpsLabel" type="Label" parent="Benchmark/BenchmarkScoreBoard/Panel2/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "min fps: "
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="MaxFpsLabel" type="Label" parent="BenchmarkSystem/BenchmarkScoreBoard/Panel2/VBoxContainer"]
+[node name="MaxFpsLabel" type="Label" parent="Benchmark/BenchmarkScoreBoard/Panel2/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "max fps: "
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="AvgFpsLabel" type="Label" parent="BenchmarkSystem/BenchmarkScoreBoard/Panel2/VBoxContainer"]
+[node name="AvgFpsLabel" type="Label" parent="Benchmark/BenchmarkScoreBoard/Panel2/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "avg fps: "
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="BenchmarkMenuAndFpsStats" type="Control" parent="BenchmarkSystem"]
+[node name="BenchmarkMenuAndFpsStats" type="Control" parent="Benchmark"]
 visible = false
 layout_mode = 3
 anchors_preset = 15
@@ -376,7 +418,7 @@ mouse_filter = 2
 script = ExtResource("6_hknud")
 metadata/_edit_lock_ = true
 
-[node name="Panel2" type="Panel" parent="BenchmarkSystem/BenchmarkMenuAndFpsStats"]
+[node name="Panel2" type="Panel" parent="Benchmark/BenchmarkMenuAndFpsStats"]
 custom_minimum_size = Vector2(200, 110)
 layout_mode = 1
 anchors_preset = 5
@@ -389,7 +431,7 @@ grow_horizontal = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_u2smx")
 
-[node name="Panel" type="Panel" parent="BenchmarkSystem/BenchmarkMenuAndFpsStats"]
+[node name="Panel" type="Panel" parent="Benchmark/BenchmarkMenuAndFpsStats"]
 custom_minimum_size = Vector2(200, 110)
 layout_mode = 1
 anchors_preset = 5
@@ -402,7 +444,7 @@ grow_horizontal = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_2ej5u")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="BenchmarkSystem/BenchmarkMenuAndFpsStats"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Benchmark/BenchmarkMenuAndFpsStats"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 1
 anchors_preset = 5
@@ -413,12 +455,12 @@ offset_right = 75.0
 offset_bottom = 40.0
 grow_horizontal = 2
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="BenchmarkSystem/BenchmarkMenuAndFpsStats/VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="Benchmark/BenchmarkMenuAndFpsStats/VBoxContainer"]
 custom_minimum_size = Vector2(150, 25)
 layout_mode = 2
 alignment = 1
 
-[node name="Text" type="Label" parent="BenchmarkSystem/BenchmarkMenuAndFpsStats/VBoxContainer/HBoxContainer2"]
+[node name="Text" type="Label" parent="Benchmark/BenchmarkMenuAndFpsStats/VBoxContainer/HBoxContainer2"]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -427,37 +469,37 @@ theme_override_constants/shadow_outline_size = 2
 theme_override_font_sizes/font_size = 25
 text = "Benchmark"
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="BenchmarkSystem/BenchmarkMenuAndFpsStats/VBoxContainer"]
+[node name="HBoxContainer3" type="HBoxContainer" parent="Benchmark/BenchmarkMenuAndFpsStats/VBoxContainer"]
 custom_minimum_size = Vector2(150, 25)
 layout_mode = 2
 alignment = 1
 
-[node name="QualityText" type="Label" parent="BenchmarkSystem/BenchmarkMenuAndFpsStats/VBoxContainer/HBoxContainer3"]
+[node name="QualityText" type="Label" parent="Benchmark/BenchmarkMenuAndFpsStats/VBoxContainer/HBoxContainer3"]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 20
 
-[node name="HBoxContainer" type="HBoxContainer" parent="BenchmarkSystem/BenchmarkMenuAndFpsStats/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Benchmark/BenchmarkMenuAndFpsStats/VBoxContainer"]
 custom_minimum_size = Vector2(150, 20)
 layout_mode = 2
 alignment = 1
 
-[node name="Text" type="Label" parent="BenchmarkSystem/BenchmarkMenuAndFpsStats/VBoxContainer/HBoxContainer"]
+[node name="Text" type="Label" parent="Benchmark/BenchmarkMenuAndFpsStats/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 20
 text = "FPS:"
 
-[node name="FPSLabel" type="Label" parent="BenchmarkSystem/BenchmarkMenuAndFpsStats/VBoxContainer/HBoxContainer"]
+[node name="FPSLabel" type="Label" parent="Benchmark/BenchmarkMenuAndFpsStats/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(45, 0)
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 20
 horizontal_alignment = 1
 
-[node name="InBenchmarkMenu" type="Control" parent="BenchmarkSystem/BenchmarkMenuAndFpsStats"]
+[node name="InBenchmarkMenu" type="Control" parent="Benchmark/BenchmarkMenuAndFpsStats"]
 top_level = true
 layout_mode = 1
 anchors_preset = 15
@@ -468,7 +510,7 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("7_k2x5r")
 
-[node name="ColorRect" type="ColorRect" parent="BenchmarkSystem/BenchmarkMenuAndFpsStats/InBenchmarkMenu"]
+[node name="ColorRect" type="ColorRect" parent="Benchmark/BenchmarkMenuAndFpsStats/InBenchmarkMenu"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -477,7 +519,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.705882)
 
-[node name="Control" type="Control" parent="BenchmarkSystem/BenchmarkMenuAndFpsStats/InBenchmarkMenu"]
+[node name="Control" type="Control" parent="Benchmark/BenchmarkMenuAndFpsStats/InBenchmarkMenu"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -491,7 +533,7 @@ offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="BenchmarkSystem/BenchmarkMenuAndFpsStats/InBenchmarkMenu/Control"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Benchmark/BenchmarkMenuAndFpsStats/InBenchmarkMenu/Control"]
 custom_minimum_size = Vector2(300, 200)
 layout_mode = 1
 anchors_preset = 8
@@ -507,7 +549,7 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="Button_BackToGame" parent="BenchmarkSystem/BenchmarkMenuAndFpsStats/InBenchmarkMenu/Control/VBoxContainer" instance=ExtResource("8_ccud7")]
+[node name="Button_BackToGame" parent="Benchmark/BenchmarkMenuAndFpsStats/InBenchmarkMenu/Control/VBoxContainer" instance=ExtResource("8_ccud7")]
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_lsx5l")
 theme_override_styles/hover = SubResource("StyleBoxFlat_vfedd")
@@ -515,7 +557,7 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_aj37x")
 text = "continue"
 ButtonFocusID = 0
 
-[node name="Button_RestartBenchmark" parent="BenchmarkSystem/BenchmarkMenuAndFpsStats/InBenchmarkMenu/Control/VBoxContainer" instance=ExtResource("8_ccud7")]
+[node name="Button_RestartBenchmark" parent="Benchmark/BenchmarkMenuAndFpsStats/InBenchmarkMenu/Control/VBoxContainer" instance=ExtResource("8_ccud7")]
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_lsx5l")
 theme_override_styles/hover = SubResource("StyleBoxFlat_vfedd")
@@ -523,7 +565,7 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_aj37x")
 text = "restart benchmark"
 ButtonFocusID = 0
 
-[node name="Button_QuitGame" parent="BenchmarkSystem/BenchmarkMenuAndFpsStats/InBenchmarkMenu/Control/VBoxContainer" instance=ExtResource("8_ccud7")]
+[node name="Button_QuitGame" parent="Benchmark/BenchmarkMenuAndFpsStats/InBenchmarkMenu/Control/VBoxContainer" instance=ExtResource("8_ccud7")]
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_7oyyx")
 theme_override_styles/hover = SubResource("StyleBoxFlat_wi8nc")
@@ -531,7 +573,7 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_oathn")
 text = "exit benchmark"
 ButtonFocusID = 1
 
-[node name="Label" type="Label" parent="BenchmarkSystem/BenchmarkMenuAndFpsStats/InBenchmarkMenu/Control"]
+[node name="Label" type="Label" parent="Benchmark/BenchmarkMenuAndFpsStats/InBenchmarkMenu/Control"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -546,37 +588,22 @@ theme_override_font_sizes/font_size = 25
 text = "Benchmark Menu"
 horizontal_alignment = 1
 
-[node name="Benchmark" parent="BenchmarkSystem" instance=ExtResource("9_c8c2k")]
+[node name="Benchmark" parent="Benchmark" instance=ExtResource("9_c8c2k")]
 
-[node name="BlackScreen" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-script = ExtResource("10_o1iat")
-metadata/_edit_lock_ = true
+[node name="Game" type="Node" parent="."]
+script = ExtResource("2_gdq4k")
 
-[node name="ColorRect" type="ColorRect" parent="BlackScreen"]
-layout_mode = 0
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-color = Color(0, 0, 0, 1)
+[node name="LevelLoader" type="Node" parent="Game"]
+script = ExtResource("2_dgyoo")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="BlackScreen"]
-libraries = {
-"": SubResource("AnimationLibrary_lbn8y")
-}
-
-[node name="LoadingHud" parent="." instance=ExtResource("4_di1bu")]
+[node name="DebugHud" parent="Game" instance=ExtResource("17_yfoib")]
 visible = false
 metadata/_edit_lock_ = true
 
-[connection signal="pressed" from="BenchmarkSystem/BenchmarkMenuAndFpsStats/InBenchmarkMenu/Control/VBoxContainer/Button_BackToGame" to="BenchmarkSystem/BenchmarkMenuAndFpsStats/InBenchmarkMenu" method="_on_button_back_to_game_pressed"]
-[connection signal="pressed" from="BenchmarkSystem/BenchmarkMenuAndFpsStats/InBenchmarkMenu/Control/VBoxContainer/Button_RestartBenchmark" to="BenchmarkSystem/BenchmarkMenuAndFpsStats/InBenchmarkMenu" method="_on_button_restart_benchmark_pressed"]
-[connection signal="pressed" from="BenchmarkSystem/BenchmarkMenuAndFpsStats/InBenchmarkMenu/Control/VBoxContainer/Button_QuitGame" to="BenchmarkSystem/BenchmarkMenuAndFpsStats/InBenchmarkMenu" method="_on_button_quit_game_pressed"]
+[node name="InGameMenu" parent="Game" instance=ExtResource("10_o21ed")]
+visible = false
+metadata/_edit_lock_ = true
+
+[connection signal="pressed" from="Benchmark/BenchmarkMenuAndFpsStats/InBenchmarkMenu/Control/VBoxContainer/Button_BackToGame" to="Benchmark/BenchmarkMenuAndFpsStats/InBenchmarkMenu" method="_on_button_back_to_game_pressed"]
+[connection signal="pressed" from="Benchmark/BenchmarkMenuAndFpsStats/InBenchmarkMenu/Control/VBoxContainer/Button_RestartBenchmark" to="Benchmark/BenchmarkMenuAndFpsStats/InBenchmarkMenu" method="_on_button_restart_benchmark_pressed"]
+[connection signal="pressed" from="Benchmark/BenchmarkMenuAndFpsStats/InBenchmarkMenu/Control/VBoxContainer/Button_QuitGame" to="Benchmark/BenchmarkMenuAndFpsStats/InBenchmarkMenu" method="_on_button_quit_game_pressed"]

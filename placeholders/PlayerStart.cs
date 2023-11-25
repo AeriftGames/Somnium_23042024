@@ -77,11 +77,11 @@ public partial class PlayerStart : Node3D
 		characterInteraction_Instance.objectHands = objectHands_instance;
 
 		// Spawn to worldlevel node
-		Node level = GameMaster.GM.GetLevelLoader().GetActualLevelScene();
+		Node level = CGameMaster.GM.GetGame().GetLevelLoader().GetActualLevelScene();
 		if (level == null)
 		{
 			// If worldlevel for spawn dont finded
-			GameMaster.GM.Log.WriteLog(this, LogSystem.ELogMsgType.ERROR,
+			CGameMaster.GM.GetUniversal().GetMasterLog().WriteLog(this, CMasterLog.ELogMsgType.ERROR,
 				"Not find /root/worldlevel for spawn player");
 		}
 		else
@@ -112,14 +112,14 @@ public partial class PlayerStart : Node3D
 			objectHands_instance.GlobalRotation = newRotation;
 			
 			// !!! SHADER PRECOMPILATION PROCESS START !!!
-			if(GameMaster.GM.GetLevelLoader().isPrecompiledShaders)
-				GameMaster.GM.GetLevelLoader().StartPrecompileShaderProcess();
+			if(CGameMaster.GM.GetGame().GetLevelLoader().isPrecompiledShaders)
+				CGameMaster.GM.GetGame().GetLevelLoader().StartPrecompileShaderProcess();
 
 			// Apply Settings
-			GameMaster.GM.GetSettings().LoadAndApply_AllGraphicsSettings();
-			GameMaster.GM.GetDebugHud().ApplyAllMainControls();
+			CGameMaster.GM.GetSettings().LoadAndApply_AllGraphicsSettings();
+			CGameMaster.GM.GetDebugHud().ApplyAllMainControls();
 
-			GameMaster.GM.EnableBlackScreen(false);
+			CGameMaster.GM.GetUniversal().EnableBlackScreen(false);
 
             //delete
             spawn_timer.Stop();
@@ -144,11 +144,11 @@ public partial class PlayerStart : Node3D
         characterInventory_Instance.objectHands = objectHands_instance;
 
         // Spawn to worldlevel node
-        Node level = GameMaster.GM.GetLevelLoader().GetActualLevelScene();
+        Node level = CGameMaster.GM.GetGame().GetLevelLoader().GetActualLevelScene();
         if (level == null)
         {
             // If worldlevel for spawn dont finded
-            GameMaster.GM.Log.WriteLog(this, LogSystem.ELogMsgType.ERROR,
+            CGameMaster.GM.GetUniversal().GetMasterLog().WriteLog(this, CMasterLog.ELogMsgType.ERROR,
                 "Not find /root/worldlevel for spawn player");
         }
         else
@@ -179,12 +179,12 @@ public partial class PlayerStart : Node3D
             objectHands_instance.GlobalRotation = newRotation;
 
             // !!! SHADER PRECOMPILATION PROCESS START !!!
-            if (GameMaster.GM.GetLevelLoader().isPrecompiledShaders)
-                GameMaster.GM.GetLevelLoader().StartPrecompileShaderProcess();
+            if (CGameMaster.GM.GetGame().GetLevelLoader().isPrecompiledShaders)
+                CGameMaster.GM.GetGame().GetLevelLoader().StartPrecompileShaderProcess();
 
             // Apply Settings
-            GameMaster.GM.GetSettings().LoadAndApply_AllGraphicsSettings();
-            GameMaster.GM.GetDebugHud().ApplyAllMainControls();
+            CGameMaster.GM.GetSettings().LoadAndApply_AllGraphicsSettings();
+            CGameMaster.GM.GetDebugHud().ApplyAllMainControls();
 
             //GameMaster.GM.EnableBlackScreen(false);
 

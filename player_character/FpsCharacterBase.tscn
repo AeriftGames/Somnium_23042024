@@ -1,0 +1,157 @@
+[gd_scene load_steps=13 format=3 uid="uid://dcilkc4fno2qm"]
+
+[ext_resource type="Script" path="res://player_character/FpsCharacterBase.cs" id="1_ob1gb"]
+[ext_resource type="Script" path="res://player_character/base_components/CCharacterMovementComponent.cs" id="2_omu0b"]
+[ext_resource type="Script" path="res://player_character/base_components/CCharacterLookComponent.cs" id="3_353i0"]
+[ext_resource type="Script" path="res://player_character/base_components/CCharacterCrouchComponent.cs" id="4_oftwk"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3j32b"]
+height = 1.8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cgcdo"]
+albedo_color = Color(1, 0.290196, 0.184314, 1)
+roughness = 0.5
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_tp7xq"]
+height = 1.8
+
+[sub_resource type="Animation" id="Animation_v3wid"]
+resource_name = "Crouch"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../../CharacterCollisionShape:shape:height")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.8, 1.4]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../CharacterCollisionShape:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0.9, 0), Vector3(0, 0.7, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../../CameraController:position")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 1.6, 0), Vector3(0, 1.2, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_vk1eh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../../CharacterCollisionShape:shape:height")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.8]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../CharacterCollisionShape:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.9, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../../CameraController:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 1.6, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_m6w5c"]
+_data = {
+"Crouch": SubResource("Animation_v3wid"),
+"RESET": SubResource("Animation_vk1eh")
+}
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_83vw8"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_a3l8c"]
+top_radius = 0.3
+bottom_radius = 0.1
+height = 0.5
+
+[node name="FpsCharacterBase" type="CharacterBody3D"]
+script = ExtResource("1_ob1gb")
+
+[node name="CharacterCollisionShape" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+shape = SubResource("CapsuleShape3D_3j32b")
+
+[node name="CharacterPlaceholderMesh" type="MeshInstance3D" parent="CharacterCollisionShape"]
+layers = 524288
+material_override = SubResource("StandardMaterial3D_cgcdo")
+mesh = SubResource("CapsuleMesh_tp7xq")
+
+[node name="BaseComponents" type="Node3D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="BaseMovementComponent" type="Node" parent="BaseComponents"]
+script = ExtResource("2_omu0b")
+Speed = 3.0
+
+[node name="BaseLookComponent" type="Node" parent="BaseComponents" node_paths=PackedStringArray("Camera")]
+script = ExtResource("3_353i0")
+Camera = NodePath("../../CameraController/Camera3D")
+
+[node name="BaseCrouchComponent" type="Node3D" parent="BaseComponents"]
+script = ExtResource("4_oftwk")
+CROUCH_SPEED = 3.0
+metadata/_edit_lock_ = true
+
+[node name="AnimationPlayerCrouch" type="AnimationPlayer" parent="BaseComponents/BaseCrouchComponent"]
+libraries = {
+"": SubResource("AnimationLibrary_m6w5c")
+}
+
+[node name="ShapeCastUncrouch" type="ShapeCast3D" parent="BaseComponents/BaseCrouchComponent"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3, 0)
+shape = SubResource("SphereShape3D_83vw8")
+target_position = Vector3(0, 0, 0)
+
+[node name="CameraController" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
+
+[node name="Camera3D" type="Camera3D" parent="CameraController"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)
+cull_mask = 524287
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CameraController/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, -0.475978)
+layers = 524288
+mesh = SubResource("CylinderMesh_a3l8c")
