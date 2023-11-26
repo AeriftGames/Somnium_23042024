@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://34ldsm7q06sf"]
+
+[ext_resource type="Theme" uid="uid://cd3yvqcy8bus4" path="res://core_systems/debug_hud_system/debug_theme.theme" id="1_tp7o5"]
+[ext_resource type="Script" path="res://core_systems/debug_hud_system/CPanelLevels.cs" id="2_wfcpi"]
+
+[node name="PanelLevels" type="PanelContainer"]
+custom_minimum_size = Vector2(300, 500)
+mouse_filter = 2
+theme = ExtResource("1_tp7o5")
+script = ExtResource("2_wfcpi")
+metadata/_edit_lock_ = true
+
+[node name="VBoxUp" type="VBoxContainer" parent="."]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxUp"]
+layout_mode = 2
+mouse_filter = 2
+theme = ExtResource("1_tp7o5")
+metadata/_edit_lock_ = true
+
+[node name="VBoxButtons" type="VBoxContainer" parent="VBoxUp/MarginContainer"]
+layout_mode = 2
+mouse_filter = 2

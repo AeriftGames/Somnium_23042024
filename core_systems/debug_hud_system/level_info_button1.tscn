@@ -1,19 +1,14 @@
 [gd_scene load_steps=3 format=3 uid="uid://h67qg61q6byk"]
 
 [ext_resource type="Script" path="res://game/base/level_info_button.cs" id="1_2v0yy"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wu637"]
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-corner_detail = 1
+[ext_resource type="Theme" uid="uid://cd3yvqcy8bus4" path="res://core_systems/debug_hud_system/debug_theme.theme" id="1_mea2d"]
 
 [node name="LevelInfoButton" type="Button"]
-custom_minimum_size = Vector2(280, 35)
-size_flags_horizontal = 4
+custom_minimum_size = Vector2(100, 0)
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme = ExtResource("1_mea2d")
 theme_override_font_sizes/font_size = 16
-theme_override_styles/normal = SubResource("StyleBoxFlat_wu637")
 text = "none"
 text_overrun_behavior = 3
 script = ExtResource("1_2v0yy")

@@ -605,7 +605,7 @@ public partial class CDebugHud : Control
 		_on_show_performance_check_box_toggled(data.ShowPerformance);
 
 		GetNode<CheckBox>("OptionsPanel/TabContainer/main/ShowPerformance_CheckBox").ButtonPressed = data.ShowPerformance;
-
+/*
 		GetNode<CheckBox>("OptionsPanel/TabContainer/main/CustomLabelEnable_Checkbox0").ButtonPressed = data.ShowCustomLabel0;
 		GetNode<CheckBox>("OptionsPanel/TabContainer/main/CustomLabelEnable_Checkbox1").ButtonPressed = data.ShowCustomLabel1;
 		GetNode<CheckBox>("OptionsPanel/TabContainer/main/CustomLabelEnable_Checkbox2").ButtonPressed = data.ShowCustomLabel2;
@@ -616,7 +616,7 @@ public partial class CDebugHud : Control
 		GetNode<CheckBox>("OptionsPanel/TabContainer/main/CustomLabelEnable_Checkbox7").ButtonPressed = data.ShowCustomLabel7;
 		GetNode<CheckBox>("OptionsPanel/TabContainer/main/CustomLabelEnable_Checkbox8").ButtonPressed = data.ShowCustomLabel8;
 		GetNode<CheckBox>("OptionsPanel/TabContainer/main/CustomLabelEnable_Checkbox9").ButtonPressed = data.ShowCustomLabel9;
-
+*/
 		GetNode<CheckBox>("OptionsPanel/TabContainer/main/EnableWorldOcclusionCulling_CheckBox").ButtonPressed = 
 			data.EnableWorldLevelOcclusionCull;
 	}
@@ -629,7 +629,7 @@ public partial class CDebugHud : Control
 		data.ShowDebugHud = isEnable;
 		data.ShowFps = GetNode<CheckBox>("OptionsPanel/TabContainer/main/ShowFps_CheckBox").ButtonPressed;
 		data.ShowPerformance = GetNode<CheckBox>("OptionsPanel/TabContainer/main/ShowPerformance_CheckBox").ButtonPressed;
-
+		/*
 		data.ShowCustomLabel0 = GetCustomLabelEnable(0);
 		data.ShowCustomLabel1 = GetCustomLabelEnable(1);
 		data.ShowCustomLabel2 = GetCustomLabelEnable(2);
@@ -640,7 +640,7 @@ public partial class CDebugHud : Control
 		data.ShowCustomLabel7 = GetCustomLabelEnable(7);
 		data.ShowCustomLabel8 = GetCustomLabelEnable(8);
 		data.ShowCustomLabel9 = GetCustomLabelEnable(9);
-
+		*/
 		data.EnableWorldLevelOcclusionCull =
 			GetNode<CheckBox>("OptionsPanel/TabContainer/main/EnableWorldOcclusionCulling_CheckBox").ButtonPressed;
 

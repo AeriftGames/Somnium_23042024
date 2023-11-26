@@ -1,0 +1,45 @@
+[gd_scene load_steps=4 format=3 uid="uid://cnq5i33i5bka6"]
+
+[ext_resource type="PackedScene" uid="uid://dqx75mfvna1rx" path="res://core_systems/debug_hud_system/base/panel_base.tscn" id="1_2trrc"]
+[ext_resource type="Script" path="res://core_systems/debug_hud_system/CPanelMainNew.cs" id="2_x8mqg"]
+[ext_resource type="Theme" uid="uid://cd3yvqcy8bus4" path="res://core_systems/debug_hud_system/debug_theme.theme" id="3_2udis"]
+
+[node name="PanelMain" instance=ExtResource("1_2trrc")]
+script = ExtResource("2_x8mqg")
+
+[node name="CheckButton_ShowFps" type="CheckButton" parent="VBoxBase/ScrollContainerElements/VBoxElements/MarginElements/VBoxElements" index="0"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("3_2udis")
+text = " SHOW FPS"
+
+[node name="CheckButton_ShowDebugLabels" type="CheckButton" parent="VBoxBase/ScrollContainerElements/VBoxElements/MarginElements/VBoxElements" index="1"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("3_2udis")
+text = " SHOW DEBUG LABELS"
+
+[node name="CheckButton_ShowPerformance" type="CheckButton" parent="VBoxBase/ScrollContainerElements/VBoxElements/MarginElements/VBoxElements" index="2"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("3_2udis")
+text = " SHOW PERFORMANCE"
+
+[node name="MarginElements_Two" type="MarginContainer" parent="VBoxBase/ScrollContainerElements/VBoxElements" index="1"]
+layout_mode = 2
+theme = ExtResource("3_2udis")
+metadata/_edit_lock_ = true
+
+[node name="VBoxElements_Two" type="VBoxContainer" parent="VBoxBase/ScrollContainerElements/VBoxElements/MarginElements_Two" index="0"]
+layout_mode = 2
+
+[node name="CheckButton_EnableOcclusionCulling" type="CheckButton" parent="VBoxBase/ScrollContainerElements/VBoxElements/MarginElements_Two/VBoxElements_Two" index="0"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("3_2udis")
+text = " ENABLE OCCLUSION CULLING"
+
+[connection signal="toggled" from="VBoxBase/ScrollContainerElements/VBoxElements/MarginElements/VBoxElements/CheckButton_ShowFps" to="." method="_on_check_button_show_fps_toggled"]
+[connection signal="toggled" from="VBoxBase/ScrollContainerElements/VBoxElements/MarginElements/VBoxElements/CheckButton_ShowDebugLabels" to="." method="_on_check_button_show_debug_labels_toggled"]
+[connection signal="toggled" from="VBoxBase/ScrollContainerElements/VBoxElements/MarginElements/VBoxElements/CheckButton_ShowPerformance" to="." method="_on_check_button_show_performance_toggled"]
+[connection signal="toggled" from="VBoxBase/ScrollContainerElements/VBoxElements/MarginElements_Two/VBoxElements_Two/CheckButton_EnableOcclusionCulling" to="." method="_on_check_button_enable_occlusion_culling_toggled"]

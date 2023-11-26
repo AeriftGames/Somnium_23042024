@@ -8,11 +8,14 @@ public partial class CCharacterMovementComponent : Node
     [Export] float SPEED_CROUCH = 1.5f;
 
     [Export] float JUMP_VELOCITY = 4.5f;
+    [Export] float LERP_SPEED = 10.0f;
 
     public float gravity = ProjectSettings.GetSetting("physics/3d/default_gravity").AsSingle();
     private FpsCharacterBase ourCharacterBase = null;
     private Vector3 workVelocity;
     private float Speed = 0.0f;
+
+    private Vector3 direction = Vector3.Zero;
 
     public void PostInit(FpsCharacterBase newCharacterBase)
     { 
@@ -29,7 +32,7 @@ public partial class CCharacterMovementComponent : Node
             workVelocity.Y -= gravity * (float)delta;
 
         Vector2 inputDir = Input.GetVector("moveLeft", "moveRight", "moveForward", "moveBackward");
-        Vector3 direction = (ourCharacterBase.Transform.Basis * new Vector3(inputDir.X, 0, inputDir.Y)).Normalized();
+        direction = direction.Lerp(ourCharacterBase.Transform.Basis * new Vector3(inputDir.X, 0, inputDir.Y).Normalized(),(float)delta*LERP_SPEED);
         if (direction != Vector3.Zero)
         {
             workVelocity.X = direction.X * Speed;

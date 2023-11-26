@@ -1,0 +1,73 @@
+[gd_scene load_steps=3 format=3 uid="uid://dqx75mfvna1rx"]
+
+[ext_resource type="Theme" uid="uid://cd3yvqcy8bus4" path="res://core_systems/debug_hud_system/debug_theme.theme" id="1_m2ky8"]
+[ext_resource type="Script" path="res://core_systems/debug_hud_system/base/CPanelBase.cs" id="2_nk362"]
+
+[node name="PanelBase" type="PanelContainer"]
+custom_minimum_size = Vector2(300, 500)
+mouse_filter = 2
+theme = ExtResource("1_m2ky8")
+script = ExtResource("2_nk362")
+metadata/_edit_lock_ = true
+
+[node name="VBoxBase" type="VBoxContainer" parent="."]
+layout_mode = 2
+metadata/_edit_lock_ = true
+
+[node name="ScrollContainerElements" type="ScrollContainer" parent="VBoxBase"]
+layout_mode = 2
+size_flags_vertical = 3
+metadata/_edit_lock_ = true
+
+[node name="VBoxElements" type="VBoxContainer" parent="VBoxBase/ScrollContainerElements"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+metadata/_edit_lock_ = true
+
+[node name="MarginElements" type="MarginContainer" parent="VBoxBase/ScrollContainerElements/VBoxElements"]
+layout_mode = 2
+mouse_filter = 2
+theme = ExtResource("1_m2ky8")
+metadata/_edit_lock_ = true
+
+[node name="VBoxElements" type="VBoxContainer" parent="VBoxBase/ScrollContainerElements/VBoxElements/MarginElements"]
+clip_contents = true
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+metadata/_edit_lock_ = true
+
+[node name="HSeparator" type="HSeparator" parent="VBoxBase"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+mouse_filter = 2
+metadata/_edit_lock_ = true
+
+[node name="VBoxBottom" type="VBoxContainer" parent="VBoxBase"]
+layout_mode = 2
+mouse_filter = 2
+alignment = 2
+metadata/_edit_lock_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxBase/VBoxBottom"]
+layout_mode = 2
+size_flags_vertical = 8
+mouse_filter = 2
+
+[node name="VBoxButtons" type="VBoxContainer" parent="VBoxBase/VBoxBottom/MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+alignment = 2
+
+[node name="Button_SaveSettings" type="Button" parent="VBoxBase/VBoxBottom/MarginContainer/VBoxButtons"]
+layout_mode = 2
+text = "SAVE SETTINGS"
+
+[node name="Button_QuitGame" type="Button" parent="VBoxBase/VBoxBottom/MarginContainer/VBoxButtons"]
+layout_mode = 2
+text = "QUIT GAME"
+
+[connection signal="pressed" from="VBoxBase/VBoxBottom/MarginContainer/VBoxButtons/Button_SaveSettings" to="." method="_on_button_save_settings_pressed"]
+[connection signal="pressed" from="VBoxBase/VBoxBottom/MarginContainer/VBoxButtons/Button_QuitGame" to="." method="_on_button_quit_game_pressed"]
