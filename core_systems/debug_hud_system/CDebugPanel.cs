@@ -16,6 +16,7 @@ public partial class CDebugPanel : Control
     private CPanelSpawns PanelSpawns = null;
     private CPanelVideo PanelVideo = null;
     private CPanelAudio PanelAudio = null;
+    private CPanelInputs PanelInputs = null;
 
     public void PostInit()
     {
@@ -49,6 +50,9 @@ public partial class CDebugPanel : Control
 
         PanelAudio = GetNode<CPanelAudio>("%PanelAudio");
         PanelAudio.PostInit(this);
+
+        PanelInputs = GetNode<CPanelInputs>("%PanelInputs");
+        PanelInputs.PostInit(this);
 
     }
 
@@ -118,5 +122,6 @@ public partial class CDebugPanel : Control
         PanelMain.LoadAllElementsSettings();
         PanelVideo.LoadAllElementsSettings();
         PanelAudio.LoadAllElementsSettings();
+        PanelInputs.LoadAllElementsSettings();
     }
 }

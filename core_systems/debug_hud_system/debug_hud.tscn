@@ -480,6 +480,7 @@ size_flags_horizontal = 4
 text = "Save video as default"
 
 [node name="audio" type="VBoxContainer" parent="OptionsPanel/TabContainer"]
+visible = false
 layout_mode = 2
 
 [node name="HSeparator" type="HSeparator" parent="OptionsPanel/TabContainer/audio"]
@@ -567,7 +568,6 @@ size_flags_horizontal = 4
 text = "Save audio as default"
 
 [node name="inputs" type="VBoxContainer" parent="OptionsPanel/TabContainer"]
-visible = false
 layout_mode = 2
 
 [node name="HSeparator" type="HSeparator" parent="OptionsPanel/TabContainer/inputs"]
