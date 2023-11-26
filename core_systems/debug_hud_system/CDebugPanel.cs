@@ -15,6 +15,7 @@ public partial class CDebugPanel : Control
     private CPanelLevels PanelLevels = null;
     private CPanelSpawns PanelSpawns = null;
     private CPanelVideo PanelVideo = null;
+    private CPanelAudio PanelAudio = null;
 
     public void PostInit()
     {
@@ -45,6 +46,9 @@ public partial class CDebugPanel : Control
 
         PanelVideo = GetNode<CPanelVideo>("%PanelVideo");
         PanelVideo.PostInit(this);
+
+        PanelAudio = GetNode<CPanelAudio>("%PanelAudio");
+        PanelAudio.PostInit(this);
 
     }
 
@@ -113,5 +117,6 @@ public partial class CDebugPanel : Control
     {
         PanelMain.LoadAllElementsSettings();
         PanelVideo.LoadAllElementsSettings();
+        PanelAudio.LoadAllElementsSettings();
     }
 }

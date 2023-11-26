@@ -1,0 +1,94 @@
+[gd_scene load_steps=3 format=3 uid="uid://c80witbt6rqms"]
+
+[ext_resource type="PackedScene" uid="uid://dqx75mfvna1rx" path="res://core_systems/debug_hud_system/base/panel_base.tscn" id="1_0sdq3"]
+[ext_resource type="Script" path="res://core_systems/debug_hud_system/CPanelAudio.cs" id="2_pj643"]
+
+[node name="PanelAudio" instance=ExtResource("1_0sdq3")]
+script = ExtResource("2_pj643")
+
+[node name="audio_HBoxContainer" type="HBoxContainer" parent="VBoxBase/ScrollContainerElements/VBoxElements/MarginElements/VBoxElements" index="0"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxBase/ScrollContainerElements/VBoxElements/MarginElements/VBoxElements/audio_HBoxContainer" index="0"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "main volume"
+horizontal_alignment = 1
+
+[node name="mainVolume_HSlider" type="HSlider" parent="VBoxBase/ScrollContainerElements/VBoxElements/MarginElements/VBoxElements/audio_HBoxContainer" index="1"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+min_value = -60.0
+max_value = 1.0
+step = 0.1
+
+[node name="mainVolume_Label" type="Label" parent="VBoxBase/ScrollContainerElements/VBoxElements/MarginElements/VBoxElements/audio_HBoxContainer" index="2"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+text = "0 db"
+horizontal_alignment = 1
+
+[node name="audio_HBoxContainer2" type="HBoxContainer" parent="VBoxBase/ScrollContainerElements/VBoxElements/MarginElements/VBoxElements" index="1"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxBase/ScrollContainerElements/VBoxElements/MarginElements/VBoxElements/audio_HBoxContainer2" index="0"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "sfx volume"
+horizontal_alignment = 1
+
+[node name="sfxVolume_HSlider" type="HSlider" parent="VBoxBase/ScrollContainerElements/VBoxElements/MarginElements/VBoxElements/audio_HBoxContainer2" index="1"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+min_value = -60.0
+max_value = 1.0
+step = 0.1
+
+[node name="sfxVolume_Label" type="Label" parent="VBoxBase/ScrollContainerElements/VBoxElements/MarginElements/VBoxElements/audio_HBoxContainer2" index="2"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+text = "0 db"
+horizontal_alignment = 1
+
+[node name="audio_HBoxContainer3" type="HBoxContainer" parent="VBoxBase/ScrollContainerElements/VBoxElements/MarginElements/VBoxElements" index="2"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxBase/ScrollContainerElements/VBoxElements/MarginElements/VBoxElements/audio_HBoxContainer3" index="0"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "music volume"
+horizontal_alignment = 1
+
+[node name="musicVolume_HSlider" type="HSlider" parent="VBoxBase/ScrollContainerElements/VBoxElements/MarginElements/VBoxElements/audio_HBoxContainer3" index="1"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+min_value = -60.0
+max_value = 1.0
+step = 0.1
+
+[node name="musicVolume_Label" type="Label" parent="VBoxBase/ScrollContainerElements/VBoxElements/MarginElements/VBoxElements/audio_HBoxContainer3" index="2"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+text = "0 db"
+horizontal_alignment = 1
+
+[connection signal="value_changed" from="VBoxBase/ScrollContainerElements/VBoxElements/MarginElements/VBoxElements/audio_HBoxContainer/mainVolume_HSlider" to="." method="_on_main_volume_h_slider_value_changed"]
+[connection signal="value_changed" from="VBoxBase/ScrollContainerElements/VBoxElements/MarginElements/VBoxElements/audio_HBoxContainer2/sfxVolume_HSlider" to="." method="_on_sfx_volume_h_slider_value_changed"]
+[connection signal="value_changed" from="VBoxBase/ScrollContainerElements/VBoxElements/MarginElements/VBoxElements/audio_HBoxContainer3/musicVolume_HSlider" to="." method="_on_music_volume_h_slider_value_changed"]

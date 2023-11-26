@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://c04geamyk5qwa"]
+[gd_scene load_steps=9 format=3 uid="uid://c04geamyk5qwa"]
 
 [ext_resource type="Theme" uid="uid://cd3yvqcy8bus4" path="res://core_systems/debug_hud_system/debug_theme.theme" id="1_gnxtd"]
 [ext_resource type="Script" path="res://core_systems/debug_hud_system/CDebugPanel.cs" id="1_yf4lg"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cg3jm0pyxxw5d" path="res://core_systems/debug_hud_system/panel_levels.tscn" id="4_1a5qt"]
 [ext_resource type="PackedScene" uid="uid://da5d4wxm4dqnm" path="res://core_systems/debug_hud_system/panel_spawns.tscn" id="5_orbp0"]
 [ext_resource type="PackedScene" uid="uid://dkr7cbtsrsnsg" path="res://core_systems/debug_hud_system/panel_video.tscn" id="6_vygrg"]
+[ext_resource type="PackedScene" uid="uid://c80witbt6rqms" path="res://core_systems/debug_hud_system/panel_audio.tscn" id="7_5llum"]
 
 [node name="DebugPanel" type="Control"]
 layout_mode = 3
@@ -149,6 +150,10 @@ anchor_right = 1.0
 offset_bottom = 500.0
 grow_horizontal = 2
 metadata/_edit_lock_ = true
+
+[node name="PanelAudio" parent="DebugTabs/MainDebugPanel/MarginContainer/TabContainer/AUDIO/MarginContainer" instance=ExtResource("7_5llum")]
+unique_name_in_owner = true
+layout_mode = 2
 
 [node name="INPUTS" type="TabBar" parent="DebugTabs/MainDebugPanel/MarginContainer/TabContainer"]
 visible = false

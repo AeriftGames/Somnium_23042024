@@ -183,6 +183,7 @@ theme_override_styles/tab_hovered = SubResource("StyleBoxFlat_l5ewt")
 theme_override_styles/tab_unselected = SubResource("StyleBoxFlat_yi35b")
 
 [node name="main" type="VBoxContainer" parent="OptionsPanel/TabContainer"]
+visible = false
 layout_mode = 2
 
 [node name="ShowFps_CheckBox" type="CheckBox" parent="OptionsPanel/TabContainer/main"]
@@ -479,7 +480,6 @@ size_flags_horizontal = 4
 text = "Save video as default"
 
 [node name="audio" type="VBoxContainer" parent="OptionsPanel/TabContainer"]
-visible = false
 layout_mode = 2
 
 [node name="HSeparator" type="HSeparator" parent="OptionsPanel/TabContainer/audio"]
