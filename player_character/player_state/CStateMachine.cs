@@ -17,7 +17,6 @@ public partial class CStateMachine : Node
             if (state != null)
             {
                 states.Add(state.Name, state);
-                //states[state.Name] = state as CState;
                 state.Connect(CState.SignalName.Transition, new Callable(this,"OnChildTransition"));
             }
             else
@@ -55,4 +54,6 @@ public partial class CStateMachine : Node
         else
             GD.PushWarning("State neexistuje");
     }
+
+    public StringName GetCurrentStateName() { return CURRENT_STATE.Name; }
 }

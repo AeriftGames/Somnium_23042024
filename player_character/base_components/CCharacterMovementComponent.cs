@@ -34,18 +34,30 @@ public partial class CCharacterMovementComponent : Node
         if (!ourCharacterBase.IsOnFloor())
             workVelocity.Y -= gravity * (float)delta;
 
+        if (Input.IsActionPressed("Sprint") && GetIsOnFloor() && ourCharacterBase.GetCharacterCrouchComponent().GetIsCrouched() == false)
+            Speed = SPEED_SPRINT;
+        else if (GetIsOnFloor() && ourCharacterBase.GetCharacterCrouchComponent().GetIsCrouched() == true)
+            Speed = SPEED_CROUCH;
+        else if (GetIsOnFloor() && ourCharacterBase.GetCharacterCrouchComponent().GetIsCrouched() == false)
+            Speed = SPEED_WALK;
+
         Vector2 inputDir = Input.GetVector("moveLeft", "moveRight", "moveForward", "moveBackward");
         direction = direction.Lerp(ourCharacterBase.Transform.Basis * new Vector3(inputDir.X, 0, inputDir.Y).Normalized(),(float)delta*60.0f);
-        //direction = ourCharacterBase.Transform.Basis * new Vector3(inputDir.X, 0, inputDir.Y).Normalized();
         if (direction != Vector3.Zero)
         {
-            workVelocity.X = float.Lerp(workVelocity.X,direction.X * Speed,ACCELERATION * (float)delta);
-            workVelocity.Z = float.Lerp(workVelocity.Z,direction.Z * Speed,ACCELERATION * (float)delta);
+            if(GetIsOnFloor())
+            {
+                workVelocity.X = float.Lerp(workVelocity.X, direction.X * Speed, ACCELERATION * (float)delta);
+                workVelocity.Z = float.Lerp(workVelocity.Z, direction.Z * Speed, ACCELERATION * (float)delta);
+            }
         }
         else
         {
-            workVelocity.X = Mathf.MoveToward(ourCharacterBase.Velocity.X, 0, DECCLERATION * (float)delta);
-            workVelocity.Z = Mathf.MoveToward(ourCharacterBase.Velocity.Z, 0, DECCLERATION * (float)delta);
+            if (GetIsOnFloor())
+            {
+                workVelocity.X = Mathf.MoveToward(ourCharacterBase.Velocity.X, 0, DECCLERATION * (float)delta);
+                workVelocity.Z = Mathf.MoveToward(ourCharacterBase.Velocity.Z, 0, DECCLERATION * (float)delta);
+            }
         }
     }
 

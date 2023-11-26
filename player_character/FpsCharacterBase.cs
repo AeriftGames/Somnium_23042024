@@ -6,10 +6,16 @@ public partial class FpsCharacterBase : CharacterBody3D
 	private CCharacterMovementComponent CharacterMovementComponent;
     private CCharacterLookComponent CharacterLookComponent;
     private CCharacterCrouchComponent CharacterCrouchComponent;
+    private CCharacterFootstepComponent CharacterFootstepComponent;
+
+    private CStateMachine CharacterStateMachine;
 
     public CCharacterMovementComponent GetCharacterMovementComponent() { return CharacterMovementComponent; }
     public CCharacterLookComponent GetCharacterLookComponent() { return CharacterLookComponent; }
     public CCharacterCrouchComponent GetCharacterCrouchComponent() { return this.CharacterCrouchComponent; }
+    public CCharacterFootstepComponent GetCharacterFootstepComponent() { return this.CharacterFootstepComponent; }
+    
+    public CStateMachine GetCharacterStateMachine() { return CharacterStateMachine; }
 
     public override void _Ready()
     {
@@ -25,6 +31,11 @@ public partial class FpsCharacterBase : CharacterBody3D
 
         CharacterCrouchComponent = GetNode<CCharacterCrouchComponent>("BaseComponents/BaseCrouchComponent");
         CharacterCrouchComponent.PostInit(this);
+
+        CharacterFootstepComponent = GetNode<CCharacterFootstepComponent>("BaseComponents/BaseFootstepComponent");
+        CharacterFootstepComponent.PostInit(this);
+
+        CharacterStateMachine = GetNode<CStateMachine>("PlayerStateMachine");
     }
 
     public override void _PhysicsProcess(double delta)

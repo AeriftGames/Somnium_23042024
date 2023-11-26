@@ -53,12 +53,12 @@ public partial class CCharacterCrouchComponent : Node
             if (newCrouch && animPlayerCrouch.IsPlaying() == false)
             {
                 animPlayerCrouch.Play("Crouch", -1, CROUCH_SPEED);
-                ourCharacter.GetCharacterMovementComponent().SetMoveSpeed("CROUCH");
+                //ourCharacter.GetCharacterMovementComponent().SetMoveSpeed("CROUCH");
             }
             else if (shapeCastUncrouch.IsColliding() == false && animPlayerCrouch.IsPlaying() == false)
             {
                 animPlayerCrouch.Play("Crouch", -1, -CROUCH_SPEED, true);
-                ourCharacter.GetCharacterMovementComponent().SetMoveSpeed("WALK");
+                //ourCharacter.GetCharacterMovementComponent().SetMoveSpeed("WALK");
             }
         }
         else if(TOGGLE_CROUCH == false)
@@ -67,7 +67,7 @@ public partial class CCharacterCrouchComponent : Node
             {
                 animPlayerCrouch.Play("Crouch", -1, CROUCH_SPEED);
                 isCrouching = true;
-                ourCharacter.GetCharacterMovementComponent().SetMoveSpeed("CROUCH");
+                //ourCharacter.GetCharacterMovementComponent().SetMoveSpeed("CROUCH");
             }
             else if (newCrouch == false && shapeCastUncrouch.IsColliding() == true)
             {
@@ -77,7 +77,7 @@ public partial class CCharacterCrouchComponent : Node
             {
                 animPlayerCrouch.Play("Crouch", -1, -CROUCH_SPEED, true);
                 isCrouching = false;
-                ourCharacter.GetCharacterMovementComponent().SetMoveSpeed("WALK");
+                //ourCharacter.GetCharacterMovementComponent().SetMoveSpeed("WALK");
             }
         }
     }

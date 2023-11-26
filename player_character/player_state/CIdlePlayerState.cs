@@ -12,10 +12,11 @@ public partial class CIdlePlayerState : CState
 
     public override void Update(float delta)
     {
-        if(CGameMaster.GM.GetGame().GetFPSCharacterBase().Velocity.Length() >= 0.02f &&
+        if(CGameMaster.GM.GetGame().GetFPSCharacterBase().Velocity.Length() >= 0.1f &&
             CGameMaster.GM.GetGame().GetFPSCharacterBase().GetCharacterMovementComponent().GetIsOnFloor())
-        {
             EmitSignal(SignalName.Transition, "WalkingPlayerState");
-        }
+
+        else if (CGameMaster.GM.GetGame().GetFPSCharacterBase().GetCharacterMovementComponent().GetIsOnFloor() == false)
+            EmitSignal(SignalName.Transition, "JumpPlayerState");
     }
 }

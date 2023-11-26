@@ -14,8 +14,12 @@ public partial class CWalkingPlayerState : CState
     public override void Update(float delta)
     {
         SetAnimationSpeed(CGameMaster.GM.GetGame().GetFPSCharacterBase().Velocity.Length());
+
         if (CGameMaster.GM.GetGame().GetFPSCharacterBase().Velocity.Length() < 0.1f)
             EmitSignal(SignalName.Transition, "IdlePlayerState");
+
+        else if (CGameMaster.GM.GetGame().GetFPSCharacterBase().GetCharacterMovementComponent().GetIsOnFloor() == false)
+            EmitSignal(SignalName.Transition, "JumpPlayerState");
     }
 
     public void SetAnimationSpeed(float newSpeed)

@@ -705,6 +705,7 @@ metadata/_edit_lock_ = true
 
 [node name="PlayerStart" parent="." instance=ExtResource("11_37ijr")]
 transform = Transform3D(1.19209e-07, 0, -1, 0, 1, 0, 1, 0, 1.19209e-07, 10.4, 0.9, 2.1)
+SpawnCharacterType = 2
 
 [node name="PlayerStart2" parent="." instance=ExtResource("11_37ijr")]
 transform = Transform3D(-4.37112e-08, 0, 1, 0, 1, 0, -1, 0, -4.37112e-08, 27.4, 4, 2.1)
