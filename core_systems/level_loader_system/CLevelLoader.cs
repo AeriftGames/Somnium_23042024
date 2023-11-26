@@ -46,6 +46,10 @@ public partial class CLevelLoader : Node
 
     public async void ChangeLevelSceneWithDelay(string newLevelScenePath, string newLevelName, int delay)
     {
+        // pokud mame otevreny debug panel - zavreme jej
+        if (CGameMaster.GM.GetGame().GetDebugPanel().GetIsOpen())
+            CGameMaster.GM.GetGame().GetDebugPanel().OpenDebugTabs(false);
+
         // zapneme cernou obrazovku
         CGameMaster.GM.GetUniversal().EnableBlackScreen(true);
 

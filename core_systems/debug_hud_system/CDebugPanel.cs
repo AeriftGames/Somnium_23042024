@@ -11,7 +11,10 @@ public partial class CDebugPanel : Control
     private CDebugLabels DebugLabels = null;
     private MarginContainer DebugTabs = null;
 
-    private CPanelMainNew PanelMain = null;
+    private CPanelMain PanelMain = null;
+    private CPanelLevels PanelLevels = null;
+    private CPanelSpawns PanelSpawns = null;
+    private CPanelVideo PanelVideo = null;
 
     public void PostInit()
     {
@@ -31,8 +34,17 @@ public partial class CDebugPanel : Control
         DebugTabs.Visible = false;
 
         // Tabs
-        PanelMain = GetNode<CPanelMainNew>("%PanelMain");
+        PanelMain = GetNode<CPanelMain>("%PanelMain");
         PanelMain.PostInit(this);
+
+        PanelLevels = GetNode<CPanelLevels>("%PanelLevels");
+        PanelLevels.PostInit(this);
+
+        PanelSpawns = GetNode<CPanelSpawns>("%PanelSpawns");
+        PanelSpawns.PostInit(this);
+
+        PanelVideo = GetNode<CPanelVideo>("%PanelVideo");
+        PanelVideo.PostInit(this);
 
     }
 
@@ -46,6 +58,13 @@ public partial class CDebugPanel : Control
 
         if (isOpen)
         {
+            // for old fps character open
+            if (CGameMaster.GM.GetGame().GetFPSCharacter() != null)
+            {
+                CGameMaster.GM.GetGame().GetFPSCharacter().SetInputEnable(false);
+                CGameMaster.GM.GetGame().GetFPSCharacter().SetMouseVisible(true);
+            }
+
             DebugTabs.Visible = true;
             Background.Visible = true;
 
@@ -53,6 +72,16 @@ public partial class CDebugPanel : Control
         }
         else
         {
+            // for old fps character close
+            FPSCharacter_Inventory charInventory = CGameMaster.GM.GetGame().GetFPSCharacter() as FPSCharacter_Inventory;
+            if (charInventory != null)
+            {
+                if (charInventory.GetInventoryMenu().GetActive()) return;
+
+                CGameMaster.GM.GetGame().GetFPSCharacter().SetInputEnable(true);
+                CGameMaster.GM.GetGame().GetFPSCharacter().SetMouseVisible(false);
+            }
+
             DebugTabs.Visible = false;
             Background.Visible = false;
 
@@ -79,4 +108,10 @@ public partial class CDebugPanel : Control
     public void SetShowPerformance(bool newShow) { MarginPerformance.Visible = newShow; }
     public bool GetShowPerformance() { return MarginPerformance.Visible; }
     public CDebugLabels GetDebugLabels() { return DebugLabels; }
+
+    public void AllLoadSettings()
+    {
+        PanelMain.LoadAllElementsSettings();
+        PanelVideo.LoadAllElementsSettings();
+    }
 }

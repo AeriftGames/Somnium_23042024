@@ -115,6 +115,9 @@ metadata/_edit_lock_ = true
 
 [node name="BaseMovementComponent" type="Node" parent="BaseComponents"]
 script = ExtResource("2_omu0b")
+SPEED_WALK = 1.8
+SPEED_SPRINT = 2.5
+SPEED_CROUCH = 1.2
 
 [node name="BaseLookComponent" type="Node" parent="BaseComponents" node_paths=PackedStringArray("Camera")]
 script = ExtResource("3_353i0")

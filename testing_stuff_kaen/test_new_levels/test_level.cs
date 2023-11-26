@@ -10,10 +10,13 @@ public partial class test_level : Node3D
         PostStart();
     }
 
-	public async void PostStart()
-	{
+    public async void PostStart()
+    {
         await Task.Delay(200);
         CGameMaster.GM.GetUniversal().EnableBlackScreen(false);
+
+        CGameMaster.GM.GetSettings().LoadAndApply_AllGraphicsSettings();
+        CGameMaster.GM.GetGame().GetDebugPanel().AllLoadSettings();
     }
 
 }

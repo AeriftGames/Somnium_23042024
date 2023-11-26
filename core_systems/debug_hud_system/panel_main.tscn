@@ -1,87 +1,45 @@
-[gd_scene load_steps=3 format=3 uid="uid://bn1376tpwykba"]
+[gd_scene load_steps=4 format=3 uid="uid://cnq5i33i5bka6"]
 
-[ext_resource type="Theme" uid="uid://cd3yvqcy8bus4" path="res://core_systems/debug_hud_system/debug_theme.theme" id="1_vry1s"]
-[ext_resource type="Script" path="res://core_systems/debug_hud_system/CPanelMain.cs" id="2_ttkoi"]
+[ext_resource type="PackedScene" uid="uid://dqx75mfvna1rx" path="res://core_systems/debug_hud_system/base/panel_base.tscn" id="1_2trrc"]
+[ext_resource type="Script" path="res://core_systems/debug_hud_system/CPanelMain.cs" id="2_x8mqg"]
+[ext_resource type="Theme" uid="uid://cd3yvqcy8bus4" path="res://core_systems/debug_hud_system/debug_theme.theme" id="3_2udis"]
 
-[node name="PanelMain" type="PanelContainer"]
-custom_minimum_size = Vector2(300, 500)
-mouse_filter = 2
-theme = ExtResource("1_vry1s")
-script = ExtResource("2_ttkoi")
-metadata/_edit_lock_ = true
+[node name="PanelMain" instance=ExtResource("1_2trrc")]
+script = ExtResource("2_x8mqg")
 
-[node name="VBoxUp" type="VBoxContainer" parent="."]
-layout_mode = 2
-mouse_filter = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="VBoxUp"]
-layout_mode = 2
-mouse_filter = 2
-theme = ExtResource("1_vry1s")
-metadata/_edit_lock_ = true
-
-[node name="VBoxButtons" type="VBoxContainer" parent="VBoxUp/MarginContainer"]
-layout_mode = 2
-mouse_filter = 2
-
-[node name="CheckButton_ShowFps" type="CheckButton" parent="VBoxUp/MarginContainer/VBoxButtons"]
+[node name="CheckButton_ShowFps" type="CheckButton" parent="VBoxBase/ScrollContainerElements/VBoxElements/MarginElements/VBoxElements" index="0"]
 unique_name_in_owner = true
 layout_mode = 2
-theme = ExtResource("1_vry1s")
+theme = ExtResource("3_2udis")
 text = " SHOW FPS"
 
-[node name="CheckButton_ShowDebugLabels" type="CheckButton" parent="VBoxUp/MarginContainer/VBoxButtons"]
+[node name="CheckButton_ShowDebugLabels" type="CheckButton" parent="VBoxBase/ScrollContainerElements/VBoxElements/MarginElements/VBoxElements" index="1"]
 unique_name_in_owner = true
 layout_mode = 2
-theme = ExtResource("1_vry1s")
+theme = ExtResource("3_2udis")
 text = " SHOW DEBUG LABELS"
 
-[node name="CheckButton_ShowPerformance" type="CheckButton" parent="VBoxUp/MarginContainer/VBoxButtons"]
+[node name="CheckButton_ShowPerformance" type="CheckButton" parent="VBoxBase/ScrollContainerElements/VBoxElements/MarginElements/VBoxElements" index="2"]
 unique_name_in_owner = true
 layout_mode = 2
-theme = ExtResource("1_vry1s")
+theme = ExtResource("3_2udis")
 text = " SHOW PERFORMANCE"
 
-[node name="MarginContainer2" type="MarginContainer" parent="VBoxUp"]
+[node name="MarginElements_Two" type="MarginContainer" parent="VBoxBase/ScrollContainerElements/VBoxElements" index="1"]
 layout_mode = 2
-theme = ExtResource("1_vry1s")
+theme = ExtResource("3_2udis")
 metadata/_edit_lock_ = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxUp/MarginContainer2"]
+[node name="VBoxElements_Two" type="VBoxContainer" parent="VBoxBase/ScrollContainerElements/VBoxElements/MarginElements_Two" index="0"]
 layout_mode = 2
 
-[node name="CheckButton_EnableOcclusionCulling" type="CheckButton" parent="VBoxUp/MarginContainer2/VBoxContainer"]
+[node name="CheckButton_EnableOcclusionCulling" type="CheckButton" parent="VBoxBase/ScrollContainerElements/VBoxElements/MarginElements_Two/VBoxElements_Two" index="0"]
 unique_name_in_owner = true
 layout_mode = 2
-theme = ExtResource("1_vry1s")
+theme = ExtResource("3_2udis")
 text = " ENABLE OCCLUSION CULLING"
 
-[node name="VBoxBottom" type="VBoxContainer" parent="."]
-layout_mode = 2
-mouse_filter = 2
-alignment = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="VBoxBottom"]
-layout_mode = 2
-size_flags_vertical = 8
-mouse_filter = 2
-
-[node name="VBoxButtons" type="VBoxContainer" parent="VBoxBottom/MarginContainer"]
-layout_mode = 2
-mouse_filter = 2
-alignment = 2
-
-[node name="Button_SaveSettings" type="Button" parent="VBoxBottom/MarginContainer/VBoxButtons"]
-layout_mode = 2
-text = "SAVE SETTINGS"
-
-[node name="Button_QuitGame" type="Button" parent="VBoxBottom/MarginContainer/VBoxButtons"]
-layout_mode = 2
-text = "QUIT GAME"
-
-[connection signal="toggled" from="VBoxUp/MarginContainer/VBoxButtons/CheckButton_ShowFps" to="." method="_on_check_button_show_fps_toggled"]
-[connection signal="toggled" from="VBoxUp/MarginContainer/VBoxButtons/CheckButton_ShowDebugLabels" to="." method="_on_check_button_show_debug_labels_toggled"]
-[connection signal="toggled" from="VBoxUp/MarginContainer/VBoxButtons/CheckButton_ShowPerformance" to="." method="_on_check_button_show_performance_toggled"]
-[connection signal="toggled" from="VBoxUp/MarginContainer2/VBoxContainer/CheckButton_EnableOcclusionCulling" to="." method="_on_check_button_enable_occlusion_culling_toggled"]
-[connection signal="pressed" from="VBoxBottom/MarginContainer/VBoxButtons/Button_SaveSettings" to="." method="_on_button_save_settings_pressed"]
-[connection signal="pressed" from="VBoxBottom/MarginContainer/VBoxButtons/Button_QuitGame" to="." method="_on_button_quit_game_pressed"]
+[connection signal="toggled" from="VBoxBase/ScrollContainerElements/VBoxElements/MarginElements/VBoxElements/CheckButton_ShowFps" to="." method="_on_check_button_show_fps_toggled"]
+[connection signal="toggled" from="VBoxBase/ScrollContainerElements/VBoxElements/MarginElements/VBoxElements/CheckButton_ShowDebugLabels" to="." method="_on_check_button_show_debug_labels_toggled"]
+[connection signal="toggled" from="VBoxBase/ScrollContainerElements/VBoxElements/MarginElements/VBoxElements/CheckButton_ShowPerformance" to="." method="_on_check_button_show_performance_toggled"]
+[connection signal="toggled" from="VBoxBase/ScrollContainerElements/VBoxElements/MarginElements_Two/VBoxElements_Two/CheckButton_EnableOcclusionCulling" to="." method="_on_check_button_enable_occlusion_culling_toggled"]

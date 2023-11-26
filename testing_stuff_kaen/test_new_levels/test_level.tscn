@@ -1,29 +1,46 @@
-[gd_scene load_steps=12 format=3 uid="uid://b4mah7ce4ydqd"]
+[gd_scene load_steps=16 format=3 uid="uid://b4mah7ce4ydqd"]
 
-[ext_resource type="Script" path="res://testing_stuff_kaen/test_new_levels/test_level.cs" id="1_1hox6"]
 [ext_resource type="Texture2D" uid="uid://cymo6nrx5cwrm" path="res://testing_stuff_kaen/syferfontein_0d_clear_puresky_2k.hdr" id="1_lf287"]
+[ext_resource type="Script" path="res://levels/worldlevel_base/WorldLevel.cs" id="1_soe0h"]
+[ext_resource type="Script" path="res://levels/worldlevel_base/LevelDataSettings.cs" id="2_5wqfy"]
 [ext_resource type="Material" uid="uid://s8du8kwvqfuc" path="res://testing_stuff_kaen/test_new_levels/prototype_material.tres" id="2_detg4"]
 [ext_resource type="Texture2D" uid="uid://dycfdwyjbsixm" path="res://testing_stuff_kaen/prototype_textures/Dark/texture_01.png" id="3_ly7is"]
 [ext_resource type="VoxelGIData" uid="uid://1m0bhq0601st" path="res://testing_stuff_kaen/test_new_levels/test_level.VoxelGI_data.res" id="3_njlxy"]
-[ext_resource type="PackedScene" uid="uid://dcilkc4fno2qm" path="res://player_character/FpsCharacterBase.tscn" id="4_c0tps"]
 [ext_resource type="Texture2D" uid="uid://cixpao8vecw1l" path="res://testing_stuff_kaen/prototype_textures/Dark/texture_01_normal.png" id="4_ou71m"]
+[ext_resource type="Script" path="res://levels/worldlevel_base/LevelScene.cs" id="6_xlcre"]
+[ext_resource type="ArrayOccluder3D" uid="uid://xkhd1t2fssl7" path="res://testing_stuff_kaen/test_new_levels/test_level.occ" id="9_q34bx"]
+[ext_resource type="PackedScene" uid="uid://bet3idvc4fg0n" path="res://placeholders/PlayerStart.tscn" id="10_ljhg2"]
 
-[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_8qjl2"]
-ground_color = Color(0.235294, 0.180392, 0.113725, 1)
-night_sky = ExtResource("1_lf287")
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_vcykb"]
+sky_cover = ExtResource("1_lf287")
 
-[sub_resource type="Sky" id="Sky_5qm2v"]
-sky_material = SubResource("PhysicalSkyMaterial_8qjl2")
+[sub_resource type="Sky" id="Sky_7l7ry"]
+sky_material = SubResource("ProceduralSkyMaterial_vcykb")
 
-[sub_resource type="Environment" id="Environment_xbcaf"]
+[sub_resource type="Environment" id="Environment_ffmid"]
 background_mode = 2
-sky = SubResource("Sky_5qm2v")
+sky = SubResource("Sky_7l7ry")
+ambient_light_source = 2
+ambient_light_color = Color(0.12549, 0.12549, 0.12549, 1)
 tonemap_mode = 2
 ssao_enabled = true
+ssao_radius = 3.0
+ssao_detail = 5.0
+ssil_radius = 2.0
 sdfgi_use_occlusion = true
+sdfgi_read_sky_light = false
+sdfgi_bounce_feedback = 0.76
 glow_enabled = true
+glow_normalized = true
+glow_strength = 0.6
+glow_bloom = 0.75
+glow_blend_mode = 1
+fog_enabled = true
+fog_light_color = Color(0.411765, 0.447059, 0.498039, 1)
+fog_light_energy = 0.2
+fog_density = 0.005
 volumetric_fog_enabled = true
-volumetric_fog_density = 0.01
+volumetric_fog_density = 0.025
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bp0ep"]
 albedo_color = Color(1, 0.85098, 0.380392, 1)
@@ -37,8 +54,20 @@ uv1_scale = Vector3(0.5, 0.5, 0.5)
 uv1_triplanar = true
 uv1_world_triplanar = true
 
-[node name="TestLevel" type="Node3D"]
-script = ExtResource("1_1hox6")
+[sub_resource type="BoxMesh" id="BoxMesh_b7hrj"]
+
+[node name="WorldLevel" type="Node"]
+script = ExtResource("1_soe0h")
+
+[node name="LevelDataSettings" type="Node" parent="."]
+script = ExtResource("2_5wqfy")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ffmid")
+
+[node name="VoxelGI" type="VoxelGI" parent="."]
+subdiv = 2
+data = ExtResource("3_njlxy")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.812909, -0.49193, -0.311742, 0.573494, 0.769358, 0.281411, 0.101407, -0.407544, 0.907538, 0, 0, 0)
@@ -48,49 +77,61 @@ light_volumetric_fog_energy = 5.0
 light_bake_mode = 1
 shadow_enabled = true
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_xbcaf")
+[node name="LevelScene" type="Node" parent="."]
+script = ExtResource("6_xlcre")
 
-[node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
+[node name="Rooms" type="Node" parent="LevelScene"]
+
+[node name="Room1" type="Node3D" parent="LevelScene/Rooms"]
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="LevelScene/Rooms/Room1"]
 use_collision = true
 
-[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D"]
+[node name="CSGBox3D" type="CSGBox3D" parent="LevelScene/Rooms/Room1/CSGCombiner3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 2.5)
 size = Vector3(13, 1, 16)
 material = ExtResource("2_detg4")
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="CSGCombiner3D"]
+[node name="CSGBox3D2" type="CSGBox3D" parent="LevelScene/Rooms/Room1/CSGCombiner3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 1.5, 5)
 size = Vector3(10, 2, 2)
 material = SubResource("StandardMaterial3D_bp0ep")
 
-[node name="CSGBox3D3" type="CSGBox3D" parent="CSGCombiner3D"]
+[node name="CSGBox3D3" type="CSGBox3D" parent="LevelScene/Rooms/Room1/CSGCombiner3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 1.225, 5)
 operation = 2
 size = Vector3(2, 1.45, 3)
 material = ExtResource("2_detg4")
 
-[node name="CSGBox3D4" type="CSGBox3D" parent="CSGCombiner3D"]
+[node name="CSGBox3D4" type="CSGBox3D" parent="LevelScene/Rooms/Room1/CSGCombiner3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 1.125, -0.9)
 operation = 2
 size = Vector3(3.89, 1.45, 7)
 material = ExtResource("2_detg4")
 
-[node name="CSGBox3D5" type="CSGBox3D" parent="CSGCombiner3D"]
+[node name="CSGBox3D5" type="CSGBox3D" parent="LevelScene/Rooms/Room1/CSGCombiner3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 1.025, -0.9)
 operation = 2
 size = Vector3(5, 1.45, 5)
 material = ExtResource("2_detg4")
 
-[node name="CSGBox3D6" type="CSGBox3D" parent="CSGCombiner3D"]
+[node name="CSGBox3D6" type="CSGBox3D" parent="LevelScene/Rooms/Room1/CSGCombiner3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.925, -1)
 operation = 2
 size = Vector3(5, 1.45, 3)
 material = ExtResource("2_detg4")
 
-[node name="VoxelGI" type="VoxelGI" parent="."]
-subdiv = 2
-data = ExtResource("3_njlxy")
+[node name="LevelOcclusion" type="OccluderInstance3D" parent="LevelScene"]
+visible = false
+occluder = ExtResource("9_q34bx")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
 
-[node name="FpsCharacterBase" parent="." instance=ExtResource("4_c0tps")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.5, 0)
+[node name="MeshInstance3D" type="MeshInstance3D" parent="LevelScene"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0)
+mesh = SubResource("BoxMesh_b7hrj")
+skeleton = NodePath("../..")
+
+[node name="PlayerStart" parent="." instance=ExtResource("10_ljhg2")]
+transform = Transform3D(0.121644, 0, 0.992574, 0, 1, 0, -0.992574, 0, 0.121644, 2.02852, 0.5, 2.1)
+SpawnCharacterType = 2

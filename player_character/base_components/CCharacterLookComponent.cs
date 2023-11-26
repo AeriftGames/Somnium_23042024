@@ -1,10 +1,10 @@
 using Godot;
-using System;
 
 public partial class CCharacterLookComponent : Node
 {
 	[Export] public Camera3D Camera;
-	[Export] public float MOUSE_SENSITIVITY = 0.5f;
+	[Export] public float MOUSE_SENSITIVITY = 0.3f;
+	[Export] public float MOUSE_LERPSPEED = 15.0f;
 	[Export] public float TILT_LOWER_LIMIT = Mathf.DegToRad(-90.0f);
     [Export] public float TILT_UPPER_LIMIT = Mathf.DegToRad(90.0f);
 
@@ -16,6 +16,8 @@ public partial class CCharacterLookComponent : Node
 
 	private Vector3 playerRotation;
 	private Vector3 cameraRotation;
+
+	private float OnlyStartOffset = 0.0f;
 
     public override void _Ready()
 	{
@@ -44,18 +46,18 @@ public partial class CCharacterLookComponent : Node
 		mouseRotation.X = Mathf.Clamp(mouseRotation.X,TILT_LOWER_LIMIT,TILT_UPPER_LIMIT);
 		mouseRotation.Y += rotationInput * (float)delta;
 
-		playerRotation = new Vector3(0.0f, mouseRotation.Y, 0.0f);
+		playerRotation = playerRotation.Lerp(new Vector3(0.0f, mouseRotation.Y, 0.0f),(float)delta*MOUSE_LERPSPEED);
 		ourCharacter.Basis = Basis.FromEuler(playerRotation);
 
-		cameraRotation = new Vector3(mouseRotation.X, 0.0f, 0.0f);
+		cameraRotation = cameraRotation.Lerp(new Vector3(mouseRotation.X, 0.0f, 0.0f),(float)delta*MOUSE_LERPSPEED);
 		Camera.Basis = Basis.FromEuler(cameraRotation);
 
 		rotationInput = 0.0f;
 		tiltInput = 0.0f;
 	}
 
-    public override void _PhysicsProcess(double delta)
-    {
-        base._PhysicsProcess(delta);
+	public void RotateStart(Vector3 newStartRot)
+	{
+		mouseRotation.Y = newStartRot.Y;
     }
 }

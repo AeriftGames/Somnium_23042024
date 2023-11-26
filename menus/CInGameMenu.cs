@@ -15,10 +15,6 @@ public partial class CInGameMenu : Control
         SetOpen(false);
 	}
 
-    public override void _Process(double delta)
-    {
-    }
-
 	public void ToggleOpen() { SetOpen(!isOpen); }
 
     public void SetOpen(bool newOpen)
@@ -35,15 +31,29 @@ public partial class CInGameMenu : Control
 
 		if(isOpen)
 		{
+            // for old fps character open
+            if (CGameMaster.GM.GetGame().GetFPSCharacter() != null)
+            {
+                CGameMaster.GM.GetGame().GetFPSCharacter().SetInputEnable(false);
+                CGameMaster.GM.GetGame().GetFPSCharacter().SetMouseVisible(true);
+            }
+
             Input.MouseMode = Input.MouseModeEnum.Visible;
         }
 		else
 		{
-			Input.MouseMode = Input.MouseModeEnum.Captured;
+            // for old fps character open
+            if (CGameMaster.GM.GetGame().GetFPSCharacter() != null)
+            {
+                CGameMaster.GM.GetGame().GetFPSCharacter().SetInputEnable(true);
+                CGameMaster.GM.GetGame().GetFPSCharacter().SetMouseVisible(false);
+
+            }
+
+            Input.MouseMode = Input.MouseModeEnum.Captured;
         }
 
-
-		/*
+        /*
 		// pokusime se ziskat interact charactera
         FPSCharacter_Interaction interChar = CGameMaster.GM.GetGame().GetFPSCharacter() as FPSCharacter_Interaction;
 		if (interChar == null) return;
@@ -76,7 +86,7 @@ public partial class CInGameMenu : Control
 				if(invChar.GetCharacterHealthComponent().GetAlive())
 					interChar.SetInputEnable(true);
         }*/
-	}
+    }
 
 	public bool GetIsOpen() { return isOpen; }
 

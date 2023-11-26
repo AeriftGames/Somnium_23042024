@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=2 format=3]
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://dmhwmneuoxp23"]
 
 [ext_resource type="Script" path="res://core_systems/global_settings_data.cs" id="1_8rhwy"]
 

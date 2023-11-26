@@ -1,25 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://bduu7qcdviq3v"]
+[gd_scene load_steps=3 format=3 uid="uid://da5d4wxm4dqnm"]
 
-[ext_resource type="Theme" uid="uid://cd3yvqcy8bus4" path="res://core_systems/debug_hud_system/debug_theme.theme" id="1_g12oi"]
-[ext_resource type="Script" path="res://core_systems/debug_hud_system/CPanelSpawns.cs" id="2_jpeyd"]
+[ext_resource type="PackedScene" uid="uid://dqx75mfvna1rx" path="res://core_systems/debug_hud_system/base/panel_base.tscn" id="1_yfmgu"]
+[ext_resource type="Script" path="res://core_systems/debug_hud_system/CPanelSpawns.cs" id="2_uk6og"]
 
-[node name="PanelSpawns" type="PanelContainer"]
-custom_minimum_size = Vector2(300, 500)
-mouse_filter = 2
-theme = ExtResource("1_g12oi")
-script = ExtResource("2_jpeyd")
-metadata/_edit_lock_ = true
+[node name="PanelSpawns" instance=ExtResource("1_yfmgu")]
+script = ExtResource("2_uk6og")
 
-[node name="VBoxUp" type="VBoxContainer" parent="."]
-layout_mode = 2
-mouse_filter = 2
+[node name="Button_SaveSettings" parent="VBoxBase/VBoxBottom/MarginContainer/VBoxButtons" index="0"]
+visible = false
 
-[node name="MarginContainer" type="MarginContainer" parent="VBoxUp"]
-layout_mode = 2
-mouse_filter = 2
-theme = ExtResource("1_g12oi")
-metadata/_edit_lock_ = true
-
-[node name="VBoxButtons" type="VBoxContainer" parent="VBoxUp/MarginContainer"]
-layout_mode = 2
-mouse_filter = 2
+[node name="Button_QuitGame" parent="VBoxBase/VBoxBottom/MarginContainer/VBoxButtons" index="1"]
+visible = false

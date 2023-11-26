@@ -10,8 +10,10 @@ public partial class CPanelBase : PanelContainer
 
     public virtual void PostInit(CDebugPanel newDebugPanel) 
     { 
-        ourDebugPanel = newDebugPanel; 
-        LoadAllElementsSettings(); 
+        ourDebugPanel = newDebugPanel;
+
+        VBoxElements = GetNode<VBoxContainer>("%VBoxElements");
+        VBoxBaseButtons = GetNode<VBoxContainer>("%VBoxButtons");
     }
 
     public CDebugPanel GetOurDebugPanel() { return ourDebugPanel; }

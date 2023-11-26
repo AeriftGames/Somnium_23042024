@@ -2,12 +2,13 @@ using Godot;
 using System;
 using System.Collections.Generic;
 
-public partial class CPanelLevels : PanelContainer
+public partial class CPanelLevels : CPanelBase
 {
-	public override void _Ready()
-	{
+    public override void PostInit(CDebugPanel newDebugPanel)
+    {
+        base.PostInit(newDebugPanel);
         BuildLevelButtons();
-	}
+    }
 
     public void BuildLevelButtons()
     {
@@ -23,7 +24,7 @@ public partial class CPanelLevels : PanelContainer
             level_info_button b = newLevelInfoButton.Instantiate<level_info_button>();
             b.Text = levelinfo.LevelName;
 
-            VBoxContainer LevelButtonContainer = GetNode<VBoxContainer>("VBoxUp/MarginContainer/VBoxButtons");
+            VBoxContainer LevelButtonContainer = GetVBoxElements();
             LevelButtonContainer.AddChild(b);
             b.SetLevelInfo(levelinfo);
         }

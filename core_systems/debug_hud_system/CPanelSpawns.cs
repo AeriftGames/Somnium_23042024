@@ -1,12 +1,14 @@
 using Godot;
 using System;
 
-public partial class CPanelSpawns : PanelContainer
+public partial class CPanelSpawns : CPanelBase
 {
-	public override void _Ready()
-	{
+    public override void PostInit(CDebugPanel newDebugPanel)
+    {
+        base.PostInit(newDebugPanel);
+
         BuildSpawnButtons();
-	}
+    }
 
     public void BuildSpawnButtons()
     {
@@ -19,7 +21,7 @@ public partial class CPanelSpawns : PanelContainer
             spawnButtonInstance.Text = spawn.name;
             spawnButtonInstance.SetSpawnObjectData(spawn.path, spawn.name);
 
-            VBoxContainer spawnButtonContainer = GetNode<VBoxContainer>("VBoxUp/MarginContainer/VBoxButtons");
+            VBoxContainer spawnButtonContainer = GetVBoxElements();
             spawnButtonContainer.AddChild(spawnButtonInstance);
         }
     }
