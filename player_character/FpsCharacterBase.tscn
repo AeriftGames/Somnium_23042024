@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dcilkc4fno2qm"]
+[gd_scene load_steps=20 format=3 uid="uid://dcilkc4fno2qm"]
 
 [ext_resource type="Script" path="res://player_character/FpsCharacterBase.cs" id="1_ob1gb"]
 [ext_resource type="Script" path="res://player_character/base_components/CCharacterMovementComponent.cs" id="2_omu0b"]
@@ -110,6 +110,86 @@ top_radius = 0.3
 bottom_radius = 0.1
 height = 0.5
 
+[sub_resource type="Animation" id="Animation_g382h"]
+resource_name = "Walking"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../../CameraController:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0, 0),
+"points": PackedFloat32Array(0.049122, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, -0.050242, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0.0499083, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2.1)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../CameraController:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0, 0),
+"points": PackedFloat32Array(1.6, -0.25, 0, 0.25, 0, 1.75021, -0.25, 0, 0.25, 0, 1.6, -0.2, 0.0300066, 0.2, 0.0280573, 1.74957, -0.25, 0, 0.25, 0, 1.6, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../../CameraController:position:z")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2)
+}
+
+[sub_resource type="Animation" id="Animation_bwx4c"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../../CameraController:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../CameraController:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1.6, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../../CameraController:position:z")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5eiqd"]
+_data = {
+"RESET": SubResource("Animation_bwx4c"),
+"Walking": SubResource("Animation_g382h")
+}
+
 [node name="FpsCharacterBase" type="CharacterBody3D"]
 script = ExtResource("1_ob1gb")
 
@@ -164,6 +244,12 @@ cull_mask = 524287
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, -0.475978)
 layers = 524288
 mesh = SubResource("CylinderMesh_a3l8c")
+
+[node name="AnimationPlayer_HeadBob" type="AnimationPlayer" parent="."]
+root_node = NodePath("../BaseComponents/BaseMovementComponent")
+libraries = {
+"": SubResource("AnimationLibrary_5eiqd")
+}
 
 [node name="UserInterface" type="Control" parent="."]
 layout_mode = 3
@@ -233,10 +319,12 @@ metadata/_edit_lock_ = true
 script = ExtResource("6_n6lq2")
 CURRENT_STATE = NodePath("IdlePlayerState")
 
-[node name="IdlePlayerState" type="Node" parent="PlayerStateMachine"]
+[node name="IdlePlayerState" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("ANIMATION")]
 script = ExtResource("7_85exw")
+ANIMATION = NodePath("../../AnimationPlayer_HeadBob")
 
-[node name="WalkingPlayerState" type="Node" parent="PlayerStateMachine"]
+[node name="WalkingPlayerState" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("ANIMATION")]
 script = ExtResource("8_eskel")
+ANIMATION = NodePath("../../AnimationPlayer_HeadBob")
 
 [connection signal="animation_started" from="BaseComponents/BaseCrouchComponent/AnimationPlayerCrouch" to="BaseComponents/BaseCrouchComponent" method="_on_animation_player_crouch_animation_started"]

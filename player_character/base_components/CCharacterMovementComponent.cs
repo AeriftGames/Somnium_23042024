@@ -3,12 +3,15 @@ using System;
 
 public partial class CCharacterMovementComponent : Node
 {
-    [Export] float SPEED_WALK = 3.0f;
-    [Export] float SPEED_SPRINT = 5.0f;
-    [Export] float SPEED_CROUCH = 1.5f;
+    [Export] public float SPEED_WALK = 4.0f;
+    [Export] public float SPEED_SPRINT = 6.0f;
+    [Export] public float SPEED_CROUCH = 2.5f;
 
-    [Export] float JUMP_VELOCITY = 4.5f;
-    [Export] float LERP_SPEED = 10.0f;
+    [Export] public float ACCELERATION = 4f;
+    [Export] public float DECCLERATION = 8f;
+
+    [Export] public float JUMP_VELOCITY = 4.5f;
+    [Export] public float LERP_SPEED = 10.0f;
 
     public float gravity = ProjectSettings.GetSetting("physics/3d/default_gravity").AsSingle();
     private FpsCharacterBase ourCharacterBase = null;
@@ -32,16 +35,17 @@ public partial class CCharacterMovementComponent : Node
             workVelocity.Y -= gravity * (float)delta;
 
         Vector2 inputDir = Input.GetVector("moveLeft", "moveRight", "moveForward", "moveBackward");
-        direction = direction.Lerp(ourCharacterBase.Transform.Basis * new Vector3(inputDir.X, 0, inputDir.Y).Normalized(),(float)delta*LERP_SPEED);
+        direction = direction.Lerp(ourCharacterBase.Transform.Basis * new Vector3(inputDir.X, 0, inputDir.Y).Normalized(),(float)delta*60.0f);
+        //direction = ourCharacterBase.Transform.Basis * new Vector3(inputDir.X, 0, inputDir.Y).Normalized();
         if (direction != Vector3.Zero)
         {
-            workVelocity.X = direction.X * Speed;
-            workVelocity.Z = direction.Z * Speed;
+            workVelocity.X = float.Lerp(workVelocity.X,direction.X * Speed,ACCELERATION * (float)delta);
+            workVelocity.Z = float.Lerp(workVelocity.Z,direction.Z * Speed,ACCELERATION * (float)delta);
         }
         else
         {
-            workVelocity.X = Mathf.MoveToward(ourCharacterBase.Velocity.X, 0, Speed);
-            workVelocity.Z = Mathf.MoveToward(ourCharacterBase.Velocity.Z, 0, Speed);
+            workVelocity.X = Mathf.MoveToward(ourCharacterBase.Velocity.X, 0, DECCLERATION * (float)delta);
+            workVelocity.Z = Mathf.MoveToward(ourCharacterBase.Velocity.Z, 0, DECCLERATION * (float)delta);
         }
     }
 
