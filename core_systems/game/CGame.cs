@@ -4,13 +4,16 @@ using System;
 public partial class CGame : Node
 {
     private FPSCharacter_BasicMoving fPSCharacter_BasicMoving_Instance = null;
+    private FpsCharacterBase fPSCharacterBase_Instance = null;
     private CLevelLoader LevelLoader = null;
     private CInGameMenu InGameMenu = null;
     private CDebugHud DebugHud = null;
     private CDebugPanel DebugPanel = null;
 
-    public void SetFPSCharacter(FPSCharacter_BasicMoving newFpsCharater) { fPSCharacter_BasicMoving_Instance = newFpsCharater; }
-    public FPSCharacter_BasicMoving GetFPSCharacter() { return fPSCharacter_BasicMoving_Instance; }
+    public void SetFPSCharacterOld(FPSCharacter_BasicMoving newFpsCharater) { fPSCharacter_BasicMoving_Instance = newFpsCharater; }
+    public FPSCharacter_BasicMoving GetFPSCharacterOld() { return fPSCharacter_BasicMoving_Instance; }
+    public void SetFPSCharacterBase(FpsCharacterBase newFpsCharacterBase) { fPSCharacterBase_Instance = newFpsCharacterBase; }
+    public FpsCharacterBase GetFPSCharacterBase() {  return fPSCharacterBase_Instance; }
     public CLevelLoader GetLevelLoader() { return LevelLoader; }
     public CInGameMenu GetInGameMenu() { return InGameMenu; }
     public CDebugPanel GetDebugPanel() { return DebugPanel; }

@@ -102,7 +102,7 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
 	public override void _Ready()
 	{
 		// pro dostupnost skrze gamemastera
-		CGameMaster.GM.GetGame().SetFPSCharacter(this);
+		CGameMaster.GM.GetGame().SetFPSCharacterOld(this);
 
 		HeadMain = GetNode<Node3D>("%HeadMain");
 		HeadGimbalA = GetNode<Node3D>("%HeadGimbalA");

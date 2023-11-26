@@ -61,7 +61,7 @@ public partial class lis_anim : Node3D
             // calculate Distance
             if (invObjectCamera != null)
             {
-                if (CGameMaster.GM.GetGame().GetFPSCharacter() == null) return;
+                if (CGameMaster.GM.GetGame().GetFPSCharacterOld() == null) return;
 
                 // cam shake
                 DistanceFromPlayer =

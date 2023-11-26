@@ -45,7 +45,7 @@ public partial class all_this_shaders_need_compiled : Node3D
         toggle_timer.Start();
 
         // Prepne baterku na enable
-        FPSCharacter_Interaction a = (FPSCharacter_Interaction)CGameMaster.GM.GetGame().GetFPSCharacter();
+        FPSCharacter_Interaction a = (FPSCharacter_Interaction)CGameMaster.GM.GetGame().GetFPSCharacterOld();
         a.ToggleSimpleFlashlight();
     }
 
@@ -62,7 +62,7 @@ public partial class all_this_shaders_need_compiled : Node3D
         else
         {
             // Prepne baterku na disable
-            FPSCharacter_Interaction a = (FPSCharacter_Interaction)CGameMaster.GM.GetGame().GetFPSCharacter();
+            FPSCharacter_Interaction a = (FPSCharacter_Interaction)CGameMaster.GM.GetGame().GetFPSCharacterOld();
             a.ToggleSimpleFlashlight();
 
             // second timer(visible) cycle

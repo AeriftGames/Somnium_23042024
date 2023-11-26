@@ -1,14 +1,29 @@
-[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://s8du8kwvqfuc"]
+[gd_resource type="StandardMaterial3D" load_steps=6 format=3 uid="uid://s8du8kwvqfuc"]
 
-[ext_resource type="Texture2D" uid="uid://dycfdwyjbsixm" path="res://testing_stuff_kaen/prototype_textures/Dark/texture_01.png" id="1_cgfwj"]
+[ext_resource type="Texture2D" uid="uid://5dtot0qj2puy" path="res://testing_stuff_kaen/prototype_textures/Orange/texture_01.png" id="1_wvgbw"]
 [ext_resource type="Texture2D" uid="uid://cixpao8vecw1l" path="res://testing_stuff_kaen/prototype_textures/Dark/texture_01_normal.png" id="2_bholl"]
 
+[sub_resource type="Gradient" id="Gradient_6dfs1"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_yr3x2"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_laeyl"]
+in_3d_space = true
+seamless = true
+seamless_blend_skirt = 0.693
+color_ramp = SubResource("Gradient_6dfs1")
+noise = SubResource("FastNoiseLite_yr3x2")
+
 [resource]
-albedo_texture = ExtResource("1_cgfwj")
+albedo_color = Color(0.760784, 0.760784, 0.760784, 1)
+albedo_texture = ExtResource("1_wvgbw")
 metallic = 0.2
+roughness = 0.8
 normal_enabled = true
-normal_scale = 4.0
 normal_texture = ExtResource("2_bholl")
+detail_albedo = SubResource("NoiseTexture2D_laeyl")
 uv1_scale = Vector3(0.5, 0.5, 0.5)
 uv1_triplanar = true
 uv1_world_triplanar = true
+uv2_world_triplanar = true
+texture_filter = 1

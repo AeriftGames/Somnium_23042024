@@ -33,7 +33,7 @@ public partial class ladder_system : Node3D
 
     private FPSCharacter_Inventory GetOurCharacter()
     {
-        return CGameMaster.GM.GetGame().GetFPSCharacter() as FPSCharacter_Inventory;
+        return CGameMaster.GM.GetGame().GetFPSCharacterOld() as FPSCharacter_Inventory;
     }
 
     public bool GetIsCharacterCanUseLadder() { return isCharacterCanUseLadder; }

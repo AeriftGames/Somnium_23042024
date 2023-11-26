@@ -32,10 +32,10 @@ public partial class CInGameMenu : Control
 		if(isOpen)
 		{
             // for old fps character open
-            if (CGameMaster.GM.GetGame().GetFPSCharacter() != null)
+            if (CGameMaster.GM.GetGame().GetFPSCharacterOld() != null)
             {
-                CGameMaster.GM.GetGame().GetFPSCharacter().SetInputEnable(false);
-                CGameMaster.GM.GetGame().GetFPSCharacter().SetMouseVisible(true);
+                CGameMaster.GM.GetGame().GetFPSCharacterOld().SetInputEnable(false);
+                CGameMaster.GM.GetGame().GetFPSCharacterOld().SetMouseVisible(true);
             }
 
             Input.MouseMode = Input.MouseModeEnum.Visible;
@@ -43,10 +43,10 @@ public partial class CInGameMenu : Control
 		else
 		{
             // for old fps character open
-            if (CGameMaster.GM.GetGame().GetFPSCharacter() != null)
+            if (CGameMaster.GM.GetGame().GetFPSCharacterOld() != null)
             {
-                CGameMaster.GM.GetGame().GetFPSCharacter().SetInputEnable(true);
-                CGameMaster.GM.GetGame().GetFPSCharacter().SetMouseVisible(false);
+                CGameMaster.GM.GetGame().GetFPSCharacterOld().SetInputEnable(true);
+                CGameMaster.GM.GetGame().GetFPSCharacterOld().SetMouseVisible(false);
 
             }
 

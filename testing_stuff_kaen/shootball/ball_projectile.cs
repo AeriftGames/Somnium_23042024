@@ -31,7 +31,7 @@ public partial class ball_projectile : RigidBody3D
 
         CGameMaster.GM.GetGame().GetLevelLoader().GetActualLevelScene().AddChild(SplashNode);
         SplashNode.GlobalPosition = GlobalPosition;
-        SplashNode.LookAtFromPosition(SplashNode.GlobalPosition, CGameMaster.GM.GetGame().GetFPSCharacter().GlobalPosition);
+        SplashNode.LookAtFromPosition(SplashNode.GlobalPosition, CGameMaster.GM.GetGame().GetFPSCharacterOld().GlobalPosition);
 
         QueueFree();
     }

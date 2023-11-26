@@ -140,7 +140,7 @@ public partial class CLevelLoader : Node
 
         Vector3 precompGlobalPosCenter = new Vector3(500, 0, 500);
 
-        FPSCharacter_BasicMoving character_basic = CGameMaster.GM.GetGame().GetFPSCharacter();
+        FPSCharacter_BasicMoving character_basic = CGameMaster.GM.GetGame().GetFPSCharacterOld();
         ObjectCamera objectCamera = character_basic.objectCamera;
         character_basic.SetInputEnable(false);
         objectCamera.SetLerpToCharacterEnable(false);
@@ -162,7 +162,7 @@ public partial class CLevelLoader : Node
     {
         CGameMaster.GM.GetSettings().RefreshShaders();
 
-        FPSCharacter_BasicMoving character_basic = CGameMaster.GM.GetGame().GetFPSCharacter();
+        FPSCharacter_BasicMoving character_basic = CGameMaster.GM.GetGame().GetFPSCharacterOld();
         ObjectCamera objectCamera = character_basic.objectCamera;
 
         objectCamera.Camera.GlobalPosition = character_basic.GlobalPosition;

@@ -96,33 +96,33 @@ public partial class CGameMaster : Node
 		// Vypne _Process GameMastera
 		ProcessMode = ProcessModeEnum.Disabled;
 
-		if (GetGame().GetFPSCharacter() == null) return;
+		if (GetGame().GetFPSCharacterOld() == null) return;
 
         // uvolni kameru a celeho hrace
-        GetGame().GetFPSCharacter().objectCamera.FreeAll();
-		GetGame().GetFPSCharacter().QueueFree();
-        GetGame().GetFPSCharacter().FreeAll();
-        GetGame().GetFPSCharacter().QueueFree();
+        GetGame().GetFPSCharacterOld().objectCamera.FreeAll();
+		GetGame().GetFPSCharacterOld().QueueFree();
+        GetGame().GetFPSCharacterOld().FreeAll();
+        GetGame().GetFPSCharacterOld().QueueFree();
 
 		// pokud byl hrac uspesne zavolan pro delete, vypiseme to v konzoli
-		if (GetGame().GetFPSCharacter().IsQueuedForDeletion())
+		if (GetGame().GetFPSCharacterOld().IsQueuedForDeletion())
 			GD.Print("Game is quit sucesfully");
 	}
 
 	public void QueueCharacterAndCamera()
 	{
-		if (GetGame().GetFPSCharacter() != null)
+		if (GetGame().GetFPSCharacterOld() != null)
 		{
-            if (GetGame().GetFPSCharacter().objectCamera != null)
+            if (GetGame().GetFPSCharacterOld().objectCamera != null)
             {
-                GetGame().GetFPSCharacter().objectCamera.FreeAll();
-                GetGame().GetFPSCharacter().objectCamera.QueueFree();
-                GetGame().GetFPSCharacter().objectCamera = null;
+                GetGame().GetFPSCharacterOld().objectCamera.FreeAll();
+                GetGame().GetFPSCharacterOld().objectCamera.QueueFree();
+                GetGame().GetFPSCharacterOld().objectCamera = null;
             }
 
-            GetGame().GetFPSCharacter().FreeAll();
-            GetGame().GetFPSCharacter().QueueFree();
-			GetGame().SetFPSCharacter(null);
+            GetGame().GetFPSCharacterOld().FreeAll();
+            GetGame().GetFPSCharacterOld().QueueFree();
+			GetGame().SetFPSCharacterOld(null);
         }
     }
 

@@ -71,7 +71,7 @@ public partial class CBenchmarkSystem : Node
         // start
         LoadBenchmarLevelInQuality(newLevelScenePath, newLevelName, NeedBenchmarkQualityLevel);
 
-        if (CGameMaster.GM.GetGame().GetFPSCharacter != null)
+        if (CGameMaster.GM.GetGame().GetFPSCharacterOld() != null)
             CGameMaster.GM.QueueCharacterAndCamera();
     }
 

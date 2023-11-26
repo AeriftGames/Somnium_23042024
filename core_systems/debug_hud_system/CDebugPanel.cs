@@ -67,10 +67,10 @@ public partial class CDebugPanel : Control
         if (isOpen)
         {
             // for old fps character open
-            if (CGameMaster.GM.GetGame().GetFPSCharacter() != null)
+            if (CGameMaster.GM.GetGame().GetFPSCharacterOld() != null)
             {
-                CGameMaster.GM.GetGame().GetFPSCharacter().SetInputEnable(false);
-                CGameMaster.GM.GetGame().GetFPSCharacter().SetMouseVisible(true);
+                CGameMaster.GM.GetGame().GetFPSCharacterOld().SetInputEnable(false);
+                CGameMaster.GM.GetGame().GetFPSCharacterOld().SetMouseVisible(true);
             }
 
             DebugTabs.Visible = true;
@@ -81,13 +81,13 @@ public partial class CDebugPanel : Control
         else
         {
             // for old fps character close
-            FPSCharacter_Inventory charInventory = CGameMaster.GM.GetGame().GetFPSCharacter() as FPSCharacter_Inventory;
+            FPSCharacter_Inventory charInventory = CGameMaster.GM.GetGame().GetFPSCharacterOld() as FPSCharacter_Inventory;
             if (charInventory != null)
             {
                 if (charInventory.GetInventoryMenu().GetActive()) return;
 
-                CGameMaster.GM.GetGame().GetFPSCharacter().SetInputEnable(true);
-                CGameMaster.GM.GetGame().GetFPSCharacter().SetMouseVisible(false);
+                CGameMaster.GM.GetGame().GetFPSCharacterOld().SetInputEnable(true);
+                CGameMaster.GM.GetGame().GetFPSCharacterOld().SetMouseVisible(false);
             }
 
             DebugTabs.Visible = false;

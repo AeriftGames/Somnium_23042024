@@ -15,6 +15,8 @@ public partial class FpsCharacterBase : CharacterBody3D
     {
         base._Ready();
 
+        CGameMaster.GM.GetGame().SetFPSCharacterBase(this);
+
         CharacterMovementComponent = GetNode<CCharacterMovementComponent>("BaseComponents/BaseMovementComponent");
         CharacterMovementComponent.PostInit(this);
 

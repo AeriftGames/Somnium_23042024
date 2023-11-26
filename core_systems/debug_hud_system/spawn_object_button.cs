@@ -18,7 +18,7 @@ public partial class spawn_object_button : Button
 	{
         GD.Print("spawn button test: ");
 
-        FPSCharacter_Inventory a = CGameMaster.GM.GetGame().GetFPSCharacter() as FPSCharacter_Inventory;
+        FPSCharacter_Inventory a = CGameMaster.GM.GetGame().GetFPSCharacterOld() as FPSCharacter_Inventory;
         if (a == null) return;
 
         InventoryObjectCamera invCam = a.GetObjectCamera() as InventoryObjectCamera;

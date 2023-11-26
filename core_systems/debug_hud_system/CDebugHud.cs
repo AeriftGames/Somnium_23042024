@@ -101,10 +101,10 @@ public partial class CDebugHud : Control
 			DebugEnabledLabel.Text = "F1 for hide these options";
 			OptionsPanel.Visible = true;
 
-			if(CGameMaster.GM.GetGame().GetFPSCharacter() != null)
+			if(CGameMaster.GM.GetGame().GetFPSCharacterOld() != null)
 			{
-                CGameMaster.GM.GetGame().GetFPSCharacter().SetInputEnable(false);
-                CGameMaster.GM.GetGame().GetFPSCharacter().SetMouseVisible(true);
+                CGameMaster.GM.GetGame().GetFPSCharacterOld().SetInputEnable(false);
+                CGameMaster.GM.GetGame().GetFPSCharacterOld().SetMouseVisible(true);
                 Input.MouseMode = Input.MouseModeEnum.Confined;
             }
 
@@ -123,12 +123,12 @@ public partial class CDebugHud : Control
 			OptionsPanel.Visible = false;
 
 			// TRY CAST TO FPSCHARACTER INVENTORY a pokud mame aktualne otevreny inventory, preskocime zbytek kodu
-			FPSCharacter_Inventory charInventory = CGameMaster.GM.GetGame().GetFPSCharacter() as FPSCharacter_Inventory;
+			FPSCharacter_Inventory charInventory = CGameMaster.GM.GetGame().GetFPSCharacterOld() as FPSCharacter_Inventory;
 			if(charInventory != null)
 				if (charInventory.GetInventoryMenu().GetActive()) return;
 
-            CGameMaster.GM.GetGame().GetFPSCharacter().SetInputEnable(true);
-			CGameMaster.GM.GetGame().GetFPSCharacter().SetMouseVisible(false);
+            CGameMaster.GM.GetGame().GetFPSCharacterOld().SetInputEnable(true);
+			CGameMaster.GM.GetGame().GetFPSCharacterOld().SetMouseVisible(false);
 			Input.MouseMode = Input.MouseModeEnum.Captured;
 		}
 	}

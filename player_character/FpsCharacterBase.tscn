@@ -1,10 +1,13 @@
-[gd_scene load_steps=14 format=3 uid="uid://dcilkc4fno2qm"]
+[gd_scene load_steps=17 format=3 uid="uid://dcilkc4fno2qm"]
 
 [ext_resource type="Script" path="res://player_character/FpsCharacterBase.cs" id="1_ob1gb"]
 [ext_resource type="Script" path="res://player_character/base_components/CCharacterMovementComponent.cs" id="2_omu0b"]
 [ext_resource type="Script" path="res://player_character/base_components/CCharacterLookComponent.cs" id="3_353i0"]
 [ext_resource type="Script" path="res://player_character/base_components/CCharacterCrouchComponent.cs" id="4_oftwk"]
 [ext_resource type="Script" path="res://player_character/user_interface/Reticle.cs" id="5_r0qr1"]
+[ext_resource type="Script" path="res://player_character/player_state/CStateMachine.cs" id="6_n6lq2"]
+[ext_resource type="Script" path="res://player_character/player_state/CIdlePlayerState.cs" id="7_85exw"]
+[ext_resource type="Script" path="res://player_character/player_state/CWalkingPlayerState.cs" id="8_eskel"]
 
 [sub_resource type="Animation" id="Animation_v3wid"]
 resource_name = "Crouch"
@@ -225,5 +228,15 @@ joint_mode = 2
 begin_cap_mode = 2
 end_cap_mode = 2
 metadata/_edit_lock_ = true
+
+[node name="PlayerStateMachine" type="Node" parent="." node_paths=PackedStringArray("CURRENT_STATE")]
+script = ExtResource("6_n6lq2")
+CURRENT_STATE = NodePath("IdlePlayerState")
+
+[node name="IdlePlayerState" type="Node" parent="PlayerStateMachine"]
+script = ExtResource("7_85exw")
+
+[node name="WalkingPlayerState" type="Node" parent="PlayerStateMachine"]
+script = ExtResource("8_eskel")
 
 [connection signal="animation_started" from="BaseComponents/BaseCrouchComponent/AnimationPlayerCrouch" to="BaseComponents/BaseCrouchComponent" method="_on_animation_player_crouch_animation_started"]

@@ -87,7 +87,7 @@ public partial class elevator_2_functional : Node3D
         // calculate Distance
         if (invObjectCamera != null)
         {
-            if (CGameMaster.GM.GetGame().GetFPSCharacter() == null) return;
+            if (CGameMaster.GM.GetGame().GetFPSCharacterOld() == null) return;
 
             // cam shake
             DistanceFromPlayer =
