@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://dcilkc4fno2qm"]
+[gd_scene load_steps=26 format=3 uid="uid://dcilkc4fno2qm"]
 
 [ext_resource type="Script" path="res://player_character/FpsCharacterBase.cs" id="1_ob1gb"]
 [ext_resource type="Script" path="res://player_character/base_components/CCharacterMovementComponent.cs" id="2_omu0b"]
@@ -7,7 +7,11 @@
 [ext_resource type="Script" path="res://player_character/base_components/CCharacterFootstepComponent.cs" id="5_55u2p"]
 [ext_resource type="Script" path="res://player_character/user_interface/Reticle.cs" id="5_r0qr1"]
 [ext_resource type="Script" path="res://player_character/player_state/CStateMachine.cs" id="6_n6lq2"]
+[ext_resource type="Script" path="res://player_character/base_components/CCharacterFlashlightComponent.cs" id="6_tb3bd"]
 [ext_resource type="Script" path="res://player_character/player_state/CIdlePlayerState.cs" id="7_85exw"]
+[ext_resource type="Texture2D" uid="uid://dwfeqhrvklsos" path="res://textures/12167.jpg" id="7_cq4g5"]
+[ext_resource type="AudioStream" uid="uid://bq620yjstjdl" path="res://audio/audio_streams/flashlight/flashlight_on.wav" id="7_jeulh"]
+[ext_resource type="AudioStream" uid="uid://com3v7we27wvm" path="res://audio/audio_streams/flashlight/flashlight_off.wav" id="8_b6vpa"]
 [ext_resource type="Script" path="res://player_character/player_state/CWalkingPlayerState.cs" id="8_eskel"]
 [ext_resource type="Script" path="res://player_character/player_state/CJumpPlayerState.cs" id="9_yaih0"]
 
@@ -113,6 +117,42 @@ top_radius = 0.3
 bottom_radius = 0.1
 height = 0.5
 
+[sub_resource type="Animation" id="Animation_bwx4c"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../../CameraCrouch/CameraController:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../CameraCrouch/CameraController:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../../CameraCrouch/CameraController:position:z")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
 [sub_resource type="Animation" id="Animation_g382h"]
 resource_name = "Walking"
 length = 2.0
@@ -179,42 +219,6 @@ tracks/4/keys = {
 "times": PackedFloat32Array(0, 0.5, 1, 1.5, 2)
 }
 
-[sub_resource type="Animation" id="Animation_bwx4c"]
-length = 0.001
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../../CameraCrouch/CameraController:position:x")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/1/type = "bezier"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("../../CameraCrouch/CameraController:position:y")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/2/type = "bezier"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("../../CameraCrouch/CameraController:position:z")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5eiqd"]
 _data = {
 "RESET": SubResource("Animation_bwx4c"),
@@ -223,6 +227,7 @@ _data = {
 
 [node name="FpsCharacterBase" type="CharacterBody3D"]
 script = ExtResource("1_ob1gb")
+metadata/_edit_lock_ = true
 
 [node name="BaseComponents" type="Node3D" parent="."]
 metadata/_edit_lock_ = true
@@ -255,10 +260,33 @@ target_position = Vector3(0, 0, 0)
 
 [node name="BaseFootstepComponent" type="Node3D" parent="BaseComponents"]
 script = ExtResource("5_55u2p")
+metadata/_edit_lock_ = true
 
 [node name="AudioStreamPlayer_Footsteps" type="AudioStreamPlayer" parent="BaseComponents/BaseFootstepComponent"]
 max_polyphony = 4
 bus = &"Footsteps"
+
+[node name="BaseFlashlightComponent" type="Node3D" parent="BaseComponents"]
+script = ExtResource("6_tb3bd")
+AudioFlashlight_On = ExtResource("7_jeulh")
+AudioFlashlight_Off = ExtResource("8_b6vpa")
+metadata/_edit_lock_ = true
+
+[node name="Flashlight" type="SpotLight3D" parent="BaseComponents/BaseFlashlightComponent"]
+transform = Transform3D(1, 1.64099e-05, -8.56436e-05, 0, 0.982134, 0.188183, 8.72016e-05, -0.188183, 0.982134, -0.022234, 1.38611, -0.196426)
+light_color = Color(0.909804, 0.901961, 0.894118, 1)
+light_indirect_energy = 6.0
+light_volumetric_fog_energy = 0.25
+light_projector = ExtResource("7_cq4g5")
+light_specular = 3.0
+shadow_enabled = true
+spot_range = 12.0
+spot_attenuation = 1.52346
+spot_angle = 40.0
+spot_angle_attenuation = 0.367894
+metadata/_edit_lock_ = true
+
+[node name="AudioStreamPlayer_Flashlight" type="AudioStreamPlayer" parent="BaseComponents/BaseFlashlightComponent"]
 
 [node name="CharacterCollisionShape" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
@@ -278,18 +306,25 @@ metadata/_edit_lock_ = true
 
 [node name="CameraController" type="Node3D" parent="CameraCrouch"]
 unique_name_in_owner = true
+metadata/_edit_lock_ = true
 
 [node name="Camera3D" type="Camera3D" parent="CameraCrouch/CameraController"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)
 cull_mask = 524287
 fov = 70.0
 far = 200.0
+metadata/_edit_lock_ = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CameraCrouch/CameraController/Camera3D"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, -0.475978)
 visible = false
 layers = 524288
 mesh = SubResource("CylinderMesh_a3l8c")
+metadata/_edit_lock_ = true
+
+[node name="LookPoint" type="Node3D" parent="CameraCrouch/CameraController/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5)
+metadata/_edit_lock_ = true
 
 [node name="AnimationPlayer_HeadBob" type="AnimationPlayer" parent="."]
 root_node = NodePath("../BaseComponents/BaseMovementComponent")

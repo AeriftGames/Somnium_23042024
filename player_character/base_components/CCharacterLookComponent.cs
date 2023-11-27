@@ -19,12 +19,17 @@ public partial class CCharacterLookComponent : Node
 
 	private float OnlyStartOffset = 0.0f;
 
-    public override void _Ready()
-	{
-		Input.MouseMode = Input.MouseModeEnum.Captured;
-	}
+	private Node3D LookingPoint = null;
 
-	public void PostInit(FpsCharacterBase newOurCharacter){ourCharacter = newOurCharacter;}
+	public void PostInit(FpsCharacterBase newOurCharacter)
+	{
+		ourCharacter = newOurCharacter;
+
+		LookingPoint = GetMainCamera().GetNode<Node3D>("LookPoint");
+
+        Input.MouseMode = Input.MouseModeEnum.Captured;
+
+    }
 
     public override void _UnhandledInput(InputEvent @event)
     {
@@ -60,4 +65,8 @@ public partial class CCharacterLookComponent : Node
 	{
 		mouseRotation.Y = newStartRot.Y;
     }
+
+	public Camera3D GetMainCamera() { return Camera; }
+
+	public Vector3 GetMainCameraLookingPoint() { return LookingPoint.GlobalPosition; }
 }

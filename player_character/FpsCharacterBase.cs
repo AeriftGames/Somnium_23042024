@@ -7,13 +7,15 @@ public partial class FpsCharacterBase : CharacterBody3D
     private CCharacterLookComponent CharacterLookComponent;
     private CCharacterCrouchComponent CharacterCrouchComponent;
     private CCharacterFootstepComponent CharacterFootstepComponent;
+    private CCharacterFlashlightComponent CharacterFlashlightComponent;
 
     private CStateMachine CharacterStateMachine;
 
     public CCharacterMovementComponent GetCharacterMovementComponent() { return CharacterMovementComponent; }
     public CCharacterLookComponent GetCharacterLookComponent() { return CharacterLookComponent; }
-    public CCharacterCrouchComponent GetCharacterCrouchComponent() { return this.CharacterCrouchComponent; }
-    public CCharacterFootstepComponent GetCharacterFootstepComponent() { return this.CharacterFootstepComponent; }
+    public CCharacterCrouchComponent GetCharacterCrouchComponent() { return CharacterCrouchComponent; }
+    public CCharacterFootstepComponent GetCharacterFootstepComponent() { return CharacterFootstepComponent; }
+    public CCharacterFlashlightComponent GetCharacterFlashlightComponent() {  return CharacterFlashlightComponent; }
     
     public CStateMachine GetCharacterStateMachine() { return CharacterStateMachine; }
 
@@ -34,6 +36,9 @@ public partial class FpsCharacterBase : CharacterBody3D
 
         CharacterFootstepComponent = GetNode<CCharacterFootstepComponent>("BaseComponents/BaseFootstepComponent");
         CharacterFootstepComponent.PostInit(this);
+
+        CharacterFlashlightComponent = GetNode<CCharacterFlashlightComponent>("BaseComponents/BaseFlashlightComponent");
+        CharacterFlashlightComponent.PostInit(this);
 
         CharacterStateMachine = GetNode<CStateMachine>("PlayerStateMachine");
     }
