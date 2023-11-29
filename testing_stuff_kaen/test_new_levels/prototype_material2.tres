@@ -17,9 +17,9 @@ noise = SubResource("FastNoiseLite_yr3x2")
 [resource]
 albedo_color = Color(0.219608, 0.219608, 0.219608, 1)
 albedo_texture = ExtResource("1_2iajc")
-metallic = 0.75
+metallic = 0.4
 metallic_specular = 1.0
-roughness = 0.6
+roughness = 0.45
 normal_enabled = true
 normal_scale = 2.0
 normal_texture = ExtResource("2_mbqly")

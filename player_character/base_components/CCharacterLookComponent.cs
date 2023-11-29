@@ -20,12 +20,14 @@ public partial class CCharacterLookComponent : Node
 	private float OnlyStartOffset = 0.0f;
 
 	private Node3D LookingPoint = null;
+	private Node3D RightHandPoint = null;
 
 	public void PostInit(FpsCharacterBase newOurCharacter)
 	{
 		ourCharacter = newOurCharacter;
 
 		LookingPoint = GetMainCamera().GetNode<Node3D>("LookPoint");
+		RightHandPoint = GetMainCamera().GetNode<Node3D>("RightHandPoint");
 
         Input.MouseMode = Input.MouseModeEnum.Captured;
 
@@ -69,4 +71,5 @@ public partial class CCharacterLookComponent : Node
 	public Camera3D GetMainCamera() { return Camera; }
 
 	public Vector3 GetMainCameraLookingPoint() { return LookingPoint.GlobalPosition; }
+    public Vector3 GetRightHandPoint() { return RightHandPoint.GlobalPosition; }
 }

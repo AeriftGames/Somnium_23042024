@@ -27,8 +27,8 @@
 [ext_resource type="PackedScene" uid="uid://2qut50tthswb" path="res://placeholders/modular_level_builds/silo_level/assets/exterior_rockchair.tscn" id="21_ygcd2"]
 [ext_resource type="PackedScene" uid="uid://bndr3up87gn1i" path="res://placeholders/Decals/blood_decal.tscn" id="22_tcmpq"]
 [ext_resource type="PackedScene" uid="uid://dv26x01is3wew" path="res://spawn/physic_object_ball_light.tscn" id="25_u234y"]
-[ext_resource type="AudioStream" uid="uid://u51po736uwlv" path="res://audio/audio_streams/music/SOMNIUM_simple_amb1.wav" id="26_8dvyp"]
 [ext_resource type="PackedScene" uid="uid://cill7wx53gakg" path="res://placeholders/posters/poster2.tscn" id="27_h8jbu"]
+[ext_resource type="AudioStream" uid="uid://vcjrbg0td0ei" path="res://audio/audio_streams/music/wrkltktltk.ogg" id="28_atu4g"]
 [ext_resource type="PackedScene" uid="uid://dk6s7gogdikp7" path="res://testing_stuff_kaen/lis/lis_anim.tscn" id="29_covdt"]
 [ext_resource type="PackedScene" uid="uid://c73m0yt3w8nd1" path="res://testing_stuff_kaen/stairs/StairsTest.tscn" id="30_xhesf"]
 [ext_resource type="PackedScene" uid="uid://dpa62hhmdflgr" path="res://testing_stuff_kaen/stairs_gd/StairNodeGD.tscn" id="31_teo4b"]
@@ -2985,10 +2985,11 @@ SpawnCharacterType = 2
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.7441, 1, 1.4485)
 
 [node name="AudioStreamPlayerMusic" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("26_8dvyp")
-volume_db = -20.0
+stream = ExtResource("28_atu4g")
+volume_db = -25.0
 autoplay = true
-mix_target = 1
+max_polyphony = 2
+bus = &"Music"
 
 [node name="poster1" parent="." instance=ExtResource("27_h8jbu")]
 transform = Transform3D(0.499896, -0.0101746, 0, 0.0101746, 0.499896, 0, 0, 0, 0.5, 0.965707, 1.4, -4.24681)

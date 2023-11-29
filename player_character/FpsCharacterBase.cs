@@ -8,6 +8,7 @@ public partial class FpsCharacterBase : CharacterBody3D
     private CCharacterCrouchComponent CharacterCrouchComponent;
     private CCharacterFootstepComponent CharacterFootstepComponent;
     private CCharacterFlashlightComponent CharacterFlashlightComponent;
+    private CCharacterLandComponent CharacterLandComponent;
 
     private CStateMachine CharacterStateMachine;
 
@@ -16,8 +17,13 @@ public partial class FpsCharacterBase : CharacterBody3D
     public CCharacterCrouchComponent GetCharacterCrouchComponent() { return CharacterCrouchComponent; }
     public CCharacterFootstepComponent GetCharacterFootstepComponent() { return CharacterFootstepComponent; }
     public CCharacterFlashlightComponent GetCharacterFlashlightComponent() {  return CharacterFlashlightComponent; }
-    
+    public CCharacterLandComponent GetCharacterLandComponent() {  return CharacterLandComponent; }
+
+
     public CStateMachine GetCharacterStateMachine() { return CharacterStateMachine; }
+
+    // predelat a dat na lepsi misto - ted jen na test
+    public double movementAnimationLastTime = 0.0f;
 
     public override void _Ready()
     {
@@ -39,6 +45,9 @@ public partial class FpsCharacterBase : CharacterBody3D
 
         CharacterFlashlightComponent = GetNode<CCharacterFlashlightComponent>("BaseComponents/BaseFlashlightComponent");
         CharacterFlashlightComponent.PostInit(this);
+
+        CharacterLandComponent = GetNode<CCharacterLandComponent>("BaseComponents/BaseLandComponent");
+        CharacterLandComponent.PostInit(this);
 
         CharacterStateMachine = GetNode<CStateMachine>("PlayerStateMachine");
     }

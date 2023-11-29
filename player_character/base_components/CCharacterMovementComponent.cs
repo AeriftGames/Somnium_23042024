@@ -3,15 +3,14 @@ using System;
 
 public partial class CCharacterMovementComponent : Node
 {
-    [Export] public float SPEED_WALK = 4.0f;
-    [Export] public float SPEED_SPRINT = 6.0f;
-    [Export] public float SPEED_CROUCH = 2.5f;
+    [Export] public float SPEED_WALK = 2.0f;
+    [Export] public float SPEED_SPRINT = 3.0f;
+    [Export] public float SPEED_CROUCH = 1.3f;
 
     [Export] public float ACCELERATION = 4f;
     [Export] public float DECCLERATION = 8f;
 
     [Export] public float JUMP_VELOCITY = 4.5f;
-    [Export] public float LERP_SPEED = 10.0f;
 
     public float gravity = ProjectSettings.GetSetting("physics/3d/default_gravity").AsSingle();
     private FpsCharacterBase ourCharacterBase = null;

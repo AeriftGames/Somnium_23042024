@@ -1,44 +1,46 @@
 using Godot;
 using System;
 
-public partial class CCharacterFootstepComponent : Node3D
+public partial class CCharacterLandComponent : Node3D
 {
-    [Export] public float FootstepsVolumeDBInWalk = -2.0f;
-    [Export] public float FootstepsVolumeDBInSprint = 1.0f;
-    [Export] public float FootstepsVolumeDBInCrouch = -7.0f;
-    [Export] public float FootstepsAudioPitch = 0.75f;
+    [Signal] public delegate void LandCompleteEventHandler();
 
-    private FpsCharacterBase ourCharacterBase = null;
+    private FpsCharacterBase ourCharacter = null;
 
-    private AudioStreamPlayer AudioStreamPlayerFootsteps;
+    private AnimationPlayer animPlayer = null;
+    private AudioStreamPlayer AudioStreamPlayerLand;
 
     public all_material_surfaces AllMaterialSurfaces = null;
 
+
     public void PostInit(FpsCharacterBase newCharacterBase)
     {
-        ourCharacterBase = newCharacterBase;
+        ourCharacter = newCharacterBase;
 
-        AudioStreamPlayerFootsteps = GetNode<AudioStreamPlayer>("AudioStreamPlayer_Footsteps");
+        animPlayer = GetNode<AnimationPlayer>("AnimationPlayer_Land");
+        AudioStreamPlayerLand = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
 
         // nacteni vsech dat material surfaces
         AllMaterialSurfaces =
             (all_material_surfaces)GD.Load("res://player/material_surface/all_material_surfaces.tres");
     }
 
-    public async void PlayFootstepNow()
+    public void DoLandEffect()
     {
-
-        GD.Print("Footstep");
-
-        await ToSignal(GetTree(), "physics_frame");
-
-        if (ourCharacterBase.GetCharacterStateMachine().GetCurrentStateName() == "WalkingPlayerState" ||
-            ourCharacterBase.GetCharacterStateMachine().GetCurrentStateName() == "RunningPlayerState")
-            PlayFootstepSound(FootstepsVolumeDBInWalk, FootstepsAudioPitch);
+        animPlayer.Play("Land");
     }
 
-    public void PlayFootstepSound(float addOffsetVolume = 0.0f, float addOffsetPitch = 0.0f)
+    public void _on_animation_player_land_animation_finished(StringName animName)
     {
+        EmitSignal(nameof(LandComplete));
+    }
+
+    public void PlayLandSoundNow() { PlayLandSound(); }
+
+    public async void PlayLandSound(float addOffsetVolume = 0.0f, float addOffsetPitch = 0.0f)
+    {
+        await ToSignal(GetTree(), "physics_frame");
+
         // Detect materal surface name and play specific audio set of footsteps
         all_material_surfaces.EMaterialSurface materialSurface =
             AllMaterialSurfaces.GetMaterialSurfaceFromGroup(DetectSurfaceMaterialOfFloor());
@@ -47,13 +49,13 @@ public partial class CCharacterFootstepComponent : Node3D
         {
             // Play random footsteps sound by material surface
             UniversalFunctions.PlayRandomSound(
-                AudioStreamPlayerFootsteps,
+                AudioStreamPlayerLand,
                 AllMaterialSurfaces.GetAudioArray(
-                    materialSurface, all_material_surfaces.EMaterialSurfaceAudio.Footstep),
+                    materialSurface, all_material_surfaces.EMaterialSurfaceAudio.Landing),
                 AllMaterialSurfaces.GetMaterialSurfaceAudioVolumeDB(
-                    materialSurface, all_material_surfaces.EMaterialSurfaceAudio.Footstep) + addOffsetVolume,
+                    materialSurface, all_material_surfaces.EMaterialSurfaceAudio.Landing) + addOffsetVolume,
                 AllMaterialSurfaces.GetMaterialSurfaceAudioPitch(
-                    materialSurface, all_material_surfaces.EMaterialSurfaceAudio.Footstep) + addOffsetPitch);
+                    materialSurface, all_material_surfaces.EMaterialSurfaceAudio.Landing) + addOffsetPitch);
         }
     }
 
@@ -62,8 +64,8 @@ public partial class CCharacterFootstepComponent : Node3D
         PhysicsDirectSpaceState3D directSpace = GetWorld3D().DirectSpaceState;
 
         PhysicsRayQueryParameters3D rayParam = new PhysicsRayQueryParameters3D();
-        rayParam.From = ourCharacterBase.GlobalPosition + (Vector3.Up * 0.2f);
-        rayParam.To = ourCharacterBase.GlobalPosition + (Vector3.Down * 1);
+        rayParam.From = ourCharacter.GlobalPosition + (Vector3.Up * 0.2f);
+        rayParam.To = ourCharacter.GlobalPosition + (Vector3.Down * 1);
 
         var rayResult = directSpace.IntersectRay(rayParam);
         if (rayResult.Count > 0)
