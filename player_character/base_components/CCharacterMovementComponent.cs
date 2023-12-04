@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class CCharacterMovementComponent : Node
+public partial class CCharacterMovementComponent : CBaseComponent
 {
     [Export] public float SPEED_WALK = 2.0f;
     [Export] public float SPEED_SPRINT = 3.0f;
@@ -13,15 +13,16 @@ public partial class CCharacterMovementComponent : Node
     [Export] public float JUMP_VELOCITY = 4.5f;
 
     public float gravity = ProjectSettings.GetSetting("physics/3d/default_gravity").AsSingle();
-    private FpsCharacterBase ourCharacterBase = null;
     private Vector3 workVelocity;
     private float Speed = 0.0f;
 
+    private Vector2 inputDir = Vector2.Zero;
     private Vector3 direction = Vector3.Zero;
 
-    public void PostInit(FpsCharacterBase newCharacterBase)
-    { 
-        ourCharacterBase = newCharacterBase;
+    public override void PostInit(FpsCharacterBase newCharacterBase)
+    {
+        base.PostInit(newCharacterBase);
+
         SetMoveSpeed("WALK");
     }
 
@@ -40,7 +41,7 @@ public partial class CCharacterMovementComponent : Node
         else if (GetIsOnFloor() && ourCharacterBase.GetCharacterCrouchComponent().GetIsCrouched() == false)
             Speed = SPEED_WALK;
 
-        Vector2 inputDir = Input.GetVector("moveLeft", "moveRight", "moveForward", "moveBackward");
+        inputDir = Input.GetVector("moveLeft", "moveRight", "moveForward", "moveBackward");
         direction = direction.Lerp(ourCharacterBase.Transform.Basis * new Vector3(inputDir.X, 0, inputDir.Y).Normalized(),(float)delta*60.0f);
         if (direction != Vector3.Zero)
         {
@@ -91,10 +92,13 @@ public partial class CCharacterMovementComponent : Node
         }
     }
 
-    public float GetSpeed() { return Speed; }
+    public float GetWantSpeed() { return Speed; }
     public float GetRealSpeed()
     {
         Vector3 moveVelocity = new Vector3(ourCharacterBase.GetRealVelocity().X, 0, ourCharacterBase.GetRealVelocity().Z);
         return float.Round(MathF.Abs(moveVelocity.Length()), 1);
     }
+
+    public Vector2 GetInputDir() { return inputDir; }
+    public Vector3 GetDirection() {  return direction; }
 }

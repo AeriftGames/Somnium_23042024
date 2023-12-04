@@ -3,24 +3,21 @@ using System;
 
 public partial class FpsCharacterBase : CharacterBody3D
 {
-	private CCharacterMovementComponent CharacterMovementComponent;
+    private CCharacterMovementComponent CharacterMovementComponent;
     private CCharacterLookComponent CharacterLookComponent;
     private CCharacterCrouchComponent CharacterCrouchComponent;
-    private CCharacterFootstepComponent CharacterFootstepComponent;
     private CCharacterFlashlightComponent CharacterFlashlightComponent;
-    private CCharacterLandComponent CharacterLandComponent;
-
-    private CStateMachine CharacterStateMachine;
 
     public CCharacterMovementComponent GetCharacterMovementComponent() { return CharacterMovementComponent; }
     public CCharacterLookComponent GetCharacterLookComponent() { return CharacterLookComponent; }
     public CCharacterCrouchComponent GetCharacterCrouchComponent() { return CharacterCrouchComponent; }
-    public CCharacterFootstepComponent GetCharacterFootstepComponent() { return CharacterFootstepComponent; }
-    public CCharacterFlashlightComponent GetCharacterFlashlightComponent() {  return CharacterFlashlightComponent; }
-    public CCharacterLandComponent GetCharacterLandComponent() {  return CharacterLandComponent; }
+    public CCharacterFlashlightComponent GetCharacterFlashlightComponent() { return CharacterFlashlightComponent; }
 
 
+    private CStateMachine CharacterStateMachine;
     public CStateMachine GetCharacterStateMachine() { return CharacterStateMachine; }
+
+    public Node3D GetBaseComponents() { return GetNode<Node3D>("BaseComponents"); }
 
     // predelat a dat na lepsi misto - ted jen na test
     public double movementAnimationLastTime = 0.0f;
@@ -31,6 +28,9 @@ public partial class FpsCharacterBase : CharacterBody3D
 
         CGameMaster.GM.GetGame().SetFPSCharacterBase(this);
 
+        CharacterStateMachine = GetNode<CStateMachine>("PlayerStateMachine");
+        CharacterStateMachine.PostInit();
+
         CharacterMovementComponent = GetNode<CCharacterMovementComponent>("BaseComponents/BaseMovementComponent");
         CharacterMovementComponent.PostInit(this);
 
@@ -39,29 +39,18 @@ public partial class FpsCharacterBase : CharacterBody3D
 
         CharacterCrouchComponent = GetNode<CCharacterCrouchComponent>("BaseComponents/BaseCrouchComponent");
         CharacterCrouchComponent.PostInit(this);
-
-        CharacterFootstepComponent = GetNode<CCharacterFootstepComponent>("BaseComponents/BaseFootstepComponent");
-        CharacterFootstepComponent.PostInit(this);
-
-        CharacterFlashlightComponent = GetNode<CCharacterFlashlightComponent>("BaseComponents/BaseFlashlightComponent");
-        CharacterFlashlightComponent.PostInit(this);
-
-        CharacterLandComponent = GetNode<CCharacterLandComponent>("BaseComponents/BaseLandComponent");
-        CharacterLandComponent.PostInit(this);
-
-        CharacterStateMachine = GetNode<CStateMachine>("PlayerStateMachine");
     }
 
     public override void _PhysicsProcess(double delta)
 	{
-        CharacterLookComponent.UpdateLook(delta);
+        GetCharacterLookComponent().UpdateLook(delta);
 
-		CharacterMovementComponent.UpdateMove(delta);
+       GetCharacterMovementComponent().UpdateMove(delta);
 
-        CharacterMovementComponent.CheckAndApplyJump("Jump");
-        CharacterCrouchComponent.CheckAndApplyCrouch("Crunch");
+        GetCharacterMovementComponent().CheckAndApplyJump("Jump");
+        GetCharacterCrouchComponent().CheckAndApplyCrouch("Crunch");
 
-        CharacterMovementComponent.ApplyWorkVelocity();
+        GetCharacterMovementComponent().ApplyWorkVelocity();
 
         CGameMaster.GM.GetGame().GetDebugPanel().GetDebugLabels().AddProperty("Character Velocity",
             new Vector3(float.Round(GetRealVelocity().X,1),

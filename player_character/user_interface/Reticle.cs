@@ -6,7 +6,6 @@ public partial class Reticle : CenterContainer
 	[Export] public float DOT_RADIUS = 1.0f;
 	[Export] public Color DOT_COLOR = Colors.White;
 	[Export] public Godot.Collections.Array<Line2D> RETICLE_LINES;
-	[Export] public FpsCharacterBase OURCHARACTERCHARACTER;
 	[Export] public float RETICLE_SPEED = 0.25f;
 	[Export] public float RETICLE_DISTANCE = 2.0f;
 
@@ -28,7 +27,10 @@ public partial class Reticle : CenterContainer
 
 	public void AdjustReticleLines()
 	{
-		Vector3 realVel = OURCHARACTERCHARACTER.GetRealVelocity();
+		Vector3 realVel = Vector3.Zero;
+        if (CGameMaster.GM.GetGame().GetFPSCharacterBase() != null)
+		{ realVel = CGameMaster.GM.GetGame().GetFPSCharacterBase().GetRealVelocity(); }
+
 		Vector3 origin = new Vector3(0,0,0);
 		Vector2 pos = new Vector2(0,0);
 		float speed = origin.DistanceTo(realVel);

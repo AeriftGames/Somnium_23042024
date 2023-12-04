@@ -5,12 +5,14 @@ public partial class CFallPlayerState : CState
 {
     public override void Enter()
     {
+        base.Enter();
 
     }
 
     public override void Update(float delta)
     {
-        if (CGameMaster.GM.GetGame().GetFPSCharacterBase().GetCharacterMovementComponent().GetIsOnFloor())
-            EmitSignal(SignalName.Transition, "LandPlayerState");
+        if (ourCharacterBase.Velocity.Y == 0.0f && 
+            ourCharacterBase.GetCharacterMovementComponent().GetIsOnFloor())
+        { EmitSignal(nameof(Transition), "LandPlayerState"); }
     }
 }

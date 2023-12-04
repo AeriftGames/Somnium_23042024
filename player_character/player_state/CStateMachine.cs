@@ -7,7 +7,7 @@ public partial class CStateMachine : Node
     [Export] CState CURRENT_STATE;
     Dictionary<string, CState> states;
 
-    public override void _Ready()
+    public void PostInit() 
     {
         states = new Dictionary<string, CState>();
 
@@ -17,7 +17,7 @@ public partial class CStateMachine : Node
             if (state != null)
             {
                 states.Add(state.Name, state);
-                state.Connect(CState.SignalName.Transition, new Callable(this,"OnChildTransition"));
+                state.Connect(CState.SignalName.Transition, new Callable(this, "OnChildTransition"));
             }
             else
                 GD.PushWarning("StateMachine obsahuje jiny child nez CState");

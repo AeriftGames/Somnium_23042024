@@ -3,24 +3,31 @@ using System;
 
 public partial class CIdlePlayerState : CState
 {
-    [Export] AnimationPlayer ANIMATION;
-    [Export] public float TOP_ANIM_SPEED = 2.2f;
 
     public override void Enter()
     {
-        if (ANIMATION.CurrentAnimation == "Running" || ANIMATION.CurrentAnimation == "Walking")
-            CGameMaster.GM.GetGame().GetFPSCharacterBase().movementAnimationLastTime = ANIMATION.CurrentAnimationPosition;
+        base.Enter();
 
-        ANIMATION.Pause();
     }
 
     public override void Update(float delta)
     {
-        if (CGameMaster.GM.GetGame().GetFPSCharacterBase().Velocity.Length() >= 0.1f &&
-            CGameMaster.GM.GetGame().GetFPSCharacterBase().GetCharacterMovementComponent().GetIsOnFloor())
-            EmitSignal(SignalName.Transition, "WalkingPlayerState");
+        if(ourCharacterBase.GetCharacterMovementComponent().GetRealSpeed() >= 0.01f && 
+            ourCharacterBase.GetCharacterCrouchComponent().GetIsCrouched() == false)
+        { EmitSignal(nameof(Transition),"WalkingPlayerState"); }
 
-        else if (CGameMaster.GM.GetGame().GetFPSCharacterBase().GetCharacterMovementComponent().GetIsOnFloor() == false)
-            EmitSignal(SignalName.Transition, "JumpPlayerState");
+        else if (ourCharacterBase.GetCharacterMovementComponent().GetRealSpeed() >= 0.01f &&
+            ourCharacterBase.GetCharacterCrouchComponent().GetIsCrouched() == true)
+        { EmitSignal(nameof(Transition), "CrouchMovePlayerState"); }
+
+        else if (ourCharacterBase.Velocity.Y > 0.0f)
+        { EmitSignal(nameof(Transition), "JumpPlayerState"); }
+
+        else if (ourCharacterBase.Velocity.Y < 0.0f)
+        { EmitSignal(nameof(Transition), "FallPlayerState"); }
+
+        else if (ourCharacterBase.GetCharacterMovementComponent().GetRealSpeed() < 0.01f &&
+            ourCharacterBase.GetCharacterCrouchComponent().GetIsCrouched() == true)
+        { EmitSignal(nameof(Transition), "IdleCrouchPlayerState"); }
     }
 }

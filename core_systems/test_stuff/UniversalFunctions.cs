@@ -333,4 +333,28 @@ public partial class UniversalFunctions
 
         return AllLevelInfo;
     }
+
+    public static string DetectSurfaceMaterialOfFloor(Node3D newCaller,Vector3 newPos)
+    {
+
+        PhysicsDirectSpaceState3D directSpace = newCaller.GetWorld3D().DirectSpaceState;
+
+        PhysicsRayQueryParameters3D rayParam = new PhysicsRayQueryParameters3D();
+        rayParam.From = newPos;
+        rayParam.To = newPos + (Vector3.Down * 1);
+
+        var rayResult = directSpace.IntersectRay(rayParam);
+        if (rayResult.Count > 0)
+        {
+            Node HitCollider = (Node)rayResult["collider"];
+            if (HitCollider == null) return "none";
+
+            if (HitCollider.IsInGroup("material_surface_metal"))
+                return "material_surface_metal";
+
+            if (HitCollider.IsInGroup("material_surface_wood"))
+                return "material_surface_wood";
+        }
+        return "none";
+    }
 }

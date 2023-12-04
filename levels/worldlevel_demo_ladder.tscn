@@ -2,13 +2,13 @@
 
 [ext_resource type="Script" path="res://levels/worldlevel_base/WorldLevel.cs" id="1_nrdxh"]
 [ext_resource type="Script" path="res://levels/worldlevel_base/LevelDataSettings.cs" id="2_8k4p7"]
-[ext_resource type="VoxelGIData" uid="uid://34ijtfyo66fp" path="res://levels/world_level_ladder/worldlevel_demo_ladder.VoxelGI_data.res" id="3_hugri"]
+[ext_resource type="VoxelGIData" uid="uid://da2nyix4bxd42" path="res://levels/worllevel_character_move_test/worldlevel_demo_ladder.VoxelGI_data.res" id="3_tv0re"]
 [ext_resource type="Script" path="res://levels/worldlevel_base/LevelScene.cs" id="4_mtai6"]
 [ext_resource type="PackedScene" uid="uid://dbmasuyoo2pr8" path="res://placeholders/modular_level_builds/placeholder/floor_4x_2m_special_5.tscn" id="6_616vs"]
 [ext_resource type="Material" uid="uid://lah0omlue113" path="res://placeholders/modular_level_builds/my_trim1/trim_floor1_mat.tres" id="7_txtp5"]
 [ext_resource type="PackedScene" uid="uid://5ahry7gwynjv" path="res://placeholders/modular_level_builds/placeholder/floor_2x_2m_variant_1.tscn" id="8_k04l2"]
 [ext_resource type="PackedScene" uid="uid://uh72paleqpy0" path="res://placeholders/modular_level_builds/my_trim1/wall_01.tscn" id="10_2kldw"]
-[ext_resource type="ArrayOccluder3D" uid="uid://dy4upe6tnp3q8" path="res://levels/world_level_ladder/worldlevel_demo_ladder1.occ" id="10_efqvt"]
+[ext_resource type="ArrayOccluder3D" uid="uid://djy7oorfg5vfo" path="res://levels/worllevel_character_move_test/worldlevel_demo_ladder1.occ" id="10_acq3g"]
 [ext_resource type="PackedScene" uid="uid://bmwx2d7mfrba7" path="res://placeholders/modular_level_builds/placeholder/sloup_end_1_2.tscn" id="15_3cwx8"]
 [ext_resource type="PackedScene" uid="uid://c75lvvyxc34b1" path="res://testing_stuff_kaen/ladder/ladder_system.tscn" id="18_d3i2h"]
 [ext_resource type="Texture2D" uid="uid://biime5bqefvd0" path="res://testing_stuff_kaen/level_decals/TexturesCom_DecalsStain0058_1_masked_S.png" id="18_rn8ax"]
@@ -64,7 +64,7 @@ environment = SubResource("Environment_a2asp")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.2018, 4.39286, 1.81833)
 subdiv = 2
 size = Vector3(36, 10, 13)
-data = ExtResource("3_hugri")
+data = ExtResource("3_tv0re")
 metadata/_edit_lock_ = true
 
 [node name="LevelScene" type="Node" parent="."]
@@ -545,7 +545,7 @@ visible = false
 
 [node name="LevelOcclusion" type="OccluderInstance3D" parent="LevelScene"]
 visible = false
-occluder = ExtResource("10_efqvt")
+occluder = ExtResource("10_acq3g")
 metadata/_edit_group_ = true
 metadata/_edit_lock_ = true
 

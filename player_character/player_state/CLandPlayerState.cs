@@ -3,25 +3,26 @@ using System;
 
 public partial class CLandPlayerState : CState
 {
-
     public override void Enter()
     {
-        // await finish land anim and  go to idle
-        CGameMaster.GM.GetGame().GetFPSCharacterBase().GetCharacterLandComponent().DoLandEffect();
+        base.Enter();
 
-        WaitForLandComplete();
-    }
-
-    public async void WaitForLandComplete()
-    {
-        await ToSignal(CGameMaster.GM.GetGame().GetFPSCharacterBase().GetCharacterLandComponent(),
-            nameof(CCharacterLandComponent.LandComplete));
-
-        EmitSignal(SignalName.Transition, "IdlePlayerState");
+        FPSCharacterMoveAnim FPSMoveAnim = ourCharacterBase as FPSCharacterMoveAnim;
+        if (FPSMoveAnim != null)
+        {
+            if (FPSMoveAnim.GetJumpLandEffectComponent() != null)
+            { FPSMoveAnim.GetJumpLandEffectComponent().ApplyEffectLand(); }
+        }
     }
 
     public override void Update(float delta)
     {
+        if (ourCharacterBase.Velocity.Y == 0.0f &&
+            ourCharacterBase.GetCharacterCrouchComponent().GetIsCrouched() == false)
+        { EmitSignal(nameof(Transition), "IdlePlayerState"); }
 
+        else if (ourCharacterBase.Velocity.Y == 0.0f &&
+            ourCharacterBase.GetCharacterCrouchComponent().GetIsCrouched() == true)
+        { EmitSignal(nameof(Transition), "IdleCrouchPlayerState"); }
     }
 }

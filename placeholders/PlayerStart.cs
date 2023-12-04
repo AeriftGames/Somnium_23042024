@@ -3,11 +3,11 @@ using System;
 
 public partial class PlayerStart : Node3D
 {
-	public enum EPlayerCharacterType {Interaction, Inventory, NewCharacter}
+	public enum EPlayerCharacterType {InventoryOld, BaseNew,MoveAnimNew}
 	[Export] public bool PlayerStartEnable = true;
 
 	// Which type of player character spawn ?
-	[Export] public EPlayerCharacterType SpawnCharacterType = EPlayerCharacterType.Inventory;
+	[Export] public EPlayerCharacterType SpawnCharacterType = EPlayerCharacterType.InventoryOld;
 
 	// Node contains meshes, which we need visible in editor and unvisible in the game
 	public Node3D EditorMesh = null;
@@ -45,22 +45,22 @@ public partial class PlayerStart : Node3D
 
 		switch (newPlayerCharacterType)
 		{
-			case EPlayerCharacterType.Interaction:
-				{
-					SpawnPlayerInteraction();
-					break;
-				}
-			case EPlayerCharacterType.Inventory:
+			case EPlayerCharacterType.InventoryOld:
 				{
 					SpawnPlayerInventory();
 					break;
 				}
-			case EPlayerCharacterType.NewCharacter:
+			case EPlayerCharacterType.BaseNew:
 				{
-					SpawnNewCharacter();
+					SpawnNewCharacterBase();
 					break;
 				}
-			default:
+            case EPlayerCharacterType.MoveAnimNew:
+                {
+                    SpawnNewCharacterMoveAnim();
+                    break;
+                }
+            default:
 				break;
 		}
 	}
@@ -204,7 +204,7 @@ public partial class PlayerStart : Node3D
         }
     }
 
-    public void SpawnNewCharacter()
+    public void SpawnNewCharacterBase()
     {
         // Instance from scenefile and cast to specific class
         var newCharacterInstance = GD.Load<PackedScene>(
@@ -226,6 +226,46 @@ public partial class PlayerStart : Node3D
 
             newCharacterInstance.GlobalPosition = GlobalPosition;
 			newCharacterInstance.GetCharacterLookComponent().RotateStart(GlobalRotation);
+
+            /*
+            // !!! SHADER PRECOMPILATION PROCESS START !!!
+            if (CGameMaster.GM.GetGame().GetLevelLoader().isPrecompiledShaders)
+                CGameMaster.GM.GetGame().GetLevelLoader().StartPrecompileShaderProcess();
+			*/
+
+            CGameMaster.GM.GetSettings().LoadAndApply_AllGraphicsSettings();
+            CGameMaster.GM.GetGame().GetDebugPanel().AllLoadSettings();
+
+            //GameMaster.GM.EnableBlackScreen(false);
+
+            //delete
+            spawn_timer.Stop();
+            spawn_timer.QueueFree();
+        }
+    }
+
+    public void SpawnNewCharacterMoveAnim()
+    {
+        // Instance from scenefile and cast to specific class
+        var newCharacterInstance = GD.Load<PackedScene>(
+            "res://player_character/FPSCharacterMoveAnim.tscn").Instantiate() as FPSCharacterMoveAnim;
+
+
+        // Spawn to worldlevel node
+        Node level = CGameMaster.GM.GetGame().GetLevelLoader().GetActualLevelScene();
+        if (level == null)
+        {
+            // If worldlevel for spawn dont finded
+            CGameMaster.GM.GetUniversal().GetMasterLog().WriteLog(this, CMasterLog.ELogMsgType.ERROR,
+                "Not find /root/worldlevel for spawn player");
+        }
+        else
+        {
+            // Add childs to worldlevel node (Spawn)
+            level.AddChild(newCharacterInstance);
+
+            newCharacterInstance.GlobalPosition = GlobalPosition;
+            newCharacterInstance.GetCharacterLookComponent().RotateStart(GlobalRotation);
 
             /*
             // !!! SHADER PRECOMPILATION PROCESS START !!!

@@ -15,13 +15,10 @@ color_ramp = SubResource("Gradient_6dfs1")
 noise = SubResource("FastNoiseLite_yr3x2")
 
 [resource]
-albedo_color = Color(0.219608, 0.219608, 0.219608, 1)
+albedo_color = Color(0.881202, 0.687882, 0, 1)
 albedo_texture = ExtResource("1_2iajc")
-metallic = 0.4
-metallic_specular = 1.0
-roughness = 0.45
+roughness = 0.8
 normal_enabled = true
-normal_scale = 2.0
 normal_texture = ExtResource("2_mbqly")
 detail_albedo = SubResource("NoiseTexture2D_laeyl")
 uv1_scale = Vector3(0.5, 0.5, 0.5)

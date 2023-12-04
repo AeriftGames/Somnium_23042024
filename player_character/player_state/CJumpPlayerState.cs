@@ -3,20 +3,21 @@ using System;
 
 public partial class CJumpPlayerState : CState
 {
-    [Export] AnimationPlayer ANIMATION;
     public override void Enter()
     {
-        if (ANIMATION.CurrentAnimation == "Running" || ANIMATION.CurrentAnimation == "Walking")
-            CGameMaster.GM.GetGame().GetFPSCharacterBase().movementAnimationLastTime = ANIMATION.CurrentAnimationPosition;
+        base.Enter();
 
-        ANIMATION.Pause();
+        FPSCharacterMoveAnim FPSMoveAnim = ourCharacterBase as FPSCharacterMoveAnim;
+        if(FPSMoveAnim != null)
+        {
+            if(FPSMoveAnim.GetJumpLandEffectComponent() != null)
+            { FPSMoveAnim.GetJumpLandEffectComponent().ApplyEffectJump(); }
+        }
     }
 
     public override void Update(float delta)
     {
-        if (CGameMaster.GM.GetGame().GetFPSCharacterBase().GetCharacterMovementComponent().GetIsOnFloor())
-            EmitSignal(SignalName.Transition, "LandPlayerState");
-        else if (CGameMaster.GM.GetGame().GetFPSCharacterBase().Velocity.Y < 0.0f)
-            EmitSignal(SignalName.Transition, "FallPlayerState");
+        if (CGameMaster.GM.GetGame().GetFPSCharacterBase().Velocity.Y < 0.0f)
+        { EmitSignal(nameof(Transition), "FallPlayerState"); }
     }
 }

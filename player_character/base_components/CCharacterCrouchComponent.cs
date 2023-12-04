@@ -2,12 +2,11 @@ using Godot;
 using System;
 using System.Threading.Tasks;
 
-public partial class CCharacterCrouchComponent : Node
+public partial class CCharacterCrouchComponent : CBaseComponent
 {
     [Export] public bool TOGGLE_CROUCH = false;
     [Export(PropertyHint.Range, "1,5,0.1")] public float CROUCH_SPEED = 2.0f;
 
-    private FpsCharacterBase ourCharacter = null;
     private AnimationPlayer animPlayerCrouch;
     private ShapeCast3D shapeCastUncrouch;
 
@@ -15,20 +14,23 @@ public partial class CCharacterCrouchComponent : Node
 
     public override void _Ready()
 	{
+        base._Ready();
+
         animPlayerCrouch = GetNode<AnimationPlayer>("AnimationPlayerCrouch");
         shapeCastUncrouch = GetNode<ShapeCast3D>("ShapeCastUncrouch");
 	}
 
-    public void PostInit(FpsCharacterBase newOurCharacter)
+    public override void PostInit(FpsCharacterBase newOurCharacter)
     {
-        ourCharacter = newOurCharacter;
-        shapeCastUncrouch.AddException(ourCharacter);
+        base.PostInit(newOurCharacter);
+
+        shapeCastUncrouch.AddException(ourCharacterBase);
     }
 
     public void CheckAndApplyCrouch(StringName newInput)
     {
-        if (ourCharacter.GetCharacterMovementComponent() == null) return;
-        bool isOnFloor = ourCharacter.GetCharacterMovementComponent().GetIsOnFloor();
+        if (ourCharacterBase.GetCharacterMovementComponent() == null) return;
+        bool isOnFloor = ourCharacterBase.GetCharacterMovementComponent().GetIsOnFloor();
 
         if (TOGGLE_CROUCH == true)
         {

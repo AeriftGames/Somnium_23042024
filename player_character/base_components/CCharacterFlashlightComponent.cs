@@ -4,6 +4,8 @@ using System.Runtime.Remoting;
 
 public partial class CCharacterFlashlightComponent : Node
 {
+    public enum EFlashlightType { OnlyLight, HandObject}
+    [Export] public EFlashlightType FLASHLIGHTTYPE = EFlashlightType.OnlyLight;
     [Export] public AudioStream AudioFlashlight_On;
 	[Export] public AudioStream AudioFlashlight_Off;
     [Export] public float AudioFlashlight_On_Pitch = 1.0f;
@@ -25,13 +27,6 @@ public partial class CCharacterFlashlightComponent : Node
 	public void PostInit(FpsCharacterBase newCharacterBase)
 	{
 		ourCharacter = newCharacterBase;
-
-		FlashlightHolder = GetNode<Node3D>("FlashlightHolder");
-		Flashlight = GetNode<SpotLight3D>("FlashlightHolder/FlashlightObject/Flashlight");
-		AudioStreamPlayer_Flashlight = GetNode<AudioStreamPlayer>("AudioStreamPlayer_Flashlight");
-		AnimationStreamPlayer_Flashlight = GetNode<AnimationPlayer>("AnimationPlayer_Flashlight");
-
-		Flashlight.Visible = false;
 	}
 
 	public override void _Process(double delta)
@@ -39,9 +34,6 @@ public partial class CCharacterFlashlightComponent : Node
 		// INPUT
 		if (Input.IsActionJustPressed("ToggleFlashlight"))
 			EnableFlashlight(!isEnable);
-
-		// UPDATE
-		//UpdateByCameraLook(delta);
 	}
 
     public override void _PhysicsProcess(double delta)
@@ -72,29 +64,11 @@ public partial class CCharacterFlashlightComponent : Node
 
 	private void UpdateByCameraLook(double delta)
 	{
-        // SET GLOBAL POS
-        /*FlashlightHolder.GlobalPosition = ourCharacter.GetCharacterLookComponent().GetMainCamera().
-			GlobalPosition + ourCharacter.GetCharacterLookComponent().GetMainCamera().
-			GlobalPosition.DirectionTo(ourCharacter.GetCharacterLookComponent().GetMainCameraLookingPoint()) * 0.2f;
-		*/
-        //await ToSignal(GetTree(), "process_frame");
-        /*
-        FlashlightHolder.GlobalPosition = 
-			FlashlightHolder.GlobalPosition.Lerp(ourCharacter.GetCharacterLookComponent().GetRightHandPoint(),
-			(float)delta* FlashlightLerpPosSpeed);
-        */
         // LERP LOOKINGPOINT FOR LOOKING
         workingLookAt = workingLookAt.Lerp(ourCharacter.GetCharacterLookComponent().GetMainCameraLookingPoint(),
 			(float)delta * FlashlightLerpRotSpeed);
 
-        // LOOK AT INTERPOLATE POINT
-        //FlashlightHolder.LookAt(workingLookAt);
-        /*FlashlightHolder.LookAtFromPosition(FlashlightHolder.GlobalPosition.Lerp(ourCharacter.GetCharacterLookComponent().GetRightHandPoint(),
-            (float)delta * FlashlightLerpPosSpeed),
-            workingLookAt);*/
-        ourCharacter.GetCharacterLookComponent().GetMainCamera().GetNode<SpotLight3D>("RightHandPoint/Flashlight").LookAt(workingLookAt);
-
-
+        ourCharacter.GetCharacterLookComponent().GetMainCamera().GetNode<Node3D>("RightHandPoint/RightHandObject").LookAt(workingLookAt);
     }
 
 	public void PlaySound(bool newEnable)
