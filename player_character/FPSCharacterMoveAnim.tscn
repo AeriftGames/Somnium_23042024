@@ -1,15 +1,40 @@
-[gd_scene load_steps=16 format=3 uid="uid://cjqwso2sh1h26"]
+[gd_scene load_steps=22 format=3 uid="uid://cjqwso2sh1h26"]
 
 [ext_resource type="PackedScene" uid="uid://dcilkc4fno2qm" path="res://player_character/FpsCharacterBase.tscn" id="1_51rw7"]
 [ext_resource type="Script" path="res://player_character/FPSCharacterMoveAnim.cs" id="2_70jfn"]
+[ext_resource type="AudioStream" uid="uid://ca0tugn8tpbpo" path="res://audio/audio_streams/our/Crouch_1.wav" id="3_afmsp"]
 [ext_resource type="Script" path="res://player_character/base_components/CCharacterHeadBobComponent.cs" id="3_its55"]
 [ext_resource type="Script" path="res://player_character/base_components/CCharacterLeanComponent.cs" id="4_c126o"]
+[ext_resource type="AudioStream" uid="uid://cmdby14e1s2cw" path="res://audio/audio_streams/our/Uncrouch_1.wav" id="4_h6qy8"]
 [ext_resource type="Script" path="res://player_character/base_components/CCharacterJumpLandEffectComponent.cs" id="5_wxfos"]
 [ext_resource type="AudioStream" uid="uid://db7lr582uf0df" path="res://audio/audio_streams/jump_new/JumpSound_Wood1.wav" id="6_03cuc"]
 [ext_resource type="AudioStream" uid="uid://h0hurxt1gpdn" path="res://audio/audio_streams/jump_new/JumpSound_Wood2.wav" id="7_1skei"]
 [ext_resource type="AudioStream" uid="uid://cti8npyq3rrku" path="res://audio/audio_streams/jump_new/JumpSound_Wood3.wav" id="8_4afla"]
 [ext_resource type="AudioStream" uid="uid://du3e1tex5f1ya" path="res://audio/audio_streams/jump_new/JumpSound_Wood4.wav" id="9_dreqm"]
 [ext_resource type="Script" path="res://player_character/base_components/CCharacterCameraShakeComponent.cs" id="10_e6ifg"]
+
+[sub_resource type="Animation" id="Animation_lc0gg"]
+resource_name = "CameraLandMedium"
+length = 0.8
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CameraCrouch/CameraLand")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 0.1, 1, 0, -0.25, 0, 0.8, 1, 0, 0, 0)
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CameraCrouch/CameraLand/CameraController/CameraHead/CameraLean/CameraSway/CameraJump:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0.0174533, 0, 0), Vector3(0, 0, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_tve3k"]
 resource_name = "CameraLandSmall"
@@ -21,6 +46,18 @@ tracks/0/path = NodePath("CameraCrouch/CameraLand")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 0.1, 1, 0, -0.1, 0, 0.8, 1, 0, 0, 0)
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CameraCrouch/CameraLand/CameraController/CameraHead/CameraLean/CameraSway/CameraJump:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0.0139626, 0, 0), Vector3(0, 0, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_n02em"]
 resource_name = "Jump"
@@ -53,8 +90,8 @@ tracks/0/keys = {
 "values": [Vector3(0, 0, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_lc0gg"]
-resource_name = "CameraLandMedium"
+[sub_resource type="Animation" id="Animation_sje5e"]
+resource_name = "CameraLandMedium_2"
 length = 0.8
 tracks/0/type = "position_3d"
 tracks/0/imported = false
@@ -62,7 +99,7 @@ tracks/0/enabled = true
 tracks/0/path = NodePath("CameraCrouch/CameraLand")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 0.1, 1, 0, -0.25, 0, 0.8, 1, 0, 0, 0)
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 0.1, 1, 0, -0.32, 0, 0.8, 1, 0, 0, 0)
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
@@ -73,12 +110,85 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.2, 0.8),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0.0349066, 0, 0), Vector3(0, 0, 0)]
+"values": [Vector3(0, 0, 0), Vector3(0.0261799, 0, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_s0res"]
+resource_name = "CameraLandMedium_3"
+length = 0.8
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CameraCrouch/CameraLand")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 0.1, 1, 0, -0.4, 0, 0.8, 1, 0, 0, 0)
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CameraCrouch/CameraLand/CameraController/CameraHead/CameraLean/CameraSway/CameraJump:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0.0314159, 0, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_gkp1n"]
+resource_name = "CameraLandMedium_4"
+length = 0.8
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CameraCrouch/CameraLand")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 0.1, 1, 0, -0.65, 0, 0.8, 1, 0, 0, 0)
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CameraCrouch/CameraLand/CameraController/CameraHead/CameraLean/CameraSway/CameraJump:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0.0436332, 0, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_qu31v"]
+resource_name = "CameraLandDeath"
+length = 0.8
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CameraCrouch/CameraLand")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 0.1, 1, 0, 0.5, 0)
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CameraCrouch/CameraLand/CameraController/CameraHead/CameraLean/CameraSway/CameraJump:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_pvmri"]
 _data = {
+"CameraLandDeath": SubResource("Animation_qu31v"),
 "CameraLandMedium": SubResource("Animation_lc0gg"),
+"CameraLandMedium_2": SubResource("Animation_sje5e"),
+"CameraLandMedium_3": SubResource("Animation_s0res"),
+"CameraLandMedium_4": SubResource("Animation_gkp1n"),
 "CameraLandSmall": SubResource("Animation_tve3k"),
 "Jump": SubResource("Animation_n02em"),
 "RESET": SubResource("Animation_xccba")
@@ -89,6 +199,16 @@ script = ExtResource("2_70jfn")
 
 [node name="BaseComponents" parent="." index="1"]
 script = null
+
+[node name="BaseCrouchComponent" parent="BaseComponents" index="2"]
+CROUCH_SPEED = 2.5
+AudioStreamCrouch = ExtResource("3_afmsp")
+AudioStreamUnCrouch = ExtResource("4_h6qy8")
+
+[node name="AudioStreamPlayer_Crouch" parent="BaseComponents/BaseCrouchComponent" index="2"]
+volume_db = -10.0
+pitch_scale = 0.8
+bus = &"Sfx"
 
 [node name="BaseHeadBobComponent" type="Node" parent="BaseComponents" index="3"]
 script = ExtResource("3_its55")
@@ -123,3 +243,4 @@ script = ExtResource("10_e6ifg")
 
 [node name="CameraLand" parent="CameraCrouch" index="0"]
 unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)

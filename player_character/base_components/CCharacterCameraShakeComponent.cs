@@ -9,9 +9,18 @@ public partial class CCharacterCameraShakeComponent : CBaseComponent
 
     RandomNumberGenerator RnGenerator = new RandomNumberGenerator();
 
+    //
+    Node3D ShakeNode = null;
+    ShakeLerp camShakeLerp = null;
+
     public override void PostInit(FpsCharacterBase newCharacterBase)
     {
         base.PostInit(newCharacterBase);
+
+        // init camShakeLerp
+        ShakeNode = ourCharacterBase.GetCharacterLookComponent().GetCameraShakeRot();
+        camShakeLerp = new ShakeLerp();
+        camShakeLerp.Init(ShakeNode);
     }
 
     public void ApplySmallInstantShake(float newShakeStrenght)
@@ -48,6 +57,11 @@ public partial class CCharacterCameraShakeComponent : CBaseComponent
             ourCharacterBase.GetCharacterLookComponent().GetMainCamera().HOffset = ShakeFinal.X;
             ourCharacterBase.GetCharacterLookComponent().GetMainCamera().VOffset = ShakeFinal.Y;
         }
+
+        //
+
+        // camShakeLerp logic update
+        camShakeLerp.Update(delta);
     }
 
     public Vector2 GetRandomOffset(float newShakeStrenght)
@@ -55,5 +69,21 @@ public partial class CCharacterCameraShakeComponent : CBaseComponent
         RnGenerator.Randomize();
         return new Vector2(RnGenerator.RandfRange(-newShakeStrenght, newShakeStrenght),
             RnGenerator.RandfRange(-newShakeStrenght, newShakeStrenght));
+    }
+
+    // funkce pro camera shake rot
+
+    public void ShakeCameraTest(float newIntensity, float newTime, float newShakeSpeedTo, float newShakeSpeedBack)
+    {
+        if (camShakeLerp != null)
+            camShakeLerp.StartBasicShake(newIntensity, newTime, newShakeSpeedTo, newShakeSpeedBack);
+    }
+
+    public void ShakeCameraRotation(float newIntensity, float newTime, float newShakeSpeedTo, float newShakeSpeedBack,
+        bool newApplyRotX = true, bool newApplyRotY = true, bool newApplyRotZ = true)
+    {
+        if (camShakeLerp != null)
+            camShakeLerp.StartBasicShake(newIntensity, newTime, newShakeSpeedTo, newShakeSpeedBack,
+                newApplyRotX, newApplyRotY, newApplyRotZ);
     }
 }

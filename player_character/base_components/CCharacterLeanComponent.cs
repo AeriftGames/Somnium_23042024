@@ -62,7 +62,8 @@ public partial class CCharacterLeanComponent : CBaseComponent
     public void SetActualLean(ELeanType newLeanType)
     {
 
-        GD.Print(newLeanType);
+        //GD.Print(newLeanType);
+
         // vypocet nove pozice pro aktualni leaning
         Vector3 finalLeanPos = CalculateLeanPositionWithRaycasts(newLeanType,
             LeanRaycastsTestLength, LeanMaxPositionDistanceX,LeanMinCameraDistanceFromWall,

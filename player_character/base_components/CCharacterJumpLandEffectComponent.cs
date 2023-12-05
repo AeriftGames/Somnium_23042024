@@ -1,11 +1,13 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Net.Mail;
 using System.Threading.Tasks;
 using static all_material_surfaces;
 
 public partial class CCharacterJumpLandEffectComponent : CBaseComponent
 {
+
     [ExportGroupAttribute("Shake Settings")]
     [Export] public float JumpShakeStrenght = 1.0f;
     [Export] public float JumpShakeFade = 9.0f;
@@ -23,6 +25,11 @@ public partial class CCharacterJumpLandEffectComponent : CBaseComponent
     public all_material_surfaces AllMaterialSurfaces = null;
 
     private Node3D CameraJump = null;
+
+    //
+    private float lastYPosFallingStart = 0.0f;
+    private float lastYPosFallingEnd = 0.0f;
+
     public override void PostInit(FpsCharacterBase newCharacterBase)
     {
         base.PostInit(newCharacterBase);
@@ -63,8 +70,11 @@ public partial class CCharacterJumpLandEffectComponent : CBaseComponent
 
     public async void ApplyEffectLand()
     {
+        // calculate amount
+        CalculateAmountLanding();
+
         // Anim
-        PlayerAnim.Play("CameraLandMedium");
+        //PlayerAnim.Play("CameraLandMedium");
 
         await ToSignal(GetTree(), "physics_frame");
 
@@ -90,5 +100,51 @@ public partial class CCharacterJumpLandEffectComponent : CBaseComponent
         FPSCharacterMoveAnim FPSMoveAnim = ourCharacterBase as FPSCharacterMoveAnim;
         if (FPSMoveAnim != null)
         { FPSMoveAnim.GetCCharacterCameraShakeComponent().ApplyUserParamShake(LandShakeStrenght, LandShakeFade); }
+    }
+
+    public void SetStartFallingNow() { lastYPosFallingStart = ourCharacterBase.GlobalPosition.Y; }
+    public void CalculateAmountLanding()
+    {
+        // save actual y pos of character
+        lastYPosFallingEnd = ourCharacterBase.GlobalPosition.Y;
+        // execute landing effect event with param of fall height
+        float heightfall = lastYPosFallingStart - lastYPosFallingEnd;
+
+        GD.Print(heightfall);
+
+        if (heightfall < 0.15)
+        {
+            // very mini
+        }
+        else if (heightfall <= 0.3f)
+        {
+            // mini land
+            PlayerAnim.Play("CameraLandSmall");
+        }
+        else if (heightfall <= 1.2f)
+        {
+            // small land
+            PlayerAnim.Play("CameraLandMedium");
+        }
+        else if (heightfall <= 2.5f)
+        {
+            // medium land
+            PlayerAnim.Play("CameraLandMedium_2");
+        }
+        else if (heightfall <= 4.0f)
+        {
+            // high
+            PlayerAnim.Play("CameraLandMedium_3");
+        }
+        else if (heightfall <= 6.0f)
+        {
+            // extreme
+            PlayerAnim.Play("CameraLandMedium_4");
+        }
+        else
+        {
+            // death?
+            PlayerAnim.Play("CameraLandDeath");
+        }
     }
 }

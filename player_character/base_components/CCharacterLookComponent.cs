@@ -23,6 +23,7 @@ public partial class CCharacterLookComponent : CBaseComponent
 	private Node3D CameraHead = null;
 	private Node3D CameraSway = null;
     private Node3D CameraJump = null;
+	private Node3D CameraShakeRot = null;
     private Node3D HeadBob = null;
 	private Node3D LookingPoint = null;
 	private Node3D RightHandPoint = null;
@@ -36,6 +37,7 @@ public partial class CCharacterLookComponent : CBaseComponent
 		CameraHead = ourCharacterBase.GetNode<Node3D>("%CameraHead");
 		CameraSway = ourCharacterBase.GetNode<Node3D>("%CameraSway");
 		CameraJump = ourCharacterBase.GetNode<Node3D>("%CameraJump");
+		CameraShakeRot = ourCharacterBase.GetNode<Node3D>("%CameraShakeRot");
         HeadBob = ourCharacterBase.GetNode<Node3D>("%HeadBob");
         LookingPoint = GetMainCamera().GetNode<Node3D>("LookPoint");
 		RightHandPoint = GetMainCamera().GetNode<Node3D>("RightHandPoint");
@@ -90,4 +92,5 @@ public partial class CCharacterLookComponent : CBaseComponent
 	public Node3D GetCameraSway() {  return CameraSway; }
 	public Node3D GetCameraLand() { return CameraLand; }
 	public Node3D GetCameraJump() { return CameraJump; }
+	public Node3D GetCameraShakeRot() { return CameraShakeRot; }
 }

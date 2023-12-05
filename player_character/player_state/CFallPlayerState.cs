@@ -7,6 +7,12 @@ public partial class CFallPlayerState : CState
     {
         base.Enter();
 
+        FPSCharacterMoveAnim FPSMoveAnim = ourCharacterBase as FPSCharacterMoveAnim;
+        if (FPSMoveAnim != null)
+        {
+            if (FPSMoveAnim.GetJumpLandEffectComponent() != null)
+            { FPSMoveAnim.GetJumpLandEffectComponent().SetStartFallingNow(); }
+        }
     }
 
     public override void Update(float delta)

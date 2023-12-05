@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://bnb3blo4rl83s"]
+[gd_scene load_steps=24 format=3 uid="uid://bnb3blo4rl83s"]
 
 [ext_resource type="PackedScene" uid="uid://0g1u2jvnfbpy" path="res://player/FPSCharacter_Interaction.tscn" id="1_ywg5i"]
 [ext_resource type="Script" path="res://player/FPSCharacter_Inventory.cs" id="2_k43co"]
@@ -29,6 +29,14 @@ radius = 0.4
 height = 1.8
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_h50ca"]
+radius = 0.4
+height = 0.9
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ybfn6"]
+radius = 0.4
+height = 1.8
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_cj1of"]
 radius = 0.4
 height = 0.9
 
@@ -88,7 +96,39 @@ metadata/_edit_lock_ = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 metadata/_edit_lock_ = true
 
-[node name="CharacterComponents" type="Node3D" parent="." index="5"]
+[node name="CharacterComponents3" type="Node3D" parent="." index="5"]
+script = ExtResource("3_myxdn")
+
+[node name="CharacterCollisionStand3" type="CollisionShape3D" parent="." index="6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+shape = SubResource("CapsuleShape3D_rvyrt")
+metadata/_edit_lock_ = true
+
+[node name="CharacterCollisionCrunch3" type="CollisionShape3D" parent="." index="7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0)
+shape = SubResource("CapsuleShape3D_h50ca")
+disabled = true
+metadata/_edit_lock_ = true
+
+[node name="AudioStreamPlayer_Hurts" type="AudioStreamPlayer" parent="." index="8"]
+stream = ExtResource("3_51q7g")
+max_polyphony = 4
+bus = &"Sfx"
+
+[node name="AudioStreamPlayer_Universal" type="AudioStreamPlayer" parent="." index="9"]
+max_polyphony = 4
+bus = &"Sfx"
+
+[node name="HeadMain3" type="Node3D" parent="." index="10"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+metadata/_edit_lock_ = true
+
+[node name="HeadStandPos3" type="Node3D" parent="." index="11"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+metadata/_edit_lock_ = true
+
+[node name="CharacterComponents" type="Node3D" parent="." index="12"]
 script = ExtResource("3_myxdn")
 
 [node name="CharacterHealthComponent" type="Node" parent="CharacterComponents" index="0"]
@@ -270,64 +310,10 @@ mix_target = 1
 max_polyphony = 4
 bus = &"Sfx"
 
-[node name="CharacterCollisionStand" type="CollisionShape3D" parent="." index="6"]
+[node name="CharacterCollisionStand" type="CollisionShape3D" parent="." index="13"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
-shape = SubResource("CapsuleShape3D_rvyrt")
+shape = SubResource("CapsuleShape3D_ybfn6")
 metadata/_edit_lock_ = true
-
-[node name="CharacterCollisionCrunch" type="CollisionShape3D" parent="." index="7"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0)
-shape = SubResource("CapsuleShape3D_h50ca")
-disabled = true
-metadata/_edit_lock_ = true
-
-[node name="AudioStreamPlayer_Hurts" type="AudioStreamPlayer" parent="." index="8"]
-stream = ExtResource("3_51q7g")
-max_polyphony = 4
-bus = &"Sfx"
-
-[node name="AudioStreamPlayer_Universal" type="AudioStreamPlayer" parent="." index="9"]
-max_polyphony = 4
-bus = &"Sfx"
-
-[node name="HeadMain" type="Node3D" parent="." index="10"]
-unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
-metadata/_edit_lock_ = true
-
-[node name="HeadGimbalA2" type="Node3D" parent="HeadMain" index="0"]
-unique_name_in_owner = true
-metadata/_edit_lock_ = true
-
-[node name="HeadGimbalA" type="Node3D" parent="HeadMain" index="1"]
-unique_name_in_owner = true
-metadata/_edit_lock_ = true
-
-[node name="HeadGimbalB2" type="Node3D" parent="HeadMain/HeadGimbalA" index="0"]
-unique_name_in_owner = true
-metadata/_edit_lock_ = true
-
-[node name="HeadGimbalB" type="Node3D" parent="HeadMain/HeadGimbalA" index="1"]
-unique_name_in_owner = true
-metadata/_edit_lock_ = true
-
-[node name="HeadHolderCamera2" type="Node3D" parent="HeadMain/HeadGimbalA/HeadGimbalB" index="0"]
-unique_name_in_owner = true
-metadata/_edit_lock_ = true
-
-[node name="HeadHolderCamera" type="Node3D" parent="HeadMain/HeadGimbalA/HeadGimbalB" index="1"]
-unique_name_in_owner = true
-metadata/_edit_lock_ = true
-
-[node name="HeadStandPos" type="Node3D" parent="." index="11"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
-metadata/_edit_lock_ = true
-
-[node name="AudioStreamPlayer_Footsteps" parent="." index="12"]
-max_polyphony = 3
-
-[node name="AudioStreamPlayer_JumpLand" parent="." index="13"]
-max_polyphony = 3
 
 [node name="AllHuds2" type="Control" parent="." index="14"]
 layout_mode = 3
@@ -339,16 +325,83 @@ grow_vertical = 2
 mouse_filter = 2
 metadata/_edit_lock_ = true
 
-[node name="Item_inspect" parent="." index="16"]
+[node name="CharacterCollisionCrunch" type="CollisionShape3D" parent="." index="15"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0)
+shape = SubResource("CapsuleShape3D_cj1of")
+disabled = true
 metadata/_edit_lock_ = true
 
-[node name="report_bug" parent="." index="17"]
+[node name="HeadMain" type="Node3D" parent="." index="16"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 metadata/_edit_lock_ = true
 
-[node name="HeadCrunchPos" parent="." index="19"]
+[node name="HeadGimbalA2" type="Node3D" parent="HeadMain" index="0"]
+unique_name_in_owner = true
 metadata/_edit_lock_ = true
 
-[node name="AllHuds" type="Control" parent="." index="20"]
+[node name="HeadGimbalA3" type="Node3D" parent="HeadMain" index="1"]
+unique_name_in_owner = true
+metadata/_edit_lock_ = true
+
+[node name="HeadGimbalA" type="Node3D" parent="HeadMain" index="2"]
+unique_name_in_owner = true
+metadata/_edit_lock_ = true
+
+[node name="HeadGimbalB2" type="Node3D" parent="HeadMain/HeadGimbalA" index="0"]
+unique_name_in_owner = true
+metadata/_edit_lock_ = true
+
+[node name="HeadGimbalB3" type="Node3D" parent="HeadMain/HeadGimbalA" index="1"]
+unique_name_in_owner = true
+metadata/_edit_lock_ = true
+
+[node name="HeadGimbalB" type="Node3D" parent="HeadMain/HeadGimbalA" index="2"]
+unique_name_in_owner = true
+metadata/_edit_lock_ = true
+
+[node name="HeadHolderCamera2" type="Node3D" parent="HeadMain/HeadGimbalA/HeadGimbalB" index="0"]
+unique_name_in_owner = true
+metadata/_edit_lock_ = true
+
+[node name="HeadHolderCamera3" type="Node3D" parent="HeadMain/HeadGimbalA/HeadGimbalB" index="1"]
+unique_name_in_owner = true
+metadata/_edit_lock_ = true
+
+[node name="HeadHolderCamera" type="Node3D" parent="HeadMain/HeadGimbalA/HeadGimbalB" index="2"]
+unique_name_in_owner = true
+metadata/_edit_lock_ = true
+
+[node name="HeadStandPos" type="Node3D" parent="." index="17"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+metadata/_edit_lock_ = true
+
+[node name="AudioStreamPlayer_Footsteps" parent="." index="18"]
+max_polyphony = 3
+
+[node name="AudioStreamPlayer_JumpLand" parent="." index="19"]
+max_polyphony = 3
+
+[node name="AllHuds3" type="Control" parent="." index="20"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+metadata/_edit_lock_ = true
+
+[node name="Item_inspect" parent="." index="22"]
+metadata/_edit_lock_ = true
+
+[node name="report_bug" parent="." index="23"]
+metadata/_edit_lock_ = true
+
+[node name="HeadCrunchPos" parent="." index="25"]
+metadata/_edit_lock_ = true
+
+[node name="AllHuds" type="Control" parent="." index="26"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

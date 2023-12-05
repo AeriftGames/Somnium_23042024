@@ -4,11 +4,15 @@ using System.Threading.Tasks;
 
 public partial class CCharacterCrouchComponent : CBaseComponent
 {
+    
     [Export] public bool TOGGLE_CROUCH = false;
     [Export(PropertyHint.Range, "1,5,0.1")] public float CROUCH_SPEED = 2.0f;
+    [Export] public AudioStream AudioStreamCrouch;
+    [Export] public AudioStream AudioStreamUnCrouch;
 
     private AnimationPlayer animPlayerCrouch;
     private ShapeCast3D shapeCastUncrouch;
+    private AudioStreamPlayer audioStreamPlayerCrouch;
 
     private bool isCrouching = false;
 
@@ -18,7 +22,8 @@ public partial class CCharacterCrouchComponent : CBaseComponent
 
         animPlayerCrouch = GetNode<AnimationPlayer>("AnimationPlayerCrouch");
         shapeCastUncrouch = GetNode<ShapeCast3D>("ShapeCastUncrouch");
-	}
+        audioStreamPlayerCrouch = GetNode<AudioStreamPlayer>("AudioStreamPlayer_Crouch");
+    }
 
     public override void PostInit(FpsCharacterBase newOurCharacter)
     {
@@ -55,12 +60,16 @@ public partial class CCharacterCrouchComponent : CBaseComponent
             if (newCrouch && animPlayerCrouch.IsPlaying() == false)
             {
                 animPlayerCrouch.Play("Crouch", -1, CROUCH_SPEED);
-                //ourCharacter.GetCharacterMovementComponent().SetMoveSpeed("CROUCH");
+
+                audioStreamPlayerCrouch.Stream = AudioStreamCrouch;
+                audioStreamPlayerCrouch.Play();
             }
             else if (shapeCastUncrouch.IsColliding() == false && animPlayerCrouch.IsPlaying() == false)
             {
                 animPlayerCrouch.Play("Crouch", -1, -CROUCH_SPEED, true);
-                //ourCharacter.GetCharacterMovementComponent().SetMoveSpeed("WALK");
+
+                audioStreamPlayerCrouch.Stream = AudioStreamUnCrouch;
+                audioStreamPlayerCrouch.Play();
             }
         }
         else if(TOGGLE_CROUCH == false)
@@ -69,7 +78,9 @@ public partial class CCharacterCrouchComponent : CBaseComponent
             {
                 animPlayerCrouch.Play("Crouch", -1, CROUCH_SPEED);
                 isCrouching = true;
-                //ourCharacter.GetCharacterMovementComponent().SetMoveSpeed("CROUCH");
+
+                audioStreamPlayerCrouch.Stream = AudioStreamCrouch;
+                audioStreamPlayerCrouch.Play();
             }
             else if (newCrouch == false && shapeCastUncrouch.IsColliding() == true)
             {
@@ -79,7 +90,9 @@ public partial class CCharacterCrouchComponent : CBaseComponent
             {
                 animPlayerCrouch.Play("Crouch", -1, -CROUCH_SPEED, true);
                 isCrouching = false;
-                //ourCharacter.GetCharacterMovementComponent().SetMoveSpeed("WALK");
+
+                audioStreamPlayerCrouch.Stream = AudioStreamUnCrouch;
+                audioStreamPlayerCrouch.Play();
             }
         }
     }
