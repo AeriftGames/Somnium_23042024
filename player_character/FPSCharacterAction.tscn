@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://c7sfdtpshgj44"]
+
+[ext_resource type="PackedScene" uid="uid://cjqwso2sh1h26" path="res://player_character/FPSCharacterMoveAnim.tscn" id="1_igu5i"]
+[ext_resource type="Script" path="res://player_character/FPSCharacterAction.cs" id="2_gd4x2"]
+[ext_resource type="PackedScene" uid="uid://cmmc6ubyav1pf" path="res://player_character/action_components/BaseFlashlightComponent.tscn" id="3_pbs4r"]
+
+[node name="FpsCharacterAction" instance=ExtResource("1_igu5i")]
+script = ExtResource("2_gd4x2")
+
+[node name="BaseMovementComponent" parent="BaseComponents" index="0"]
+SPEED_WALK = 2.5
+SPEED_SPRINT = 4.2
+SPEED_CROUCH = 1.6
+ACCELERATION = 6.0
+
+[node name="BaseHeadBobComponent" parent="BaseComponents" index="3"]
+FootStepLengthInWalk = 1.25
+FootStepLengthInSprint = 1.28
+FootStepLengthInCrouch = 0.95
+
+[node name="BaseFlashlightComponent" parent="BaseComponents" index="9" instance=ExtResource("3_pbs4r")]
+
+[node name="Camera3D" parent="CameraCrouch/CameraLand/CameraController/CameraHead/CameraLean/CameraSway/CameraJump/CameraShakeRot/HeadBob/HeadBreathing" index="0"]
+current = true

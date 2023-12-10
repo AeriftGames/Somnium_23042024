@@ -3,7 +3,7 @@ using System;
 
 public partial class PlayerStart : Node3D
 {
-	public enum EPlayerCharacterType {InventoryOld, BaseNew,MoveAnimNew}
+	public enum EPlayerCharacterType {InventoryOld, BaseNew, MoveAnimNew, ActionNew}
 	[Export] public bool PlayerStartEnable = true;
 
 	// Which type of player character spawn ?
@@ -58,6 +58,11 @@ public partial class PlayerStart : Node3D
             case EPlayerCharacterType.MoveAnimNew:
                 {
                     SpawnNewCharacterMoveAnim();
+                    break;
+                }
+            case EPlayerCharacterType.ActionNew:
+                {
+                    SpawnNewCharacterActionNew();
                     break;
                 }
             default:
@@ -249,6 +254,46 @@ public partial class PlayerStart : Node3D
         // Instance from scenefile and cast to specific class
         var newCharacterInstance = GD.Load<PackedScene>(
             "res://player_character/FPSCharacterMoveAnim.tscn").Instantiate() as FPSCharacterMoveAnim;
+
+
+        // Spawn to worldlevel node
+        Node level = CGameMaster.GM.GetGame().GetLevelLoader().GetActualLevelScene();
+        if (level == null)
+        {
+            // If worldlevel for spawn dont finded
+            CGameMaster.GM.GetUniversal().GetMasterLog().WriteLog(this, CMasterLog.ELogMsgType.ERROR,
+                "Not find /root/worldlevel for spawn player");
+        }
+        else
+        {
+            // Add childs to worldlevel node (Spawn)
+            level.AddChild(newCharacterInstance);
+
+            newCharacterInstance.GlobalPosition = GlobalPosition;
+            newCharacterInstance.GetCharacterLookComponent().RotateStart(GlobalRotation);
+
+            /*
+            // !!! SHADER PRECOMPILATION PROCESS START !!!
+            if (CGameMaster.GM.GetGame().GetLevelLoader().isPrecompiledShaders)
+                CGameMaster.GM.GetGame().GetLevelLoader().StartPrecompileShaderProcess();
+			*/
+
+            CGameMaster.GM.GetSettings().LoadAndApply_AllGraphicsSettings();
+            CGameMaster.GM.GetGame().GetDebugPanel().AllLoadSettings();
+
+            //GameMaster.GM.EnableBlackScreen(false);
+
+            //delete
+            spawn_timer.Stop();
+            spawn_timer.QueueFree();
+        }
+    }
+
+    public void SpawnNewCharacterActionNew()
+    {
+        // Instance from scenefile and cast to specific class
+        var newCharacterInstance = GD.Load<PackedScene>(
+            "res://player_character/FPSCharacterAction.tscn").Instantiate() as FPSCharacterAction;
 
 
         // Spawn to worldlevel node

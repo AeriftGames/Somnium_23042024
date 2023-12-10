@@ -1,0 +1,26 @@
+[remap]
+
+importer="2d_array_texture"
+type="CompressedTexture2DArray"
+uid="uid://cbgexvlq5g2rw"
+path="res://.godot/imported/worldlevel_character_move_test.exr-04c473b80709ae08491071732e939bd9.ctexarray"
+metadata={
+"vram_texture": false
+}
+
+[deps]
+
+source_file="res://levels/worllevel_character_move_test/worldlevel_character_move_test.exr"
+dest_files=["res://.godot/imported/worldlevel_character_move_test.exr-04c473b80709ae08491071732e939bd9.ctexarray"]
+
+[params]
+
+compress/mode=3
+compress/high_quality=false
+compress/lossy_quality=0.7
+compress/hdr_compression=1
+compress/channel_pack=1
+mipmaps/generate=false
+mipmaps/limit=-1
+slices/horizontal=1
+slices/vertical=12

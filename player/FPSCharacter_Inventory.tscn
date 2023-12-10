@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://bnb3blo4rl83s"]
+[gd_scene load_steps=26 format=3 uid="uid://bnb3blo4rl83s"]
 
 [ext_resource type="PackedScene" uid="uid://0g1u2jvnfbpy" path="res://player/FPSCharacter_Interaction.tscn" id="1_ywg5i"]
 [ext_resource type="Script" path="res://player/FPSCharacter_Inventory.cs" id="2_k43co"]
@@ -40,6 +40,14 @@ height = 1.8
 radius = 0.4
 height = 0.9
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ee8cu"]
+radius = 0.4
+height = 1.8
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_741di"]
+radius = 0.4
+height = 0.9
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7bbwt"]
 bg_color = Color(0.913319, 0.285158, 0, 0.392157)
 corner_radius_top_left = 10
@@ -55,7 +63,6 @@ corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
 [node name="FPSCharacter_Inventory" instance=ExtResource("1_ywg5i")]
-collision_layer = 2
 collision_mask = 33
 floor_constant_speed = true
 floor_max_angle = 0.872665
@@ -71,7 +78,6 @@ FootstepsVolumeDBInCrouch = -7.0
 FootstepsAudioPitch = 0.0
 MiniHeightForLandingEffect = 0.35
 CrunchLerpSpeed = 5.0
-metadata/_edit_lock_ = true
 
 [node name="CharacterComponents2" type="Node3D" parent="." index="0"]
 script = ExtResource("3_myxdn")
@@ -128,8 +134,38 @@ metadata/_edit_lock_ = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 metadata/_edit_lock_ = true
 
-[node name="CharacterComponents" type="Node3D" parent="." index="12"]
+[node name="CharacterComponents4" type="Node3D" parent="." index="12"]
 script = ExtResource("3_myxdn")
+
+[node name="CharacterCollisionStand4" type="CollisionShape3D" parent="." index="13"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+shape = SubResource("CapsuleShape3D_ybfn6")
+metadata/_edit_lock_ = true
+
+[node name="AllHuds2" type="Control" parent="." index="14"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+metadata/_edit_lock_ = true
+
+[node name="CharacterCollisionCrunch4" type="CollisionShape3D" parent="." index="15"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0)
+shape = SubResource("CapsuleShape3D_cj1of")
+disabled = true
+metadata/_edit_lock_ = true
+
+[node name="HeadMain4" type="Node3D" parent="." index="16"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+metadata/_edit_lock_ = true
+
+[node name="HeadStandPos4" type="Node3D" parent="." index="17"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+metadata/_edit_lock_ = true
 
 [node name="CharacterHealthComponent" type="Node" parent="CharacterComponents" index="0"]
 script = ExtResource("3_aggcm")
@@ -310,77 +346,8 @@ mix_target = 1
 max_polyphony = 4
 bus = &"Sfx"
 
-[node name="CharacterCollisionStand" type="CollisionShape3D" parent="." index="13"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
-shape = SubResource("CapsuleShape3D_ybfn6")
-metadata/_edit_lock_ = true
-
-[node name="AllHuds2" type="Control" parent="." index="14"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-metadata/_edit_lock_ = true
-
-[node name="CharacterCollisionCrunch" type="CollisionShape3D" parent="." index="15"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0)
-shape = SubResource("CapsuleShape3D_cj1of")
-disabled = true
-metadata/_edit_lock_ = true
-
-[node name="HeadMain" type="Node3D" parent="." index="16"]
-unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
-metadata/_edit_lock_ = true
-
-[node name="HeadGimbalA2" type="Node3D" parent="HeadMain" index="0"]
-unique_name_in_owner = true
-metadata/_edit_lock_ = true
-
-[node name="HeadGimbalA3" type="Node3D" parent="HeadMain" index="1"]
-unique_name_in_owner = true
-metadata/_edit_lock_ = true
-
-[node name="HeadGimbalA" type="Node3D" parent="HeadMain" index="2"]
-unique_name_in_owner = true
-metadata/_edit_lock_ = true
-
-[node name="HeadGimbalB2" type="Node3D" parent="HeadMain/HeadGimbalA" index="0"]
-unique_name_in_owner = true
-metadata/_edit_lock_ = true
-
-[node name="HeadGimbalB3" type="Node3D" parent="HeadMain/HeadGimbalA" index="1"]
-unique_name_in_owner = true
-metadata/_edit_lock_ = true
-
-[node name="HeadGimbalB" type="Node3D" parent="HeadMain/HeadGimbalA" index="2"]
-unique_name_in_owner = true
-metadata/_edit_lock_ = true
-
-[node name="HeadHolderCamera2" type="Node3D" parent="HeadMain/HeadGimbalA/HeadGimbalB" index="0"]
-unique_name_in_owner = true
-metadata/_edit_lock_ = true
-
-[node name="HeadHolderCamera3" type="Node3D" parent="HeadMain/HeadGimbalA/HeadGimbalB" index="1"]
-unique_name_in_owner = true
-metadata/_edit_lock_ = true
-
-[node name="HeadHolderCamera" type="Node3D" parent="HeadMain/HeadGimbalA/HeadGimbalB" index="2"]
-unique_name_in_owner = true
-metadata/_edit_lock_ = true
-
-[node name="HeadStandPos" type="Node3D" parent="." index="17"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
-metadata/_edit_lock_ = true
-
-[node name="AudioStreamPlayer_Footsteps" parent="." index="18"]
-max_polyphony = 3
-
-[node name="AudioStreamPlayer_JumpLand" parent="." index="19"]
-max_polyphony = 3
+[node name="CharacterCollisionStand" parent="." index="19"]
+shape = SubResource("CapsuleShape3D_ee8cu")
 
 [node name="AllHuds3" type="Control" parent="." index="20"]
 layout_mode = 3
@@ -392,16 +359,52 @@ grow_vertical = 2
 mouse_filter = 2
 metadata/_edit_lock_ = true
 
-[node name="Item_inspect" parent="." index="22"]
+[node name="CharacterCollisionCrunch" parent="." index="21"]
+shape = SubResource("CapsuleShape3D_741di")
+
+[node name="HeadGimbalA2" type="Node3D" parent="HeadMain" index="0"]
+unique_name_in_owner = true
 metadata/_edit_lock_ = true
 
-[node name="report_bug" parent="." index="23"]
+[node name="HeadGimbalA3" type="Node3D" parent="HeadMain" index="1"]
+unique_name_in_owner = true
 metadata/_edit_lock_ = true
 
-[node name="HeadCrunchPos" parent="." index="25"]
+[node name="HeadGimbalA4" type="Node3D" parent="HeadMain" index="2"]
+unique_name_in_owner = true
 metadata/_edit_lock_ = true
 
-[node name="AllHuds" type="Control" parent="." index="26"]
+[node name="HeadGimbalB2" type="Node3D" parent="HeadMain/HeadGimbalA" index="0"]
+unique_name_in_owner = true
+metadata/_edit_lock_ = true
+
+[node name="HeadGimbalB3" type="Node3D" parent="HeadMain/HeadGimbalA" index="1"]
+unique_name_in_owner = true
+metadata/_edit_lock_ = true
+
+[node name="HeadGimbalB4" type="Node3D" parent="HeadMain/HeadGimbalA" index="2"]
+unique_name_in_owner = true
+metadata/_edit_lock_ = true
+
+[node name="HeadHolderCamera2" type="Node3D" parent="HeadMain/HeadGimbalA/HeadGimbalB" index="0"]
+unique_name_in_owner = true
+metadata/_edit_lock_ = true
+
+[node name="HeadHolderCamera3" type="Node3D" parent="HeadMain/HeadGimbalA/HeadGimbalB" index="1"]
+unique_name_in_owner = true
+metadata/_edit_lock_ = true
+
+[node name="HeadHolderCamera4" type="Node3D" parent="HeadMain/HeadGimbalA/HeadGimbalB" index="2"]
+unique_name_in_owner = true
+metadata/_edit_lock_ = true
+
+[node name="AudioStreamPlayer_Footsteps" parent="." index="24"]
+max_polyphony = 3
+
+[node name="AudioStreamPlayer_JumpLand" parent="." index="25"]
+max_polyphony = 3
+
+[node name="AllHuds4" type="Control" parent="." index="26"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -409,6 +412,12 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+metadata/_edit_lock_ = true
+
+[node name="Item_inspect" parent="." index="28"]
+metadata/_edit_lock_ = true
+
+[node name="report_bug" parent="." index="29"]
 metadata/_edit_lock_ = true
 
 [node name="BasicHud" parent="AllHuds" index="0"]

@@ -8,6 +8,9 @@ public partial class CCharacterLookComponent : CBaseComponent
 	[Export] public float TILT_LOWER_LIMIT = Mathf.DegToRad(-90.0f);
     [Export] public float TILT_UPPER_LIMIT = Mathf.DegToRad(90.0f);
 
+	[Export] public float FOV_NORMAL = 70.0f;
+	[Export] public bool FOV_RUNNING_ENABLE = true;
+
     private bool isMouseInput = false;
     private float rotationInput;
     private float tiltInput;
@@ -25,10 +28,17 @@ public partial class CCharacterLookComponent : CBaseComponent
     private Node3D CameraJump = null;
 	private Node3D CameraShakeRot = null;
     private Node3D HeadBob = null;
+	private Node3D HeadBreathing = null;
 	private Node3D LookingPoint = null;
 	private Node3D RightHandPoint = null;
 
-	public override void PostInit(FpsCharacterBase newOurCharacter)
+    // FOV offsets
+    private float finalOffset = 0.0f;
+    private float breathOffset = 0.0f;
+    private float zoomOffset = 0.0f;
+	private float runningOffset = 0.0f;
+
+    public override void PostInit(FpsCharacterBase newOurCharacter)
 	{
 		base.PostInit(newOurCharacter);
 
@@ -39,11 +49,11 @@ public partial class CCharacterLookComponent : CBaseComponent
 		CameraJump = ourCharacterBase.GetNode<Node3D>("%CameraJump");
 		CameraShakeRot = ourCharacterBase.GetNode<Node3D>("%CameraShakeRot");
         HeadBob = ourCharacterBase.GetNode<Node3D>("%HeadBob");
+		HeadBreathing = ourCharacterBase.GetNode<Node3D>("%HeadBreathing");
         LookingPoint = GetMainCamera().GetNode<Node3D>("LookPoint");
 		RightHandPoint = GetMainCamera().GetNode<Node3D>("RightHandPoint");
 
         Input.MouseMode = Input.MouseModeEnum.Captured;
-
     }
 
     public override void _UnhandledInput(InputEvent @event)
@@ -76,21 +86,54 @@ public partial class CCharacterLookComponent : CBaseComponent
 		tiltInput = 0.0f;
 
 		UpdateCameraPosition(delta);
+		UpdateRunningFoV(delta);
 	}
 
 	public void UpdateCameraPosition(double delta)
 	{
-		CameraHead.GlobalPosition = CameraHead.GlobalPosition.Lerp(CameraController.GlobalPosition, (float)delta * 50.0f); ;
+		CameraHead.GlobalPosition = 
+			CameraHead.GlobalPosition.Lerp(CameraController.GlobalPosition, (float)delta * 50.0f); ;
 	}
 
 	public void RotateStart( Vector3 newStartRot ){ mouseRotation.Y = newStartRot.Y; }
+
+	public void SetFovOffset(string newFovOffsetName,float newOffsetValue)
+	{
+		if(newFovOffsetName == "Breath") { breathOffset = newOffsetValue; }
+		else if(newFovOffsetName == "Zoom") { zoomOffset = newOffsetValue; }
+		else if(newFovOffsetName == "Running") { runningOffset = newOffsetValue; }
+	}
+
+	public void ApplyFinalFov()
+	{
+		float finalFov = FOV_NORMAL + breathOffset + zoomOffset + runningOffset;
+		GetMainCamera().Fov = finalFov;
+
+		CGameMaster.GM.GetGame().GetDebugPanel().GetDebugLabels().AddProperty("Final Camera Fov", finalFov.ToString(),4);
+	}
+
+	public void UpdateRunningFoV(double delta)
+	{
+		if (FOV_RUNNING_ENABLE && 
+			ourCharacterBase.GetCharacterMovementComponent().GetWantSpeed() == 
+			ourCharacterBase.GetCharacterMovementComponent().SPEED_SPRINT &&
+			ourCharacterBase.GetCharacterMovementComponent().GetRealSpeed() > 3.0f)
+		{ runningOffset = Mathf.Lerp(runningOffset, 10.0f, (float)delta * 1.5f); }
+		else
+		{ runningOffset = Mathf.Lerp(runningOffset, 0.0f, (float)delta * 1.5f); }
+
+        ourCharacterBase.GetCharacterLookComponent().SetFovOffset("Running",runningOffset);
+	}
+
+	// GETTIGNS
 	public Camera3D GetMainCamera() { return Camera; }
-	public Vector3 GetMainCameraLookingPoint() { return LookingPoint.GlobalPosition; }
-    public Vector3 GetRightHandPoint() { return RightHandPoint.GlobalPosition; }
+	public Vector3 GetMainCameraLookingPointPos() { return LookingPoint.GlobalPosition; }
+    public Vector3 GetRightHandPointPos() { return RightHandPoint.GlobalPosition; }
 	public Node3D GetCameraHead() { return CameraHead; }
     public Node3D GetHeadBob() { return HeadBob; }
 	public Node3D GetCameraSway() {  return CameraSway; }
 	public Node3D GetCameraLand() { return CameraLand; }
 	public Node3D GetCameraJump() { return CameraJump; }
 	public Node3D GetCameraShakeRot() { return CameraShakeRot; }
+	public Node3D GetHeadBreathing() { return HeadBreathing; }
 }

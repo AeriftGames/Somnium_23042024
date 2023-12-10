@@ -12,12 +12,18 @@ public partial class CCharacterMovementComponent : CBaseComponent
 
     [Export] public float JUMP_VELOCITY = 4.5f;
 
-    public float gravity = ProjectSettings.GetSetting("physics/3d/default_gravity").AsSingle();
-    private Vector3 workVelocity;
+    [Export] public bool CAN_MOVEINFALL = true;
+    [Export] public float MOVESPEED_INFALL = 1.4f;
+    [Export] public float DECCELERATE_INFALL = 1.0f;
+    [Export] public bool ENABLE_LIMITVELOCITY_AFTERLANDED = true;
+    [Export] public float LANDING_LIMIT_MOVEVELOCITY = 1.5f;
+
+    private float Gravity = ProjectSettings.GetSetting("physics/3d/default_gravity").AsSingle();
+    private Vector3 WorkVelocity;
     private float Speed = 0.0f;
 
-    private Vector2 inputDir = Vector2.Zero;
-    private Vector3 direction = Vector3.Zero;
+    private Vector2 InputDir = Vector2.Zero;
+    private Vector3 Direction = Vector3.Zero;
 
     public override void PostInit(FpsCharacterBase newCharacterBase)
     {
@@ -28,12 +34,15 @@ public partial class CCharacterMovementComponent : CBaseComponent
 
     public void UpdateMove(double delta)
     {
-        workVelocity = ourCharacterBase.Velocity;
+        // get input actions for input dir and calculate direction
+        InputDir = Input.GetVector("moveLeft", "moveRight", "moveForward", "moveBackward");
+        Direction = Direction.Lerp(ourCharacterBase.Transform.Basis * new Vector3(InputDir.X, 0, InputDir.Y).Normalized(), (float)delta * 60.0f);
 
-        // Add the gravity.
-        if (!ourCharacterBase.IsOnFloor())
-            workVelocity.Y -= gravity * (float)delta;
+        // get actual character velocity
+        WorkVelocity = ourCharacterBase.Velocity;
+        WorkVelocity.Y = 0f;    // disable gravity at this moment
 
+        // set character want speed
         if (Input.IsActionPressed("Sprint") && GetIsOnFloor() && ourCharacterBase.GetCharacterCrouchComponent().GetIsCrouched() == false)
             Speed = SPEED_SPRINT;
         else if (GetIsOnFloor() && ourCharacterBase.GetCharacterCrouchComponent().GetIsCrouched() == true)
@@ -41,31 +50,70 @@ public partial class CCharacterMovementComponent : CBaseComponent
         else if (GetIsOnFloor() && ourCharacterBase.GetCharacterCrouchComponent().GetIsCrouched() == false)
             Speed = SPEED_WALK;
 
-        inputDir = Input.GetVector("moveLeft", "moveRight", "moveForward", "moveBackward");
-        direction = direction.Lerp(ourCharacterBase.Transform.Basis * new Vector3(inputDir.X, 0, inputDir.Y).Normalized(),(float)delta*60.0f);
-        if (direction != Vector3.Zero)
+        if (Direction != Vector3.Zero)
         {
-            if(GetIsOnFloor())
+            // for move on ground - with input
+            if (GetIsOnFloor())
             {
+                // new move fix pro vyreseni bugu se zdi
+                if(ourCharacterBase.IsOnWall() && InputDir != Vector2.Zero)
+                {
+                    var newDir = ourCharacterBase.GetWallNormal().Slide(Direction).Normalized();
+                    newDir.Y = 0.0f;
+                    WorkVelocity = WorkVelocity.Lerp(newDir * Speed, ACCELERATION * (float)delta);
+                }
+                else
+                {
+                    WorkVelocity = WorkVelocity.Lerp(Direction * Speed, ACCELERATION * (float)delta);
+                }
+
+                /* old move - funkce vyse vypada ze funguje a resi problem se zdi
                 workVelocity.X = float.Lerp(workVelocity.X, direction.X * Speed, ACCELERATION * (float)delta);
                 workVelocity.Z = float.Lerp(workVelocity.Z, direction.Z * Speed, ACCELERATION * (float)delta);
+                */
+            }
+            // for fall - with input
+            else if (CAN_MOVEINFALL)
+            {
+                // add additional move velocity and set limit length for final velocity
+                WorkVelocity += (Direction * MOVESPEED_INFALL) * (float)delta;
+                WorkVelocity = WorkVelocity.LimitLength(Speed);
             }
         }
         else
         {
+            // for move on ground - no input
             if (GetIsOnFloor())
             {
-                workVelocity.X = Mathf.MoveToward(ourCharacterBase.Velocity.X, 0, DECCLERATION * (float)delta);
-                workVelocity.Z = Mathf.MoveToward(ourCharacterBase.Velocity.Z, 0, DECCLERATION * (float)delta);
+                WorkVelocity.X = Mathf.MoveToward(ourCharacterBase.Velocity.X, 0, DECCLERATION * (float)delta);
+                WorkVelocity.Z = Mathf.MoveToward(ourCharacterBase.Velocity.Z, 0, DECCLERATION * (float)delta);
+            }
+            // for fall - no input
+            else if (CAN_MOVEINFALL)
+            {
+                WorkVelocity.X = Mathf.MoveToward(ourCharacterBase.Velocity.X, 0, DECCELERATE_INFALL * (float)delta);
+                WorkVelocity.Z = Mathf.MoveToward(ourCharacterBase.Velocity.Z, 0, DECCELERATE_INFALL * (float)delta);
             }
         }
+
+        // limit velocity after landing
+        if (ENABLE_LIMITVELOCITY_AFTERLANDED && GetIsOnFloor() &&
+            ourCharacterBase.GetCharacterStateMachine().GetCurrentStateName() == "LandPlayerState")
+        { WorkVelocity = WorkVelocity.LimitLength(LANDING_LIMIT_MOVEVELOCITY); }  // zmensi aktualni velocity
+
+        // add get back original velocity y
+        WorkVelocity.Y = ourCharacterBase.Velocity.Y;
+
+        // add the gravity.
+        if (!ourCharacterBase.IsOnFloor())
+            WorkVelocity.Y -= Gravity * (float)delta;
     }
 
     public bool GetIsOnFloor() { return ourCharacterBase.IsOnFloor(); }
 
     public void ApplyWorkVelocity()
     {
-        ourCharacterBase.Velocity = workVelocity;
+        ourCharacterBase.Velocity = WorkVelocity;
         ourCharacterBase.MoveAndSlide();
     }
 
@@ -78,7 +126,7 @@ public partial class CCharacterMovementComponent : CBaseComponent
         bool isCrouch = ourCharacterBase.GetCharacterCrouchComponent().GetIsCrouched();
 
         if (Input.IsActionJustPressed(newInput) && isOnFloor && !isCrouch)
-            workVelocity.Y = JUMP_VELOCITY;
+            WorkVelocity.Y = JUMP_VELOCITY;
     }
 
     public void SetMoveSpeed(string newSpeedName)
@@ -99,6 +147,6 @@ public partial class CCharacterMovementComponent : CBaseComponent
         return float.Round(MathF.Abs(moveVelocity.Length()), 1);
     }
 
-    public Vector2 GetInputDir() { return inputDir; }
-    public Vector3 GetDirection() {  return direction; }
+    public Vector2 GetInputDir() { return InputDir; }
+    public Vector3 GetDirection() {  return Direction; }
 }

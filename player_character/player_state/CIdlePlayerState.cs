@@ -3,11 +3,9 @@ using System;
 
 public partial class CIdlePlayerState : CState
 {
-
     public override void Enter()
     {
         base.Enter();
-
     }
 
     public override void Update(float delta)

@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://dptwx8xdm6i72"]
+
+[ext_resource type="PackedScene" uid="uid://jb4b3rysysa3" path="res://testing_stuff_kaen/test_new_levels/1.glb" id="1_iftjx"]
+[ext_resource type="Material" uid="uid://c7w2kwibxd03b" path="res://placeholders/modular_level_builds/my_trim1/trim_floor_lesk_mat.tres" id="2_0s0mc"]
+
+[node name="1" instance=ExtResource("1_iftjx")]
+
+[node name="Cube" parent="." index="0"]
+material_override = ExtResource("2_0s0mc")

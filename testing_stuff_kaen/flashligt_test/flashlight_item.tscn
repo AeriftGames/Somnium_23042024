@@ -1,8 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://du8mneghcplbx"]
+[gd_scene load_steps=18 format=3 uid="uid://du8mneghcplbx"]
 
 [ext_resource type="Texture2D" uid="uid://dwfeqhrvklsos" path="res://textures/12167.jpg" id="1_y262i"]
+[ext_resource type="Script" path="res://testing_stuff_kaen/flashligt_test/Flashlight_Item.cs" id="2_6lcuh"]
 [ext_resource type="Texture2D" uid="uid://dagkujp78tb7u" path="res://testing_stuff_kaen/flashligt_test/Flashlight_BaseColor.png" id="2_s800b"]
+[ext_resource type="AudioStream" uid="uid://bq620yjstjdl" path="res://audio/audio_streams/flashlight/flashlight_on.wav" id="3_31kwb"]
 [ext_resource type="Texture2D" uid="uid://b5ddy62aa08lg" path="res://testing_stuff_kaen/flashligt_test/Flashlight_Metallic.png" id="3_yyitb"]
+[ext_resource type="AudioStream" uid="uid://com3v7we27wvm" path="res://audio/audio_streams/flashlight/flashlight_off.wav" id="4_ca3h3"]
 [ext_resource type="Texture2D" uid="uid://kbkkgr3rbpsm" path="res://testing_stuff_kaen/flashligt_test/Flashlight_Normal.png" id="4_mfnw0"]
 [ext_resource type="Texture2D" uid="uid://bdgu0hu6tvqij" path="res://testing_stuff_kaen/flashligt_test/Flashlight_Roughness.png" id="5_wvvf1"]
 
@@ -70,25 +73,126 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_7a1aw")
 
+[sub_resource type="Animation" id="Animation_6y21d"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:light_energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_ijaw5"]
+resource_name = "TurnOff"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:light_energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.5, 0.7, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.5, 0.5, 0.1, 0.0, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.9),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_7ys0x"]
+resource_name = "TurnOn"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:light_energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.1, 0.5, 0.5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.04),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_h34ra"]
+_data = {
+"RESET": SubResource("Animation_6y21d"),
+"TurnOff": SubResource("Animation_ijaw5"),
+"TurnOn": SubResource("Animation_7ys0x")
+}
+
 [node name="Flashlight_Item" type="SpotLight3D"]
 light_color = Color(0.909804, 0.901961, 0.894118, 1)
 light_energy = 0.5
-light_indirect_energy = 5.0
+light_indirect_energy = 0.0
 light_volumetric_fog_energy = 3.0
 light_projector = ExtResource("1_y262i")
-light_specular = 3.0
+light_specular = 4.0
+light_bake_mode = 0
 light_cull_mask = 4294705151
 shadow_enabled = true
 spot_range = 12.0
-spot_attenuation = 0.75
-spot_angle = 40.0
-spot_angle_attenuation = 0.367
+spot_attenuation = 1.06066
+spot_angle = 35.0
+spot_angle_attenuation = 0.330759
+script = ExtResource("2_6lcuh")
+AudioStream_TurnOn = ExtResource("3_31kwb")
+AudioStream_TurnOff = ExtResource("4_ca3h3")
 metadata/_edit_lock_ = true
 
 [node name="SM_Flashlight" type="MeshInstance3D" parent="."]
-transform = Transform3D(1.6, 0, 0, 0, -6.11959e-08, 1.6, 0, -1.4, -6.99382e-08, 0.005, -0.045, -0.0500001)
+transform = Transform3D(1.6, 0, 0, 0, -6.11959e-08, 1.6, 0, -1.4, -6.99382e-08, 0.005, -0.00264331, 0.195014)
 layers = 262144
 material_override = SubResource("StandardMaterial3D_wjr3l")
 cast_shadow = 0
 mesh = SubResource("ArrayMesh_tm5rj")
 skeleton = NodePath("")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_h34ra")
+}
+speed_scale = 2.0
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+bus = &"Sfx"
