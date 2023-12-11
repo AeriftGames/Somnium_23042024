@@ -12,6 +12,10 @@ public partial class CLandPlayerState : CState
         {
             if (FPSMoveAnim.GetJumpLandEffectComponent() != null)
             { FPSMoveAnim.GetJumpLandEffectComponent().ApplyEffectLand(); }
+
+            // Apply Land Fov effect now
+            if (FPSMoveAnim.GetCharacterFovComponent != null)
+            { ourCharacterBase.GetCharacterFovComponent().SetLandFovNow(); }
         }
     }
 

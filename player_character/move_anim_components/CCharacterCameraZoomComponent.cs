@@ -47,7 +47,7 @@ public partial class CCharacterCameraZoomComponent : CBaseComponent
             WorkFov = LerpObject_CameraZoom.ActualUpdate(WorkFov, delta);
 
             // finalni nastaveni offset fov
-            ourCharacterBase.GetCharacterLookComponent().SetFovOffset("Zoom",WorkFov);
+            ourCharacterBase.GetCharacterFovComponent().SetFovOffset("Zoom",WorkFov);
         }
     }
 

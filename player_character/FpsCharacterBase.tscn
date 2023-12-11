@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://dcilkc4fno2qm"]
+[gd_scene load_steps=25 format=3 uid="uid://dcilkc4fno2qm"]
 
 [ext_resource type="Script" path="res://player_character/FpsCharacterBase.cs" id="1_ob1gb"]
 [ext_resource type="Script" path="res://player_character/base_components/CCharacterMovementComponent.cs" id="2_omu0b"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://player_character/base_components/CCharacterLookComponent.cs" id="3_353i0"]
 [ext_resource type="Script" path="res://player_character/base_components/CCharacterCrouchComponent.cs" id="4_oftwk"]
 [ext_resource type="Script" path="res://player_character/user_interface/Reticle.cs" id="5_r0qr1"]
+[ext_resource type="Script" path="res://player_character/base_components/CCharacterFovComponent.cs" id="5_sagus"]
 [ext_resource type="Script" path="res://player_character/player_state/CStateMachine.cs" id="6_n6lq2"]
 [ext_resource type="Script" path="res://player_character/player_state/CIdlePlayerState.cs" id="7_85exw"]
 [ext_resource type="Script" path="res://player_character/player_state/CWalkingPlayerState.cs" id="8_eskel"]
@@ -137,6 +138,9 @@ Camera = NodePath("../../CameraCrouch/CameraLand/CameraController/CameraHead/Cam
 MOUSE_LERPSPEED = 25.0
 TILT_LOWER_LIMIT = -1.4
 TILT_UPPER_LIMIT = 1.4
+
+[node name="BaseFovComponent" type="Node" parent="BaseComponents"]
+script = ExtResource("5_sagus")
 
 [node name="BaseCrouchComponent" type="Node3D" parent="BaseComponents"]
 script = ExtResource("4_oftwk")

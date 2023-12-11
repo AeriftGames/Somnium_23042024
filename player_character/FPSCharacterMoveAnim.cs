@@ -49,7 +49,7 @@ public partial class FPSCharacterMoveAnim : FpsCharacterBase
         //
         CameraZoomComponent.Update(delta);
         BreathingEffectComponent.Update(delta);
-        GetCharacterLookComponent().ApplyFinalFov();
+        GetCharacterFovComponent().Update(delta);
     }
 
     public override void _PhysicsProcess(double delta)

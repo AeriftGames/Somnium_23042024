@@ -5,11 +5,13 @@ public partial class FpsCharacterBase : CharacterBody3D
 {
     private CCharacterMovementComponent CharacterMovementComponent;
     private CCharacterLookComponent CharacterLookComponent;
+    private CCharacterFovComponent CharacterFovComponent;
     private CCharacterCrouchComponent CharacterCrouchComponent;
     private CCharacterFlashlightComponent CharacterFlashlightComponent;
 
     public CCharacterMovementComponent GetCharacterMovementComponent() { return CharacterMovementComponent; }
     public CCharacterLookComponent GetCharacterLookComponent() { return CharacterLookComponent; }
+    public CCharacterFovComponent GetCharacterFovComponent() { return CharacterFovComponent; }
     public CCharacterCrouchComponent GetCharacterCrouchComponent() { return CharacterCrouchComponent; }
     public CCharacterFlashlightComponent GetCharacterFlashlightComponent() { return CharacterFlashlightComponent; }
 
@@ -36,6 +38,9 @@ public partial class FpsCharacterBase : CharacterBody3D
 
         CharacterLookComponent = GetNode<CCharacterLookComponent>("BaseComponents/BaseLookComponent");
         CharacterLookComponent.PostInit(this);
+
+        CharacterFovComponent = GetNode<CCharacterFovComponent>("BaseComponents/BaseFovComponent");
+        CharacterFovComponent.PostInit(this);
 
         CharacterCrouchComponent = GetNode<CCharacterCrouchComponent>("BaseComponents/BaseCrouchComponent");
         CharacterCrouchComponent.PostInit(this);

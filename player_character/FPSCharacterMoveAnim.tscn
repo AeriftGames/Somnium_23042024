@@ -256,16 +256,6 @@ script = ExtResource("2_70jfn")
 [node name="BaseComponents" parent="." index="0"]
 script = null
 
-[node name="BaseCrouchComponent" parent="BaseComponents" index="2"]
-CROUCH_SPEED = 2.5
-AudioStreamCrouch = ExtResource("3_afmsp")
-AudioStreamUnCrouch = ExtResource("4_h6qy8")
-
-[node name="AudioStreamPlayer_Crouch" parent="BaseComponents/BaseCrouchComponent" index="2"]
-volume_db = -10.0
-pitch_scale = 0.8
-bus = &"Sfx"
-
 [node name="BaseHeadBobComponent" type="Node" parent="BaseComponents" index="3"]
 script = ExtResource("3_its55")
 SwayAmmount = 0.8
@@ -309,6 +299,16 @@ libraries = {
 }
 autoplay = "Breathing_Low"
 speed_scale = 0.5
+
+[node name="BaseCrouchComponent" parent="BaseComponents" index="9"]
+CROUCH_SPEED = 2.5
+AudioStreamCrouch = ExtResource("3_afmsp")
+AudioStreamUnCrouch = ExtResource("4_h6qy8")
+
+[node name="AudioStreamPlayer_Crouch" parent="BaseComponents/BaseCrouchComponent" index="2"]
+volume_db = -10.0
+pitch_scale = 0.8
+bus = &"Sfx"
 
 [node name="CameraLand" parent="CameraCrouch" index="0"]
 unique_name_in_owner = true

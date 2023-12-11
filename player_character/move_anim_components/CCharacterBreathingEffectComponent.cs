@@ -13,6 +13,6 @@ public partial class CCharacterBreathingEffectComponent : CBaseComponent
 
     public void Update(double delta)
     {
-        ourCharacterBase.GetCharacterLookComponent().SetFovOffset("Breath", BreathFovOffset);
+        ourCharacterBase.GetCharacterFovComponent().SetFovOffset("Breath", BreathFovOffset);
     }
 }
