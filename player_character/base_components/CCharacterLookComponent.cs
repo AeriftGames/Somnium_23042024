@@ -8,8 +8,13 @@ public partial class CCharacterLookComponent : CBaseComponent
 	[Export] public float TILT_LOWER_LIMIT = Mathf.DegToRad(-90.0f);
     [Export] public float TILT_UPPER_LIMIT = Mathf.DegToRad(90.0f);
 
-	[Export] public float FOV_NORMAL = 70.0f;
-	[Export] public bool FOV_RUNNING_ENABLE = true;
+    [ExportGroupAttribute("FOV Settings")]
+    [Export] public float FOV_NORMAL = 70.0f;
+    [Export] public bool FOV_WALK_ENABLE = true;
+	[Export] public float FOV_WALK_NEEDVALUE = 4.0f;
+    [Export] public bool FOV_RUNNING_ENABLE = true;
+    [Export] public float FOV_RUNNING_NEEDVALUE = 12.0f;
+    [Export] public float FOV_INTERPSPEED = 1.5f;
 
     private bool isMouseInput = false;
     private float rotationInput;
@@ -36,7 +41,7 @@ public partial class CCharacterLookComponent : CBaseComponent
     private float finalOffset = 0.0f;
     private float breathOffset = 0.0f;
     private float zoomOffset = 0.0f;
-	private float runningOffset = 0.0f;
+	private float walkrunOffset = 0.0f;
 
     public override void PostInit(FpsCharacterBase newOurCharacter)
 	{
@@ -86,7 +91,7 @@ public partial class CCharacterLookComponent : CBaseComponent
 		tiltInput = 0.0f;
 
 		UpdateCameraPosition(delta);
-		UpdateRunningFoV(delta);
+		UpdateMovementFoV(delta);
 	}
 
 	public void UpdateCameraPosition(double delta)
@@ -101,28 +106,34 @@ public partial class CCharacterLookComponent : CBaseComponent
 	{
 		if(newFovOffsetName == "Breath") { breathOffset = newOffsetValue; }
 		else if(newFovOffsetName == "Zoom") { zoomOffset = newOffsetValue; }
-		else if(newFovOffsetName == "Running") { runningOffset = newOffsetValue; }
+		else if(newFovOffsetName == "WalkRun") { walkrunOffset = newOffsetValue; }
 	}
 
 	public void ApplyFinalFov()
 	{
-		float finalFov = FOV_NORMAL + breathOffset + zoomOffset + runningOffset;
+		float finalFov = FOV_NORMAL + breathOffset + zoomOffset + walkrunOffset;
 		GetMainCamera().Fov = finalFov;
 
-		CGameMaster.GM.GetGame().GetDebugPanel().GetDebugLabels().AddProperty("Final Camera Fov", finalFov.ToString(),4);
+		CGameMaster.GM.GetGame().GetDebugPanel().GetDebugLabels().AddProperty("Final Camera Fov",
+			float.Round(GetMainCamera().Fov, 1).ToString(), 4);
 	}
 
-	public void UpdateRunningFoV(double delta)
+	public void UpdateMovementFoV(double delta)
 	{
+		if(FOV_WALK_ENABLE &&
+            ourCharacterBase.GetCharacterMovementComponent().GetWantSpeed() ==
+            ourCharacterBase.GetCharacterMovementComponent().SPEED_WALK &&
+            ourCharacterBase.GetCharacterMovementComponent().GetRealSpeed() > 0.2f)
+		{ walkrunOffset = Mathf.Lerp(walkrunOffset, FOV_WALK_NEEDVALUE, (float)delta * FOV_INTERPSPEED); }
 		if (FOV_RUNNING_ENABLE && 
 			ourCharacterBase.GetCharacterMovementComponent().GetWantSpeed() == 
 			ourCharacterBase.GetCharacterMovementComponent().SPEED_SPRINT &&
 			ourCharacterBase.GetCharacterMovementComponent().GetRealSpeed() > 3.0f)
-		{ runningOffset = Mathf.Lerp(runningOffset, 10.0f, (float)delta * 1.5f); }
+		{ walkrunOffset = Mathf.Lerp(walkrunOffset, FOV_RUNNING_NEEDVALUE, (float)delta * FOV_INTERPSPEED); }
 		else
-		{ runningOffset = Mathf.Lerp(runningOffset, 0.0f, (float)delta * 1.5f); }
+		{ walkrunOffset = Mathf.Lerp(walkrunOffset, 0.0f, (float)delta * FOV_INTERPSPEED); }
 
-        ourCharacterBase.GetCharacterLookComponent().SetFovOffset("Running",runningOffset);
+        ourCharacterBase.GetCharacterLookComponent().SetFovOffset("WalkRun",walkrunOffset);
 	}
 
 	// GETTIGNS

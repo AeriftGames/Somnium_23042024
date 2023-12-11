@@ -52,12 +52,17 @@ public partial class FpsCharacterBase : CharacterBody3D
 
         GetCharacterMovementComponent().ApplyWorkVelocity();
 
+        CGameMaster.GM.GetGame().GetDebugPanel().GetDebugLabels().AddProperty("Character Position",
+            new Vector3(float.Round(GlobalPosition.X, 1),
+            float.Round(GlobalPosition.Y, 1),
+            float.Round(GlobalPosition.Z, 1)).ToString(), 0);
+
         CGameMaster.GM.GetGame().GetDebugPanel().GetDebugLabels().AddProperty("Character Velocity",
             new Vector3(float.Round(GetRealVelocity().X,1),
             float.Round(GetRealVelocity().Y, 1), 
-            float.Round(GetRealVelocity().Z, 1)).ToString(),0);
+            float.Round(GetRealVelocity().Z, 1)).ToString(),1);
 
         CGameMaster.GM.GetGame().GetDebugPanel().GetDebugLabels().AddProperty("Character Speed",
-            GetCharacterMovementComponent().GetRealSpeed().ToString(), 1);
+            GetCharacterMovementComponent().GetRealSpeed().ToString(), 2);
     }
 }

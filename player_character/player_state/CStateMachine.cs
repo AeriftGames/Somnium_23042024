@@ -30,7 +30,7 @@ public partial class CStateMachine : Node
     {
         CURRENT_STATE.Update((float)delta);
 
-        CGameMaster.GM.GetGame().GetDebugPanel().GetDebugLabels().AddProperty("Current State",CURRENT_STATE.Name.ToString(),2);
+        CGameMaster.GM.GetGame().GetDebugPanel().GetDebugLabels().AddProperty("Current State",CURRENT_STATE.Name.ToString(),3);
     }
 
     public override void _PhysicsProcess(double delta)
