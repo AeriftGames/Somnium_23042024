@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://c7sfdtpshgj44"]
+[gd_scene load_steps=5 format=3 uid="uid://c7sfdtpshgj44"]
 
 [ext_resource type="PackedScene" uid="uid://cjqwso2sh1h26" path="res://player_character/FPSCharacterMoveAnim.tscn" id="1_igu5i"]
 [ext_resource type="Script" path="res://player_character/FPSCharacterAction.cs" id="2_gd4x2"]
 [ext_resource type="PackedScene" uid="uid://cmmc6ubyav1pf" path="res://player_character/action_components/BaseFlashlightComponent.tscn" id="3_pbs4r"]
+[ext_resource type="CameraAttributesPractical" uid="uid://cgjd2qg365mbu" path="res://player_character/FPSCharacterAction_Attributes.tres" id="4_no4op"]
 
 [node name="FpsCharacterAction" instance=ExtResource("1_igu5i")]
 script = ExtResource("2_gd4x2")
@@ -21,4 +22,5 @@ FootStepLengthInCrouch = 0.95
 [node name="BaseFlashlightComponent" parent="BaseComponents" index="9" instance=ExtResource("3_pbs4r")]
 
 [node name="Camera3D" parent="CameraCrouch/CameraLand/CameraController/CameraHead/CameraLean/CameraSway/CameraJump/CameraShakeRot/HeadBob/HeadBreathing" index="0"]
+attributes = ExtResource("4_no4op")
 current = true

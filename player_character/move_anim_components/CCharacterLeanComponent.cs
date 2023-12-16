@@ -62,6 +62,12 @@ public partial class CCharacterLeanComponent : CBaseComponent
     public void SetActualLean(ELeanType newLeanType)
     {
 
+        if (tweenLeanPos != null)
+            tweenLeanPos.Kill();
+
+        if (tweenLeanRot != null)
+            tweenLeanRot.Kill();
+
         //GD.Print(newLeanType);
 
         // vypocet nove pozice pro aktualni leaning
@@ -76,12 +82,12 @@ public partial class CCharacterLeanComponent : CBaseComponent
         // Rot
         tweenLeanRot = CreateTween();
         tweenLeanRot.TweenProperty(CameraLean, "rotation", finalLeanRot,
-            LeanPositionTweenTime).SetEase(Tween.EaseType.OutIn);
+            LeanPositionTweenTime).SetEase(Tween.EaseType.OutIn).SetTrans(Tween.TransitionType.Cubic);
 
         // Pos
         tweenLeanPos = CreateTween();
         tweenLeanPos.TweenProperty(CameraLean, "position", finalLeanPos,
-            LeanPositionTweenTime).SetEase(Tween.EaseType.OutIn);
+            LeanPositionTweenTime).SetEase(Tween.EaseType.OutIn).SetTrans(Tween.TransitionType.Cubic);
     }
 
     public ELeanType GetActualLean() { return ActualLean; }
