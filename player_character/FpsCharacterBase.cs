@@ -21,6 +21,9 @@ public partial class FpsCharacterBase : CharacterBody3D
 
     public Node3D GetBaseComponents() { return GetNode<Node3D>("BaseComponents"); }
 
+    private CollisionShape3D CharacterCollisionShape = null;
+    public CollisionShape3D GetCharacterCollisionShape() { return CharacterCollisionShape; }
+
     // predelat a dat na lepsi misto - ted jen na test
     public double movementAnimationLastTime = 0.0f;
 
@@ -29,6 +32,8 @@ public partial class FpsCharacterBase : CharacterBody3D
         base._Ready();
 
         CGameMaster.GM.GetGame().SetFPSCharacterBase(this);
+
+        CharacterCollisionShape = GetNode<CollisionShape3D>("CharacterCollisionShape");
 
         CharacterStateMachine = GetNode<CStateMachine>("PlayerStateMachine");
         CharacterStateMachine.PostInit();

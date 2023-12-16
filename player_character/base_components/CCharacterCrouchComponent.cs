@@ -6,23 +6,34 @@ public partial class CCharacterCrouchComponent : CBaseComponent
 {
     
     [Export] public bool TOGGLE_CROUCH = false;
-    [Export(PropertyHint.Range, "1,5,0.1")] public float CROUCH_SPEED = 2.0f;
+    [Export(PropertyHint.Range, "0.3,2,0.1")] public float CROUCH_TIME = 0.5f;
+
+    [Export(PropertyHint.Range, "0.1,2,0.01")] public float CROUCH_CAM_POS = 1.2f;
+    [Export(PropertyHint.Range, "0.1,2,0.01")] public float CROUCH_SHAPE_HEIGHT = 1.3f;
+    [Export(PropertyHint.Range, "0.1,2,0.01")] public float CROUCH_SHAPE_POS = 0.65f;
+    [Export(PropertyHint.Range, "0.1,2,0.01")] public float UNCROUCH_CAM_POS = 1.75f;
+    [Export(PropertyHint.Range, "0.1,2,0.01")] public float UNCROUCH_SHAPE_HEIGHT = 1.8f;
+    [Export(PropertyHint.Range, "0.1,2,0.01")] public float UNCROUCH_SHAPE_POS = 0.9f;
+
     [Export] public AudioStream AudioStreamCrouch;
     [Export] public AudioStream AudioStreamUnCrouch;
 
-    private AnimationPlayer animPlayerCrouch;
     private ShapeCast3D shapeCastUncrouch;
     private AudioStreamPlayer audioStreamPlayerCrouch;
 
     private bool isCrouching = false;
 
+    Tween tweenCrouchPos = null;
+    private Node3D CameraCrouch = null;
+    private CollisionShape3D CharacterCollision = null;
+
     public override void _Ready()
 	{
         base._Ready();
 
-        animPlayerCrouch = GetNode<AnimationPlayer>("AnimationPlayerCrouch");
         shapeCastUncrouch = GetNode<ShapeCast3D>("ShapeCastUncrouch");
         audioStreamPlayerCrouch = GetNode<AudioStreamPlayer>("AudioStreamPlayer_Crouch");
+
     }
 
     public override void PostInit(FpsCharacterBase newOurCharacter)
@@ -30,6 +41,9 @@ public partial class CCharacterCrouchComponent : CBaseComponent
         base.PostInit(newOurCharacter);
 
         shapeCastUncrouch.AddException(ourCharacterBase);
+
+        CameraCrouch = ourCharacterBase.GetCharacterLookComponent().GetCameraCrouch();
+        CharacterCollision = ourCharacterBase.GetCharacterCollisionShape();
     }
 
     public void CheckAndApplyCrouch(StringName newInput)
@@ -55,52 +69,20 @@ public partial class CCharacterCrouchComponent : CBaseComponent
     private void ToggleCrouch(){ SetCrouch(!isCrouching); }
     private void SetCrouch(bool newCrouch)
     {
-        if(TOGGLE_CROUCH == true)
+        if (newCrouch)
         {
-            if (newCrouch && animPlayerCrouch.IsPlaying() == false)
-            {
-                animPlayerCrouch.Play("Crouch", -1, CROUCH_SPEED);
-
-                audioStreamPlayerCrouch.Stream = AudioStreamCrouch;
-                audioStreamPlayerCrouch.Play();
-            }
-            else if (shapeCastUncrouch.IsColliding() == false && animPlayerCrouch.IsPlaying() == false)
-            {
-                animPlayerCrouch.Play("Crouch", -1, -CROUCH_SPEED, true);
-
-                audioStreamPlayerCrouch.Stream = AudioStreamUnCrouch;
-                audioStreamPlayerCrouch.Play();
-            }
+            SetTweenCrouch(true);
+            audioStreamPlayerCrouch.Stream = AudioStreamCrouch;
+            audioStreamPlayerCrouch.Play();
+            isCrouching = true;
         }
-        else if(TOGGLE_CROUCH == false)
+        else if (shapeCastUncrouch.IsColliding() == false)
         {
-            if (newCrouch == true && shapeCastUncrouch.IsColliding() == false)
-            {
-                animPlayerCrouch.Play("Crouch", -1, CROUCH_SPEED);
-                isCrouching = true;
-
-                audioStreamPlayerCrouch.Stream = AudioStreamCrouch;
-                audioStreamPlayerCrouch.Play();
-            }
-            else if (newCrouch == false && shapeCastUncrouch.IsColliding() == true)
-            {
-                Uncrouch_Check();
-            }
-            else if (newCrouch == false && shapeCastUncrouch.IsColliding() == false)
-            {
-                animPlayerCrouch.Play("Crouch", -1, -CROUCH_SPEED, true);
-                isCrouching = false;
-
-                audioStreamPlayerCrouch.Stream = AudioStreamUnCrouch;
-                audioStreamPlayerCrouch.Play();
-            }
+            SetTweenCrouch(false);
+            audioStreamPlayerCrouch.Stream = AudioStreamUnCrouch;
+            audioStreamPlayerCrouch.Play();
+            isCrouching = false;
         }
-    }
-
-    public void _on_animation_player_crouch_animation_started(StringName animName)
-    {
-        if(animName == "Crouch" && TOGGLE_CROUCH == true)
-            isCrouching = !isCrouching;
     }
 
     private async void Uncrouch_Check()
@@ -118,4 +100,39 @@ public partial class CCharacterCrouchComponent : CBaseComponent
 
     public bool GetIsCrouched() {  return isCrouching; }
 
+    public void SetTweenCrouch(bool newCrouchState)
+    {
+        if(tweenCrouchPos != null)
+            tweenCrouchPos.Kill();
+
+
+        if(newCrouchState)
+        {
+            //GD.Print("Crouched");
+            tweenCrouchPos = GetTree().CreateTween();
+            tweenCrouchPos.Parallel().TweenProperty(
+                CameraCrouch, "position", new Vector3(0, CROUCH_CAM_POS, 0), CROUCH_TIME)
+                .SetTrans(Tween.TransitionType.Cubic);
+
+            tweenCrouchPos.Parallel().TweenProperty(
+                CharacterCollision, "position", new Vector3(0, CROUCH_SHAPE_POS, 0), CROUCH_TIME);
+            tweenCrouchPos.Parallel().TweenProperty(
+                CharacterCollision, "shape:height", CROUCH_SHAPE_HEIGHT, CROUCH_TIME);
+
+        }
+        else
+        {
+            //GD.Print("Uncrouched");
+            tweenCrouchPos = GetTree().CreateTween();
+            tweenCrouchPos.TweenProperty(
+                CameraCrouch, "position", new Vector3(0, UNCROUCH_CAM_POS, 0), CROUCH_TIME)
+                .SetTrans(Tween.TransitionType.Cubic);
+
+            tweenCrouchPos.Parallel().TweenProperty(
+                CharacterCollision, "position", new Vector3(0, UNCROUCH_SHAPE_POS, 0), CROUCH_TIME);
+            tweenCrouchPos.Parallel().TweenProperty(
+                CharacterCollision, "shape:height", UNCROUCH_SHAPE_HEIGHT, CROUCH_TIME);
+
+        }
+    }
 }

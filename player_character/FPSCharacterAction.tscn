@@ -19,6 +19,9 @@ FootStepLengthInWalk = 1.25
 FootStepLengthInSprint = 1.28
 FootStepLengthInCrouch = 0.95
 
+[node name="BaseLeanComponent" parent="BaseComponents" index="4"]
+LeanPositionTweenTime = 0.25
+
 [node name="BaseFlashlightComponent" parent="BaseComponents" index="9" instance=ExtResource("3_pbs4r")]
 
 [node name="Camera3D" parent="CameraCrouch/CameraLand/CameraController/CameraHead/CameraLean/CameraSway/CameraJump/CameraShakeRot/HeadBob/HeadBreathing" index="0"]

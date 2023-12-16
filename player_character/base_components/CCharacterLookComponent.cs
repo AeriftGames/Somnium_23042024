@@ -8,7 +8,7 @@ public partial class CCharacterLookComponent : CBaseComponent
 	[Export] public float TILT_LOWER_LIMIT = Mathf.DegToRad(-90.0f);
 	[Export] public float TILT_UPPER_LIMIT = Mathf.DegToRad(90.0f);
 
-    private bool isMouseInput = false;
+	private bool isMouseInput = false;
 	private float rotationInput;
 	private float tiltInput;
 	private Vector3 mouseRotation;
@@ -18,6 +18,7 @@ public partial class CCharacterLookComponent : CBaseComponent
 
 	private float OnlyStartOffset = 0.0f;
 
+	private Node3D CameraCrouch = null;
 	private Node3D CameraLand = null;
 	private Node3D CameraController = null;
 	private Node3D CameraHead = null;
@@ -33,6 +34,7 @@ public partial class CCharacterLookComponent : CBaseComponent
 	{
 		base.PostInit(newOurCharacter);
 
+		CameraCrouch = ourCharacterBase.GetNode<Node3D>("%CameraCrouch");
 		CameraLand = ourCharacterBase.GetNode<Node3D>("%CameraLand");
 		CameraController = ourCharacterBase.GetNode<Node3D>("%CameraController");
 		CameraHead = ourCharacterBase.GetNode<Node3D>("%CameraHead");
@@ -90,10 +92,11 @@ public partial class CCharacterLookComponent : CBaseComponent
 	// GETTIGNS
 	public Camera3D GetMainCamera() { return Camera; }
 	public Vector3 GetMainCameraLookingPointPos() { return LookingPoint.GlobalPosition; }
-    public Vector3 GetRightHandPointPos() { return RightHandPoint.GlobalPosition; }
+	public Vector3 GetRightHandPointPos() { return RightHandPoint.GlobalPosition; }
 	public Node3D GetCameraHead() { return CameraHead; }
-    public Node3D GetHeadBob() { return HeadBob; }
-	public Node3D GetCameraSway() {  return CameraSway; }
+	public Node3D GetHeadBob() { return HeadBob; }
+	public Node3D GetCameraSway() { return CameraSway; }
+	public Node3D GetCameraCrouch() { return CameraCrouch; }
 	public Node3D GetCameraLand() { return CameraLand; }
 	public Node3D GetCameraJump() { return CameraJump; }
 	public Node3D GetCameraShakeRot() { return CameraShakeRot; }

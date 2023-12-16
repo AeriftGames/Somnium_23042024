@@ -39,7 +39,7 @@ public partial class CCharacterLeanComponent : CBaseComponent
         if (waitToCenter)
         {
             SetActualLean(ELeanType.Center);
-            if (CameraLean.Position.Length() < 0.12f) 
+            if (MathF.Abs(CameraLean.Position.Length()) < 0.02f) 
             {
                 waitToCenter = false;
             }
@@ -51,8 +51,6 @@ public partial class CCharacterLeanComponent : CBaseComponent
                 SetActualLean(ELeanType.Left);
             else if (Input.IsActionPressed("leanRight") && !Input.IsActionPressed("leanLeft"))
                 SetActualLean(ELeanType.Right);
-            else
-                SetActualLean(ELeanType.Center);
         }    
         
         if (Input.IsActionJustReleased("leanLeft") || Input.IsActionJustReleased("leanRight")) 
@@ -80,13 +78,12 @@ public partial class CCharacterLeanComponent : CBaseComponent
            LeanMaxPositionDistanceX, LeanMaxRotateDistanceZ);
 
         // Rot
-        tweenLeanRot = CreateTween();
-        tweenLeanRot.TweenProperty(CameraLean, "rotation", finalLeanRot,
+        tweenLeanRot = CreateTween().SetParallel(true);
+        tweenLeanRot.Parallel().TweenProperty(CameraLean, "rotation", finalLeanRot,
             LeanPositionTweenTime).SetEase(Tween.EaseType.OutIn).SetTrans(Tween.TransitionType.Cubic);
 
         // Pos
-        tweenLeanPos = CreateTween();
-        tweenLeanPos.TweenProperty(CameraLean, "position", finalLeanPos,
+        tweenLeanRot.Parallel().TweenProperty(CameraLean, "position", finalLeanPos,
             LeanPositionTweenTime).SetEase(Tween.EaseType.OutIn).SetTrans(Tween.TransitionType.Cubic);
     }
 

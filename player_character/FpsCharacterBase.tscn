@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://dcilkc4fno2qm"]
+[gd_scene load_steps=22 format=3 uid="uid://dcilkc4fno2qm"]
 
 [ext_resource type="Script" path="res://player_character/FpsCharacterBase.cs" id="1_ob1gb"]
 [ext_resource type="Script" path="res://player_character/base_components/CCharacterMovementComponent.cs" id="2_omu0b"]
@@ -17,92 +17,7 @@
 [ext_resource type="Script" path="res://player_character/player_state/CLandPlayerState.cs" id="21_0snpr"]
 [ext_resource type="Script" path="res://player_character/player_state/CFallPlayerState.cs" id="22_tom1k"]
 
-[sub_resource type="Animation" id="Animation_v3wid"]
-resource_name = "Crouch"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../../CharacterCollisionShape:shape:height")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [1.8, 1.3]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("../../CharacterCollisionShape:position")
-tracks/1/interp = 2
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(0, 0.9, 0), Vector3(0, 0.65, 0)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("../../CameraCrouch:position")
-tracks/2/interp = 2
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(0, 1.75, 0), Vector3(0, 1.2, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_vk1eh"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../../CharacterCollisionShape:shape:height")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [1.8]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("../../CharacterCollisionShape:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0.9, 0)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("../../CameraCrouch:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 1.75, 0)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_m6w5c"]
-_data = {
-"Crouch": SubResource("Animation_v3wid"),
-"RESET": SubResource("Animation_vk1eh")
-}
-
 [sub_resource type="SphereShape3D" id="SphereShape3D_83vw8"]
-radius = 0.53
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3j32b"]
 height = 1.8
@@ -145,18 +60,13 @@ script = ExtResource("5_sagus")
 [node name="BaseCrouchComponent" type="Node3D" parent="BaseComponents"]
 script = ExtResource("4_oftwk")
 TOGGLE_CROUCH = true
-CROUCH_SPEED = 3.0
 metadata/_edit_lock_ = true
-
-[node name="AnimationPlayerCrouch" type="AnimationPlayer" parent="BaseComponents/BaseCrouchComponent"]
-libraries = {
-"": SubResource("AnimationLibrary_m6w5c")
-}
 
 [node name="ShapeCastUncrouch" type="ShapeCast3D" parent="BaseComponents/BaseCrouchComponent"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.31472, 0)
 shape = SubResource("SphereShape3D_83vw8")
 target_position = Vector3(0, 0, 0)
+metadata/_edit_lock_ = true
 
 [node name="AudioStreamPlayer_Crouch" type="AudioStreamPlayer" parent="BaseComponents/BaseCrouchComponent"]
 
@@ -342,5 +252,3 @@ script = ExtResource("22_tom1k")
 
 [node name="CrouchMovePlayerState" type="Node" parent="PlayerStateMachine"]
 script = ExtResource("15_v6jlm")
-
-[connection signal="animation_started" from="BaseComponents/BaseCrouchComponent/AnimationPlayerCrouch" to="BaseComponents/BaseCrouchComponent" method="_on_animation_player_crouch_animation_started"]
