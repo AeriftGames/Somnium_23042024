@@ -38,16 +38,16 @@ public partial class FpsCharacterBase : CharacterBody3D
         CharacterStateMachine = GetNode<CStateMachine>("PlayerStateMachine");
         CharacterStateMachine.PostInit();
 
-        CharacterMovementComponent = GetNode<CCharacterMovementComponent>("BaseComponents/BaseMovementComponent");
+        CharacterMovementComponent = GetBaseComponents().GetNode<CCharacterMovementComponent>("BaseMovementComponent");
         CharacterMovementComponent.PostInit(this);
 
-        CharacterLookComponent = GetNode<CCharacterLookComponent>("BaseComponents/BaseLookComponent");
+        CharacterLookComponent = GetBaseComponents().GetNode<CCharacterLookComponent>("BaseLookComponent");
         CharacterLookComponent.PostInit(this);
 
-        CharacterFovComponent = GetNode<CCharacterFovComponent>("BaseComponents/BaseFovComponent");
+        CharacterFovComponent = GetBaseComponents().GetNode<CCharacterFovComponent>("BaseFovComponent");
         CharacterFovComponent.PostInit(this);
 
-        CharacterCrouchComponent = GetNode<CCharacterCrouchComponent>("BaseComponents/BaseCrouchComponent");
+        CharacterCrouchComponent = GetBaseComponents().GetNode<CCharacterCrouchComponent>("BaseCrouchComponent");
         CharacterCrouchComponent.PostInit(this);
     }
 

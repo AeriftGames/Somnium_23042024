@@ -13,7 +13,7 @@ public partial class CWalkingPlayerState : CState
         if (ourCharacterBase.GetCharacterCrouchComponent().GetIsCrouched() == true)
         { EmitSignal(nameof(Transition), "CrouchMovePlayerState"); }
 
-        else if (ourCharacterBase.GetCharacterMovementComponent().GetRealSpeed() > 2.1f)
+        else if (ourCharacterBase.GetCharacterMovementComponent().GetRealSpeed() > 3.2f)
         { EmitSignal(nameof(Transition), "RunningPlayerState"); }
 
         else if (ourCharacterBase.GetCharacterMovementComponent().GetRealSpeed() < 0.01f &&

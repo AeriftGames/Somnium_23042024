@@ -7,15 +7,19 @@ public partial class CLandPlayerState : CState
     {
         base.Enter();
 
-        FPSCharacterMoveAnim FPSMoveAnim = ourCharacterBase as FPSCharacterMoveAnim;
-        if (FPSMoveAnim != null)
+        FPSCharacterAction FPSMoveAction = ourCharacterBase as FPSCharacterAction;
+        if (FPSMoveAction != null)
         {
-            if (FPSMoveAnim.GetJumpLandEffectComponent() != null)
-            { FPSMoveAnim.GetJumpLandEffectComponent().ApplyEffectLand(); }
+            if (FPSMoveAction.GetJumpLandEffectComponent() != null)
+            { FPSMoveAction.GetJumpLandEffectComponent().ApplyEffectLand(); }
 
             // Apply Land Fov effect now
-            if (FPSMoveAnim.GetCharacterFovComponent != null)
-            { ourCharacterBase.GetCharacterFovComponent().SetLandFovNow(); }
+            if (FPSMoveAction.GetCharacterFovComponent() != null)
+            { FPSMoveAction.GetCharacterFovComponent().SetLandFovNow(); }
+
+            // Remove Stamina
+            if (FPSMoveAction.GetStaminaComponent() != null)
+            { FPSMoveAction.GetStaminaComponent().RemoveStaminaLand(); }
         }
     }
 

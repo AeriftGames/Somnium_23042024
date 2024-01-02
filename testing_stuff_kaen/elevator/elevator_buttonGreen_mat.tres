@@ -23,3 +23,4 @@ anisotropy = 0.71
 heightmap_deep_parallax = true
 heightmap_min_layers = 8
 heightmap_max_layers = 32
+grow_amount = 0.1

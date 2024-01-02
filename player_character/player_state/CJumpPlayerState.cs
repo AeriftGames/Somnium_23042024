@@ -7,11 +7,14 @@ public partial class CJumpPlayerState : CState
     {
         base.Enter();
 
-        FPSCharacterMoveAnim FPSMoveAnim = ourCharacterBase as FPSCharacterMoveAnim;
-        if(FPSMoveAnim != null)
+        FPSCharacterAction FPSAction = ourCharacterBase as FPSCharacterAction;
+        if (FPSAction != null)
         {
-            if(FPSMoveAnim.GetJumpLandEffectComponent() != null)
-            { FPSMoveAnim.GetJumpLandEffectComponent().ApplyEffectJump(); }
+            if (FPSAction.GetJumpLandEffectComponent() != null)
+            { FPSAction.GetJumpLandEffectComponent().ApplyEffectJump(); }
+
+            if (FPSAction.GetStaminaComponent() != null)
+            { FPSAction.GetStaminaComponent().RemoveStaminaJump(); }
         }
     }
 

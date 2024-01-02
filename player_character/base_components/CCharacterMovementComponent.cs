@@ -149,4 +149,9 @@ public partial class CCharacterMovementComponent : CBaseComponent
 
     public Vector2 GetInputDir() { return InputDir; }
     public Vector3 GetDirection() {  return Direction; }
+
+    public bool GetIsWantSprint() { 
+        if (Speed == SPEED_SPRINT) return true;
+        else return false;
+    }
 }

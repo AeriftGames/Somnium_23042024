@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://d375ij8nslw6x"]
+
+[ext_resource type="PackedScene" uid="uid://demhwke6dyff" path="res://testing_stuff_kaen/test_new_levels/new_room2/assets/plate_small.glb" id="1_g672k"]
+[ext_resource type="Material" uid="uid://xgg2kugcbyhy" path="res://testing_stuff_kaen/test_new_levels/new_room2/mat/trim01_ceil_shader.tres" id="2_wrc0g"]
+
+[node name="plate_small" instance=ExtResource("1_g672k")]
+
+[node name="Cube_2202" parent="." index="0"]
+transform = Transform3D(-1, -4.47024e-08, 0, 4.47024e-08, -1, 0, 0, 0, 1, 0, 0, 0)
+material_override = ExtResource("2_wrc0g")
+lod_bias = 10.0

@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://dwjy2dmoful2u"]
+
+[ext_resource type="PackedScene" uid="uid://cwgy3tl06mvga" path="res://testing_stuff_kaen/test_new_levels/new_room2/assets/box.glb" id="1_b38g1"]
+[ext_resource type="Material" uid="uid://ckxg8gajrxn1i" path="res://testing_stuff_kaen/test_new_levels/new_room2/mat/trim01_box_shader.tres" id="2_cuw1b"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2m7jc"]
+size = Vector3(1.8, 5.7, 5.8)
+
+[node name="box" instance=ExtResource("1_b38g1")]
+
+[node name="Cube_2167" parent="." index="0"]
+transform = Transform3D(0, -9.00032e-07, -1, 9.00032e-07, -1, 9.00032e-07, -1, -9.00032e-07, 0, 0, 0, 0)
+material_override = ExtResource("2_cuw1b")
+lod_bias = 10.0
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." index="1"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.9407e-08, 0.05, 0)
+shape = SubResource("BoxShape3D_2m7jc")

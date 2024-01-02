@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://dxuoek783pl4n"]
+
+[ext_resource type="PackedScene" uid="uid://cxuyprh5ndp2n" path="res://testing_stuff_kaen/test_new_levels/new_room2/assets/ventilator.glb" id="1_mme6a"]
+[ext_resource type="Material" uid="uid://kmq4rqktauvn" path="res://testing_stuff_kaen/test_new_levels/new_room2/mat/trim01_ventilator_shader.tres" id="2_ce6pl"]
+
+[node name="ventilator" instance=ExtResource("1_mme6a")]
+
+[node name="Cube_2166" parent="." index="0"]
+transform = Transform3D(4.76837e-07, -2.68221e-07, -1, -0.70688, 0.707334, -5.06639e-07, 0.707334, 0.70688, 1.78814e-07, 0, 0, 0)
+material_override = ExtResource("2_ce6pl")

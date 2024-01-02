@@ -14,7 +14,7 @@ public partial class CRuningPlayerState : CState
         if (ourCharacterBase.GetCharacterCrouchComponent().GetIsCrouched() == true)
         { EmitSignal(nameof(Transition), "CrouchMovePlayerState"); }
 
-        else if (ourCharacterBase.GetCharacterMovementComponent().GetRealSpeed() <= 2.1f)
+        else if (ourCharacterBase.GetCharacterMovementComponent().GetRealSpeed() <= 3.19f)
         { EmitSignal(nameof(Transition), "WalkingPlayerState"); }
 
         else if (ourCharacterBase.GetCharacterMovementComponent().GetRealSpeed() < 0.01f)

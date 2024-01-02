@@ -304,9 +304,6 @@ speed_scale = 0.5
 AudioStreamCrouch = ExtResource("3_afmsp")
 AudioStreamUnCrouch = ExtResource("4_h6qy8")
 
-[node name="ShapeCastUncrouch" parent="BaseComponents/BaseCrouchComponent" index="0"]
-metadata/_edit_lock_ = true
-
 [node name="AudioStreamPlayer_Crouch" parent="BaseComponents/BaseCrouchComponent" index="1"]
 volume_db = -10.0
 pitch_scale = 0.8

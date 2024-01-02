@@ -15,8 +15,8 @@
 [ext_resource type="PackedScene" uid="uid://dpa62hhmdflgr" path="res://testing_stuff_kaen/stairs_gd/StairNodeGD.tscn" id="13_exdu3"]
 [ext_resource type="PackedScene" uid="uid://cfw5ieeqmr1ut" path="res://testing_stuff_kaen/stairs_gd/stair_classic_short.tscn" id="14_57052"]
 [ext_resource type="PackedScene" uid="uid://bmwx2d7mfrba7" path="res://placeholders/modular_level_builds/placeholder/sloup_end_1_2.tscn" id="15_m0n7h"]
-[ext_resource type="Script" path="res://testing_stuff_kaen/stairs_gd/stair_classic1.gd" id="17_7jjff"]
 [ext_resource type="Texture2D" uid="uid://biime5bqefvd0" path="res://testing_stuff_kaen/level_decals/TexturesCom_DecalsStain0058_1_masked_S.png" id="17_fxyq8"]
+[ext_resource type="Script" path="res://testing_stuff_kaen/stairs_gd/stair_classic1.gd" id="17_gykq3"]
 [ext_resource type="Texture2D" uid="uid://r1yp733qyqh3" path="res://testing_stuff_kaen/level_decals/TexturesCom_DecalLeakingRusty0037_2_masked_L.png" id="18_kd1wr"]
 [ext_resource type="ArrayOccluder3D" uid="uid://b5qgayspgs5vt" path="res://levels/worldlevel_new_test_trim_room/worldlevel_demo_ladder1.occ" id="19_m1b28"]
 [ext_resource type="Texture2D" uid="uid://d1e2ap8udx8nc" path="res://testing_stuff_kaen/level_decals/TexturesCom_DecalsDamagePlaster0106_1_masked_L.png" id="19_xbvqr"]
@@ -1458,27 +1458,27 @@ enable_player_col = true
 [node name="AllStairs" type="Node3D" parent="LevelScene/Rooms/Room_Origin/StairNodes/StairNodeGd"]
 
 [node name="stair_0" type="Node3D" parent="LevelScene/Rooms/Room_Origin/StairNodes/StairNodeGd/AllStairs" instance=ExtResource("14_57052")]
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="stair_1" type="Node3D" parent="LevelScene/Rooms/Room_Origin/StairNodes/StairNodeGd/AllStairs" instance=ExtResource("14_57052")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.599998, 0.120623, 0)
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="stair_2" type="Node3D" parent="LevelScene/Rooms/Room_Origin/StairNodes/StairNodeGd/AllStairs" instance=ExtResource("14_57052")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, 0.241246, 0)
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="stair_3" type="Node3D" parent="LevelScene/Rooms/Room_Origin/StairNodes/StairNodeGd/AllStairs" instance=ExtResource("14_57052")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8, 0.361868, 0)
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="stair_4" type="Node3D" parent="LevelScene/Rooms/Room_Origin/StairNodes/StairNodeGd/AllStairs" instance=ExtResource("14_57052")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.39999, 0.482491, 0)
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="stair_5" type="Node3D" parent="LevelScene/Rooms/Room_Origin/StairNodes/StairNodeGd/AllStairs" instance=ExtResource("14_57052")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.99999, 0.603114, 0)
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="StairNodeGd2" parent="LevelScene/Rooms/Room_Origin/StairNodes" instance=ExtResource("13_exdu3")]
 transform = Transform3D(-3.27835e-08, 0, -0.5, 0, 1, 0, 0.75, 0, -2.18557e-08, 18.8071, 0, 0)
@@ -1490,27 +1490,27 @@ enable_player_col = true
 [node name="AllStairs" type="Node3D" parent="LevelScene/Rooms/Room_Origin/StairNodes/StairNodeGd2"]
 
 [node name="stair_0" type="Node3D" parent="LevelScene/Rooms/Room_Origin/StairNodes/StairNodeGd2/AllStairs" instance=ExtResource("14_57052")]
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="stair_1" type="Node3D" parent="LevelScene/Rooms/Room_Origin/StairNodes/StairNodeGd2/AllStairs" instance=ExtResource("14_57052")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, 0.120623, 0)
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="stair_2" type="Node3D" parent="LevelScene/Rooms/Room_Origin/StairNodes/StairNodeGd2/AllStairs" instance=ExtResource("14_57052")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, 0.241246, 0)
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="stair_3" type="Node3D" parent="LevelScene/Rooms/Room_Origin/StairNodes/StairNodeGd2/AllStairs" instance=ExtResource("14_57052")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8, 0.361868, 0)
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="stair_4" type="Node3D" parent="LevelScene/Rooms/Room_Origin/StairNodes/StairNodeGd2/AllStairs" instance=ExtResource("14_57052")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4, 0.482491, 0)
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="stair_5" type="Node3D" parent="LevelScene/Rooms/Room_Origin/StairNodes/StairNodeGd2/AllStairs" instance=ExtResource("14_57052")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.603114, 0)
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="Node3D" type="Node3D" parent="LevelScene/Rooms/Room_Origin"]
 transform = Transform3D(-2.62268e-08, -0.6, 7.81621e-16, 0.424264, -1.85452e-08, 0.330926, -0.424264, 1.85452e-08, 0.330926, 21.8789, 3, 2)
@@ -3118,27 +3118,27 @@ enable_player_col = true
 [node name="AllStairs" type="Node3D" parent="LevelScene/Rooms/Room1/StairNodes/StairNodeGd"]
 
 [node name="stair_0" type="Node3D" parent="LevelScene/Rooms/Room1/StairNodes/StairNodeGd/AllStairs" instance=ExtResource("14_57052")]
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="stair_1" type="Node3D" parent="LevelScene/Rooms/Room1/StairNodes/StairNodeGd/AllStairs" instance=ExtResource("14_57052")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, 0.120623, 0)
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="stair_2" type="Node3D" parent="LevelScene/Rooms/Room1/StairNodes/StairNodeGd/AllStairs" instance=ExtResource("14_57052")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, 0.241246, 0)
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="stair_3" type="Node3D" parent="LevelScene/Rooms/Room1/StairNodes/StairNodeGd/AllStairs" instance=ExtResource("14_57052")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8, 0.361868, 0)
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="stair_4" type="Node3D" parent="LevelScene/Rooms/Room1/StairNodes/StairNodeGd/AllStairs" instance=ExtResource("14_57052")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4, 0.482491, 0)
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="stair_5" type="Node3D" parent="LevelScene/Rooms/Room1/StairNodes/StairNodeGd/AllStairs" instance=ExtResource("14_57052")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.603114, 0)
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="StairNodeGd2" parent="LevelScene/Rooms/Room1/StairNodes" instance=ExtResource("13_exdu3")]
 transform = Transform3D(-3.27835e-08, 0, -0.5, 0, 1, 0, 0.75, 0, -2.18557e-08, 18.8071, 0, 0)
@@ -3150,27 +3150,27 @@ enable_player_col = true
 [node name="AllStairs" type="Node3D" parent="LevelScene/Rooms/Room1/StairNodes/StairNodeGd2"]
 
 [node name="stair_0" type="Node3D" parent="LevelScene/Rooms/Room1/StairNodes/StairNodeGd2/AllStairs" instance=ExtResource("14_57052")]
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="stair_1" type="Node3D" parent="LevelScene/Rooms/Room1/StairNodes/StairNodeGd2/AllStairs" instance=ExtResource("14_57052")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, 0.120623, 0)
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="stair_2" type="Node3D" parent="LevelScene/Rooms/Room1/StairNodes/StairNodeGd2/AllStairs" instance=ExtResource("14_57052")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, 0.241246, 0)
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="stair_3" type="Node3D" parent="LevelScene/Rooms/Room1/StairNodes/StairNodeGd2/AllStairs" instance=ExtResource("14_57052")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8, 0.361868, 0)
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="stair_4" type="Node3D" parent="LevelScene/Rooms/Room1/StairNodes/StairNodeGd2/AllStairs" instance=ExtResource("14_57052")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4, 0.482491, 0)
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="stair_5" type="Node3D" parent="LevelScene/Rooms/Room1/StairNodes/StairNodeGd2/AllStairs" instance=ExtResource("14_57052")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.603114, 0)
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="Node3D" type="Node3D" parent="LevelScene/Rooms/Room1"]
 transform = Transform3D(-2.62268e-08, -0.6, 7.81621e-16, 0.424264, -1.85452e-08, 0.330926, -0.424264, 1.85452e-08, 0.330926, 21.8789, 3, 2)
@@ -4753,27 +4753,27 @@ enable_player_col = true
 [node name="AllStairs" type="Node3D" parent="LevelScene/Rooms/Room2/StairNodes/StairNodeGd"]
 
 [node name="stair_0" type="Node3D" parent="LevelScene/Rooms/Room2/StairNodes/StairNodeGd/AllStairs" instance=ExtResource("14_57052")]
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="stair_1" type="Node3D" parent="LevelScene/Rooms/Room2/StairNodes/StairNodeGd/AllStairs" instance=ExtResource("14_57052")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.599998, 0.120623, 0)
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="stair_2" type="Node3D" parent="LevelScene/Rooms/Room2/StairNodes/StairNodeGd/AllStairs" instance=ExtResource("14_57052")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, 0.241246, 0)
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="stair_3" type="Node3D" parent="LevelScene/Rooms/Room2/StairNodes/StairNodeGd/AllStairs" instance=ExtResource("14_57052")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8, 0.361868, 0)
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="stair_4" type="Node3D" parent="LevelScene/Rooms/Room2/StairNodes/StairNodeGd/AllStairs" instance=ExtResource("14_57052")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.39999, 0.482491, 0)
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="stair_5" type="Node3D" parent="LevelScene/Rooms/Room2/StairNodes/StairNodeGd/AllStairs" instance=ExtResource("14_57052")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.99999, 0.603114, 0)
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="StairNodeGd2" parent="LevelScene/Rooms/Room2/StairNodes" instance=ExtResource("13_exdu3")]
 transform = Transform3D(-3.27835e-08, 0, -0.5, 0, 1, 0, 0.75, 0, -2.18557e-08, 18.8071, 0, 0)
@@ -4785,27 +4785,27 @@ enable_player_col = true
 [node name="AllStairs" type="Node3D" parent="LevelScene/Rooms/Room2/StairNodes/StairNodeGd2"]
 
 [node name="stair_0" type="Node3D" parent="LevelScene/Rooms/Room2/StairNodes/StairNodeGd2/AllStairs" instance=ExtResource("14_57052")]
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="stair_1" type="Node3D" parent="LevelScene/Rooms/Room2/StairNodes/StairNodeGd2/AllStairs" instance=ExtResource("14_57052")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, 0.120623, 0)
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="stair_2" type="Node3D" parent="LevelScene/Rooms/Room2/StairNodes/StairNodeGd2/AllStairs" instance=ExtResource("14_57052")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, 0.241246, 0)
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="stair_3" type="Node3D" parent="LevelScene/Rooms/Room2/StairNodes/StairNodeGd2/AllStairs" instance=ExtResource("14_57052")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8, 0.361868, 0)
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="stair_4" type="Node3D" parent="LevelScene/Rooms/Room2/StairNodes/StairNodeGd2/AllStairs" instance=ExtResource("14_57052")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4, 0.482491, 0)
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="stair_5" type="Node3D" parent="LevelScene/Rooms/Room2/StairNodes/StairNodeGd2/AllStairs" instance=ExtResource("14_57052")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.603114, 0)
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="Node3D" type="Node3D" parent="LevelScene/Rooms/Room2"]
 transform = Transform3D(-2.62268e-08, -0.6, 7.81621e-16, 0.424264, -1.85452e-08, 0.330926, -0.424264, 1.85452e-08, 0.330926, 21.8789, 3, 2)
@@ -6385,27 +6385,27 @@ enable_player_col = true
 [node name="AllStairs" type="Node3D" parent="LevelScene/Rooms/Room3/StairNodes/StairNodeGd"]
 
 [node name="stair_0" type="Node3D" parent="LevelScene/Rooms/Room3/StairNodes/StairNodeGd/AllStairs" instance=ExtResource("14_57052")]
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="stair_1" type="Node3D" parent="LevelScene/Rooms/Room3/StairNodes/StairNodeGd/AllStairs" instance=ExtResource("14_57052")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.599998, 0.120623, 0)
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="stair_2" type="Node3D" parent="LevelScene/Rooms/Room3/StairNodes/StairNodeGd/AllStairs" instance=ExtResource("14_57052")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, 0.241246, 0)
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="stair_3" type="Node3D" parent="LevelScene/Rooms/Room3/StairNodes/StairNodeGd/AllStairs" instance=ExtResource("14_57052")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8, 0.361868, 0)
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="stair_4" type="Node3D" parent="LevelScene/Rooms/Room3/StairNodes/StairNodeGd/AllStairs" instance=ExtResource("14_57052")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.39999, 0.482491, 0)
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="stair_5" type="Node3D" parent="LevelScene/Rooms/Room3/StairNodes/StairNodeGd/AllStairs" instance=ExtResource("14_57052")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.99999, 0.603114, 0)
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="StairNodeGd2" parent="LevelScene/Rooms/Room3/StairNodes" instance=ExtResource("13_exdu3")]
 transform = Transform3D(-3.27835e-08, 0, -0.5, 0, 1, 0, 0.75, 0, -2.18557e-08, 18.8071, 0, 0)
@@ -6417,27 +6417,27 @@ enable_player_col = true
 [node name="AllStairs" type="Node3D" parent="LevelScene/Rooms/Room3/StairNodes/StairNodeGd2"]
 
 [node name="stair_0" type="Node3D" parent="LevelScene/Rooms/Room3/StairNodes/StairNodeGd2/AllStairs" instance=ExtResource("14_57052")]
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="stair_1" type="Node3D" parent="LevelScene/Rooms/Room3/StairNodes/StairNodeGd2/AllStairs" instance=ExtResource("14_57052")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, 0.120623, 0)
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="stair_2" type="Node3D" parent="LevelScene/Rooms/Room3/StairNodes/StairNodeGd2/AllStairs" instance=ExtResource("14_57052")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, 0.241246, 0)
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="stair_3" type="Node3D" parent="LevelScene/Rooms/Room3/StairNodes/StairNodeGd2/AllStairs" instance=ExtResource("14_57052")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8, 0.361868, 0)
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="stair_4" type="Node3D" parent="LevelScene/Rooms/Room3/StairNodes/StairNodeGd2/AllStairs" instance=ExtResource("14_57052")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4, 0.482491, 0)
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="stair_5" type="Node3D" parent="LevelScene/Rooms/Room3/StairNodes/StairNodeGd2/AllStairs" instance=ExtResource("14_57052")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.603114, 0)
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="Node3D" type="Node3D" parent="LevelScene/Rooms/Room3"]
 transform = Transform3D(-2.62268e-08, -0.6, 7.81621e-16, 0.424264, -1.85452e-08, 0.330926, -0.424264, 1.85452e-08, 0.330926, 21.8789, 3, 2)
@@ -8017,27 +8017,27 @@ enable_player_col = true
 [node name="AllStairs" type="Node3D" parent="LevelScene/Rooms/Room4/StairNodes/StairNodeGd"]
 
 [node name="stair_0" type="Node3D" parent="LevelScene/Rooms/Room4/StairNodes/StairNodeGd/AllStairs" instance=ExtResource("14_57052")]
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="stair_1" type="Node3D" parent="LevelScene/Rooms/Room4/StairNodes/StairNodeGd/AllStairs" instance=ExtResource("14_57052")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, 0.120623, 0)
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="stair_2" type="Node3D" parent="LevelScene/Rooms/Room4/StairNodes/StairNodeGd/AllStairs" instance=ExtResource("14_57052")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, 0.241246, 0)
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="stair_3" type="Node3D" parent="LevelScene/Rooms/Room4/StairNodes/StairNodeGd/AllStairs" instance=ExtResource("14_57052")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8, 0.361868, 0)
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="stair_4" type="Node3D" parent="LevelScene/Rooms/Room4/StairNodes/StairNodeGd/AllStairs" instance=ExtResource("14_57052")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4, 0.482491, 0)
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="stair_5" type="Node3D" parent="LevelScene/Rooms/Room4/StairNodes/StairNodeGd/AllStairs" instance=ExtResource("14_57052")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.603114, 0)
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="StairNodeGd2" parent="LevelScene/Rooms/Room4/StairNodes" instance=ExtResource("13_exdu3")]
 transform = Transform3D(-3.27835e-08, 0, -0.5, 0, 1, 0, 0.75, 0, -2.18557e-08, 18.8071, 0, 0)
@@ -8049,27 +8049,27 @@ enable_player_col = true
 [node name="AllStairs" type="Node3D" parent="LevelScene/Rooms/Room4/StairNodes/StairNodeGd2"]
 
 [node name="stair_0" type="Node3D" parent="LevelScene/Rooms/Room4/StairNodes/StairNodeGd2/AllStairs" instance=ExtResource("14_57052")]
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="stair_1" type="Node3D" parent="LevelScene/Rooms/Room4/StairNodes/StairNodeGd2/AllStairs" instance=ExtResource("14_57052")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, 0.120623, 0)
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="stair_2" type="Node3D" parent="LevelScene/Rooms/Room4/StairNodes/StairNodeGd2/AllStairs" instance=ExtResource("14_57052")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, 0.241246, 0)
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="stair_3" type="Node3D" parent="LevelScene/Rooms/Room4/StairNodes/StairNodeGd2/AllStairs" instance=ExtResource("14_57052")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8, 0.361868, 0)
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="stair_4" type="Node3D" parent="LevelScene/Rooms/Room4/StairNodes/StairNodeGd2/AllStairs" instance=ExtResource("14_57052")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4, 0.482491, 0)
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="stair_5" type="Node3D" parent="LevelScene/Rooms/Room4/StairNodes/StairNodeGd2/AllStairs" instance=ExtResource("14_57052")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.603114, 3.8147e-06)
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="Node3D" type="Node3D" parent="LevelScene/Rooms/Room4"]
 transform = Transform3D(-2.62268e-08, -0.6, 7.81621e-16, 0.424264, -1.85452e-08, 0.330926, -0.424264, 1.85452e-08, 0.330926, 21.8789, 3, 2)
@@ -9649,27 +9649,27 @@ enable_player_col = true
 [node name="AllStairs" type="Node3D" parent="LevelScene/Rooms/Room5/StairNodes/StairNodeGd"]
 
 [node name="stair_0" type="Node3D" parent="LevelScene/Rooms/Room5/StairNodes/StairNodeGd/AllStairs" instance=ExtResource("14_57052")]
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="stair_1" type="Node3D" parent="LevelScene/Rooms/Room5/StairNodes/StairNodeGd/AllStairs" instance=ExtResource("14_57052")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, 0.120623, 0)
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="stair_2" type="Node3D" parent="LevelScene/Rooms/Room5/StairNodes/StairNodeGd/AllStairs" instance=ExtResource("14_57052")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, 0.241246, 0)
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="stair_3" type="Node3D" parent="LevelScene/Rooms/Room5/StairNodes/StairNodeGd/AllStairs" instance=ExtResource("14_57052")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8, 0.361868, 0)
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="stair_4" type="Node3D" parent="LevelScene/Rooms/Room5/StairNodes/StairNodeGd/AllStairs" instance=ExtResource("14_57052")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4, 0.482491, 0)
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="stair_5" type="Node3D" parent="LevelScene/Rooms/Room5/StairNodes/StairNodeGd/AllStairs" instance=ExtResource("14_57052")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.603114, 0)
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="StairNodeGd2" parent="LevelScene/Rooms/Room5/StairNodes" instance=ExtResource("13_exdu3")]
 transform = Transform3D(-3.27835e-08, 0, -0.5, 0, 1, 0, 0.75, 0, -2.18557e-08, 18.8071, 0, 0)
@@ -9681,27 +9681,27 @@ enable_player_col = true
 [node name="AllStairs" type="Node3D" parent="LevelScene/Rooms/Room5/StairNodes/StairNodeGd2"]
 
 [node name="stair_0" type="Node3D" parent="LevelScene/Rooms/Room5/StairNodes/StairNodeGd2/AllStairs" instance=ExtResource("14_57052")]
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="stair_1" type="Node3D" parent="LevelScene/Rooms/Room5/StairNodes/StairNodeGd2/AllStairs" instance=ExtResource("14_57052")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, 0.120623, 0)
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="stair_2" type="Node3D" parent="LevelScene/Rooms/Room5/StairNodes/StairNodeGd2/AllStairs" instance=ExtResource("14_57052")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, 0.241246, 0)
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="stair_3" type="Node3D" parent="LevelScene/Rooms/Room5/StairNodes/StairNodeGd2/AllStairs" instance=ExtResource("14_57052")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8, 0.361868, 0)
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="stair_4" type="Node3D" parent="LevelScene/Rooms/Room5/StairNodes/StairNodeGd2/AllStairs" instance=ExtResource("14_57052")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4, 0.482491, 0)
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="stair_5" type="Node3D" parent="LevelScene/Rooms/Room5/StairNodes/StairNodeGd2/AllStairs" instance=ExtResource("14_57052")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.603114, 4.76837e-07)
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="Node3D" type="Node3D" parent="LevelScene/Rooms/Room5"]
 transform = Transform3D(-2.62268e-08, -0.6, 7.81621e-16, 0.424264, -1.85452e-08, 0.330926, -0.424264, 1.85452e-08, 0.330926, 21.8789, 3, 2)
@@ -11281,27 +11281,27 @@ enable_player_col = true
 [node name="AllStairs" type="Node3D" parent="LevelScene/Rooms/Room6/StairNodes/StairNodeGd"]
 
 [node name="stair_0" type="Node3D" parent="LevelScene/Rooms/Room6/StairNodes/StairNodeGd/AllStairs" instance=ExtResource("14_57052")]
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="stair_1" type="Node3D" parent="LevelScene/Rooms/Room6/StairNodes/StairNodeGd/AllStairs" instance=ExtResource("14_57052")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.599998, 0.120623, 0)
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="stair_2" type="Node3D" parent="LevelScene/Rooms/Room6/StairNodes/StairNodeGd/AllStairs" instance=ExtResource("14_57052")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, 0.241246, 0)
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="stair_3" type="Node3D" parent="LevelScene/Rooms/Room6/StairNodes/StairNodeGd/AllStairs" instance=ExtResource("14_57052")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8, 0.361868, 0)
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="stair_4" type="Node3D" parent="LevelScene/Rooms/Room6/StairNodes/StairNodeGd/AllStairs" instance=ExtResource("14_57052")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.39999, 0.482491, 0)
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="stair_5" type="Node3D" parent="LevelScene/Rooms/Room6/StairNodes/StairNodeGd/AllStairs" instance=ExtResource("14_57052")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.99999, 0.603114, 0)
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="StairNodeGd2" parent="LevelScene/Rooms/Room6/StairNodes" instance=ExtResource("13_exdu3")]
 transform = Transform3D(-3.27835e-08, 0, -0.5, 0, 1, 0, 0.75, 0, -2.18557e-08, 18.8071, 0, 0)
@@ -11313,27 +11313,27 @@ enable_player_col = true
 [node name="AllStairs" type="Node3D" parent="LevelScene/Rooms/Room6/StairNodes/StairNodeGd2"]
 
 [node name="stair_0" type="Node3D" parent="LevelScene/Rooms/Room6/StairNodes/StairNodeGd2/AllStairs" instance=ExtResource("14_57052")]
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="stair_1" type="Node3D" parent="LevelScene/Rooms/Room6/StairNodes/StairNodeGd2/AllStairs" instance=ExtResource("14_57052")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, 0.120623, 0)
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="stair_2" type="Node3D" parent="LevelScene/Rooms/Room6/StairNodes/StairNodeGd2/AllStairs" instance=ExtResource("14_57052")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, 0.241246, 0)
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="stair_3" type="Node3D" parent="LevelScene/Rooms/Room6/StairNodes/StairNodeGd2/AllStairs" instance=ExtResource("14_57052")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8, 0.361868, 0)
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="stair_4" type="Node3D" parent="LevelScene/Rooms/Room6/StairNodes/StairNodeGd2/AllStairs" instance=ExtResource("14_57052")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4, 0.482491, 0)
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="stair_5" type="Node3D" parent="LevelScene/Rooms/Room6/StairNodes/StairNodeGd2/AllStairs" instance=ExtResource("14_57052")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.603114, 0)
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="Node3D" type="Node3D" parent="LevelScene/Rooms/Room6"]
 transform = Transform3D(-2.62268e-08, -0.6, 7.81621e-16, 0.424264, -1.85452e-08, 0.330926, -0.424264, 1.85452e-08, 0.330926, 21.8789, 3, 2)
@@ -12913,27 +12913,27 @@ enable_player_col = true
 [node name="AllStairs" type="Node3D" parent="LevelScene/Rooms/Room7/StairNodes/StairNodeGd"]
 
 [node name="stair_0" type="Node3D" parent="LevelScene/Rooms/Room7/StairNodes/StairNodeGd/AllStairs" instance=ExtResource("14_57052")]
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="stair_1" type="Node3D" parent="LevelScene/Rooms/Room7/StairNodes/StairNodeGd/AllStairs" instance=ExtResource("14_57052")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, 0.120623, 0)
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="stair_2" type="Node3D" parent="LevelScene/Rooms/Room7/StairNodes/StairNodeGd/AllStairs" instance=ExtResource("14_57052")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, 0.241246, 0)
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="stair_3" type="Node3D" parent="LevelScene/Rooms/Room7/StairNodes/StairNodeGd/AllStairs" instance=ExtResource("14_57052")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8, 0.361868, 0)
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="stair_4" type="Node3D" parent="LevelScene/Rooms/Room7/StairNodes/StairNodeGd/AllStairs" instance=ExtResource("14_57052")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4, 0.482491, 0)
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="stair_5" type="Node3D" parent="LevelScene/Rooms/Room7/StairNodes/StairNodeGd/AllStairs" instance=ExtResource("14_57052")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.603114, 0)
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="StairNodeGd2" parent="LevelScene/Rooms/Room7/StairNodes" instance=ExtResource("13_exdu3")]
 transform = Transform3D(-3.27835e-08, 0, -0.5, 0, 1, 0, 0.75, 0, -2.18557e-08, 18.8071, 0, 0)
@@ -12945,27 +12945,27 @@ enable_player_col = true
 [node name="AllStairs" type="Node3D" parent="LevelScene/Rooms/Room7/StairNodes/StairNodeGd2"]
 
 [node name="stair_0" type="Node3D" parent="LevelScene/Rooms/Room7/StairNodes/StairNodeGd2/AllStairs" instance=ExtResource("14_57052")]
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="stair_1" type="Node3D" parent="LevelScene/Rooms/Room7/StairNodes/StairNodeGd2/AllStairs" instance=ExtResource("14_57052")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, 0.120623, 0)
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="stair_2" type="Node3D" parent="LevelScene/Rooms/Room7/StairNodes/StairNodeGd2/AllStairs" instance=ExtResource("14_57052")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, 0.241246, 2.38419e-07)
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="stair_3" type="Node3D" parent="LevelScene/Rooms/Room7/StairNodes/StairNodeGd2/AllStairs" instance=ExtResource("14_57052")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8, 0.361868, 4.76837e-07)
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="stair_4" type="Node3D" parent="LevelScene/Rooms/Room7/StairNodes/StairNodeGd2/AllStairs" instance=ExtResource("14_57052")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4, 0.482491, 7.15256e-07)
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="stair_5" type="Node3D" parent="LevelScene/Rooms/Room7/StairNodes/StairNodeGd2/AllStairs" instance=ExtResource("14_57052")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.603114, 7.15256e-07)
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="Node3D" type="Node3D" parent="LevelScene/Rooms/Room7"]
 transform = Transform3D(-2.62268e-08, -0.6, 7.81621e-16, 0.424264, -1.85452e-08, 0.330926, -0.424264, 1.85452e-08, 0.330926, 21.8789, 3, 2)
@@ -14545,27 +14545,27 @@ enable_player_col = true
 [node name="AllStairs" type="Node3D" parent="LevelScene/Rooms/Room8/StairNodes/StairNodeGd"]
 
 [node name="stair_0" type="Node3D" parent="LevelScene/Rooms/Room8/StairNodes/StairNodeGd/AllStairs" instance=ExtResource("14_57052")]
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="stair_1" type="Node3D" parent="LevelScene/Rooms/Room8/StairNodes/StairNodeGd/AllStairs" instance=ExtResource("14_57052")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, 0.120623, 0)
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="stair_2" type="Node3D" parent="LevelScene/Rooms/Room8/StairNodes/StairNodeGd/AllStairs" instance=ExtResource("14_57052")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, 0.241246, 0)
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="stair_3" type="Node3D" parent="LevelScene/Rooms/Room8/StairNodes/StairNodeGd/AllStairs" instance=ExtResource("14_57052")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8, 0.361868, 0)
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="stair_4" type="Node3D" parent="LevelScene/Rooms/Room8/StairNodes/StairNodeGd/AllStairs" instance=ExtResource("14_57052")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4, 0.482491, 0)
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="stair_5" type="Node3D" parent="LevelScene/Rooms/Room8/StairNodes/StairNodeGd/AllStairs" instance=ExtResource("14_57052")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.603114, 0)
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="StairNodeGd2" parent="LevelScene/Rooms/Room8/StairNodes" instance=ExtResource("13_exdu3")]
 transform = Transform3D(-3.27835e-08, 0, -0.5, 0, 1, 0, 0.75, 0, -2.18557e-08, 18.8071, 0, 0)
@@ -14577,27 +14577,27 @@ enable_player_col = true
 [node name="AllStairs" type="Node3D" parent="LevelScene/Rooms/Room8/StairNodes/StairNodeGd2"]
 
 [node name="stair_0" type="Node3D" parent="LevelScene/Rooms/Room8/StairNodes/StairNodeGd2/AllStairs" instance=ExtResource("14_57052")]
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="stair_1" type="Node3D" parent="LevelScene/Rooms/Room8/StairNodes/StairNodeGd2/AllStairs" instance=ExtResource("14_57052")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, 0.120623, 0)
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="stair_2" type="Node3D" parent="LevelScene/Rooms/Room8/StairNodes/StairNodeGd2/AllStairs" instance=ExtResource("14_57052")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, 0.241246, 0)
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="stair_3" type="Node3D" parent="LevelScene/Rooms/Room8/StairNodes/StairNodeGd2/AllStairs" instance=ExtResource("14_57052")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8, 0.361868, 0)
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="stair_4" type="Node3D" parent="LevelScene/Rooms/Room8/StairNodes/StairNodeGd2/AllStairs" instance=ExtResource("14_57052")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4, 0.482491, 0)
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="stair_5" type="Node3D" parent="LevelScene/Rooms/Room8/StairNodes/StairNodeGd2/AllStairs" instance=ExtResource("14_57052")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.603114, -2.38419e-07)
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="Node3D" type="Node3D" parent="LevelScene/Rooms/Room8"]
 transform = Transform3D(-2.62268e-08, -0.6, 7.81621e-16, 0.424264, -1.85452e-08, 0.330926, -0.424264, 1.85452e-08, 0.330926, 21.8789, 3, 2)
@@ -16177,27 +16177,27 @@ enable_player_col = true
 [node name="AllStairs" type="Node3D" parent="LevelScene/Rooms/Room9/StairNodes/StairNodeGd"]
 
 [node name="stair_0" type="Node3D" parent="LevelScene/Rooms/Room9/StairNodes/StairNodeGd/AllStairs" instance=ExtResource("14_57052")]
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="stair_1" type="Node3D" parent="LevelScene/Rooms/Room9/StairNodes/StairNodeGd/AllStairs" instance=ExtResource("14_57052")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, 0.120623, 0)
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="stair_2" type="Node3D" parent="LevelScene/Rooms/Room9/StairNodes/StairNodeGd/AllStairs" instance=ExtResource("14_57052")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, 0.241246, 0)
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="stair_3" type="Node3D" parent="LevelScene/Rooms/Room9/StairNodes/StairNodeGd/AllStairs" instance=ExtResource("14_57052")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8, 0.361868, 0)
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="stair_4" type="Node3D" parent="LevelScene/Rooms/Room9/StairNodes/StairNodeGd/AllStairs" instance=ExtResource("14_57052")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4, 0.482491, 0)
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="stair_5" type="Node3D" parent="LevelScene/Rooms/Room9/StairNodes/StairNodeGd/AllStairs" instance=ExtResource("14_57052")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.603114, 0)
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="StairNodeGd2" parent="LevelScene/Rooms/Room9/StairNodes" instance=ExtResource("13_exdu3")]
 transform = Transform3D(-3.27835e-08, 0, -0.5, 0, 1, 0, 0.75, 0, -2.18557e-08, 18.8071, 0, 0)
@@ -16209,27 +16209,27 @@ enable_player_col = true
 [node name="AllStairs" type="Node3D" parent="LevelScene/Rooms/Room9/StairNodes/StairNodeGd2"]
 
 [node name="stair_0" type="Node3D" parent="LevelScene/Rooms/Room9/StairNodes/StairNodeGd2/AllStairs" instance=ExtResource("14_57052")]
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="stair_1" type="Node3D" parent="LevelScene/Rooms/Room9/StairNodes/StairNodeGd2/AllStairs" instance=ExtResource("14_57052")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.600002, 0.120623, 0)
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="stair_2" type="Node3D" parent="LevelScene/Rooms/Room9/StairNodes/StairNodeGd2/AllStairs" instance=ExtResource("14_57052")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, 0.241246, 0)
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="stair_3" type="Node3D" parent="LevelScene/Rooms/Room9/StairNodes/StairNodeGd2/AllStairs" instance=ExtResource("14_57052")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8, 0.361868, 0)
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="stair_4" type="Node3D" parent="LevelScene/Rooms/Room9/StairNodes/StairNodeGd2/AllStairs" instance=ExtResource("14_57052")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.40001, 0.482491, 0)
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="stair_5" type="Node3D" parent="LevelScene/Rooms/Room9/StairNodes/StairNodeGd2/AllStairs" instance=ExtResource("14_57052")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.00001, 0.603114, -2.38419e-07)
-script = ExtResource("17_7jjff")
+script = ExtResource("17_gykq3")
 
 [node name="Node3D" type="Node3D" parent="LevelScene/Rooms/Room9"]
 transform = Transform3D(-2.62268e-08, -0.6, 7.81621e-16, 0.424264, -1.85452e-08, 0.330926, -0.424264, 1.85452e-08, 0.330926, 21.8789, 3, 2)

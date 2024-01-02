@@ -1,0 +1,28 @@
+[gd_resource type="ShaderMaterial" load_steps=7 format=3 uid="uid://kmq4rqktauvn"]
+
+[ext_resource type="Shader" path="res://core_systems/core_materials/material_with_color_mask.gdshader" id="1_b4wg2"]
+[ext_resource type="Texture2D" uid="uid://ceg5x5njdrjs" path="res://testing_stuff_kaen/test_new_levels/new_room2/mat/base/mask_color.png" id="2_epsi0"]
+[ext_resource type="Texture2D" uid="uid://0dskn3swsue2" path="res://testing_stuff_kaen/test_new_levels/new_room2/mat/base/9_2_f_low_DefaultMaterial_BaseColor.png" id="3_hk6es"]
+[ext_resource type="Texture2D" uid="uid://1t4rn16em2wq" path="res://testing_stuff_kaen/test_new_levels/new_room2/mat/base/9_2_f_low_DefaultMaterial_Metallic.png" id="4_tt4ya"]
+[ext_resource type="Texture2D" uid="uid://dq4uoy6s5xifm" path="res://testing_stuff_kaen/test_new_levels/new_room2/mat/base/9_2_f_low_DefaultMaterial_Normal.png" id="5_3vvxd"]
+[ext_resource type="Texture2D" uid="uid://po0lphkticwx" path="res://testing_stuff_kaen/test_new_levels/new_room2/mat/base/9_2_f_low_DefaultMaterial_Roughness.png" id="6_7d1j0"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_b4wg2")
+shader_parameter/point_size = 0.0
+shader_parameter/roughness = 1.0
+shader_parameter/metallic_texture_channel = Vector4(1.02, -0.145, 0.8, 0.015)
+shader_parameter/specular = 1.0
+shader_parameter/metallic = 0.5
+shader_parameter/normal_scale = 1.0
+shader_parameter/uv1_scale = Vector3(1, 1, 1)
+shader_parameter/uv1_offset = Vector3(0.425, -0.59, 0)
+shader_parameter/uv2_scale = Vector3(0, 1, 1)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)
+shader_parameter/paint_color = Color(0.713726, 0.745098, 0.784314, 1)
+shader_parameter/paint_mask_tex = ExtResource("2_epsi0")
+shader_parameter/texture_albedo = ExtResource("3_hk6es")
+shader_parameter/texture_metallic = ExtResource("4_tt4ya")
+shader_parameter/texture_roughness = ExtResource("6_7d1j0")
+shader_parameter/texture_normal = ExtResource("5_3vvxd")
