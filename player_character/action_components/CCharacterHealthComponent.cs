@@ -3,7 +3,7 @@ using System;
 
 public partial class CCharacterHealthComponent : CBaseComponent
 {
-    FPSCharacterAction ourActionCharacter = null;
+    private FPSCharacterAction ourCharacterAction = null;
 
     [Export] public float StartActualHealth = 100.0f;
     [Export] public float StartMaxHealth = 100.0f;
@@ -17,19 +17,26 @@ public partial class CCharacterHealthComponent : CBaseComponent
     [Export] public float ActualHealthRegenTick = 0.5f;
     [Export] public bool ActualHealthRegenEnable = false;
 
-    Godot.Timer timerHealthRegenTimer = null;
+    private Godot.Timer timerHealthRegenTimer = null;
 
     private bool isAlive = true;
 
-    DamageHud damageHud = null;
+    // GUI
+    [ExportGroupAttribute("GUI SETTINGS")]
+    [Export] public bool ShowHealthGUIEnable = true;
+
+    private Control HealthScreenControl = null;
+    private ProgressBar HealthProgressBar = null;
+
 
     public override void PostInit(FpsCharacterBase newCharacterBase)
     {
         base.PostInit(newCharacterBase);
+        ourCharacterAction = ourCharacterBase as FPSCharacterAction;
 
-        ourActionCharacter = newCharacterBase as FPSCharacterAction;
-
-        damageHud = ourActionCharacter.GetNodeOrNull<DamageHud>("AllHuds/DamageHud");
+        // GUI
+        HealthScreenControl = GetNode<Control>("%HealthScreenControl");
+        HealthProgressBar = GetNode<ProgressBar>("%HealthProgressBar");
 
         //RegenTickTimer init
         timerHealthRegenTimer = new Godot.Timer();
@@ -93,19 +100,6 @@ public partial class CCharacterHealthComponent : CBaseComponent
         if (ActualHealth < 0)
             ActualHealth = 0;
 
-        // Effects
-
-        // pokud existuje damageHud - aplikujeme damage effect
-        if (damageHud != null)
-            damageHud.ApplyCentralDamageEffect(GetDamageIntensityFromDamageValue(value));
-        /*
-        // shake
-        ownCharacter.GetObjectCamera().ShakeCameraTest(GetDamageIntensityFromDamageValue(value), 0.2f, 5.0f, 4.0f);
-
-        // audio
-        UniversalFunctions.PlayRandomSound(ownCharacter.GetHurtPlayer(), ownCharacter.GetHurtAudios(), 0, 1);
-        */
-        //
         ChangeUpdate();
     }
 
@@ -123,38 +117,32 @@ public partial class CCharacterHealthComponent : CBaseComponent
 
     private void ChangeUpdate()
     {
-        /*
-        if (ourActionCharacter == null) return;
-        if (ownCharacter.GetCharacterInfoHud() == null) return;
-        */
+        if (ourCharacterAction == null) return;
+        if (HealthProgressBar == null) return;
+
         // DEAD
         if (ActualHealth < 1.0f && isAlive)
         {
             GD.Print("you are dead test");
             isAlive = false;
-            /*
-            // audio
-            UniversalFunctions.PlayRandomSound(ownCharacter.GetHurtPlayer(), ownCharacter.GetDeathAudios(), 1.0f, 0.75f);
-            
-            // event dead
-            ownCharacter.EventDead(FPSCharacter_BasicMoving.ECharacterReasonDead.NoHealth);*/
         }
-        /*
-        ownCharacter.GetCharacterInfoHud().SetHealthDataFromPlayer();*/
+
+        // Set gui visible ?
+        HealthScreenControl.Visible = ShowHealthGUIEnable;
+
+        // apply gui
+        HealthProgressBar.Value = ActualHealth;
     }
 
-    public float GetDamageIntensityFromDamageValue(float value)
+    // STATES LOGIC
+    public override void _Process(double delta)
     {
-        if (value > 49)
-            return 1.0f;
-        else if (value > 19)
-            return 0.6f;
-        else
-            return 0.15f;
-    }
+        base._Process(delta);
 
-    public DamageHud GetDamageHud()
-    {
-        return damageHud;
+        if (Input.IsActionJustPressed("test_damage"))
+            RemoveHealth(10);
+
+        if (Input.IsActionJustPressed("test_regen"))
+            AddHealth(10);
     }
 }

@@ -115,57 +115,6 @@ public partial class CCharacterStaminaComponent : CBaseComponent
         ChangeUpdate();
     }
 
-    // STATES LOGIC
-
-    public override void _Process(double delta)
-    {
-        base._Process(delta);
-
-        // Idle State
-        if( ourCharacterBase.GetCharacterStateMachine().GetCurrentStateName() == "IdlePlayerState" &&
-            ActiveFastRegenForStanding)
-        {
-            SetStaminaRegenVal(0.3f);
-            SetStaminaRegenTick(0.05f); 
-        }
-
-        else
-        // Crouching move State
-        if (ourCharacterBase.GetCharacterStateMachine().GetCurrentStateName() == "CrouchMovePlayerState" &&
-            ActiveFastRegenForCrouching)
-        {
-            SetStaminaRegenVal(0.25f);
-            SetStaminaRegenTick(0.05f);
-        }
-
-        else
-        // Crouching idle State
-        if (ourCharacterBase.GetCharacterStateMachine().GetCurrentStateName() == "IdleCrouchPlayerState" &&
-            ActiveFastRegenForCrouching)
-        {
-            SetStaminaRegenVal(0.35f);
-            SetStaminaRegenTick(0.05f); 
-        }
-
-        else
-        // Walking State
-        if (ourCharacterBase.GetCharacterMovementComponent().GetIsWantSprint() == false &&
-            ourCharacterBase.GetCharacterMovementComponent().GetRealSpeed() < 2.6f)
-        {
-            SetStaminaRegenVal(0.18f);
-        }
-
-        else
-        // Running State
-        if (ourCharacterBase.GetCharacterMovementComponent().GetIsWantSprint() &&
-            ourCharacterBase.GetCharacterMovementComponent().GetRealSpeed() > 2.6f &&
-            ActiveStaminaForSprint)
-        {
-            RemoveStamina(0.05f);
-            SetStaminaRegenVal(0.0f);
-        }
-    }
-
     public void RemoveStaminaJump() 
     { 
         RemoveStamina(2.0f); 
@@ -188,5 +137,55 @@ public partial class CCharacterStaminaComponent : CBaseComponent
 
         // apply gui
         StaminaProgressBar.Value = ActualStamina;
+    }
+
+    // STATES LOGIC
+    public override void _Process(double delta)
+    {
+        base._Process(delta);
+
+        // Idle State
+        if (ourCharacterBase.GetCharacterStateMachine().GetCurrentStateName() == "IdlePlayerState" &&
+            ActiveFastRegenForStanding)
+        {
+            SetStaminaRegenVal(0.3f);
+            SetStaminaRegenTick(0.05f);
+        }
+
+        else
+        // Crouching move State
+        if (ourCharacterBase.GetCharacterStateMachine().GetCurrentStateName() == "CrouchMovePlayerState" &&
+            ActiveFastRegenForCrouching)
+        {
+            SetStaminaRegenVal(0.25f);
+            SetStaminaRegenTick(0.05f);
+        }
+
+        else
+        // Crouching idle State
+        if (ourCharacterBase.GetCharacterStateMachine().GetCurrentStateName() == "IdleCrouchPlayerState" &&
+            ActiveFastRegenForCrouching)
+        {
+            SetStaminaRegenVal(0.35f);
+            SetStaminaRegenTick(0.05f);
+        }
+
+        else
+        // Walking State
+        if (ourCharacterBase.GetCharacterMovementComponent().GetIsWantSprint() == false &&
+            ourCharacterBase.GetCharacterMovementComponent().GetRealSpeed() < 2.6f)
+        {
+            SetStaminaRegenVal(0.18f);
+        }
+
+        else
+        // Running State
+        if (ourCharacterBase.GetCharacterMovementComponent().GetIsWantSprint() &&
+            ourCharacterBase.GetCharacterMovementComponent().GetRealSpeed() > 2.6f &&
+            ActiveStaminaForSprint)
+        {
+            RemoveStamina(0.05f);
+            SetStaminaRegenVal(0.0f);
+        }
     }
 }

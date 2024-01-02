@@ -101,6 +101,52 @@ mouse_filter = 2
 [node name="BaseHealthComponent" type="Node" parent="BaseComponents" index="13"]
 script = ExtResource("6_gnhgd")
 
+[node name="HealthScreenControl" type="Control" parent="BaseComponents/BaseHealthComponent" index="0"]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+metadata/_edit_lock_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="BaseComponents/BaseHealthComponent/HealthScreenControl" index="0"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -150.0
+offset_top = -179.0
+offset_right = 150.0
+offset_bottom = -105.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+metadata/_edit_lock_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="BaseComponents/BaseHealthComponent/HealthScreenControl/MarginContainer" index="0"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="BaseComponents/BaseHealthComponent/HealthScreenControl/MarginContainer/VBoxContainer" index="0"]
+layout_mode = 2
+text = "HEALTH"
+horizontal_alignment = 1
+
+[node name="HealthProgressBar" type="ProgressBar" parent="BaseComponents/BaseHealthComponent/HealthScreenControl/MarginContainer/VBoxContainer" index="1"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+
 [node name="Camera3D" parent="CameraCrouch/CameraLand/CameraController/CameraHead/CameraLean/CameraSway/CameraJump/CameraShakeRot/HeadBob/HeadBreathing" index="0"]
 attributes = ExtResource("4_no4op")
 current = true
