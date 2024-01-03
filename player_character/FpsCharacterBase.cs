@@ -55,11 +55,11 @@ public partial class FpsCharacterBase : CharacterBody3D
 	{
         GetCharacterLookComponent().UpdateLook(delta);
 
-       GetCharacterMovementComponent().UpdateMove(delta);
+        ApplyMovementInputActions(delta);  // virtual for sprint crouch walk speed
+        //GetCharacterMovementComponent().CheckAndApplyJump("Jump");
+        //GetCharacterCrouchComponent().CheckAndApplyCrouch("Crunch");
 
-        GetCharacterMovementComponent().CheckAndApplyJump("Jump");
-        GetCharacterCrouchComponent().CheckAndApplyCrouch("Crunch");
-
+        // Final apply velocity
         GetCharacterMovementComponent().ApplyWorkVelocity();
 
         CGameMaster.GM.GetGame().GetDebugPanel().GetDebugLabels().AddProperty("Character Position",
@@ -74,5 +74,23 @@ public partial class FpsCharacterBase : CharacterBody3D
 
         CGameMaster.GM.GetGame().GetDebugPanel().GetDebugLabels().AddProperty("Character Speed",
             GetCharacterMovementComponent().GetRealSpeed().ToString(), 2);
+    }
+
+    public virtual void ApplyMovementInputActions(double delta)
+    {
+        // SPEED
+        if (Input.IsActionPressed("Sprint") && GetCharacterMovementComponent().GetIsOnFloor() && GetCharacterCrouchComponent().GetIsCrouched() == false)
+            GetCharacterMovementComponent().SetMoveSpeed("SPRINT");
+        else if (GetCharacterMovementComponent().GetIsOnFloor() && GetCharacterCrouchComponent().GetIsCrouched() == true)
+            GetCharacterMovementComponent().SetMoveSpeed("CROUCH");
+        else if (GetCharacterMovementComponent().GetIsOnFloor() && GetCharacterCrouchComponent().GetIsCrouched() == false)
+            GetCharacterMovementComponent().SetMoveSpeed("WALK");
+
+        // MOVEMENT
+        GetCharacterMovementComponent().UpdateMove(delta);
+
+        // JUMP AND CROUCH
+        GetCharacterMovementComponent().CheckAndApplyJump("Jump");
+        GetCharacterCrouchComponent().CheckAndApplyCrouch("Crunch");
     }
 }

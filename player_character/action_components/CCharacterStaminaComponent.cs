@@ -24,6 +24,9 @@ public partial class CCharacterStaminaComponent : CBaseComponent
     [Export] public bool ActualStaminaRegenEnable = false;
 
     private Godot.Timer timerStaminaRegenTimer = null;
+    private Godot.Timer timerStaminaExhaustTimer = null;
+
+    private bool StaminaExhaustActive = false;
 
     // GUI
     [ExportGroupAttribute("GUI SETTINGS")]
@@ -49,6 +52,13 @@ public partial class CCharacterStaminaComponent : CBaseComponent
         timerStaminaRegenTimer.OneShot = false;
         AddChild(timerStaminaRegenTimer);
         timerStaminaRegenTimer.Stop();
+
+        // ExhaustTimer init
+        timerStaminaExhaustTimer = new Godot.Timer();
+        timerStaminaExhaustTimer.Connect("timeout", new Callable(this, "StaminaExhaustEnd"));
+        timerStaminaExhaustTimer.OneShot = true;
+        AddChild(timerStaminaExhaustTimer);
+        timerStaminaExhaustTimer.Stop();
 
         //
         SetAllData(InitStamina, InitMaxStamina, InitStaminaRegenVal, InitStaminaRegenTick, InitStaminaRegenEnable);
@@ -125,6 +135,26 @@ public partial class CCharacterStaminaComponent : CBaseComponent
         SetStaminaRegenVal(0.0f);
     }
 
+    // STAMINA EXHAUST
+    public void ApplyStaminaExhaustForTime(float newTimeForNotRecovery)
+    {
+        StaminaExhaustActive = true;
+        ActualStamina = 0.0f;
+        //SetStaminaRegenVal(0.0f);
+
+        timerStaminaExhaustTimer.WaitTime = newTimeForNotRecovery;
+        timerStaminaExhaustTimer.Start();
+    }
+
+    public bool GetStaminaExhaustActive() { return StaminaExhaustActive; }
+
+    public void StaminaExhaustEnd() 
+    {
+        ActualStamina = 0.12f;
+        timerStaminaExhaustTimer.Stop();
+        StaminaExhaustActive = false;
+    }
+
     // GUI
 
     private void ChangeUpdate()
@@ -143,6 +173,9 @@ public partial class CCharacterStaminaComponent : CBaseComponent
     public override void _Process(double delta)
     {
         base._Process(delta);
+
+        // pokud jsme uplne vycerpani - musime pockat
+        if (StaminaExhaustActive) return;
 
         // Idle State
         if (ourCharacterBase.GetCharacterStateMachine().GetCurrentStateName() == "IdlePlayerState" &&

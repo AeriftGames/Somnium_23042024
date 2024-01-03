@@ -42,14 +42,6 @@ public partial class CCharacterMovementComponent : CBaseComponent
         WorkVelocity = ourCharacterBase.Velocity;
         WorkVelocity.Y = 0f;    // disable gravity at this moment
 
-        // set character want speed
-        if (Input.IsActionPressed("Sprint") && GetIsOnFloor() && ourCharacterBase.GetCharacterCrouchComponent().GetIsCrouched() == false)
-            Speed = SPEED_SPRINT;
-        else if (GetIsOnFloor() && ourCharacterBase.GetCharacterCrouchComponent().GetIsCrouched() == true)
-            Speed = SPEED_CROUCH;
-        else if (GetIsOnFloor() && ourCharacterBase.GetCharacterCrouchComponent().GetIsCrouched() == false)
-            Speed = SPEED_WALK;
-
         if (Direction != Vector3.Zero)
         {
             // for move on ground - with input
@@ -66,11 +58,6 @@ public partial class CCharacterMovementComponent : CBaseComponent
                 {
                     WorkVelocity = WorkVelocity.Lerp(Direction * Speed, ACCELERATION * (float)delta);
                 }
-
-                /* old move - funkce vyse vypada ze funguje a resi problem se zdi
-                workVelocity.X = float.Lerp(workVelocity.X, direction.X * Speed, ACCELERATION * (float)delta);
-                workVelocity.Z = float.Lerp(workVelocity.Z, direction.Z * Speed, ACCELERATION * (float)delta);
-                */
             }
             // for fall - with input
             else if (CAN_MOVEINFALL)
@@ -117,16 +104,23 @@ public partial class CCharacterMovementComponent : CBaseComponent
         ourCharacterBase.MoveAndSlide();
     }
 
-    public void CheckAndApplyJump(StringName newInput)
+    public bool CheckAndApplyJump(StringName newInput)
     {
-        if (ourCharacterBase.GetCharacterMovementComponent() == null) return;
+        if (ourCharacterBase.GetCharacterMovementComponent() == null) return false;
         bool isOnFloor = ourCharacterBase.GetCharacterMovementComponent().GetIsOnFloor();
 
-        if (ourCharacterBase.GetCharacterCrouchComponent() == null) return;
+        if (ourCharacterBase.GetCharacterCrouchComponent() == null) return false;
         bool isCrouch = ourCharacterBase.GetCharacterCrouchComponent().GetIsCrouched();
 
         if (Input.IsActionJustPressed(newInput) && isOnFloor && !isCrouch)
+        {
             WorkVelocity.Y = JUMP_VELOCITY;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     public void SetMoveSpeed(string newSpeedName)
@@ -136,6 +130,7 @@ public partial class CCharacterMovementComponent : CBaseComponent
             case "WALK": Speed = SPEED_WALK; break;
             case "SPRINT": Speed = SPEED_SPRINT; break;
             case "CROUCH": Speed = SPEED_CROUCH; break;
+            case "EXHAUST": Speed = 1.0f; break;
             default: break;
         }
     }

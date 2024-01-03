@@ -37,4 +37,41 @@ public partial class FPSCharacterAction : FPSCharacterMoveAnim
 
         GetUseActionComponent().Update(delta);
     }
+
+    // override function (movement speed) with stamina system
+    public override void ApplyMovementInputActions(double delta)
+    {
+        if(GetStaminaComponent() == null)
+            base.ApplyMovementInputActions(delta);
+        else
+        {
+            // SPEED
+            if (Input.IsActionPressed("Sprint") && GetCharacterMovementComponent().GetIsOnFloor() &&
+                GetCharacterCrouchComponent().GetIsCrouched() == false && GetStaminaComponent().GetStamina() > 0.1f)
+            { GetCharacterMovementComponent().SetMoveSpeed("SPRINT"); }
+
+            else if (GetCharacterMovementComponent().GetIsOnFloor() && GetCharacterCrouchComponent().GetIsCrouched() == true)
+            { GetCharacterMovementComponent().SetMoveSpeed("CROUCH"); }
+
+            else if (GetCharacterMovementComponent().GetIsOnFloor() && GetCharacterCrouchComponent().GetIsCrouched() == false)
+            { GetCharacterMovementComponent().SetMoveSpeed("WALK"); }
+
+            // MOVEMENT
+            GetCharacterMovementComponent().UpdateMove(delta);
+
+            // JUMP
+            if(GetStaminaComponent().GetStamina() > 5.0f)
+            { GetCharacterMovementComponent().CheckAndApplyJump("Jump"); }
+            
+            // CROUCH
+            GetCharacterCrouchComponent().CheckAndApplyCrouch("Crunch");
+
+            // FULLY STAMINA OUT - zadychani
+            if (GetStaminaComponent().GetStamina() <= 0.1f && !GetStaminaComponent().GetStaminaExhaustActive())
+            {
+                GD.Print("STAMINA OUT");
+                GetStaminaComponent().ApplyStaminaExhaustForTime(1.0f);
+            }
+        }
+    }
 }
