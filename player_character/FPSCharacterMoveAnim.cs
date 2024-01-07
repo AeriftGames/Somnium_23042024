@@ -3,26 +3,23 @@ using System;
 
 public partial class FPSCharacterMoveAnim : FpsCharacterBase
 {
-    private CCharacterHeadBobComponent HeadBobComponent = null;
     private CCharacterLeanComponent LeanComponent = null;
     private CCharacterJumpLandEffectComponent JumpLandEffectComponent = null;
     private CCharacterCameraShakeComponent CameraShakeComponent = null;
     private CCharacterCameraZoomComponent CameraZoomComponent = null;
     private CCharacterBreathingEffectComponent BreathingEffectComponent = null;
+    private CCharacterWalkEffectComponent WalkEffectComponent = null;
 
-    public CCharacterHeadBobComponent GetCharacterHeadBobComponent() { return HeadBobComponent; }
     public CCharacterLeanComponent GetCharacterLeanComponent() { return LeanComponent; }
     public CCharacterJumpLandEffectComponent GetJumpLandEffectComponent() { return JumpLandEffectComponent; }
     public CCharacterCameraShakeComponent GetCharacterCameraShakeComponent() { return CameraShakeComponent; }
     public CCharacterCameraZoomComponent GetCharacterCameraZoomComponent() { return CameraZoomComponent; }
     public CCharacterBreathingEffectComponent GetCharacterBreathingEffectComponent() { return BreathingEffectComponent; }
+    public CCharacterWalkEffectComponent GetCharacterWalkEffectComponent() { return WalkEffectComponent; }
 
     public override void _Ready()
     {
         base._Ready();
-
-        HeadBobComponent = GetBaseComponents().GetNode<CCharacterHeadBobComponent>("BaseHeadBobComponent");
-        HeadBobComponent.PostInit(this);
 
         LeanComponent = GetBaseComponents().GetNode<CCharacterLeanComponent>("BaseLeanComponent");
         LeanComponent.PostInit(this);
@@ -40,6 +37,9 @@ public partial class FPSCharacterMoveAnim : FpsCharacterBase
         BreathingEffectComponent = 
             GetBaseComponents().GetNode<CCharacterBreathingEffectComponent>("BaseBreathingEffectComponent");
         BreathingEffectComponent.PostInit(this);
+
+        WalkEffectComponent = GetBaseComponents().GetNode<CCharacterWalkEffectComponent>("BaseWalkEffectComponent");
+        WalkEffectComponent.PostInit(this);
     }
 
     public override void _Process(double delta)
@@ -56,7 +56,6 @@ public partial class FPSCharacterMoveAnim : FpsCharacterBase
     {
         base._PhysicsProcess(delta);
 
-        HeadBobComponent.Update(delta);
         LeanComponent.InputUpdate(delta);
         JumpLandEffectComponent.Update(delta);
 

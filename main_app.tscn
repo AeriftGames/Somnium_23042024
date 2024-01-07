@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://ddal074shtj1g"]
 
 [ext_resource type="Script" path="res://core_systems/MainApp.cs" id="1_d8pml"]
-[ext_resource type="Resource" uid="uid://b537iaq5k3rpy" path="res://levels/all_levels_info_resources/game_levels/levelinfo_demo_extend.tres" id="2_7crgj"]
+[ext_resource type="Resource" uid="uid://drxceaq6qxmqr" path="res://levels/all_levels_info_resources/game_levels/levelinfo_trim_room2.tres" id="2_p8imf"]
 
 [node name="MainApp" type="Node"]
 editor_description = "Můžeme nastavit jaký typ aplikace se má spustit:
@@ -11,7 +11,8 @@ Benchmark - spustí menu pro benchmark
 
 Specific Level - spustí jakýkoliv LevelInfoData nastavený v záložce"
 script = ExtResource("1_d8pml")
-LevelInfo_SpecificLevelInfo = ExtResource("2_7crgj")
+AppType = 2
+LevelInfo_SpecificLevelInfo = ExtResource("2_p8imf")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchors_preset = 15

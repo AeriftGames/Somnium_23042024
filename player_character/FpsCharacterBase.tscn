@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://dcilkc4fno2qm"]
+[gd_scene load_steps=23 format=3 uid="uid://dcilkc4fno2qm"]
 
 [ext_resource type="Script" path="res://player_character/FpsCharacterBase.cs" id="1_ob1gb"]
 [ext_resource type="Script" path="res://player_character/base_components/CCharacterMovementComponent.cs" id="2_omu0b"]
@@ -18,8 +18,14 @@
 [ext_resource type="Script" path="res://player_character/player_state/CFallPlayerState.cs" id="22_tom1k"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_83vw8"]
+radius = 0.36
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_yocmg"]
+height = 1.0
+radius = 0.2
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3j32b"]
+radius = 0.4
 height = 1.8
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cgcdo"]
@@ -35,6 +41,7 @@ bottom_radius = 0.1
 height = 0.5
 
 [node name="FpsCharacterBase" type="CharacterBody3D"]
+collision_layer = 2
 floor_constant_speed = true
 script = ExtResource("1_ob1gb")
 metadata/_edit_lock_ = true
@@ -49,7 +56,7 @@ SPEED_SPRINT = 3.5
 
 [node name="BaseLookComponent" type="Node" parent="BaseComponents" node_paths=PackedStringArray("Camera")]
 script = ExtResource("3_353i0")
-Camera = NodePath("../../CameraCrouch/CameraLand/CameraController/CameraHead/CameraLean/CameraSway/CameraJump/CameraShakeRot/HeadBob/HeadBreathing/Camera3D")
+Camera = NodePath("../../CameraCrouch/CameraLand/CameraController/CameraHead/CameraLean/CameraSway/CameraJump/CameraShakeRot/HeadBob/HeadBreathing/HeadCrouchDynamic/Camera3D")
 MOUSE_LERPSPEED = 25.0
 TILT_LOWER_LIMIT = -1.4
 TILT_UPPER_LIMIT = 1.4
@@ -57,15 +64,25 @@ TILT_UPPER_LIMIT = 1.4
 [node name="BaseFovComponent" type="Node" parent="BaseComponents"]
 script = ExtResource("5_sagus")
 
-[node name="BaseCrouchComponent" type="Node3D" parent="BaseComponents"]
+[node name="BaseCrouchComponent" type="Node3D" parent="BaseComponents" node_paths=PackedStringArray("ShapeCastCrouchDynamic")]
 script = ExtResource("4_oftwk")
 TOGGLE_CROUCH = true
+CROUCH_SHAPE_HEIGHT = 0.8
+CROUCH_SHAPE_POS = 0.4
+ShapeCastCrouchDynamic = NodePath("ShapeCastCrouchDynamic")
 metadata/_edit_lock_ = true
 
 [node name="ShapeCastUncrouch" type="ShapeCast3D" parent="BaseComponents/BaseCrouchComponent"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.31472, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
 shape = SubResource("SphereShape3D_83vw8")
 target_position = Vector3(0, 0, 0)
+metadata/_edit_lock_ = true
+
+[node name="ShapeCastCrouchDynamic" type="ShapeCast3D" parent="BaseComponents/BaseCrouchComponent"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+shape = SubResource("CylinderShape3D_yocmg")
+target_position = Vector3(0, 0.2, 0)
+debug_shape_custom_color = Color(1, 0.462745, 0.662745, 1)
 metadata/_edit_lock_ = true
 
 [node name="AudioStreamPlayer_Crouch" type="AudioStreamPlayer" parent="BaseComponents/BaseCrouchComponent"]
@@ -87,6 +104,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 0)
 metadata/_edit_lock_ = true
 
 [node name="CameraLand" type="Node3D" parent="CameraCrouch"]
+unique_name_in_owner = true
 metadata/_edit_lock_ = true
 
 [node name="CameraController" type="Node3D" parent="CameraCrouch/CameraLand"]
@@ -123,29 +141,33 @@ metadata/_edit_lock_ = true
 unique_name_in_owner = true
 metadata/_edit_lock_ = true
 
-[node name="Camera3D" type="Camera3D" parent="CameraCrouch/CameraLand/CameraController/CameraHead/CameraLean/CameraSway/CameraJump/CameraShakeRot/HeadBob/HeadBreathing"]
+[node name="HeadCrouchDynamic" type="Node3D" parent="CameraCrouch/CameraLand/CameraController/CameraHead/CameraLean/CameraSway/CameraJump/CameraShakeRot/HeadBob/HeadBreathing"]
+unique_name_in_owner = true
+metadata/_edit_lock_ = true
+
+[node name="Camera3D" type="Camera3D" parent="CameraCrouch/CameraLand/CameraController/CameraHead/CameraLean/CameraSway/CameraJump/CameraShakeRot/HeadBob/HeadBreathing/HeadCrouchDynamic"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.000244021, 0)
 cull_mask = 524287
 fov = 70.0
 far = 200.0
 metadata/_edit_lock_ = true
 
-[node name="CameraLookDebugMesh" type="MeshInstance3D" parent="CameraCrouch/CameraLand/CameraController/CameraHead/CameraLean/CameraSway/CameraJump/CameraShakeRot/HeadBob/HeadBreathing/Camera3D"]
+[node name="CameraLookDebugMesh" type="MeshInstance3D" parent="CameraCrouch/CameraLand/CameraController/CameraHead/CameraLean/CameraSway/CameraJump/CameraShakeRot/HeadBob/HeadBreathing/HeadCrouchDynamic/Camera3D"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, -0.475978)
 visible = false
 layers = 524288
 mesh = SubResource("CylinderMesh_a3l8c")
 metadata/_edit_lock_ = true
 
-[node name="LookPoint" type="Node3D" parent="CameraCrouch/CameraLand/CameraController/CameraHead/CameraLean/CameraSway/CameraJump/CameraShakeRot/HeadBob/HeadBreathing/Camera3D"]
+[node name="LookPoint" type="Node3D" parent="CameraCrouch/CameraLand/CameraController/CameraHead/CameraLean/CameraSway/CameraJump/CameraShakeRot/HeadBob/HeadBreathing/HeadCrouchDynamic/Camera3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5)
 metadata/_edit_lock_ = true
 
-[node name="RightHandPoint" type="Node3D" parent="CameraCrouch/CameraLand/CameraController/CameraHead/CameraLean/CameraSway/CameraJump/CameraShakeRot/HeadBob/HeadBreathing/Camera3D"]
+[node name="RightHandPoint" type="Node3D" parent="CameraCrouch/CameraLand/CameraController/CameraHead/CameraLean/CameraSway/CameraJump/CameraShakeRot/HeadBob/HeadBreathing/HeadCrouchDynamic/Camera3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, -0.2, -0.225)
 metadata/_edit_lock_ = true
 
-[node name="RightHandObject" type="Node3D" parent="CameraCrouch/CameraLand/CameraController/CameraHead/CameraLean/CameraSway/CameraJump/CameraShakeRot/HeadBob/HeadBreathing/Camera3D/RightHandPoint"]
+[node name="RightHandObject" type="Node3D" parent="CameraCrouch/CameraLand/CameraController/CameraHead/CameraLean/CameraSway/CameraJump/CameraShakeRot/HeadBob/HeadBreathing/HeadCrouchDynamic/Camera3D/RightHandPoint"]
 metadata/_edit_lock_ = true
 
 [node name="LerpPos_LeanCenter" type="Node3D" parent="CameraCrouch/CameraLand/CameraController/CameraHead"]

@@ -5,8 +5,9 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_4kht2"]
 size = Vector3(0.592358, 0.736096, 0.7)
 
-[node name="InteractiveObject" type="Node3D"]
+[node name="InteractiveObject" type="Node3D" node_paths=PackedStringArray("ObjectsForBoundingBox")]
 script = ExtResource("1_6lv6y")
+ObjectsForBoundingBox = []
 metadata/_edit_lock_ = true
 
 [node name="StaticBody3D" type="StaticBody3D" parent="." groups=["interactive_object"]]

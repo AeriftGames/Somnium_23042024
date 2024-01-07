@@ -1,8 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://vf06hwxc3mje"]
+[gd_scene load_steps=5 format=3 uid="uid://vf06hwxc3mje"]
 
 [ext_resource type="PackedScene" uid="uid://b87vninn1p141" path="res://testing_stuff_kaen/new_lockers/locker_normal.glb" id="1_1y0lt"]
-[ext_resource type="Material" uid="uid://cbnsad6w0f8o8" path="res://testing_stuff_kaen/locker2/locker_mat.tres" id="2_22jgs"]
-[ext_resource type="Material" uid="uid://ptxp5dga6lrp" path="res://testing_stuff_kaen/lis/lis_mat.material" id="3_0rpgt"]
+[ext_resource type="Material" uid="uid://b82lonmh1r8dp" path="res://testing_stuff_kaen/new_lockers/locker_big_new_mat.tres" id="2_danul"]
 [ext_resource type="Texture2D" uid="uid://2vnn5as8tp5i" path="res://testing_stuff_kaen/level_decals/TexturesCom_DecalsRusted0004_1_masked_S.png" id="9_rs33i"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_dyxa6"]
@@ -12,11 +11,11 @@ size = Vector3(0.421814, 1.65925, 0.5)
 
 [node name="locker_body_normal" parent="." index="0"]
 transform = Transform3D(-1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 0, 0, 0)
-material_override = ExtResource("2_22jgs")
+material_override = ExtResource("2_danul")
 
 [node name="locker_body_normal_door" parent="." index="1"]
 transform = Transform3D(-1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, -0.372298, 0, 0)
-material_override = ExtResource("3_0rpgt")
+material_override = ExtResource("2_danul")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="." index="2"]
 

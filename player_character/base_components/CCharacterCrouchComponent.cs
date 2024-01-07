@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 
 public partial class CCharacterCrouchComponent : CBaseComponent
 {
-    
     [Export] public bool TOGGLE_CROUCH = false;
     [Export(PropertyHint.Range, "0.3,2,0.1")] public float CROUCH_TIME = 0.5f;
 
@@ -27,13 +26,16 @@ public partial class CCharacterCrouchComponent : CBaseComponent
     private Node3D CameraCrouch = null;
     private CollisionShape3D CharacterCollision = null;
 
+    [Export] ShapeCast3D ShapeCastCrouchDynamic;
+    Tween tweenCrouchDynamic = null;
+    Node3D HeadCrouchDynamic = null;
+
     public override void _Ready()
 	{
         base._Ready();
 
         shapeCastUncrouch = GetNode<ShapeCast3D>("ShapeCastUncrouch");
         audioStreamPlayerCrouch = GetNode<AudioStreamPlayer>("AudioStreamPlayer_Crouch");
-
     }
 
     public override void PostInit(FpsCharacterBase newOurCharacter)
@@ -41,9 +43,12 @@ public partial class CCharacterCrouchComponent : CBaseComponent
         base.PostInit(newOurCharacter);
 
         shapeCastUncrouch.AddException(ourCharacterBase);
+        ShapeCastCrouchDynamic.AddException(ourCharacterBase);
 
         CameraCrouch = ourCharacterBase.GetCharacterLookComponent().GetCameraCrouch();
         CharacterCollision = ourCharacterBase.GetCharacterCollisionShape();
+
+        HeadCrouchDynamic = ourCharacterBase.GetNode<Node3D>("%HeadCrouchDynamic");
     }
 
     public void CheckAndApplyCrouch(StringName newInput)
@@ -135,4 +140,82 @@ public partial class CCharacterCrouchComponent : CBaseComponent
 
         }
     }
+
+    public override void _PhysicsProcess(double delta)
+    {
+        base._PhysicsProcess(delta);
+
+        SetTweenCrouchCamDynamic();
+    }
+
+    public override void _Process(double delta)
+    {
+        base._Process(delta);
+    }
+
+    public void SetTweenCrouchCamDynamic(bool activeDynamic = true)
+    {
+        Vector3 FloorPos = Vector3.Zero;
+
+        if (ShapeCastCrouchDynamic.IsColliding())
+        {
+            FloorPos = ShapeCastCrouchDynamic.GetCollisionPoint(0);
+            FloorPos.Y = ourCharacterBase.GlobalPosition.Y + 0.3f;
+            float distance = FindUpHeightForCrouch(ourCharacterBase, FloorPos);
+
+            if(distance != -9999)
+            {
+                GD.Print("height from floor: " + distance.ToString());
+            }
+  
+            else
+            {
+                GD.Print("height from floor: 0");
+            }
+
+            if (tweenCrouchDynamic != null)
+                tweenCrouchDynamic.Kill();
+
+            tweenCrouchDynamic = GetTree().CreateTween();
+            tweenCrouchDynamic.TweenProperty(
+                HeadCrouchDynamic, "position", new Vector3(0, -CameraCrouch.Position.Y+distance, 0), 0.03f)
+                .SetTrans(Tween.TransitionType.Cubic);
+        }
+        else
+        {
+            if (tweenCrouchDynamic != null)
+                tweenCrouchDynamic.Kill();
+
+            tweenCrouchDynamic = GetTree().CreateTween();
+            tweenCrouchDynamic.TweenProperty(
+                HeadCrouchDynamic, "position", new Vector3(0, 0.0f, 0), 0.03f)
+                .SetTrans(Tween.TransitionType.Cubic);
+        }
+    }
+
+    public float FindUpHeightForCrouch(Node3D newCaller, Vector3 newPos)
+    {
+        PhysicsDirectSpaceState3D directSpace = newCaller.GetWorld3D().DirectSpaceState;
+
+        PhysicsRayQueryParameters3D rayParam = new PhysicsRayQueryParameters3D();
+        rayParam.From = newPos;
+        rayParam.To = newPos + (Vector3.Up * 1.5f);
+
+        Vector3 hit_pos = new Vector3(-9999, -9999, -9999);
+        float distance = -9999.0f;
+
+        var rayResult = directSpace.IntersectRay(rayParam);
+        if (rayResult.Count > 0)
+        {
+            hit_pos = (Vector3)rayResult["position"];
+        }
+        
+        if(hit_pos != new Vector3(-9999,-9999,-9999))
+        {
+            distance = Mathf.Abs(newPos.DistanceTo(hit_pos));
+        }
+
+        return distance;
+    }
+
 }

@@ -142,6 +142,13 @@ public partial class CCharacterMovementComponent : CBaseComponent
         return float.Round(MathF.Abs(moveVelocity.Length()), 1);
     }
 
+    public float GetRealUnroundedSpeed()
+    {
+        Vector3 moveVelocity = new Vector3(ourCharacterBase.GetRealVelocity().X, 0, ourCharacterBase.GetRealVelocity().Z);
+        return moveVelocity.Length();
+    }
+
+
     public Vector2 GetInputDir() { return InputDir; }
     public Vector3 GetDirection() {  return Direction; }
 

@@ -42,10 +42,11 @@ shadow_mesh = SubResource("ArrayMesh_u33u2")
 [node name="music_box2" type="Node3D"]
 script = ExtResource("1_ifosa")
 
-[node name="InteractiveObject" parent="." node_paths=PackedStringArray("CallUseObject", "OutlineMesh") groups=["interactive_object"] instance=ExtResource("2_dc72n")]
+[node name="InteractiveObject" parent="." node_paths=PackedStringArray("CallUseObject", "OutlineMesh", "ObjectsForBoundingBox") groups=["interactive_object"] instance=ExtResource("2_dc72n")]
 CallUseObject = NodePath("..")
 OutlineMesh = NodePath("../Cube_666")
 ObjectName = "music box"
+ObjectsForBoundingBox = []
 
 [node name="Cube_666" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)

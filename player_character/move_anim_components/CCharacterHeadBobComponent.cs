@@ -17,9 +17,9 @@ public partial class CCharacterHeadBobComponent : CBaseComponent
     [Export] public float SwayLerpSpeed = 2.5f;
 
     [ExportGroupAttribute("Footsteps Settings")]
-    [Export] public float FootStepLengthInWalk = 1.1f;
-    [Export] public float FootStepLengthInSprint = 1.12f;
-    [Export] public float FootStepLengthInCrouch = 0.85f;
+    [Export] public float FootStepLengthInWalk = 1.25f;
+    [Export] public float FootStepLengthInSprint = 1.28f;
+    [Export] public float FootStepLengthInCrouch = 0.95f;
 
     [Export] public float FootstepsVolumeDBInWalk = -2.0f;
     [Export] public float FootstepsVolumeDBInSprint = 1.0f;
@@ -68,6 +68,8 @@ public partial class CCharacterHeadBobComponent : CBaseComponent
 
     public override void PostInit(FpsCharacterBase newCharacterBase)
     {
+        if (EnableComponent == false) { return; }
+
         base.PostInit(newCharacterBase);
 
         AudioStreamPlayerFootsteps = GetNode<AudioStreamPlayer>("AudioStreamPlayer_Footsteps");
@@ -81,9 +83,11 @@ public partial class CCharacterHeadBobComponent : CBaseComponent
     }
     public void Update(double delta)
     {
-        CalculateFootSteps((float)delta);
-        UpdateWalkHeadBobbing((float)delta);
-
+        if(EnableComponent == false ) { return; }
+        
+        //CalculateFootSteps((float)delta);
+        //UpdateWalkHeadBobbing((float)delta);
+        /*
         if (EnableEffectPos)
         {
             Vector3 pos = HeadBobNode.Position;
@@ -91,14 +95,14 @@ public partial class CCharacterHeadBobComponent : CBaseComponent
             pos.Y = Mathf.Lerp(pos.Y, lerpHeadWalkY, headBobMovingYDelta * (float)delta);
             HeadBobNode.Position = pos;
         }
-
+        
         if (EnableEffectRot)
         {
             HeadBobNode.RotationDegrees = 
                 HeadBobNode.RotationDegrees.Lerp(new Vector3(0, 0, headBobRot),
                 (float)delta * headBobRotDelta);
         }
-
+        */
         if (EnableEffectSway)
         {
             Vector3 workDir = new Vector3(ourCharacterBase.GetCharacterMovementComponent().GetInputDir().Normalized().Y * 
@@ -250,7 +254,6 @@ public partial class CCharacterHeadBobComponent : CBaseComponent
     }
     private void CalculateFootSteps(float delta)
     {
-
         float halfFootStepLength = FootStepLengthInWalk / 2;
         float lastHalfFootStepDistance = 0.0f;
 
@@ -316,8 +319,10 @@ public partial class CCharacterHeadBobComponent : CBaseComponent
     public void SetActualStep(bool newValue) { FootstepRight = newValue; }
     public bool GetFootstepNow() { return FootstepNow; }
     public void SetFootstepNow(bool newValue) { FootstepNow = newValue; }
-    public void PlayFootstepSound(float addOffsetVolume = 0.0f, float addOffsetPitch = 0.0f)
+    public async void PlayFootstepSound(float addOffsetVolume = 0.0f, float addOffsetPitch = 0.0f)
     {
+        await ToSignal(GetTree(),SceneTree.SignalName.PhysicsFrame);
+
         // Detect materal surface name and play specific audio set of footsteps
         all_material_surfaces.EMaterialSurface materialSurface =
             AllMaterialSurfaces.GetMaterialSurfaceFromGroup(UniversalFunctions.DetectSurfaceMaterialOfFloor(

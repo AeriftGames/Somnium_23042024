@@ -9,12 +9,16 @@ public partial class CCharacterUseActionComponent : CBaseComponent
 
     private CInteractiveObject SelectedObject = null;
 
+    private ActionLayer actionLayer = null;
+
     public override void PostInit(FpsCharacterBase newCharacterBase)
     {
         base.PostInit(newCharacterBase);
 
         GetNode<CollisionShape3D>("UseActionAreaDetect/CollisionShape3D").Shape.Set("radius", DETECT_RADIUS);
         //GD.Print("Detect radius = " + GetNode<CollisionShape3D>("UseActionAreaDetect/CollisionShape3D").Shape.Get("radius").ToString());
+
+        actionLayer = GetNode<ActionLayer>("ActionLayer");
     }
 
     public void UseAction()
@@ -52,9 +56,9 @@ public partial class CCharacterUseActionComponent : CBaseComponent
 
         //
         SDetectObject resultDetect = DetectInteractiveObjectWithCameraRay();
-        if(resultDetect.InteractiveObject != null)
-        {
 
+        if (resultDetect.InteractiveObject != null)
+        {
             // jiny objekt nez mame selektnuty ? = deselect puvodniho
             if (resultDetect.InteractiveObject != GetSelectedUseActionObject() && 
                 GetSelectedUseActionObject != null)
@@ -68,6 +72,7 @@ public partial class CCharacterUseActionComponent : CBaseComponent
                 SetSelectedUseActionObject(resultDetect.InteractiveObject);
                 GetSelectedUseActionObject().SetIsInLook(true);
                 GetSelectedUseActionObject().SetOutlineEffect(true);
+                ShowBoundingBox(resultDetect.InteractiveObject, true);
             }
             else
             {
@@ -92,6 +97,7 @@ public partial class CCharacterUseActionComponent : CBaseComponent
     {
         if (GetSelectedUseActionObject() != null)
         {
+            ShowBoundingBox(GetSelectedUseActionObject(), false);
             GetSelectedUseActionObject().SetIsInLook(false);
             GetSelectedUseActionObject().SetOutlineEffect(false);
             SetSelectedUseActionObject(null);
@@ -127,5 +133,32 @@ public partial class CCharacterUseActionComponent : CBaseComponent
         }
 
         return returnDetect;
+    }
+
+    public void ShowBoundingBox(CInteractiveObject interactiveObject, bool visible)
+    {
+        // hide
+        if (visible == false) 
+        { 
+            actionLayer.DeactiveObjectActionLayer();
+
+            if(interactiveObject != null)
+            {
+                interactiveObject.GetTestBilboard().ActivateLookAtCamera(false);
+            }
+
+            return; 
+        }
+
+        // visible
+        if (interactiveObject == null) return;
+
+        Node3D a = interactiveObject.CallUseObject as Node3D;
+        if(a == null) return;
+
+        actionLayer.ActiveObjectActionLayer(interactiveObject.GetTestBilboard().GetLeftUpPosition(),
+            interactiveObject.GetTestBilboard().GetRightDownPosition(),a.GlobalPosition);
+
+        interactiveObject.GetTestBilboard().ActivateLookAtCamera(true);
     }
 }

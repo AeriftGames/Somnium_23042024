@@ -336,7 +336,6 @@ public partial class UniversalFunctions
 
     public static string DetectSurfaceMaterialOfFloor(Node3D newCaller,Vector3 newPos)
     {
-
         PhysicsDirectSpaceState3D directSpace = newCaller.GetWorld3D().DirectSpaceState;
 
         PhysicsRayQueryParameters3D rayParam = new PhysicsRayQueryParameters3D();

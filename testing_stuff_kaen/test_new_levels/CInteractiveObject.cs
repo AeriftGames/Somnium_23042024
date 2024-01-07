@@ -7,6 +7,7 @@ public partial class CInteractiveObject : Node3D
 	[Export] public MeshInstance3D OutlineMesh = null;
 	[Export] private string ObjectName = "none";
 	[Export] public string CallUseObjectFunction = "UseAction";
+	[Export] public test_bilboard test_Bilboard = null;
 
 	private bool isInRange = false;
 	private bool isInLook = false;
@@ -49,4 +50,6 @@ public partial class CInteractiveObject : Node3D
 			{ OutlineMesh.MaterialOverlay.Set("shader_parameter/enable", newOutlineEnable); }
 		}
 	}
+
+	public test_bilboard GetTestBilboard() { return test_Bilboard; }
 }

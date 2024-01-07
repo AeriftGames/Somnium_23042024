@@ -1,54 +1,62 @@
-[gd_scene load_steps=5 format=3 uid="uid://bqcc3ox822w73"]
+[gd_scene load_steps=7 format=3 uid="uid://bqcc3ox822w73"]
 
 [ext_resource type="PackedScene" uid="uid://darrpqdjdaenp" path="res://testing_stuff_kaen/new_actions/wall_button.tscn" id="1_p4lpk"]
 [ext_resource type="Script" path="res://testing_stuff_kaen/test_new_levels/CInteractiveObject.cs" id="2_jl5ap"]
 [ext_resource type="Script" path="res://testing_stuff_kaen/test_new_levels/CActionItemUse.cs" id="2_lq2td"]
+[ext_resource type="Script" path="res://testing_stuff_kaen/new_actions/test_bilboard.cs" id="4_gigpx"]
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_xjv4v"]
-height = 0.6
-radius = 0.35
+[sub_resource type="BoxShape3D" id="BoxShape3D_je34a"]
+size = Vector3(2.74603, 1.0069, 2.02661)
+
+[sub_resource type="SphereMesh" id="SphereMesh_ho0nh"]
+radius = 0.05
+height = 0.1
 
 [node name="wall_button" instance=ExtResource("1_p4lpk")]
 script = ExtResource("2_lq2td")
 
-[node name="ButtonUp" parent="." index="1"]
-transform = Transform3D(1.78814e-07, 1, 0, -1, 1.78814e-07, 0, 5.0822e-21, 0, 1, 0.36027, 0.865726, 7.10543e-15)
-
-[node name="InteractiveObject" type="Node3D" parent="ButtonUp" index="0" node_paths=PackedStringArray("CallUseObject", "OutlineMesh") groups=["interactive_object"]]
-transform = Transform3D(1.78814e-07, -1, -1.69407e-21, 1, 1.78814e-07, 1.42109e-14, -1.42109e-14, 7.05861e-21, 1, 0, 0, 0)
+[node name="InteractiveObject" type="Node3D" parent="." index="0" node_paths=PackedStringArray("CallUseObject", "test_Bilboard") groups=["interactive_object"]]
+transform = Transform3D(1, 8.52655e-28, 1.42109e-14, 0, 1, 4.23518e-21, -1.42109e-14, 1.41172e-21, 1, 0.36027, 0.865726, 7.10543e-15)
 script = ExtResource("2_jl5ap")
-CallUseObject = NodePath("../..")
-OutlineMesh = NodePath("..")
-ObjectName = "ButtonUp"
+CallUseObject = NodePath("..")
+ObjectName = "Button"
 CallUseObjectFunction = "UseAction_Button_UP"
+test_Bilboard = NodePath("../Node3D")
 metadata/_edit_lock_ = true
 
-[node name="StaticBody3D" type="StaticBody3D" parent="ButtonUp/InteractiveObject" index="0" groups=["interactive_object"]]
+[node name="StaticBody3D" type="StaticBody3D" parent="InteractiveObject" index="0" groups=["interactive_object"]]
 transform = Transform3D(4.96704e-08, 1, -1.50996e-07, -1, 4.96705e-08, -1.50996e-07, -1.50996e-07, 1.50996e-07, 1, -0.0966343, 0, -1.45914e-08)
 collision_layer = 4
 collision_mask = 4
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="ButtonUp/InteractiveObject/StaticBody3D" index="0"]
-transform = Transform3D(1, -1.60933e-20, -1.42109e-14, 3.5527e-15, 1, -6.77626e-21, 1.42109e-14, 0, 1, 0, 0, 0)
-shape = SubResource("CylinderShape3D_xjv4v")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractiveObject/StaticBody3D" index="0"]
+transform = Transform3D(1, 1.53122e-12, -1.42109e-14, -1.52767e-12, 1, 1.45825e-17, 7.67386e-12, -1.5233e-17, 1, 0.502533, 0.0598452, -0.00354005)
+shape = SubResource("BoxShape3D_je34a")
 
-[node name="ButtonUpBase" parent="." index="2"]
+[node name="ButtonUp" parent="." index="2"]
+transform = Transform3D(1.78814e-07, 1, 0, -1, 1.78814e-07, 0, 5.0822e-21, 0, 1, 0.36027, 0.865726, 7.10543e-15)
+
+[node name="ButtonUpBase" parent="." index="3"]
 transform = Transform3D(1.78814e-07, 1, 0, -1, 1.78814e-07, 0, 1.69407e-21, 0, 1, 0.114886, 0.865726, 0)
 
-[node name="InteractiveObject2" type="Node3D" parent="ButtonDown" index="0" node_paths=PackedStringArray("CallUseObject", "OutlineMesh") groups=["interactive_object"]]
-transform = Transform3D(1.78814e-07, -1, 0, 1, 1.78814e-07, 1.42109e-14, -1.42109e-14, 1.41172e-21, 1, 0, 0, 0)
-script = ExtResource("2_jl5ap")
-CallUseObject = NodePath("../..")
-OutlineMesh = NodePath("..")
-ObjectName = "ButtonDown"
-CallUseObjectFunction = "UseAction_Button_Down"
+[node name="Node3D" type="Node3D" parent="." index="6"]
+transform = Transform3D(-2.62269e-07, 0, -6, 0, 6, 0, 6, 0, -2.62269e-07, 0, 0, 0)
+visible = false
+script = ExtResource("4_gigpx")
+CanLookAtCamera = false
+
+[node name="NodeLeftUp" type="Node3D" parent="Node3D" index="0"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.182612, 0.301465, -0.0988364)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D/NodeLeftUp" index="0"]
+transform = Transform3D(1, 0, -2.84217e-14, 0, 1, 0, 2.84217e-14, 0, 1, 0, 0, 0)
+mesh = SubResource("SphereMesh_ho0nh")
 metadata/_edit_lock_ = true
 
-[node name="StaticBody3D" type="StaticBody3D" parent="ButtonDown/InteractiveObject2" index="0" groups=["interactive_object"]]
-transform = Transform3D(4.96705e-08, 1, -1.50996e-07, -1, 4.96705e-08, -1.50996e-07, -1.50996e-07, 1.50996e-07, 1, -0.088876, 0, -1.34199e-08)
-collision_layer = 4
-collision_mask = 4
+[node name="NodeRightDown" type="Node3D" parent="Node3D" index="1"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.182168, -0.18113, -0.0988363)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="ButtonDown/InteractiveObject2/StaticBody3D" index="0"]
-transform = Transform3D(1, -4.47037e-20, -1.42109e-14, 1.06581e-14, 1, 0, 1.42109e-14, 0, 1, 0, 0, 0)
-shape = SubResource("CylinderShape3D_xjv4v")
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D/NodeRightDown" index="0"]
+transform = Transform3D(1, 0, -9.9476e-14, 0, 1, 0, 9.9476e-14, 0, 1, 0, 0, 0)
+mesh = SubResource("SphereMesh_ho0nh")
+metadata/_edit_lock_ = true

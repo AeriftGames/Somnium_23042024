@@ -1,9 +1,8 @@
-[gd_scene load_steps=26 format=3 uid="uid://cjqwso2sh1h26"]
+[gd_scene load_steps=29 format=3 uid="uid://cjqwso2sh1h26"]
 
 [ext_resource type="PackedScene" uid="uid://dcilkc4fno2qm" path="res://player_character/FpsCharacterBase.tscn" id="1_51rw7"]
 [ext_resource type="Script" path="res://player_character/FPSCharacterMoveAnim.cs" id="2_70jfn"]
 [ext_resource type="AudioStream" uid="uid://ca0tugn8tpbpo" path="res://audio/audio_streams/our/Crouch_1.wav" id="3_afmsp"]
-[ext_resource type="Script" path="res://player_character/move_anim_components/CCharacterHeadBobComponent.cs" id="3_its55"]
 [ext_resource type="Script" path="res://player_character/move_anim_components/CCharacterLeanComponent.cs" id="4_c126o"]
 [ext_resource type="AudioStream" uid="uid://cmdby14e1s2cw" path="res://audio/audio_streams/our/Uncrouch_1.wav" id="4_h6qy8"]
 [ext_resource type="Script" path="res://player_character/move_anim_components/CCharacterJumpLandEffectComponent.cs" id="5_wxfos"]
@@ -14,6 +13,7 @@
 [ext_resource type="Script" path="res://player_character/move_anim_components/CCharacterCameraShakeComponent.cs" id="10_e6ifg"]
 [ext_resource type="Script" path="res://player_character/move_anim_components/CCharacterCameraZoomComponent.cs" id="13_8jvsc"]
 [ext_resource type="Script" path="res://player_character/move_anim_components/CCharacterBreathingEffectComponent.cs" id="14_nobcg"]
+[ext_resource type="Script" path="res://player_character/move_anim_components/CCharacterWalkEffectComponent.cs" id="15_10gmf"]
 
 [sub_resource type="Animation" id="Animation_qu31v"]
 resource_name = "CameraLandDeath"
@@ -250,18 +250,108 @@ _data = {
 "Breathing_Low": SubResource("Animation_vpe10")
 }
 
+[sub_resource type="Animation" id="Animation_6bh8q"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%HeadBob:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_fxhvd"]
+resource_name = "Walk"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%HeadBob:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0, 0),
+"points": PackedFloat32Array(0.00967625, -0.25, 0, 0.25, 0, -0.02876, -0.2, 0.0243, 0.2, -0.0167845, -0.0595734, -0.25, 0, 0.25, 0, -0.0295115, -0.2, -0.015532, 0.2, 0.0253021, 0.00981155, -0.3, 4.42195e-05, 0.3, 0.000215325),
+"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("%HeadBob:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0, 0),
+"points": PackedFloat32Array(-0.0155544, -0.25, 0, 0.2, 0.0158004, 0.0450701, -0.25, 0, 0.3, 6.41216e-06, -0.0152086, -0.2, 0.0158984, 0.2, 0.0154546, 0.0450701, -0.25, 0, 0.25, 0, -0.0157354, -0.2, 0.016869, 0.2, 0.0155376),
+"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("%HeadBob:position:z")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(),
+"points": PackedFloat32Array(),
+"times": PackedFloat32Array()
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("%HeadBob:rotation")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.4, 0.8, 1, 1.4, 1.8, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0.00523599), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, -0.00523599)]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(1, 2),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"PlayFootStepNow"
+}, {
+"args": [],
+"method": &"PlayFootStepNow"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_d2wko"]
+_data = {
+"RESET": SubResource("Animation_6bh8q"),
+"Walk": SubResource("Animation_fxhvd")
+}
+
 [node name="FpsCharacterMoveAnim" instance=ExtResource("1_51rw7")]
 script = ExtResource("2_70jfn")
 
 [node name="BaseComponents" parent="." index="0"]
 script = null
 
-[node name="BaseHeadBobComponent" type="Node" parent="BaseComponents" index="3"]
-script = ExtResource("3_its55")
-SwayAmmount = 0.8
+[node name="BaseCrouchComponent" parent="BaseComponents" index="3"]
+AudioStreamCrouch = ExtResource("3_afmsp")
+AudioStreamUnCrouch = ExtResource("4_h6qy8")
 
-[node name="AudioStreamPlayer_Footsteps" type="AudioStreamPlayer" parent="BaseComponents/BaseHeadBobComponent" index="0"]
-bus = &"Footsteps"
+[node name="AudioStreamPlayer_Crouch" parent="BaseComponents/BaseCrouchComponent" index="2"]
+volume_db = -10.0
+pitch_scale = 0.8
+bus = &"Sfx"
 
 [node name="BaseLeanComponent" type="Node" parent="BaseComponents" index="4"]
 script = ExtResource("4_c126o")
@@ -300,20 +390,20 @@ libraries = {
 autoplay = "Breathing_Low"
 speed_scale = 0.5
 
-[node name="BaseCrouchComponent" parent="BaseComponents" index="9"]
-AudioStreamCrouch = ExtResource("3_afmsp")
-AudioStreamUnCrouch = ExtResource("4_h6qy8")
+[node name="BaseWalkEffectComponent" type="Node" parent="BaseComponents" index="9"]
+script = ExtResource("15_10gmf")
 
-[node name="AudioStreamPlayer_Crouch" parent="BaseComponents/BaseCrouchComponent" index="1"]
-volume_db = -10.0
-pitch_scale = 0.8
-bus = &"Sfx"
+[node name="AnimationPlayer_HeadBobMovement" type="AnimationPlayer" parent="BaseComponents/BaseWalkEffectComponent" index="0"]
+libraries = {
+"": SubResource("AnimationLibrary_d2wko")
+}
 
-[node name="CameraLand" parent="CameraCrouch" index="0"]
-unique_name_in_owner = true
+[node name="AudioStreamPlayer_Footsteps" type="AudioStreamPlayer" parent="BaseComponents/BaseWalkEffectComponent" index="1"]
+max_polyphony = 2
+bus = &"Footsteps"
 
 [node name="CameraHead" parent="CameraCrouch/CameraLand/CameraController" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
 
-[node name="Camera3D" parent="CameraCrouch/CameraLand/CameraController/CameraHead/CameraLean/CameraSway/CameraJump/CameraShakeRot/HeadBob/HeadBreathing" index="0"]
-fov = 1.00123
+[node name="HeadBob" parent="CameraCrouch/CameraLand/CameraController/CameraHead/CameraLean/CameraSway/CameraJump/CameraShakeRot" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00967625, -0.0155544, 0)

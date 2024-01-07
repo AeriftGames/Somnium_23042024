@@ -10,17 +10,17 @@
 [resource]
 render_priority = 0
 shader = ExtResource("1_kbgup")
-shader_parameter/point_size = 1.0
+shader_parameter/point_size = 0.0
 shader_parameter/roughness = 0.9
 shader_parameter/metallic_texture_channel = Vector4(0, 0, 0, 0)
-shader_parameter/specular = 0.5
-shader_parameter/metallic = 0.6
+shader_parameter/specular = 1.0
+shader_parameter/metallic = 0.0
 shader_parameter/normal_scale = 2.0
 shader_parameter/uv1_scale = Vector3(1, 1, 1)
 shader_parameter/uv1_offset = Vector3(0, 0, 0)
 shader_parameter/uv2_scale = Vector3(1, 1, 1)
 shader_parameter/uv2_offset = Vector3(0, 0, 0)
-shader_parameter/paint_color = Color(0.501961, 0.776471, 1, 1)
+shader_parameter/paint_color = Color(1, 1, 1, 1)
 shader_parameter/paint_mask_tex = ExtResource("1_dyyy6")
 shader_parameter/texture_albedo = ExtResource("2_b08wy")
 shader_parameter/texture_metallic = ExtResource("3_55hob")
