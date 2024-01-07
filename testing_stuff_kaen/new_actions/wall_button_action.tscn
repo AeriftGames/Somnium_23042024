@@ -1,9 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://bqcc3ox822w73"]
+[gd_scene load_steps=8 format=3 uid="uid://bqcc3ox822w73"]
 
 [ext_resource type="PackedScene" uid="uid://darrpqdjdaenp" path="res://testing_stuff_kaen/new_actions/wall_button.tscn" id="1_p4lpk"]
 [ext_resource type="Script" path="res://testing_stuff_kaen/test_new_levels/CInteractiveObject.cs" id="2_jl5ap"]
 [ext_resource type="Script" path="res://testing_stuff_kaen/test_new_levels/CActionItemUse.cs" id="2_lq2td"]
-[ext_resource type="Script" path="res://testing_stuff_kaen/new_actions/test_bilboard.cs" id="4_gigpx"]
+[ext_resource type="Script" path="res://testing_stuff_kaen/new_actions/CBilboardObject.cs" id="4_7jeyo"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_je34a"]
 size = Vector3(2.74603, 1.0069, 2.02661)
@@ -12,16 +12,20 @@ size = Vector3(2.74603, 1.0069, 2.02661)
 radius = 0.05
 height = 0.1
 
+[sub_resource type="SphereMesh" id="SphereMesh_xg05b"]
+radius = 0.05
+height = 0.1
+
 [node name="wall_button" instance=ExtResource("1_p4lpk")]
 script = ExtResource("2_lq2td")
 
-[node name="InteractiveObject" type="Node3D" parent="." index="0" node_paths=PackedStringArray("CallUseObject", "test_Bilboard") groups=["interactive_object"]]
+[node name="InteractiveObject" type="Node3D" parent="." index="0" node_paths=PackedStringArray("CallUseObject", "BilboardObject") groups=["interactive_object"]]
 transform = Transform3D(1, 8.52655e-28, 1.42109e-14, 0, 1, 4.23518e-21, -1.42109e-14, 1.41172e-21, 1, 0.36027, 0.865726, 7.10543e-15)
 script = ExtResource("2_jl5ap")
 CallUseObject = NodePath("..")
 ObjectName = "Button"
 CallUseObjectFunction = "UseAction_Button_UP"
-test_Bilboard = NodePath("../Node3D")
+BilboardObject = NodePath("../BilboardObject")
 metadata/_edit_lock_ = true
 
 [node name="StaticBody3D" type="StaticBody3D" parent="InteractiveObject" index="0" groups=["interactive_object"]]
@@ -39,24 +43,38 @@ transform = Transform3D(1.78814e-07, 1, 0, -1, 1.78814e-07, 0, 5.0822e-21, 0, 1,
 [node name="ButtonUpBase" parent="." index="3"]
 transform = Transform3D(1.78814e-07, 1, 0, -1, 1.78814e-07, 0, 1.69407e-21, 0, 1, 0.114886, 0.865726, 0)
 
-[node name="Node3D" type="Node3D" parent="." index="6"]
+[node name="BilboardObject" type="Node3D" parent="." index="6"]
 transform = Transform3D(-2.62269e-07, 0, -6, 0, 6, 0, 6, 0, -2.62269e-07, 0, 0, 0)
 visible = false
-script = ExtResource("4_gigpx")
+script = ExtResource("4_7jeyo")
 CanLookAtCamera = false
 
-[node name="NodeLeftUp" type="Node3D" parent="Node3D" index="0"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.182612, 0.301465, -0.0988364)
+[node name="NodeLeftUp" type="Node3D" parent="BilboardObject" index="0"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.182612, 0.301465, -0.0442353)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D/NodeLeftUp" index="0"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="BilboardObject/NodeLeftUp" index="0"]
 transform = Transform3D(1, 0, -2.84217e-14, 0, 1, 0, 2.84217e-14, 0, 1, 0, 0, 0)
 mesh = SubResource("SphereMesh_ho0nh")
 metadata/_edit_lock_ = true
 
-[node name="NodeRightDown" type="Node3D" parent="Node3D" index="1"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.182168, -0.18113, -0.0988363)
+[node name="NodeRightDown" type="Node3D" parent="BilboardObject" index="1"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.182168, -0.18113, -0.0442352)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D/NodeRightDown" index="0"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="BilboardObject/NodeRightDown" index="0"]
 transform = Transform3D(1, 0, -9.9476e-14, 0, 1, 0, 9.9476e-14, 0, 1, 0, 0, 0)
 mesh = SubResource("SphereMesh_ho0nh")
+metadata/_edit_lock_ = true
+
+[node name="NodeLeftDown" type="Node3D" parent="BilboardObject" index="2"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.182, -0.181, -0.044)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="BilboardObject/NodeLeftDown" index="0"]
+mesh = SubResource("SphereMesh_xg05b")
+metadata/_edit_lock_ = true
+
+[node name="NodeRightUp" type="Node3D" parent="BilboardObject" index="3"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.183, 0.301, -0.044)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="BilboardObject/NodeRightUp" index="0"]
+mesh = SubResource("SphereMesh_xg05b")
 metadata/_edit_lock_ = true

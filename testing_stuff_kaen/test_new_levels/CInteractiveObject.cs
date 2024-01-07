@@ -4,22 +4,12 @@ using System;
 public partial class CInteractiveObject : Node3D
 {
 	[Export] public Node CallUseObject = null;
-	[Export] public MeshInstance3D OutlineMesh = null;
 	[Export] private string ObjectName = "none";
 	[Export] public string CallUseObjectFunction = "UseAction";
-	[Export] public test_bilboard test_Bilboard = null;
+	[Export] public CBilboardObject BilboardObject = null;
 
 	private bool isInRange = false;
 	private bool isInLook = false;
-
-    public override void _Ready()
-    {
-        base._Ready();
-
-		// unique outline material
-		if (OutlineMesh != null)
-            OutlineMesh.MaterialOverlay = OutlineMesh.MaterialOverlay.Duplicate() as Material;
-    }
 
     public void CallUseAction()
 	{
@@ -35,21 +25,5 @@ public partial class CInteractiveObject : Node3D
 	public bool GetIsInLook() {  return isInLook; }
 	public string GetObjectName() { return ObjectName; }
 
-    public override void _PhysicsProcess(double delta)
-    {
-        base._PhysicsProcess(delta);
-
-		//SetIsInLook(false);
-    }
-
-	public void SetOutlineEffect(bool newOutlineEnable)
-	{
-		if(OutlineMesh != null) 
-		{
-			if(OutlineMesh.MaterialOverlay != null)
-			{ OutlineMesh.MaterialOverlay.Set("shader_parameter/enable", newOutlineEnable); }
-		}
-	}
-
-	public test_bilboard GetTestBilboard() { return test_Bilboard; }
+	public CBilboardObject GetBilboardObject() { return BilboardObject; }
 }

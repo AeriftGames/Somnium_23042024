@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://1t4rn16em2wq" path="res://testing_stuff_kaen/test_new_levels/new_room2/mat/base/9_2_f_low_DefaultMaterial_Metallic.png" id="5_hkt82"]
 [ext_resource type="Texture2D" uid="uid://dq4uoy6s5xifm" path="res://testing_stuff_kaen/test_new_levels/new_room2/mat/base/9_2_f_low_DefaultMaterial_Normal.png" id="6_6dqux"]
 [ext_resource type="Texture2D" uid="uid://po0lphkticwx" path="res://testing_stuff_kaen/test_new_levels/new_room2/mat/base/9_2_f_low_DefaultMaterial_Roughness.png" id="7_ayu2p"]
-[ext_resource type="Script" path="res://testing_stuff_kaen/new_actions/test_bilboard.cs" id="8_g658b"]
+[ext_resource type="Script" path="res://testing_stuff_kaen/new_actions/CBilboardObject.cs" id="8_se75n"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_pedob"]
 size = Vector3(0.131922, 0.395166, 0.4)
@@ -72,13 +72,13 @@ height = 0.1
 
 [node name="BoxAction" type="Node3D"]
 
-[node name="InteractiveObject" type="Node3D" parent="." node_paths=PackedStringArray("CallUseObject", "test_Bilboard") groups=["interactive_object"]]
+[node name="InteractiveObject" type="Node3D" parent="." node_paths=PackedStringArray("CallUseObject", "BilboardObject") groups=["interactive_object"]]
 transform = Transform3D(1.78814e-07, -1, -1.69407e-21, 1, 1.78814e-07, 1.42109e-14, -1.42109e-14, 7.05861e-21, 1, 0, 0, 0)
 script = ExtResource("1_swdpv")
 CallUseObject = NodePath("..")
 ObjectName = "Box"
 CallUseObjectFunction = "UseAction_Use"
-test_Bilboard = NodePath("../Node3D")
+BilboardObject = NodePath("../BilboardObject")
 metadata/_edit_lock_ = true
 
 [node name="StaticBody3D" type="StaticBody3D" parent="InteractiveObject" groups=["interactive_object"]]
@@ -96,21 +96,21 @@ material_override = SubResource("ShaderMaterial_2eset")
 mesh = SubResource("ArrayMesh_s5wt3")
 skeleton = NodePath("")
 
-[node name="Node3D" type="Node3D" parent="."]
+[node name="BilboardObject" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 3.81469e-06, -3.8147e-06)
 visible = false
-script = ExtResource("8_g658b")
+script = ExtResource("8_se75n")
 
-[node name="NodeLeftUp" type="Node3D" parent="Node3D"]
+[node name="NodeLeftUp" type="Node3D" parent="BilboardObject"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.22, 0.22, -0.199)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D/NodeLeftUp"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="BilboardObject/NodeLeftUp"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.140982, 0, -0.0181585)
 mesh = SubResource("SphereMesh_1ql00")
 
-[node name="NodeRightDown" type="Node3D" parent="Node3D"]
+[node name="NodeRightDown" type="Node3D" parent="BilboardObject"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.22, -0.22, -0.199)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D/NodeRightDown"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="BilboardObject/NodeRightDown"]
 transform = Transform3D(1, -0.000461548, 9.53021e-05, 0.000461513, 1, 0.000360618, -9.54711e-05, -0.000360573, 1, -0.262213, 0.00107676, 0.416171)
 mesh = SubResource("SphereMesh_1ql00")

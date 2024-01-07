@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://1t4rn16em2wq" path="res://testing_stuff_kaen/test_new_levels/new_room2/mat/base/9_2_f_low_DefaultMaterial_Metallic.png" id="4_73wwu"]
 [ext_resource type="Texture2D" uid="uid://dq4uoy6s5xifm" path="res://testing_stuff_kaen/test_new_levels/new_room2/mat/base/9_2_f_low_DefaultMaterial_Normal.png" id="5_yqwfu"]
 [ext_resource type="Texture2D" uid="uid://po0lphkticwx" path="res://testing_stuff_kaen/test_new_levels/new_room2/mat/base/9_2_f_low_DefaultMaterial_Roughness.png" id="6_cfwwi"]
-[ext_resource type="Script" path="res://testing_stuff_kaen/new_actions/test_bilboard.cs" id="8_lm564"]
+[ext_resource type="Script" path="res://testing_stuff_kaen/new_actions/CBilboardObject.cs" id="8_k4chc"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_3kkhh"]
 size = Vector3(0.403665, 0.395166, 0.4)
@@ -106,19 +106,19 @@ shader_parameter/texture_metallic = ExtResource("4_73wwu")
 shader_parameter/texture_roughness = ExtResource("6_cfwwi")
 shader_parameter/texture_normal = ExtResource("5_yqwfu")
 
-[sub_resource type="SphereMesh" id="SphereMesh_1ql00"]
+[sub_resource type="SphereMesh" id="SphereMesh_aifwt"]
 radius = 0.05
 height = 0.1
 
 [node name="BoxAction" type="Node3D"]
 
-[node name="InteractiveObject" type="Node3D" parent="." node_paths=PackedStringArray("CallUseObject", "test_Bilboard") groups=["interactive_object"]]
+[node name="InteractiveObject" type="Node3D" parent="." node_paths=PackedStringArray("CallUseObject", "BilboardObject") groups=["interactive_object"]]
 transform = Transform3D(1.78814e-07, -1, -1.69407e-21, 1, 1.78814e-07, 1.42109e-14, -1.42109e-14, 7.05861e-21, 1, 0, 0, 0)
 script = ExtResource("1_b6wos")
 CallUseObject = NodePath("..")
 ObjectName = "Box"
 CallUseObjectFunction = "UseAction_Use"
-test_Bilboard = NodePath("../Node3D")
+BilboardObject = NodePath("../BilboardObject")
 metadata/_edit_lock_ = true
 
 [node name="StaticBody3D" type="StaticBody3D" parent="InteractiveObject" groups=["interactive_object"]]
@@ -148,18 +148,38 @@ material_override = SubResource("ShaderMaterial_hrd7n")
 mesh = SubResource("ArrayMesh_s5wt3")
 skeleton = NodePath("")
 
-[node name="Node3D" type="Node3D" parent="."]
+[node name="BilboardObject" type="Node3D" parent="."]
 visible = false
-script = ExtResource("8_lm564")
+script = ExtResource("8_k4chc")
 
-[node name="NodeLeftUp" type="Node3D" parent="Node3D"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.22, 0.22, -0.199)
+[node name="NodeLeftUp" type="Node3D" parent="BilboardObject"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.206101, 0.225405, 0)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D/NodeLeftUp"]
-mesh = SubResource("SphereMesh_1ql00")
+[node name="MeshInstance3D" type="MeshInstance3D" parent="BilboardObject/NodeLeftUp"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+mesh = SubResource("SphereMesh_aifwt")
+metadata/_edit_lock_ = true
 
-[node name="NodeRightDown" type="Node3D" parent="Node3D"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.22, -0.22, -0.199)
+[node name="NodeRightDown" type="Node3D" parent="BilboardObject"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.206101, -0.224633, 0)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D/NodeRightDown"]
-mesh = SubResource("SphereMesh_1ql00")
+[node name="MeshInstance3D" type="MeshInstance3D" parent="BilboardObject/NodeRightDown"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+mesh = SubResource("SphereMesh_aifwt")
+metadata/_edit_lock_ = true
+
+[node name="NodeLeftDown" type="Node3D" parent="BilboardObject"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.206, -0.225, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="BilboardObject/NodeLeftDown"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+mesh = SubResource("SphereMesh_aifwt")
+metadata/_edit_lock_ = true
+
+[node name="NodeRightUp" type="Node3D" parent="BilboardObject"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.206, 0.225, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="BilboardObject/NodeRightUp"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+mesh = SubResource("SphereMesh_aifwt")
+metadata/_edit_lock_ = true

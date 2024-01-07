@@ -3,10 +3,11 @@ using System;
 
 public partial class test_bilboard : Node3D
 {
-	Node3D NodeLeftUp;
-	Node3D NodeRightDown;
+    [Export] public bool CanLookAtCamera = true;
+
+    private Node3D NodeLeftUp;
+	private Node3D NodeRightDown;
 	private bool LookAtCamera = false;
-	[Export] public bool CanLookAtCamera = true;
 
 	public override void _Ready()
 	{
@@ -22,12 +23,10 @@ public partial class test_bilboard : Node3D
 		{ 
 			LookAt(CGameMaster.GM.GetGame().GetFPSCharacterBase().GetCharacterLookComponent().
 			GetMainCamera().GlobalPosition);
-			GD.Print("LookAtCameraActivate");
+			//GD.Print("LookAtCameraActivate");
 		}
 	}
-
 	public Vector3 GetLeftUpPosition() { return NodeLeftUp.GlobalPosition; }
     public Vector3 GetRightDownPosition() { return NodeRightDown.GlobalPosition; }
-
 	public void ActivateLookAtCamera( bool newActivate ){ LookAtCamera = newActivate; }
 }
