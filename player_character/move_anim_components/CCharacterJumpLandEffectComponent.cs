@@ -69,7 +69,7 @@ public partial class CCharacterJumpLandEffectComponent : CBaseComponent
         lastVel = ourCharacterBase.Velocity.Y;
 
         // lerp pro landing - bacha vzdy na offset (-Vector se meni vzdy kdyz budeme menit hodnoty) 
-        CameraLand.Position = CameraLand.Position.Lerp((LandingBounce() / 20.0f) - new Vector3(0,0.45f,0), 5.0f * (float)delta);
+        CameraLand.Position = CameraLand.Position.Lerp((LandingBounce() / 20.0f) - new Vector3(0,0.45f,0), 6.0f * (float)delta);
         //GD.Print(CameraLand.Position);
     }
 
