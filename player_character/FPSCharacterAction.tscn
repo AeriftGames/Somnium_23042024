@@ -226,6 +226,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 mouse_filter = 2
 color = Color(1, 1, 1, 0.356863)
+metadata/_edit_lock_ = true
 
 [node name="ColorRect" type="ColorRect" parent="BaseComponents/BaseUseActionComponent/ActionLayer/SelectRect/LeftUpRect" index="0"]
 visible = false
@@ -233,6 +234,7 @@ layout_mode = 1
 offset_right = 2.0
 offset_bottom = 10.0
 mouse_filter = 2
+metadata/_edit_lock_ = true
 
 [node name="ColorRect2" type="ColorRect" parent="BaseComponents/BaseUseActionComponent/ActionLayer/SelectRect/LeftUpRect" index="1"]
 visible = false
@@ -240,6 +242,7 @@ layout_mode = 1
 offset_right = 10.0
 offset_bottom = 2.0
 mouse_filter = 2
+metadata/_edit_lock_ = true
 
 [node name="ColorRect3" type="ColorRect" parent="BaseComponents/BaseUseActionComponent/ActionLayer/SelectRect/LeftUpRect" index="2"]
 layout_mode = 1
@@ -248,6 +251,7 @@ offset_top = 11.0
 offset_right = 6.0
 offset_bottom = 21.0
 mouse_filter = 2
+metadata/_edit_lock_ = true
 
 [node name="ColorRect5" type="ColorRect" parent="BaseComponents/BaseUseActionComponent/ActionLayer/SelectRect/LeftUpRect" index="3"]
 layout_mode = 1
@@ -257,6 +261,7 @@ offset_right = 13.0
 offset_bottom = 14.0
 rotation = 0.795498
 mouse_filter = 2
+metadata/_edit_lock_ = true
 
 [node name="ColorRect4" type="ColorRect" parent="BaseComponents/BaseUseActionComponent/ActionLayer/SelectRect/LeftUpRect" index="4"]
 layout_mode = 1
@@ -265,6 +270,7 @@ offset_top = 4.0
 offset_right = 21.0
 offset_bottom = 6.0
 mouse_filter = 2
+metadata/_edit_lock_ = true
 
 [node name="RightUpRect" type="ColorRect" parent="BaseComponents/BaseUseActionComponent/ActionLayer/SelectRect" index="1"]
 self_modulate = Color(1, 1, 1, 0)
@@ -278,6 +284,7 @@ grow_horizontal = 0
 rotation = 1.5708
 mouse_filter = 2
 color = Color(1, 1, 1, 0.356863)
+metadata/_edit_lock_ = true
 
 [node name="ColorRect" type="ColorRect" parent="BaseComponents/BaseUseActionComponent/ActionLayer/SelectRect/RightUpRect" index="0"]
 visible = false
@@ -285,6 +292,7 @@ layout_mode = 1
 offset_right = 2.0
 offset_bottom = 10.0
 mouse_filter = 2
+metadata/_edit_lock_ = true
 
 [node name="ColorRect2" type="ColorRect" parent="BaseComponents/BaseUseActionComponent/ActionLayer/SelectRect/RightUpRect" index="1"]
 visible = false
@@ -292,6 +300,7 @@ layout_mode = 1
 offset_right = 10.0
 offset_bottom = 2.0
 mouse_filter = 2
+metadata/_edit_lock_ = true
 
 [node name="ColorRect3" type="ColorRect" parent="BaseComponents/BaseUseActionComponent/ActionLayer/SelectRect/RightUpRect" index="2"]
 layout_mode = 1
@@ -300,6 +309,7 @@ offset_top = 11.0
 offset_right = 6.0
 offset_bottom = 21.0
 mouse_filter = 2
+metadata/_edit_lock_ = true
 
 [node name="ColorRect5" type="ColorRect" parent="BaseComponents/BaseUseActionComponent/ActionLayer/SelectRect/RightUpRect" index="3"]
 layout_mode = 1
@@ -309,6 +319,7 @@ offset_right = 13.0
 offset_bottom = 14.0
 rotation = 0.795498
 mouse_filter = 2
+metadata/_edit_lock_ = true
 
 [node name="ColorRect4" type="ColorRect" parent="BaseComponents/BaseUseActionComponent/ActionLayer/SelectRect/RightUpRect" index="4"]
 layout_mode = 1
@@ -317,6 +328,7 @@ offset_top = 4.0
 offset_right = 21.0
 offset_bottom = 6.0
 mouse_filter = 2
+metadata/_edit_lock_ = true
 
 [node name="ColorRect6" type="ColorRect" parent="BaseComponents/BaseUseActionComponent/ActionLayer/SelectRect/RightUpRect" index="5"]
 visible = false
@@ -326,6 +338,7 @@ offset_top = 4.0
 offset_right = 43.0
 offset_bottom = 6.0
 mouse_filter = 2
+metadata/_edit_lock_ = true
 
 [node name="LeftDownRect" type="ColorRect" parent="BaseComponents/BaseUseActionComponent/ActionLayer/SelectRect" index="2"]
 self_modulate = Color(1, 1, 1, 0)
@@ -337,6 +350,7 @@ grow_vertical = 0
 rotation = -1.5708
 mouse_filter = 2
 color = Color(1, 1, 1, 0.356863)
+metadata/_edit_lock_ = true
 
 [node name="ColorRect" type="ColorRect" parent="BaseComponents/BaseUseActionComponent/ActionLayer/SelectRect/LeftDownRect" index="0"]
 visible = false
@@ -344,6 +358,7 @@ layout_mode = 1
 offset_right = 2.0
 offset_bottom = 10.0
 mouse_filter = 2
+metadata/_edit_lock_ = true
 
 [node name="ColorRect2" type="ColorRect" parent="BaseComponents/BaseUseActionComponent/ActionLayer/SelectRect/LeftDownRect" index="1"]
 visible = false
@@ -351,6 +366,7 @@ layout_mode = 1
 offset_right = 10.0
 offset_bottom = 2.0
 mouse_filter = 2
+metadata/_edit_lock_ = true
 
 [node name="ColorRect3" type="ColorRect" parent="BaseComponents/BaseUseActionComponent/ActionLayer/SelectRect/LeftDownRect" index="2"]
 layout_mode = 1
@@ -359,6 +375,7 @@ offset_top = 11.0
 offset_right = 6.0
 offset_bottom = 21.0
 mouse_filter = 2
+metadata/_edit_lock_ = true
 
 [node name="ColorRect5" type="ColorRect" parent="BaseComponents/BaseUseActionComponent/ActionLayer/SelectRect/LeftDownRect" index="3"]
 layout_mode = 1
@@ -368,6 +385,7 @@ offset_right = 13.0
 offset_bottom = 14.0
 rotation = 0.795498
 mouse_filter = 2
+metadata/_edit_lock_ = true
 
 [node name="ColorRect4" type="ColorRect" parent="BaseComponents/BaseUseActionComponent/ActionLayer/SelectRect/LeftDownRect" index="4"]
 layout_mode = 1
@@ -376,6 +394,7 @@ offset_top = 4.0
 offset_right = 21.0
 offset_bottom = 6.0
 mouse_filter = 2
+metadata/_edit_lock_ = true
 
 [node name="RightDownRect" type="ColorRect" parent="BaseComponents/BaseUseActionComponent/ActionLayer/SelectRect" index="3"]
 self_modulate = Color(1, 1, 1, 0)
@@ -390,6 +409,7 @@ grow_vertical = 0
 rotation = 3.14159
 mouse_filter = 2
 color = Color(1, 1, 1, 0.356863)
+metadata/_edit_lock_ = true
 
 [node name="ColorRect" type="ColorRect" parent="BaseComponents/BaseUseActionComponent/ActionLayer/SelectRect/RightDownRect" index="0"]
 visible = false
@@ -397,6 +417,7 @@ layout_mode = 1
 offset_right = 2.0
 offset_bottom = 10.0
 mouse_filter = 2
+metadata/_edit_lock_ = true
 
 [node name="ColorRect2" type="ColorRect" parent="BaseComponents/BaseUseActionComponent/ActionLayer/SelectRect/RightDownRect" index="1"]
 visible = false
@@ -404,6 +425,7 @@ layout_mode = 1
 offset_right = 10.0
 offset_bottom = 2.0
 mouse_filter = 2
+metadata/_edit_lock_ = true
 
 [node name="ColorRect3" type="ColorRect" parent="BaseComponents/BaseUseActionComponent/ActionLayer/SelectRect/RightDownRect" index="2"]
 layout_mode = 1
@@ -412,6 +434,7 @@ offset_top = 11.0
 offset_right = 6.0
 offset_bottom = 21.0
 mouse_filter = 2
+metadata/_edit_lock_ = true
 
 [node name="ColorRect6" type="ColorRect" parent="BaseComponents/BaseUseActionComponent/ActionLayer/SelectRect/RightDownRect" index="3"]
 visible = false
@@ -421,6 +444,7 @@ offset_top = 35.0
 offset_right = 7.0
 offset_bottom = 45.0
 mouse_filter = 2
+metadata/_edit_lock_ = true
 
 [node name="ColorRect5" type="ColorRect" parent="BaseComponents/BaseUseActionComponent/ActionLayer/SelectRect/RightDownRect" index="4"]
 layout_mode = 1
@@ -430,6 +454,7 @@ offset_right = 13.0
 offset_bottom = 14.0
 rotation = 0.795498
 mouse_filter = 2
+metadata/_edit_lock_ = true
 
 [node name="ColorRect4" type="ColorRect" parent="BaseComponents/BaseUseActionComponent/ActionLayer/SelectRect/RightDownRect" index="5"]
 layout_mode = 1
@@ -438,9 +463,9 @@ offset_top = 4.0
 offset_right = 21.0
 offset_bottom = 6.0
 mouse_filter = 2
+metadata/_edit_lock_ = true
 
 [node name="ActionRect" type="ColorRect" parent="BaseComponents/BaseUseActionComponent/ActionLayer/SelectRect" index="4"]
-visible = false
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -455,6 +480,7 @@ grow_vertical = 2
 rotation = -0.00140014
 mouse_filter = 2
 color = Color(0.560784, 0.560784, 0.560784, 1)
+metadata/_edit_lock_ = true
 
 [node name="ColorRect2" type="ColorRect" parent="BaseComponents/BaseUseActionComponent/ActionLayer/SelectRect/ActionRect" index="0"]
 layout_mode = 1
@@ -470,6 +496,7 @@ offset_bottom = 0.726
 rotation = 0.588943
 mouse_filter = 2
 color = Color(0.560784, 0.560784, 0.560784, 1)
+metadata/_edit_lock_ = true
 
 [node name="ColorRect3" type="ColorRect" parent="BaseComponents/BaseUseActionComponent/ActionLayer/SelectRect/ActionRect" index="1"]
 layout_mode = 1
@@ -484,6 +511,7 @@ offset_right = 39.64
 offset_bottom = 0.978
 mouse_filter = 2
 color = Color(0.560784, 0.560784, 0.560784, 1)
+metadata/_edit_lock_ = true
 
 [node name="Label" type="Label" parent="BaseComponents/BaseUseActionComponent/ActionLayer/SelectRect/ActionRect/ColorRect3" index="0"]
 layout_mode = 0
@@ -505,6 +533,7 @@ offset_right = 39.64
 offset_bottom = 19.978
 mouse_filter = 2
 color = Color(0.560784, 0.560784, 0.560784, 1)
+metadata/_edit_lock_ = true
 
 [node name="Label" type="Label" parent="BaseComponents/BaseUseActionComponent/ActionLayer/SelectRect/ActionRect/ColorRect4" index="0"]
 layout_mode = 0
@@ -525,6 +554,7 @@ offset_bottom = 1.0
 grow_vertical = 2
 mouse_filter = 2
 color = Color(0.560784, 0.560784, 0.560784, 1)
+metadata/_edit_lock_ = true
 
 [node name="ColorRect7" type="ColorRect" parent="BaseComponents/BaseUseActionComponent/ActionLayer/SelectRect/ActionRect" index="4"]
 layout_mode = 1
@@ -537,6 +567,7 @@ offset_right = -1.9944
 offset_bottom = 4.99441
 grow_vertical = 2
 mouse_filter = 2
+metadata/_edit_lock_ = true
 
 [node name="CenterRect" type="ColorRect" parent="BaseComponents/BaseUseActionComponent/ActionLayer/SelectRect" index="5"]
 visible = false
@@ -553,6 +584,7 @@ offset_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+metadata/_edit_lock_ = true
 
 [node name="AnimationPlayer_ActionLayer" type="AnimationPlayer" parent="BaseComponents/BaseUseActionComponent/ActionLayer" index="1"]
 libraries = {

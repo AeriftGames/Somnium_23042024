@@ -13,6 +13,7 @@ public partial class ActionLayer : Control
 	private ColorRect RightUpRect;
 	private ColorRect LeftDownRect;
 	private ColorRect RightDownRect;
+	private ColorRect ActionRect;
 
 	public override void _Ready()
 	{
@@ -24,6 +25,7 @@ public partial class ActionLayer : Control
         RightUpRect = SelectRect.GetNode<ColorRect>("RightUpRect");
         LeftDownRect = SelectRect.GetNode<ColorRect>("LeftDownRect");
         RightDownRect = SelectRect.GetNode<ColorRect>("RightDownRect");
+		ActionRect = SelectRect.GetNode<ColorRect>("ActionRect");
 
         DeactiveObjectActionLayer();
     }
@@ -32,10 +34,20 @@ public partial class ActionLayer : Control
 	{
         Character = CGameMaster.GM.GetGame().GetFPSCharacterBase();
 
+		// Select Rect
 		LeftUpRect.Position = Character.GetCharacterLookComponent().GetMainCamera().UnprojectPosition(LeftUp);
         RightUpRect.Position = Character.GetCharacterLookComponent().GetMainCamera().UnprojectPosition(RightUp);
         LeftDownRect.Position = Character.GetCharacterLookComponent().GetMainCamera().UnprojectPosition(LeftDown);
         RightDownRect.Position = Character.GetCharacterLookComponent().GetMainCamera().UnprojectPosition(RightDown);
+
+
+		// Action Rect
+		Vector3 rightUpToRightDown = RightUp.DirectionTo(RightDown);
+		float distance = RightUp.DistanceTo(RightDown);
+		Vector3 newPos = RightUp + (rightUpToRightDown * (distance / 2));
+
+		ActionRect.Position = Character.GetCharacterLookComponent().GetMainCamera().UnprojectPosition(newPos);
+
 
         if (isActivate == false)
         {

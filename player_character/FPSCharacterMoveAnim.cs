@@ -47,6 +47,7 @@ public partial class FPSCharacterMoveAnim : FpsCharacterBase
         base._Process(delta);
 
         //
+        JumpLandEffectComponent.Update(delta);
         CameraZoomComponent.Update(delta);
         BreathingEffectComponent.Update(delta);
         GetCharacterFovComponent().Update(delta);
@@ -57,7 +58,6 @@ public partial class FPSCharacterMoveAnim : FpsCharacterBase
         base._PhysicsProcess(delta);
 
         LeanComponent.InputUpdate(delta);
-        JumpLandEffectComponent.Update(delta);
 
         CameraZoomComponent.InputUpdate(delta);
     }

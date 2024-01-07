@@ -14,7 +14,7 @@ transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 0, 0, 0)
 [node name="rohovy_gauc_final_pillow" parent="." index="1" instance=ExtResource("5_d3nwn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 4.7, 0)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="." index="2"]
+[node name="StaticBody3D" type="StaticBody3D" parent="." index="2" groups=["material_surface_wood"]]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.85, 0.0999999, 0)
