@@ -1,9 +1,16 @@
-[gd_scene load_steps=8 format=3 uid="uid://bqcc3ox822w73"]
+[gd_scene load_steps=10 format=3 uid="uid://bqcc3ox822w73"]
 
 [ext_resource type="PackedScene" uid="uid://darrpqdjdaenp" path="res://testing_stuff_kaen/new_actions/wall_button.tscn" id="1_p4lpk"]
 [ext_resource type="Script" path="res://testing_stuff_kaen/test_new_levels/CInteractiveObject.cs" id="2_jl5ap"]
 [ext_resource type="Script" path="res://testing_stuff_kaen/test_new_levels/CActionItemUse.cs" id="2_lq2td"]
+[ext_resource type="Script" path="res://testing_stuff_kaen/new_actions/action_resources/CBaseAction.cs" id="4_0pk6f"]
 [ext_resource type="Script" path="res://testing_stuff_kaen/new_actions/CBilboardObject.cs" id="4_7jeyo"]
+
+[sub_resource type="Resource" id="Resource_gdntr"]
+script = ExtResource("4_0pk6f")
+ActionName = "Open"
+ActionFunction = "ActionOpen"
+ActionInputActivate = 1
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_je34a"]
 size = Vector3(2.74603, 1.0069, 2.02661)
@@ -26,6 +33,7 @@ CallUseObject = NodePath("..")
 ObjectName = "Button"
 CallUseObjectFunction = "UseAction_Button_UP"
 BilboardObject = NodePath("../BilboardObject")
+ActionResources = Array[Resource]([SubResource("Resource_gdntr")])
 metadata/_edit_lock_ = true
 
 [node name="StaticBody3D" type="StaticBody3D" parent="InteractiveObject" index="0" groups=["interactive_object"]]

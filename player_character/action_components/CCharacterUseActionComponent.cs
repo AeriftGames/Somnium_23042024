@@ -124,31 +124,26 @@ public partial class CCharacterUseActionComponent : CBaseComponent
         return returnDetect;
     }
 
-    public void ShowBoundingBox(CInteractiveObject interactiveObject, bool visible)
+    public void ShowBoundingBox(CInteractiveObject newInteractiveObject, bool newVisible)
     {
         // hide
-        if (visible == false) 
+        if (newVisible == false) 
         { 
             actionLayer.DeactiveObjectActionLayer();
 
-            if(interactiveObject != null)
-            { interactiveObject.GetBilboardObject().ActivateLookAtCamera(false); }
+            if(newInteractiveObject != null)
+            { newInteractiveObject.GetBilboardObject().ActivateLookAtCamera(false); }
 
             return; 
         }
 
         // visible
-        if (interactiveObject == null) return;
+        if (newInteractiveObject == null) return;
 
-        Node3D a = interactiveObject.CallUseObject as Node3D;
-        if(a == null) return;
+        Node3D callUseObject = newInteractiveObject.CallUseObject as Node3D;
+        if(callUseObject == null) return;
 
-        actionLayer.ActivateObjectActionLayer(
-            interactiveObject.GetBilboardObject().GetLeftUpPosition(),
-            interactiveObject.GetBilboardObject().GetRightUpPosition(),
-            interactiveObject.GetBilboardObject().GetLeftDownPosition(),
-            interactiveObject.GetBilboardObject().GetRightDownPosition());
-
-        interactiveObject.GetBilboardObject().ActivateLookAtCamera(true);
+        actionLayer.ActivateObjectActionLayer(newInteractiveObject);
+        newInteractiveObject.GetBilboardObject().ActivateLookAtCamera(true);
     }
 }

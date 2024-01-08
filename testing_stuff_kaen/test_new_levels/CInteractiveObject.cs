@@ -7,16 +7,14 @@ public partial class CInteractiveObject : Node3D
 	[Export] private string ObjectName = "none";
 	[Export] public string CallUseObjectFunction = "UseAction";
 	[Export] public CBilboardObject BilboardObject = null;
+	[Export] public Godot.Collections.Array<CBaseAction> ActionResources;
 
 	private bool isInRange = false;
 	private bool isInLook = false;
 
     public void CallUseAction()
 	{
-		if (CallUseObject == null) { return; }
-
-		else if (CallUseObject.HasMethod(CallUseObjectFunction) && isInRange && isInLook) 
-		{ CallUseObject.Call(CallUseObjectFunction); }
+		CallActionFunction("UseAction");
 	}
 
 	public void SetIsInRange(bool newInRange) { isInRange = newInRange; }
@@ -26,4 +24,13 @@ public partial class CInteractiveObject : Node3D
 	public string GetObjectName() { return ObjectName; }
 
 	public CBilboardObject GetBilboardObject() { return BilboardObject; }
+
+	public Godot.Collections.Array<CBaseAction> GetAllActionResources(){ return ActionResources; }
+	public void CallActionFunction(string newActionFunction)
+	{
+        if (CallUseObject == null) { return; }
+
+        if (CallUseObject.HasMethod(newActionFunction) && isInRange && isInLook)
+		{ CallUseObject.Call(newActionFunction); }
+    }
 }

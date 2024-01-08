@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://c7sfdtpshgj44"]
+[gd_scene load_steps=19 format=3 uid="uid://c7sfdtpshgj44"]
 
 [ext_resource type="PackedScene" uid="uid://cjqwso2sh1h26" path="res://player_character/FPSCharacterMoveAnim.tscn" id="1_igu5i"]
 [ext_resource type="Script" path="res://player_character/FPSCharacterAction.cs" id="2_gd4x2"]
@@ -6,10 +6,33 @@
 [ext_resource type="Script" path="res://player_character/action_components/CCharacterUseActionComponent.cs" id="4_cgis7"]
 [ext_resource type="Script" path="res://testing_stuff_kaen/new_actions/ActionLayer.cs" id="5_i11px"]
 [ext_resource type="Script" path="res://player_character/action_components/CCharacterStaminaComponent.cs" id="5_tqnun"]
+[ext_resource type="Theme" uid="uid://cd3yvqcy8bus4" path="res://core_systems/debug_hud_system/debug_theme.theme" id="6_84f1h"]
 [ext_resource type="Script" path="res://player_character/action_components/CCharacterHealthComponent.cs" id="6_gnhgd"]
+[ext_resource type="PackedScene" uid="uid://dubtqsbpsbtes" path="res://testing_stuff_kaen/new_actions/action_ui_element.tscn" id="6_l11qj"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_fwo84"]
 radius = 3.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1fbpd"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 3
+corner_radius_top_left = 10
+corner_radius_bottom_left = 10
+shadow_color = Color(0, 0, 0, 0.160784)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3u42n"]
+bg_color = Color(0.6, 0.6, 0.6, 0.392157)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 1
+shadow_color = Color(0, 0, 0, 0.27451)
+shadow_size = 5
 
 [sub_resource type="Animation" id="Animation_m5s1t"]
 length = 0.001
@@ -467,53 +490,52 @@ metadata/_edit_lock_ = true
 
 [node name="ActionRect" type="ColorRect" parent="BaseComponents/BaseUseActionComponent/ActionLayer/SelectRect" index="4"]
 layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
+anchors_preset = -1
+anchor_left = 0.92
 anchor_top = 0.5
-anchor_right = 1.0
+anchor_right = 0.92
 anchor_bottom = 0.5
-offset_left = -20.0
+offset_left = -4.0
 offset_top = -1.0
 offset_bottom = 1.0
 grow_horizontal = 0
-grow_vertical = 2
 rotation = -0.00140014
 mouse_filter = 2
-color = Color(0.560784, 0.560784, 0.560784, 1)
-metadata/_edit_lock_ = true
+color = Color(0.560784, 0.560784, 0.560784, 0)
 
 [node name="ColorRect2" type="ColorRect" parent="BaseComponents/BaseUseActionComponent/ActionLayer/SelectRect/ActionRect" index="0"]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.946
 anchor_top = 0.637
 anchor_right = 0.946
 anchor_bottom = 0.637
-offset_left = 1.08
+offset_left = 0.216
 offset_top = -1.274
-offset_right = 10.08
+offset_right = 10.216
 offset_bottom = 0.726
 rotation = 0.588943
 mouse_filter = 2
 color = Color(0.560784, 0.560784, 0.560784, 1)
-metadata/_edit_lock_ = true
 
 [node name="ColorRect3" type="ColorRect" parent="BaseComponents/BaseUseActionComponent/ActionLayer/SelectRect/ActionRect" index="1"]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.368
 anchor_top = 3.011
 anchor_right = 1.368
 anchor_bottom = 3.011
-offset_left = -1.36
+offset_left = 5.528
 offset_top = -1.022
-offset_right = 39.64
+offset_right = 11.528
 offset_bottom = 0.978
 mouse_filter = 2
 color = Color(0.560784, 0.560784, 0.560784, 1)
-metadata/_edit_lock_ = true
 
 [node name="Label" type="Label" parent="BaseComponents/BaseUseActionComponent/ActionLayer/SelectRect/ActionRect/ColorRect3" index="0"]
+visible = false
 layout_mode = 0
 offset_left = 10.0
 offset_right = 40.0
@@ -521,19 +543,19 @@ offset_bottom = 23.0
 text = "USE"
 
 [node name="ColorRect4" type="ColorRect" parent="BaseComponents/BaseUseActionComponent/ActionLayer/SelectRect/ActionRect" index="2"]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.368
 anchor_top = 3.011
 anchor_right = 1.368
 anchor_bottom = 3.011
-offset_left = 8.64
-offset_top = -1.022
-offset_right = 39.64
+offset_left = 30.528
+offset_top = -1.02201
+offset_right = 61.528
 offset_bottom = 19.978
 mouse_filter = 2
 color = Color(0.560784, 0.560784, 0.560784, 1)
-metadata/_edit_lock_ = true
 
 [node name="Label" type="Label" parent="BaseComponents/BaseUseActionComponent/ActionLayer/SelectRect/ActionRect/ColorRect4" index="0"]
 layout_mode = 0
@@ -543,20 +565,21 @@ offset_bottom = 23.0
 text = "USE"
 
 [node name="ColorRect8" type="ColorRect" parent="BaseComponents/BaseUseActionComponent/ActionLayer/SelectRect/ActionRect" index="3"]
+visible = false
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
 offset_left = -2.0
 offset_top = -1.0
-offset_right = 10.0
+offset_right = 3.0
 offset_bottom = 1.0
 grow_vertical = 2
 mouse_filter = 2
 color = Color(0.560784, 0.560784, 0.560784, 1)
-metadata/_edit_lock_ = true
 
 [node name="ColorRect7" type="ColorRect" parent="BaseComponents/BaseUseActionComponent/ActionLayer/SelectRect/ActionRect" index="4"]
+visible = false
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -567,7 +590,46 @@ offset_right = -1.9944
 offset_bottom = 4.99441
 grow_vertical = 2
 mouse_filter = 2
-metadata/_edit_lock_ = true
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="BaseComponents/BaseUseActionComponent/ActionLayer/SelectRect/ActionRect" index="5"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -48.0
+offset_right = 64.0
+offset_bottom = 48.0
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="BaseComponents/BaseUseActionComponent/ActionLayer/SelectRect/ActionRect/AspectRatioContainer" index="0"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_1fbpd")
+
+[node name="MarginContainer" type="MarginContainer" parent="BaseComponents/BaseUseActionComponent/ActionLayer/SelectRect/ActionRect/AspectRatioContainer/PanelContainer" index="0"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 23
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="ActionElementsVBox" type="VBoxContainer" parent="BaseComponents/BaseUseActionComponent/ActionLayer/SelectRect/ActionRect/AspectRatioContainer/PanelContainer/MarginContainer" index="0"]
+unique_name_in_owner = true
+layout_mode = 2
+alignment = 1
+
+[node name="ActionObjectContainer" parent="BaseComponents/BaseUseActionComponent/ActionLayer/SelectRect/ActionRect/AspectRatioContainer/PanelContainer/MarginContainer/ActionElementsVBox" index="0" instance=ExtResource("6_l11qj")]
+layout_mode = 2
+
+[node name="ActionObjectContainer2" parent="BaseComponents/BaseUseActionComponent/ActionLayer/SelectRect/ActionRect/AspectRatioContainer/PanelContainer/MarginContainer/ActionElementsVBox" index="1" instance=ExtResource("6_l11qj")]
+visible = false
+layout_mode = 2
+
+[node name="ActionObjectContainer3" parent="BaseComponents/BaseUseActionComponent/ActionLayer/SelectRect/ActionRect/AspectRatioContainer/PanelContainer/MarginContainer/ActionElementsVBox" index="2" instance=ExtResource("6_l11qj")]
+visible = false
+layout_mode = 2
 
 [node name="CenterRect" type="ColorRect" parent="BaseComponents/BaseUseActionComponent/ActionLayer/SelectRect" index="5"]
 visible = false
@@ -585,6 +647,44 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 metadata/_edit_lock_ = true
+
+[node name="ActionObjectControl" type="Control" parent="BaseComponents/BaseUseActionComponent/ActionLayer/SelectRect" index="6"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+grow_horizontal = 2
+mouse_filter = 2
+
+[node name="ActionObjectContainer" type="PanelContainer" parent="BaseComponents/BaseUseActionComponent/ActionLayer/SelectRect/ActionObjectControl" index="0"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -49.0
+offset_top = -37.0
+offset_right = 49.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+theme = ExtResource("6_84f1h")
+theme_override_styles/panel = SubResource("StyleBoxFlat_3u42n")
+
+[node name="MarginContainer" type="MarginContainer" parent="BaseComponents/BaseUseActionComponent/ActionLayer/SelectRect/ActionObjectControl/ActionObjectContainer" index="0"]
+layout_mode = 2
+mouse_filter = 2
+theme = ExtResource("6_84f1h")
+
+[node name="ActionObjectNameLabel" type="Label" parent="BaseComponents/BaseUseActionComponent/ActionLayer/SelectRect/ActionObjectControl/ActionObjectContainer/MarginContainer" index="0"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("6_84f1h")
+text = "item name"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="AnimationPlayer_ActionLayer" type="AnimationPlayer" parent="BaseComponents/BaseUseActionComponent/ActionLayer" index="1"]
 libraries = {

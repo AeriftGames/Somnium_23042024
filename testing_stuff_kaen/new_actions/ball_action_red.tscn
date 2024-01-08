@@ -1,20 +1,14 @@
-[gd_scene load_steps=11 format=3 uid="uid://bqfht44dq1bc1"]
+[gd_scene load_steps=12 format=3 uid="uid://dox78ea6kifn"]
 
-[ext_resource type="Script" path="res://testing_stuff_kaen/test_new_levels/CInteractiveObject.cs" id="1_44872"]
-[ext_resource type="Script" path="res://testing_stuff_kaen/new_actions/ball_action.cs" id="1_hm1vu"]
-[ext_resource type="Script" path="res://testing_stuff_kaen/new_actions/CBilboardObject.cs" id="2_36sja"]
-[ext_resource type="Script" path="res://testing_stuff_kaen/new_actions/action_resources/CBaseAction.cs" id="3_yn8mh"]
+[ext_resource type="Script" path="res://testing_stuff_kaen/new_actions/ball_action.cs" id="1_vd4sy"]
+[ext_resource type="Script" path="res://testing_stuff_kaen/test_new_levels/CInteractiveObject.cs" id="2_jr2qt"]
+[ext_resource type="Script" path="res://testing_stuff_kaen/new_actions/action_resources/CBaseAction.cs" id="3_b7u2v"]
+[ext_resource type="Script" path="res://testing_stuff_kaen/new_actions/CBilboardObject.cs" id="4_n4tvi"]
 
-[sub_resource type="Resource" id="Resource_l12hr"]
-script = ExtResource("3_yn8mh")
-ActionName = "Use"
-ActionFunction = "ActionUse"
-ActionInputActivate = 0
-
-[sub_resource type="Resource" id="Resource_njg2b"]
-script = ExtResource("3_yn8mh")
-ActionName = "Pick"
-ActionFunction = "ActionPick"
+[sub_resource type="Resource" id="Resource_wl2so"]
+script = ExtResource("3_b7u2v")
+ActionName = "Eat"
+ActionFunction = "ActionEat"
 ActionInputActivate = 1
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_dvhcp"]
@@ -24,27 +18,37 @@ size = Vector3(0.210187, 0.215063, 0.211694)
 radius = 0.05
 height = 0.1
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bew46"]
-albedo_color = Color(0, 0.705882, 0.717647, 1)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_awwv7"]
+albedo_color = Color(1, 0.396078, 0.254902, 1)
 metallic = 0.74
 roughness = 0.46
 emission_enabled = true
-emission = Color(0, 0.176471, 0.145098, 1)
+emission = Color(0.333333, 0, 0.0117647, 1)
+emission_energy_multiplier = 0.5
 
 [sub_resource type="SphereMesh" id="SphereMesh_edawe"]
 radius = 0.1
 height = 0.2
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e3ycw"]
+albedo_color = Color(0.160784, 0.843137, 1, 1)
+metallic = 0.74
+roughness = 0.46
+emission = Color(0.333333, 0, 0.0117647, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_g0e1b"]
+size = Vector3(0.02, 0.05, 0.02)
+
 [node name="BallAction" type="Node3D"]
-script = ExtResource("1_hm1vu")
+script = ExtResource("1_vd4sy")
 
 [node name="InteractiveObject" type="Node3D" parent="." node_paths=PackedStringArray("CallUseObject", "BilboardObject") groups=["interactive_object"]]
 transform = Transform3D(1.78814e-07, -1, -1.69407e-21, 1, 1.78814e-07, 1.42109e-14, -1.42109e-14, 7.05861e-21, 1, 0, 0, 0)
-script = ExtResource("1_44872")
+script = ExtResource("2_jr2qt")
 CallUseObject = NodePath("..")
-ObjectName = "Ball"
+ObjectName = "Red Apple"
 BilboardObject = NodePath("../BilboardObject")
-ActionResources = Array[Resource]([SubResource("Resource_l12hr"), SubResource("Resource_njg2b")])
+ActionResources = Array[Resource]([SubResource("Resource_wl2so")])
 metadata/_edit_lock_ = true
 
 [node name="StaticBody3D" type="StaticBody3D" parent="InteractiveObject" groups=["interactive_object"]]
@@ -58,7 +62,7 @@ shape = SubResource("BoxShape3D_dvhcp")
 
 [node name="BilboardObject" type="Node3D" parent="."]
 visible = false
-script = ExtResource("2_36sja")
+script = ExtResource("4_n4tvi")
 metadata/_edit_lock_ = true
 
 [node name="NodeLeftUp" type="Node3D" parent="BilboardObject"]
@@ -94,5 +98,10 @@ mesh = SubResource("SphereMesh_1ql00")
 metadata/_edit_lock_ = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-material_override = SubResource("StandardMaterial3D_bew46")
+material_override = SubResource("StandardMaterial3D_awwv7")
 mesh = SubResource("SphereMesh_edawe")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.865458, 0.5, -0.0313568, -0.499672, 0.866025, 0.0181038, 0.0362077, 0, 0.999344, 0.0316774, 0.0936761, 0)
+material_override = SubResource("StandardMaterial3D_e3ycw")
+mesh = SubResource("BoxMesh_g0e1b")

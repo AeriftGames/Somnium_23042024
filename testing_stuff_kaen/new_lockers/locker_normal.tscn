@@ -1,10 +1,23 @@
-[gd_scene load_steps=9 format=3 uid="uid://vf06hwxc3mje"]
+[gd_scene load_steps=12 format=3 uid="uid://vf06hwxc3mje"]
 
 [ext_resource type="PackedScene" uid="uid://b87vninn1p141" path="res://testing_stuff_kaen/new_lockers/locker_normal.glb" id="1_1y0lt"]
 [ext_resource type="Script" path="res://testing_stuff_kaen/test_new_levels/CInteractiveObject.cs" id="2_0qeoc"]
 [ext_resource type="Material" uid="uid://b82lonmh1r8dp" path="res://testing_stuff_kaen/new_lockers/locker_big_new_mat.tres" id="2_danul"]
+[ext_resource type="Script" path="res://testing_stuff_kaen/new_actions/action_resources/CBaseAction.cs" id="3_bq7bk"]
 [ext_resource type="Script" path="res://testing_stuff_kaen/new_actions/CBilboardObject.cs" id="5_mxb3u"]
 [ext_resource type="Texture2D" uid="uid://2vnn5as8tp5i" path="res://testing_stuff_kaen/level_decals/TexturesCom_DecalsRusted0004_1_masked_S.png" id="9_rs33i"]
+
+[sub_resource type="Resource" id="Resource_dlqhp"]
+script = ExtResource("3_bq7bk")
+ActionName = "Open Locker"
+ActionFunction = "ActionOpen"
+ActionInputActivate = 1
+
+[sub_resource type="Resource" id="Resource_bigcs"]
+script = ExtResource("3_bq7bk")
+ActionName = "Use Lockpick"
+ActionFunction = "ActionLockpick"
+ActionInputActivate = 0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_jjjqf"]
 size = Vector3(0.155, 0.221758, 0.0779526)
@@ -25,6 +38,7 @@ CallUseObject = NodePath("..")
 ObjectName = "Locker"
 CallUseObjectFunction = "UseAction_Use"
 BilboardObject = NodePath("../BilboardObject")
+ActionResources = Array[Resource]([SubResource("Resource_dlqhp"), SubResource("Resource_bigcs")])
 metadata/_edit_lock_ = true
 
 [node name="StaticBody3D" type="StaticBody3D" parent="InteractiveObject" index="0" groups=["interactive_object"]]
