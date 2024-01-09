@@ -8,7 +8,7 @@ public partial class CCharacterMovementComponent : CBaseComponent
     [Export] public float SPEED_WALK = 2.0f;
     [Export] public float SPEED_SPRINT = 3.0f;
     [Export] public float SPEED_CROUCH = 1.3f;
-    [Export] public float SPEED_CROUCH_DYNAMIC = 0.7f;
+    [Export] public float SPEED_CROUCH_DYNAMIC = 1.0f;
 
     [Export] public float ACCELERATION = 4f;
     [Export] public float DECCLERATION = 8f;

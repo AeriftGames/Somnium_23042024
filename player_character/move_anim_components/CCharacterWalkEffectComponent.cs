@@ -9,6 +9,7 @@ public partial class CCharacterWalkEffectComponent : CBaseComponent
 {
     [Export] private float TOP_ANIMSPEED_WALK = 1.9f;
     [Export] private float TOP_ANIMSPEED_CROUCH = 2.4f;
+    [Export] private float TOP_ANIMSPEED_CROUCH_EXTRA = 2.8f;
     [Export] private float TOP_ANIMSPEED_RUNNING = 1.7f;
     [Export] private bool ENABLE_ANIM = true;
     [Export] public bool ENABLE_SWAY = true;
@@ -21,6 +22,7 @@ public partial class CCharacterWalkEffectComponent : CBaseComponent
     [Export] public float FootstepsVolumeDBInWalk = -2.0f;
     [Export] public float FootstepsVolumeDBInSprint = 1.0f;
     [Export] public float FootstepsVolumeDBInCrouch = -7.0f;
+    [Export] public float FootstepsVolumeDBInCrouchExtra = -15.0f;
     [Export] public float FootstepsAudioPitch = 0.75f;
 
     private AnimationPlayer WalkBobAnimationPlayer = null;
@@ -96,6 +98,9 @@ public partial class CCharacterWalkEffectComponent : CBaseComponent
         if (ourCharacterBase.GetCharacterStateMachine().GetCurrentStateName() == "CrouchMovePlayerState")
         { WalkBobAnimationPlayer.SpeedScale = Mathf.Lerp(0.0f, TOP_ANIMSPEED_CROUCH, alpha); }
         else
+        if (ourCharacterBase.GetCharacterStateMachine().GetCurrentStateName() == "CrouchActivePlayerState")
+        { WalkBobAnimationPlayer.SpeedScale = Mathf.Lerp(0.0f, TOP_ANIMSPEED_CROUCH_EXTRA, alpha); }
+        else
         if (ourCharacterBase.GetCharacterStateMachine().GetCurrentStateName() == "RunningPlayerState")
         { WalkBobAnimationPlayer.SpeedScale = Mathf.Lerp(0.0f, TOP_ANIMSPEED_RUNNING, alpha); }
     }
@@ -114,6 +119,8 @@ public partial class CCharacterWalkEffectComponent : CBaseComponent
             volume = FootstepsVolumeDBInSprint;
         else if (ourCharacterBase.GetCharacterStateMachine().GetCurrentStateName() == "CrouchMovePlayerState")
             volume = FootstepsVolumeDBInCrouch;
+        else if (ourCharacterBase.GetCharacterStateMachine().GetCurrentStateName() == "CrouchActivePlayerState")
+            volume = FootstepsVolumeDBInCrouchExtra;
 
         PlayFootstepSound(volume,FootstepsAudioPitch);
     }

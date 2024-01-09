@@ -6,6 +6,9 @@ public partial class CIdleCrouchPlayerState : CState
     public override void Enter()
     {
         base.Enter();
+        /*
+        ourCharacterBase.GetCharacterMovementComponent().SetMoveSpeed(
+            CCharacterMovementComponent.ESpeedMoveType.SPEED_CROUCH);*/
     }
 
     public override void Update(float delta)

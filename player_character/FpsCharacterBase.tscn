@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://dcilkc4fno2qm"]
+[gd_scene load_steps=24 format=3 uid="uid://dcilkc4fno2qm"]
 
 [ext_resource type="Script" path="res://player_character/FpsCharacterBase.cs" id="1_ob1gb"]
 [ext_resource type="Script" path="res://player_character/base_components/CCharacterMovementComponent.cs" id="2_omu0b"]
@@ -14,6 +14,7 @@
 [ext_resource type="Script" path="res://player_character/player_state/CJumpPlayerState.cs" id="9_yaih0"]
 [ext_resource type="Script" path="res://player_character/player_state/CRuningPlayerState.cs" id="15_dtubv"]
 [ext_resource type="Script" path="res://player_character/player_state/CCrouchMovePlayerState.cs" id="15_v6jlm"]
+[ext_resource type="Script" path="res://player_character/player_state/CCrouchActivePlayerState.cs" id="17_syqxm"]
 [ext_resource type="Script" path="res://player_character/player_state/CLandPlayerState.cs" id="21_0snpr"]
 [ext_resource type="Script" path="res://player_character/player_state/CFallPlayerState.cs" id="22_tom1k"]
 
@@ -274,3 +275,6 @@ script = ExtResource("22_tom1k")
 
 [node name="CrouchMovePlayerState" type="Node" parent="PlayerStateMachine"]
 script = ExtResource("15_v6jlm")
+
+[node name="CrouchActivePlayerState" type="Node" parent="PlayerStateMachine"]
+script = ExtResource("17_syqxm")

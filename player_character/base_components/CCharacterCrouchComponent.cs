@@ -30,6 +30,8 @@ public partial class CCharacterCrouchComponent : CBaseComponent
     Tween tweenCrouchDynamic = null;
     Node3D HeadCrouchDynamic = null;
 
+    private bool isCrouchingExtra = false;
+
     public override void _Ready()
 	{
         base._Ready();
@@ -180,6 +182,8 @@ public partial class CCharacterCrouchComponent : CBaseComponent
             tweenCrouchDynamic.TweenProperty(
                 HeadCrouchDynamic, "position", new Vector3(0, -CameraCrouch.Position.Y+distance, 0), 0.03f)
                 .SetTrans(Tween.TransitionType.Cubic);
+
+            isCrouchingExtra = true;
         }
         else
         {
@@ -190,6 +194,8 @@ public partial class CCharacterCrouchComponent : CBaseComponent
             tweenCrouchDynamic.TweenProperty(
                 HeadCrouchDynamic, "position", new Vector3(0, 0.0f, 0), 0.03f)
                 .SetTrans(Tween.TransitionType.Cubic);
+
+            isCrouchingExtra = false;
         }
     }
 
@@ -217,5 +223,7 @@ public partial class CCharacterCrouchComponent : CBaseComponent
 
         return distance;
     }
+
+    public bool GetIsCrouchExtra() { return isCrouchingExtra; }
 
 }

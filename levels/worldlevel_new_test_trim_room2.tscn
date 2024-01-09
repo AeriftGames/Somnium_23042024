@@ -1960,8 +1960,38 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 2.1, 18)
 [node name="MeshInstance3D3" parent="." instance=ExtResource("41_wnl7i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 2.1, 18)
 
+[node name="MeshInstance3D17" parent="." instance=ExtResource("41_wnl7i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 2.1, 17)
+
+[node name="MeshInstance3D18" parent="." instance=ExtResource("41_wnl7i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 2.1, 16)
+
+[node name="MeshInstance3D20" parent="." instance=ExtResource("41_wnl7i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 2.1, 16)
+
+[node name="MeshInstance3D21" parent="." instance=ExtResource("41_wnl7i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 2.1, 16)
+
+[node name="MeshInstance3D22" parent="." instance=ExtResource("41_wnl7i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 2.1, 17)
+
+[node name="MeshInstance3D23" parent="." instance=ExtResource("41_wnl7i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 2.1, 17)
+
+[node name="MeshInstance3D19" parent="." instance=ExtResource("41_wnl7i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 2.1, 15)
+
 [node name="MeshInstance3D4" parent="." instance=ExtResource("41_wnl7i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 2.5, 18)
+
+[node name="MeshInstance3D14" parent="." instance=ExtResource("41_wnl7i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 2.5, 17)
+
+[node name="MeshInstance3D15" parent="." instance=ExtResource("41_wnl7i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 2.5, 16)
+
+[node name="MeshInstance3D16" parent="." instance=ExtResource("41_wnl7i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 2.5, 15)
 
 [node name="MeshInstance3D12" parent="." instance=ExtResource("41_wnl7i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 3.1, 18)
