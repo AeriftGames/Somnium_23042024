@@ -48,13 +48,13 @@ public partial class FPSCharacterAction : FPSCharacterMoveAnim
             // SPEED
             if (Input.IsActionPressed("Sprint") && GetCharacterMovementComponent().GetIsOnFloor() &&
                 GetCharacterCrouchComponent().GetIsCrouched() == false && GetStaminaComponent().GetStamina() > 0.1f)
-            { GetCharacterMovementComponent().SetMoveSpeed("SPRINT"); }
+            { GetCharacterMovementComponent().SetMoveSpeed(CCharacterMovementComponent.ESpeedMoveType.SPEED_SPRINT); }
 
             else if (GetCharacterMovementComponent().GetIsOnFloor() && GetCharacterCrouchComponent().GetIsCrouched() == true)
-            { GetCharacterMovementComponent().SetMoveSpeed("CROUCH"); }
+            { GetCharacterMovementComponent().SetMoveSpeed(CCharacterMovementComponent.ESpeedMoveType.SPEED_CROUCH); }
 
             else if (GetCharacterMovementComponent().GetIsOnFloor() && GetCharacterCrouchComponent().GetIsCrouched() == false)
-            { GetCharacterMovementComponent().SetMoveSpeed("WALK"); }
+            { GetCharacterMovementComponent().SetMoveSpeed(CCharacterMovementComponent.ESpeedMoveType.SPEED_WALK); }
 
             // MOVEMENT
             GetCharacterMovementComponent().UpdateMove(delta);

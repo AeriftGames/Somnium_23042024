@@ -3,9 +3,12 @@ using System;
 
 public partial class CCharacterMovementComponent : CBaseComponent
 {
+    public enum ESpeedMoveType { SPEED_WALK,SPEED_SPRINT,SPEED_CROUCH,SPEED_CROUCH_DYNAMIC }
+
     [Export] public float SPEED_WALK = 2.0f;
     [Export] public float SPEED_SPRINT = 3.0f;
     [Export] public float SPEED_CROUCH = 1.3f;
+    [Export] public float SPEED_CROUCH_DYNAMIC = 0.7f;
 
     [Export] public float ACCELERATION = 4f;
     [Export] public float DECCLERATION = 8f;
@@ -21,6 +24,7 @@ public partial class CCharacterMovementComponent : CBaseComponent
     private float Gravity = ProjectSettings.GetSetting("physics/3d/default_gravity").AsSingle();
     private Vector3 WorkVelocity;
     private float Speed = 0.0f;
+    private ESpeedMoveType ActualSpeedMoveType;
 
     private Vector2 InputDir = Vector2.Zero;
     private Vector3 Direction = Vector3.Zero;
@@ -29,7 +33,8 @@ public partial class CCharacterMovementComponent : CBaseComponent
     {
         base.PostInit(newCharacterBase);
 
-        SetMoveSpeed("WALK");
+        //SetMoveSpeed("WALK");
+        SetMoveSpeed(ESpeedMoveType.SPEED_WALK);
     }
 
     public void UpdateMove(double delta)
@@ -123,17 +128,26 @@ public partial class CCharacterMovementComponent : CBaseComponent
         }
     }
 
-    public void SetMoveSpeed(string newSpeedName)
+    public void SetMoveSpeed(ESpeedMoveType newSpeedMoveType)
     {
-        switch (newSpeedName)
+        ActualSpeedMoveType = newSpeedMoveType;
+
+        switch (newSpeedMoveType)
         {
-            case "WALK": Speed = SPEED_WALK; break;
-            case "SPRINT": Speed = SPEED_SPRINT; break;
-            case "CROUCH": Speed = SPEED_CROUCH; break;
-            case "EXHAUST": Speed = 1.0f; break;
-            default: break;
+            case ESpeedMoveType.SPEED_WALK:
+                { Speed = SPEED_WALK; break; }
+            case ESpeedMoveType.SPEED_SPRINT:
+                { Speed = SPEED_SPRINT; break; }
+            case ESpeedMoveType.SPEED_CROUCH:
+                { Speed = SPEED_CROUCH; break; }
+            case ESpeedMoveType.SPEED_CROUCH_DYNAMIC:
+                { Speed = SPEED_CROUCH_DYNAMIC; break; }
+            default:
+                break;
         }
     }
+
+    public ESpeedMoveType GetActualSpeedMoveType() { return ActualSpeedMoveType; }
 
     public float GetWantSpeed() { return Speed; }
     public float GetRealSpeed()

@@ -56,8 +56,6 @@ public partial class FpsCharacterBase : CharacterBody3D
         GetCharacterLookComponent().UpdateLook(delta);
 
         ApplyMovementInputActions(delta);  // virtual for sprint crouch walk speed
-        //GetCharacterMovementComponent().CheckAndApplyJump("Jump");
-        //GetCharacterCrouchComponent().CheckAndApplyCrouch("Crunch");
 
         // Final apply velocity
         GetCharacterMovementComponent().ApplyWorkVelocity();
@@ -80,11 +78,11 @@ public partial class FpsCharacterBase : CharacterBody3D
     {
         // SPEED
         if (Input.IsActionPressed("Sprint") && GetCharacterMovementComponent().GetIsOnFloor() && GetCharacterCrouchComponent().GetIsCrouched() == false)
-            GetCharacterMovementComponent().SetMoveSpeed("SPRINT");
+            GetCharacterMovementComponent().SetMoveSpeed(CCharacterMovementComponent.ESpeedMoveType.SPEED_SPRINT);
         else if (GetCharacterMovementComponent().GetIsOnFloor() && GetCharacterCrouchComponent().GetIsCrouched() == true)
-            GetCharacterMovementComponent().SetMoveSpeed("CROUCH");
+            GetCharacterMovementComponent().SetMoveSpeed(CCharacterMovementComponent.ESpeedMoveType.SPEED_CROUCH);
         else if (GetCharacterMovementComponent().GetIsOnFloor() && GetCharacterCrouchComponent().GetIsCrouched() == false)
-            GetCharacterMovementComponent().SetMoveSpeed("WALK");
+            GetCharacterMovementComponent().SetMoveSpeed(CCharacterMovementComponent.ESpeedMoveType.SPEED_WALK);
 
         // MOVEMENT
         GetCharacterMovementComponent().UpdateMove(delta);
