@@ -14,6 +14,9 @@ public partial class CCharacterCrouchComponent : CBaseComponent
     [Export(PropertyHint.Range, "0.1,2,0.01")] public float UNCROUCH_SHAPE_HEIGHT = 1.8f;
     [Export(PropertyHint.Range, "0.1,2,0.01")] public float UNCROUCH_SHAPE_POS = 0.9f;
 
+    [Export] public float CROUCHING_EXTRA_CAM_TIME = 0.03f;
+    [Export] public float CROUCHING_CLAMP_MIN_HEIGHT = 0.4f;
+
     [Export] public AudioStream AudioStreamCrouch;
     [Export] public AudioStream AudioStreamUnCrouch;
 
@@ -161,7 +164,8 @@ public partial class CCharacterCrouchComponent : CBaseComponent
 
         if (ShapeCastCrouchDynamic.IsColliding())
         {
-            FloorPos = ShapeCastCrouchDynamic.GetCollisionPoint(0);
+            //FloorPos = ShapeCastCrouchDynamic.GetCollisionPoint(0);
+            FloorPos = GetLowestHeightPos();
             FloorPos.Y = ourCharacterBase.GlobalPosition.Y + 0.3f;
             float distance = FindUpHeightForCrouch(ourCharacterBase, FloorPos);
 
@@ -178,10 +182,14 @@ public partial class CCharacterCrouchComponent : CBaseComponent
             if (tweenCrouchDynamic != null)
                 tweenCrouchDynamic.Kill();
 
+            // CLAMP POS
+            float val = -CameraCrouch.Position.Y + distance;
+            float clamped_val = Mathf.Clamp(val, -CROUCHING_CLAMP_MIN_HEIGHT, 0.0f);
+
             tweenCrouchDynamic = GetTree().CreateTween();
             tweenCrouchDynamic.TweenProperty(
-                HeadCrouchDynamic, "position", new Vector3(0, -CameraCrouch.Position.Y+distance, 0), 0.03f)
-                .SetTrans(Tween.TransitionType.Cubic);
+                HeadCrouchDynamic, "position", new Vector3(0, clamped_val , 0),
+                CROUCHING_EXTRA_CAM_TIME).SetTrans(Tween.TransitionType.Cubic);
 
             isCrouchingExtra = true;
         }
@@ -192,11 +200,29 @@ public partial class CCharacterCrouchComponent : CBaseComponent
 
             tweenCrouchDynamic = GetTree().CreateTween();
             tweenCrouchDynamic.TweenProperty(
-                HeadCrouchDynamic, "position", new Vector3(0, 0.0f, 0), 0.03f)
-                .SetTrans(Tween.TransitionType.Cubic);
+                HeadCrouchDynamic, "position", new Vector3(0, 0.0f, 0),
+                CROUCHING_EXTRA_CAM_TIME).SetTrans(Tween.TransitionType.Cubic);
 
             isCrouchingExtra = false;
         }
+    }
+
+    private Vector3 GetLowestHeightPos()
+    {
+        Godot.Collections.Array<Vector3> AllPos = new Godot.Collections.Array<Vector3>();
+        for (int i = 0; i < ShapeCastCrouchDynamic.GetCollisionCount(); i++)
+        {
+            AllPos.Add(ShapeCastCrouchDynamic.GetCollisionPoint(i));
+        }
+
+        Vector3 lowestPos = new Vector3(0,10000,0);
+        foreach (Vector3 pos in AllPos)
+        {
+            if(pos.Y < lowestPos.Y)
+                lowestPos = pos;
+        }
+
+        return lowestPos;
     }
 
     public float FindUpHeightForCrouch(Node3D newCaller, Vector3 newPos)
