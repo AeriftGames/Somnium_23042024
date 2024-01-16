@@ -2,7 +2,6 @@ using Godot;
 
 public partial class CCharacterLookComponent : CBaseComponent
 {
-	[Export] public Camera3D Camera;
 	[Export] public float MOUSE_SENSITIVITY = 0.3f;
 	[Export] public float MOUSE_LERPSPEED = 15.0f;
 	[Export] public float TILT_LOWER_LIMIT = Mathf.DegToRad(-90.0f);
@@ -26,9 +25,13 @@ public partial class CCharacterLookComponent : CBaseComponent
 	private Node3D CameraJump = null;
 	private Node3D CameraShakeRot = null;
 	private Node3D HeadBob = null;
+	private Node3D HeadFocusAction = null;
 	private Node3D HeadBreathing = null;
+	private Camera3D Camera = null;
 	private Node3D LookingPoint = null;
 	private Node3D RightHandPoint = null;
+
+	private Node3D HeadForwardNode = null;
 
 	public override void PostInit(FpsCharacterBase newOurCharacter)
 	{
@@ -42,9 +45,14 @@ public partial class CCharacterLookComponent : CBaseComponent
 		CameraJump = ourCharacterBase.GetNode<Node3D>("%CameraJump");
 		CameraShakeRot = ourCharacterBase.GetNode<Node3D>("%CameraShakeRot");
 		HeadBob = ourCharacterBase.GetNode<Node3D>("%HeadBob");
+		HeadFocusAction = ourCharacterBase.GetNode<Node3D>("%HeadFocusAction");
 		HeadBreathing = ourCharacterBase.GetNode<Node3D>("%HeadBreathing");
+		Camera = ourCharacterBase.GetNode<Camera3D>("%Camera3D");
 		LookingPoint = GetMainCamera().GetNode<Node3D>("LookPoint");
 		RightHandPoint = GetMainCamera().GetNode<Node3D>("RightHandPoint");
+
+		HeadForwardNode = GetNode<Node3D>("%HeadForwardNode");
+
 
 		Input.MouseMode = Input.MouseModeEnum.Captured;
 	}
@@ -65,6 +73,9 @@ public partial class CCharacterLookComponent : CBaseComponent
 
 	public void UpdateLook(double delta)
 	{
+		if (ourCharacterBase.GetCharacterInputState() == FpsCharacterBase.ECharacterInputState.DontMoveAndLook)
+		{ return; }
+
 		mouseRotation.X += tiltInput * (float)delta;
 		mouseRotation.X = Mathf.Clamp(mouseRotation.X, TILT_LOWER_LIMIT, TILT_UPPER_LIMIT);
 		mouseRotation.Y += rotationInput * (float)delta;
@@ -101,4 +112,7 @@ public partial class CCharacterLookComponent : CBaseComponent
 	public Node3D GetCameraJump() { return CameraJump; }
 	public Node3D GetCameraShakeRot() { return CameraShakeRot; }
 	public Node3D GetHeadBreathing() { return HeadBreathing; }
+	public Node3D GetHeadFocusAction() { return HeadFocusAction; }
+
+	public Node3D GetHeadForwardNode() {  return HeadForwardNode; }
 }

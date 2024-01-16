@@ -3,6 +3,8 @@ using System;
 
 public partial class FpsCharacterBase : CharacterBody3D
 {
+    public enum ECharacterInputState { DontMoveAndLook,Normal}
+
     private CCharacterMovementComponent CharacterMovementComponent;
     private CCharacterLookComponent CharacterLookComponent;
     private CCharacterFovComponent CharacterFovComponent;
@@ -26,6 +28,9 @@ public partial class FpsCharacterBase : CharacterBody3D
 
     // predelat a dat na lepsi misto - ted jen na test
     public double movementAnimationLastTime = 0.0f;
+
+    private ECharacterInputState CharacterInputState = ECharacterInputState.Normal;
+    private bool isMouseVisible = false;
 
     public override void _Ready()
     {
@@ -98,4 +103,19 @@ public partial class FpsCharacterBase : CharacterBody3D
         GetCharacterMovementComponent().CheckAndApplyJump("Jump");
         GetCharacterCrouchComponent().CheckAndApplyCrouch("Crunch");
     }
+
+    public virtual void SetCharacterInputState( ECharacterInputState newCharacterInputState) { CharacterInputState = newCharacterInputState; }
+    public ECharacterInputState GetCharacterInputState() {  return CharacterInputState; }
+
+    public void SetMouseVisible(bool newMouseVisible)
+    {
+        isMouseVisible = newMouseVisible;
+
+        if(newMouseVisible == true)
+            Input.MouseMode = Input.MouseModeEnum.Visible;
+        else
+            Input.MouseMode = Input.MouseModeEnum.Captured;
+    }
+
+    public bool GetIsMouseVisible() { return isMouseVisible; }
 }

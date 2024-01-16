@@ -1,15 +1,17 @@
-[gd_scene load_steps=10 format=3 uid="uid://bqcc3ox822w73"]
+[gd_scene load_steps=12 format=3 uid="uid://bqcc3ox822w73"]
 
 [ext_resource type="PackedScene" uid="uid://darrpqdjdaenp" path="res://testing_stuff_kaen/new_actions/wall_button.tscn" id="1_p4lpk"]
 [ext_resource type="Script" path="res://testing_stuff_kaen/test_new_levels/CInteractiveObject.cs" id="2_jl5ap"]
 [ext_resource type="Script" path="res://testing_stuff_kaen/test_new_levels/CActionItemUse.cs" id="2_lq2td"]
 [ext_resource type="Script" path="res://testing_stuff_kaen/new_actions/action_resources/CBaseAction.cs" id="4_0pk6f"]
 [ext_resource type="Script" path="res://testing_stuff_kaen/new_actions/CBilboardObject.cs" id="4_7jeyo"]
+[ext_resource type="Script" path="res://testing_stuff_kaen/new_actions/FocusActionObject.cs" id="6_4fubn"]
+[ext_resource type="Theme" uid="uid://cd3yvqcy8bus4" path="res://core_systems/debug_hud_system/debug_theme.theme" id="7_raecs"]
 
-[sub_resource type="Resource" id="Resource_gdntr"]
+[sub_resource type="Resource" id="Resource_0hd0v"]
 script = ExtResource("4_0pk6f")
-ActionName = "Open"
-ActionFunction = "ActionOpen"
+ActionName = "Use Action"
+ActionFunction = "UseAction"
 ActionInputActivate = 1
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_je34a"]
@@ -31,9 +33,8 @@ transform = Transform3D(1, 8.52655e-28, 1.42109e-14, 0, 1, 4.23518e-21, -1.42109
 script = ExtResource("2_jl5ap")
 CallUseObject = NodePath("..")
 ObjectName = "Button"
-CallUseObjectFunction = "UseAction_Button_UP"
 BilboardObject = NodePath("../BilboardObject")
-ActionResources = Array[Resource]([SubResource("Resource_gdntr")])
+ActionResources = Array[Resource]([SubResource("Resource_0hd0v")])
 metadata/_edit_lock_ = true
 
 [node name="StaticBody3D" type="StaticBody3D" parent="InteractiveObject" index="0" groups=["interactive_object"]]
@@ -45,17 +46,12 @@ collision_mask = 4
 transform = Transform3D(1, 1.53122e-12, -1.42109e-14, -1.52767e-12, 1, 1.45825e-17, 7.67386e-12, -1.5233e-17, 1, 0.502533, 0.0598452, -0.00354005)
 shape = SubResource("BoxShape3D_je34a")
 
-[node name="ButtonUp" parent="." index="2"]
-transform = Transform3D(1.78814e-07, 1, 0, -1, 1.78814e-07, 0, 5.0822e-21, 0, 1, 0.36027, 0.865726, 7.10543e-15)
-
-[node name="ButtonUpBase" parent="." index="3"]
-transform = Transform3D(1.78814e-07, 1, 0, -1, 1.78814e-07, 0, 1.69407e-21, 0, 1, 0.114886, 0.865726, 0)
-
-[node name="BilboardObject" type="Node3D" parent="." index="6"]
+[node name="BilboardObject" type="Node3D" parent="." index="1"]
 transform = Transform3D(-2.62269e-07, 0, -6, 0, 6, 0, 6, 0, -2.62269e-07, 0, 0, 0)
 visible = false
 script = ExtResource("4_7jeyo")
 CanLookAtCamera = false
+metadata/_edit_lock_ = true
 
 [node name="NodeLeftUp" type="Node3D" parent="BilboardObject" index="0"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.182612, 0.301465, -0.0442353)
@@ -86,3 +82,45 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.183
 [node name="MeshInstance3D" type="MeshInstance3D" parent="BilboardObject/NodeRightUp" index="0"]
 mesh = SubResource("SphereMesh_xg05b")
 metadata/_edit_lock_ = true
+
+[node name="FocusActionObject" type="Node3D" parent="." index="2" node_paths=PackedStringArray("FocusLookObject")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.33333, 0, 5.03319e-07)
+script = ExtResource("6_4fubn")
+FocusLookObject = NodePath("..")
+metadata/_edit_lock_ = true
+
+[node name="ButtonUp" parent="." index="4"]
+transform = Transform3D(1.78814e-07, 1, 0, -1, 1.78814e-07, 0, 5.0822e-21, 0, 1, 0.36027, 0.865726, 7.10543e-15)
+
+[node name="ButtonUpBase" parent="." index="5"]
+transform = Transform3D(1.78814e-07, 1, 0, -1, 1.78814e-07, 0, 1.69407e-21, 0, 1, 0.114886, 0.865726, 0)
+
+[node name="Control" type="Control" parent="." index="8"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Button" type="Button" parent="Control" index="0"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -31.0
+offset_top = 39.0
+offset_right = 21.0
+offset_bottom = 62.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("7_raecs")
+text = "-BACK-"
+
+[connection signal="pressed" from="Control/Button" to="." method="_on_button_pressed"]

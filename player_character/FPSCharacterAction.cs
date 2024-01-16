@@ -5,14 +5,15 @@ public partial class FPSCharacterAction : FPSCharacterMoveAnim
 {
     private CCharacterFlashlightComponent FlashlightComponent = null;
     private CCharacterUseActionComponent UseActionComponent = null;
-    
     private CCharacterStaminaComponent StaminaComponent = null;
     private CCharacterHealthComponent HealthComponent = null;
+    private CCharacterFocusActionComponent FocusActionComponent = null;
 
     public CCharacterFlashlightComponent GetFlashlightComponent() { return FlashlightComponent; }
     public CCharacterUseActionComponent GetUseActionComponent() { return UseActionComponent; }
     public CCharacterStaminaComponent GetStaminaComponent() { return StaminaComponent; }
     public CCharacterHealthComponent GetHealthComponent() { return HealthComponent; }
+    public CCharacterFocusActionComponent GetFocusActionComponent() { return FocusActionComponent; }
 
     public override void _Ready()
     {
@@ -29,6 +30,9 @@ public partial class FPSCharacterAction : FPSCharacterMoveAnim
 
         HealthComponent = GetBaseComponents().GetNode<CCharacterHealthComponent>("BaseHealthComponent");
         HealthComponent.PostInit(this);
+
+        FocusActionComponent = GetBaseComponents().GetNode<CCharacterFocusActionComponent>("BaseFocusActionComponent");
+        FocusActionComponent.PostInit(this);
     }
 
     public override void _PhysicsProcess(double delta)

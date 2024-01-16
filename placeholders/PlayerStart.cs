@@ -17,27 +17,6 @@ public partial class PlayerStart : Node3D
 
 	public override void _Ready()
 	{
-		if (PlayerStartEnable == false) return;
-
-		// Po Startu zneviditelnime a nechame objekt znicit (chceme videt jen v editoru)
-		EditorMesh = GetNode<Node3D>("EditorMesh");
-		EditorMesh.Visible = false;
-		EditorMesh.QueueFree();
-
-		spawn_timer = new Godot.Timer();
-		// Create timer for delaying spawn if start game
-		var callable_spawn = new Callable(this,"SpawnNewPlayer");
-		spawn_timer.Connect("timeout", callable_spawn);
-		spawn_timer.WaitTime = 0.2;
-		spawn_timer.OneShot = true;
-		AddChild(spawn_timer);
-		spawn_timer.Start();
-	}
-
-	// tohle vola timer po zacatku hry + timer.delay (0,2s)
-	public void SpawnNewPlayer()
-	{
-		SpawnPlayerByType(SpawnCharacterType);
 	}
 
 	public void SpawnPlayerByType(EPlayerCharacterType newPlayerCharacterType)
@@ -131,10 +110,6 @@ public partial class PlayerStart : Node3D
             CGameMaster.GM.GetGame().GetDebugPanel().AllLoadSettings();
 
             CGameMaster.GM.GetUniversal().EnableBlackScreen(false);
-
-            //delete
-            spawn_timer.Stop();
-			spawn_timer.QueueFree();
 		}
 	}
 
@@ -202,10 +177,6 @@ public partial class PlayerStart : Node3D
             CGameMaster.GM.GetGame().GetDebugPanel().AllLoadSettings();
 
             //GameMaster.GM.EnableBlackScreen(false);
-
-            //delete
-            spawn_timer.Stop();
-            spawn_timer.QueueFree();
         }
     }
 
@@ -242,10 +213,6 @@ public partial class PlayerStart : Node3D
             CGameMaster.GM.GetGame().GetDebugPanel().AllLoadSettings();
 
             //GameMaster.GM.EnableBlackScreen(false);
-
-            //delete
-            spawn_timer.Stop();
-            spawn_timer.QueueFree();
         }
     }
 
@@ -282,10 +249,6 @@ public partial class PlayerStart : Node3D
             CGameMaster.GM.GetGame().GetDebugPanel().AllLoadSettings();
 
             //GameMaster.GM.EnableBlackScreen(false);
-
-            //delete
-            spawn_timer.Stop();
-            spawn_timer.QueueFree();
         }
     }
 
@@ -322,10 +285,6 @@ public partial class PlayerStart : Node3D
             CGameMaster.GM.GetGame().GetDebugPanel().AllLoadSettings();
 
             //GameMaster.GM.EnableBlackScreen(false);
-
-            //delete
-            spawn_timer.Stop();
-            spawn_timer.QueueFree();
         }
     }
 }

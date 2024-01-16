@@ -77,7 +77,6 @@ transform = Transform3D(1.78814e-07, -1, -1.69407e-21, 1, 1.78814e-07, 1.42109e-
 script = ExtResource("1_swdpv")
 CallUseObject = NodePath("..")
 ObjectName = "Box"
-CallUseObjectFunction = "UseAction_Use"
 BilboardObject = NodePath("../BilboardObject")
 metadata/_edit_lock_ = true
 

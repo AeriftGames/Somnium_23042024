@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Linq;
 using System.Reflection.Metadata.Ecma335;
 using System.Threading.Tasks;
 using System.Transactions;
@@ -39,6 +40,8 @@ public partial class WorldLevel : Node
 			CGameMaster.GM.GetSettings().LoadAndApply_AllGraphicsSettings();
 			CGameMaster.GM.GetUniversal().GetLoadingHud().LoadingIsComplete(false);
 
+			SpawnPlayerOnPlayerStart();
+
             StartGame();
         }
 	}
@@ -49,6 +52,21 @@ public partial class WorldLevel : Node
 
 		await Task.Delay(100);
 			CGameMaster.GM.GetUniversal().EnableBlackScreen(false);
+    }
+
+	public void SpawnPlayerOnPlayerStart() 
+	{
+		Godot.Collections.Array<PlayerStart> allPlayerStarts = new Godot.Collections.Array<PlayerStart>();
+
+		Godot.Collections.Array<Node> allNodes = GetChildren();
+		foreach (Node node in allNodes)
+			if (node.IsInGroup("PlayerStart"))
+				allPlayerStarts.Add(node as PlayerStart);
+
+		foreach (PlayerStart pStart in allPlayerStarts)
+			if (pStart.PlayerStartEnable == true)
+				pStart.SpawnPlayerByType(pStart.SpawnCharacterType);
+
     }
 
 }

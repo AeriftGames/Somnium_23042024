@@ -105,6 +105,10 @@ public partial class CCharacterMovementComponent : CBaseComponent
 
     public void ApplyWorkVelocity()
     {
+        // pokud je input vypnuty - vynulujeme WorkVelocity a ponechame pouze gravitaci
+        if (ourCharacterBase.GetCharacterInputState() == FpsCharacterBase.ECharacterInputState.DontMoveAndLook)
+        { WorkVelocity = new Vector3(0.0f, WorkVelocity.Y, 0.0f); }
+
         ourCharacterBase.Velocity = WorkVelocity;
         ourCharacterBase.MoveAndSlide();
     }

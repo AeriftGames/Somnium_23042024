@@ -5,7 +5,6 @@ public partial class CInteractiveObject : Node3D
 {
 	[Export] public Node CallUseObject = null;
 	[Export] private string ObjectName = "none";
-	[Export] public string CallUseObjectFunction = "UseAction";
 	[Export] public CBilboardObject BilboardObject = null;
 	[Export] public Godot.Collections.Array<CBaseAction> ActionResources;
 

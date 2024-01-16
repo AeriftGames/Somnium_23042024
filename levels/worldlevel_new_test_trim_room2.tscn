@@ -1910,7 +1910,7 @@ occluder = ExtResource("10_bs7rc")
 metadata/_edit_group_ = true
 metadata/_edit_lock_ = true
 
-[node name="PlayerStart2" parent="." instance=ExtResource("11_43x2v")]
+[node name="PlayerStart" parent="." instance=ExtResource("11_43x2v")]
 transform = Transform3D(0.0029496, 0, -0.999996, 0, 1, 0, 0.999996, 0, 0.0029496, 9.4008, 0.200857, 10.1838)
 visible = false
 SpawnCharacterType = 3

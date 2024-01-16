@@ -36,7 +36,6 @@ transform = Transform3D(1.78814e-07, -1, -1.69407e-21, 1, 1.78814e-07, 1.42109e-
 script = ExtResource("2_0qeoc")
 CallUseObject = NodePath("..")
 ObjectName = "Locker"
-CallUseObjectFunction = "UseAction_Use"
 BilboardObject = NodePath("../BilboardObject")
 ActionResources = Array[Resource]([SubResource("Resource_dlqhp"), SubResource("Resource_bigcs")])
 metadata/_edit_lock_ = true
