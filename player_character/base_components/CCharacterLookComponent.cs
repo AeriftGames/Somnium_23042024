@@ -65,17 +65,22 @@ public partial class CCharacterLookComponent : CBaseComponent
 
 		if (isMouseInput)
 		{
-			InputEventMouseMotion eventMouseMotion = @event as InputEventMouseMotion;
-			rotationInput = -eventMouseMotion.Relative.X * MOUSE_SENSITIVITY;
-			tiltInput = -eventMouseMotion.Relative.Y * MOUSE_SENSITIVITY;
+            if (ourCharacterBase.GetCharacterInputState() == FpsCharacterBase.ECharacterInputState.Normal)
+			{
+                InputEventMouseMotion eventMouseMotion = @event as InputEventMouseMotion;
+                rotationInput = -eventMouseMotion.Relative.X * MOUSE_SENSITIVITY;
+                tiltInput = -eventMouseMotion.Relative.Y * MOUSE_SENSITIVITY;
+            }
+			else if (ourCharacterBase.GetCharacterInputState() == FpsCharacterBase.ECharacterInputState.DontMoveAndLook)
+			{
+                rotationInput = 0.0f;
+                tiltInput = 0.0f;
+            }
 		}
 	}
 
 	public void UpdateLook(double delta)
 	{
-		if (ourCharacterBase.GetCharacterInputState() == FpsCharacterBase.ECharacterInputState.DontMoveAndLook)
-		{ return; }
-
 		mouseRotation.X += tiltInput * (float)delta;
 		mouseRotation.X = Mathf.Clamp(mouseRotation.X, TILT_LOWER_LIMIT, TILT_UPPER_LIMIT);
 		mouseRotation.Y += rotationInput * (float)delta;

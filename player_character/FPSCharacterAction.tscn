@@ -1,6 +1,6 @@
 [gd_scene load_steps=20 format=3 uid="uid://c7sfdtpshgj44"]
 
-[ext_resource type="PackedScene" uid="uid://cjqwso2sh1h26" path="res://player_character/FPSCharacterMoveAnim.tscn" id="1_igu5i"]
+[ext_resource type="PackedScene" uid="uid://b8y8ttj527bo2" path="res://player_character/FPSCharacterMoveAnim.tscn" id="1_igu5i"]
 [ext_resource type="Script" path="res://player_character/FPSCharacterAction.cs" id="2_gd4x2"]
 [ext_resource type="PackedScene" uid="uid://cmmc6ubyav1pf" path="res://player_character/action_components/BaseFlashlightComponent.tscn" id="3_pbs4r"]
 [ext_resource type="Script" path="res://player_character/action_components/CCharacterUseActionComponent.cs" id="4_cgis7"]

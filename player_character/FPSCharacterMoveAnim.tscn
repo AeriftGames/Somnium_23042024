@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://cjqwso2sh1h26"]
+[gd_scene load_steps=25 format=3 uid="uid://b8y8ttj527bo2"]
 
 [ext_resource type="PackedScene" uid="uid://dcilkc4fno2qm" path="res://player_character/FpsCharacterBase.tscn" id="1_51rw7"]
 [ext_resource type="Script" path="res://player_character/FPSCharacterMoveAnim.cs" id="2_70jfn"]

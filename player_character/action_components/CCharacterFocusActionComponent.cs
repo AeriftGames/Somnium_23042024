@@ -8,13 +8,14 @@ public partial class CCharacterFocusActionComponent : CBaseComponent
     private Tween TweenFocusLook = null;
 
     private Node3D HeadFocusAction = null;
-    private float TransMoveTime = 0.75f;
-    private float TransLookTime = 0.75f;
+    private float TransMoveTime = 0.7f;
+    private float TransLookTime = 0.3f;
 
     private bool isFocusActive = false;
     private Node3D actualFocusNode = null;
     private Node3D actualLookNode = new Node3D();
     private bool isFocusNotActive = true;
+    private bool needFocusNormal = true;
 
     [Signal] public delegate void FocusActionActiveEventHandler(bool newResult);
 
@@ -44,20 +45,32 @@ public partial class CCharacterFocusActionComponent : CBaseComponent
             ourCharacterBase.SetCharacterInputState(FpsCharacterBase.ECharacterInputState.Normal);
             ourCharacterBase.SetMouseVisible(false);
 
-            actualLookNode.Position = Vector3.Zero;
+            //actualLookNode.Position = Vector3.Zero;
+            //HeadFocusAction.Rotation = Vector3.Zero;
+
+            FPSCharacterAction a = ourCharacterBase as FPSCharacterAction;
+            a.GetCharacterBreathingEffectComponent().PlayBreathing();
+            needFocusNormal = true;
         }
     }
 
     public void StartFocusAction(Node3D newFocusMoveNode, Node3D newFocusLookNode,
-        float newTransSpeedMove,float newTransSpeedLook)
+        float newTransSpeedMove, float newTransSpeedLook)
     {
         ourCharacterBase.SetCharacterInputState(FpsCharacterBase.ECharacterInputState.DontMoveAndLook);
 
         isFocusActive = true;
         isFocusNotActive = false;
+        needFocusNormal = false;
 
-        TransMoveTime = newTransSpeedMove;
-        TransLookTime = newTransSpeedLook;
+        FPSCharacterAction a = ourCharacterBase as FPSCharacterAction;
+        a.GetCharacterBreathingEffectComponent().PauseBreathing();
+
+        //TransMoveTime = newTransSpeedMove;
+        //TransLookTime = newTransSpeedLook;
+
+        TransMoveTime = 0.75f;
+        TransLookTime = 0.75f;
 
         // init
         actualLookNode.GlobalPosition = ourCharacterBase.GetCharacterLookComponent().GetHeadForwardNode().GlobalPosition;
@@ -92,6 +105,9 @@ public partial class CCharacterFocusActionComponent : CBaseComponent
 
         isFocusActive = false;
 
+        TransMoveTime = 0.75f;
+        TransLookTime = 0.75f;
+
         // pos
         if (TweenFocusMove != null)
             TweenFocusMove.Kill();
@@ -118,13 +134,10 @@ public partial class CCharacterFocusActionComponent : CBaseComponent
 
     private void UpdateLook(double delta)
     {
-        if (isFocusNotActive)
-        {
-            /*actualLookNode.GlobalPosition = ourCharacterBase.GetCharacterLookComponent().
-                GetHeadForwardNode().GlobalPosition;*/
-        }
+        if (needFocusNormal)
+            actualLookNode.GlobalPosition = ourCharacterBase.GetCharacterLookComponent().GetHeadForwardNode().GlobalPosition;
 
-        if(!isFocusNotActive)
+        if (!isFocusNotActive)
             HeadFocusAction.LookAt(actualLookNode.GlobalPosition, null, false);
     }
 

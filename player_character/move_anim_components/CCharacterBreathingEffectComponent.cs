@@ -15,4 +15,7 @@ public partial class CCharacterBreathingEffectComponent : CBaseComponent
     {
         ourCharacterBase.GetCharacterFovComponent().SetFovOffset("Breath", BreathFovOffset);
     }
+
+    public void PauseBreathing() { GetNode<AnimationPlayer>("AnimationPlayer_Breathing").Pause(); }
+    public void PlayBreathing() { GetNode<AnimationPlayer>("AnimationPlayer_Breathing").Play(); }
 }
