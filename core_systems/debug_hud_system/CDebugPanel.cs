@@ -124,4 +124,6 @@ public partial class CDebugPanel : Control
         PanelAudio.LoadAllElementsSettings();
         PanelInputs.LoadAllElementsSettings();
     }
+
+    public CPanelSpawns GetPanelSpawns() { return PanelSpawns; }
 }

@@ -1,13 +1,46 @@
-[gd_scene load_steps=3 format=3 uid="uid://da5d4wxm4dqnm"]
+[gd_scene load_steps=4 format=3 uid="uid://da5d4wxm4dqnm"]
 
 [ext_resource type="PackedScene" uid="uid://dqx75mfvna1rx" path="res://core_systems/debug_hud_system/base/panel_base.tscn" id="1_yfmgu"]
 [ext_resource type="Script" path="res://core_systems/debug_hud_system/CPanelSpawns.cs" id="2_uk6og"]
+[ext_resource type="Theme" uid="uid://cd3yvqcy8bus4" path="res://core_systems/debug_hud_system/debug_theme.theme" id="3_fwamd"]
 
 [node name="PanelSpawns" instance=ExtResource("1_yfmgu")]
 script = ExtResource("2_uk6og")
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxBase/ScrollContainerElements/VBoxElements" index="0"]
+layout_mode = 2
+theme = ExtResource("3_fwamd")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxBase/ScrollContainerElements/VBoxElements/MarginContainer" index="0"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxBase/ScrollContainerElements/VBoxElements/MarginContainer/VBoxContainer" index="0"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxBase/ScrollContainerElements/VBoxElements/MarginContainer/VBoxContainer/HBoxContainer" index="0"]
+layout_mode = 2
+text = "number spawn objects:"
+horizontal_alignment = 1
+
+[node name="LabelNum" type="Label" parent="VBoxBase/ScrollContainerElements/VBoxElements/MarginContainer/VBoxContainer/HBoxContainer" index="1"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+text = "1"
+horizontal_alignment = 1
+
+[node name="HSliderSpawnNum" type="HSlider" parent="VBoxBase/ScrollContainerElements/VBoxElements/MarginContainer/VBoxContainer" index="1"]
+unique_name_in_owner = true
+layout_mode = 2
+min_value = 1.0
+max_value = 20.0
+value = 1.0
 
 [node name="Button_SaveSettings" parent="VBoxBase/VBoxBottom/MarginContainer/VBoxButtons" index="0"]
 visible = false
 
 [node name="Button_QuitGame" parent="VBoxBase/VBoxBottom/MarginContainer/VBoxButtons" index="1"]
 visible = false
+
+[connection signal="value_changed" from="VBoxBase/ScrollContainerElements/VBoxElements/MarginContainer/VBoxContainer/HSliderSpawnNum" to="." method="_on_h_slider_value_changed"]

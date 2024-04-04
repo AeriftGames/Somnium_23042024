@@ -164,3 +164,15 @@ near = 0.01
 [node name="HeadForwardNode" type="Node3D" parent="CameraCrouch/CameraLand/HeadCrouchDynamic/CameraController/CameraHead/CameraLean/CameraSway/CameraJump/CameraShakeRot/HeadBob/HeadFocusAction" index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
 metadata/_edit_lock_ = true
+
+[node name="LineDown" parent="UserInterface/Reticle" index="0"]
+visible = false
+
+[node name="LineUp" parent="UserInterface/Reticle" index="1"]
+visible = false
+
+[node name="LineRight" parent="UserInterface/Reticle" index="2"]
+visible = false
+
+[node name="LineLeft" parent="UserInterface/Reticle" index="3"]
+visible = false

@@ -3,9 +3,13 @@ using System;
 
 public partial class CPanelSpawns : CPanelBase
 {
+    private Label LabelNum = null;
+
     public override void PostInit(CDebugPanel newDebugPanel)
     {
         base.PostInit(newDebugPanel);
+
+        LabelNum = GetNode<Label>("%LabelNum");
 
         BuildSpawnButtons();
     }
@@ -25,4 +29,11 @@ public partial class CPanelSpawns : CPanelBase
             spawnButtonContainer.AddChild(spawnButtonInstance);
         }
     }
+
+    public void _on_h_slider_value_changed(float newValue)
+    {
+        LabelNum.Text = newValue.ToString();
+    }
+
+    public int GetNumSpawnObject() { return (int) GetNode<HSlider>("%HSliderSpawnNum").Value; }
 }

@@ -43,7 +43,7 @@ public partial class spawn_object_button : Button
         Godot.Collections.Array<Node3D> allSpawnNodes = UniversalFunctions.SpawnGameObjectToWorld(
             CGameMaster.GM.GetGame().GetLevelLoader().GetActualLevelScene(),
             spawnObjectPath, charAction.GetCharacterLookComponent().GetSpawnItemPoint().GlobalPosition,
-            CGameMaster.GM.GetDebugHud().GetNeedNumOfSpawn());
+            CGameMaster.GM.GetGame().GetDebugPanel().GetPanelSpawns().GetNumSpawnObject());
 
         GD.Print("Spawn " + allSpawnNodes.Count + " object of: " + allSpawnNodes[0].Name);
     }
