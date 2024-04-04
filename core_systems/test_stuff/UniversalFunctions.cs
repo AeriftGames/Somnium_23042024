@@ -1,11 +1,15 @@
 using Godot;
 using Godot.Collections;
+using Godot.NativeInterop;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading;
 
-public partial class UniversalFunctions
+public partial class UniversalFunctions : Node
 {
+    public bool test = false;
+
     public struct HitResult
     {
         public bool isHit;
@@ -356,4 +360,57 @@ public partial class UniversalFunctions
         }
         return "none";
     }
+    /*
+    public static void TryCall(Node newObject,StringName newFunction, params Variant[] args = null)
+    {
+        if (newObject == null)
+        {
+            // Log error dont exist object
+        }
+        else if (newObject.HasMethod(newFunction) == false)
+        {
+            // Log error has method
+            GD.Print("neexistuje methoda");
+        }
+        else
+        {
+            newObject.Call(newFunction, args);
+        }
+    }
+    */
+    /*
+    public static void TryCall(Node newObject, StringName newFunction)
+    {
+        if (newObject == null)
+        {
+            // Log error dont exist object
+        }
+        else if (newObject.HasMethod(newFunction) == false)
+        {
+            // Log error has method
+            GD.Print("neexistuje methoda");
+        }
+        else
+        {
+            newObject.Call(newFunction);
+        }
+    }
+    */
+    public static void TryCall(Node newObject, StringName newFunction)
+    {
+        if (newObject == null)
+        {
+            // Log error dont exist object
+        }
+        else if (newObject.HasMethod(newFunction) == false)
+        {
+            // Log error has method
+            GD.Print("neexistuje methoda");
+        }
+        else
+        {
+            newObject.Call(newFunction);
+        }
+    }
+
 }

@@ -19,7 +19,7 @@ public partial class ActionLayer : Control
 
 	private Label ActionObjectNameLabel;
 	private VBoxContainer ActionElementsVbox;
-
+	/*
 	public override void _Ready()
 	{
 		player = GetNode<AnimationPlayer>("AnimationPlayer_ActionLayer");
@@ -42,6 +42,9 @@ public partial class ActionLayer : Control
     //Vector3 LeftUp, Vector3 RightUp,Vector3 LeftDown, Vector3 RightDown
     public void ActivateObjectActionLayer(CInteractiveObject newInteractiveObject)
 	{
+		if(newInteractiveObject == null) return;
+		if (newInteractiveObject.GetBilboardObject() == null) return;
+
 		Vector3 LeftUp = newInteractiveObject.GetBilboardObject().GetLeftUpPosition();
         Vector3 RightUp = newInteractiveObject.GetBilboardObject().GetRightUpPosition();
         Vector3 LeftDown = newInteractiveObject.GetBilboardObject().GetLeftDownPosition();
@@ -130,5 +133,5 @@ public partial class ActionLayer : Control
 			action_element.Visible = false;
 			action_element.QueueFree();
 		}
-	}
+	}*/
 }

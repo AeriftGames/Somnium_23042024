@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://darrpqdjdaenp"]
+[gd_scene load_steps=19 format=3 uid="uid://darrpqdjdaenp"]
 
 [ext_resource type="Material" uid="uid://n303wu2f8je2" path="res://testing_stuff_kaen/elevator/elevator_mat.tres" id="1_i71j3"]
 [ext_resource type="Material" uid="uid://ba4qs30jn56xh" path="res://testing_stuff_kaen/elevator/elevator_buttonGreen_mat.tres" id="2_tpe64"]
@@ -70,13 +70,6 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_ijd65")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lye82"]
-albedo_color = Color(0, 0.329412, 0.0901961, 1)
-roughness = 0.55
-emission_enabled = true
-emission = Color(0, 1, 0, 1)
-emission_energy_multiplier = 0.5
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_drd31"]
 
@@ -196,21 +189,22 @@ mesh = SubResource("ArrayMesh_4cun8")
 skeleton = NodePath("")
 
 [node name="ButtonUp" type="MeshInstance3D" parent="."]
-transform = Transform3D(1.78814e-07, 1, 0, -1, 1.78814e-07, 0, 0, 0, 1, 0.36027, 0.865726, 0)
+transform = Transform3D(2.44358e-07, 1.255, -9.9476e-14, -1.255, 2.44358e-07, 2.12605e-21, 2.37169e-20, 9.9476e-14, 1.255, 0.36027, 0.443563, 7.10543e-15)
 material_override = ExtResource("2_tpe64")
 lod_bias = 3.0
 mesh = SubResource("ArrayMesh_vt2ch")
 skeleton = NodePath("")
 
 [node name="ButtonUpBase" type="MeshInstance3D" parent="."]
-transform = Transform3D(1.78814e-07, 1, 0, -1, 1.78814e-07, 0, 0, 0, 1, 0.114886, 0.865726, 0)
-material_override = SubResource("StandardMaterial3D_lye82")
+transform = Transform3D(2.44358e-07, 1.255, -7.10543e-14, -1.255, 2.44358e-07, 5.31513e-21, 2.37169e-20, 7.10543e-14, 1.255, 0.114886, 0.443563, 1.24345e-14)
+material_override = ExtResource("2_tpe64")
 lod_bias = 3.0
 mesh = SubResource("ArrayMesh_vo7bg")
 skeleton = NodePath("")
 
 [node name="ButtonDown" type="MeshInstance3D" parent="."]
 transform = Transform3D(1.78814e-07, 1, 0, -1, 1.78814e-07, 0, 0, 0, 1, 0.36027, -0.113895, 0)
+visible = false
 material_override = ExtResource("2_tpe64")
 lod_bias = 3.0
 mesh = SubResource("ArrayMesh_hssr0")
@@ -218,6 +212,7 @@ skeleton = NodePath("")
 
 [node name="ButtonDownBase" type="MeshInstance3D" parent="."]
 transform = Transform3D(1.78814e-07, 1, 0, -1, 1.78814e-07, 0, 0, 0, 1, 0.114886, -0.113895, 0)
+visible = false
 material_override = SubResource("StandardMaterial3D_2lvxj")
 lod_bias = 3.0
 mesh = SubResource("ArrayMesh_h2iwx")

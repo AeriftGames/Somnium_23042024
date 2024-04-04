@@ -3,19 +3,22 @@ using System;
 
 public partial class CCharacterUseActionComponent : CBaseComponent
 {
+    /*
     [Export(PropertyHint.Range, "1.0,5.0,0.1")] public float DETECT_RADIUS = 3.0f;
 
     public struct SDetectObject { public CInteractiveObject InteractiveObject; public Vector3 HitPosition; }
 
     private CInteractiveObject SelectedObject = null;
     private ActionLayer actionLayer = null;
-
+    private CHandNode handNode = null;
+    
     public override void PostInit(FpsCharacterBase newCharacterBase)
     {
         base.PostInit(newCharacterBase);
 
         GetNode<CollisionShape3D>("UseActionAreaDetect/CollisionShape3D").Shape.Set("radius", DETECT_RADIUS);
         actionLayer = GetNode<ActionLayer>("ActionLayer");
+        handNode = GetNode<CHandNode>("ActionLayer/HandNode");
     }
 
     public void UseAction()
@@ -66,7 +69,11 @@ public partial class CCharacterUseActionComponent : CBaseComponent
             {
                 SetSelectedUseActionObject(resultDetect.InteractiveObject);
                 GetSelectedUseActionObject().SetIsInLook(true);
-                ShowBoundingBox(resultDetect.InteractiveObject, true);
+
+                if (GetSelectedUseActionObject().GetActionType() == CInteractiveObject.EActionType.Rect)
+                    ShowBoundingBox(resultDetect.InteractiveObject, true);
+                else if (GetSelectedUseActionObject().GetActionType() == CInteractiveObject.EActionType.Hand)
+                    handNode.SetHandType(CHandNode.EHandType.Point);
             }
             else
             { TryDeselectObject(); }
@@ -87,7 +94,11 @@ public partial class CCharacterUseActionComponent : CBaseComponent
     {
         if (GetSelectedUseActionObject() != null)
         {
-            ShowBoundingBox(GetSelectedUseActionObject(), false);
+            if (GetSelectedUseActionObject().GetActionType() == CInteractiveObject.EActionType.Rect)
+                ShowBoundingBox(GetSelectedUseActionObject(), false);
+            else if (GetSelectedUseActionObject().GetActionType() == CInteractiveObject.EActionType.Hand)
+                handNode.SetHandType(CHandNode.EHandType.Off);
+
             GetSelectedUseActionObject().SetIsInLook(false);
             SetSelectedUseActionObject(null);
         }
@@ -132,7 +143,9 @@ public partial class CCharacterUseActionComponent : CBaseComponent
             actionLayer.DeactiveObjectActionLayer();
 
             if(newInteractiveObject != null)
-            { newInteractiveObject.GetBilboardObject().ActivateLookAtCamera(false); }
+            {
+                newInteractiveObject.GetBilboardObject().ActivateLookAtCamera(false);
+            }
 
             return; 
         }
@@ -145,5 +158,5 @@ public partial class CCharacterUseActionComponent : CBaseComponent
 
         actionLayer.ActivateObjectActionLayer(newInteractiveObject);
         newInteractiveObject.GetBilboardObject().ActivateLookAtCamera(true);
-    }
+    }*/
 }

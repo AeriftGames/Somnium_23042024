@@ -69,4 +69,8 @@ public partial class WorldLevel : Node
 
     }
 
+	public void SpawnCharacter()
+	{
+		GD.Print("blablabla");
+	}
 }

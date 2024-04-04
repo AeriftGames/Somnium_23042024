@@ -231,7 +231,7 @@ public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
 				tempHitPosition = (Vector3)rayResult["position"];
 			}
 		}
-
+		
 		// Final
 		InteractiveSystem.SetActualInteractiveObject(interact_object,tempHitPosition);
 		return result;

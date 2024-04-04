@@ -72,12 +72,11 @@ height = 0.1
 
 [node name="BoxAction" type="Node3D"]
 
-[node name="InteractiveObject" type="Node3D" parent="." node_paths=PackedStringArray("CallUseObject", "BilboardObject") groups=["interactive_object"]]
+[node name="InteractiveObject" type="Node3D" parent="." node_paths=PackedStringArray("CallUseObject") groups=["interactive_object"]]
 transform = Transform3D(1.78814e-07, -1, -1.69407e-21, 1, 1.78814e-07, 1.42109e-14, -1.42109e-14, 7.05861e-21, 1, 0, 0, 0)
 script = ExtResource("1_swdpv")
 CallUseObject = NodePath("..")
 ObjectName = "Box"
-BilboardObject = NodePath("../BilboardObject")
 metadata/_edit_lock_ = true
 
 [node name="StaticBody3D" type="StaticBody3D" parent="InteractiveObject" groups=["interactive_object"]]

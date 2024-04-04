@@ -77,7 +77,7 @@ public partial class CharacterInteractiveSystem : Godot.GodotObject
             }
         }
     }
-
+    
     public void SetActualInteractiveObject(interactive_object newInteractiveObject, Vector3 hitPosition)
     {
         // pokud nemame v grabu nejaky item, prepiseme interacatObject novym, ktery detekujeme jako prichozi
@@ -89,7 +89,7 @@ public partial class CharacterInteractiveSystem : Godot.GodotObject
                 hit_offset = actualInteractiveObject.GetInteractCenterGlobalPosition() - hitPosition;
         }
     }
-
+    
     public void UpdateForUse(interactive_object newInteractiveObject,bool newUseNow,double delta)
     {
         //  Pokud mame pouzivame objekt pro USE - zobrazime text pro jeho akci

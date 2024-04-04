@@ -1,15 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://dox78ea6kifn"]
+[gd_scene load_steps=10 format=3 uid="uid://dox78ea6kifn"]
 
 [ext_resource type="Script" path="res://testing_stuff_kaen/new_actions/ball_action.cs" id="1_vd4sy"]
 [ext_resource type="Script" path="res://testing_stuff_kaen/test_new_levels/CInteractiveObject.cs" id="2_jr2qt"]
-[ext_resource type="Script" path="res://testing_stuff_kaen/new_actions/action_resources/CBaseAction.cs" id="3_b7u2v"]
 [ext_resource type="Script" path="res://testing_stuff_kaen/new_actions/CBilboardObject.cs" id="4_n4tvi"]
-
-[sub_resource type="Resource" id="Resource_wl2so"]
-script = ExtResource("3_b7u2v")
-ActionName = "Eat"
-ActionFunction = "ActionEat"
-ActionInputActivate = 1
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_dvhcp"]
 size = Vector3(0.210187, 0.215063, 0.211694)
@@ -42,13 +35,11 @@ size = Vector3(0.02, 0.05, 0.02)
 [node name="BallAction" type="Node3D"]
 script = ExtResource("1_vd4sy")
 
-[node name="InteractiveObject" type="Node3D" parent="." node_paths=PackedStringArray("CallUseObject", "BilboardObject") groups=["interactive_object"]]
+[node name="InteractiveObject" type="Node3D" parent="." node_paths=PackedStringArray("CallUseObject") groups=["interactive_object"]]
 transform = Transform3D(1.78814e-07, -1, -1.69407e-21, 1, 1.78814e-07, 1.42109e-14, -1.42109e-14, 7.05861e-21, 1, 0, 0, 0)
 script = ExtResource("2_jr2qt")
 CallUseObject = NodePath("..")
 ObjectName = "Red Apple"
-BilboardObject = NodePath("../BilboardObject")
-ActionResources = Array[Resource]([SubResource("Resource_wl2so")])
 metadata/_edit_lock_ = true
 
 [node name="StaticBody3D" type="StaticBody3D" parent="InteractiveObject" groups=["interactive_object"]]

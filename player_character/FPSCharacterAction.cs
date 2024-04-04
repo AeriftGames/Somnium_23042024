@@ -4,16 +4,16 @@ using System;
 public partial class FPSCharacterAction : FPSCharacterMoveAnim
 {
     private CCharacterFlashlightComponent FlashlightComponent = null;
-    private CCharacterUseActionComponent UseActionComponent = null;
     private CCharacterStaminaComponent StaminaComponent = null;
     private CCharacterHealthComponent HealthComponent = null;
     private CCharacterFocusActionComponent FocusActionComponent = null;
+    private CCharacterInteractionComponent InteractionComponent = null;
 
     public CCharacterFlashlightComponent GetFlashlightComponent() { return FlashlightComponent; }
-    public CCharacterUseActionComponent GetUseActionComponent() { return UseActionComponent; }
     public CCharacterStaminaComponent GetStaminaComponent() { return StaminaComponent; }
     public CCharacterHealthComponent GetHealthComponent() { return HealthComponent; }
     public CCharacterFocusActionComponent GetFocusActionComponent() { return FocusActionComponent; }
+    public CCharacterInteractionComponent GetInteractionComponent() { return InteractionComponent; }
 
     public override void _Ready()
     {
@@ -21,9 +21,6 @@ public partial class FPSCharacterAction : FPSCharacterMoveAnim
 
         FlashlightComponent = GetBaseComponents().GetNode<CCharacterFlashlightComponent>("BaseFlashlightComponent");
         FlashlightComponent.PostInit(this);
-
-        UseActionComponent = GetBaseComponents().GetNode<CCharacterUseActionComponent>("BaseUseActionComponent");
-        UseActionComponent.PostInit(this);
 
         StaminaComponent = GetBaseComponents().GetNode<CCharacterStaminaComponent>("BaseStaminaComponent");
         StaminaComponent.PostInit(this);
@@ -33,13 +30,16 @@ public partial class FPSCharacterAction : FPSCharacterMoveAnim
 
         FocusActionComponent = GetBaseComponents().GetNode<CCharacterFocusActionComponent>("BaseFocusActionComponent");
         FocusActionComponent.PostInit(this);
+
+        InteractionComponent = GetBaseComponents().GetNode<CCharacterInteractionComponent>("BaseInteractionComponent");
+        InteractionComponent.PostInit(this);
     }
 
     public override void _PhysicsProcess(double delta)
     {
         base._PhysicsProcess(delta);
 
-        GetUseActionComponent().Update(delta);
+        GetInteractionComponent().PhysicUpdate(delta);
     }
 
     // override function (movement speed) with stamina system

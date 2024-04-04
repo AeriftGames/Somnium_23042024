@@ -125,6 +125,7 @@ public partial class CCharacterJumpLandEffectComponent : CBaseComponent
     public void SetStartFallingNow() { lastYPosFallingStart = ourCharacterBase.GlobalPosition.Y; }
     public void CalculateAmountLanding()
     {
+        GD.Print("land effect");
         if (ourCharacterBase.GetCharacterMovementComponent().GetRealSpeed() > 3.0f)
         { PlayerAnim.Play("CameraLandMedium_4"); }
         else

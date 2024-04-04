@@ -23,7 +23,7 @@ radius = 0.36
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_yocmg"]
 height = 0.6
-radius = 0.25
+radius = 0.38
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3j32b"]
 radius = 0.4
@@ -178,6 +178,10 @@ metadata/_edit_lock_ = true
 
 [node name="RightHandObject" type="Node3D" parent="CameraCrouch/CameraLand/HeadCrouchDynamic/CameraController/CameraHead/CameraLean/CameraSway/CameraJump/CameraShakeRot/HeadBob/HeadFocusAction/HeadBreathing/Camera3D/RightHandPoint"]
 metadata/_edit_lock_ = true
+
+[node name="SpawnItemPoint" type="Node3D" parent="CameraCrouch/CameraLand/HeadCrouchDynamic/CameraController/CameraHead/CameraLean/CameraSway/CameraJump/CameraShakeRot/HeadBob/HeadFocusAction/HeadBreathing/Camera3D"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.2)
 
 [node name="LerpPos_LeanCenter" type="Node3D" parent="CameraCrouch/CameraLand/HeadCrouchDynamic/CameraController/CameraHead"]
 unique_name_in_owner = true

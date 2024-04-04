@@ -32,6 +32,7 @@ public partial class CCharacterLookComponent : CBaseComponent
 	private Node3D RightHandPoint = null;
 
 	private Node3D HeadForwardNode = null;
+	private Node3D SpawnItemPoint = null;
 
 	public override void PostInit(FpsCharacterBase newOurCharacter)
 	{
@@ -52,6 +53,7 @@ public partial class CCharacterLookComponent : CBaseComponent
 		RightHandPoint = GetMainCamera().GetNode<Node3D>("RightHandPoint");
 
 		HeadForwardNode = GetNode<Node3D>("%HeadForwardNode");
+		SpawnItemPoint = GetNode<Node3D>("%SpawnItemPoint");
 
 
 		Input.MouseMode = Input.MouseModeEnum.Captured;
@@ -120,4 +122,5 @@ public partial class CCharacterLookComponent : CBaseComponent
 	public Node3D GetHeadFocusAction() { return HeadFocusAction; }
 
 	public Node3D GetHeadForwardNode() {  return HeadForwardNode; }
+	public Node3D GetSpawnItemPoint() {  return SpawnItemPoint; }
 }

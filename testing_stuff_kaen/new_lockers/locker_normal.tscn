@@ -1,23 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://vf06hwxc3mje"]
+[gd_scene load_steps=9 format=3 uid="uid://vf06hwxc3mje"]
 
 [ext_resource type="PackedScene" uid="uid://b87vninn1p141" path="res://testing_stuff_kaen/new_lockers/locker_normal.glb" id="1_1y0lt"]
 [ext_resource type="Script" path="res://testing_stuff_kaen/test_new_levels/CInteractiveObject.cs" id="2_0qeoc"]
 [ext_resource type="Material" uid="uid://b82lonmh1r8dp" path="res://testing_stuff_kaen/new_lockers/locker_big_new_mat.tres" id="2_danul"]
-[ext_resource type="Script" path="res://testing_stuff_kaen/new_actions/action_resources/CBaseAction.cs" id="3_bq7bk"]
 [ext_resource type="Script" path="res://testing_stuff_kaen/new_actions/CBilboardObject.cs" id="5_mxb3u"]
 [ext_resource type="Texture2D" uid="uid://2vnn5as8tp5i" path="res://testing_stuff_kaen/level_decals/TexturesCom_DecalsRusted0004_1_masked_S.png" id="9_rs33i"]
-
-[sub_resource type="Resource" id="Resource_dlqhp"]
-script = ExtResource("3_bq7bk")
-ActionName = "Open Locker"
-ActionFunction = "ActionOpen"
-ActionInputActivate = 1
-
-[sub_resource type="Resource" id="Resource_bigcs"]
-script = ExtResource("3_bq7bk")
-ActionName = "Use Lockpick"
-ActionFunction = "ActionLockpick"
-ActionInputActivate = 0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_jjjqf"]
 size = Vector3(0.155, 0.221758, 0.0779526)
@@ -31,13 +18,11 @@ height = 0.1
 
 [node name="locker_normal" instance=ExtResource("1_1y0lt")]
 
-[node name="InteractiveObject" type="Node3D" parent="." index="0" node_paths=PackedStringArray("CallUseObject", "BilboardObject") groups=["interactive_object"]]
+[node name="InteractiveObject" type="Node3D" parent="." index="0" node_paths=PackedStringArray("CallUseObject") groups=["interactive_object"]]
 transform = Transform3D(1.78814e-07, -1, -1.69407e-21, 1, 1.78814e-07, 1.42109e-14, -1.42109e-14, 7.05861e-21, 1, 0, 0, 0)
 script = ExtResource("2_0qeoc")
 CallUseObject = NodePath("..")
 ObjectName = "Locker"
-BilboardObject = NodePath("../BilboardObject")
-ActionResources = Array[Resource]([SubResource("Resource_dlqhp"), SubResource("Resource_bigcs")])
 metadata/_edit_lock_ = true
 
 [node name="StaticBody3D" type="StaticBody3D" parent="InteractiveObject" index="0" groups=["interactive_object"]]

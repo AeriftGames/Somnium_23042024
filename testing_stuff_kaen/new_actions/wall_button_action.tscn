@@ -1,18 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://bqcc3ox822w73"]
+[gd_scene load_steps=10 format=3 uid="uid://bqcc3ox822w73"]
 
 [ext_resource type="PackedScene" uid="uid://darrpqdjdaenp" path="res://testing_stuff_kaen/new_actions/wall_button.tscn" id="1_p4lpk"]
 [ext_resource type="Script" path="res://testing_stuff_kaen/test_new_levels/CInteractiveObject.cs" id="2_jl5ap"]
 [ext_resource type="Script" path="res://testing_stuff_kaen/test_new_levels/CActionItemUse.cs" id="2_lq2td"]
-[ext_resource type="Script" path="res://testing_stuff_kaen/new_actions/action_resources/CBaseAction.cs" id="4_0pk6f"]
 [ext_resource type="Script" path="res://testing_stuff_kaen/new_actions/CBilboardObject.cs" id="4_7jeyo"]
 [ext_resource type="Script" path="res://testing_stuff_kaen/new_actions/FocusActionObject.cs" id="6_4fubn"]
 [ext_resource type="Theme" uid="uid://cd3yvqcy8bus4" path="res://core_systems/debug_hud_system/debug_theme.theme" id="7_raecs"]
-
-[sub_resource type="Resource" id="Resource_0hd0v"]
-script = ExtResource("4_0pk6f")
-ActionName = "Use Action"
-ActionFunction = "UseAction"
-ActionInputActivate = 1
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_je34a"]
 size = Vector3(2.74603, 1.0069, 2.02661)
@@ -25,16 +18,15 @@ height = 0.1
 radius = 0.05
 height = 0.1
 
-[node name="wall_button" instance=ExtResource("1_p4lpk")]
+[node name="wall_button" node_paths=PackedStringArray("FocusActionObject") instance=ExtResource("1_p4lpk")]
 script = ExtResource("2_lq2td")
+FocusActionObject = NodePath("FocusActionObject")
 
-[node name="InteractiveObject" type="Node3D" parent="." index="0" node_paths=PackedStringArray("CallUseObject", "BilboardObject") groups=["interactive_object"]]
+[node name="InteractiveObject" type="Node3D" parent="." index="0" node_paths=PackedStringArray("CallUseObject") groups=["interactive_object"]]
 transform = Transform3D(1, 8.52655e-28, 1.42109e-14, 0, 1, 4.23518e-21, -1.42109e-14, 1.41172e-21, 1, 0.36027, 0.865726, 7.10543e-15)
 script = ExtResource("2_jl5ap")
 CallUseObject = NodePath("..")
 ObjectName = "Button"
-BilboardObject = NodePath("../BilboardObject")
-ActionResources = Array[Resource]([SubResource("Resource_0hd0v")])
 metadata/_edit_lock_ = true
 
 [node name="StaticBody3D" type="StaticBody3D" parent="InteractiveObject" index="0" groups=["interactive_object"]]
@@ -90,10 +82,10 @@ FocusLookObject = NodePath("..")
 metadata/_edit_lock_ = true
 
 [node name="ButtonUp" parent="." index="4"]
-transform = Transform3D(1.78814e-07, 1, 0, -1, 1.78814e-07, 0, 5.0822e-21, 0, 1, 0.36027, 0.865726, 7.10543e-15)
+transform = Transform3D(1.78814e-07, 1, 0, -1, 1.78814e-07, 0, 8.47033e-21, 0, 1, 0.36027, 0.532393, 7.10543e-15)
 
 [node name="ButtonUpBase" parent="." index="5"]
-transform = Transform3D(1.78814e-07, 1, 0, -1, 1.78814e-07, 0, 1.69407e-21, 0, 1, 0.114886, 0.865726, 0)
+transform = Transform3D(1.78814e-07, 1, 0, -1, 1.78814e-07, 0, 5.0822e-21, 0, 1, 0.114886, 0.532393, 1.77636e-15)
 
 [node name="Control" type="Control" parent="." index="8"]
 visible = false

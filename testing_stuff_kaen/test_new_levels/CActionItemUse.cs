@@ -4,11 +4,10 @@ using System;
 public partial class CActionItemUse : Node3D
 {
 	FPSCharacterAction ActionCharacter;
-	FocusActionObject FocusActionObject;
+	[Export] FocusActionObject FocusActionObject;
 
     public override void _Ready()
 	{
-		FocusActionObject = GetNode<FocusActionObject>("FocusActionObject");
 		GameStart();
     }
 
@@ -28,7 +27,8 @@ public partial class CActionItemUse : Node3D
 
     private void CActionItemUse_FocusActionActive(bool newResult)
     {
-		GetNode<Control>("Control").Visible = newResult;
+        //GetNode<Control>("Control").Visible = newResult;
+        GetNode<Sprite3D>("Sprite3D").Visible = newResult;
     }
 
     public virtual void UseAction()

@@ -32,6 +32,7 @@ driver/output_latency=30
 Logging="*res://autoload/logging.gd"
 CustomSettings="*res://autoload/custom_settings.gd"
 GameMaster="*res://core_systems/GameMaster.tscn"
+UniversalFunctions="*res://core_systems/test_stuff/universal_functions.tscn"
 LastSingleton="*res://autoload/last_singleton.gd"
 
 [display]
