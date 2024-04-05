@@ -45,6 +45,7 @@ editor_description = "Nesahat na breath fov offset - je to promena ovladana skrz
 
 [node name="BaseWalkEffectComponent" parent="BaseComponents" index="9"]
 TOP_ANIMSPEED_RUNNING = 1.8
+SwayAmount = 0.55
 
 [node name="BaseFlashlightComponent" parent="BaseComponents" index="10" instance=ExtResource("3_pbs4r")]
 
