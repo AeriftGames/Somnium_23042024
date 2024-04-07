@@ -1,4 +1,5 @@
 using Godot;
+using static Godot.TextServer;
 
 public partial class CCharacterLookComponent : CBaseComponent
 {
@@ -34,7 +35,10 @@ public partial class CCharacterLookComponent : CBaseComponent
 	private Node3D HeadForwardNode = null;
 	private Node3D SpawnItemPoint = null;
 
-	public override void PostInit(FpsCharacterBase newOurCharacter)
+	private Vector2 LookGamepad = Vector2.Zero;
+
+
+    public override void PostInit(FpsCharacterBase newOurCharacter)
 	{
 		base.PostInit(newOurCharacter);
 
@@ -65,24 +69,47 @@ public partial class CCharacterLookComponent : CBaseComponent
 
 		isMouseInput = @event is InputEventMouseMotion eventMouseMotion_test && Input.MouseMode == Input.MouseModeEnum.Captured;
 
-		if (isMouseInput)
-		{
-            if (ourCharacterBase.GetCharacterInputState() == FpsCharacterBase.ECharacterInputState.Normal)
-			{
-                InputEventMouseMotion eventMouseMotion = @event as InputEventMouseMotion;
-                rotationInput = -eventMouseMotion.Relative.X * MOUSE_SENSITIVITY;
-                tiltInput = -eventMouseMotion.Relative.Y * MOUSE_SENSITIVITY;
-            }
-			else if (ourCharacterBase.GetCharacterInputState() == FpsCharacterBase.ECharacterInputState.DontMoveAndLook)
-			{
-                rotationInput = 0.0f;
-                tiltInput = 0.0f;
-            }
-		}
+		// Prisel event pohybu mysi ? provedeme kalkulaci
+		if (isMouseInput) 
+		{ CalculateByMouse(@event); }
 	}
 
-	public void UpdateLook(double delta)
+	public void CalculateByMouse(InputEvent @event)
 	{
+        if (ourCharacterBase.GetCharacterInputState() == FpsCharacterBase.ECharacterInputState.Normal)
+        {
+            InputEventMouseMotion eventMouseMotion = @event as InputEventMouseMotion;
+            rotationInput = -eventMouseMotion.Relative.X * MOUSE_SENSITIVITY;
+            tiltInput = -eventMouseMotion.Relative.Y * MOUSE_SENSITIVITY;
+        }
+        else if (ourCharacterBase.GetCharacterInputState() == FpsCharacterBase.ECharacterInputState.DontMoveAndLook)
+        {
+            rotationInput = 0.0f;
+            tiltInput = 0.0f;
+        }
+    }
+
+	public void CalculateByGamepad(double delta)
+	{
+		Vector2 InputDir = new Vector2(
+			Input.GetActionStrength("LookRight") - Input.GetActionStrength("LookLeft"),
+			Input.GetActionStrength("LookDown") - Input.GetActionStrength("LookUp"));//.LimitLength(1.0f);
+
+        LookGamepad = LookGamepad.Lerp(new Vector2(InputDir.X, InputDir.Y), (float)delta * 20.0f);
+
+		// prisel event pohybu mysi ? preskocime nasledujici nastaveni rotationInput a tiltInput z Gamepadu
+		// musi tak byt kvuli vynulovani hodnot pro mys a gamepad - protoze mys funguje na eventu
+		if (isMouseInput) return;
+		
+        rotationInput = -LookGamepad.X * MOUSE_SENSITIVITY * 8;
+        tiltInput = -LookGamepad.Y * MOUSE_SENSITIVITY * 8;
+        
+    }
+
+	public void UpdateFinalLook(double delta)
+	{
+		CalculateByGamepad(delta);
+
 		mouseRotation.X += tiltInput * (float)delta;
 		mouseRotation.X = Mathf.Clamp(mouseRotation.X, TILT_LOWER_LIMIT, TILT_UPPER_LIMIT);
 		mouseRotation.Y += rotationInput * (float)delta;

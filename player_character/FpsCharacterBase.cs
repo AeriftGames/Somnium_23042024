@@ -58,7 +58,7 @@ public partial class FpsCharacterBase : CharacterBody3D
 
     public override void _PhysicsProcess(double delta)
 	{
-        GetCharacterLookComponent().UpdateLook(delta);
+        GetCharacterLookComponent().UpdateFinalLook(delta);
 
         ApplyMovementInputActions(delta);  // virtual for sprint crouch walk speed
 
