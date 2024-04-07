@@ -13,10 +13,9 @@ public partial class DamageHud : Control
     [Export] float maxMutliplier = 0.3f;
 
     float actualVal = 0.8f;
-    public override void _Ready()
-    {
-        base._Ready();
 
+    public void PostInit()
+    {
         damageShader = GetNode<ColorRect>("ColorRect_Vignette").Material as ShaderMaterial;
         animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
         bloodTextureRect = GetNode<TextureRect>("TextureRect_blood");

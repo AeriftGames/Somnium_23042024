@@ -25,14 +25,14 @@ public partial class CCharacterCameraShakeComponent : CBaseComponent
 
     public void ApplySmallInstantShake(float newShakeStrenght)
     {
-        ShakeStrenght = 0.1f;
+        ShakeStrenght = 1f;
         ShakeFade = 5.0f;
     }
 
-    public void ApplyMediumLongShake(float newShakeStrenght)
+    public void ApplyMediumStrengthInstanShake(float newShakeStrenght)
     {
-        ShakeStrenght = 0.02f;
-        ShakeFade = 0.5f;
+        ShakeStrenght = 2f;
+        ShakeFade = 8.5f;
     }
     public void ApplyUserParamShake(float newShakeStrenght, float newShakeFade)
     {
@@ -43,9 +43,6 @@ public partial class CCharacterCameraShakeComponent : CBaseComponent
     public override void _Process(double delta)
     {
         base._Process(delta);
-
-        if (Input.IsActionJustPressed("testDangerShake"))
-            ApplySmallInstantShake(0);
 
         if (ShakeStrenght > 0.0f && EnableShakeFromWorld)
         {
