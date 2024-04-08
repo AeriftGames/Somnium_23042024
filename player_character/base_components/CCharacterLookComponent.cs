@@ -100,10 +100,17 @@ public partial class CCharacterLookComponent : CBaseComponent
 		// prisel event pohybu mysi ? preskocime nasledujici nastaveni rotationInput a tiltInput z Gamepadu
 		// musi tak byt kvuli vynulovani hodnot pro mys a gamepad - protoze mys funguje na eventu
 		if (isMouseInput) return;
-		
-        rotationInput = -LookGamepad.X * MOUSE_SENSITIVITY * 8;
-        tiltInput = -LookGamepad.Y * MOUSE_SENSITIVITY * 8;
-        
+
+		if (ourCharacterBase.GetCharacterInputState() == FpsCharacterBase.ECharacterInputState.Normal)
+		{
+            rotationInput = -LookGamepad.X * MOUSE_SENSITIVITY * 8;
+            tiltInput = -LookGamepad.Y * MOUSE_SENSITIVITY * 8;
+        }
+        else if (ourCharacterBase.GetCharacterInputState() == FpsCharacterBase.ECharacterInputState.DontMoveAndLook)
+        {
+            rotationInput = 0.0f;
+            tiltInput = 0.0f;
+        }
     }
 
 	public void UpdateFinalLook(double delta)
