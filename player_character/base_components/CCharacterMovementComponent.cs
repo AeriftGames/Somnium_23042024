@@ -40,8 +40,14 @@ public partial class CCharacterMovementComponent : CBaseComponent
     public void UpdateMove(double delta)
     {
         // get input actions for input dir and calculate direction
-        InputDir = Input.GetVector("moveLeft", "moveRight", "moveForward", "moveBackward");
-        Direction = Direction.Lerp(ourCharacterBase.Transform.Basis * new Vector3(InputDir.X, 0, InputDir.Y).Normalized(), (float)delta * 60.0f);
+        //InputDir = Input.GetVector("moveLeft", "moveRight", "moveForward", "moveBackward");
+        //Direction = Direction.Lerp(ourCharacterBase.Transform.Basis * new Vector3(InputDir.X, 0, InputDir.Y).Normalized(), (float)delta * 60.0f);
+
+        Vector2 InputDir = new Vector2(
+            Input.GetActionStrength("moveRight") - Input.GetActionStrength("moveLeft"),
+            Input.GetActionStrength("moveBackward") - Input.GetActionStrength("moveForward"));//.LimitLength(1.0f);
+
+        Direction = Direction.Lerp(ourCharacterBase.Transform.Basis * new Vector3(InputDir.X, 0, InputDir.Y), (float)delta * 60.0f);
 
         // get actual character velocity
         WorkVelocity = ourCharacterBase.Velocity;
