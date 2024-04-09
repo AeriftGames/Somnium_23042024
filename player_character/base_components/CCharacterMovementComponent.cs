@@ -45,7 +45,7 @@ public partial class CCharacterMovementComponent : CBaseComponent
 
         Vector2 InputDir = new Vector2(
             Input.GetActionStrength("moveRight") - Input.GetActionStrength("moveLeft"),
-            Input.GetActionStrength("moveBackward") - Input.GetActionStrength("moveForward"));//.LimitLength(1.0f);
+            Input.GetActionStrength("moveBackward") - Input.GetActionStrength("moveForward")).LimitLength(1.0f);
 
         Direction = Direction.Lerp(ourCharacterBase.Transform.Basis * new Vector3(InputDir.X, 0, InputDir.Y), (float)delta * 60.0f);
 

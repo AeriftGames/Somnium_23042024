@@ -28,7 +28,7 @@
 [ext_resource type="PackedScene" uid="uid://bndr3up87gn1i" path="res://placeholders/Decals/blood_decal.tscn" id="22_tcmpq"]
 [ext_resource type="PackedScene" uid="uid://dv26x01is3wew" path="res://spawn/physic_object_ball_light.tscn" id="25_u234y"]
 [ext_resource type="PackedScene" uid="uid://cill7wx53gakg" path="res://placeholders/posters/poster2.tscn" id="27_h8jbu"]
-[ext_resource type="AudioStream" uid="uid://vcjrbg0td0ei" path="res://audio/audio_streams/music/wrkltktltk.ogg" id="28_atu4g"]
+[ext_resource type="AudioStream" uid="uid://ngmb6mrvsbqc" path="res://audio/audio_streams/613738__punneedsounds__amb-ost1.mp3" id="28_n5lir"]
 [ext_resource type="PackedScene" uid="uid://dk6s7gogdikp7" path="res://testing_stuff_kaen/lis/lis_anim.tscn" id="29_covdt"]
 [ext_resource type="PackedScene" uid="uid://c73m0yt3w8nd1" path="res://testing_stuff_kaen/stairs/StairsTest.tscn" id="30_xhesf"]
 [ext_resource type="PackedScene" uid="uid://dpa62hhmdflgr" path="res://testing_stuff_kaen/stairs_gd/StairNodeGD.tscn" id="31_teo4b"]
@@ -2986,8 +2986,9 @@ SpawnCharacterType = 3
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.7441, 1, 1.4485)
 
 [node name="AudioStreamPlayerMusic" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("28_atu4g")
-volume_db = -25.0
+stream = ExtResource("28_n5lir")
+volume_db = -5.0
+pitch_scale = 0.85
 autoplay = true
 max_polyphony = 2
 bus = &"Music"
@@ -3351,4 +3352,5 @@ transform = Transform3D(1.19969, 0, 0.0271202, 0, 1.2, 0, -0.0271202, 0, 1.19969
 [node name="DamageZone" parent="." instance=ExtResource("42_itx1e")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, -2)
 damageZoneType = 1
+printDebugToConsole = true
 _boxSize = Vector3(8, 6, 4)

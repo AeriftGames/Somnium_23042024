@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.Threading.Tasks;
 
 [Tool]
 public partial class DamageZone : Area3D
@@ -38,7 +39,9 @@ public partial class DamageZone : Area3D
     CollisionShape3D collisionShape3D = null;
     MeshInstance3D meshInstance3D = null;
 
-    public override void _Ready()
+    private bool enableStart = false;
+
+    public override async void _Ready()
     {
         base._Ready();
 
@@ -64,7 +67,16 @@ public partial class DamageZone : Area3D
         healthTick_timer.OneShot = false;
         AddChild(healthTick_timer);
         healthTick_timer.Stop();
+
+        DelayStart(2000);
     }
+
+    public async void DelayStart(int MSDelay)
+    {
+        await Task.Delay(MSDelay);
+        enableStart = true;
+    }
+
     public override void _Process(double delta)
     {
         base._Process(delta);
@@ -72,6 +84,8 @@ public partial class DamageZone : Area3D
 
     public void _on_body_entered(Node3D body)
     {
+        if (enableStart == false) return;
+
         // Je to hrac ?
         characterInZone = body as FPSCharacterAction;
         if (characterInZone == null) return;
@@ -123,6 +137,8 @@ public partial class DamageZone : Area3D
 
     public void _on_body_exited(Node3D body)
     {
+        if (enableStart == false) return;
+
         // Je to hrac ?
         characterInZone = body as FPSCharacterAction;
         if (characterInZone == null) return;
