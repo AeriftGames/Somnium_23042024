@@ -12,7 +12,7 @@ public partial class DamageZone : Area3D
     [Export] public float damageTickSeconds = 1.0f;
     [Export] public bool resetOnLeave = true;
 
-    private FPSCharacter_Inventory characterInZone = null;
+    private FPSCharacterAction characterInZone = null;
 
     [Export] public bool _debugVisible {
         get { return debugVisible; }
@@ -73,7 +73,7 @@ public partial class DamageZone : Area3D
     public void _on_body_entered(Node3D body)
     {
         // Je to hrac ?
-        characterInZone = body as FPSCharacter_Inventory;
+        characterInZone = body as FPSCharacterAction;
         if (characterInZone == null) return;
 
         if(printDebugToConsole)
@@ -100,7 +100,8 @@ public partial class DamageZone : Area3D
                 if (printDebugToConsole)
                     GD.Print("Death Damage");
 
-                characterInZone.GetCharacterHealthComponent().RemoveHealth(characterInZone.GetCharacterHealthComponent().GetMaxHealth()*10);
+                characterInZone.GetHealthComponent().ApplyDamage(
+                    characterInZone.GetHealthComponent().GetHealthMath().GetMaxHealth()*10);
                 break;
             }
             case EDamageZoneType.OneAddHealth:
@@ -123,7 +124,7 @@ public partial class DamageZone : Area3D
     public void _on_body_exited(Node3D body)
     {
         // Je to hrac ?
-        characterInZone = body as FPSCharacter_Inventory;
+        characterInZone = body as FPSCharacterAction;
         if (characterInZone == null) return;
 
         if (printDebugToConsole)
@@ -186,7 +187,7 @@ public partial class DamageZone : Area3D
         if (printDebugToConsole)
             GD.Print("One Tick Damage");
 
-        characterInZone.GetCharacterHealthComponent().RemoveHealth(damageValue);
+        characterInZone.GetHealthComponent().ApplyDamage(damageValue);
     }
 
     public void OneTickHealth()
@@ -196,7 +197,7 @@ public partial class DamageZone : Area3D
         if (printDebugToConsole)
             GD.Print("One Tick Health");
 
-        characterInZone.GetCharacterHealthComponent().AddHealth(damageValue);
+        characterInZone.GetHealthComponent().ApplyHeal(damageValue);
     }
 
     public void UpdateBoxSize(Vector3 newSize)

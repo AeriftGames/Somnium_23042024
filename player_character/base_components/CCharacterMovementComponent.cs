@@ -39,7 +39,7 @@ public partial class CCharacterMovementComponent : CBaseComponent
 
     public void UpdateMove(double delta)
     {
-        // get input actions for input dir and calculate direction
+        // get input actions for input dir and calculate direction - OLD VARIANT
         //InputDir = Input.GetVector("moveLeft", "moveRight", "moveForward", "moveBackward");
         //Direction = Direction.Lerp(ourCharacterBase.Transform.Basis * new Vector3(InputDir.X, 0, InputDir.Y).Normalized(), (float)delta * 60.0f);
 

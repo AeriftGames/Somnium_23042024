@@ -8,12 +8,14 @@ public partial class FPSCharacterAction : FPSCharacterMoveAnim
     private CCharacterHealthComponent HealthComponent = null;
     private CCharacterFocusActionComponent FocusActionComponent = null;
     private CCharacterInteractionComponent InteractionComponent = null;
+    private CCharacterShootBallComponent ShootBallComponent = null;
 
     public CCharacterFlashlightComponent GetFlashlightComponent() { return FlashlightComponent; }
     public CCharacterStaminaComponent GetStaminaComponent() { return StaminaComponent; }
     public CCharacterHealthComponent GetHealthComponent() { return HealthComponent; }
     public CCharacterFocusActionComponent GetFocusActionComponent() { return FocusActionComponent; }
     public CCharacterInteractionComponent GetInteractionComponent() { return InteractionComponent; }
+    public CCharacterShootBallComponent GetShootBallComponent() { return ShootBallComponent; }
 
     public override void _Ready()
     {
@@ -33,6 +35,9 @@ public partial class FPSCharacterAction : FPSCharacterMoveAnim
 
         InteractionComponent = GetBaseComponents().GetNode<CCharacterInteractionComponent>("BaseInteractionComponent");
         InteractionComponent.PostInit(this);
+
+        ShootBallComponent = GetBaseComponents().GetNode<CCharacterShootBallComponent>("BaseShootBallComponent");
+        ShootBallComponent.PostInit(this);
     }
 
     public override void _PhysicsProcess(double delta)

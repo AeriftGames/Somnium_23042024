@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://1i0rk47y5rfe"]
+[gd_scene load_steps=52 format=3 uid="uid://1i0rk47y5rfe"]
 
 [ext_resource type="Script" path="res://levels/worldlevel_base/WorldLevel.cs" id="1_ucxcv"]
 [ext_resource type="VoxelGIData" uid="uid://b07w76761sd8j" path="res://levels/worldlevel_demo_extend/level_data/worldlevel_demo.VoxelGI_data.res" id="2_d5wgc"]
@@ -39,6 +39,7 @@
 [ext_resource type="Texture2D" uid="uid://473hk7hmnx55" path="res://testing_stuff_kaen/level_decals/TexturesCom_DecalsSubtle0024_1_masked_S.png" id="37_x8jic"]
 [ext_resource type="PackedScene" uid="uid://vf06hwxc3mje" path="res://testing_stuff_kaen/new_lockers/locker_normal.tscn" id="41_4snod"]
 [ext_resource type="PackedScene" uid="uid://chen8oeqtsmbj" path="res://testing_stuff_kaen/new_lockers/locker_small.tscn" id="42_hf7dr"]
+[ext_resource type="PackedScene" uid="uid://daxlyxpkjss0g" path="res://placeholders/zones/DamageZone.tscn" id="42_itx1e"]
 [ext_resource type="PackedScene" uid="uid://d1x3jfxpnvao3" path="res://testing_stuff_kaen/new_lockers/locker_double.tscn" id="43_fj0w6"]
 [ext_resource type="PackedScene" uid="uid://ojpgjqgyt2j3" path="res://testing_stuff_kaen/new_lockers/locker_big.tscn" id="44_1k3ks"]
 
@@ -3346,3 +3347,8 @@ transform = Transform3D(1.11972, 0, 0.431527, 0, 1.2, 0, -0.431527, 0, 1.11972, 
 
 [node name="locker_big6" parent="." instance=ExtResource("44_1k3ks")]
 transform = Transform3D(1.19969, 0, 0.0271202, 0, 1.2, 0, -0.0271202, 0, 1.19969, 40.8075, 0.0837884, 3.41232)
+
+[node name="DamageZone" parent="." instance=ExtResource("42_itx1e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, -2)
+damageZoneType = 1
+_boxSize = Vector3(8, 6, 4)
