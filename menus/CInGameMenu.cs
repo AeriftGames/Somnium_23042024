@@ -39,6 +39,12 @@ public partial class CInGameMenu : Control
             }
 
             Input.MouseMode = Input.MouseModeEnum.Visible;
+
+			if (CGameMaster.GM.GetGame().GetFPSCharacterBase() != null)
+			{
+                CGameMaster.GM.GetGame().GetFPSCharacterBase().SetCharacterInputState(
+                    FpsCharacterBase.ECharacterInputState.InGameMenu);
+            }
         }
 		else
 		{
@@ -51,6 +57,12 @@ public partial class CInGameMenu : Control
             }
 
             Input.MouseMode = Input.MouseModeEnum.Captured;
+
+            if (CGameMaster.GM.GetGame().GetFPSCharacterBase() != null)
+            {
+				CGameMaster.GM.GetGame().GetFPSCharacterBase().SetCharacterInputState(
+					FpsCharacterBase.ECharacterInputState.Normal);
+            }
         }
 
         /*

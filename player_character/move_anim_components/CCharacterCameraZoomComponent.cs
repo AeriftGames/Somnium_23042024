@@ -30,11 +30,18 @@ public partial class CCharacterCameraZoomComponent : CBaseComponent
     {
         if (EnableComponent == false) return;
 
-        // Camera Zoom
-        if (Input.IsActionPressed("CameraZoom"))
-            SetZoom(true);
-        else if (Input.IsActionJustReleased("CameraZoom"))
+        if(ourCharacterBase.GetCharacterInputState() == FpsCharacterBase.ECharacterInputState.Normal)
+        {
+            // Camera Zoom
+            if (Input.IsActionPressed("CameraZoom"))
+                SetZoom(true);
+            else if (Input.IsActionJustReleased("CameraZoom"))
+                SetZoom(false);
+        }
+        else
+        {
             SetZoom(false);
+        }
     }
 
     public void Update(double delta)

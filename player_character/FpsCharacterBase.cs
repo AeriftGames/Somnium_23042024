@@ -3,7 +3,7 @@ using System;
 
 public partial class FpsCharacterBase : CharacterBody3D
 {
-    public enum ECharacterInputState { DontMoveAndLook,Normal}
+    public enum ECharacterInputState { DontMoveAndLook,Normal,InGameMenu}
 
     private CCharacterMovementComponent CharacterMovementComponent;
     private CCharacterLookComponent CharacterLookComponent;
@@ -104,7 +104,25 @@ public partial class FpsCharacterBase : CharacterBody3D
         GetCharacterCrouchComponent().CheckAndApplyCrouch("Crunch");
     }
 
-    public virtual void SetCharacterInputState( ECharacterInputState newCharacterInputState) { CharacterInputState = newCharacterInputState; }
+    public virtual void SetCharacterInputState( ECharacterInputState newCharacterInputState) 
+    {
+        CharacterInputState = newCharacterInputState;
+
+        switch (CharacterInputState)
+        {
+            case ECharacterInputState.DontMoveAndLook:
+                break;
+            case ECharacterInputState.Normal:
+                break;
+            case ECharacterInputState.InGameMenu:
+                break;
+            default:
+                break;
+        }
+
+        CGameMaster.GM.GetGame().GetDebugPanel().GetDebugLabels().AddProperty("Character Input State",
+            CharacterInputState.ToString(), 6);
+    }
     public ECharacterInputState GetCharacterInputState() {  return CharacterInputState; }
 
     public void SetMouseVisible(bool newMouseVisible)

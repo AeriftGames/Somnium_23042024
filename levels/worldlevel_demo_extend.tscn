@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://1i0rk47y5rfe"]
+[gd_scene load_steps=49 format=3 uid="uid://1i0rk47y5rfe"]
 
 [ext_resource type="Script" path="res://levels/worldlevel_base/WorldLevel.cs" id="1_ucxcv"]
 [ext_resource type="VoxelGIData" uid="uid://b07w76761sd8j" path="res://levels/worldlevel_demo_extend/level_data/worldlevel_demo.VoxelGI_data.res" id="2_d5wgc"]
@@ -30,9 +30,6 @@
 [ext_resource type="PackedScene" uid="uid://cill7wx53gakg" path="res://placeholders/posters/poster2.tscn" id="27_h8jbu"]
 [ext_resource type="AudioStream" uid="uid://ngmb6mrvsbqc" path="res://audio/audio_streams/613738__punneedsounds__amb-ost1.mp3" id="28_n5lir"]
 [ext_resource type="PackedScene" uid="uid://dk6s7gogdikp7" path="res://testing_stuff_kaen/lis/lis_anim.tscn" id="29_covdt"]
-[ext_resource type="PackedScene" uid="uid://c73m0yt3w8nd1" path="res://testing_stuff_kaen/stairs/StairsTest.tscn" id="30_xhesf"]
-[ext_resource type="PackedScene" uid="uid://dpa62hhmdflgr" path="res://testing_stuff_kaen/stairs_gd/StairNodeGD.tscn" id="31_teo4b"]
-[ext_resource type="PackedScene" uid="uid://cfw5ieeqmr1ut" path="res://testing_stuff_kaen/stairs_gd/stair_classic_short.tscn" id="34_o3rpm"]
 [ext_resource type="Texture2D" uid="uid://r1yp733qyqh3" path="res://testing_stuff_kaen/level_decals/TexturesCom_DecalLeakingRusty0037_2_masked_L.png" id="35_bldmo"]
 [ext_resource type="Texture2D" uid="uid://2vnn5as8tp5i" path="res://testing_stuff_kaen/level_decals/TexturesCom_DecalsRusted0004_1_masked_S.png" id="36_6q1kp"]
 [ext_resource type="Texture2D" uid="uid://d1e2ap8udx8nc" path="res://testing_stuff_kaen/level_decals/TexturesCom_DecalsDamagePlaster0106_1_masked_L.png" id="36_677dw"]
@@ -431,6 +428,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 3)
 
 [node name="floor_4x2m_special34" parent="LevelScene/Rooms/Room1/Grounds" instance=ExtResource("13_sidox")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.81214, 0.72848, 3)
+
+[node name="floor_4x2m_special49" parent="LevelScene/Rooms/Room1/Grounds" instance=ExtResource("13_sidox")]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 7.81214, -0.27152, 3)
+
+[node name="floor_4x2m_special50" parent="LevelScene/Rooms/Room1/Grounds" instance=ExtResource("13_sidox")]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 11.8121, -0.27152, 3)
 
 [node name="floor_4x2m_special35" parent="LevelScene/Rooms/Room1/Grounds" instance=ExtResource("13_sidox")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.8121, 0.72848, 3)
@@ -2978,7 +2981,7 @@ metadata/_edit_group_ = true
 metadata/_edit_lock_ = true
 
 [node name="PlayerStart" parent="." instance=ExtResource("9_xjo8n")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 10.4, 0.7, 2.1)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 10.4, 1.1, 2.1)
 visible = false
 SpawnCharacterType = 3
 
@@ -3018,98 +3021,6 @@ DelayMsStartAnim = 2.5
 PowerShake = 1.0
 ShakeFadeMin = 2.0
 ShakeFadeMax = 4.0
-
-[node name="StairNodes" type="Node3D" parent="."]
-
-[node name="StairsTest7" parent="StairNodes" instance=ExtResource("30_xhesf")]
-transform = Transform3D(0.8, 0, 2.563e-07, 0, 0.8, 0, -1.90735e-07, 0, 1.075, 3, 0.103414, 12.1)
-
-[node name="StairNodeGd2" parent="StairNodes" instance=ExtResource("31_teo4b")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0.1, 19.9)
-number_of_stairs = 7
-
-[node name="AllStairs2" type="Node3D" parent="StairNodes/StairNodeGd2"]
-
-[node name="StairNodeGd" parent="StairNodes" instance=ExtResource("31_teo4b")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.8071, 0, 2)
-number_of_stairs = 6
-stair_prefab = ExtResource("34_o3rpm")
-enable_world_col = true
-enable_player_col = true
-
-[node name="AllStairs2" type="Node3D" parent="StairNodes/StairNodeGd"]
-
-[node name="StairNodeGd6" parent="StairNodes" instance=ExtResource("31_teo4b")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 35, 0, -2)
-number_of_stairs = 4
-stair_prefab = ExtResource("34_o3rpm")
-enable_world_col = true
-enable_player_col = true
-
-[node name="AllStairs2" type="Node3D" parent="StairNodes/StairNodeGd6"]
-
-[node name="StairNodeGd7" parent="StairNodes" instance=ExtResource("31_teo4b")]
-transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, 41.2, 0, -2)
-number_of_stairs = 4
-stair_prefab = ExtResource("34_o3rpm")
-enable_world_col = true
-enable_player_col = true
-
-[node name="AllStairs2" type="Node3D" parent="StairNodes/StairNodeGd7"]
-
-[node name="StairNodeGd8" parent="StairNodes" instance=ExtResource("31_teo4b")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 35, 0, 6)
-number_of_stairs = 4
-stair_prefab = ExtResource("34_o3rpm")
-enable_world_col = true
-enable_player_col = true
-
-[node name="AllStairs2" type="Node3D" parent="StairNodes/StairNodeGd8"]
-
-[node name="StairNodeGd9" parent="StairNodes" instance=ExtResource("31_teo4b")]
-transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, 41.2, 0, 6)
-number_of_stairs = 4
-stair_prefab = ExtResource("34_o3rpm")
-enable_world_col = true
-enable_player_col = true
-
-[node name="AllStairs2" type="Node3D" parent="StairNodes/StairNodeGd9"]
-
-[node name="StairNodeGd3" parent="StairNodes" instance=ExtResource("31_teo4b")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 4.8, 0, 2)
-number_of_stairs = 6
-stair_prefab = ExtResource("34_o3rpm")
-enable_world_col = true
-enable_player_col = true
-
-[node name="AllStairs2" type="Node3D" parent="StairNodes/StairNodeGd3"]
-
-[node name="StairNodeGd10" parent="StairNodes" instance=ExtResource("31_teo4b")]
-transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, -20, 0, 6)
-number_of_stairs = 2
-stair_prefab = ExtResource("34_o3rpm")
-enable_world_col = true
-enable_player_col = true
-
-[node name="AllStairs2" type="Node3D" parent="StairNodes/StairNodeGd10"]
-
-[node name="StairNodeGd12" parent="StairNodes" instance=ExtResource("31_teo4b")]
-transform = Transform3D(-2.18557e-07, 0, 1, 0, 1, 0, -1, 0, -2.18557e-07, -18, 0, 8)
-number_of_stairs = 10
-stair_prefab = ExtResource("34_o3rpm")
-enable_world_col = true
-enable_player_col = true
-
-[node name="AllStairs2" type="Node3D" parent="StairNodes/StairNodeGd12"]
-
-[node name="StairNodeGd11" parent="StairNodes" instance=ExtResource("31_teo4b")]
-transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, -20, 0, -2)
-number_of_stairs = 2
-stair_prefab = ExtResource("34_o3rpm")
-enable_world_col = true
-enable_player_col = true
-
-[node name="AllStairs2" type="Node3D" parent="StairNodes/StairNodeGd11"]
 
 [node name="TestingDecals" type="Node3D" parent="."]
 

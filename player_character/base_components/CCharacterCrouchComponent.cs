@@ -58,6 +58,9 @@ public partial class CCharacterCrouchComponent : CBaseComponent
 
     public void CheckAndApplyCrouch(StringName newInput)
     {
+        if (ourCharacterBase.GetCharacterInputState() != FpsCharacterBase.ECharacterInputState.Normal)
+            return;
+
         if (ourCharacterBase.GetCharacterMovementComponent() == null) return;
         bool isOnFloor = ourCharacterBase.GetCharacterMovementComponent().GetIsOnFloor();
 

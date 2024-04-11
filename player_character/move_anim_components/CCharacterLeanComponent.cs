@@ -45,12 +45,19 @@ public partial class CCharacterLeanComponent : CBaseComponent
             }
         }
 
-        if(waitToCenter == false)
+        if (waitToCenter == false)
         {
-            if (Input.IsActionPressed("leanLeft") && !Input.IsActionPressed("leanRight"))
-                SetActualLean(ELeanType.Left);
-            else if (Input.IsActionPressed("leanRight") && !Input.IsActionPressed("leanLeft"))
-                SetActualLean(ELeanType.Right);
+            if (ourCharacterBase.GetCharacterInputState() == FpsCharacterBase.ECharacterInputState.Normal)
+            {
+                if (Input.IsActionPressed("leanLeft") && !Input.IsActionPressed("leanRight"))
+                    SetActualLean(ELeanType.Left);
+                else if (Input.IsActionPressed("leanRight") && !Input.IsActionPressed("leanLeft"))
+                    SetActualLean(ELeanType.Right);
+            }
+            else
+            {
+                SetActualLean(ELeanType.Center);
+            }
         }    
         
         if (Input.IsActionJustReleased("leanLeft") || Input.IsActionJustReleased("leanRight")) 

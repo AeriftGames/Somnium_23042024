@@ -39,13 +39,14 @@ public partial class CCharacterMovementComponent : CBaseComponent
 
     public void UpdateMove(double delta)
     {
-        // get input actions for input dir and calculate direction - OLD VARIANT
-        //InputDir = Input.GetVector("moveLeft", "moveRight", "moveForward", "moveBackward");
-        //Direction = Direction.Lerp(ourCharacterBase.Transform.Basis * new Vector3(InputDir.X, 0, InputDir.Y).Normalized(), (float)delta * 60.0f);
-
+        //
         InputDir = new Vector2(
-            Input.GetActionStrength("moveRight") - Input.GetActionStrength("moveLeft"),
-            Input.GetActionStrength("moveBackward") - Input.GetActionStrength("moveForward")).LimitLength(1.0f);
+        Input.GetActionStrength("moveRight") - Input.GetActionStrength("moveLeft"),
+        Input.GetActionStrength("moveBackward") - Input.GetActionStrength("moveForward")).LimitLength(1.0f);
+
+        // is enable normal input ? if not then input set to zero
+        if(ourCharacterBase.GetCharacterInputState() != FpsCharacterBase.ECharacterInputState.Normal)
+        { InputDir = Vector2.Zero; }
 
         Direction = Direction.Lerp(ourCharacterBase.Transform.Basis * new Vector3(InputDir.X, 0, InputDir.Y), (float)delta * 60.0f);
 
@@ -121,6 +122,9 @@ public partial class CCharacterMovementComponent : CBaseComponent
 
     public bool CheckAndApplyJump(StringName newInput)
     {
+        if (ourCharacterBase.GetCharacterInputState() != FpsCharacterBase.ECharacterInputState.Normal)
+            return false;
+
         if (ourCharacterBase.GetCharacterMovementComponent() == null) return false;
         bool isOnFloor = ourCharacterBase.GetCharacterMovementComponent().GetIsOnFloor();
 
