@@ -31,13 +31,14 @@ public partial class CCharacterShootBallComponent : CBaseComponent
     {
         base._PhysicsProcess(delta);
 
-        // strelba
-        bool shootNow = ourCharacterBase.GetCharacterInputState() 
-            == FpsCharacterBase.ECharacterInputState.Normal && 
-            CanShootProjectile && Input.IsActionJustPressed("mouseRightClick");
+        if(ourCharacterBase.GetCharacterInputState() == FpsCharacterBase.ECharacterInputState.Normal)
+        {
+            // strelba
+            bool shootNow = CanShootProjectile && Input.IsActionJustPressed("mouseRightClick");
 
-        if (shootNow)
-            ShootPhysicProjectile();
+            if (shootNow)
+                ShootPhysicProjectile();
+        }
     }
 
     public void ShootPhysicProjectile()
