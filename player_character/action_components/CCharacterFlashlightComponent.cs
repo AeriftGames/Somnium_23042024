@@ -36,7 +36,10 @@ public partial class CCharacterFlashlightComponent : CBaseComponent
 	public override void _Process(double delta)
 	{
         // INPUT
-        if (Input.IsActionJustPressed("ToggleFlashlight")) { FlashlightObject.UseAction(); }
+        if (ourCharacterBase.GetCharacterInputState() == FpsCharacterBase.ECharacterInputState.Normal)
+        {
+            if (Input.IsActionJustPressed("ToggleFlashlight")) { FlashlightObject.UseAction(); }
+        }
 	}
 
     public override void _PhysicsProcess(double delta)
