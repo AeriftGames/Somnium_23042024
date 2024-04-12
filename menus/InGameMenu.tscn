@@ -59,6 +59,7 @@ metadata/_edit_lock_ = true
 [node name="Button_BackToGame" parent="Control/PanelContainer/MarginContainer/VBoxContainer" instance=ExtResource("2_10o54")]
 custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
+focus_neighbor_bottom = NodePath("../Button_QuitGame")
 theme = ExtResource("3_wvgby")
 text = "CONTINUE GAME"
 ButtonFocusID = 0
@@ -69,6 +70,7 @@ layout_mode = 2
 [node name="Button_QuitGame" parent="Control/PanelContainer/MarginContainer/VBoxContainer" instance=ExtResource("2_10o54")]
 custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
+focus_neighbor_top = NodePath("../Button_BackToGame")
 theme = ExtResource("3_wvgby")
 text = "QUIT GAME"
 ButtonFocusID = 1

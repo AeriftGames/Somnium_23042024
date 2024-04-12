@@ -31,7 +31,7 @@ public partial class CInGameMenu : Control
 
 		if(isOpen)
 		{
-            // for old fps character open
+            // only for for old fps character open
             if (CGameMaster.GM.GetGame().GetFPSCharacterOld() != null)
             {
                 CGameMaster.GM.GetGame().GetFPSCharacterOld().SetInputEnable(false);
@@ -44,11 +44,13 @@ public partial class CInGameMenu : Control
 			{
                 CGameMaster.GM.GetGame().GetFPSCharacterBase().SetCharacterInputState(
                     FpsCharacterBase.ECharacterInputState.InGameMenu);
+
+                SetActiveFocusButtonID(0);
             }
         }
 		else
 		{
-            // for old fps character open
+            // only for old fps character open
             if (CGameMaster.GM.GetGame().GetFPSCharacterOld() != null)
             {
                 CGameMaster.GM.GetGame().GetFPSCharacterOld().SetInputEnable(true);
@@ -64,40 +66,6 @@ public partial class CInGameMenu : Control
 					FpsCharacterBase.ECharacterInputState.Normal);
             }
         }
-
-        /*
-		// pokusime se ziskat interact charactera
-        FPSCharacter_Interaction interChar = CGameMaster.GM.GetGame().GetFPSCharacter() as FPSCharacter_Interaction;
-		if (interChar == null) return;
-
-        // ostatni akce pri zmene
-        if (active)
-		{
-			// pokusime se castit na inventory player (pokud je hrac inventory - ma otevreny inventar? pokud ano, zavreme ho)
-			FPSCharacter_Inventory invChar = interChar as FPSCharacter_Inventory;
-            if (invChar != null)
-				if (invChar.GetInventoryMenu().GetActive())
-					invChar.GetInventoryMenu().SetActive(false);
-			
-			// vyresetuje lean a zoom hrace
-			interChar.GetObjectCamera().SetActualLean(ObjectCamera.ELeanType.Center);
-			interChar.SetCameraZoom(false);
-
-			// zakaze char_inputs a zobrazi mys
-            interChar.SetInputEnable(false);
-            interChar.SetMouseVisible(true);
-
-			SetActiveFocusButtonID(0);
-        }
-		else
-		{
-			// povoli char_inputs + captured mouse (uvnitr funkce SetInputEnable)
-			// jen pokud je hrac typu: (inventory a vys) a pokud je nazivu
-			FPSCharacter_Inventory invChar = interChar as FPSCharacter_Inventory;
-			if (invChar != null)
-				if(invChar.GetCharacterHealthComponent().GetAlive())
-					interChar.SetInputEnable(true);
-        }*/
     }
 
 	public bool GetIsOpen() { return isOpen; }
