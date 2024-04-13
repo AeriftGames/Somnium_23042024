@@ -31,6 +31,22 @@ public partial class CCharacterStaminaComponent : CBaseComponent
     // GUI
     [ExportGroupAttribute("GUI SETTINGS")]
     [Export] public bool ShowStaminaGUIEnable = true;
+    [Export] public float StartShowStaminaInPercent = 90.0f;
+
+    [ExportGroupAttribute("VALUES IN STATES")]
+    [Export] public float IdleRegenVal = 0.3f;
+    [Export] public float IdleRegenTick = 0.05f;
+    [Export] public float CrouchingMoveRegenVal = 0.25f;
+    [Export] public float CrouchingMoveRegenTick = 0.05f;
+    [Export] public float CrouchingIdleRegenVal = 0.35f;
+    [Export] public float CrouchingIdleRegenTick = 0.05f;
+    [Export] public float WalkRegenVal = 0.18f;
+    [Export] public float RunRegenVal = 0.0f;
+
+    [ExportGroupAttribute("REMOVE STAMINA IN ACTIONS")]
+    [Export] public float JumpActionRemove = 2.0f;
+    [Export] public float LandActionRemove = 2.0f;
+    [Export] public float RunActionRemove = 0.05f;
 
     private Control StaminaScreenControl = null;
     private ProgressBar StaminaProgressBar = null;
@@ -136,12 +152,12 @@ public partial class CCharacterStaminaComponent : CBaseComponent
 
     public void RemoveStaminaJump() 
     { 
-        RemoveStamina(2.0f); 
+        RemoveStamina(JumpActionRemove); 
     }
     public void RemoveStaminaLand() 
     {
-        RemoveStamina(3.0f);
-        SetStaminaRegenVal(0.0f);
+        RemoveStamina(LandActionRemove);
+        //SetStaminaRegenVal(0.0f);
     }
 
     // STAMINA EXHAUST
@@ -177,7 +193,8 @@ public partial class CCharacterStaminaComponent : CBaseComponent
         // apply gui
         StaminaProgressBar.Value = ActualStamina;
 
-        if (ActualStamina < GetMaxStamina() -5.0f)
+        // after 90 percent and less - start show stamina
+        if (ActualStamina < (GetMaxStamina()/100.0f)* StartShowStaminaInPercent)
             SetAnimStaminaShow(true);
         else
             SetAnimStaminaShow(false);
@@ -198,8 +215,8 @@ public partial class CCharacterStaminaComponent : CBaseComponent
         if (ourCharacterBase.GetCharacterStateMachine().GetCurrentStateName() == "IdlePlayerState" &&
             ActiveFastRegenForStanding)
         {
-            SetStaminaRegenVal(0.3f);
-            SetStaminaRegenTick(0.05f);
+            SetStaminaRegenVal(IdleRegenVal);
+            SetStaminaRegenTick(IdleRegenTick);
         }
 
         else
@@ -207,8 +224,8 @@ public partial class CCharacterStaminaComponent : CBaseComponent
         if (ourCharacterBase.GetCharacterStateMachine().GetCurrentStateName() == "CrouchMovePlayerState" &&
             ActiveFastRegenForCrouching)
         {
-            SetStaminaRegenVal(0.25f);
-            SetStaminaRegenTick(0.05f);
+            SetStaminaRegenVal(CrouchingMoveRegenVal);
+            SetStaminaRegenTick(CrouchingMoveRegenTick);
         }
 
         else
@@ -216,8 +233,8 @@ public partial class CCharacterStaminaComponent : CBaseComponent
         if (ourCharacterBase.GetCharacterStateMachine().GetCurrentStateName() == "IdleCrouchPlayerState" &&
             ActiveFastRegenForCrouching)
         {
-            SetStaminaRegenVal(0.35f);
-            SetStaminaRegenTick(0.05f);
+            SetStaminaRegenVal(CrouchingIdleRegenVal);
+            SetStaminaRegenTick(CrouchingIdleRegenTick);
         }
 
         else
@@ -225,7 +242,7 @@ public partial class CCharacterStaminaComponent : CBaseComponent
         if (ourCharacterBase.GetCharacterMovementComponent().GetIsWantSprint() == false &&
             ourCharacterBase.GetCharacterMovementComponent().GetRealSpeed() < 2.6f)
         {
-            SetStaminaRegenVal(0.18f);
+            SetStaminaRegenVal(WalkRegenVal);
         }
 
         else
@@ -234,8 +251,8 @@ public partial class CCharacterStaminaComponent : CBaseComponent
             ourCharacterBase.GetCharacterMovementComponent().GetRealSpeed() > 2.6f &&
             ActiveStaminaForSprint)
         {
-            RemoveStamina(0.05f);
-            SetStaminaRegenVal(0.0f);
+            RemoveStamina(RunActionRemove);
+            SetStaminaRegenVal(RunRegenVal);
         }
     }
 
