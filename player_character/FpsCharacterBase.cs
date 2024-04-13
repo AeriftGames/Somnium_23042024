@@ -3,7 +3,7 @@ using System;
 
 public partial class FpsCharacterBase : CharacterBody3D
 {
-    public enum ECharacterInputState { DontMoveAndLook,Normal,InGameMenu}
+    public enum ECharacterInputState { DontMoveAndLook,Normal,InGameMenu,DebugPanelHud}
 
     private CCharacterMovementComponent CharacterMovementComponent;
     private CCharacterLookComponent CharacterLookComponent;

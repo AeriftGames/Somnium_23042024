@@ -8,6 +8,9 @@ public partial class CPanelLevels : CPanelBase
     {
         base.PostInit(newDebugPanel);
         BuildLevelButtons();
+
+        // Set first element for focus input - we are set manually after build level buttons spawns
+        FirstElementInBox = GetVBoxElements().GetChild(0) as Control;
     }
 
     public void BuildLevelButtons()

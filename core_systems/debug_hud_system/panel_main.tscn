@@ -4,8 +4,9 @@
 [ext_resource type="Script" path="res://core_systems/debug_hud_system/CPanelMain.cs" id="2_x8mqg"]
 [ext_resource type="Theme" uid="uid://cd3yvqcy8bus4" path="res://core_systems/debug_hud_system/debug_theme.theme" id="3_2udis"]
 
-[node name="PanelMain" instance=ExtResource("1_2trrc")]
+[node name="PanelMain" node_paths=PackedStringArray("FirstElementInBox") instance=ExtResource("1_2trrc")]
 script = ExtResource("2_x8mqg")
+FirstElementInBox = NodePath("VBoxBase/ScrollContainerElements/VBoxElements/MarginElements/VBoxElements/CheckButton_ShowFps")
 
 [node name="CheckButton_ShowFps" type="CheckButton" parent="VBoxBase/ScrollContainerElements/VBoxElements/MarginElements/VBoxElements" index="0"]
 unique_name_in_owner = true

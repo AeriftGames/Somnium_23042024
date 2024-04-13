@@ -4,8 +4,9 @@
 [ext_resource type="Script" path="res://core_systems/debug_hud_system/CPanelSpawns.cs" id="2_uk6og"]
 [ext_resource type="Theme" uid="uid://cd3yvqcy8bus4" path="res://core_systems/debug_hud_system/debug_theme.theme" id="3_fwamd"]
 
-[node name="PanelSpawns" instance=ExtResource("1_yfmgu")]
+[node name="PanelSpawns" node_paths=PackedStringArray("FirstElementInBox") instance=ExtResource("1_yfmgu")]
 script = ExtResource("2_uk6og")
+FirstElementInBox = NodePath("VBoxBase/ScrollContainerElements/VBoxElements/MarginContainer/VBoxContainer/HSliderSpawnNum")
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxBase/ScrollContainerElements/VBoxElements" index="0"]
 layout_mode = 2

@@ -87,7 +87,7 @@ public partial class CInGameMenu : Control
 
 		foreach (var item in InGameMenuButtonsContainer.GetChildren())
 		{
-			BaseFocusedMenuButton a = (BaseFocusedMenuButton)item;
+			BaseFocusedMenuButton a = item as BaseFocusedMenuButton;
 			if (a != null)
 			{
 				if(a.ButtonFocusID == newButtonID)

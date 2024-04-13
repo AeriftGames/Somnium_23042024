@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://dmia1x8tn4ra1"]
+
+[ext_resource type="Theme" uid="uid://cd3yvqcy8bus4" path="res://core_systems/debug_hud_system/debug_theme.theme" id="1_eqvwf"]
+[ext_resource type="Script" path="res://core_systems/debug_hud_system/DebugPanelTabBar.cs" id="2_aamd0"]
+
+[node name="TabBar" type="TabBar"]
+theme = ExtResource("1_eqvwf")
+script = ExtResource("2_aamd0")
+metadata/_edit_lock_ = true
+
+[connection signal="focus_entered" from="." to="." method="_on_focus_entered"]

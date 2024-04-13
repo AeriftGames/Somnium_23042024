@@ -3,8 +3,9 @@
 [ext_resource type="PackedScene" uid="uid://dqx75mfvna1rx" path="res://core_systems/debug_hud_system/base/panel_base.tscn" id="1_0sdq3"]
 [ext_resource type="Script" path="res://core_systems/debug_hud_system/CPanelAudio.cs" id="2_pj643"]
 
-[node name="PanelAudio" instance=ExtResource("1_0sdq3")]
+[node name="PanelAudio" node_paths=PackedStringArray("FirstElementInBox") instance=ExtResource("1_0sdq3")]
 script = ExtResource("2_pj643")
+FirstElementInBox = NodePath("VBoxBase/ScrollContainerElements/VBoxElements/MarginElements/VBoxElements/audio_HBoxContainer/mainVolume_HSlider")
 
 [node name="audio_HBoxContainer" type="HBoxContainer" parent="VBoxBase/ScrollContainerElements/VBoxElements/MarginElements/VBoxElements" index="0"]
 layout_mode = 2

@@ -1,4 +1,5 @@
 using Godot;
+using System.Security.Cryptography.X509Certificates;
 
 public partial class CDebugPanel : Control
 {
@@ -77,6 +78,13 @@ public partial class CDebugPanel : Control
             Background.Visible = true;
 
             Input.MouseMode = Input.MouseModeEnum.Visible;
+
+            CGameMaster.GM.GetGame().GetFPSCharacterBase().
+                SetCharacterInputState(FpsCharacterBase.ECharacterInputState.DebugPanelHud);
+
+            TabContainer a = GetNode<TabContainer>("DebugTabs/MainDebugPanel/MarginContainer/TabContainer");
+            a.GetTabBar().GrabFocus();
+
         }
         else
         {
@@ -94,6 +102,9 @@ public partial class CDebugPanel : Control
             Background.Visible = false;
 
             Input.MouseMode = Input.MouseModeEnum.Captured;
+
+            CGameMaster.GM.GetGame().GetFPSCharacterBase().
+                SetCharacterInputState(FpsCharacterBase.ECharacterInputState.Normal);
         }
     }
 
