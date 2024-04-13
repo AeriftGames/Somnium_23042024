@@ -69,11 +69,9 @@ theme = ExtResource("1_gnxtd")
 tab_alignment = 1
 metadata/_edit_lock_ = true
 
-[node name="MAIN" parent="DebugTabs/MainDebugPanel/MarginContainer/TabContainer" node_paths=PackedStringArray("ourPanel") instance=ExtResource("3_a211v")]
-unique_name_in_owner = true
+[node name="MAIN" parent="DebugTabs/MainDebugPanel/MarginContainer/TabContainer" instance=ExtResource("3_a211v")]
 layout_mode = 2
 max_tab_width = 377
-ourPanel = NodePath("MarginContainer/PanelMain")
 
 [node name="MarginContainer" type="MarginContainer" parent="DebugTabs/MainDebugPanel/MarginContainer/TabContainer/MAIN"]
 custom_minimum_size = Vector2(0, 500)
@@ -88,12 +86,10 @@ metadata/_edit_lock_ = true
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="LEVEL" parent="DebugTabs/MainDebugPanel/MarginContainer/TabContainer" node_paths=PackedStringArray("ourPanel") instance=ExtResource("3_a211v")]
-unique_name_in_owner = true
+[node name="LEVEL" parent="DebugTabs/MainDebugPanel/MarginContainer/TabContainer" instance=ExtResource("3_a211v")]
 visible = false
 layout_mode = 2
 max_tab_width = 377
-ourPanel = NodePath("MarginContainer/PanelLevels")
 
 [node name="MarginContainer" type="MarginContainer" parent="DebugTabs/MainDebugPanel/MarginContainer/TabContainer/LEVEL"]
 custom_minimum_size = Vector2(0, 500)
@@ -106,12 +102,10 @@ metadata/_edit_lock_ = true
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="SPAWN" parent="DebugTabs/MainDebugPanel/MarginContainer/TabContainer" node_paths=PackedStringArray("ourPanel") instance=ExtResource("3_a211v")]
-unique_name_in_owner = true
+[node name="SPAWN" parent="DebugTabs/MainDebugPanel/MarginContainer/TabContainer" instance=ExtResource("3_a211v")]
 visible = false
 layout_mode = 2
 max_tab_width = 377
-ourPanel = NodePath("MarginContainer/PanelSpawns")
 
 [node name="MarginContainer" type="MarginContainer" parent="DebugTabs/MainDebugPanel/MarginContainer/TabContainer/SPAWN"]
 custom_minimum_size = Vector2(0, 500)
@@ -124,11 +118,9 @@ metadata/_edit_lock_ = true
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="VIDEO" parent="DebugTabs/MainDebugPanel/MarginContainer/TabContainer" node_paths=PackedStringArray("ourPanel") instance=ExtResource("3_a211v")]
-unique_name_in_owner = true
+[node name="VIDEO" parent="DebugTabs/MainDebugPanel/MarginContainer/TabContainer" instance=ExtResource("3_a211v")]
 visible = false
 layout_mode = 2
-ourPanel = NodePath("MarginContainer/PanelVideo")
 
 [node name="MarginContainer" type="MarginContainer" parent="DebugTabs/MainDebugPanel/MarginContainer/TabContainer/VIDEO"]
 custom_minimum_size = Vector2(0, 500)
@@ -141,11 +133,9 @@ metadata/_edit_lock_ = true
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="AUDIO" parent="DebugTabs/MainDebugPanel/MarginContainer/TabContainer" node_paths=PackedStringArray("ourPanel") instance=ExtResource("3_a211v")]
-unique_name_in_owner = true
+[node name="AUDIO" parent="DebugTabs/MainDebugPanel/MarginContainer/TabContainer" instance=ExtResource("3_a211v")]
 visible = false
 layout_mode = 2
-ourPanel = NodePath("MarginContainer/PanelAudio")
 
 [node name="MarginContainer" type="MarginContainer" parent="DebugTabs/MainDebugPanel/MarginContainer/TabContainer/AUDIO"]
 custom_minimum_size = Vector2(0, 500)
@@ -158,11 +148,9 @@ metadata/_edit_lock_ = true
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="INPUTS" parent="DebugTabs/MainDebugPanel/MarginContainer/TabContainer" node_paths=PackedStringArray("ourPanel") instance=ExtResource("3_a211v")]
-unique_name_in_owner = true
+[node name="INPUTS" parent="DebugTabs/MainDebugPanel/MarginContainer/TabContainer" instance=ExtResource("3_a211v")]
 visible = false
 layout_mode = 2
-ourPanel = NodePath("MarginContainer/PanelInputs")
 
 [node name="MarginContainer" type="MarginContainer" parent="DebugTabs/MainDebugPanel/MarginContainer/TabContainer/INPUTS"]
 custom_minimum_size = Vector2(0, 500)
