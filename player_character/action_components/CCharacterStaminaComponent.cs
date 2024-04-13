@@ -35,6 +35,11 @@ public partial class CCharacterStaminaComponent : CBaseComponent
     private Control StaminaScreenControl = null;
     private ProgressBar StaminaProgressBar = null;
 
+    private ProgressBar StaminaLeft = null;
+    private ProgressBar StaminaRight = null;
+    private AnimationPlayer AnimationPlayer_Stamina = null;
+    private bool StaminaShow = false;
+
     public override void PostInit(FpsCharacterBase newCharacterBase)
     {
         base.PostInit(newCharacterBase);
@@ -43,6 +48,10 @@ public partial class CCharacterStaminaComponent : CBaseComponent
         // GUI
         StaminaScreenControl = GetNode<Control>("%StaminaScreenControl");
         StaminaProgressBar = GetNode<ProgressBar>("%StaminaProgressBar");
+
+        StaminaLeft = GetNode<ProgressBar>("%ProgressBar");
+        StaminaRight = GetNode<ProgressBar>("%ProgressBar2");
+        AnimationPlayer_Stamina = GetNode<AnimationPlayer>("%AnimationPlayer_Stamina");
 
         // RegenTickTimer init
         timerStaminaRegenTimer = new Godot.Timer();
@@ -167,6 +176,14 @@ public partial class CCharacterStaminaComponent : CBaseComponent
 
         // apply gui
         StaminaProgressBar.Value = ActualStamina;
+
+        if (ActualStamina < GetMaxStamina() -5.0f)
+            SetAnimStaminaShow(true);
+        else
+            SetAnimStaminaShow(false);
+
+        StaminaLeft.Value = ActualStamina;
+        StaminaRight.Value = ActualStamina;
     }
 
     // STATES LOGIC
@@ -219,6 +236,20 @@ public partial class CCharacterStaminaComponent : CBaseComponent
         {
             RemoveStamina(0.05f);
             SetStaminaRegenVal(0.0f);
+        }
+    }
+
+    private void SetAnimStaminaShow(bool newShow)
+    {
+        if(newShow == true && StaminaShow != newShow)
+        {
+            StaminaShow = newShow;
+            AnimationPlayer_Stamina.Play("Show");
+        }
+        else if(newShow == false && StaminaShow != newShow)
+        {
+            StaminaShow = newShow;
+            AnimationPlayer_Stamina.PlayBackwards("Show");
         }
     }
 }
