@@ -6,6 +6,8 @@ public partial class CPanelAudio : CPanelBase
     public override void PostInit(CDebugPanel newDebugPanel)
     {
         base.PostInit(newDebugPanel);
+
+        LoadAllElementsSettings();
     }
 
     public override void LoadAllElementsSettings()

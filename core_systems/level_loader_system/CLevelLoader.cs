@@ -192,7 +192,7 @@ public partial class CLevelLoader : Node
         loadingScenePath = newLevelScenePath;
 
         // toto jsem od verze 4.2.rc1 musel nastavit (usethreads) na false, protoze to jinak crashovalo
-        ResourceLoader.LoadThreadedRequest(loadingScenePath,"",false);
+        ResourceLoader.LoadThreadedRequest(loadingScenePath,"",true);
     }
 
     public async void Update(double delta)

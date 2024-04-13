@@ -27,7 +27,7 @@ public partial class CGame : Node
 
         InGameMenu = GetNode<CInGameMenu>("InGameMenu");
         InGameMenu.PostInit();
-
+        
         DebugHud = GetNode<CDebugHud>("DebugHud");
         DebugHud.PostInit();
 

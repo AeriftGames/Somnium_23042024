@@ -19,6 +19,8 @@ public partial class CInGameMenu : Control
 
     public void SetOpen(bool newOpen)
 	{
+        if (CGameMaster.GM.GetGame().GetFPSCharacterBase() == null) return;
+
         // pokud mame otevreny debug panel - zavreme jej = main menu je nadrazene
         if (newOpen && CGameMaster.GM.GetGame().GetDebugPanel().GetIsOpen())
                 CGameMaster.GM.GetGame().GetDebugPanel().OpenDebugTabs(false);

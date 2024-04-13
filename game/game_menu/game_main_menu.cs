@@ -16,6 +16,11 @@ public partial class game_main_menu : Control
 
         PickLevelsControl.Visible = false;
         LoadAllLevelsAsButtons();
+
+        // Set visible mouse for navigate
+        Input.MouseMode = Input.MouseModeEnum.Visible;
+
+        GetNode<Button>("%StartLevelButton").GrabFocus();
     }
 
     public void LoadAllLevelsAsButtons()
@@ -39,11 +44,15 @@ public partial class game_main_menu : Control
     public void _on_start_level_button_pressed()
     {
         PickLevelsControl.Visible = true;
+        GetNode<VBoxContainer>("%VBoxContainer").Visible = false;
+        GetNode<Button>("%ClosePickLevelsControl").GrabFocus();
     }
 
     public void _on_close_pick_levels_control_pressed()
     {
         PickLevelsControl.Visible = false;
+        GetNode<VBoxContainer>("%VBoxContainer").Visible = true;
+        GetNode<Button>("%StartLevelButton").GrabFocus();
     }
 
     public void _on_exit_game_menu_pressed()

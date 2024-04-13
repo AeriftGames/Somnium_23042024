@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=2 format=3]
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://bsbslrhosphok"]
 
 [ext_resource type="Script" path="res://core_systems/global_settings_data.cs" id="1_8rhwy"]
 
@@ -7,7 +7,7 @@ script = ExtResource("1_8rhwy")
 ScreenMode = 0
 ScreenSizeID = 1
 Scale3d = 0.8
-AntialiasID = 3
+AntialiasID = 0
 GlobalIlumination = 1
 Sdfgi = false
 Ssao = true
@@ -15,9 +15,9 @@ Ssil = false
 HalfResolutionGI = false
 UnlockMaxFps = true
 DisableVsync = false
-MainVolume = -0.1
-MusicVolume = -8.4
-SfxVolume = 1.0
+MainVolume = -3.7
+MusicVolume = -3.7
+SfxVolume = -0.5
 ShowDebugHud = true
 ShowFps = true
 ShowDebugLabels = true

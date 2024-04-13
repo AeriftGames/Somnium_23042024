@@ -11,7 +11,6 @@ Benchmark - spustí menu pro benchmark
 
 Specific Level - spustí jakýkoliv LevelInfoData nastavený v záložce"
 script = ExtResource("1_d8pml")
-AppType = 2
 LevelInfo_SpecificLevelInfo = ExtResource("2_p8imf")
 
 [node name="ColorRect" type="ColorRect" parent="."]

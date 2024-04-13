@@ -5,7 +5,11 @@ public partial class CCharacterLookComponent : CBaseComponent
 {
 	[Export] public float MOUSE_SENSITIVITY = 0.3f;
 	[Export] public float MOUSE_LERPSPEED = 15.0f;
-	[Export] public float TILT_LOWER_LIMIT = Mathf.DegToRad(-90.0f);
+    [Export] public float GAMEPAD_SENSITIVITY = 0.3f;
+    [Export] public float GAMEPAD_LERPSPEED = 15.0f;
+	[Export] public bool INVERSE_LOOK = false;
+
+    [Export] public float TILT_LOWER_LIMIT = Mathf.DegToRad(-90.0f);
 	[Export] public float TILT_UPPER_LIMIT = Mathf.DegToRad(90.0f);
 
 	private bool isMouseInput = false;

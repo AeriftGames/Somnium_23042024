@@ -60,6 +60,8 @@ public partial class CDebugPanel : Control
     public void ToggleOpen() { OpenDebugTabs(!isOpen); }
     public void OpenDebugTabs(bool newOpen)
     {
+        if (CGameMaster.GM.GetGame().GetFPSCharacterBase() == null) return;
+
         // pokud je in game menu otevrene - ignorujeme timhle akci otevrit debug hud
         if (CGameMaster.GM.GetGame().GetInGameMenu().GetIsOpen()) return;
 
@@ -132,7 +134,7 @@ public partial class CDebugPanel : Control
     {
         PanelMain.LoadAllElementsSettings();
         PanelVideo.LoadAllElementsSettings();
-        PanelAudio.LoadAllElementsSettings();
+        //PanelAudio.LoadAllElementsSettings();
         PanelInputs.LoadAllElementsSettings();
     }
 

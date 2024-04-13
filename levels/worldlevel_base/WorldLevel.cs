@@ -47,11 +47,12 @@ public partial class WorldLevel : Node
 	}
 	public async void StartGame()
 	{
+		GD.Print("GameStart!");
 		// Emit Signal StartGame
 		CGameMaster.GM.GetMasterSignals().EmitSignal(CMasterSignals.SignalName.GameStart);
 
 		await Task.Delay(100);
-			CGameMaster.GM.GetUniversal().EnableBlackScreen(false);
+		CGameMaster.GM.GetUniversal().EnableBlackScreen(false);
     }
 
 	public void SpawnPlayerOnPlayerStart() 

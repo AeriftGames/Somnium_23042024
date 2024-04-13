@@ -7,7 +7,7 @@ public partial class CPanelVideo : CPanelBase
     {
         base.PostInit(newDebugPanel);
 
-        ApplyAllVideoControls();
+        //ApplyAllVideoControls();
     }
 
     public override void LoadAllElementsSettings()

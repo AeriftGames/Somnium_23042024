@@ -95,7 +95,7 @@ public partial class CGameMaster : Node
 	{
 		// Vypne _Process GameMastera
 		ProcessMode = ProcessModeEnum.Disabled;
-
+		/*
 		if (GetGame().GetFPSCharacterOld() == null) return;
 
         // uvolni kameru a celeho hrace
@@ -105,12 +105,12 @@ public partial class CGameMaster : Node
         GetGame().GetFPSCharacterOld().QueueFree();
 
 		// pokud byl hrac uspesne zavolan pro delete, vypiseme to v konzoli
-		if (GetGame().GetFPSCharacterOld().IsQueuedForDeletion())
+		if (GetGame().GetFPSCharacterOld().IsQueuedForDeletion())*/
 			GD.Print("Game is quit sucesfully");
 	}
 
 	public void QueueCharacterAndCamera()
-	{
+	{/*
 		if (GetGame().GetFPSCharacterOld() != null)
 		{
             if (GetGame().GetFPSCharacterOld().objectCamera != null)
@@ -123,7 +123,7 @@ public partial class CGameMaster : Node
             GetGame().GetFPSCharacterOld().FreeAll();
             GetGame().GetFPSCharacterOld().QueueFree();
 			GetGame().SetFPSCharacterOld(null);
-        }
+        }*/
     }
 
 	public bool GetIsQuitting()

@@ -59,6 +59,7 @@ color = Color(0, 0, 0, 1)
 metadata/_edit_lock_ = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(400, 300)
 layout_mode = 1
 anchors_preset = 8
@@ -107,13 +108,17 @@ grow_vertical = 2
 alignment = 1
 
 [node name="StartLevelButton" type="Button" parent="VBoxContainer/Panel2/Panel3/VBoxContainer"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
+focus_neighbor_bottom = NodePath("../ExitGameMenu")
 text = "Spustit Level"
 
 [node name="ExitGameMenu" type="Button" parent="VBoxContainer/Panel2/Panel3/VBoxContainer"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
+focus_neighbor_top = NodePath("../StartLevelButton")
 text = "Ukončit"
 
 [node name="BuildLabel" type="Label" parent="VBoxContainer/Panel2"]
@@ -215,6 +220,7 @@ grow_vertical = 0
 alignment = 1
 
 [node name="ClosePickLevelsControl" type="Button" parent="PickLevelsControl/Panel2/Panel3/HBoxContainer"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(299.38, 50)
 layout_mode = 2
 size_flags_horizontal = 4

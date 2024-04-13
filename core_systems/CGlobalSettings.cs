@@ -774,8 +774,9 @@ public partial class CGlobalSettings : Node
         // Apply now
         if (newApplyNow)
         {
-            if (CGameMaster.GM.GetGame().GetFPSCharacterOld() == null) return;
-            CGameMaster.GM.GetGame().GetFPSCharacterOld().MouseSmooth = newValue;
+            if (CGameMaster.GM.GetGame().GetFPSCharacterBase() == null) return;
+            CGameMaster.GM.GetGame().GetFPSCharacterBase().GetCharacterLookComponent().MOUSE_LERPSPEED = newValue;
+
         }
 
         // Save nowj
@@ -788,8 +789,8 @@ public partial class CGlobalSettings : Node
 
     public float GetActual_LookMouseSmooth()
     {
-        if (CGameMaster.GM.GetGame().GetFPSCharacterOld() == null) return 1f;
-        return CGameMaster.GM.GetGame().GetFPSCharacterOld().MouseSmooth;
+        if (CGameMaster.GM.GetGame().GetFPSCharacterBase() == null) return 1f;
+        return CGameMaster.GM.GetGame().GetFPSCharacterBase().GetCharacterLookComponent().MOUSE_LERPSPEED;
     }
 
     // settings Mouse Sensitivity
@@ -798,8 +799,8 @@ public partial class CGlobalSettings : Node
         // Apply now
         if (newApplyNow)
         {
-            if (CGameMaster.GM.GetGame().GetFPSCharacterOld() == null) return;
-            CGameMaster.GM.GetGame().GetFPSCharacterOld().MouseSensitivity = newValue;
+            if (CGameMaster.GM.GetGame().GetFPSCharacterBase() == null) return;
+            CGameMaster.GM.GetGame().GetFPSCharacterBase().GetCharacterLookComponent().MOUSE_SENSITIVITY = newValue;
         }
 
         // Save nowj
@@ -812,8 +813,8 @@ public partial class CGlobalSettings : Node
 
     public float GetActual_LookMouseSensitivity()
     {
-        if (CGameMaster.GM.GetGame().GetFPSCharacterOld() == null) return 1f;
-        return CGameMaster.GM.GetGame().GetFPSCharacterOld().MouseSensitivity;
+        if (CGameMaster.GM.GetGame().GetFPSCharacterBase() == null) return 1f;
+        return CGameMaster.GM.GetGame().GetFPSCharacterBase().GetCharacterLookComponent().MOUSE_SENSITIVITY;
     }
 
     // settings Gamepad Smooth
@@ -822,8 +823,8 @@ public partial class CGlobalSettings : Node
         // Apply now
         if (newApplyNow)
         {
-            if (CGameMaster.GM.GetGame().GetFPSCharacterOld() == null) return;
-            CGameMaster.GM.GetGame().GetFPSCharacterOld().GamepadSmooth = newValue;
+            if (CGameMaster.GM.GetGame().GetFPSCharacterBase() == null) return;
+            CGameMaster.GM.GetGame().GetFPSCharacterBase().GetCharacterLookComponent().GAMEPAD_LERPSPEED = newValue;
         }
 
         // Save nowj
@@ -836,8 +837,8 @@ public partial class CGlobalSettings : Node
 
     public float GetActual_LookGamepadSmooth()
     {
-        if (CGameMaster.GM.GetGame().GetFPSCharacterOld() == null) return 1f;
-        return CGameMaster.GM.GetGame().GetFPSCharacterOld().GamepadSmooth;
+        if (CGameMaster.GM.GetGame().GetFPSCharacterBase() == null) return 1f;
+        return CGameMaster.GM.GetGame().GetFPSCharacterBase().GetCharacterLookComponent().GAMEPAD_LERPSPEED;
     }
 
     // settings Gamepad Sensitivity
@@ -846,8 +847,8 @@ public partial class CGlobalSettings : Node
         // Apply now
         if (newApplyNow)
         {
-            if (CGameMaster.GM.GetGame().GetFPSCharacterOld() == null) return;
-            CGameMaster.GM.GetGame().GetFPSCharacterOld().GamepadSensitvity = newValue;
+            if (CGameMaster.GM.GetGame().GetFPSCharacterBase() == null) return;
+            CGameMaster.GM.GetGame().GetFPSCharacterBase().GetCharacterLookComponent().GAMEPAD_SENSITIVITY = newValue;
         }
 
         // Save nowj
@@ -860,8 +861,8 @@ public partial class CGlobalSettings : Node
 
     public float GetActual_LookGamepadSensitivity()
     {
-        if (CGameMaster.GM.GetGame().GetFPSCharacterOld() == null) return 1f;
-        return CGameMaster.GM.GetGame().GetFPSCharacterOld().GamepadSensitvity;
+        if (CGameMaster.GM.GetGame().GetFPSCharacterBase() == null) return 1f;
+        return CGameMaster.GM.GetGame().GetFPSCharacterBase().GetCharacterLookComponent().GAMEPAD_SENSITIVITY;
     }
 
     // settings InverseVerticalLook
@@ -870,8 +871,8 @@ public partial class CGlobalSettings : Node
         // Apply now
         if (newApplyNow)
         {
-            if (CGameMaster.GM.GetGame().GetFPSCharacterOld() == null) return;
-            CGameMaster.GM.GetGame().GetFPSCharacterOld().InverseVerticalLook = newValue;
+            if (CGameMaster.GM.GetGame().GetFPSCharacterBase() == null) return;
+            CGameMaster.GM.GetGame().GetFPSCharacterBase().GetCharacterLookComponent().INVERSE_LOOK = newValue;
         }
 
         // Save nowj
@@ -884,8 +885,8 @@ public partial class CGlobalSettings : Node
 
     public bool GetActual_InverseVerticalLook()
     {
-        if (CGameMaster.GM.GetGame().GetFPSCharacterOld() == null) return false;
-        return CGameMaster.GM.GetGame().GetFPSCharacterOld().InverseVerticalLook;
+        if (CGameMaster.GM.GetGame().GetFPSCharacterBase() == null) return false;
+        return CGameMaster.GM.GetGame().GetFPSCharacterBase().GetCharacterLookComponent().INVERSE_LOOK;
     }
 
     /**************************************************************************/
