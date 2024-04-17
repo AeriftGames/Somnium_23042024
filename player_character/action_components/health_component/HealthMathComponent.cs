@@ -41,6 +41,7 @@ public partial class HealthMathComponent : Node
         // First init data
         SetAllData(StartActualHealth, StartMaxHealth, StartHealthRegenVal,
             StartHealthRegenTick, StartHealthRegenEnable);
+
     }
 
     public float GetHealth() { return ActualHealth; }
@@ -70,6 +71,8 @@ public partial class HealthMathComponent : Node
         SetHealthRegenVal(newHealthRegenVal);
         SetHealthRegenTick(newHealthRegenTick);
         SetHealthRegenEnable(newHealthRegenEnable);
+
+        ChangeUpdate();
     }
 
     public void AddHealth(float value)
@@ -110,12 +113,14 @@ public partial class HealthMathComponent : Node
     private void ChangeUpdate()
     {
         if (ourCharacterAction == null) return;
-        if (HealthProgressBar == null) return;
 
         // DEAD
         if (ActualHealth < 1.0f && isAlive)
         {
             isAlive = false;
         }
+
+        // Impuls pro sdeleni kalkulace
+        ourCharacterAction.GetHealthComponent().ChangeUpdate();
     }
 }

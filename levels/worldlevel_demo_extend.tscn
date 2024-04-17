@@ -1,9 +1,8 @@
 [gd_scene load_steps=49 format=3 uid="uid://1i0rk47y5rfe"]
 
 [ext_resource type="Script" path="res://levels/worldlevel_base/WorldLevel.cs" id="1_ucxcv"]
-[ext_resource type="VoxelGIData" uid="uid://b07w76761sd8j" path="res://levels/worldlevel_demo_extend/level_data/worldlevel_demo.VoxelGI_data.res" id="2_d5wgc"]
 [ext_resource type="Script" path="res://levels/worldlevel_base/LevelDataSettings.cs" id="2_u2484"]
-[ext_resource type="ArrayOccluder3D" uid="uid://cdridb2sqa38l" path="res://levels/worldlevel_demo_extend/level_data/worldlevel_demo.occ" id="3_gksyn"]
+[ext_resource type="VoxelGIData" uid="uid://ucnr5la7eal4" path="res://levels/worldlevel_audio_test/level_data/worldlevel_demo.VoxelGI_data.res" id="3_inrok"]
 [ext_resource type="PackedScene" uid="uid://ddbs42l3gfmyh" path="res://placeholders/modular_level_builds/placeholder/floor_2x_2m_variant_4.tscn" id="4_7mihh"]
 [ext_resource type="Script" path="res://levels/worldlevel_base/LevelScene.cs" id="4_gfat0"]
 [ext_resource type="PackedScene" uid="uid://5ahry7gwynjv" path="res://placeholders/modular_level_builds/placeholder/floor_2x_2m_variant_1.tscn" id="5_54dkv"]
@@ -26,6 +25,7 @@
 [ext_resource type="PackedScene" uid="uid://1qpyb7wsriep" path="res://placeholders/modular_level_builds/silo_level/assets/small_rock.tscn" id="20_521tp"]
 [ext_resource type="PackedScene" uid="uid://2qut50tthswb" path="res://placeholders/modular_level_builds/silo_level/assets/exterior_rockchair.tscn" id="21_ygcd2"]
 [ext_resource type="PackedScene" uid="uid://bndr3up87gn1i" path="res://placeholders/Decals/blood_decal.tscn" id="22_tcmpq"]
+[ext_resource type="ArrayOccluder3D" uid="uid://blruoj1psk3mo" path="res://levels/worldlevel_audio_test/level_data/worldlevel_demo.occ" id="25_3cia1"]
 [ext_resource type="PackedScene" uid="uid://dv26x01is3wew" path="res://spawn/physic_object_ball_light.tscn" id="25_u234y"]
 [ext_resource type="PackedScene" uid="uid://cill7wx53gakg" path="res://placeholders/posters/poster2.tscn" id="27_h8jbu"]
 [ext_resource type="AudioStream" uid="uid://ngmb6mrvsbqc" path="res://audio/audio_streams/613738__punneedsounds__amb-ost1.mp3" id="28_n5lir"]
@@ -180,7 +180,7 @@ environment = SubResource("Environment_a2asp")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.84739, 2.22975, 5.21833)
 subdiv = 2
 size = Vector3(80.7089, 5.67378, 19.8)
-data = ExtResource("2_d5wgc")
+data = ExtResource("3_inrok")
 metadata/_edit_lock_ = true
 
 [node name="LevelScene" type="Node" parent="."]
@@ -2976,7 +2976,7 @@ transform = Transform3D(-2.18557e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.18557e-08, 
 
 [node name="LevelOcclusion" type="OccluderInstance3D" parent="LevelScene"]
 visible = false
-occluder = ExtResource("3_gksyn")
+occluder = ExtResource("25_3cia1")
 metadata/_edit_group_ = true
 metadata/_edit_lock_ = true
 

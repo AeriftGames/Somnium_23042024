@@ -25,6 +25,8 @@ public partial class CCharacterHealthComponent : CBaseComponent
         base.PostInit(newCharacterBase);
         ourCharacterAction = ourCharacterBase as FPSCharacterAction;
 
+        HealthProgressBar = GetNode<ProgressBar>("%HealthProgressBar");
+
         healthMathComponent = GetNode<HealthMathComponent>("%HealthMathComponent");
         healthMathComponent.PostInit(ourCharacterBase);
 
@@ -33,6 +35,7 @@ public partial class CCharacterHealthComponent : CBaseComponent
 
         healthAudioComponent = GetNode<CHealthAudioComponent>("%HealthAudioComponent");
         healthAudioComponent.PostInit(ourCharacterAction);
+
     }
 
     public HealthMathComponent GetHealthMath() { return healthMathComponent; }
@@ -63,6 +66,20 @@ public partial class CCharacterHealthComponent : CBaseComponent
 
     public void ApplyHeal(float newHeal)
     {
-        GetHealthMath().AddHealth(newHeal); 
+        GetHealthMath().AddHealth(newHeal);
     }
+
+    // Volane z HealthMathComponent z ChangeUpdate
+    public void ChangeUpdate()
+    {
+        if(HealthProgressBar != null)
+        {
+            HealthProgressBar.MaxValue = healthMathComponent.ActualMaxHealth;
+            HealthProgressBar.Value = healthMathComponent.ActualHealth;
+
+            if(damageHudComponent != null)
+                damageHudComponent.UpdateBloodScreenHealth();
+        }
+    }
+
 }
