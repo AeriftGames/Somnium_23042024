@@ -1,0 +1,21 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://cbcec8cw2bfhq"]
+
+[ext_resource type="Texture2D" uid="uid://c80vqp1tbk1" path="res://placeholders/modular_pipes/textures/pipe_testing_color.jpg" id="1_iu8uf"]
+[ext_resource type="Texture2D" uid="uid://cdwwwaf5y8qvi" path="res://placeholders/modular_pipes/textures/pipe_testing_normal.jpg" id="2_t88k8"]
+
+[resource]
+resource_name = "Material.015"
+cull_mode = 2
+albedo_texture = ExtResource("1_iu8uf")
+metallic = 0.15
+metallic_specular = 0.8
+roughness = 0.4
+normal_enabled = true
+normal_texture = ExtResource("2_t88k8")
+clearcoat_enabled = true
+clearcoat = 0.97
+clearcoat_roughness = 0.83
+anisotropy = -0.12
+uv1_scale = Vector3(0.25, 0.25, 0.25)
+uv1_triplanar = true
+uv1_world_triplanar = true

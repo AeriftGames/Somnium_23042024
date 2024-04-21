@@ -20,6 +20,8 @@ public partial class CCharacterInteractionComponent : CBaseComponent
     Vector2 originalHandGrabbedTex = Vector2.Zero;
     Vector3 hit_offset = Vector3.Zero;
 
+    private Reticle GuiReticle = null;
+
     public struct SPhysicalGrabbedItemParams
     {
         public Vector3 inertia;
@@ -47,6 +49,8 @@ public partial class CCharacterInteractionComponent : CBaseComponent
 
         GetNode<CollisionShape3D>("UseActionAreaDetect/CollisionShape3D").Shape.Set("radius", DETECT_RADIUS);
         HandNode = GetNode<CHandNode>("ActionLayer/HandNode");
+
+        GuiReticle = ourCharacterBase.GetNode<Reticle>("UserInterface/Reticle");
     }
     public void _on_use_action_area_detect_body_entered(Node3D newBody)
     {
@@ -106,8 +110,9 @@ public partial class CCharacterInteractionComponent : CBaseComponent
     public void DeselectHand() 
     { 
         HandNode.SetHandType(CHandNode.EHandType.Off);
+        GuiReticle.SetShowReticle(true);
 
-        if(SelectedObject != null)
+        if (SelectedObject != null)
         {
             SelectedObject.SetIsInLook(false);
             SelectedObject = null;
@@ -134,6 +139,7 @@ public partial class CCharacterInteractionComponent : CBaseComponent
             {
                 SetSelectedUseActionObject(resultDetect.InteractiveObject);
                 SelectedObject.SetIsInLook(true);
+
                 switch (SelectedObject.InteractiveLevel)
                 {
                     case CInteractiveObject.EInteractiveLevel.OnlyUse:
@@ -180,6 +186,7 @@ public partial class CCharacterInteractionComponent : CBaseComponent
                     {
                         /*basicHud.SetHandClickVisible(true);*/
                         HandNode.SetHandType(CHandNode.EHandType.Point);
+                        GuiReticle.SetShowReticle(false);
                         break;
                     }
                 case CInteractiveObject.EUseInteractVisibleBy.HandClickAndText:

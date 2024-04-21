@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://baoh06w3xmob2"
+path="res://.godot/imported/Supplies.obj-677cee245f096b976bd56dec13a785ae.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Supplies.obj-677cee245f096b976bd56dec13a785ae.mesh"]
+
+source_file="res://testing_stuff_kaen/models/Supplies/Supplies.obj"
+dest_files=["res://.godot/imported/Supplies.obj-677cee245f096b976bd56dec13a785ae.mesh", "res://.godot/imported/Supplies.obj-677cee245f096b976bd56dec13a785ae.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

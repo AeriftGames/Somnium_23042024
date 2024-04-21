@@ -1,21 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://bqfht44dq1bc1"]
+[gd_scene load_steps=8 format=3 uid="uid://bqfht44dq1bc1"]
 
 [ext_resource type="Script" path="res://testing_stuff_kaen/test_new_levels/CInteractiveObject.cs" id="1_44872"]
 [ext_resource type="Script" path="res://testing_stuff_kaen/new_actions/ball_action.cs" id="1_hm1vu"]
 [ext_resource type="Script" path="res://testing_stuff_kaen/new_actions/CBilboardObject.cs" id="2_36sja"]
-[ext_resource type="Script" path="res://testing_stuff_kaen/new_actions/action_resources/CBaseAction.cs" id="3_yn8mh"]
-
-[sub_resource type="Resource" id="Resource_l12hr"]
-script = ExtResource("3_yn8mh")
-ActionName = "Use"
-ActionFunction = "ActionUse"
-ActionInputActivate = 0
-
-[sub_resource type="Resource" id="Resource_njg2b"]
-script = ExtResource("3_yn8mh")
-ActionName = "Pick"
-ActionFunction = "ActionPick"
-ActionInputActivate = 1
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_dvhcp"]
 size = Vector3(0.210187, 0.215063, 0.211694)
@@ -38,13 +25,12 @@ height = 0.2
 [node name="BallAction" type="Node3D"]
 script = ExtResource("1_hm1vu")
 
-[node name="InteractiveObject" type="Node3D" parent="." node_paths=PackedStringArray("CallUseObject", "BilboardObject") groups=["interactive_object"]]
+[node name="InteractiveObject" type="Node3D" parent="." node_paths=PackedStringArray("CallUseObject") groups=["interactive_object"]]
 transform = Transform3D(1.78814e-07, -1, -1.69407e-21, 1, 1.78814e-07, 1.42109e-14, -1.42109e-14, 7.05861e-21, 1, 0, 0, 0)
 script = ExtResource("1_44872")
 CallUseObject = NodePath("..")
 ObjectName = "Ball"
-BilboardObject = NodePath("../BilboardObject")
-ActionResources = Array[Resource]([SubResource("Resource_l12hr"), SubResource("Resource_njg2b")])
+InteractVisibleBy = 1
 metadata/_edit_lock_ = true
 
 [node name="StaticBody3D" type="StaticBody3D" parent="InteractiveObject" groups=["interactive_object"]]

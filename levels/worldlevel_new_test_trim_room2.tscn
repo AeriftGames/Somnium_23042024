@@ -1,4 +1,4 @@
-[gd_scene load_steps=121 format=3 uid="uid://bfcbeqxffhki7"]
+[gd_scene load_steps=122 format=3 uid="uid://bfcbeqxffhki7"]
 
 [ext_resource type="Script" path="res://levels/worldlevel_base/WorldLevel.cs" id="1_51a6y"]
 [ext_resource type="Script" path="res://levels/worldlevel_base/LevelDataSettings.cs" id="2_2qqv3"]
@@ -49,6 +49,7 @@
 [ext_resource type="Script" path="res://testing_stuff_kaen/test_new_levels/CInteractiveObject.cs" id="46_s3tml"]
 [ext_resource type="Script" path="res://testing_stuff_kaen/new_actions/CBilboardObject.cs" id="48_af6hr"]
 [ext_resource type="Script" path="res://testing_stuff_kaen/new_actions/FocusActionObject.cs" id="49_pr8h6"]
+[ext_resource type="PackedScene" uid="uid://b0p7cpttoqb2h" path="res://placeholders/modular_level_builds/my_trim1/button_door_test.tscn" id="51_lsfqm"]
 [ext_resource type="Script" path="res://core_systems/level_logic/level_logic.gd" id="51_ucl74"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_w3cwh"]
@@ -2522,6 +2523,9 @@ mesh = SubResource("BoxMesh_ovcxn")
 
 [node name="Node" type="Node" parent="."]
 script = ExtResource("51_ucl74")
+
+[node name="button_door_test" parent="." instance=ExtResource("51_lsfqm")]
+transform = Transform3D(-0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, 18, 0.5, 12)
 
 [connection signal="body_entered" from="monitor/Area3D" to="monitor" method="_on_area_3d_body_entered"]
 [connection signal="body_exited" from="monitor/Area3D" to="monitor" method="_on_area_3d_body_exited"]

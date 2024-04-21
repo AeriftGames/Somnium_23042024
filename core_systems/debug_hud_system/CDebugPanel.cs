@@ -121,6 +121,12 @@ public partial class CDebugPanel : Control
         {
             GetNode<Label>("%Label_DrawCalls").Text = Performance.GetMonitor(Performance.Monitor.RenderTotalDrawCallsInFrame).ToString();
             GetNode<Label>("%Label_Objects").Text = Performance.GetMonitor(Performance.Monitor.RenderTotalObjectsInFrame).ToString();
+
+            double dVMemoryUseMB = Mathf.Abs(Performance.GetMonitor(Performance.Monitor.RenderVideoMemUsed) / 1000000.0f);
+            GetNode<Label>("%Label_VRam").Text = Mathf.CeilToInt(dVMemoryUseMB).ToString() + " MB";
+
+            double dMemoryUseMB = Mathf.Abs(Performance.GetMonitor(Performance.Monitor.MemoryStatic) / 1000000.0f);
+            GetNode<Label>("%Label_Ram").Text = Mathf.CeilToInt(dMemoryUseMB).ToString() + " MB";
         }
     }
 

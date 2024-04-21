@@ -9,9 +9,15 @@ public partial class Reticle : CenterContainer
 	[Export] public float RETICLE_SPEED = 0.25f;
 	[Export] public float RETICLE_DISTANCE = 2.0f;
 
+	AnimationPlayer AnimationPlayer_Reticle = null;
+	bool isNeedShowReticle = false;
+
     public override void _Ready()
 	{
+		AnimationPlayer_Reticle = GetNode<AnimationPlayer>("AnimationPlayer_Reticle");
 		QueueRedraw();
+
+		SetShowReticle(true);
 	}
 
 	public override void _Process(double delta)
@@ -47,4 +53,19 @@ public partial class Reticle : CenterContainer
         RETICLE_LINES[3].Position =
             RETICLE_LINES[3].Position.Lerp(pos + new Vector2(-speed * RETICLE_DISTANCE, 0), RETICLE_SPEED);
     }
+
+	public void SetShowReticle(bool newShowReticle)
+	{
+		if(newShowReticle != isNeedShowReticle)
+		{
+			// jaka zmena
+			if (newShowReticle == true)
+				AnimationPlayer_Reticle.Play("Show");
+			else
+                AnimationPlayer_Reticle.PlayBackwards("Show");
+
+			// nastaveni stavu
+            isNeedShowReticle = newShowReticle;
+		}
+	}
 }

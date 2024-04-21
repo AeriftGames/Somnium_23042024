@@ -17,7 +17,7 @@ ClassPrefix=""
 [application]
 
 config/name="Somnium"
-run/main_scene="res://levels/worldlevel_demo_extend.tscn"
+run/main_scene="res://levels/worldlevel_audio_test.tscn"
 config/features=PackedStringArray("4.2", "C#")
 run/flush_stdout_on_print=true
 boot_splash/bg_color=Color(0, 0, 0, 1)

@@ -413,4 +413,11 @@ public partial class UniversalFunctions : Node
         }
     }
 
+    // for getting vram in mb
+    public static int GetVRamUsageInMBytes()
+    {
+        int a = (int) RenderingServer.GetRenderingInfo(RenderingServer.RenderingInfo.VideoMemUsed);
+        a = a / 1000000;
+        return a;
+    }
 }
