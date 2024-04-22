@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://b5s5xndgewp01"]
+
+[ext_resource type="PackedScene" uid="uid://mr8ckltulfxv" path="res://testing_stuff_kaen/test_new_levels/new_level_assets/round_corridor.glb" id="1_38bjw"]
+[ext_resource type="Material" uid="uid://btinqpm8usxre" path="res://testing_stuff_kaen/test_new_levels/NEW_TRIM/new_trim2.material" id="2_a4a5h"]
+
+[node name="round_corridor" instance=ExtResource("1_38bjw")]
+
+[node name="Cube_1125" parent="." index="0"]
+transform = Transform3D(2.38419e-07, -1.19209e-06, -1, -1, 0, -2.38419e-07, 0, 1, -1.19209e-06, 0, 0, 0)
+material_override = ExtResource("2_a4a5h")

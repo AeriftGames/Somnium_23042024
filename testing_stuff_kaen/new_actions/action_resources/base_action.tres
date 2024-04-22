@@ -1,0 +1,8 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://c7bx7d82a4res"]
+
+[ext_resource type="Script" path="res://testing_stuff_kaen/new_actions/action_resources/CBaseAction.cs" id="1_e2otc"]
+
+[resource]
+script = ExtResource("1_e2otc")
+ActionName = "Use"
+ActionFunction = "ActionUse"

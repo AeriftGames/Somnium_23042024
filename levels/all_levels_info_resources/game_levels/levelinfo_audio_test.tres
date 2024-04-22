@@ -1,0 +1,9 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://bpsvgly1bt3jt"]
+
+[ext_resource type="Script" path="res://levels/all_levels_info_resources/base/levelinfo_base_resource.cs" id="1_ixvdx"]
+
+[resource]
+script = ExtResource("1_ixvdx")
+LevelType = 0
+LevelPath = "res://levels/worldlevel_audio_test.tscn"
+LevelName = "Audio Test"

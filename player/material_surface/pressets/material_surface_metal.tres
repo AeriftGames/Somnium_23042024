@@ -1,28 +1,36 @@
-[gd_resource type="Resource" load_steps=16 format=3 uid="uid://sbcafl6nubgl"]
+[gd_resource type="Resource" load_steps=24 format=3 uid="uid://sbcafl6nubgl"]
 
+[ext_resource type="AudioStream" uid="uid://buch3yf0m4u5v" path="res://audio/audio_streams/footsteps_new/Metal2/Step_metal_surface_1.wav" id="1_0unja"]
 [ext_resource type="Script" path="res://player/material_surface/material_surface_data.cs" id="1_knawp"]
-[ext_resource type="AudioStream" uid="uid://b2rq8oq84rehc" path="res://audio/audio_streams/footsteps_new/Metal/Footstep_Metal1.wav" id="1_vy3vj"]
-[ext_resource type="AudioStream" uid="uid://dscuqsd5gook5" path="res://audio/audio_streams/footsteps_new/Metal/Footstep_Metal2.wav" id="2_escng"]
-[ext_resource type="AudioStream" uid="uid://bcnifl1cavy31" path="res://audio/audio_streams/footsteps_new/Metal/Footstep_Metal3.wav" id="3_w6n3t"]
-[ext_resource type="AudioStream" uid="uid://dsydwhjuyqpgk" path="res://audio/audio_streams/footsteps_new/Metal/Footstep_Metal4.wav" id="4_we3ny"]
-[ext_resource type="AudioStream" uid="uid://jfglnivb0ahj" path="res://audio/audio_streams/footsteps_new/Metal/Footstep_Metal5.wav" id="5_tufqj"]
-[ext_resource type="AudioStream" uid="uid://detvu6lmye4ty" path="res://audio/audio_streams/footsteps_new/Metal/Footstep_Metal6.wav" id="6_dudgy"]
-[ext_resource type="AudioStream" uid="uid://c63r0eu22krfa" path="res://audio/audio_streams/footsteps_new/Metal/Footstep_Metal7.wav" id="7_gw1ky"]
-[ext_resource type="AudioStream" uid="uid://l360juleq68w" path="res://audio/audio_streams/footsteps_new/Metal/Footstep_Metal8.wav" id="8_2aihy"]
-[ext_resource type="AudioStream" uid="uid://ygiblvly2tec" path="res://audio/audio_streams/footsteps_new/Metal/Footstep_Metal9.wav" id="9_abtsx"]
-[ext_resource type="AudioStream" uid="uid://dpl36qts20dkb" path="res://audio/audio_streams/footsteps_new/Metal/Footstep_Metal10.wav" id="10_egpj4"]
-[ext_resource type="AudioStream" uid="uid://bhk2qh3k8fepa" path="res://audio/audio_streams/footsteps_new/Metal/Footstep_Metal11.wav" id="11_nepju"]
-[ext_resource type="AudioStream" uid="uid://8mokhnt8bu63" path="res://audio/audio_streams/footsteps_new/Metal/Footstep_Metal12.wav" id="12_4ii7o"]
+[ext_resource type="AudioStream" uid="uid://cy60o8ncpl5o4" path="res://audio/audio_streams/footsteps_new/Metal2/Step_metal_surface_2.wav" id="2_amirc"]
+[ext_resource type="AudioStream" uid="uid://dlifeyw66hy3e" path="res://audio/audio_streams/footsteps_new/Metal2/Step_metal_surface_3.wav" id="3_hwlly"]
+[ext_resource type="AudioStream" uid="uid://dqikqwib8xwp3" path="res://audio/audio_streams/footsteps_new/Metal2/Step_metal_surface_4.wav" id="4_vphte"]
+[ext_resource type="AudioStream" uid="uid://dd5nxlmjldau3" path="res://audio/audio_streams/footsteps_new/Metal2/Step_metal_surface_5.wav" id="5_76k6u"]
+[ext_resource type="AudioStream" uid="uid://bgpya0piqh4ai" path="res://audio/audio_streams/footsteps_new/Metal2/Step_metal_surface_6.wav" id="6_i5u08"]
+[ext_resource type="AudioStream" uid="uid://cke7iahvckryk" path="res://audio/audio_streams/footsteps_new/Metal2/Step_metal_surface_7.wav" id="7_d87gv"]
+[ext_resource type="AudioStream" uid="uid://g83l4dapdh3l" path="res://audio/audio_streams/footsteps_new/Metal2/Step_metal_surface_8.wav" id="8_qkuv4"]
+[ext_resource type="AudioStream" uid="uid://c6ly3drxrf7hn" path="res://audio/audio_streams/footsteps_new/Metal2/Step_metal_surface_9.wav" id="9_p8rsg"]
+[ext_resource type="AudioStream" uid="uid://ctfm7nfdmm5d1" path="res://audio/audio_streams/footsteps_new/Metal2/Step_metal_surface_10.wav" id="10_i7lni"]
+[ext_resource type="AudioStream" uid="uid://cxrvhswfbvj5c" path="res://audio/audio_streams/footsteps_new/Metal2/Step_metal_surface_11.wav" id="11_enbkm"]
+[ext_resource type="AudioStream" uid="uid://c6ky5xlf5hlhd" path="res://audio/audio_streams/footsteps_new/Metal2/Step_metal_surface_12.wav" id="12_8d5sr"]
 [ext_resource type="AudioStream" uid="uid://bidcb6c5835w3" path="res://audio/audio_streams/landing_new/LandSound_Metal1.wav" id="13_kfq24"]
+[ext_resource type="AudioStream" uid="uid://xr2aoavgsgmy" path="res://audio/audio_streams/footsteps_new/Metal2/Step_metal_surface_13.wav" id="13_nuhdi"]
+[ext_resource type="AudioStream" uid="uid://dd1h1m5f1t4li" path="res://audio/audio_streams/footsteps_new/Metal2/Step_metal_surface_14.wav" id="14_7g00m"]
 [ext_resource type="AudioStream" uid="uid://bcio8f612r5ug" path="res://audio/audio_streams/landing_new/LandSound_Metal3.wav" id="15_4a0u0"]
+[ext_resource type="AudioStream" uid="uid://76ts7558nn5n" path="res://audio/audio_streams/footsteps_new/Metal2/Step_metal_surface_15.wav" id="15_nt6fm"]
+[ext_resource type="AudioStream" uid="uid://ctwxtul22k7v5" path="res://audio/audio_streams/footsteps_new/Metal2/Step_metal_surface_16.wav" id="16_lf3ce"]
+[ext_resource type="AudioStream" uid="uid://can1x7i4ajnt1" path="res://audio/audio_streams/footsteps_new/Metal2/Step_metal_surface_17.wav" id="17_tlnhs"]
+[ext_resource type="AudioStream" uid="uid://mr5vkdqbxyh7" path="res://audio/audio_streams/footsteps_new/Metal2/Step_metal_surface_18.wav" id="18_jssis"]
+[ext_resource type="AudioStream" uid="uid://dvd3rjt1ssuo1" path="res://audio/audio_streams/footsteps_new/Metal2/Step_metal_surface_19.wav" id="19_3unk6"]
+[ext_resource type="AudioStream" uid="uid://c1h2pjjq58vnr" path="res://audio/audio_streams/footsteps_new/Metal2/Step_metal_surface_20.wav" id="20_ljfvr"]
 
 [resource]
 script = ExtResource("1_knawp")
 MaterialSurfaceNameID = "material_surface_metal"
 MaterialSurface = 1
-FootstepSounds = Array[AudioStream]([ExtResource("1_vy3vj"), ExtResource("2_escng"), ExtResource("3_w6n3t"), ExtResource("4_we3ny"), ExtResource("5_tufqj"), ExtResource("6_dudgy"), ExtResource("7_gw1ky"), ExtResource("8_2aihy"), ExtResource("9_abtsx"), ExtResource("10_egpj4"), ExtResource("11_nepju"), ExtResource("12_4ii7o")])
-FootstepAudioPitchScale = 0.5
-FootstepAudioVolumeDB = -25.0
+FootstepSounds = Array[AudioStream]([ExtResource("1_0unja"), ExtResource("2_amirc"), ExtResource("3_hwlly"), ExtResource("4_vphte"), ExtResource("5_76k6u"), ExtResource("6_i5u08"), ExtResource("7_d87gv"), ExtResource("8_qkuv4"), ExtResource("9_p8rsg"), ExtResource("10_i7lni"), ExtResource("11_enbkm"), ExtResource("12_8d5sr"), ExtResource("13_nuhdi"), ExtResource("14_7g00m"), ExtResource("15_nt6fm"), ExtResource("16_lf3ce"), ExtResource("17_tlnhs"), ExtResource("18_jssis"), ExtResource("19_3unk6"), ExtResource("20_ljfvr")])
+FootstepAudioPitchScale = 0.8
+FootstepAudioVolumeDB = -10.0
 LandingSounds = Array[AudioStream]([ExtResource("13_kfq24"), ExtResource("15_4a0u0")])
 LandingAudioPitchScale = 0.6
 LandingAudioVolumeDB = -13.0

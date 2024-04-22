@@ -1,6 +1,8 @@
 using Godot;
 using System;
+using System.Linq;
 using System.Reflection.Metadata.Ecma335;
+using System.Threading.Tasks;
 using System.Transactions;
 
 public partial class WorldLevel : Node
@@ -24,32 +26,52 @@ public partial class WorldLevel : Node
 
 		InitGame();
 	}
-
 	public void InitGame()
 	{
 		// Pro moznost benchmarku - tudiz bez playera
 		if(WithoutPlayer)
 		{
 			// Apply Settings
-			GameMaster.GM.GetSettings().LoadAndApply_AllGraphicsSettings();
-			GameMaster.GM.EnableBlackScreen(false);
-			GameMaster.GM.GetLoadingHud().LoadingIsComplete(false);
+			CGameMaster.GM.GetSettings().LoadAndApply_AllGraphicsSettings();
 		}
 		else
 		{
 			// Apply Settings
-			GameMaster.GM.GetSettings().LoadAndApply_AllGraphicsSettings();
-			GameMaster.GM.EnableBlackScreen(false);
-			GameMaster.GM.GetLoadingHud().LoadingIsComplete(false);
-		}
+			CGameMaster.GM.GetSettings().LoadAndApply_AllGraphicsSettings();
+			CGameMaster.GM.GetUniversal().GetLoadingHud().LoadingIsComplete(false);
 
-		StartGame();
+			SpawnPlayerOnPlayerStart();
+
+            StartGame();
+        }
 	}
-
-	public void StartGame()
+	public async void StartGame()
 	{
+		GD.Print("GameStart!");
 		// Emit Signal StartGame
-		GameMaster.GM.GetMasterSignals().EmitSignal(MasterSignals.SignalName.GameStart);
-	}
+		CGameMaster.GM.GetMasterSignals().EmitSignal(CMasterSignals.SignalName.GameStart);
 
+		await Task.Delay(100);
+		CGameMaster.GM.GetUniversal().EnableBlackScreen(false);
+    }
+
+	public void SpawnPlayerOnPlayerStart() 
+	{
+		Godot.Collections.Array<PlayerStart> allPlayerStarts = new Godot.Collections.Array<PlayerStart>();
+
+		Godot.Collections.Array<Node> allNodes = GetChildren();
+		foreach (Node node in allNodes)
+			if (node.IsInGroup("PlayerStart"))
+				allPlayerStarts.Add(node as PlayerStart);
+
+		foreach (PlayerStart pStart in allPlayerStarts)
+			if (pStart.PlayerStartEnable == true)
+				pStart.SpawnPlayerByType(pStart.SpawnCharacterType);
+
+    }
+
+	public void SpawnCharacter()
+	{
+		GD.Print("blablabla");
+	}
 }

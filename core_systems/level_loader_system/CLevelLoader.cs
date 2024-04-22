@@ -38,25 +38,31 @@ public partial class CLevelLoader : Node
         progress = new Godot.Collections.Array();
     }
 
-    public async void LoadNewWorldLevel(string newLevelScenePath, string newLevelName)
+    public void LoadNewWorldLevel(string newLevelScenePath, string newLevelName)
     {
         // Spusti async task pro zmenu levelu
-        await ChangeLevelSceneWithDelay(newLevelScenePath,newLevelName,1000);
+        ChangeLevelSceneWithDelay(newLevelScenePath,newLevelName,1000);
     }
 
-    async Task ChangeLevelSceneWithDelay(string newLevelScenePath, string newLevelName, int delay)
+    public async void ChangeLevelSceneWithDelay(string newLevelScenePath, string newLevelName, int delay)
     {
-        // zapneme cernou obrazovku
-        GameMaster.GM.EnableBlackScreen(true);
+        // pokud mame otevreny debug panel - zavreme jej
+        if (CGameMaster.GM.GetGame().GetDebugPanel().GetIsOpen())
+            CGameMaster.GM.GetGame().GetDebugPanel().OpenDebugTabs(false);
 
-        // nastavime loading hud
-        GameMaster.GM.GetLoadingHud().SetInitializeAndVisibleNow(actualLevelName, true);
+        // zapneme cernou obrazovku
+        CGameMaster.GM.GetUniversal().EnableBlackScreen(true);
+
+        // zmenime level
+        actualLevelName = newLevelName;
 
         // potrebny delay
         await Task.Delay(delay);
 
+        // nastavime loading hud
+        CGameMaster.GM.GetUniversal().GetLoadingHud().SetInitializeAndVisibleNow(actualLevelName, isPrecompiledShaders);
+
         // zmenime level
-        actualLevelName = newLevelName;
         LoadNewWorldLevel_Threaded(newLevelScenePath, newLevelName);
     }
 
@@ -122,7 +128,7 @@ public partial class CLevelLoader : Node
             }
         }
 
-        if (allLevels.Count == 0) { GameMaster.GM.Log.WriteLog(GameMaster.GM, LogSystem.ELogMsgType.ERROR, "nenacetli jsme zadne LevelInfo"); }
+        if (allLevels.Count == 0) { CGameMaster.GM.GetUniversal().GetMasterLog().WriteLog(CGameMaster.GM, CMasterLog.ELogMsgType.ERROR, "nenacetli jsme zadne LevelInfo"); }
 
         return allLevels;
     }
@@ -130,11 +136,11 @@ public partial class CLevelLoader : Node
     public void StartPrecompileShaderProcess()
     {
         // TODO - bonus, vytvorit gui scenu pro loading (prekryti vsech tech nesmyslu co se deji za oponou)
-        GameMaster.GM.Log.WriteLog(GameMaster.GM, LogSystem.ELogMsgType.INFO, "START PRECOMPILE SHADER PROCESS...");
+        CGameMaster.GM.GetUniversal().GetMasterLog().WriteLog(CGameMaster.GM, CMasterLog.ELogMsgType.INFO, "START PRECOMPILE SHADER PROCESS...");
 
         Vector3 precompGlobalPosCenter = new Vector3(500, 0, 500);
 
-        FPSCharacter_BasicMoving character_basic = GameMaster.GM.GetFPSCharacter();
+        FPSCharacter_BasicMoving character_basic = CGameMaster.GM.GetGame().GetFPSCharacterOld();
         ObjectCamera objectCamera = character_basic.objectCamera;
         character_basic.SetInputEnable(false);
         objectCamera.SetLerpToCharacterEnable(false);
@@ -145,7 +151,7 @@ public partial class CLevelLoader : Node
         // instancovat all_this_shaders scenu
         var all_this_shaders_need_precomp_Instance = (all_this_shaders_need_compiled)GD.Load<PackedScene>(
             "res://core_systems/level_loader_system/all_this_shaders_need_compiled.tscn").Instantiate();
-        GameMaster.GM.GetTree().Root.AddChild(all_this_shaders_need_precomp_Instance);
+        CGameMaster.GM.GetTree().Root.AddChild(all_this_shaders_need_precomp_Instance);
         all_this_shaders_need_precomp_Instance.GlobalPosition = new Vector3(450, 0, 450);
 
         // ted se spusti all_this_shader_need_compiled ready funkce a po par vterinach
@@ -154,9 +160,9 @@ public partial class CLevelLoader : Node
 
     public void EndPrecompileShaderProcess()
     {
-        GameMaster.GM.GetSettings().RefreshShaders();
+        CGameMaster.GM.GetSettings().RefreshShaders();
 
-        FPSCharacter_BasicMoving character_basic = GameMaster.GM.GetFPSCharacter();
+        FPSCharacter_BasicMoving character_basic = CGameMaster.GM.GetGame().GetFPSCharacterOld();
         ObjectCamera objectCamera = character_basic.objectCamera;
 
         objectCamera.Camera.GlobalPosition = character_basic.GlobalPosition;
@@ -167,17 +173,17 @@ public partial class CLevelLoader : Node
         objectCamera.SetLerpToCharacterEnable(true);
         character_basic.SetInputEnable(true);
 
-        GameMaster.GM.Log.WriteLog(GameMaster.GM, LogSystem.ELogMsgType.INFO, "END PRECOMPILE SHADER PROCESS...");
-        GameMaster.GM.Log.WriteLog(GameMaster.GM, LogSystem.ELogMsgType.INFO, "GAME START...");
+        CGameMaster.GM.GetUniversal().GetMasterLog().WriteLog(CGameMaster.GM, CMasterLog.ELogMsgType.INFO, "END PRECOMPILE SHADER PROCESS...");
+        CGameMaster.GM.GetUniversal().GetMasterLog().WriteLog(CGameMaster.GM, CMasterLog.ELogMsgType.INFO, "GAME START...");
 
         // loading hud dokonci svoji ulohu a znici se
-        GameMaster.GM.GetLoadingHud().LoadingIsComplete(false);
+        CGameMaster.GM.GetUniversal().GetLoadingHud().LoadingIsComplete(false);
     }
 
     public void SetNewInfoLevelCompilingShader(string newInfo, int process)
     {
-        GameMaster.GM.Log.WriteLog(GameMaster.GM, LogSystem.ELogMsgType.INFO, newInfo);
-        GameMaster.GM.GetLoadingHud().SetShaderProcessValueText(process.ToString());
+        CGameMaster.GM.GetUniversal().GetMasterLog().WriteLog(CGameMaster.GM, CMasterLog.ELogMsgType.INFO, newInfo);
+        CGameMaster.GM.GetUniversal().GetLoadingHud().SetShaderProcessValueText(process.ToString());
     }
     
     public void LoadNewWorldLevel_Threaded(string newLevelScenePath, string newLevelName)
@@ -185,7 +191,7 @@ public partial class CLevelLoader : Node
         canUpdate = true;
         loadingScenePath = newLevelScenePath;
 
-
+        // toto jsem od verze 4.2.rc1 musel nastavit (usethreads) na false, protoze to jinak crashovalo
         ResourceLoader.LoadThreadedRequest(loadingScenePath,"",true);
     }
 
@@ -201,26 +207,26 @@ public partial class CLevelLoader : Node
             canUpdate = false;
 
             GD.Print("loading scene is complete, it is change now");
-            GameMaster.GM.GetTree().ChangeSceneToPacked((PackedScene)ResourceLoader.LoadThreadedGet(loadingScenePath));
+            CGameMaster.GM.GetTree().ChangeSceneToPacked((PackedScene)ResourceLoader.LoadThreadedGet(loadingScenePath));
 
-            await ToSignal(GameMaster.GM.GetTree(), "process_frame");
+            await ToSignal(CGameMaster.GM.GetTree(), "process_frame");
             EmitSignal(SignalName.LevelLoadComplete,true);
 
         }
         else if(loadingNewWorldLevelStatus == ResourceLoader.ThreadLoadStatus.InProgress)
         {
             //GD.Print("loading bar: " + progress[0]);
-            GameMaster.GM.GetLoadingHud().UpdateProgressBar(((float)progress[0]));
+            CGameMaster.GM.GetUniversal().GetLoadingHud().UpdateProgressBar(((float)progress[0]));
         }
     }
 
     public WorldLevel GetActualLevelScene()
     {
-        WorldLevel level = GameMaster.GM.GetNode<WorldLevel>("/root/WorldLevel");
+        WorldLevel level = CGameMaster.GM.GetNode<WorldLevel>("/root/WorldLevel");
         if (level == null)
         {
             // pokud nemuzeme level najit, napiseme chybu do logu
-            GameMaster.GM.Log.WriteLog(GameMaster.GM, LogSystem.ELogMsgType.ERROR,
+            CGameMaster.GM.GetUniversal().GetMasterLog().WriteLog(CGameMaster.GM, CMasterLog.ELogMsgType.ERROR,
                 "GetActualLevelScene() - Not find /root/WorldLevel");
         }
 

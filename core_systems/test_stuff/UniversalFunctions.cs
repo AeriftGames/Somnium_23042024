@@ -1,11 +1,15 @@
 using Godot;
 using Godot.Collections;
+using Godot.NativeInterop;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading;
 
-public partial class UniversalFunctions
+public partial class UniversalFunctions : Node
 {
+    public bool test = false;
+
     public struct HitResult
     {
         public bool isHit;
@@ -246,7 +250,7 @@ public partial class UniversalFunctions
             }
         }
 
-        if (allSpawnObjects.Count == 0) { GameMaster.GM.Log.WriteLog(GameMaster.GM, LogSystem.ELogMsgType.ERROR, "nenacetli jsme zadne LevelInfo"); }
+        if (allSpawnObjects.Count == 0) { CGameMaster.GM.GetUniversal().GetMasterLog().WriteLog(CGameMaster.GM, CMasterLog.ELogMsgType.ERROR, "nenacetli jsme zadne LevelInfo"); }
 
         return allSpawnObjects;
     }
@@ -267,6 +271,8 @@ public partial class UniversalFunctions
 
     static public levelinfo_base_resource GetLevelInfoData(Resource newlevelInfo)
     {
+        if (newlevelInfo == null) return null;
+
         Resource data = GD.Load(newlevelInfo.ResourcePath);
         if (data != null && data is levelinfo_base_resource leveldata)
             return leveldata;
@@ -327,8 +333,91 @@ public partial class UniversalFunctions
             }
         }
 
-        if (AllLevelInfo.Count == 0) { GameMaster.GM.Log.WriteLog(GameMaster.GM, LogSystem.ELogMsgType.ERROR, "nenacetli jsme zadne LevelInfo"); }
+        if (AllLevelInfo.Count == 0) { CGameMaster.GM.GetUniversal().GetMasterLog().WriteLog(CGameMaster.GM, CMasterLog.ELogMsgType.ERROR, "nenacetli jsme zadne LevelInfo"); }
 
         return AllLevelInfo;
+    }
+
+    public static string DetectSurfaceMaterialOfFloor(Node3D newCaller,Vector3 newPos)
+    {
+        PhysicsDirectSpaceState3D directSpace = newCaller.GetWorld3D().DirectSpaceState;
+
+        PhysicsRayQueryParameters3D rayParam = new PhysicsRayQueryParameters3D();
+        rayParam.From = newPos;
+        rayParam.To = newPos + (Vector3.Down * 1);
+
+        var rayResult = directSpace.IntersectRay(rayParam);
+        if (rayResult.Count > 0)
+        {
+            Node HitCollider = (Node)rayResult["collider"];
+            if (HitCollider == null) return "none";
+
+            if (HitCollider.IsInGroup("material_surface_metal"))
+                return "material_surface_metal";
+
+            if (HitCollider.IsInGroup("material_surface_wood"))
+                return "material_surface_wood";
+        }
+        return "none";
+    }
+    /*
+    public static void TryCall(Node newObject,StringName newFunction, params Variant[] args = null)
+    {
+        if (newObject == null)
+        {
+            // Log error dont exist object
+        }
+        else if (newObject.HasMethod(newFunction) == false)
+        {
+            // Log error has method
+            GD.Print("neexistuje methoda");
+        }
+        else
+        {
+            newObject.Call(newFunction, args);
+        }
+    }
+    */
+    /*
+    public static void TryCall(Node newObject, StringName newFunction)
+    {
+        if (newObject == null)
+        {
+            // Log error dont exist object
+        }
+        else if (newObject.HasMethod(newFunction) == false)
+        {
+            // Log error has method
+            GD.Print("neexistuje methoda");
+        }
+        else
+        {
+            newObject.Call(newFunction);
+        }
+    }
+    */
+    public static void TryCall(Node newObject, StringName newFunction)
+    {
+        if (newObject == null)
+        {
+            // Log error dont exist object
+        }
+        else if (newObject.HasMethod(newFunction) == false)
+        {
+            // Log error has method
+            GD.Print("neexistuje methoda");
+        }
+        else
+        {
+            newObject.Call(newFunction);
+        }
+    }
+
+    // for getting vram in mb
+    public static int GetVRamUsageInMBytes()
+    {
+        int a = (int) RenderingServer.GetRenderingInfo(RenderingServer.RenderingInfo.VideoMemUsed);
+        a = a / 1000000;
+        return a;
     }
 }

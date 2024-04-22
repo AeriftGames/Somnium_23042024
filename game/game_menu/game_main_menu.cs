@@ -16,12 +16,17 @@ public partial class game_main_menu : Control
 
         PickLevelsControl.Visible = false;
         LoadAllLevelsAsButtons();
+
+        // Set visible mouse for navigate
+        Input.MouseMode = Input.MouseModeEnum.Visible;
+
+        GetNode<Button>("%StartLevelButton").GrabFocus();
     }
 
     public void LoadAllLevelsAsButtons()
     {
         PackedScene newLevelInfoButton = 
-            GD.Load<PackedScene>("res://game/game_menu/base/level_info_button.tscn");
+            GD.Load<PackedScene>("res://game/base/level_info_button.tscn");
 
         List<levelinfo_base_resource> AllLevelInfos = 
             UniversalFunctions.GetAllLevelInfoDataFromDir("res://levels/all_levels_info_resources/game_levels/");
@@ -39,11 +44,15 @@ public partial class game_main_menu : Control
     public void _on_start_level_button_pressed()
     {
         PickLevelsControl.Visible = true;
+        GetNode<VBoxContainer>("%VBoxContainer").Visible = false;
+        GetNode<Button>("%ClosePickLevelsControl").GrabFocus();
     }
 
     public void _on_close_pick_levels_control_pressed()
     {
         PickLevelsControl.Visible = false;
+        GetNode<VBoxContainer>("%VBoxContainer").Visible = true;
+        GetNode<Button>("%StartLevelButton").GrabFocus();
     }
 
     public void _on_exit_game_menu_pressed()

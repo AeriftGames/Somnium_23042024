@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://bffm3rd3grnjn"]
+
+[ext_resource type="Shader" path="res://testing_stuff_kaen/outline/outline_test.gdshader" id="1_3g1uk"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_3g1uk")
+shader_parameter/enable = false
+shader_parameter/outline_thickness = 0.02
+shader_parameter/color = Color(1, 1, 1, 1)

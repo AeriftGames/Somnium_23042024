@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://b0p7cpttoqb2h"]
+[gd_scene load_steps=19 format=3 uid="uid://b0p7cpttoqb2h"]
 
 [ext_resource type="Script" path="res://placeholders/modular_level_builds/my_trim1/button_door_test.cs" id="1_nmv0f"]
 [ext_resource type="Material" uid="uid://75g41m3tp8pj" path="res://placeholders/modular_level_builds/my_trim1/trim1_mat.tres" id="1_q3kfm"]
@@ -7,8 +7,12 @@
 [ext_resource type="Texture2D" uid="uid://cuovukpdoti1o" path="res://textures/grid_texture_normal.jpg" id="4_cfnuw"]
 [ext_resource type="AudioStream" uid="uid://d0wafy2xcdq37" path="res://audio/audio_streams/button_press/ButtonPress_3.wav" id="4_s2yqo"]
 [ext_resource type="AudioStream" uid="uid://dmexiofq7ggkd" path="res://audio/audio_streams/button_press/ButtonPress_4.wav" id="5_6hwjt"]
-[ext_resource type="Script" path="res://core_systems/interactive_system/interactive_object.cs" id="5_kv0o7"]
 [ext_resource type="AudioStream" uid="uid://df6pxda3djl2w" path="res://audio/audio_streams/button_press/ButtonPress_1.wav" id="6_y0sx3"]
+[ext_resource type="Script" path="res://testing_stuff_kaen/test_new_levels/CInteractiveObject.cs" id="10_nywch"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yhqs0"]
+resource_local_to_scene = true
+size = Vector3(0.0894468, 0.091, 0.0965906)
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_g4s1e"]
 _surfaces = [{
@@ -84,12 +88,6 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_d882b")
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_daxt8"]
-size = Vector3(0.106161, 0.162522, 0.119634)
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_oh6ko"]
-radius = 1.5034
 
 [sub_resource type="Animation" id="Animation_i8jdm"]
 length = 0.001
@@ -169,9 +167,25 @@ _data = {
 "buttonPressed": SubResource("Animation_lrr7k")
 }
 
-[node name="button_door_test" type="Node3D"]
+[node name="button_door_test" type="Node3D" node_paths=PackedStringArray("AllUseObjects")]
 script = ExtResource("1_nmv0f")
 audioStreams = Array[AudioStream]([ExtResource("6_y0sx3"), ExtResource("3_y1hoa"), ExtResource("4_s2yqo"), ExtResource("5_6hwjt")])
+AllUseObjects = []
+
+[node name="InteractiveObject" type="Node3D" parent="." node_paths=PackedStringArray("CallUseObject") groups=["interactive_object"]]
+script = ExtResource("10_nywch")
+CallUseObject = NodePath("..")
+ObjectName = "Button"
+InteractVisibleBy = 1
+metadata/_edit_lock_ = true
+
+[node name="StaticBody3D" type="StaticBody3D" parent="InteractiveObject" groups=["interactive_object"]]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractiveObject/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00131519, 0.517183, 0.0119575)
+shape = SubResource("BoxShape3D_yhqs0")
 
 [node name="button_body" type="MeshInstance3D" parent="."]
 mesh = SubResource("ArrayMesh_u6qif")
@@ -181,30 +195,6 @@ skeleton = NodePath("")
 transform = Transform3D(1, 0, 0, 0, 0.961011, -0.27651, 0, 0.27651, 0.961011, 0, 0.492413, 0.00302356)
 mesh = SubResource("ArrayMesh_w67b3")
 skeleton = NodePath("")
-
-[node name="interactive_object" type="Node3D" parent="." groups=["interactive_object"]]
-script = ExtResource("5_kv0o7")
-InteractVisibleBy = 1
-metadata/_edit_lock_ = true
-
-[node name="StaticBody3D" type="StaticBody3D" parent="interactive_object"]
-collision_layer = 4
-collision_mask = 0
-metadata/_edit_lock_ = true
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="interactive_object/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.502351, 0)
-shape = SubResource("BoxShape3D_daxt8")
-
-[node name="interactive_object_area3D" type="Area3D" parent="interactive_object/StaticBody3D"]
-collision_layer = 4
-collision_mask = 2
-monitorable = false
-metadata/_edit_lock_ = true
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="interactive_object/StaticBody3D/interactive_object_area3D"]
-shape = SubResource("SphereShape3D_oh6ko")
-metadata/_edit_lock_ = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -217,6 +207,3 @@ stream = ExtResource("6_y0sx3")
 unit_size = 2.0
 max_db = 0.0
 bus = &"Sfx"
-
-[connection signal="body_entered" from="interactive_object/StaticBody3D/interactive_object_area3D" to="interactive_object" method="_on_interactive_object_area_3d_body_entered" flags=18]
-[connection signal="body_exited" from="interactive_object/StaticBody3D/interactive_object_area3D" to="interactive_object" method="_on_interactive_object_area_3d_body_exited" flags=18]

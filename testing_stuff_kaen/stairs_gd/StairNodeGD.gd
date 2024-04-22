@@ -1,4 +1,3 @@
-@tool
 extends Node3D
 
 var allstair_node:Node = null
@@ -31,9 +30,13 @@ func _ready() -> void:
 	
 
 func start_init():
+	await get_tree().create_timer(0.5).timeout
 	if Engine.is_editor_hint():
-		if get_node("AllStairs") != null:
-			get_node("AllStairs").queue_free()
+		for a in get_children():
+			a.queue_free()
+			
+		#if get_node("AllStairs") != null:
+		#	get_node("AllStairs").queue_free()
 			
 		await get_tree().process_frame
 
@@ -44,14 +47,17 @@ func start_init():
 			allstair_node.set_owner(get_tree().edited_scene_root)
 	
 			_generate_stairs(number_of_stairs)
+	
+	else:
+		
+		await get_tree().process_frame
 			
-			
-	if get_tree() != null:
-		if not Engine.is_editor_hint():
-			if get_node("AllStairs") != null:
-				for child in get_node("AllStairs").get_children():
-					child.set_stair_world_collision(enable_world_col)
-					child.set_stair_player_collision(enable_player_col)
+		if get_tree() != null:
+			if not Engine.is_editor_hint():
+				if get_node("AllStairs") != null:
+					for child in get_node("AllStairs").get_children():
+						child.set_stair_world_collision(enable_world_col)
+						child.set_stair_player_collision(enable_player_col)
 	
 func _generate_stairs(new_number_of_stairs:int):
 	if not Engine.is_editor_hint():

@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://3mphmigfjen8"]
+
+[ext_resource type="PackedScene" uid="uid://c3e0a1ws1lkkm" path="res://testing_stuff_kaen/zabradli/zabradli.glb" id="1_4h3gu"]
+[ext_resource type="Material" uid="uid://cbcec8cw2bfhq" path="res://testing_stuff_kaen/zabradli/zabradli_mat.tres" id="2_e687w"]
+
+[node name="zabradli" instance=ExtResource("1_4h3gu")]
+
+[node name="zabradli1_003" parent="." index="0"]
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, 0.7, 0)
+material_override = ExtResource("2_e687w")
+lod_bias = 10.0

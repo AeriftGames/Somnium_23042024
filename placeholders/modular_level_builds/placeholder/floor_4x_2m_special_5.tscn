@@ -8,6 +8,7 @@ size = Vector3(2, 0.05, 4)
 
 [node name="floor_4x2m_special4" type="MeshInstance3D"]
 material_override = ExtResource("1_fbdd0")
+extra_cull_margin = 1.0
 mesh = ExtResource("2_nwir6")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="." groups=["material_surface_wood"]]

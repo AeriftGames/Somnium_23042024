@@ -1,0 +1,6 @@
+[gd_resource type="FogMaterial" format=3 uid="uid://m2ngh4oo6ln"]
+
+[resource]
+emission = Color(1, 1, 1, 1)
+height_falloff = 6.41555
+edge_fade = 1e-05

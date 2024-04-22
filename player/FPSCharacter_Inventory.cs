@@ -12,18 +12,13 @@ public partial class FPSCharacter_Inventory : FPSCharacter_Interaction
     private CharacterStaminaComponent characterStaminaComponent = null;
     private CharacterInventoryComponent characterInventoryComponent = null;
     private CharacterStairsComponent characterStairsComponent = null;
+    private CharacterShootBallComponet characterShootBallComponet = null;
+    private CharacterUseLadderComponent characterUseLadderComponent = null;
 
     [ExportGroupAttribute("DamageAndDeath")]
     [Export] public Godot.Collections.Array<AudioStream> HurtAudios;
     [Export] public Godot.Collections.Array<AudioStream> DeathAudios;
     [Export] public Godot.Collections.Array<AudioStream> BodyFallAudios;
-
-    [ExportGroupAttribute("ShootProjectile")]
-    [Export] bool CanShootProjectile = true;
-    [Export] float PowerImpulseShoot = 10.0f;
-    [Export] float MassProjectile = 5.0f;
-    [Export] bool EnableAutoDestroyProjectile = true;
-    [Export] int MSecToDestroyProjectile = 5000;
 
     AudioStreamPlayer hurtPlayer = null;
     AudioStreamPlayer universalPlayer = null;
@@ -50,8 +45,17 @@ public partial class FPSCharacter_Inventory : FPSCharacter_Interaction
         characterInventoryComponent = GetNode<CharacterInventoryComponent>("CharacterComponents/CharacterInventoryComponent");
         characterInventoryComponent.StartInit(this);
 
+        // stairs component
         characterStairsComponent = GetNode<CharacterStairsComponent>("CharacterComponents/CharacterStairsComponent");
         characterStairsComponent.StartInit(this);
+
+        // shootball component
+        characterShootBallComponet = GetNode<CharacterShootBallComponet>("CharacterComponents/CharacterShootBallComponet");
+        characterShootBallComponet.StartInit(this);
+
+        // use ladder component
+        characterUseLadderComponent = GetNode<CharacterUseLadderComponent>("CharacterComponents/CharacterUseLadderComponent");
+        characterUseLadderComponent.StartInit(this);
 
         hurtPlayer = GetNode<AudioStreamPlayer>("AudioStreamPlayer_Hurts");
         universalPlayer = GetNode<AudioStreamPlayer>("AudioStreamPlayer_Universal");
@@ -112,11 +116,6 @@ public partial class FPSCharacter_Inventory : FPSCharacter_Interaction
             if (GetCharacterPosture() == ECharacterPosture.Crunch)
                 GetCharacterStaminaComponent().SetStaminaRegenTick(0.085f);
         }
-        
-        // Shoot physic projectile **********************************************************
-        bool shootNow = IsInputEnable() && CanShootProjectile && Input.IsActionJustPressed("mouseRightClick");
-        if (shootNow)
-            ShootPhysicProjectile();
 
         // put inventory item to world
         TestInventoryItemPutToWorld();
@@ -250,7 +249,7 @@ public partial class FPSCharacter_Inventory : FPSCharacter_Interaction
         // vytvorime (spawn) DeadCamBody do levelu na misto kde se aktualne nachazela kamera
         deadCamBody = 
             GD.Load<PackedScene>("res://player/character_systems/dead_cam_body.tscn").Instantiate() as dead_cam_body;
-        GameMaster.GM.GetLevelLoader().GetActualLevelScene().AddChild(deadCamBody);
+        CGameMaster.GM.GetGame().GetLevelLoader().GetActualLevelScene().AddChild(deadCamBody);
 
         // aktivujeme DeadCam
         deadCamBody.ActivateDeadCam();
@@ -261,35 +260,14 @@ public partial class FPSCharacter_Inventory : FPSCharacter_Interaction
     public CharacterStaminaComponent GetCharacterStaminaComponent() {  return characterStaminaComponent; }
     public CharacterInventoryComponent GetInventoryComponent() { return characterInventoryComponent; }
     public CharacterStairsComponent GetCharacterStairsComponent() { return characterStairsComponent; }
+    public CharacterShootBallComponet GetCharacterShootBallComponet() { return characterShootBallComponet; }
+    public CharacterUseLadderComponent GetCharacterUseLadderComponent() {  return characterUseLadderComponent; }
     public CharacterInfoHud GetCharacterInfoHud() { return characterInfoHud; }
     public Godot.Collections.Array<AudioStream> GetHurtAudios(){return HurtAudios;}
     public Godot.Collections.Array<AudioStream> GetDeathAudios() { return DeathAudios;}
     public Godot.Collections.Array<AudioStream> GetBodyFallAudios() { return BodyFallAudios; }
 
     public AudioStreamPlayer GetHurtPlayer() { return hurtPlayer; }
-
-    public void ShootPhysicProjectile()
-    {
-        Vector3 start = GetObjectCamera().GlobalPosition;
-        Vector3 end = GetObjectCamera().GetCameraLookingPoint().GlobalPosition;
-
-        RigidBody3D projectile = 
-            GD.Load<PackedScene>("res://testing_stuff_kaen/shootball/ball_projectile.tscn").Instantiate() as RigidBody3D;
-
-        GameMaster.GM.GetLevelLoader().GetActualLevelScene().AddChild(projectile);
-        projectile.Mass = MassProjectile;
-        projectile.GlobalPosition = start;
-        projectile.ApplyCentralImpulse((end - start) * PowerImpulseShoot);
-
-        if(EnableAutoDestroyProjectile)
-            DestroyProjectile(projectile);
-    }
-
-    public async void DestroyProjectile(RigidBody3D projectile)
-    {
-        await Task.Delay(MSecToDestroyProjectile);
-        projectile.QueueFree();
-    }
 
     public void PlaySpecificAudioOnPlayer(AudioStream newStream,float volumeDB = 0.0f,float pitchScale = 1.0f)
     {

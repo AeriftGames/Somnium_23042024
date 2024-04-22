@@ -3,19 +3,20 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bl8f5dclwml3k"
-path="res://.godot/imported/trimsheet_3_low_DefaultMaterial_Height.png-29769bb9be4d5714334bbd5f1e575a9d.ctex"
+path.s3tc="res://.godot/imported/trimsheet_3_low_DefaultMaterial_Height.png-29769bb9be4d5714334bbd5f1e575a9d.s3tc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://placeholders/modular_level_builds/my_trim1/textures/textures_2variant/trimsheet_3_low_DefaultMaterial_Height.png"
-dest_files=["res://.godot/imported/trimsheet_3_low_DefaultMaterial_Height.png-29769bb9be4d5714334bbd5f1e575a9d.ctex"]
+dest_files=["res://.godot/imported/trimsheet_3_low_DefaultMaterial_Height.png-29769bb9be4d5714334bbd5f1e575a9d.s3tc.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1

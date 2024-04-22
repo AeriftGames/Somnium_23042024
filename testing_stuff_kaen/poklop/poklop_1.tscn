@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://c1sh6k71140rj"]
+
+[ext_resource type="PackedScene" uid="uid://bhoboy471abp0" path="res://testing_stuff_kaen/poklop/poklop1.glb" id="1_cuow1"]
+[ext_resource type="Material" uid="uid://dk2d5anxmrsd7" path="res://testing_stuff_kaen/poklop/poklop1_mat.tres" id="2_3hd08"]
+
+[node name="poklop1" instance=ExtResource("1_cuow1")]
+
+[node name="poklop" parent="." index="0"]
+material_override = ExtResource("2_3hd08")
+
+[node name="base" parent="." index="1"]
+material_override = ExtResource("2_3hd08")
+
+[node name="poklop_props" parent="." index="2"]
+material_override = ExtResource("2_3hd08")

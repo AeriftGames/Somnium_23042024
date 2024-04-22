@@ -1,4 +1,4 @@
-[gd_resource type="AudioBusLayout" load_steps=3 format=3 uid="uid://cumbtyjpkml8o"]
+[gd_resource type="AudioBusLayout" load_steps=9 format=3 uid="uid://cumbtyjpkml8o"]
 
 [sub_resource type="AudioEffectReverb" id="AudioEffectReverb_ajupu"]
 resource_name = "Reverb"
@@ -17,8 +17,39 @@ spread = 0.7
 hipass = 0.09
 wet = 0.29
 
+[sub_resource type="AudioEffectDelay" id="AudioEffectDelay_i4qy0"]
+resource_name = "Delay"
+dry = 0.5
+
+[sub_resource type="AudioEffectPitchShift" id="AudioEffectPitchShift_rulkb"]
+resource_name = "PitchShift"
+pitch_scale = 0.5
+
+[sub_resource type="AudioEffectPitchShift" id="AudioEffectPitchShift_wn6id"]
+resource_name = "PitchShift"
+pitch_scale = 0.4
+oversampling = 8
+
+[sub_resource type="AudioEffectReverb" id="AudioEffectReverb_wbqx1"]
+resource_name = "Reverb"
+room_size = 0.49
+hipass = 1.0
+dry = 0.8
+
+[sub_resource type="AudioEffectReverb" id="AudioEffectReverb_rhu64"]
+resource_name = "Reverb"
+room_size = 0.2
+damping = 0.16
+spread = 0.6
+hipass = 0.41
+dry = 0.35
+wet = 0.07
+
+[sub_resource type="AudioEffectPhaser" id="AudioEffectPhaser_avgjj"]
+resource_name = "Phaser"
+
 [resource]
-bus/0/volume_db = 2.25149
+bus/0/volume_db = 0.267241
 bus/0/effect/0/effect = SubResource("AudioEffectReverb_ajupu")
 bus/0/effect/0/enabled = true
 bus/1/name = &"Sfx"
@@ -34,4 +65,34 @@ bus/2/bypass_fx = false
 bus/2/volume_db = -0.130497
 bus/2/send = &"Master"
 bus/2/effect/0/effect = SubResource("AudioEffectReverb_fvdiv")
-bus/2/effect/0/enabled = true
+bus/2/effect/0/enabled = false
+bus/2/effect/1/effect = SubResource("AudioEffectDelay_i4qy0")
+bus/2/effect/1/enabled = false
+bus/3/name = &"HalfPitch"
+bus/3/solo = false
+bus/3/mute = false
+bus/3/bypass_fx = false
+bus/3/volume_db = 0.0
+bus/3/send = &"Sfx"
+bus/3/effect/0/effect = SubResource("AudioEffectPitchShift_rulkb")
+bus/3/effect/0/enabled = true
+bus/4/name = &"Footsteps"
+bus/4/solo = false
+bus/4/mute = false
+bus/4/bypass_fx = false
+bus/4/volume_db = 6.02
+bus/4/send = &"Sfx"
+bus/4/effect/0/effect = SubResource("AudioEffectPitchShift_wn6id")
+bus/4/effect/0/enabled = true
+bus/4/effect/1/effect = SubResource("AudioEffectReverb_wbqx1")
+bus/4/effect/1/enabled = true
+bus/5/name = &"HealthAudio"
+bus/5/solo = false
+bus/5/mute = false
+bus/5/bypass_fx = false
+bus/5/volume_db = 0.0
+bus/5/send = &"Sfx"
+bus/5/effect/0/effect = SubResource("AudioEffectReverb_rhu64")
+bus/5/effect/0/enabled = true
+bus/5/effect/1/effect = SubResource("AudioEffectPhaser_avgjj")
+bus/5/effect/1/enabled = false

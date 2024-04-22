@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://ojsk1qrly5kf"]
+
+[ext_resource type="PackedScene" uid="uid://c5v1f1rxatwjm" path="res://testing_stuff_kaen/test_new_levels/3_madla.glb" id="1_onncx"]
+[ext_resource type="Material" uid="uid://btinqpm8usxre" path="res://testing_stuff_kaen/test_new_levels/NEW_TRIM/new_trim2.material" id="2_2x4ci"]
+
+[node name="3_madla" instance=ExtResource("1_onncx")]
+
+[node name="NurbsPath_044" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+material_override = ExtResource("2_2x4ci")

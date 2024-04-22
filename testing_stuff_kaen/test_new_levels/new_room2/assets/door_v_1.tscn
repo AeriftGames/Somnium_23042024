@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://bnades2shc0wk"]
+
+[ext_resource type="PackedScene" uid="uid://5iedyxrfe3it" path="res://testing_stuff_kaen/test_new_levels/new_room2/assets/door_v1.glb" id="1_lylbg"]
+[ext_resource type="Material" uid="uid://djkk2stsjxqfb" path="res://testing_stuff_kaen/test_new_levels/new_room2/mat/trim01_door_shader.tres" id="2_jwr2b"]
+
+[node name="door_v1" instance=ExtResource("1_lylbg")]
+
+[node name="Cube_2165" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+material_override = ExtResource("2_jwr2b")

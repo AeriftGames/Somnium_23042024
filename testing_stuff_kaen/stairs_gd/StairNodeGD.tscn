@@ -6,3 +6,5 @@
 [node name="StairNodeGd" type="Node3D"]
 script = ExtResource("1_3fyrr")
 stair_prefab = ExtResource("2_yldpj")
+
+[node name="AllStairs" type="Node3D" parent="."]

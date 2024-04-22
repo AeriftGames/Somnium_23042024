@@ -26,17 +26,8 @@ public partial class global_settings_data : Resource
 	[ExportGroupAttribute("Debug Hud Settings")]
 	[Export] public bool ShowDebugHud { get; set; }
 	[Export] public bool ShowFps { get; set; }
+	[Export] public bool ShowDebugLabels {  get; set; }
 	[Export] public bool ShowPerformance { get; set; }
-	[Export] public bool ShowCustomLabel0 { get; set; }
-	[Export] public bool ShowCustomLabel1 { get; set; }
-	[Export] public bool ShowCustomLabel2 { get; set; }
-	[Export] public bool ShowCustomLabel3 { get; set; }
-	[Export] public bool ShowCustomLabel4 { get; set; }
-	[Export] public bool ShowCustomLabel5 { get; set; }
-	[Export] public bool ShowCustomLabel6 { get; set; }
-	[Export] public bool ShowCustomLabel7 { get; set; }
-	[Export] public bool ShowCustomLabel8 { get; set; }
-	[Export] public bool ShowCustomLabel9 { get; set; }
 	[Export] public bool EnableWorldLevelOcclusionCull { get; set; }
 
     [ExportGroupAttribute("Inputs Settings")]

@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://b2r1jri7l2xqy"]
+
+[ext_resource type="PackedScene" uid="uid://sxpxigaqffee" path="res://testing_stuff_kaen/test_new_levels/new_room2/assets/rohovy_gauc_final_pillow.glb" id="1_6dnlg"]
+[ext_resource type="Material" uid="uid://bffl0cpdaxjct" path="res://testing_stuff_kaen/test_new_levels/new_room2/mat/trim01_pillow2_shader.tres" id="2_4n6n2"]
+
+[node name="rohovy_gauc_final_pillow" instance=ExtResource("1_6dnlg")]
+
+[node name="Cube_1823" parent="." index="0"]
+transform = Transform3D(0.999972, -0.00515148, 0.00546423, 0.00543907, 0.998527, -0.0539914, -0.00517805, 0.0540196, 0.998526, 0, 0, 0)
+material_override = ExtResource("2_4n6n2")

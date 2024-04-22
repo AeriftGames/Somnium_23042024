@@ -52,7 +52,7 @@ public partial class CBenchmarkSystem : Node
         //await ToSignal(GameMaster.GM.GetMasterSignals(), MasterSignals.SignalName.GameStart);
         await Task.Delay(1000);
 
-        GameMaster.GM.GetMasterSignals().BenchmarkFinishPresset += () => FinishBenchmarkPresset();
+        CGameMaster.GM.GetMasterSignals().BenchmarkFinishPresset += () => FinishBenchmarkPresset();
     }
 
     public int GetActualQualityBenchmark(){ return ActualBenchmarkQualityLevel; }
@@ -71,8 +71,8 @@ public partial class CBenchmarkSystem : Node
         // start
         LoadBenchmarLevelInQuality(newLevelScenePath, newLevelName, NeedBenchmarkQualityLevel);
 
-        if (GameMaster.GM.GetFPSCharacter != null)
-            GameMaster.GM.QueueCharacterAndCamera();
+        if (CGameMaster.GM.GetGame().GetFPSCharacterOld() != null)
+            CGameMaster.GM.QueueCharacterAndCamera();
     }
 
     public void BenchmarkStart(bool success)
@@ -80,9 +80,10 @@ public partial class CBenchmarkSystem : Node
         //GD.Print("Benchmark level start in quality presset: " + NeedBenchmarkQualityLevel);
         //await Task.Delay(1000);
         // Emit start game from now
-        GameMaster.GM.GetMasterSignals().EmitSignal(MasterSignals.SignalName.GameStart);
+        CGameMaster.GM.GetMasterSignals().EmitSignal(CMasterSignals.SignalName.GameStart);
 
-        GameMaster.GM.GetLoadingHud().Visible = false;
+        CGameMaster.GM.GetUniversal().GetLoadingHud().LoadingIsComplete(true);
+        CGameMaster.GM.GetUniversal().EnableBlackScreen(false);
 
         // priprava na dalsi test
 
@@ -116,28 +117,28 @@ public partial class CBenchmarkSystem : Node
         benchmarkScoreBoard.SetVisibleForPlayer(false);
         AllFpsData.Clear();
 
-        LoadBenchmarLevelInQuality(GameMaster.GM.GetLevelLoader().GetActualLevelScene().SceneFilePath,
-            GameMaster.GM.GetLevelLoader().GetActualLevelName(), NeedBenchmarkQualityLevel);
+        LoadBenchmarLevelInQuality(CGameMaster.GM.GetGame().GetLevelLoader().GetActualLevelScene().SceneFilePath,
+            CGameMaster.GM.GetGame().GetLevelLoader().GetActualLevelName(), NeedBenchmarkQualityLevel);
     }
 
     public async void LoadBenchmarLevelInQuality(string newLevelScenePath,
         string newLevelName,int newQualityPresset)
     {
         // normalni process pro (thread) nacteni noveho levelu vcetne loading baru atd
-        GameMaster.GM.GetLevelLoader().LoadNewWorldLevel(newLevelScenePath, newLevelName);
+        CGameMaster.GM.GetGame().GetLevelLoader().LoadNewWorldLevel(newLevelScenePath, newLevelName);
 
         // ma jedinou funkci a pouzivame ji pro zobrazeni textu v benchmarku
         ActualBenchmarkQualityLevel = NeedBenchmarkQualityLevel;
 
         // pockame v teto asynchronni funkci na signal kdy se benchmark level uspesne nacetl
-        await ToSignal(GameMaster.GM.GetLevelLoader(), CLevelLoader.SignalName.LevelLoadComplete);
-        //GD.Print("Benchmark level Load Complete");
+        await ToSignal(CGameMaster.GM.GetGame().GetLevelLoader(), CLevelLoader.SignalName.LevelLoadComplete);
+        GD.Print("Benchmark level Load Complete");
 
         await ToSignal(GetTree().CreateTimer(1.0f), "timeout");
 
         // Apply nastaveni quality pressetu
-        GameMaster.GM.GetLevelLoader().GetActualLevelScene().GetLevelDataSettings().
-            ApplyNewLevelDataSettings(GameMaster.GM.GetLevelLoader().
+        CGameMaster.GM.GetGame().GetLevelLoader().GetActualLevelScene().GetLevelDataSettings().
+            ApplyNewLevelDataSettings(CGameMaster.GM.GetGame().GetLevelLoader().
             GetActualLevelScene().GetLevelDataSettings().GetQualityPressetByID(NeedBenchmarkQualityLevel),
             false,true);
     }
@@ -148,19 +149,19 @@ public partial class CBenchmarkSystem : Node
         UniversalFunctions.SFpsInfo FpsInfo = UniversalFunctions.CalculateFpsInfo(AllFpsData);
 
         // vypsani vysledku ve scoreboard klientovi
-        benchmarkScoreBoard.SetBenchmarkScoreData(GameMaster.GM.GetBuild(),
-            GameMaster.GM.GetLevelLoader().GetActualLevelName(),
+        benchmarkScoreBoard.SetBenchmarkScoreData(CGameMaster.GM.GetBuild(),
+            CGameMaster.GM.GetGame().GetLevelLoader().GetActualLevelName(),
             UniversalFunctions.GetQualityLevelText(ActualBenchmarkQualityLevel),
             FpsInfo.avgFps.ToString(), FpsInfo.minFps.ToString(), FpsInfo.maxFps.ToString());
         benchmarkScoreBoard.SetVisibleForPlayer(true);
 
         // zkouska poslani dat oalovi
-        SendBenchmarkScoreData(GameMaster.GM.GetBuild(),
-            GameMaster.GM.GetLevelLoader().GetActualLevelName(),
+        SendBenchmarkScoreData(CGameMaster.GM.GetBuild(),
+            CGameMaster.GM.GetGame().GetLevelLoader().GetActualLevelName(),
             FpsInfo.avgFps, FpsInfo.minFps, FpsInfo.maxFps);
 
         //
-        BenchmarkGD.Call("send_test", GameMaster.GM.GetBuild(), GameMaster.GM.GetLevelLoader().GetActualLevelName(),
+        BenchmarkGD.Call("send_test", CGameMaster.GM.GetBuild(), CGameMaster.GM.GetGame().GetLevelLoader().GetActualLevelName(),
             UniversalFunctions.GetQualityLevelText(ActualBenchmarkQualityLevel), FpsInfo.minFps, FpsInfo.maxFps,
             FpsInfo.avgFps);
     }
@@ -184,8 +185,8 @@ public partial class CBenchmarkSystem : Node
         benchmarkMenuAndFpsStats.SetQualityLevelText(
             UniversalFunctions.GetQualityLevelText(ActualBenchmarkQualityLevel));
 
-        GameMaster.GM.GetSettings().Apply_UnlockMaxFps(true, true);
-        GameMaster.GM.GetSettings().Apply_DisableVsync(true, true);
+        CGameMaster.GM.GetSettings().Apply_UnlockMaxFps(true, true);
+        CGameMaster.GM.GetSettings().Apply_DisableVsync(true, true);
 
         benchmarkMenuAndFpsStats.Visible = true;
     }
@@ -209,7 +210,7 @@ public partial class CBenchmarkSystem : Node
     public void ServerCheck(){ BenchmarkGD.Call("server_check"); }
     public void ServerCheck_End(bool newResult)
     {
-        GameMaster.GM.GetMasterSignals().EmitSignal(MasterSignals.SignalName.BenchmarkServerStatus,newResult);
+        CGameMaster.GM.GetMasterSignals().EmitSignal(CMasterSignals.SignalName.BenchmarkServerStatus,newResult);
     }
 
 }

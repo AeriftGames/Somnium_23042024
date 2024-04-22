@@ -1,0 +1,30 @@
+[gd_scene load_steps=8 format=3 uid="uid://dcyfiv5n8dmrg"]
+
+[ext_resource type="PackedScene" uid="uid://5smpd7bsxoi7" path="res://testing_stuff_kaen/models/my_scifi_box/scifi_box.glb" id="1_ydh18"]
+[ext_resource type="Texture2D" uid="uid://cxkownviewhhe" path="res://testing_stuff_kaen/models/my_scifi_box/7merge_Material_BaseColor.png" id="2_12bll"]
+[ext_resource type="Texture2D" uid="uid://25exw86e3diu" path="res://testing_stuff_kaen/models/my_scifi_box/7merge_Material_Metallic.png" id="3_h1efu"]
+[ext_resource type="Texture2D" uid="uid://dw4pjsbh11kro" path="res://testing_stuff_kaen/models/my_scifi_box/7merge_Material_Normal.png" id="4_mg18b"]
+[ext_resource type="Texture2D" uid="uid://cc78qo76x4c2f" path="res://testing_stuff_kaen/models/my_scifi_box/7merge_Material_Roughness.png" id="5_l0ini"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lcu2s"]
+albedo_texture = ExtResource("2_12bll")
+metallic = 0.6
+metallic_texture = ExtResource("3_h1efu")
+roughness_texture = ExtResource("5_l0ini")
+normal_enabled = true
+normal_texture = ExtResource("4_mg18b")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2hg8e"]
+size = Vector3(2.2, 2.9, 3.6)
+
+[node name="scifi_box" instance=ExtResource("1_ydh18")]
+
+[node name="Cube" parent="." index="0"]
+layers = 2
+material_override = SubResource("StandardMaterial3D_lcu2s")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." index="1"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.98023e-08, 0.05, -1.78814e-07)
+shape = SubResource("BoxShape3D_2hg8e")

@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://o5usr20k37uj"]
+
+[ext_resource type="PackedScene" uid="uid://c7eweimtc5fmv" path="res://testing_stuff_kaen/test_new_levels/sloupy.glb" id="1_8sjb8"]
+[ext_resource type="Material" uid="uid://btinqpm8usxre" path="res://testing_stuff_kaen/test_new_levels/NEW_TRIM/new_trim2.material" id="2_46uu2"]
+
+[node name="sloupy" instance=ExtResource("1_8sjb8")]
+
+[node name="Cube_688" parent="." index="0"]
+transform = Transform3D(0, 1.60933e-06, -1, -1, -1.19209e-07, -5.96046e-08, -5.96046e-08, 1, 1.54972e-06, 0, 0, 0)
+material_override = ExtResource("2_46uu2")
+
+[node name="Cube_687" parent="." index="1"]
+transform = Transform3D(1.01304e-07, 1.18464e-06, 0.75, -0.849802, 0, 1.11759e-07, 5.06521e-08, 0.75, -1.20699e-06, -3, 0, 0)
+visible = false
+material_override = ExtResource("2_46uu2")

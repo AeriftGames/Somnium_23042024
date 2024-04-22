@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://coybnvevflhni"]
+
+[ext_resource type="Script" path="res://core_systems/test_stuff/UniversalFunctions.cs" id="1_5wjkp"]
+
+[node name="UniversalFunctions" type="Node"]
+script = ExtResource("1_5wjkp")

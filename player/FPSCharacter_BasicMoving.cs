@@ -102,7 +102,7 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
 	public override void _Ready()
 	{
 		// pro dostupnost skrze gamemastera
-		GameMaster.GM.SetFPSCharacter(this);
+		CGameMaster.GM.GetGame().SetFPSCharacterOld(this);
 
 		HeadMain = GetNode<Node3D>("%HeadMain");
 		HeadGimbalA = GetNode<Node3D>("%HeadGimbalA");
@@ -123,13 +123,13 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
 
 		allHuds = GetNode<Control>("AllHuds");
 
-        GameMaster.GM.GetSettings().LoadAndApply_AllInputsSettings();
+        CGameMaster.GM.GetSettings().LoadAndApply_AllInputsSettings();
     }
 
 	// Update Physical updated process
 	public override void _PhysicsProcess(double delta)
 	{
-		if (GameMaster.GM.GetIsQuitting()) return;
+		if (CGameMaster.GM.GetIsQuitting()) return;
 
 		switch (CharacterMode)
 		{
@@ -270,7 +270,7 @@ public partial class FPSCharacter_BasicMoving : CharacterBody3D
 			}
 		}
 
-		GameMaster.GM.GetDebugHud().CustomLabelUpdateText(2, this, "velocity = " + direction);
+		CGameMaster.GM.GetDebugHud().CustomLabelUpdateText(2, this, "velocity = " + direction);
 
 		// Function of Falling and StartFalling
 		if (!IsOnFloor())

@@ -129,7 +129,7 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
 
     public override void _PhysicsProcess(double delta)
     {
-        if (GameMaster.GM.GetIsQuitting()) return;
+        if (CGameMaster.GM.GetIsQuitting()) return;
 
         base._PhysicsProcess(delta);
 
@@ -137,8 +137,8 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
 
         // SET CUSTOM LABEL MOVESPEED AND POSITION OF PLAYER
         float a = Mathf.Snapped(ActualMovementSpeed, 0.1f);
-        GameMaster.GM.GetDebugHud().CustomLabelUpdateText(0, this, "MoveSpeed: " + a);
-        GameMaster.GM.GetDebugHud().CustomLabelUpdateText(1, this, "Position: " + GlobalPosition);
+        CGameMaster.GM.GetDebugHud().CustomLabelUpdateText(0, this, "MoveSpeed: " + a);
+        CGameMaster.GM.GetDebugHud().CustomLabelUpdateText(1, this, "Position: " + GlobalPosition);
 
         CalculateFootSteps((float)delta);
         UpdateLandingHeadBobbing((float)delta);
@@ -314,7 +314,7 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
         {
             
             // very mini
-            GameMaster.GM.Log.WriteLog(this, LogSystem.ELogMsgType.INFO, "(very mini) noticable land effect");
+            CGameMaster.GM.GetUniversal().GetMasterLog().WriteLog(this, CMasterLog.ELogMsgType.INFO, "(very mini) noticable land effect");
 
             // Detect materal surface name and play specific audio set of footsteps
             EMaterialSurface materialSurface = AllMaterialSurfaces.GetMaterialSurfaceFromGroup(DetectSurfaceMaterialOfFloor());
@@ -338,7 +338,7 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
         else if (heightfall <= MiniHeightForLandingEffect)
         {
             // mini land
-            GameMaster.GM.Log.WriteLog(this, LogSystem.ELogMsgType.INFO, "(mini land)" + "height from start falling: " + heightfall + " m");
+            CGameMaster.GM.GetUniversal().GetMasterLog().WriteLog(this, CMasterLog.ELogMsgType.INFO, "(mini land)" + "height from start falling: " + heightfall + " m");
 
             // Detect materal surface name and play specific audio set of footsteps
             EMaterialSurface materialSurface = AllMaterialSurfaces.GetMaterialSurfaceFromGroup(DetectSurfaceMaterialOfFloor());
@@ -361,7 +361,7 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
         else if (heightfall <= SmallHeightForLandingEffect)
         {
             // small land
-            GameMaster.GM.Log.WriteLog(this, LogSystem.ELogMsgType.INFO, "(small land)" + "height from start falling: " + heightfall + " m");
+            CGameMaster.GM.GetUniversal().GetMasterLog().WriteLog(this, CMasterLog.ELogMsgType.INFO, "(small land)" + "height from start falling: " + heightfall + " m");
 
             // Detect materal surface name and play specific audio set of footsteps
             EMaterialSurface materialSurface = AllMaterialSurfaces.GetMaterialSurfaceFromGroup(DetectSurfaceMaterialOfFloor());
@@ -384,7 +384,7 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
         else if (heightfall <= MediumHeightForLandingEffect)
         {
             // medium land
-            GameMaster.GM.Log.WriteLog(this, LogSystem.ELogMsgType.INFO, "(medium land)" + "height from start falling: " + heightfall + " m");
+            CGameMaster.GM.GetUniversal().GetMasterLog().WriteLog(this, CMasterLog.ELogMsgType.INFO, "(medium land)" + "height from start falling: " + heightfall + " m");
 
             // Detect materal surface name and play specific audio set of footsteps
             EMaterialSurface materialSurface = AllMaterialSurfaces.GetMaterialSurfaceFromGroup(DetectSurfaceMaterialOfFloor());
@@ -407,7 +407,7 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
         else if (heightfall <= HighHeightForLandingEffect)
         {
             // high land
-            GameMaster.GM.Log.WriteLog(this, LogSystem.ELogMsgType.INFO, "(high land)" + "height from start falling: " + heightfall + " m");
+            CGameMaster.GM.GetUniversal().GetMasterLog().WriteLog(this, CMasterLog.ELogMsgType.INFO, "(high land)" + "height from start falling: " + heightfall + " m");
 
             // Detect materal surface name and play specific audio set of footsteps
             EMaterialSurface materialSurface = AllMaterialSurfaces.GetMaterialSurfaceFromGroup(DetectSurfaceMaterialOfFloor());
@@ -430,7 +430,7 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
         else if (heightfall > HighHeightForLandingEffect)
         {
             // death land
-            GameMaster.GM.Log.WriteLog(this, LogSystem.ELogMsgType.INFO, "(death land)" + "height from start falling: " + heightfall + " m");
+            CGameMaster.GM.GetUniversal().GetMasterLog().WriteLog(this, CMasterLog.ELogMsgType.INFO, "(death land)" + "height from start falling: " + heightfall + " m");
 
             // Detect materal surface name and play specific audio set of footsteps
             EMaterialSurface materialSurface = AllMaterialSurfaces.GetMaterialSurfaceFromGroup(DetectSurfaceMaterialOfFloor());
@@ -474,7 +474,7 @@ public partial class FPSCharacter_WalkingEffects : FPSCharacter_BasicMoving
     {
         base.EventDead(newReasonDead, newAdditionalData, newPrintToConsole);
 
-        GameMaster.GM.Log.WriteLog(this,LogSystem.ELogMsgType.INFO,"Your character dead becouse: " +
+        CGameMaster.GM.GetUniversal().GetMasterLog().WriteLog(this,CMasterLog.ELogMsgType.INFO,"Your character dead becouse: " +
             newReasonDead + "( " + newAdditionalData + ")");
 
         switch (newReasonDead)

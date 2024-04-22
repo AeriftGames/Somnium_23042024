@@ -70,7 +70,7 @@ public partial class CharacterInventoryComponent : Node
         // Spawn
         Node3D itemPut = GD.Load<PackedScene>(newInventoryItemData.spawnObjectScenePath).Instantiate() as Node3D;
         if (itemPut != null)
-            GameMaster.GM.GetLevelLoader().GetActualLevelScene().AddChild(itemPut);
+            CGameMaster.GM.GetGame().GetLevelLoader().GetActualLevelScene().AddChild(itemPut);
         itemPut.GlobalPosition = safePos;
 
         // Destroy from InventorySystem

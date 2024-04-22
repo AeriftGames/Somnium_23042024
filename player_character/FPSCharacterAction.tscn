@@ -1,0 +1,294 @@
+[gd_scene load_steps=21 format=3 uid="uid://c7sfdtpshgj44"]
+
+[ext_resource type="PackedScene" uid="uid://b8y8ttj527bo2" path="res://player_character/FPSCharacterMoveAnim.tscn" id="1_igu5i"]
+[ext_resource type="Script" path="res://player_character/FPSCharacterAction.cs" id="2_gd4x2"]
+[ext_resource type="PackedScene" uid="uid://cmmc6ubyav1pf" path="res://player_character/action_components/BaseFlashlightComponent.tscn" id="3_pbs4r"]
+[ext_resource type="PackedScene" uid="uid://qokhtagjavo8" path="res://player_character/action_components/BaseHealthComponent.tscn" id="5_n3gvx"]
+[ext_resource type="Script" path="res://player_character/action_components/CCharacterStaminaComponent.cs" id="5_tqnun"]
+[ext_resource type="PackedScene" uid="uid://dk6pwl286slhy" path="res://player_character/action_components/BaseInteractionComponent.tscn" id="7_6tf1x"]
+[ext_resource type="Script" path="res://player_character/action_components/CCharacterShootBallComponent.cs" id="8_kafd3"]
+[ext_resource type="AudioStream" uid="uid://dxie2xuqywf7d" path="res://audio/audio_streams/downloads/impact_ice.wav" id="9_jierr"]
+[ext_resource type="CameraAttributesPractical" uid="uid://cgjd2qg365mbu" path="res://player_character/FPSCharacterAction_Attributes.tres" id="10_ec71m"]
+[ext_resource type="Script" path="res://player_character/action_components/CCharacterFocusActionComponent.cs" id="10_rl15b"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pjd3v"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_066ec"]
+corner_radius_top_left = 2
+corner_radius_bottom_left = 2
+corner_detail = 1
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ewbik"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qa1b7"]
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_detail = 1
+
+[sub_resource type="Animation" id="Animation_xdq7s"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%StaminaScreenBar:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_tfsqg"]
+resource_name = "Show"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%StaminaScreenBar:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_utdca"]
+_data = {
+"RESET": SubResource("Animation_xdq7s"),
+"Show": SubResource("Animation_tfsqg")
+}
+
+[sub_resource type="Animation" id="Animation_dvfqn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_cnx2p"]
+resource_name = "Show"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_w4col"]
+_data = {
+"RESET": SubResource("Animation_dvfqn"),
+"Show": SubResource("Animation_cnx2p")
+}
+
+[node name="FpsCharacterAction" instance=ExtResource("1_igu5i")]
+script = ExtResource("2_gd4x2")
+
+[node name="BaseMovementComponent" parent="BaseComponents" index="0"]
+SPEED_WALK = 2.6
+SPEED_SPRINT = 4.5
+SPEED_CROUCH = 2.0
+SPEED_CROUCH_DYNAMIC = 1.2
+ACCELERATION = 7.0
+DECCLERATION = 7.0
+
+[node name="BaseFovComponent" parent="BaseComponents" index="2"]
+FOV_NORMAL = 65.0
+FOV_RUNNING_NEEDVALUE = 8.0
+
+[node name="BaseCrouchComponent" parent="BaseComponents" index="3"]
+CROUCHING_CLAMP_MIN_HEIGHT = 0.55
+
+[node name="ShapeCastUncrouch" parent="BaseComponents/BaseCrouchComponent" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.41, 0)
+
+[node name="ShapeCastCrouchDynamic" parent="BaseComponents/BaseCrouchComponent" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+target_position = Vector3(0, 0.2, 0)
+
+[node name="BaseLeanComponent" parent="BaseComponents" index="4"]
+LeanPositionTweenTime = 0.25
+
+[node name="BaseJumpLandEffectComponent" parent="BaseComponents" index="5"]
+JumpShakeStrenght = 0.2
+
+[node name="BaseBreathingEffectComponent" parent="BaseComponents" index="8"]
+editor_description = "Nesahat na breath fov offset - je to promena ovladana skrze animaci !"
+
+[node name="BaseWalkEffectComponent" parent="BaseComponents" index="9"]
+TOP_ANIMSPEED_RUNNING = 1.8
+SwayAmount = 0.5
+
+[node name="BaseFlashlightComponent" parent="BaseComponents" index="10" instance=ExtResource("3_pbs4r")]
+
+[node name="BaseStaminaComponent" type="Node" parent="BaseComponents" index="11"]
+script = ExtResource("5_tqnun")
+ActualStaminaRegenEnable = true
+ShowStaminaGUIEnable = false
+
+[node name="StaminaScreenControl" type="Control" parent="BaseComponents/BaseStaminaComponent" index="0"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+metadata/_edit_lock_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="BaseComponents/BaseStaminaComponent/StaminaScreenControl" index="0"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -150.0
+offset_top = -96.0
+offset_right = 150.0
+offset_bottom = -42.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+metadata/_edit_lock_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="BaseComponents/BaseStaminaComponent/StaminaScreenControl/MarginContainer" index="0"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="BaseComponents/BaseStaminaComponent/StaminaScreenControl/MarginContainer/VBoxContainer" index="0"]
+layout_mode = 2
+text = "STAMINA"
+horizontal_alignment = 1
+
+[node name="StaminaProgressBar" type="ProgressBar" parent="BaseComponents/BaseStaminaComponent/StaminaScreenControl/MarginContainer/VBoxContainer" index="1"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+
+[node name="StaminaScreenBar" type="Control" parent="BaseComponents/BaseStaminaComponent" index="1"]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+metadata/_edit_lock_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="BaseComponents/BaseStaminaComponent/StaminaScreenBar" index="0"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -300.0
+offset_top = -103.0
+offset_right = 300.0
+offset_bottom = -82.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="ProgressBar" type="ProgressBar" parent="BaseComponents/BaseStaminaComponent/StaminaScreenBar/MarginContainer" index="0"]
+unique_name_in_owner = true
+self_modulate = Color(1, 1, 1, 0.627451)
+custom_minimum_size = Vector2(290, 1)
+layout_mode = 2
+size_flags_horizontal = 0
+mouse_filter = 2
+theme_override_styles/background = SubResource("StyleBoxEmpty_pjd3v")
+theme_override_styles/fill = SubResource("StyleBoxFlat_066ec")
+value = 50.0
+fill_mode = 1
+show_percentage = false
+
+[node name="ProgressBar2" type="ProgressBar" parent="BaseComponents/BaseStaminaComponent/StaminaScreenBar/MarginContainer" index="1"]
+unique_name_in_owner = true
+self_modulate = Color(1, 1, 1, 0.627451)
+custom_minimum_size = Vector2(290, 1)
+layout_mode = 2
+size_flags_horizontal = 8
+mouse_filter = 2
+theme_override_styles/background = SubResource("StyleBoxEmpty_ewbik")
+theme_override_styles/fill = SubResource("StyleBoxFlat_qa1b7")
+value = 50.0
+show_percentage = false
+
+[node name="AnimationPlayer_Stamina" type="AnimationPlayer" parent="BaseComponents/BaseStaminaComponent" index="2"]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_utdca")
+}
+
+[node name="BaseHealthComponent" parent="BaseComponents" index="12" instance=ExtResource("5_n3gvx")]
+
+[node name="BaseFocusActionComponent" type="Node" parent="BaseComponents" index="13"]
+script = ExtResource("10_rl15b")
+
+[node name="BaseInteractionComponent" parent="BaseComponents" index="14" instance=ExtResource("7_6tf1x")]
+
+[node name="BaseShootBallComponent" type="Node" parent="BaseComponents" index="15"]
+script = ExtResource("8_kafd3")
+PowerImpulseShoot = 4.0
+
+[node name="AudioStreamPlayer_ShootBall" type="AudioStreamPlayer" parent="BaseComponents/BaseShootBallComponent" index="0"]
+stream = ExtResource("9_jierr")
+volume_db = -10.0
+pitch_scale = 0.6
+mix_target = 1
+max_polyphony = 4
+bus = &"HealthAudio"
+
+[node name="CameraCrouch" parent="." index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 0)
+
+[node name="Camera3D" parent="CameraCrouch/CameraLand/HeadCrouchDynamic/CameraController/CameraHead/CameraLean/CameraSway/CameraJump/CameraShakeRot/HeadBob/HeadFocusAction/HeadBreathing" index="0"]
+attributes = ExtResource("10_ec71m")
+fov = 65.0
+near = 0.01
+
+[node name="HeadForwardNode" type="Node3D" parent="CameraCrouch/CameraLand/HeadCrouchDynamic/CameraController/CameraHead/CameraLean/CameraSway/CameraJump/CameraShakeRot/HeadBob/HeadFocusAction" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
+metadata/_edit_lock_ = true
+
+[node name="LineDown" parent="UserInterface/Reticle" index="0"]
+visible = false
+
+[node name="LineUp" parent="UserInterface/Reticle" index="1"]
+visible = false
+
+[node name="AnimationPlayer_Reticle" type="AnimationPlayer" parent="UserInterface/Reticle" index="4"]
+libraries = {
+"": SubResource("AnimationLibrary_w4col")
+}

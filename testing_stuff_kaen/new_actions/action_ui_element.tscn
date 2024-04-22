@@ -1,0 +1,88 @@
+[gd_scene load_steps=5 format=3 uid="uid://dubtqsbpsbtes"]
+
+[ext_resource type="Theme" uid="uid://cd3yvqcy8bus4" path="res://core_systems/debug_hud_system/debug_theme.theme" id="1_amfdj"]
+[ext_resource type="Script" path="res://testing_stuff_kaen/new_actions/CActionUIElement.cs" id="2_tg2nr"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gf2aa"]
+bg_color = Color(0.6, 0.6, 0.6, 0.392157)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 5
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 5
+corner_detail = 20
+shadow_color = Color(0, 0, 0, 0.27451)
+shadow_size = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fx6l7"]
+bg_color = Color(0.713726, 0.537255, 0.662745, 0.392157)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.831373, 0.419608, 0, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+corner_detail = 20
+shadow_color = Color(0, 0, 0, 0.27451)
+
+[node name="ActionObjectContainer" type="PanelContainer"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0.645, 20)
+offset_left = 7.0
+offset_right = 58.0
+offset_bottom = 22.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+theme = ExtResource("1_amfdj")
+theme_override_styles/panel = SubResource("StyleBoxFlat_gf2aa")
+script = ExtResource("2_tg2nr")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_top = -1
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = -1
+
+[node name="ActionNameLabel" type="Label" parent="MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("1_amfdj")
+theme_override_font_sizes/font_size = 14
+text = "USE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 2
+size_flags_horizontal = 0
+mouse_filter = 2
+
+[node name="ActionInputContainer" type="PanelContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -28.0
+offset_top = -12.0
+offset_right = -4.0
+offset_bottom = 12.0
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("1_amfdj")
+theme_override_styles/panel = SubResource("StyleBoxFlat_fx6l7")
+
+[node name="ActionInputLabel" type="Label" parent="Control/ActionInputContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("1_amfdj")
+theme_override_font_sizes/font_size = 14
+text = "F"
+horizontal_alignment = 1
+vertical_alignment = 1

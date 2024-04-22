@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://wlh0gi2r057f"]
+[gd_scene load_steps=4 format=3 uid="uid://wlh0gi2r057f"]
 
-[ext_resource type="Script" path="res://menus/InGameMenu.cs" id="1_k4aci"]
+[ext_resource type="Script" path="res://menus/CInGameMenu.cs" id="1_5yglf"]
 [ext_resource type="PackedScene" uid="uid://d1xpbdilt7rk1" path="res://menus/BaseFocusedMenuButton.tscn" id="2_10o54"]
+[ext_resource type="Theme" uid="uid://cd3yvqcy8bus4" path="res://core_systems/debug_hud_system/debug_theme.theme" id="3_wvgby"]
 
 [node name="InGameMenu" type="Control"]
 top_level = true
@@ -12,7 +13,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-script = ExtResource("1_k4aci")
+script = ExtResource("1_5yglf")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
@@ -22,6 +23,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.705882)
+metadata/_edit_lock_ = true
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 1
@@ -36,43 +38,67 @@ offset_right = 20.0
 offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
+metadata/_edit_lock_ = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
-custom_minimum_size = Vector2(300, 300)
+[node name="PanelContainer" type="PanelContainer" parent="Control"]
+layout_mode = 2
+offset_left = -130.0
+offset_top = 166.0
+offset_right = 170.0
+offset_bottom = 170.0
+theme = ExtResource("3_wvgby")
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/PanelContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/PanelContainer/MarginContainer"]
+layout_mode = 2
+alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="Button_BackToGame" parent="Control/PanelContainer/MarginContainer/VBoxContainer" instance=ExtResource("2_10o54")]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+focus_neighbor_bottom = NodePath("../Button_QuitGame")
+theme = ExtResource("3_wvgby")
+text = "CONTINUE GAME"
+ButtonFocusID = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Button_QuitGame" parent="Control/PanelContainer/MarginContainer/VBoxContainer" instance=ExtResource("2_10o54")]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+focus_neighbor_top = NodePath("../Button_BackToGame")
+theme = ExtResource("3_wvgby")
+text = "QUIT GAME"
+ButtonFocusID = 1
+
+[node name="PanelContainer2" type="PanelContainer" parent="Control"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -150.0
-offset_top = -150.0
-offset_right = 150.0
-offset_bottom = 150.0
+offset_left = -67.0
+offset_top = -20.0
+offset_right = 67.0
+offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
-alignment = 2
+theme = ExtResource("3_wvgby")
 
-[node name="Button_BackToGame" parent="Control/VBoxContainer" instance=ExtResource("2_10o54")]
+[node name="MarginContainer" type="MarginContainer" parent="Control/PanelContainer2"]
 layout_mode = 2
-ButtonFocusID = 0
+theme = ExtResource("3_wvgby")
 
-[node name="Button_QuitGame" parent="Control/VBoxContainer" instance=ExtResource("2_10o54")]
+[node name="Label" type="Label" parent="Control/PanelContainer2/MarginContainer"]
 layout_mode = 2
-text = "quit game"
-ButtonFocusID = 1
-
-[node name="Label" type="Label" parent="Control"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -150.0
-offset_right = 150.0
-offset_bottom = 26.0
-grow_horizontal = 2
-text = "In Game Menu"
+text = "IN GAME MENU"
 horizontal_alignment = 1
+metadata/_edit_lock_ = true
 
-[connection signal="pressed" from="Control/VBoxContainer/Button_BackToGame" to="." method="_on_button_back_to_game_pressed"]
-[connection signal="pressed" from="Control/VBoxContainer/Button_QuitGame" to="." method="_on_button_quit_game_pressed"]
+[connection signal="pressed" from="Control/PanelContainer/MarginContainer/VBoxContainer/Button_BackToGame" to="." method="_on_button_back_to_game_pressed"]
+[connection signal="pressed" from="Control/PanelContainer/MarginContainer/VBoxContainer/Button_QuitGame" to="." method="_on_button_quit_game_pressed"]

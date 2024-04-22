@@ -3,12 +3,13 @@ using System.Threading.Tasks;
 
 public partial class MainApp : Node
 {
-    public enum EAppType { Game, Benchmark};
+    public enum EAppType { Game,Benchmark,SpecificLevel };
     [Export] public EAppType AppType = EAppType.Game;
-    [ExportGroup("Start Scenes")]
-    [Export] Resource LevelInfo_StartGame;
-    [Export] Resource LevelInfo_StartBenchmark;
-    
+    [ExportGroup("Start specific Level")]
+    levelinfo_base_resource LevelInfo_StartGame;
+    levelinfo_base_resource LevelInfo_StartBenchmark;
+    [Export] Resource LevelInfo_SpecificLevelInfo = null;
+
     public override void _Ready()
     {
         base._Ready();
@@ -17,28 +18,39 @@ public partial class MainApp : Node
 
     public async void PostInit()
     {
+        LevelInfo_StartGame = UniversalFunctions.GetLevelInfoData(
+            GD.Load("res://levels/all_levels_info_resources/menus/levelinfo_game_menu.tres"));
+
+        LevelInfo_StartBenchmark = UniversalFunctions.GetLevelInfoData(
+            GD.Load("res://levels/all_levels_info_resources/menus/levelinfo_benchmark_menu.tres"));
+
         await Task.Delay(1200);
 
         // Podle App Type
         switch (AppType)
         {
             case EAppType.Game:
-                StartAsGame(); break;
+                RunLevelInfo(LevelInfo_StartGame); break;
             case EAppType.Benchmark:
-                StartAsBenchmark(); break;
+                RunLevelInfo(LevelInfo_StartBenchmark); break;
+            case EAppType.SpecificLevel:
+                RunLevelInfo(UniversalFunctions.GetLevelInfoData(LevelInfo_SpecificLevelInfo)); break;
             default: break;
         }
     }
 
-    public void StartAsGame()
+    public void RunLevelInfo(levelinfo_base_resource newLevelInfo)
     {
-        levelinfo_base_resource LevelInfoData = UniversalFunctions.GetLevelInfoData(LevelInfo_StartGame);
-        GameMaster.GM.GetLevelLoader().LoadNewWorldLevel_Threaded(LevelInfoData.LevelPath,LevelInfoData.LevelName);
-    }
+        if (newLevelInfo == null) { GD.Print("(CHYBA) MainApp RunLevelInfo - newLevelInfo = null"); return; }
 
-    public void StartAsBenchmark()
-    {
-        levelinfo_base_resource LevelInfoData = UniversalFunctions.GetLevelInfoData(LevelInfo_StartBenchmark);
-        GetTree().ChangeSceneToFile(LevelInfoData.LevelPath);
+        CGameMaster.GM.GetUniversal().EnableBlackScreen(true);
+
+        if (newLevelInfo.LevelType == WorldLevel.ELevelType.GameLevel)
+            CGameMaster.GM.GetGame().GetLevelLoader().LoadNewWorldLevel(newLevelInfo.LevelPath, newLevelInfo.LevelName);
+        else if (newLevelInfo.LevelType == WorldLevel.ELevelType.BenchmarkLevel)
+            CGameMaster.GM.GetBenchmark().StartBenchmarkLevel(newLevelInfo.LevelPath, newLevelInfo.LevelName);
+        else if (newLevelInfo.LevelType == WorldLevel.ELevelType.Menu)
+            GetTree().ChangeSceneToFile(newLevelInfo.LevelPath);
     }
 }
+    

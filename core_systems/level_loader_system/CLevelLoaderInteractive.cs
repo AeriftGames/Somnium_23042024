@@ -3,7 +3,7 @@ using System;
 
 public partial class CLevelLoaderInteractive : Godot.GodotObject
 {
-    private GameMaster gm;
+    private CGameMaster gm;
     public string actualLevelName = (string)ProjectSettings.GetSetting("application/run/main_scene");
     public struct SLevelInfo
     {
@@ -13,7 +13,7 @@ public partial class CLevelLoaderInteractive : Godot.GodotObject
 
     public CLevelLoaderInteractive(Node ownerInstance)
     {
-        gm = (GameMaster)ownerInstance;
+        gm = (CGameMaster)ownerInstance;
     }
 
     public void LoadNewWorldLevel(string newLevelScenePath, string newLevelName)

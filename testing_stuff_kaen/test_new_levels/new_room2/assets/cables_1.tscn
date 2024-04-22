@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://dea232rbxwkjp"]
+
+[ext_resource type="PackedScene" uid="uid://b0frwjumj5565" path="res://testing_stuff_kaen/test_new_levels/new_room2/assets/cables1.glb" id="1_62bfc"]
+[ext_resource type="Material" uid="uid://cu5g5sts01gl6" path="res://testing_stuff_kaen/test_new_levels/new_room2/mat/trim01_sloupy_shader.tres" id="2_tse7h"]
+
+[node name="cables1" instance=ExtResource("1_62bfc")]
+
+[node name="NurbsPath_064" parent="." index="0"]
+transform = Transform3D(1.78814e-07, 1, 0, -1, 1.78814e-07, 0, 0, 0, 1, 0, -0.415464, -0.5)
+material_override = ExtResource("2_tse7h")
+
+[node name="NurbsPath_062" parent="." index="1"]
+transform = Transform3D(1.78814e-07, 1, 0, -1, 1.78814e-07, 0, 0, 0, 1, 0, 0, 0.1)
+material_override = ExtResource("2_tse7h")
+
+[node name="NurbsPath_063" parent="." index="2"]
+transform = Transform3D(5.96046e-08, -0.984808, -0.173648, -1, 5.96046e-08, -7.45058e-09, 7.45058e-09, 0.173648, -0.984808, 0, 0, 2.1)
+visible = false
+material_override = ExtResource("2_tse7h")

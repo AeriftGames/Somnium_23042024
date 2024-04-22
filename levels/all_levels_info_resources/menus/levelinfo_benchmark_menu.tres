@@ -5,5 +5,5 @@
 [resource]
 script = ExtResource("1_5ir7g")
 LevelType = 2
-LevelPath = "res://benchmark/benchmark_menu/benchmark_main_menu.tscn"
+LevelPath = "res://game/benchmark_menu/benchmark_main_menu.tscn"
 LevelName = "Benchmark Menu"
