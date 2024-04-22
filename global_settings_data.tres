@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=2 format=3 uid="uid://bsbslrhosphok"]
+[gd_resource type="Resource" load_steps=2 format=3]
 
 [ext_resource type="Script" path="res://core_systems/global_settings_data.cs" id="1_8rhwy"]
 
@@ -20,7 +20,7 @@ MusicVolume = -3.7
 SfxVolume = -0.5
 ShowDebugHud = true
 ShowFps = true
-ShowDebugLabels = true
+ShowDebugLabels = false
 ShowPerformance = true
 EnableWorldLevelOcclusionCull = false
 LookMouseSmooth = 15.0

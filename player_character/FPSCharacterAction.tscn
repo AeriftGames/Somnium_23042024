@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://c7sfdtpshgj44"]
+[gd_scene load_steps=21 format=3 uid="uid://c7sfdtpshgj44"]
 
 [ext_resource type="PackedScene" uid="uid://b8y8ttj527bo2" path="res://player_character/FPSCharacterMoveAnim.tscn" id="1_igu5i"]
 [ext_resource type="Script" path="res://player_character/FPSCharacterAction.cs" id="2_gd4x2"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://dk6pwl286slhy" path="res://player_character/action_components/BaseInteractionComponent.tscn" id="7_6tf1x"]
 [ext_resource type="Script" path="res://player_character/action_components/CCharacterShootBallComponent.cs" id="8_kafd3"]
 [ext_resource type="AudioStream" uid="uid://dxie2xuqywf7d" path="res://audio/audio_streams/downloads/impact_ice.wav" id="9_jierr"]
+[ext_resource type="CameraAttributesPractical" uid="uid://cgjd2qg365mbu" path="res://player_character/FPSCharacterAction_Attributes.tres" id="10_ec71m"]
 [ext_resource type="Script" path="res://player_character/action_components/CCharacterFocusActionComponent.cs" id="10_rl15b"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pjd3v"]
@@ -273,6 +274,7 @@ bus = &"HealthAudio"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 0)
 
 [node name="Camera3D" parent="CameraCrouch/CameraLand/HeadCrouchDynamic/CameraController/CameraHead/CameraLean/CameraSway/CameraJump/CameraShakeRot/HeadBob/HeadFocusAction/HeadBreathing" index="0"]
+attributes = ExtResource("10_ec71m")
 fov = 65.0
 near = 0.01
 

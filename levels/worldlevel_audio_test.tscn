@@ -1,4 +1,4 @@
-[gd_scene load_steps=95 format=3 uid="uid://c3e45ahgcch3e"]
+[gd_scene load_steps=103 format=3 uid="uid://c3e45ahgcch3e"]
 
 [ext_resource type="Script" path="res://levels/worldlevel_base/WorldLevel.cs" id="1_c30ae"]
 [ext_resource type="Script" path="res://levels/worldlevel_base/LevelDataSettings.cs" id="2_4dugm"]
@@ -60,6 +60,11 @@
 [ext_resource type="Texture2D" uid="uid://df3t4x1hx6y6l" path="res://testing_stuff_kaen/models/tex/Metal_Plate_015_roughness.jpg" id="58_qe26h"]
 [ext_resource type="ArrayMesh" uid="uid://b3vyjebx6e4oy" path="res://testing_stuff_kaen/models/box.obj" id="59_gayf8"]
 [ext_resource type="PackedScene" uid="uid://ctqghgj1gbt3b" path="res://placeholders/PhysicsItems/physic_item_gas_tank_medium.tscn" id="60_ky2gj"]
+[ext_resource type="PackedScene" uid="uid://da8251mfps48f" path="res://placeholders/modular_level_builds/placeholder/oblouk_center.tscn" id="61_d0wjd"]
+[ext_resource type="PackedScene" uid="uid://dxuoek783pl4n" path="res://testing_stuff_kaen/test_new_levels/new_room2/assets/ventilator.tscn" id="62_yvdtf"]
+[ext_resource type="PackedScene" uid="uid://hamgc1gq4lwx" path="res://placeholders/modular_level_builds/placeholder/oblouk_center_long_side.tscn" id="63_5g5ux"]
+[ext_resource type="PackedScene" uid="uid://cw3hrvpva3ih" path="res://placeholders/modular_pipes/new_big/pipe_big_long.tscn" id="64_yygiw"]
+[ext_resource type="PackedScene" uid="uid://dcyfiv5n8dmrg" path="res://testing_stuff_kaen/models/my_scifi_box/scifi_box.tscn" id="65_oorux"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_w3cwh"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -414,6 +419,20 @@ normal_enabled = true
 normal_texture = ExtResource("57_8ya1w")
 ao_enabled = true
 ao_texture = ExtResource("56_5wtdv")
+
+[sub_resource type="Gradient" id="Gradient_30xx3"]
+offsets = PackedFloat32Array(0.0136364, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.683077, 0.683077, 0.683077, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_htjon"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_vsci5"]
+width = 100
+height = 3
+in_3d_space = true
+seamless = true
+color_ramp = SubResource("Gradient_30xx3")
+noise = SubResource("FastNoiseLite_htjon")
 
 [node name="WorldLevel" type="Node"]
 script = ExtResource("1_c30ae")
@@ -1078,6 +1097,7 @@ omni_attenuation = 1.03526
 
 [node name="OmniLight3D6" type="OmniLight3D" parent="LevelScene/Rooms/Room1/Lights"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.212, 2.35933, -2.57943)
+visible = false
 light_color = Color(0.733333, 0.733333, 0.733333, 1)
 light_energy = 0.2
 light_indirect_energy = 6.526
@@ -2848,15 +2868,11 @@ transform = Transform3D(-2, -1.74846e-07, 0, 1.74846e-07, -2, 0, 0, -7.89508e-21
 
 [node name="strop_oblouk25" parent="LevelScene/Rooms/Room2/ceil" instance=ExtResource("9_4vtcj")]
 transform = Transform3D(-2, -1.74846e-07, 0, 1.74846e-07, -2, 0, 0, -9.4741e-21, 2, 0.999994, -1.1, 14.0587)
+visible = false
 
 [node name="strop_oblouk26" parent="LevelScene/Rooms/Room2/ceil" instance=ExtResource("9_4vtcj")]
 transform = Transform3D(-2, -1.74846e-07, 0, 1.74846e-07, -2, 0, 0, -9.4741e-21, 2, 2.99999, -1.1, 14.0587)
-
-[node name="strop_oblouk27" parent="LevelScene/Rooms/Room2/ceil" instance=ExtResource("9_4vtcj")]
-transform = Transform3D(-2, -1.74846e-07, 0, 1.74846e-07, -2, 0, 0, -1.10531e-20, 2, -3.00001, -1.1, 14.0587)
-
-[node name="strop_oblouk28" parent="LevelScene/Rooms/Room2/ceil" instance=ExtResource("9_4vtcj")]
-transform = Transform3D(-2, -1.74846e-07, 0, 1.74846e-07, -2, 0, 0, -1.10531e-20, 2, -1.00001, -1.1, 14.0587)
+visible = false
 
 [node name="strop_oblouk29" parent="LevelScene/Rooms/Room2/ceil" instance=ExtResource("9_4vtcj")]
 transform = Transform3D(-2, -1.74846e-07, 0, 1.74846e-07, -2, 0, 0, -1.26321e-20, 2, -7.00001, -1.1, 14.0587)
@@ -4025,6 +4041,30 @@ transform = Transform3D(1, -8.74228e-08, 8.74228e-08, 8.74228e-08, -5.96046e-08,
 [node name="floor_2x2m_variant29" parent="LevelScene/Rooms/Room2/Node3D2" instance=ExtResource("8_yj3kj")]
 transform = Transform3D(1, -8.74228e-08, 8.74228e-08, 8.74228e-08, -5.96046e-08, -1, 8.74228e-08, 1, -5.96046e-08, 0.76338, 2.8, -4.1)
 
+[node name="floor_2x2m_variant40" parent="LevelScene/Rooms/Room2/Node3D2" instance=ExtResource("8_yj3kj")]
+transform = Transform3D(-1, 2.13163e-14, -8.74228e-08, 8.74228e-08, -5.96046e-08, -1, -2.13163e-14, -1, 5.96046e-08, 2.96338, 3.9, -0.173769)
+
+[node name="floor_2x2m_variant41" parent="LevelScene/Rooms/Room2/Node3D2" instance=ExtResource("8_yj3kj")]
+transform = Transform3D(-1, 2.13163e-14, -8.74228e-08, 8.74228e-08, -5.96046e-08, -1, -2.13163e-14, -1, 5.96046e-08, 0.963381, 3.9, -0.173769)
+
+[node name="floor_2x2m_variant42" parent="LevelScene/Rooms/Room2/Node3D2" instance=ExtResource("8_yj3kj")]
+transform = Transform3D(1, -8.74228e-08, 8.74228e-08, 8.74228e-08, -5.96046e-08, -1, 8.74228e-08, 1, -5.96046e-08, 0.963381, 3.9, -3.97377)
+
+[node name="floor_2x2m_variant47" parent="LevelScene/Rooms/Room2/Node3D2" instance=ExtResource("8_yj3kj")]
+transform = Transform3D(1, -8.74228e-08, 8.74228e-08, 8.74228e-08, -5.96046e-08, -1, 8.74228e-08, 1, -5.96046e-08, 2.96338, 3.9, -3.97377)
+
+[node name="floor_2x2m_variant48" parent="LevelScene/Rooms/Room2/Node3D2" instance=ExtResource("8_yj3kj")]
+transform = Transform3D(-1, 2.13163e-14, -8.74228e-08, 8.74228e-08, -5.96046e-08, -1, -2.13163e-14, -1, 5.96046e-08, -1.03662, 3.9, -0.173769)
+
+[node name="floor_2x2m_variant49" parent="LevelScene/Rooms/Room2/Node3D2" instance=ExtResource("8_yj3kj")]
+transform = Transform3D(-1, 2.13163e-14, -8.74228e-08, 8.74228e-08, -5.96046e-08, -1, -2.13163e-14, -1, 5.96046e-08, -3.03662, 3.9, -0.173769)
+
+[node name="floor_2x2m_variant50" parent="LevelScene/Rooms/Room2/Node3D2" instance=ExtResource("8_yj3kj")]
+transform = Transform3D(1, -8.74228e-08, 8.74228e-08, 8.74228e-08, -5.96046e-08, -1, 8.74228e-08, 1, -5.96046e-08, -3.03662, 3.9, -3.97377)
+
+[node name="floor_2x2m_variant51" parent="LevelScene/Rooms/Room2/Node3D2" instance=ExtResource("8_yj3kj")]
+transform = Transform3D(1, -8.74228e-08, 8.74228e-08, 8.74228e-08, -5.96046e-08, -1, 8.74228e-08, 1, -5.96046e-08, -1.03662, 3.9, -3.97377)
+
 [node name="floor_2x2m_variant30" parent="LevelScene/Rooms/Room2/Node3D2" instance=ExtResource("8_yj3kj")]
 transform = Transform3D(1, -8.74228e-08, 8.74228e-08, 8.74228e-08, -5.96046e-08, -1, 8.74228e-08, 1, -5.96046e-08, 2.76338, 2.8, -4.1)
 
@@ -4145,95 +4185,157 @@ transform = Transform3D(0.499896, -0.0101746, 0, 0.0101746, 0.499896, 0, 0, 0, 0
 transform = Transform3D(0.144544, -0.397131, 0.906308, 0.939693, 0.34202, 4.10753e-08, -0.309976, 0.851651, 0.422618, 0, 0, 0.4)
 size = Vector3(4, 4, 4)
 texture_albedo = ExtResource("31_ao3n4")
+distance_fade_enabled = true
+
+[node name="Decal32" type="Decal" parent="TestingDecals"]
+transform = Transform3D(-0.116978, 0.321394, 0.939692, 0.939693, 0.34202, 3.28909e-08, -0.321394, 0.883022, -0.342021, -10.5711, 1.11764, -4.87604)
+size = Vector3(3.9, 3.43, 2.74)
+texture_albedo = ExtResource("31_ao3n4")
+normal_fade = 0.021
+distance_fade_enabled = true
+cull_mask = 1048571
+
+[node name="Decal33" type="Decal" parent="TestingDecals"]
+transform = Transform3D(-0.0125691, -0.00933052, 0.999877, 0.667919, -0.744233, 0.00145122, 0.744129, 0.667854, 0.0155863, -10.0674, 4.31764, -3.06428)
+size = Vector3(3.9, 3.43, 2.74)
+texture_albedo = ExtResource("31_ao3n4")
+normal_fade = 0.021
+distance_fade_enabled = true
+cull_mask = 1048571
+
+[node name="Decal34" type="Decal" parent="TestingDecals"]
+transform = Transform3D(0.0125692, 0.00933058, -0.999877, 0.667918, -0.744233, 0.00145123, -0.744129, -0.667854, -0.0155864, -10.0674, 4.31764, -5.06759)
+size = Vector3(3.9, 3.43, 2.74)
+texture_albedo = ExtResource("31_ao3n4")
+normal_fade = 0.021
+distance_fade_enabled = true
+cull_mask = 1048571
 
 [node name="Decal2" type="Decal" parent="TestingDecals"]
 transform = Transform3D(0.0298091, -0.0818996, -0.996195, 0.939693, 0.34202, 4.25455e-08, 0.340719, -0.936117, 0.0871558, -2.2, 0.2, -1.8)
 size = Vector3(4, 4, 4)
 texture_albedo = ExtResource("31_ao3n4")
+distance_fade_enabled = true
 
 [node name="Decal3" type="Decal" parent="TestingDecals"]
 transform = Transform3D(0.0298091, -0.0818996, -0.996195, 0.939693, 0.34202, 4.25455e-08, 0.340719, -0.936117, 0.0871558, 4.1, 0.2, 3.5)
 size = Vector3(4, 4, 4)
 texture_albedo = ExtResource("31_ao3n4")
+distance_fade_enabled = true
 
 [node name="Decal4" type="Decal" parent="TestingDecals"]
 transform = Transform3D(0.0298091, -0.0818996, -0.996195, 0.939693, 0.34202, 4.25455e-08, 0.340719, -0.936117, 0.0871558, 7.4, 1.6, 3.2)
 size = Vector3(4, 4, 4)
 texture_albedo = ExtResource("31_ao3n4")
+distance_fade_enabled = true
 
 [node name="Decal5" type="Decal" parent="TestingDecals"]
 transform = Transform3D(0.0298091, -0.0818996, -0.996195, 0.939693, 0.34202, 4.25455e-08, 0.340719, -0.936117, 0.0871558, 16.4, 1.2, 4.1)
 size = Vector3(4, 4, 4)
 texture_albedo = ExtResource("31_ao3n4")
+distance_fade_enabled = true
+
+[node name="Decal29" type="Decal" parent="TestingDecals"]
+transform = Transform3D(0.0298091, -0.0818996, -0.996195, 0.939693, 0.34202, 4.25455e-08, 0.340719, -0.936117, 0.0871558, 26.4, 1.2, 5.2)
+size = Vector3(4, 4, 4)
+texture_albedo = ExtResource("31_ao3n4")
+distance_fade_enabled = true
 
 [node name="Decal23" type="Decal" parent="TestingDecals"]
 transform = Transform3D(0.0298091, -0.0818996, -0.996195, 0.939693, 0.34202, 4.25455e-08, 0.340719, -0.936117, 0.0871558, 18.2, 1.2, -6.9)
+sorting_offset = 1000.0
 size = Vector3(4, 4, 4)
 texture_albedo = ExtResource("31_ao3n4")
+distance_fade_enabled = true
+
+[node name="Decal27" type="Decal" parent="TestingDecals"]
+transform = Transform3D(0.0298091, -0.0818996, -0.996195, 0.939693, 0.34202, 4.42687e-08, 0.340719, -0.936117, 0.0871558, 17.6, 4.1, -6.9)
+sorting_offset = 1000.0
+size = Vector3(4, 4, 4)
+texture_albedo = ExtResource("31_ao3n4")
+distance_fade_enabled = true
+
+[node name="Decal28" type="Decal" parent="TestingDecals"]
+transform = Transform3D(0.0986131, 0.396307, 0.912807, -0.88221, -0.38958, 0.264449, 0.460415, -0.831365, 0.311208, 13.5, 3, -8.9)
+size = Vector3(4, 4, 4)
+texture_albedo = ExtResource("31_ao3n4")
+distance_fade_enabled = true
 
 [node name="Decal26" type="Decal" parent="TestingDecals"]
 transform = Transform3D(-0.0298091, 0.0818995, 0.996195, 0.939693, 0.34202, 4.40041e-08, -0.340719, 0.936117, -0.0871557, 14.2, 1.2, -6.1)
 size = Vector3(4, 4, 4)
 texture_albedo = ExtResource("31_ao3n4")
+distance_fade_enabled = true
+cull_mask = 1048573
 
 [node name="Decal22" type="Decal" parent="TestingDecals"]
 transform = Transform3D(1, 0, 1.49012e-08, 0, 1, 0, 5.21541e-08, 0, 1, 13.7342, -0.106469, 7.80597)
 size = Vector3(4, 1, 4)
 texture_albedo = ExtResource("31_ao3n4")
 normal_fade = 0.385
+distance_fade_enabled = true
 
 [node name="Decal8" type="Decal" parent="TestingDecals"]
 transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 0, -4.37114e-08, 1, -1, 4.37114e-08, 1.91069e-15, 11.8449, 1.24875, 6.78306)
 size = Vector3(3, 0.5, 3)
 texture_albedo = ExtResource("32_3qm6h")
+distance_fade_enabled = true
 
 [node name="Decal16" type="Decal" parent="TestingDecals"]
 transform = Transform3D(4.37114e-08, 3.82137e-15, -1, 8.74228e-08, -1, 0, -1, -8.74228e-08, -4.37114e-08, 14.0763, 2.94056, 6.59251)
 size = Vector3(3, 0.5, 3)
 texture_albedo = ExtResource("32_3qm6h")
 modulate = Color(0, 0, 0, 1)
+distance_fade_enabled = true
 
 [node name="Decal17" type="Decal" parent="TestingDecals"]
 transform = Transform3D(0.5, 4.37114e-08, -0.866025, 8.74228e-08, -1, -7.34104e-22, -0.866025, -7.57103e-08, -0.5, 17.8763, 2.94056, 5.99251)
 size = Vector3(3, 0.5, 3)
 texture_albedo = ExtResource("32_3qm6h")
 modulate = Color(0, 0, 0, 1)
+distance_fade_enabled = true
 
 [node name="Decal18" type="Decal" parent="TestingDecals"]
 transform = Transform3D(1, 8.74228e-08, 5.96046e-08, 8.74228e-08, -1, -1.46821e-21, 8.9407e-08, 1.77636e-14, -1, 16.0763, 2.94056, 8.59251)
 size = Vector3(3, 0.5, 3)
 texture_albedo = ExtResource("33_rm6b0")
 modulate = Color(0, 0, 0, 1)
+distance_fade_enabled = true
 
 [node name="Decal19" type="Decal" parent="TestingDecals"]
 transform = Transform3D(1, 8.74228e-08, 5.96046e-08, 8.74228e-08, -1, -1.46821e-21, 8.9407e-08, 1.77636e-14, -1, 14.2763, 2.94056, 8.59251)
 size = Vector3(3, 0.5, 3)
 texture_albedo = ExtResource("33_rm6b0")
 modulate = Color(0, 0, 0, 1)
+distance_fade_enabled = true
 
 [node name="Decal20" type="Decal" parent="TestingDecals"]
 transform = Transform3D(1, 8.74228e-08, 5.96046e-08, 8.74228e-08, -1, -1.46821e-21, 8.9407e-08, 1.77636e-14, -1, 12.2763, 2.94056, 8.59251)
 size = Vector3(3, 0.5, 3)
 texture_albedo = ExtResource("33_rm6b0")
 modulate = Color(0, 0, 0, 1)
+distance_fade_enabled = true
 
 [node name="Decal21" type="Decal" parent="TestingDecals"]
 transform = Transform3D(1, 8.74228e-08, 5.96046e-08, 8.74228e-08, -1, -1.46821e-21, 8.9407e-08, 1.77636e-14, -1, 18.5763, 2.94056, 8.59251)
 size = Vector3(3, 0.5, 3)
 texture_albedo = ExtResource("33_rm6b0")
 modulate = Color(0, 0, 0, 1)
+distance_fade_enabled = true
 
 [node name="Decal9" type="Decal" parent="TestingDecals"]
 transform = Transform3D(-2.88102e-08, -4.37114e-08, 1, -1, -1.61176e-15, -4.37114e-08, 7.96334e-15, -1, -4.37114e-08, 13.7449, 1.24875, 8.18306)
 size = Vector3(3, 0.5, 3)
 texture_albedo = ExtResource("32_3qm6h")
 modulate = Color(0.435294, 0.435294, 0.435294, 1)
+distance_fade_enabled = true
 
 [node name="Decal10" type="Decal" parent="TestingDecals"]
 transform = Transform3D(-2.88102e-08, -4.37114e-08, 1, -1, -1.61176e-15, -4.37114e-08, 7.96334e-15, -1, -4.37114e-08, 16.7449, 0.0487499, 8.18306)
 size = Vector3(3, 0.5, 3)
 texture_albedo = ExtResource("33_rm6b0")
 modulate = Color(0.435294, 0.435294, 0.435294, 1)
+distance_fade_enabled = true
 
 [node name="Decal11" type="Decal" parent="TestingDecals"]
 transform = Transform3D(-2.88102e-08, -4.37114e-08, 1, -1, -1.61176e-15, -4.37114e-08, 7.96334e-15, -1, -4.37114e-08, 18.7449, 1.24875, 8.18306)
@@ -4241,24 +4343,42 @@ visible = false
 size = Vector3(3, 0.5, 3)
 texture_albedo = ExtResource("33_rm6b0")
 modulate = Color(0.435294, 0.435294, 0.435294, 1)
+distance_fade_enabled = true
 
 [node name="Decal12" type="Decal" parent="TestingDecals"]
 transform = Transform3D(0.996195, 3.8097e-09, -0.0871557, 0.0871557, -4.3545e-08, 0.996195, 7.96334e-15, -1, -4.37114e-08, 13.9449, 1.24875, 8.25581)
 size = Vector3(3, 1, 3)
 texture_albedo = ExtResource("33_rm6b0")
 modulate = Color(0.164706, 0.164706, 0.164706, 1)
+distance_fade_enabled = true
+
+[node name="Decal30" type="Decal" parent="TestingDecals"]
+transform = Transform3D(0.936117, 0.34202, -0.0818996, 0.0871557, -4.3545e-08, 0.996195, 0.340719, -0.939693, -0.029809, 25.2449, 1.14875, 8.38645)
+size = Vector3(3, 1, 3)
+texture_albedo = ExtResource("33_rm6b0")
+modulate = Color(0.164706, 0.164706, 0.164706, 1)
+distance_fade_enabled = true
+
+[node name="Decal31" type="Decal" parent="TestingDecals"]
+transform = Transform3D(0.640342, -0.766044, -0.0560226, 0.0871557, -4.09967e-08, 0.996195, -0.76313, -0.642788, 0.0667651, 27.8449, 1.14875, 8.38645)
+size = Vector3(3, 1, 3)
+texture_albedo = ExtResource("33_rm6b0")
+modulate = Color(0.164706, 0.164706, 0.164706, 1)
+distance_fade_enabled = true
 
 [node name="Decal14" type="Decal" parent="TestingDecals"]
 transform = Transform3D(0.574528, 0.627507, 0.525503, -0.295891, -0.439385, 0.848168, 0.763129, -0.642788, -0.0667652, 12.2993, 1.24875, 7.75581)
 size = Vector3(3, 1, 3)
 texture_albedo = ExtResource("33_rm6b0")
 modulate = Color(0.92549, 0.235294, 0, 1)
+distance_fade_enabled = true
 
 [node name="Decal15" type="Decal" parent="TestingDecals"]
 transform = Transform3D(-0.386562, 0.765972, -0.51367, -0.879672, -0.138924, 0.454837, 0.277031, 0.627684, 0.727507, 19.6489, 1.24875, 7.75581)
 size = Vector3(3, 1, 3)
 texture_albedo = ExtResource("33_rm6b0")
 modulate = Color(0.92549, 0.235294, 0, 1)
+distance_fade_enabled = true
 
 [node name="Decal6" type="Decal" parent="TestingDecals"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 19.5074, 0.1, 2.2)
@@ -4267,6 +4387,7 @@ texture_albedo = ExtResource("34_lqg8l")
 emission_energy = 0.0
 albedo_mix = 0.86
 normal_fade = 0.999
+distance_fade_enabled = true
 
 [node name="Decal24" type="Decal" parent="TestingDecals"]
 transform = Transform3D(-2.18557e-07, 0, 1, 0, 1, 0, -1, 0, -2.18557e-07, 21.5235, 0.1, 2)
@@ -4277,6 +4398,7 @@ albedo_mix = 0.86
 normal_fade = 0.318
 upper_fade = 3.20776
 lower_fade = 0.113679
+distance_fade_enabled = true
 
 [node name="Decal25" type="Decal" parent="TestingDecals"]
 transform = Transform3D(3.0598e-07, 0, -1, 0, 1, 0, 1, 0, 3.0598e-07, 20.4878, 0.1, 2)
@@ -4287,6 +4409,7 @@ albedo_mix = 0.86
 normal_fade = 0.318
 upper_fade = 3.20776
 lower_fade = 0.113679
+distance_fade_enabled = true
 
 [node name="Decal7" type="Decal" parent="TestingDecals"]
 transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 22.5074, 0.1, 1.7)
@@ -4296,6 +4419,7 @@ emission_energy = 0.0
 albedo_mix = 0.86
 normal_fade = 0.999
 lower_fade = 0.356762
+distance_fade_enabled = true
 
 [node name="Decal13" type="Decal" parent="TestingDecals"]
 transform = Transform3D(-2.18557e-07, 0, 1, 0, 1, 0, -1, 0, -2.18557e-07, 19.6552, -0.071205, -6)
@@ -4303,6 +4427,7 @@ size = Vector3(4, 0.2, 0.75)
 texture_albedo = ExtResource("34_lqg8l")
 emission_energy = 0.0
 albedo_mix = 0.86
+distance_fade_enabled = true
 
 [node name="Node3D" type="Node3D" parent="TestingDecals"]
 
@@ -4547,19 +4672,19 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 18.9, 
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 12.9, 0.4, -4.5)
 
 [node name="Door_rounded_test" parent="." instance=ExtResource("35_1532w")]
-transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, -10, 1.1, -4)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 1.3, -4)
 
 [node name="round_wallbok1" parent="." instance=ExtResource("36_43p1r")]
-transform = Transform3D(-0.8, 2.14577e-07, 9.37945e-15, 0, 3.49691e-08, -0.8, 2.14577e-07, 0.8, 3.49691e-08, -9.91051, 1.16449, -3.75797)
+transform = Transform3D(-1, 2.68221e-07, 1.17243e-14, 0, 4.37114e-08, -1, 2.68221e-07, 1, 4.37114e-08, -9.91051, 1.26449, -3.75797)
 
 [node name="round_wallbok2" parent="." instance=ExtResource("36_43p1r")]
-transform = Transform3D(0.8, 2.14577e-07, 9.37945e-15, 0, 3.49691e-08, -0.8, -2.14577e-07, 0.8, 3.49691e-08, -10.0967, 1.16449, -3.75797)
+transform = Transform3D(1, 2.68221e-07, -1.17243e-14, 0, -4.37114e-08, -1, -2.68221e-07, 1, -4.37114e-08, -10.0967, 1.26449, -3.75797)
 
 [node name="round_wallbok4" parent="." instance=ExtResource("36_43p1r")]
-transform = Transform3D(-0.8, -2.84515e-07, 1.24365e-14, -6.77626e-22, -3.49691e-08, -0.8, 2.84515e-07, -0.8, 3.49691e-08, -9.89911, 1.16449, -4.24138)
+transform = Transform3D(-1, -3.89414e-07, 1.70218e-14, 0, -4.37114e-08, -1, 3.89414e-07, -1, 4.37114e-08, -9.89911, 1.26449, -4.25148)
 
 [node name="round_wallbok5" parent="." instance=ExtResource("36_43p1r")]
-transform = Transform3D(0.8, -3.11531e-07, 1.36175e-14, 0, -3.49691e-08, -0.8, -3.11531e-07, -0.8, 3.49691e-08, -10.0991, 1.16449, -4.24138)
+transform = Transform3D(1, -3.89414e-07, -1.70218e-14, 0, 4.37114e-08, -1, -3.89414e-07, -1, -4.37114e-08, -10.0991, 1.26449, -4.25148)
 
 [node name="floor_2x2m_variant3" parent="." instance=ExtResource("8_yj3kj")]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -12.7, 2.13361, -3.63538)
@@ -4580,16 +4705,19 @@ transform = Transform3D(-1, 8.74228e-08, -3.82137e-15, 0, -4.37114e-08, -1, -8.7
 transform = Transform3D(-1, 8.74228e-08, -3.82137e-15, 0, -4.37114e-08, -1, -8.74228e-08, -1, 4.37114e-08, -12.3, -0.666393, -4.33538)
 
 [node name="floor_2x2m_variant9" parent="." instance=ExtResource("8_yj3kj")]
-transform = Transform3D(-1, 8.74228e-08, -3.82137e-15, 0, -4.37114e-08, -1, -8.74228e-08, -1, 4.37114e-08, -12.3, 1.33361, -4.33538)
+transform = Transform3D(-1, 8.74228e-08, -3.82137e-15, 0, -4.37114e-08, -1, -8.74228e-08, -1, 4.37114e-08, -12.5, 1.33361, -4.33538)
 
 [node name="floor_2x2m_variant5" parent="." instance=ExtResource("8_yj3kj")]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -7.3, 0.133607, -3.63538)
 
 [node name="stone_big" parent="." instance=ExtResource("37_t5t70")]
-transform = Transform3D(-2, 0, 0, 0, -8.74228e-08, -2.95983, 0, 2, -1.29378e-07, -10, 2.66264, -3.76548)
+transform = Transform3D(-2, 0, 0, 0, -8.74228e-08, -2.95983, 0, 2, -1.29378e-07, -10, 3.01029, -3.69583)
+
+[node name="stone_big3" parent="." instance=ExtResource("37_t5t70")]
+transform = Transform3D(-2, 0, 0, 0, 3.0598e-07, -2.96, 0, 7, 1.29386e-07, -10, -0.263504, -3.99583)
 
 [node name="stone_big2" parent="." instance=ExtResource("37_t5t70")]
-transform = Transform3D(-2, 0, 0, 0, -8.74228e-08, -2.95983, 0, 2, -1.29378e-07, -10, 2.66264, -4.24662)
+transform = Transform3D(-2, 0, 0, 0, -8.74228e-08, -2.95983, 0, 2, -1.29378e-07, -10, 3.01029, -4.29583)
 
 [node name="3_wall_sloup" parent="." instance=ExtResource("38_y42i5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 1.4, -11.8513)
@@ -4641,21 +4769,76 @@ spot_attenuation = 0.241484
 spot_angle = 30.0
 spot_angle_attenuation = 0.307785
 
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 4.37115e-08, 1.91069e-15, 0, -4.37114e-08, 1, 4.37115e-08, -1, -4.37114e-08, -10.688, 2.727, 1.919)
+top_level = true
+light_color = Color(0.752941, 0.705882, 0.670588, 1)
+light_energy = 0.1
+light_indirect_energy = 10.0
+light_volumetric_fog_energy = 5.0
+light_bake_mode = 1
+shadow_enabled = true
+spot_range = 15.0
+spot_attenuation = 0.241484
+spot_angle = 55.0
+spot_angle_attenuation = 0.307785
+
+[node name="ceil_lamp7" type="Node3D" parent="."]
+transform = Transform3D(0.18, 0, 3.55271e-15, 0, 0.18, 0, -3.55271e-15, 0, 0.18, -10.5573, 3.30149, 2.342)
+
+[node name="Cube_2211" type="MeshInstance3D" parent="ceil_lamp7"]
+transform = Transform3D(1, 0, -1.69407e-21, 0, 1, 0, 1.69407e-21, 0, 1, 0, 0, 0)
+material_override = ExtResource("53_hkuc3")
+cast_shadow = 0
+mesh = SubResource("ArrayMesh_rn204")
+skeleton = NodePath("")
+
+[node name="Cube_2214" type="MeshInstance3D" parent="ceil_lamp7"]
+transform = Transform3D(1, 0, -1.69407e-21, 0, 1, 0, 1.69407e-21, 0, 1, 0, -0.276955, 0)
+material_override = SubResource("StandardMaterial3D_2vg05")
+cast_shadow = 0
+gi_mode = 0
+gi_lightmap_scale = 1
+mesh = SubResource("ArrayMesh_nhpgr")
+skeleton = NodePath("")
+
+[node name="ceil_lamp6" type="Node3D" parent="."]
+transform = Transform3D(0.18, 0, 3.55271e-15, 0, 0.18, 0, -3.55271e-15, 0, 0.18, 29.0427, 3.40149, -9.958)
+
+[node name="Cube_2211" type="MeshInstance3D" parent="ceil_lamp6"]
+transform = Transform3D(1, 0, -1.69407e-21, 0, 1, 0, 1.69407e-21, 0, 1, 0, 0, 0)
+material_override = ExtResource("53_hkuc3")
+cast_shadow = 0
+mesh = SubResource("ArrayMesh_rn204")
+skeleton = NodePath("")
+
+[node name="Cube_2214" type="MeshInstance3D" parent="ceil_lamp6"]
+transform = Transform3D(1, 0, -1.69407e-21, 0, 1, 0, 1.69407e-21, 0, 1, 0, -0.276955, 0)
+material_override = SubResource("StandardMaterial3D_2vg05")
+cast_shadow = 0
+gi_mode = 0
+gi_lightmap_scale = 1
+mesh = SubResource("ArrayMesh_nhpgr")
+skeleton = NodePath("")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="ceil_lamp6"]
+transform = Transform3D(1, 4.37115e-08, 1.91069e-15, 0, -4.37114e-08, 1, 4.37115e-08, -1, -4.37114e-08, 0, -2.05359, 0)
+light_color = Color(0.752941, 0.705882, 0.670588, 1)
+light_energy = 0.15
+light_indirect_energy = 10.0
+light_volumetric_fog_energy = 5.0
+light_bake_mode = 1
+shadow_enabled = true
+spot_range = 15.0
+spot_attenuation = 0.241484
+spot_angle = 30.0
+spot_angle_attenuation = 0.307785
+
 [node name="Emergency Backup Generator" parent="." instance=ExtResource("54_p16rd")]
 transform = Transform3D(-2.18557e-08, 0, -0.5, 0, 0.5, 0, 0.5, 0, -2.18557e-08, 18, 0.9, -5.3)
 
 [node name="Box2" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.005, 0, 0, 0, 0.005, 0, 0, 0, 0.005, 19, -0.1, -11.2)
-material_override = SubResource("StandardMaterial3D_2gkh1")
-mesh = ExtResource("59_gayf8")
-
-[node name="Box4" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.005, 0, 0, 0, 0.005, 0, 0, 0, 0.005, 15, -0.1, -5.2)
-material_override = SubResource("StandardMaterial3D_2gkh1")
-mesh = ExtResource("59_gayf8")
-
-[node name="Box5" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.00498097, 0, 0.000435779, 0, 0.005, 0, -0.000435779, 0, 0.00498097, 13.7, -0.1, -5.2)
 material_override = SubResource("StandardMaterial3D_2gkh1")
 mesh = ExtResource("59_gayf8")
 
@@ -4675,3 +4858,92 @@ freeze = true
 [node name="PhysicItem_gas_tank_small3" parent="." instance=ExtResource("60_ky2gj")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 12.6, 0, -4.9)
 freeze = true
+
+[node name="oblouk_center" parent="." instance=ExtResource("61_d0wjd")]
+transform = Transform3D(-2.8213e-07, 0, 1, 0, 1, 0, -1, 0, -2.8213e-07, 17.9978, 4.0169, -10.0561)
+visible = false
+
+[node name="oblouk_center2" parent="." instance=ExtResource("61_d0wjd")]
+transform = Transform3D(1, 0, -3.89414e-07, 0, 1, 0, -3.89414e-07, 0, -1, 14.0063, 4.0169, -10.0561)
+visible = false
+
+[node name="ventilator" parent="." instance=ExtResource("62_yvdtf")]
+transform = Transform3D(1.13247e-08, 0, -0.15, 0, 0.15, 0, 0.15, 0, 1.13247e-08, 19.8, 2.2, -6.4)
+
+[node name="ventilator3" parent="." instance=ExtResource("62_yvdtf")]
+transform = Transform3D(-0.1, 0, -1.50996e-08, 0, 0.1, 0, 1.50996e-08, 0, -0.1, 17.6385, 4.4, -8.4)
+
+[node name="ventilator4" parent="." instance=ExtResource("62_yvdtf")]
+transform = Transform3D(-0.1, 0, -1.50996e-08, 0, 0.1, 0, 1.50996e-08, 0, -0.1, 14.3385, 4.4, -8.4)
+
+[node name="ventilator5" parent="." instance=ExtResource("62_yvdtf")]
+transform = Transform3D(0.1, 0, 2.38419e-08, 0, 0.1, 0, -2.38419e-08, 0, 0.1, 14.3385, 4.4, -11.6382)
+
+[node name="ventilator6" parent="." instance=ExtResource("62_yvdtf")]
+transform = Transform3D(0.1, 0, 2.38419e-08, 0, 0.1, 0, -2.38419e-08, 0, 0.1, 17.6385, 4.4, -11.6382)
+
+[node name="ventilator2" parent="." instance=ExtResource("62_yvdtf")]
+transform = Transform3D(1.78873e-09, 0, 0.15, 0, 0.15, 0, -0.15, 0, 1.78873e-09, 12.4, 2.2, -6.4)
+
+[node name="oblouk_center_long_side" parent="." instance=ExtResource("63_5g5ux")]
+transform = Transform3D(3.69552e-07, 0, -1, 0, 1, 0, 1, 0, 3.69552e-07, 15.9903, 4.02948, -10.0548)
+
+[node name="pipe_big_long" parent="." instance=ExtResource("64_yygiw")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 16.3, 4.4, -10)
+
+[node name="pipe_big_long2" parent="." instance=ExtResource("64_yygiw")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 15.7, 4.4, -10)
+
+[node name="pipe_big_long3" parent="." instance=ExtResource("64_yygiw")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 19.4, 3.6, -10)
+
+[node name="pipe_big_long4" parent="." instance=ExtResource("64_yygiw")]
+transform = Transform3D(-5.66234e-08, -1.11312e-14, 0.75, 1.13247e-07, -1, 2.01493e-16, 0.75, 1.50996e-07, 5.66234e-08, 14.4, 2.4, -4.1)
+
+[node name="Decal" type="Decal" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.2, -0.0797855, -7.88379)
+size = Vector3(8.2, 0.9, 0.15)
+texture_albedo = SubResource("NoiseTexture2D_vsci5")
+modulate = Color(0.345098, 0.313726, 0, 1)
+normal_fade = 0.999
+upper_fade = 0.00577098
+distance_fade_enabled = true
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 16.2, 3.1, -8.1)
+transparency = 0.96
+modulate = Color(0.898039, 0.721569, 0, 1)
+text = "GENERATOR 1A"
+font_size = 64
+outline_size = 16
+uppercase = true
+
+[node name="scifi_box" parent="." instance=ExtResource("65_oorux")]
+transform = Transform3D(-1.5299e-08, 0, 0.35, 0, 0.35, 0, -0.35, 0, -1.5299e-08, 14.9, 0.4, -4.7)
+
+[node name="scifi_box3" parent="." instance=ExtResource("65_oorux")]
+transform = Transform3D(-1.5299e-08, 0, 0.35, 0, 0.35, 0, -0.35, 0, -1.5299e-08, 14.7, 0.4, 7.5)
+
+[node name="scifi_box4" parent="." instance=ExtResource("65_oorux")]
+transform = Transform3D(0.0905866, 0, 0.338074, 0, 0.35, 0, -0.338074, 0, 0.0905866, 25.5, 0.4, 7.2)
+
+[node name="scifi_box5" parent="." instance=ExtResource("65_oorux")]
+transform = Transform3D(0.0905866, 0, 0.338074, 0, 0.35, 0, -0.338074, 0, 0.0905866, -11.3, 0.4, 3.4)
+
+[node name="scifi_box6" parent="." instance=ExtResource("65_oorux")]
+transform = Transform3D(0.147916, 0, 0.317208, 0, 0.35, 0, -0.317208, 0, 0.147916, -11.3, 1.4, 3.4)
+
+[node name="scifi_box2" parent="." instance=ExtResource("65_oorux")]
+transform = Transform3D(0.175, 0, 0.303109, 0, 0.35, 0, -0.303109, 0, 0.175, 13.5, 0.4, -5)
+
+[node name="scifi_box7" parent="." instance=ExtResource("65_oorux")]
+transform = Transform3D(-1.5299e-08, 0, 0.35, 0, 0.35, 0, -0.35, 0, -1.5299e-08, 15, 0.4, -5.7)
+
+[node name="scifi_box8" parent="." instance=ExtResource("65_oorux")]
+transform = Transform3D(0.119707, 0, 0.328892, 0, 0.35, 0, -0.328892, 0, 0.119707, 13.6, 0.4, -6)
+
+[node name="scifi_box9" parent="." instance=ExtResource("65_oorux")]
+transform = Transform3D(0.15, 0, 0.259808, 0, 0.3, 0, -0.259808, 0, 0.15, 13.578, 1.35388, -5.9)
+
+[node name="scifi_box10" parent="." instance=ExtResource("65_oorux")]
+transform = Transform3D(0.0305045, 0, 0.348668, 0, 0.35, 0, -0.348668, 0, 0.0305045, 14.8, 1.41823, -4.8)
