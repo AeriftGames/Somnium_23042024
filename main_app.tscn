@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://ddal074shtj1g"]
+
+[ext_resource type="Script" path="res://core_systems/MainApp.cs" id="1_d8pml"]
+[ext_resource type="Resource" uid="uid://drxceaq6qxmqr" path="res://levels/all_levels_info_resources/game_levels/levelinfo_trim_room2.tres" id="2_p8imf"]
+
+[node name="MainApp" type="Node"]
+editor_description = "Můžeme nastavit jaký typ aplikace se má spustit:
+
+Game - spustí menu pro hru
+Benchmark - spustí menu pro benchmark
+
+Specific Level - spustí jakýkoliv LevelInfoData nastavený v záložce"
+script = ExtResource("1_d8pml")
+LevelInfo_SpecificLevelInfo = ExtResource("2_p8imf")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+metadata/_edit_lock_ = true

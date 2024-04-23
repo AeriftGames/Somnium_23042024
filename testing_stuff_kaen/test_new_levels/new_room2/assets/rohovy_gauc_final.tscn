@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://boje32oyuoukc"]
+
+[ext_resource type="PackedScene" uid="uid://b7plaemv5kd8d" path="res://testing_stuff_kaen/test_new_levels/new_room2/assets/rohovy_gauc_final_solid.glb" id="1_vv1sh"]
+[ext_resource type="PackedScene" uid="uid://b2r1jri7l2xqy" path="res://testing_stuff_kaen/test_new_levels/new_room2/assets/rohovy_gauc_final_pillow.tscn" id="5_d3nwn"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_b135x"]
+size = Vector3(11.3, 9.2, 25)
+
+[node name="rohovy_gauc_final_solid" instance=ExtResource("1_vv1sh")]
+
+[node name="Cube_1810" parent="." index="0"]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 0, 0, 0)
+
+[node name="rohovy_gauc_final_pillow" parent="." index="1" instance=ExtResource("5_d3nwn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 4.7, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." index="2" groups=["material_surface_wood"]]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.85, 0.0999999, 0)
+shape = SubResource("BoxShape3D_b135x")

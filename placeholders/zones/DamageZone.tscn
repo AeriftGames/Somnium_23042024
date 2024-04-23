@@ -11,7 +11,8 @@ resource_local_to_scene = true
 material = ExtResource("2_r1w1v")
 
 [node name="DamageZone" type="Area3D"]
-collision_mask = 3
+collision_layer = 2
+collision_mask = 2
 script = ExtResource("1_6v1pl")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

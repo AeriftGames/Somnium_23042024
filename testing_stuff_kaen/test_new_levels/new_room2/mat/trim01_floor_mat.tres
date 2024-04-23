@@ -1,0 +1,14 @@
+[gd_resource type="StandardMaterial3D" load_steps=5 format=3 uid="uid://crxx24pq8yx7j"]
+
+[ext_resource type="Texture2D" uid="uid://0dskn3swsue2" path="res://testing_stuff_kaen/test_new_levels/new_room2/mat/base/9_2_f_low_DefaultMaterial_BaseColor.png" id="1_dxhc7"]
+[ext_resource type="Texture2D" uid="uid://1t4rn16em2wq" path="res://testing_stuff_kaen/test_new_levels/new_room2/mat/base/9_2_f_low_DefaultMaterial_Metallic.png" id="2_ipnxf"]
+[ext_resource type="Texture2D" uid="uid://dq4uoy6s5xifm" path="res://testing_stuff_kaen/test_new_levels/new_room2/mat/base/9_2_f_low_DefaultMaterial_Normal.png" id="3_e7w3t"]
+[ext_resource type="Texture2D" uid="uid://po0lphkticwx" path="res://testing_stuff_kaen/test_new_levels/new_room2/mat/base/9_2_f_low_DefaultMaterial_Roughness.png" id="4_rlt4d"]
+
+[resource]
+albedo_texture = ExtResource("1_dxhc7")
+metallic = 1.0
+metallic_texture = ExtResource("2_ipnxf")
+roughness_texture = ExtResource("4_rlt4d")
+normal_enabled = true
+normal_texture = ExtResource("3_e7w3t")

@@ -23,8 +23,14 @@ public partial class LoadingHud : Control
 
 	public void LoadingIsComplete(bool newShowPressAnyKeyToStart)
 	{
-		QueueFree();
-	}
+		Visible = false;
+
+        // vyresetuje labely a progress bar
+        shaderProcessText.Text = "";
+		nameOfLevelLabel.Text = "";
+        loadingLevelProgressBar.Value = 0.0f;
+
+    }
 
 	public void SetShaderProcessValueText(string newShaderProcessValueText)
 	{

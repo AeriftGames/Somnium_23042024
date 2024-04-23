@@ -1,0 +1,865 @@
+[gd_scene load_steps=27 format=3 uid="uid://ctxb56s2dnxa2"]
+
+[ext_resource type="Script" path="res://player_character/action_components/CCharacterUseActionComponent.cs" id="1_d65x0"]
+[ext_resource type="Script" path="res://testing_stuff_kaen/new_actions/ActionLayer.cs" id="2_jjhfm"]
+[ext_resource type="PackedScene" uid="uid://dubtqsbpsbtes" path="res://testing_stuff_kaen/new_actions/action_ui_element.tscn" id="3_eeyix"]
+[ext_resource type="Theme" uid="uid://cd3yvqcy8bus4" path="res://core_systems/debug_hud_system/debug_theme.theme" id="4_r4ypm"]
+[ext_resource type="Script" path="res://testing_stuff_kaen/new_actions/CHandNode.cs" id="5_b6vw6"]
+[ext_resource type="Texture2D" uid="uid://ci4to6fyojbqm" path="res://textures/wave-hand-svgrepo-com.png" id="6_8hsu1"]
+[ext_resource type="Texture2D" uid="uid://tia0qor02qmg" path="res://textures/hand_click.png" id="7_keof4"]
+[ext_resource type="Texture2D" uid="uid://byineyv5wipjo" path="res://textures/cursor-hand-grab-svgrepo-com.png" id="8_myybp"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_fwo84"]
+radius = 3.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1fbpd"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 3
+corner_radius_top_left = 10
+corner_radius_bottom_left = 10
+shadow_color = Color(0, 0, 0, 0.160784)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3u42n"]
+bg_color = Color(0.6, 0.6, 0.6, 0.392157)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 1
+shadow_color = Color(0, 0, 0, 0.27451)
+shadow_size = 5
+
+[sub_resource type="Animation" id="Animation_m5s1t"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SelectRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_eel36"]
+resource_name = "StartShow"
+length = 0.4
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SelectRect:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jywd1"]
+_data = {
+"RESET": SubResource("Animation_m5s1t"),
+"StartShow": SubResource("Animation_eel36")
+}
+
+[sub_resource type="Animation" id="Animation_decs4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SelectRect/LeftUpRect:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SelectRect/RightUpRect:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("SelectRect/LeftDownRect:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("SelectRect/RightDownRect:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_0bwae"]
+resource_name = "Selected"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SelectRect/LeftUpRect:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.8, 0.8)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SelectRect/RightUpRect:scale")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.8, 0.8)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("SelectRect/LeftDownRect:scale")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.8, 0.8)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("SelectRect/RightDownRect:scale")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.8, 0.8)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nsgfj"]
+_data = {
+"RESET": SubResource("Animation_decs4"),
+"Selected": SubResource("Animation_0bwae")
+}
+
+[sub_resource type="Animation" id="Animation_do1t2"]
+length = 0.001
+
+[sub_resource type="Animation" id="Animation_75uid"]
+resource_name = "Show"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HandNormalTexture:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ie20w"]
+_data = {
+"RESET": SubResource("Animation_do1t2"),
+"Show": SubResource("Animation_75uid")
+}
+
+[sub_resource type="Animation" id="Animation_3gli3"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HandPointTexture:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_t4bif"]
+resource_name = "Show"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HandPointTexture:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_e2swp"]
+_data = {
+"RESET": SubResource("Animation_3gli3"),
+"Show": SubResource("Animation_t4bif")
+}
+
+[sub_resource type="Animation" id="Animation_6iyg4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HandGrabTexture:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ypepi"]
+resource_name = "Show"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HandGrabTexture:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xcai8"]
+_data = {
+"RESET": SubResource("Animation_6iyg4"),
+"Show": SubResource("Animation_ypepi")
+}
+
+[node name="BaseUseActionComponent" type="Node3D"]
+script = ExtResource("1_d65x0")
+metadata/_edit_lock_ = true
+
+[node name="UseActionAreaDetect" type="Area3D" parent="."]
+collision_layer = 4
+collision_mask = 4
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="UseActionAreaDetect"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -0.1)
+shape = SubResource("SphereShape3D_fwo84")
+metadata/_edit_lock_ = true
+
+[node name="ActionLayer" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+script = ExtResource("2_jjhfm")
+
+[node name="SelectRect" type="ColorRect" parent="ActionLayer"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_right = 200.0
+offset_bottom = 200.0
+mouse_filter = 2
+color = Color(0.960918, 0.447789, 1.92523e-07, 0.313726)
+
+[node name="LeftUpRect" type="ColorRect" parent="ActionLayer/SelectRect"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+color = Color(1, 1, 1, 0.356863)
+metadata/_edit_lock_ = true
+
+[node name="ColorRect" type="ColorRect" parent="ActionLayer/SelectRect/LeftUpRect"]
+visible = false
+layout_mode = 1
+offset_right = 2.0
+offset_bottom = 10.0
+mouse_filter = 2
+metadata/_edit_lock_ = true
+
+[node name="ColorRect2" type="ColorRect" parent="ActionLayer/SelectRect/LeftUpRect"]
+visible = false
+layout_mode = 1
+offset_right = 10.0
+offset_bottom = 2.0
+mouse_filter = 2
+metadata/_edit_lock_ = true
+
+[node name="ColorRect3" type="ColorRect" parent="ActionLayer/SelectRect/LeftUpRect"]
+layout_mode = 1
+offset_left = 4.0
+offset_top = 11.0
+offset_right = 6.0
+offset_bottom = 21.0
+mouse_filter = 2
+metadata/_edit_lock_ = true
+
+[node name="ColorRect5" type="ColorRect" parent="ActionLayer/SelectRect/LeftUpRect"]
+layout_mode = 1
+offset_left = 11.0
+offset_top = 4.0
+offset_right = 13.0
+offset_bottom = 14.0
+rotation = 0.795498
+mouse_filter = 2
+metadata/_edit_lock_ = true
+
+[node name="ColorRect4" type="ColorRect" parent="ActionLayer/SelectRect/LeftUpRect"]
+layout_mode = 1
+offset_left = 11.0
+offset_top = 4.0
+offset_right = 21.0
+offset_bottom = 6.0
+mouse_filter = 2
+metadata/_edit_lock_ = true
+
+[node name="RightUpRect" type="ColorRect" parent="ActionLayer/SelectRect"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_right = 40.0
+offset_bottom = 40.0
+grow_horizontal = 0
+rotation = 1.5708
+mouse_filter = 2
+color = Color(1, 1, 1, 0.356863)
+metadata/_edit_lock_ = true
+
+[node name="ColorRect" type="ColorRect" parent="ActionLayer/SelectRect/RightUpRect"]
+visible = false
+layout_mode = 1
+offset_right = 2.0
+offset_bottom = 10.0
+mouse_filter = 2
+metadata/_edit_lock_ = true
+
+[node name="ColorRect2" type="ColorRect" parent="ActionLayer/SelectRect/RightUpRect"]
+visible = false
+layout_mode = 1
+offset_right = 10.0
+offset_bottom = 2.0
+mouse_filter = 2
+metadata/_edit_lock_ = true
+
+[node name="ColorRect3" type="ColorRect" parent="ActionLayer/SelectRect/RightUpRect"]
+layout_mode = 1
+offset_left = 4.0
+offset_top = 11.0
+offset_right = 6.0
+offset_bottom = 21.0
+mouse_filter = 2
+metadata/_edit_lock_ = true
+
+[node name="ColorRect5" type="ColorRect" parent="ActionLayer/SelectRect/RightUpRect"]
+layout_mode = 1
+offset_left = 11.0
+offset_top = 4.0
+offset_right = 13.0
+offset_bottom = 14.0
+rotation = 0.795498
+mouse_filter = 2
+metadata/_edit_lock_ = true
+
+[node name="ColorRect4" type="ColorRect" parent="ActionLayer/SelectRect/RightUpRect"]
+layout_mode = 1
+offset_left = 11.0
+offset_top = 4.0
+offset_right = 21.0
+offset_bottom = 6.0
+mouse_filter = 2
+metadata/_edit_lock_ = true
+
+[node name="ColorRect6" type="ColorRect" parent="ActionLayer/SelectRect/RightUpRect"]
+visible = false
+layout_mode = 1
+offset_left = 33.0
+offset_top = 4.0
+offset_right = 43.0
+offset_bottom = 6.0
+mouse_filter = 2
+metadata/_edit_lock_ = true
+
+[node name="LeftDownRect" type="ColorRect" parent="ActionLayer/SelectRect"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+grow_vertical = 0
+rotation = -1.5708
+mouse_filter = 2
+color = Color(1, 1, 1, 0.356863)
+metadata/_edit_lock_ = true
+
+[node name="ColorRect" type="ColorRect" parent="ActionLayer/SelectRect/LeftDownRect"]
+visible = false
+layout_mode = 1
+offset_right = 2.0
+offset_bottom = 10.0
+mouse_filter = 2
+metadata/_edit_lock_ = true
+
+[node name="ColorRect2" type="ColorRect" parent="ActionLayer/SelectRect/LeftDownRect"]
+visible = false
+layout_mode = 1
+offset_right = 10.0
+offset_bottom = 2.0
+mouse_filter = 2
+metadata/_edit_lock_ = true
+
+[node name="ColorRect3" type="ColorRect" parent="ActionLayer/SelectRect/LeftDownRect"]
+layout_mode = 1
+offset_left = 4.0
+offset_top = 11.0
+offset_right = 6.0
+offset_bottom = 21.0
+mouse_filter = 2
+metadata/_edit_lock_ = true
+
+[node name="ColorRect5" type="ColorRect" parent="ActionLayer/SelectRect/LeftDownRect"]
+layout_mode = 1
+offset_left = 11.0
+offset_top = 4.0
+offset_right = 13.0
+offset_bottom = 14.0
+rotation = 0.795498
+mouse_filter = 2
+metadata/_edit_lock_ = true
+
+[node name="ColorRect4" type="ColorRect" parent="ActionLayer/SelectRect/LeftDownRect"]
+layout_mode = 1
+offset_left = 11.0
+offset_top = 4.0
+offset_right = 21.0
+offset_bottom = 6.0
+mouse_filter = 2
+metadata/_edit_lock_ = true
+
+[node name="RightDownRect" type="ColorRect" parent="ActionLayer/SelectRect"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 0
+rotation = 3.14159
+mouse_filter = 2
+color = Color(1, 1, 1, 0.356863)
+metadata/_edit_lock_ = true
+
+[node name="ColorRect" type="ColorRect" parent="ActionLayer/SelectRect/RightDownRect"]
+visible = false
+layout_mode = 1
+offset_right = 2.0
+offset_bottom = 10.0
+mouse_filter = 2
+metadata/_edit_lock_ = true
+
+[node name="ColorRect2" type="ColorRect" parent="ActionLayer/SelectRect/RightDownRect"]
+visible = false
+layout_mode = 1
+offset_right = 10.0
+offset_bottom = 2.0
+mouse_filter = 2
+metadata/_edit_lock_ = true
+
+[node name="ColorRect3" type="ColorRect" parent="ActionLayer/SelectRect/RightDownRect"]
+layout_mode = 1
+offset_left = 4.0
+offset_top = 11.0
+offset_right = 6.0
+offset_bottom = 21.0
+mouse_filter = 2
+metadata/_edit_lock_ = true
+
+[node name="ColorRect6" type="ColorRect" parent="ActionLayer/SelectRect/RightDownRect"]
+visible = false
+layout_mode = 1
+offset_left = 5.0
+offset_top = 35.0
+offset_right = 7.0
+offset_bottom = 45.0
+mouse_filter = 2
+metadata/_edit_lock_ = true
+
+[node name="ColorRect5" type="ColorRect" parent="ActionLayer/SelectRect/RightDownRect"]
+layout_mode = 1
+offset_left = 11.0
+offset_top = 4.0
+offset_right = 13.0
+offset_bottom = 14.0
+rotation = 0.795498
+mouse_filter = 2
+metadata/_edit_lock_ = true
+
+[node name="ColorRect4" type="ColorRect" parent="ActionLayer/SelectRect/RightDownRect"]
+layout_mode = 1
+offset_left = 11.0
+offset_top = 4.0
+offset_right = 21.0
+offset_bottom = 6.0
+mouse_filter = 2
+metadata/_edit_lock_ = true
+
+[node name="ActionRect" type="ColorRect" parent="ActionLayer/SelectRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.92
+anchor_top = 0.5
+anchor_right = 0.92
+anchor_bottom = 0.5
+offset_left = -4.0
+offset_top = -1.0
+offset_bottom = 1.0
+grow_horizontal = 0
+rotation = -0.00140014
+mouse_filter = 2
+color = Color(0.560784, 0.560784, 0.560784, 0)
+
+[node name="ColorRect2" type="ColorRect" parent="ActionLayer/SelectRect/ActionRect"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.946
+anchor_top = 0.637
+anchor_right = 0.946
+anchor_bottom = 0.637
+offset_left = 0.216
+offset_top = -1.274
+offset_right = 10.216
+offset_bottom = 0.726
+rotation = 0.588943
+mouse_filter = 2
+color = Color(0.560784, 0.560784, 0.560784, 1)
+
+[node name="ColorRect3" type="ColorRect" parent="ActionLayer/SelectRect/ActionRect"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.368
+anchor_top = 3.011
+anchor_right = 1.368
+anchor_bottom = 3.011
+offset_left = 5.528
+offset_top = -1.022
+offset_right = 11.528
+offset_bottom = 0.978
+mouse_filter = 2
+color = Color(0.560784, 0.560784, 0.560784, 1)
+
+[node name="Label" type="Label" parent="ActionLayer/SelectRect/ActionRect/ColorRect3"]
+visible = false
+layout_mode = 0
+offset_left = 10.0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "USE"
+
+[node name="ColorRect4" type="ColorRect" parent="ActionLayer/SelectRect/ActionRect"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.368
+anchor_top = 3.011
+anchor_right = 1.368
+anchor_bottom = 3.011
+offset_left = 30.528
+offset_top = -1.02201
+offset_right = 61.528
+offset_bottom = 19.978
+mouse_filter = 2
+color = Color(0.560784, 0.560784, 0.560784, 1)
+
+[node name="Label" type="Label" parent="ActionLayer/SelectRect/ActionRect/ColorRect4"]
+layout_mode = 0
+offset_left = 1.0
+offset_right = 31.0
+offset_bottom = 23.0
+text = "USE"
+
+[node name="ColorRect8" type="ColorRect" parent="ActionLayer/SelectRect/ActionRect"]
+visible = false
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -2.0
+offset_top = -1.0
+offset_right = 3.0
+offset_bottom = 1.0
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.560784, 0.560784, 0.560784, 1)
+
+[node name="ColorRect7" type="ColorRect" parent="ActionLayer/SelectRect/ActionRect"]
+visible = false
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -3.9944
+offset_top = -5.00559
+offset_right = -1.9944
+offset_bottom = 4.99441
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="ActionLayer/SelectRect/ActionRect"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -48.0
+offset_right = 64.0
+offset_bottom = 48.0
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="ActionLayer/SelectRect/ActionRect/AspectRatioContainer"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_1fbpd")
+
+[node name="MarginContainer" type="MarginContainer" parent="ActionLayer/SelectRect/ActionRect/AspectRatioContainer/PanelContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 23
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="ActionElementsVBox" type="VBoxContainer" parent="ActionLayer/SelectRect/ActionRect/AspectRatioContainer/PanelContainer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+alignment = 1
+
+[node name="ActionObjectContainer" parent="ActionLayer/SelectRect/ActionRect/AspectRatioContainer/PanelContainer/MarginContainer/ActionElementsVBox" instance=ExtResource("3_eeyix")]
+layout_mode = 2
+
+[node name="ActionObjectContainer2" parent="ActionLayer/SelectRect/ActionRect/AspectRatioContainer/PanelContainer/MarginContainer/ActionElementsVBox" instance=ExtResource("3_eeyix")]
+visible = false
+layout_mode = 2
+
+[node name="ActionObjectContainer3" parent="ActionLayer/SelectRect/ActionRect/AspectRatioContainer/PanelContainer/MarginContainer/ActionElementsVBox" instance=ExtResource("3_eeyix")]
+visible = false
+layout_mode = 2
+
+[node name="CenterRect" type="ColorRect" parent="ActionLayer/SelectRect"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1.0
+offset_top = -1.0
+offset_right = 1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+metadata/_edit_lock_ = true
+
+[node name="ActionObjectControl" type="Control" parent="ActionLayer/SelectRect"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+grow_horizontal = 2
+mouse_filter = 2
+
+[node name="ActionObjectContainer" type="PanelContainer" parent="ActionLayer/SelectRect/ActionObjectControl"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -49.0
+offset_top = -37.0
+offset_right = 49.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+theme = ExtResource("4_r4ypm")
+theme_override_styles/panel = SubResource("StyleBoxFlat_3u42n")
+
+[node name="MarginContainer" type="MarginContainer" parent="ActionLayer/SelectRect/ActionObjectControl/ActionObjectContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme = ExtResource("4_r4ypm")
+
+[node name="ActionObjectNameLabel" type="Label" parent="ActionLayer/SelectRect/ActionObjectControl/ActionObjectContainer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("4_r4ypm")
+text = "item name"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnimationPlayer_ActionLayer" type="AnimationPlayer" parent="ActionLayer"]
+libraries = {
+"": SubResource("AnimationLibrary_jywd1")
+}
+
+[node name="AnimationPlayer_Edges" type="AnimationPlayer" parent="ActionLayer"]
+libraries = {
+"": SubResource("AnimationLibrary_nsgfj")
+}
+autoplay = "Selected"
+
+[node name="HandNode" type="Control" parent="ActionLayer"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("5_b6vw6")
+
+[node name="HandNormalTexture" type="TextureRect" parent="ActionLayer/HandNode"]
+modulate = Color(1, 1, 1, 0.627451)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("6_8hsu1")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="HandPointTexture" type="TextureRect" parent="ActionLayer/HandNode"]
+modulate = Color(1, 1, 1, 0.627451)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -21.0
+offset_top = -20.0
+offset_right = 15.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("7_keof4")
+expand_mode = 1
+
+[node name="HandGrabTexture" type="TextureRect" parent="ActionLayer/HandNode"]
+modulate = Color(1, 1, 1, 0.627451)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.0
+offset_top = -20.0
+offset_right = 18.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("8_myybp")
+expand_mode = 1
+
+[node name="AnimationPlayer_HandNormal" type="AnimationPlayer" parent="ActionLayer/HandNode"]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_ie20w")
+}
+
+[node name="AnimationPlayer_HandPoint" type="AnimationPlayer" parent="ActionLayer/HandNode"]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_e2swp")
+}
+
+[node name="AnimationPlayer_HandGrab" type="AnimationPlayer" parent="ActionLayer/HandNode"]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_xcai8")
+}
+
+[connection signal="body_entered" from="UseActionAreaDetect" to="." method="_on_use_action_area_detect_body_entered"]
+[connection signal="body_exited" from="UseActionAreaDetect" to="." method="_on_use_action_area_detect_body_exited"]

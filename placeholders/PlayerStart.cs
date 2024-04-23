@@ -3,10 +3,11 @@ using System;
 
 public partial class PlayerStart : Node3D
 {
-	public enum EPlayerCharacterType {Interaction, Inventory}
+	public enum EPlayerCharacterType {InventoryOld, BaseNew, MoveAnimNew, ActionNew}
+	[Export] public bool PlayerStartEnable = true;
 
 	// Which type of player character spawn ?
-	[Export] public EPlayerCharacterType SpawnCharacterType = EPlayerCharacterType.Inventory;
+	[Export] public EPlayerCharacterType SpawnCharacterType = EPlayerCharacterType.InventoryOld;
 
 	// Node contains meshes, which we need visible in editor and unvisible in the game
 	public Node3D EditorMesh = null;
@@ -16,25 +17,6 @@ public partial class PlayerStart : Node3D
 
 	public override void _Ready()
 	{
-		// Po Startu zneviditelnime a nechame objekt znicit (chceme videt jen v editoru)
-		EditorMesh = GetNode<Node3D>("EditorMesh");
-		EditorMesh.Visible = false;
-		EditorMesh.QueueFree();
-
-		spawn_timer = new Godot.Timer();
-		// Create timer for delaying spawn if start game
-		var callable_spawn = new Callable(this,"SpawnNewPlayer");
-		spawn_timer.Connect("timeout", callable_spawn);
-		spawn_timer.WaitTime = 0.2;
-		spawn_timer.OneShot = true;
-		AddChild(spawn_timer);
-		spawn_timer.Start();
-	}
-
-	// tohle vola timer po zacatku hry + timer.delay (0,2s)
-	public void SpawnNewPlayer()
-	{
-		SpawnPlayerByType(SpawnCharacterType);
 	}
 
 	public void SpawnPlayerByType(EPlayerCharacterType newPlayerCharacterType)
@@ -42,17 +24,27 @@ public partial class PlayerStart : Node3D
 
 		switch (newPlayerCharacterType)
 		{
-			case EPlayerCharacterType.Interaction:
-				{
-					SpawnPlayerInteraction();
-					break;
-				}
-			case EPlayerCharacterType.Inventory:
+			case EPlayerCharacterType.InventoryOld:
 				{
 					SpawnPlayerInventory();
 					break;
 				}
-			default:
+			case EPlayerCharacterType.BaseNew:
+				{
+					SpawnNewCharacterBase();
+					break;
+				}
+            case EPlayerCharacterType.MoveAnimNew:
+                {
+                    SpawnNewCharacterMoveAnim();
+                    break;
+                }
+            case EPlayerCharacterType.ActionNew:
+                {
+                    SpawnNewCharacterActionNew();
+                    break;
+                }
+            default:
 				break;
 		}
 	}
@@ -74,11 +66,11 @@ public partial class PlayerStart : Node3D
 		characterInteraction_Instance.objectHands = objectHands_instance;
 
 		// Spawn to worldlevel node
-		Node level = GameMaster.GM.GetLevelLoader().GetActualLevelScene();
+		Node level = CGameMaster.GM.GetGame().GetLevelLoader().GetActualLevelScene();
 		if (level == null)
 		{
 			// If worldlevel for spawn dont finded
-			GameMaster.GM.Log.WriteLog(this, LogSystem.ELogMsgType.ERROR,
+			CGameMaster.GM.GetUniversal().GetMasterLog().WriteLog(this, CMasterLog.ELogMsgType.ERROR,
 				"Not find /root/worldlevel for spawn player");
 		}
 		else
@@ -109,18 +101,15 @@ public partial class PlayerStart : Node3D
 			objectHands_instance.GlobalRotation = newRotation;
 			
 			// !!! SHADER PRECOMPILATION PROCESS START !!!
-			if(GameMaster.GM.GetLevelLoader().isPrecompiledShaders)
-				GameMaster.GM.GetLevelLoader().StartPrecompileShaderProcess();
+			if(CGameMaster.GM.GetGame().GetLevelLoader().isPrecompiledShaders)
+				CGameMaster.GM.GetGame().GetLevelLoader().StartPrecompileShaderProcess();
 
 			// Apply Settings
-			GameMaster.GM.GetSettings().LoadAndApply_AllGraphicsSettings();
-			GameMaster.GM.GetDebugHud().ApplyAllMainControls();
+			CGameMaster.GM.GetSettings().LoadAndApply_AllGraphicsSettings();
+            CGameMaster.GM.GetDebugHud().ApplyAllMainControls();
+            CGameMaster.GM.GetGame().GetDebugPanel().AllLoadSettings();
 
-			GameMaster.GM.EnableBlackScreen(false);
-
-            //delete
-            spawn_timer.Stop();
-			spawn_timer.QueueFree();
+            CGameMaster.GM.GetUniversal().EnableBlackScreen(false);
 		}
 	}
 
@@ -141,11 +130,11 @@ public partial class PlayerStart : Node3D
         characterInventory_Instance.objectHands = objectHands_instance;
 
         // Spawn to worldlevel node
-        Node level = GameMaster.GM.GetLevelLoader().GetActualLevelScene();
+        Node level = CGameMaster.GM.GetGame().GetLevelLoader().GetActualLevelScene();
         if (level == null)
         {
             // If worldlevel for spawn dont finded
-            GameMaster.GM.Log.WriteLog(this, LogSystem.ELogMsgType.ERROR,
+            CGameMaster.GM.GetUniversal().GetMasterLog().WriteLog(this, CMasterLog.ELogMsgType.ERROR,
                 "Not find /root/worldlevel for spawn player");
         }
         else
@@ -176,18 +165,126 @@ public partial class PlayerStart : Node3D
             objectHands_instance.GlobalRotation = newRotation;
 
             // !!! SHADER PRECOMPILATION PROCESS START !!!
-            if (GameMaster.GM.GetLevelLoader().isPrecompiledShaders)
-                GameMaster.GM.GetLevelLoader().StartPrecompileShaderProcess();
+            if (CGameMaster.GM.GetGame().GetLevelLoader().isPrecompiledShaders)
+                CGameMaster.GM.GetGame().GetLevelLoader().StartPrecompileShaderProcess();
 
             // Apply Settings
-            GameMaster.GM.GetSettings().LoadAndApply_AllGraphicsSettings();
-            GameMaster.GM.GetDebugHud().ApplyAllMainControls();
+            //CGameMaster.GM.GetSettings().LoadAndApply_AllGraphicsSettings();
+            //CGameMaster.GM.GetDebugHud().ApplyAllMainControls();
 
-            GameMaster.GM.EnableBlackScreen(false);
+            CGameMaster.GM.GetSettings().LoadAndApply_AllGraphicsSettings();
+            //CGameMaster.GM.GetDebugHud().ApplyAllMainControls();
+            CGameMaster.GM.GetGame().GetDebugPanel().AllLoadSettings();
 
-            //delete
-            spawn_timer.Stop();
-            spawn_timer.QueueFree();
+            //GameMaster.GM.EnableBlackScreen(false);
+        }
+    }
+
+    public void SpawnNewCharacterBase()
+    {
+        // Instance from scenefile and cast to specific class
+        var newCharacterInstance = GD.Load<PackedScene>(
+            "res://player_character/FpsCharacterBase.tscn").Instantiate() as FpsCharacterBase;
+
+
+        // Spawn to worldlevel node
+        Node level = CGameMaster.GM.GetGame().GetLevelLoader().GetActualLevelScene();
+        if (level == null)
+        {
+            // If worldlevel for spawn dont finded
+            CGameMaster.GM.GetUniversal().GetMasterLog().WriteLog(this, CMasterLog.ELogMsgType.ERROR,
+                "Not find /root/worldlevel for spawn player");
+        }
+        else
+        {
+            // Add childs to worldlevel node (Spawn)
+            level.AddChild(newCharacterInstance);
+
+            newCharacterInstance.GlobalPosition = GlobalPosition;
+			newCharacterInstance.GetCharacterLookComponent().RotateStart(GlobalRotation);
+
+            /*
+            // !!! SHADER PRECOMPILATION PROCESS START !!!
+            if (CGameMaster.GM.GetGame().GetLevelLoader().isPrecompiledShaders)
+                CGameMaster.GM.GetGame().GetLevelLoader().StartPrecompileShaderProcess();
+			*/
+
+            CGameMaster.GM.GetSettings().LoadAndApply_AllGraphicsSettings();
+            CGameMaster.GM.GetGame().GetDebugPanel().AllLoadSettings();
+
+            //GameMaster.GM.EnableBlackScreen(false);
+        }
+    }
+
+    public void SpawnNewCharacterMoveAnim()
+    {
+        // Instance from scenefile and cast to specific class
+        var newCharacterInstance = GD.Load<PackedScene>(
+            "res://player_character/FPSCharacterMoveAnim.tscn").Instantiate() as FPSCharacterMoveAnim;
+
+
+        // Spawn to worldlevel node
+        Node level = CGameMaster.GM.GetGame().GetLevelLoader().GetActualLevelScene();
+        if (level == null)
+        {
+            // If worldlevel for spawn dont finded
+            CGameMaster.GM.GetUniversal().GetMasterLog().WriteLog(this, CMasterLog.ELogMsgType.ERROR,
+                "Not find /root/worldlevel for spawn player");
+        }
+        else
+        {
+            // Add childs to worldlevel node (Spawn)
+            level.AddChild(newCharacterInstance);
+
+            newCharacterInstance.GlobalPosition = GlobalPosition;
+            newCharacterInstance.GetCharacterLookComponent().RotateStart(GlobalRotation);
+
+            /*
+            // !!! SHADER PRECOMPILATION PROCESS START !!!
+            if (CGameMaster.GM.GetGame().GetLevelLoader().isPrecompiledShaders)
+                CGameMaster.GM.GetGame().GetLevelLoader().StartPrecompileShaderProcess();
+			*/
+
+            CGameMaster.GM.GetSettings().LoadAndApply_AllGraphicsSettings();
+            CGameMaster.GM.GetGame().GetDebugPanel().AllLoadSettings();
+
+            //GameMaster.GM.EnableBlackScreen(false);
+        }
+    }
+
+    public void SpawnNewCharacterActionNew()
+    {
+        // Instance from scenefile and cast to specific class
+        var newCharacterInstance = GD.Load<PackedScene>(
+            "res://player_character/FPSCharacterAction.tscn").Instantiate() as FPSCharacterAction;
+
+
+        // Spawn to worldlevel node
+        Node level = CGameMaster.GM.GetGame().GetLevelLoader().GetActualLevelScene();
+        if (level == null)
+        {
+            // If worldlevel for spawn dont finded
+            CGameMaster.GM.GetUniversal().GetMasterLog().WriteLog(this, CMasterLog.ELogMsgType.ERROR,
+                "Not find /root/worldlevel for spawn player");
+        }
+        else
+        {
+            // Add childs to worldlevel node (Spawn)
+            level.AddChild(newCharacterInstance);
+
+            newCharacterInstance.GlobalPosition = GlobalPosition;
+            newCharacterInstance.GetCharacterLookComponent().RotateStart(GlobalRotation);
+
+            /*
+            // !!! SHADER PRECOMPILATION PROCESS START !!!
+            if (CGameMaster.GM.GetGame().GetLevelLoader().isPrecompiledShaders)
+                CGameMaster.GM.GetGame().GetLevelLoader().StartPrecompileShaderProcess();
+			*/
+
+            CGameMaster.GM.GetSettings().LoadAndApply_AllGraphicsSettings();
+            CGameMaster.GM.GetGame().GetDebugPanel().AllLoadSettings();
+
+            //GameMaster.GM.EnableBlackScreen(false);
         }
     }
 }

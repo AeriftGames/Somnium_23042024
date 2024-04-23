@@ -5,5 +5,5 @@
 
 [node name="small_rock" instance=ExtResource("1_fhfmw")]
 
-[node name="small_rock" parent="." index="0"]
+[node name="small_rock2" parent="." index="0"]
 material_override = ExtResource("2_3osmc")

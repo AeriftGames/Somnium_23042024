@@ -1,0 +1,9 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://dhmydohqelw7x"]
+
+[ext_resource type="Script" path="res://levels/all_levels_info_resources/base/levelinfo_base_resource.cs" id="1_5ir7g"]
+
+[resource]
+script = ExtResource("1_5ir7g")
+LevelType = 2
+LevelPath = "res://game/benchmark_menu/benchmark_main_menu.tscn"
+LevelName = "Benchmark Menu"

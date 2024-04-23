@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://dywdghrvadkxg"]
+[gd_scene load_steps=36 format=3 uid="uid://dywdghrvadkxg"]
 
 [ext_resource type="Script" path="res://levels/worldlevel_base/WorldLevel.cs" id="1_ikoab"]
 [ext_resource type="Script" path="res://levels/worldlevel_base/LevelDataSettings.cs" id="2_x020f"]
@@ -26,9 +26,7 @@
 [ext_resource type="ArrayOccluder3D" uid="uid://5q8bjy164pq1" path="res://levels/worldlevel_demo_extend_benchmark/level_data/worldlevel_demo_extend_benchmark.occ" id="24_u26mg"]
 [ext_resource type="Script" path="res://testing_stuff_kaen/BenchmarkPoints.cs" id="25_1kp43"]
 [ext_resource type="Script" path="res://core_systems/benchmark_system/BenchmarkCameraBody.cs" id="26_5wh76"]
-[ext_resource type="Script" path="res://core_systems/benchmark_system/InBenchmarkMenu.cs" id="27_wwjxq"]
-[ext_resource type="PackedScene" uid="uid://d1xpbdilt7rk1" path="res://menus/BaseFocusedMenuButton.tscn" id="28_rkirg"]
-[ext_resource type="AudioStream" uid="uid://bt2cmy83a0gqm" path="res://audio/audio_streams/music/Main_Menu (1).mp3" id="29_jo8ct"]
+[ext_resource type="AudioStream" uid="uid://u51po736uwlv" path="res://audio/audio_streams/music/SOMNIUM_simple_amb1.wav" id="27_o0ane"]
 [ext_resource type="PackedScene" uid="uid://dk6s7gogdikp7" path="res://testing_stuff_kaen/lis/lis_anim.tscn" id="30_1iyh8"]
 
 [sub_resource type="Animation" id="Animation_3ll5r"]
@@ -134,117 +132,6 @@ point_count = 39
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_xdg07"]
 radius = 0.3
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i3jlr"]
-bg_color = Color(0.552941, 0.552941, 0.552941, 1)
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
-border_color = Color(0.258824, 0.258824, 0.258824, 1)
-border_blend = true
-corner_radius_bottom_right = 50
-corner_radius_bottom_left = 50
-corner_detail = 1
-shadow_color = Color(0, 0, 0, 0.470588)
-shadow_size = 5
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qmjmt"]
-bg_color = Color(0.337255, 0.337255, 0.337255, 1)
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
-border_color = Color(0.203922, 0.203922, 0.203922, 1)
-border_blend = true
-corner_radius_bottom_right = 50
-corner_radius_bottom_left = 50
-corner_detail = 1
-shadow_size = 2
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yuy2j"]
-bg_color = Color(0.415686, 0.368627, 0.32549, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-corner_detail = 10
-shadow_color = Color(0, 0, 0, 0.470588)
-shadow_size = 5
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1md6j"]
-bg_color = Color(0.262745, 0.227451, 0.2, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-corner_detail = 10
-shadow_color = Color(0, 0, 0, 0.470588)
-shadow_size = 5
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vxwi3"]
-bg_color = Color(0.262745, 0.227451, 0.2, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-corner_detail = 10
-shadow_color = Color(0, 0, 0, 0.470588)
-shadow_size = 5
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rvyj6"]
-bg_color = Color(0.415686, 0.368627, 0.32549, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-corner_detail = 10
-shadow_color = Color(0, 0, 0, 0.470588)
-shadow_size = 5
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_28045"]
-bg_color = Color(0.262745, 0.227451, 0.2, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-corner_detail = 10
-shadow_color = Color(0, 0, 0, 0.470588)
-shadow_size = 5
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_323qg"]
-bg_color = Color(0.262745, 0.227451, 0.2, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-corner_detail = 10
-shadow_color = Color(0, 0, 0, 0.470588)
-shadow_size = 5
 
 [node name="WorldLevel" type="Node"]
 script = ExtResource("1_ikoab")
@@ -2238,17 +2125,16 @@ metadata/_edit_lock_ = true
 
 [node name="BenchmarkPoints" type="Node3D" parent="."]
 script = ExtResource("25_1kp43")
-speed = 2.0
 
 [node name="Path3D" type="Path3D" parent="BenchmarkPoints"]
 transform = Transform3D(1, 0, 0, 0, 1, 6.98132e-05, 0, -6.98132e-05, 1, -18.0375, 0.99466, 2.00341)
 curve = SubResource("Curve3D_8tbx0")
 
 [node name="PathFollow3D_pos_point" type="PathFollow3D" parent="BenchmarkPoints/Path3D"]
-transform = Transform3D(-0.461871, 0.00460133, -0.886903, -2.32822e-10, 0.999932, 0.00518803, 0.886905, 0.00239622, -0.46187, 0.872206, 0.0870391, -0.489383)
+transform = Transform3D(-0.461871, 0.00460133, -0.886903, -2.32822e-10, 0.999931, 0.00518803, 0.886905, 0.00239622, -0.46187, 0.872206, 0.0870391, -0.489383)
 
 [node name="PathFollow3D_look_point" type="PathFollow3D" parent="BenchmarkPoints/Path3D"]
-transform = Transform3D(-0.461884, 0.00460152, -0.886921, -2.32829e-10, 0.999973, 0.00518813, 0.88693, 0.00239632, -0.461879, 1.5964, 0.0829075, 0.00253433)
+transform = Transform3D(-0.461884, 0.00460151, -0.886921, -2.32829e-10, 0.999972, 0.00518813, 0.88693, 0.00239632, -0.461879, 1.5964, 0.0829075, 0.00253433)
 progress = 1.0
 
 [node name="BenchmarkCameraBody" type="CharacterBody3D" parent="BenchmarkPoints"]
@@ -2263,187 +2149,8 @@ shape = SubResource("SphereShape3D_xdg07")
 transform = Transform3D(1, 0, 0, 1.49012e-08, 1, 1.49012e-08, 0, -1.49012e-08, 1, 0, 0, 0)
 far = 200.0
 
-[node name="Control" type="Control" parent="BenchmarkPoints/BenchmarkCameraBody/BenchmarkCamera"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-
-[node name="Panel2" type="Panel" parent="BenchmarkPoints/BenchmarkCameraBody/BenchmarkCamera/Control"]
-custom_minimum_size = Vector2(200, 110)
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -103.0
-offset_right = 103.0
-offset_bottom = 115.0
-grow_horizontal = 2
-mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_i3jlr")
-
-[node name="Panel" type="Panel" parent="BenchmarkPoints/BenchmarkCameraBody/BenchmarkCamera/Control"]
-custom_minimum_size = Vector2(200, 110)
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -20.0
-offset_right = 20.0
-offset_bottom = 40.0
-grow_horizontal = 2
-mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_qmjmt")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="BenchmarkPoints/BenchmarkCameraBody/BenchmarkCamera/Control"]
-custom_minimum_size = Vector2(200, 0)
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -75.0
-offset_right = 75.0
-offset_bottom = 40.0
-grow_horizontal = 2
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="BenchmarkPoints/BenchmarkCameraBody/BenchmarkCamera/Control/VBoxContainer"]
-custom_minimum_size = Vector2(150, 25)
-layout_mode = 2
-alignment = 1
-
-[node name="Text" type="Label" parent="BenchmarkPoints/BenchmarkCameraBody/BenchmarkCamera/Control/VBoxContainer/HBoxContainer2"]
-custom_minimum_size = Vector2(30, 0)
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_outline_size = 2
-theme_override_font_sizes/font_size = 25
-text = "Benchmark"
-
-[node name="HBoxContainer3" type="HBoxContainer" parent="BenchmarkPoints/BenchmarkCameraBody/BenchmarkCamera/Control/VBoxContainer"]
-custom_minimum_size = Vector2(150, 25)
-layout_mode = 2
-alignment = 1
-
-[node name="QualityText" type="Label" parent="BenchmarkPoints/BenchmarkCameraBody/BenchmarkCamera/Control/VBoxContainer/HBoxContainer3"]
-custom_minimum_size = Vector2(30, 0)
-layout_mode = 2
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 20
-
-[node name="HBoxContainer" type="HBoxContainer" parent="BenchmarkPoints/BenchmarkCameraBody/BenchmarkCamera/Control/VBoxContainer"]
-custom_minimum_size = Vector2(150, 20)
-layout_mode = 2
-alignment = 1
-
-[node name="Text" type="Label" parent="BenchmarkPoints/BenchmarkCameraBody/BenchmarkCamera/Control/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(30, 0)
-layout_mode = 2
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 20
-text = "FPS:"
-
-[node name="FPSLabel" type="Label" parent="BenchmarkPoints/BenchmarkCameraBody/BenchmarkCamera/Control/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(45, 0)
-layout_mode = 2
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 20
-horizontal_alignment = 1
-
-[node name="InBenchmarkMenu" type="Control" parent="BenchmarkPoints/BenchmarkCameraBody/BenchmarkCamera/Control"]
-top_level = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-script = ExtResource("27_wwjxq")
-
-[node name="ColorRect" type="ColorRect" parent="BenchmarkPoints/BenchmarkCameraBody/BenchmarkCamera/Control/InBenchmarkMenu"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 0.705882)
-
-[node name="Control" type="Control" parent="BenchmarkPoints/BenchmarkCameraBody/BenchmarkCamera/Control/InBenchmarkMenu"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="BenchmarkPoints/BenchmarkCameraBody/BenchmarkCamera/Control/InBenchmarkMenu/Control"]
-custom_minimum_size = Vector2(300, 200)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -150.0
-offset_top = -54.0
-offset_right = 150.0
-offset_bottom = 146.0
-grow_horizontal = 2
-grow_vertical = 2
-alignment = 1
-
-[node name="Button_BackToGame" parent="BenchmarkPoints/BenchmarkCameraBody/BenchmarkCamera/Control/InBenchmarkMenu/Control/VBoxContainer" instance=ExtResource("28_rkirg")]
-layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_yuy2j")
-theme_override_styles/hover = SubResource("StyleBoxFlat_1md6j")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_vxwi3")
-text = "continue"
-ButtonFocusID = 0
-
-[node name="Button_RestartBenchmark" parent="BenchmarkPoints/BenchmarkCameraBody/BenchmarkCamera/Control/InBenchmarkMenu/Control/VBoxContainer" instance=ExtResource("28_rkirg")]
-layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_yuy2j")
-theme_override_styles/hover = SubResource("StyleBoxFlat_1md6j")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_vxwi3")
-text = "restart benchmark"
-ButtonFocusID = 0
-
-[node name="Button_QuitGame" parent="BenchmarkPoints/BenchmarkCameraBody/BenchmarkCamera/Control/InBenchmarkMenu/Control/VBoxContainer" instance=ExtResource("28_rkirg")]
-layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_rvyj6")
-theme_override_styles/hover = SubResource("StyleBoxFlat_28045")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_323qg")
-text = "exit benchmark"
-ButtonFocusID = 1
-
-[node name="Label" type="Label" parent="BenchmarkPoints/BenchmarkCameraBody/BenchmarkCamera/Control/InBenchmarkMenu/Control"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -150.0
-offset_top = -42.0
-offset_right = 150.0
-offset_bottom = -7.0
-grow_horizontal = 2
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 25
-text = "Benchmark Menu"
-horizontal_alignment = 1
-
 [node name="AudioStreamPlayerMusic" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("29_jo8ct")
+stream = ExtResource("27_o0ane")
 volume_db = -10.0
 autoplay = true
 bus = &"Music"
@@ -2470,7 +2177,3 @@ DelayMsStartAnim = 4.5
 PowerShake = 1.0
 ShakeFadeMin = 3.0
 ShakeFadeMax = 7.0
-
-[connection signal="pressed" from="BenchmarkPoints/BenchmarkCameraBody/BenchmarkCamera/Control/InBenchmarkMenu/Control/VBoxContainer/Button_BackToGame" to="BenchmarkPoints/BenchmarkCameraBody/BenchmarkCamera/Control/InBenchmarkMenu" method="_on_button_back_to_game_pressed"]
-[connection signal="pressed" from="BenchmarkPoints/BenchmarkCameraBody/BenchmarkCamera/Control/InBenchmarkMenu/Control/VBoxContainer/Button_RestartBenchmark" to="BenchmarkPoints/BenchmarkCameraBody/BenchmarkCamera/Control/InBenchmarkMenu" method="_on_button_restart_benchmark_pressed"]
-[connection signal="pressed" from="BenchmarkPoints/BenchmarkCameraBody/BenchmarkCamera/Control/InBenchmarkMenu/Control/VBoxContainer/Button_QuitGame" to="BenchmarkPoints/BenchmarkCameraBody/BenchmarkCamera/Control/InBenchmarkMenu" method="_on_button_quit_game_pressed"]

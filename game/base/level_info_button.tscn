@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://dqte75d7q1mdq"]
+
+[ext_resource type="Script" path="res://game/base/level_info_button.cs" id="1_s50mw"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fkrvy"]
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 1
+
+[node name="LevelInfoButton" type="Button"]
+custom_minimum_size = Vector2(350, 50)
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_fkrvy")
+text = "Demo Extend"
+script = ExtResource("1_s50mw")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

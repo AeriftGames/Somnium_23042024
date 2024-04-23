@@ -1,0 +1,9 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://cbru51ibgxgia"]
+
+[ext_resource type="Script" path="res://levels/all_levels_info_resources/base/levelinfo_base_resource.cs" id="1_rcfab"]
+
+[resource]
+script = ExtResource("1_rcfab")
+LevelType = 1
+LevelPath = "res://levels/worldlevel_demo_extend_benchmark.tscn"
+LevelName = "Demo Extend Benchmark"

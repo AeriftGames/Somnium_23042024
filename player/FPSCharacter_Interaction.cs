@@ -79,7 +79,7 @@ public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
 		base._Ready();
 
 		// nacteni hudu
-		basicHud = GetNode<BasicHud>("BasicHud");
+		basicHud = GetNode<BasicHud>("AllHuds/BasicHud");
 		basicHud.SetUseVisible(false);
 
 		// vytvoreni grab system
@@ -107,7 +107,7 @@ public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
 
 	public override void _PhysicsProcess(double delta)
 	{
-		if (GameMaster.GM.GetIsQuitting()) return;
+		if (CGameMaster.GM.GetIsQuitting()) return;
         if (objectCamera == null) return;
 
         base._PhysicsProcess(delta);
@@ -231,7 +231,7 @@ public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
 				tempHitPosition = (Vector3)rayResult["position"];
 			}
 		}
-
+		
 		// Final
 		InteractiveSystem.SetActualInteractiveObject(interact_object,tempHitPosition);
 		return result;
@@ -274,7 +274,7 @@ public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
 		if(isFlashlightEnable)
 		{
 			//ON
-			GameMaster.GM.Log.WriteLog(this,LogSystem.ELogMsgType.INFO,"Flaslight ON");
+			CGameMaster.GM.GetUniversal().GetMasterLog().WriteLog(this,CMasterLog.ELogMsgType.INFO,"Flaslight ON");
 			objectHands.objectFlashlight.Visible = true;
 
 			// Audio play
@@ -286,7 +286,7 @@ public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
 		else
 		{
 			//OFF
-			GameMaster.GM.Log.WriteLog(this, LogSystem.ELogMsgType.INFO, "Flaslight OFF");
+			CGameMaster.GM.GetUniversal().GetMasterLog().WriteLog(this, CMasterLog.ELogMsgType.INFO, "Flaslight OFF");
 			objectHands.objectFlashlight.Visible = false;
 
 			// Audio play
@@ -310,20 +310,8 @@ public partial class FPSCharacter_Interaction : FPSCharacter_WalkingEffects
 			newZoomValue,newZoomInterpSpeed,newZoomRotateSpeed,newOnHitTargetZoomToNormal);
 	}
 
-	public CharacterInteractiveSystem GetInteractiveSystem()
-	{
-		return InteractiveSystem;
-	}
-
-	public BasicHud GetBasicHud()
-	{
-		return basicHud;
-	}
-
-	public InGameMenu GetInGameMenu()
-	{
-		return GetAllHudsControlNode().GetNode<InGameMenu>("InGameMenu");
-	}
+	public CharacterInteractiveSystem GetInteractiveSystem(){return InteractiveSystem;}
+	public BasicHud GetBasicHud(){return basicHud;}
 
 	public override void FreeAll()
 	{

@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://b1jbcn7is57by"]
+
+[ext_resource type="PackedScene" uid="uid://csxdcn7cjacxh" path="res://testing_stuff_kaen/test_new_levels/new_room2/assets/plate_1.glb" id="1_nb5py"]
+[ext_resource type="Material" uid="uid://cirpw2lg4yfny" path="res://testing_stuff_kaen/test_new_levels/new_room2/mat/trim01_plate_shader.tres" id="2_en1am"]
+
+[node name="plate_1" instance=ExtResource("1_nb5py")]
+
+[node name="Cube_2196" parent="." index="0"]
+transform = Transform3D(-1, -4.47024e-08, 0, 4.47024e-08, -1, 0, 0, 0, 1, 0, 0, 0)
+material_override = ExtResource("2_en1am")
+lod_bias = 20.0
+
+[node name="Cube_2197" parent="." index="1"]
+transform = Transform3D(-1, -4.47024e-08, 0, 4.47024e-08, -1, 0, 0, 0, 1, -0.8, 0, 13.1158)
+material_override = ExtResource("2_en1am")
+lod_bias = 20.0

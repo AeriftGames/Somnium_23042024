@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://cmmc6ubyav1pf"]
+
+[ext_resource type="Script" path="res://player_character/action_components/CCharacterFlashlightComponent.cs" id="1_kyovh"]
+[ext_resource type="PackedScene" uid="uid://du8mneghcplbx" path="res://testing_stuff_kaen/flashligt_test/flashlight_item.tscn" id="4_6s6r1"]
+
+[node name="BaseFlashlightComponent" type="Node"]
+script = ExtResource("1_kyovh")
+
+[node name="Flashlight_Item" parent="." instance=ExtResource("4_6s6r1")]

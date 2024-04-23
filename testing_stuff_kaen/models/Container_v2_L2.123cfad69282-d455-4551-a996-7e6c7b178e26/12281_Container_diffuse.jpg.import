@@ -1,0 +1,35 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://b5tkvqy86qry"
+path.s3tc="res://.godot/imported/12281_Container_diffuse.jpg-3de149f4506714484e985bed48d185fd.s3tc.ctex"
+metadata={
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
+}
+
+[deps]
+
+source_file="res://testing_stuff_kaen/models/Container_v2_L2.123cfad69282-d455-4551-a996-7e6c7b178e26/12281_Container_diffuse.jpg"
+dest_files=["res://.godot/imported/12281_Container_diffuse.jpg-3de149f4506714484e985bed48d185fd.s3tc.ctex"]
+
+[params]
+
+compress/mode=2
+compress/high_quality=false
+compress/lossy_quality=0.7
+compress/hdr_compression=1
+compress/normal_map=0
+compress/channel_pack=0
+mipmaps/generate=true
+mipmaps/limit=-1
+roughness/mode=0
+roughness/src_normal=""
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/normal_map_invert_y=false
+process/hdr_as_srgb=false
+process/hdr_clamp_exposure=false
+process/size_limit=0
+detect_3d/compress_to=0

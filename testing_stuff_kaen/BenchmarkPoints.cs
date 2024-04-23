@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 
 public partial class BenchmarkPoints : Node3D
 {
@@ -13,7 +14,9 @@ public partial class BenchmarkPoints : Node3D
 	[Export] public float speed = 3.0f;
 	[Export] public float speed_interp = 0.8f;
 
-	private bool updateMove = true;
+	private bool updateMove = false;
+
+	Godot.Timer FpsTimer = new Timer();
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -25,6 +28,14 @@ public partial class BenchmarkPoints : Node3D
 		interpPos = pathFollowPos.GlobalPosition;
 		interpLook = pathFollowLook.GlobalPosition;
 
+		// FPS
+		FpsTimer.WaitTime = CGameMaster.GM.GetBenchmark().AddFpsDataTimer;
+        FpsTimer.OneShot = false;
+		FpsTimer.Connect("timeout", new Callable(this, "AddFpsNow"));
+		AddChild(FpsTimer);
+		FpsTimer.Start();
+
+		PostInit();
     }
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -41,21 +52,28 @@ public partial class BenchmarkPoints : Node3D
         benchmarkBody.GlobalPosition = interpPos;
 		benchmarkBody.LookAtFromPosition(benchmarkBody.GlobalPosition,interpLook);
 
-		// end
-		if(pathFollowPos.ProgressRatio > 0.98f)
+		// Benchmark update state
+		if (pathFollowPos.ProgressRatio > 0.99f)
 		{
 			updateMove = false;
+			FpsTimer.Stop();
 
-			// pokud nejsme na konci benchmarku (mysleno neprobehly vsechny kvality)
-			if (!GameMaster.GM.GetBenchmarkSystem().BenchmarkEnd)
-				GameMaster.GM.GetBenchmarkSystem().NextBenchmarkQuality();
-			else
-			{
-				// score ?
-
-				// aspon spustime in benchmark menu
-				benchmarkBody.GetInBenchmarkMenu().SetActive(true);
-			}
-        }
+			// Posleme globalni signal ze benchmark presset se provedl do konce
+			CGameMaster.GM.GetMasterSignals().EmitSignal(CMasterSignals.SignalName.BenchmarkFinishPresset);
+			GD.Print("SendSignal");
+		}
 	}
+
+	public void AddFpsNow(){CGameMaster.GM.GetBenchmark().AddFpsData((int)Engine.GetFramesPerSecond());}
+
+    public async void PostInit()
+    {
+        await ToSignal(CGameMaster.GM.GetMasterSignals(), CMasterSignals.SignalName.GameStart);
+		GD.Print("GameStart receiverd");
+
+		CGameMaster.GM.GetBenchmark().SetPostInitBenchmarkSettings();
+
+		// start move benchmark camera
+		updateMove = true;
+    }
 }

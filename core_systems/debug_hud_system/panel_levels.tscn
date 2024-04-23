@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://cg3jm0pyxxw5d"]
+
+[ext_resource type="PackedScene" uid="uid://dqx75mfvna1rx" path="res://core_systems/debug_hud_system/base/panel_base.tscn" id="1_43j5o"]
+[ext_resource type="Script" path="res://core_systems/debug_hud_system/CPanelLevels.cs" id="2_jvaj6"]
+
+[node name="PanelLevels" instance=ExtResource("1_43j5o")]
+script = ExtResource("2_jvaj6")
+
+[node name="Button_SaveSettings" parent="VBoxBase/VBoxBottom/MarginContainer/VBoxButtons" index="0"]
+visible = false
+
+[node name="Button_QuitGame" parent="VBoxBase/VBoxBottom/MarginContainer/VBoxButtons" index="1"]
+visible = false

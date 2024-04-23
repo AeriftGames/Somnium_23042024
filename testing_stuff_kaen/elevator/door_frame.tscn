@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://dyuap2p5ox3p6"]
+
+[ext_resource type="PackedScene" uid="uid://dcleembfnk2fy" path="res://testing_stuff_kaen/elevator/door_frame.glb" id="1_nd7py"]
+[ext_resource type="Material" uid="uid://n303wu2f8je2" path="res://testing_stuff_kaen/elevator/elevator_mat.tres" id="2_ki8gi"]
+
+[node name="door_frame" instance=ExtResource("1_nd7py")]
+
+[node name="ram_002" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+material_override = ExtResource("2_ki8gi")

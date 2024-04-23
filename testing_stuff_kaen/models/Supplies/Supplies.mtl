@@ -1,0 +1,98 @@
+# 3ds Max Wavefront OBJ Exporter v0.97b - (c)2007 guruware
+# File Created: 30.07.2014 12:05:03
+
+newmtl Material__29
+	Ns 59.2940
+	Ni 1.0000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.7500 0.7500 0.7500
+	Kd 0.4000 0.4000 0.4000
+	Ks 0.7000 0.7000 0.7000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka C:\Users\Gianluca\Desktop\Crates\crtshl.jpg
+	map_Kd C:\Users\Gianluca\Desktop\Crates\crtshl.jpg
+
+newmtl Material__26
+	Ns 59.2940
+	Ni 1.0000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.7500 0.7500 0.7500
+	Kd 0.4000 0.4000 0.4000
+	Ks 0.7000 0.7000 0.7000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka C:\Users\Gianluca\Desktop\Crates\crtlng.jpg
+	map_Kd C:\Users\Gianluca\Desktop\Crates\crtlng.jpg
+
+newmtl Material__27
+	Ns 59.2940
+	Ni 1.0000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.7500 0.7500 0.7500
+	Kd 0.4000 0.4000 0.4000
+	Ks 0.7000 0.7000 0.7000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka C:\Users\Gianluca\Desktop\Crates\crtrec.jpg
+	map_Kd C:\Users\Gianluca\Desktop\Crates\crtrec.jpg
+
+newmtl Material__28
+	Ns 59.2940
+	Ni 1.0000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.7500 0.7500 0.7500
+	Kd 0.4000 0.4000 0.4000
+	Ks 0.7000 0.7000 0.7000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka C:\Users\Gianluca\Desktop\Crates\crtroc.jpg
+	map_Kd C:\Users\Gianluca\Desktop\Crates\crtroc.jpg
+
+newmtl Material__25
+	Ns 59.2940
+	Ni 1.0000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.7500 0.7500 0.7500
+	Kd 0.4000 0.4000 0.4000
+	Ks 0.7000 0.7000 0.7000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka C:\Users\Gianluca\Desktop\Crates\crtlat.jpg
+	map_Kd C:\Users\Gianluca\Desktop\Crates\crtlat.jpg
+
+newmtl default02
+	Ns 59.2940
+	Ni 1.0000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.7500 0.7500 0.7500
+	Kd 0.4000 0.4000 0.4000
+	Ks 0.7000 0.7000 0.7000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka C:\Users\Gianluca\Desktop\Crates\crtbev.jpg
+	map_Kd C:\Users\Gianluca\Desktop\Crates\crtbev.jpg
+
+newmtl Material__7
+	Ns 25.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.0641 0.1582 0.1817
+	Kd 0.1922 0.4745 0.5451
+	Ks 0.0450 0.0450 0.0450
+	Ke 0.0000 0.0000 0.0000

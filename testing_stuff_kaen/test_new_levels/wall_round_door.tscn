@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://dswna5rgagn7k"]
+
+[ext_resource type="PackedScene" uid="uid://clm6118dobxsg" path="res://testing_stuff_kaen/test_new_levels/wall_round_door.glb" id="1_gcllv"]
+[ext_resource type="Material" uid="uid://btinqpm8usxre" path="res://testing_stuff_kaen/test_new_levels/NEW_TRIM/new_trim2.material" id="2_bjrkg"]
+
+[node name="wall_round_door" instance=ExtResource("1_gcllv")]
+
+[node name="Plane_020" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+material_override = ExtResource("2_bjrkg")

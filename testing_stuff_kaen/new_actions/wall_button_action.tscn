@@ -1,0 +1,118 @@
+[gd_scene load_steps=10 format=3 uid="uid://bqcc3ox822w73"]
+
+[ext_resource type="PackedScene" uid="uid://darrpqdjdaenp" path="res://testing_stuff_kaen/new_actions/wall_button.tscn" id="1_p4lpk"]
+[ext_resource type="Script" path="res://testing_stuff_kaen/test_new_levels/CInteractiveObject.cs" id="2_jl5ap"]
+[ext_resource type="Script" path="res://testing_stuff_kaen/test_new_levels/CActionItemUse.cs" id="2_lq2td"]
+[ext_resource type="Script" path="res://testing_stuff_kaen/new_actions/CBilboardObject.cs" id="4_7jeyo"]
+[ext_resource type="Script" path="res://testing_stuff_kaen/new_actions/FocusActionObject.cs" id="6_4fubn"]
+[ext_resource type="Theme" uid="uid://cd3yvqcy8bus4" path="res://core_systems/debug_hud_system/debug_theme.theme" id="7_raecs"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_je34a"]
+size = Vector3(2.74603, 1.0069, 2.02661)
+
+[sub_resource type="SphereMesh" id="SphereMesh_ho0nh"]
+radius = 0.05
+height = 0.1
+
+[sub_resource type="SphereMesh" id="SphereMesh_xg05b"]
+radius = 0.05
+height = 0.1
+
+[node name="wall_button" node_paths=PackedStringArray("FocusActionObject") instance=ExtResource("1_p4lpk")]
+script = ExtResource("2_lq2td")
+FocusActionObject = NodePath("FocusActionObject")
+
+[node name="InteractiveObject" type="Node3D" parent="." index="0" node_paths=PackedStringArray("CallUseObject") groups=["interactive_object"]]
+transform = Transform3D(1, 8.52655e-28, 1.42109e-14, 0, 1, 4.23518e-21, -1.42109e-14, 1.41172e-21, 1, 0.36027, 0.865726, 7.10543e-15)
+script = ExtResource("2_jl5ap")
+CallUseObject = NodePath("..")
+ObjectName = "Button"
+metadata/_edit_lock_ = true
+
+[node name="StaticBody3D" type="StaticBody3D" parent="InteractiveObject" index="0" groups=["interactive_object"]]
+transform = Transform3D(4.96704e-08, 1, -1.50996e-07, -1, 4.96705e-08, -1.50996e-07, -1.50996e-07, 1.50996e-07, 1, -0.0966343, 0, -1.45914e-08)
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractiveObject/StaticBody3D" index="0"]
+transform = Transform3D(1, 1.53122e-12, -1.42109e-14, -1.52767e-12, 1, 1.45825e-17, 7.67386e-12, -1.5233e-17, 1, 0.502533, 0.0598452, -0.00354005)
+shape = SubResource("BoxShape3D_je34a")
+
+[node name="BilboardObject" type="Node3D" parent="." index="1"]
+transform = Transform3D(-2.62269e-07, 0, -6, 0, 6, 0, 6, 0, -2.62269e-07, 0, 0, 0)
+visible = false
+script = ExtResource("4_7jeyo")
+CanLookAtCamera = false
+metadata/_edit_lock_ = true
+
+[node name="NodeLeftUp" type="Node3D" parent="BilboardObject" index="0"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.182612, 0.301465, -0.0442353)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="BilboardObject/NodeLeftUp" index="0"]
+transform = Transform3D(1, 0, -2.84217e-14, 0, 1, 0, 2.84217e-14, 0, 1, 0, 0, 0)
+mesh = SubResource("SphereMesh_ho0nh")
+metadata/_edit_lock_ = true
+
+[node name="NodeRightDown" type="Node3D" parent="BilboardObject" index="1"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.182168, -0.18113, -0.0442352)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="BilboardObject/NodeRightDown" index="0"]
+transform = Transform3D(1, 0, -9.9476e-14, 0, 1, 0, 9.9476e-14, 0, 1, 0, 0, 0)
+mesh = SubResource("SphereMesh_ho0nh")
+metadata/_edit_lock_ = true
+
+[node name="NodeLeftDown" type="Node3D" parent="BilboardObject" index="2"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.182, -0.181, -0.044)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="BilboardObject/NodeLeftDown" index="0"]
+mesh = SubResource("SphereMesh_xg05b")
+metadata/_edit_lock_ = true
+
+[node name="NodeRightUp" type="Node3D" parent="BilboardObject" index="3"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.183, 0.301, -0.044)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="BilboardObject/NodeRightUp" index="0"]
+mesh = SubResource("SphereMesh_xg05b")
+metadata/_edit_lock_ = true
+
+[node name="FocusActionObject" type="Node3D" parent="." index="2" node_paths=PackedStringArray("FocusLookObject")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.33333, 0, 5.03319e-07)
+script = ExtResource("6_4fubn")
+FocusLookObject = NodePath("..")
+metadata/_edit_lock_ = true
+
+[node name="ButtonUp" parent="." index="4"]
+transform = Transform3D(1.78814e-07, 1, 0, -1, 1.78814e-07, 0, 8.47033e-21, 0, 1, 0.36027, 0.532393, 7.10543e-15)
+
+[node name="ButtonUpBase" parent="." index="5"]
+transform = Transform3D(1.78814e-07, 1, 0, -1, 1.78814e-07, 0, 5.0822e-21, 0, 1, 0.114886, 0.532393, 1.77636e-15)
+
+[node name="Control" type="Control" parent="." index="8"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Button" type="Button" parent="Control" index="0"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -31.0
+offset_top = 39.0
+offset_right = 21.0
+offset_bottom = 62.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("7_raecs")
+text = "-BACK-"
+
+[connection signal="pressed" from="Control/Button" to="." method="_on_button_pressed"]

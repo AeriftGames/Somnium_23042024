@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://cs18akut7qmre"]
+
+[ext_resource type="PackedScene" uid="uid://dwjy2dmoful2u" path="res://testing_stuff_kaen/test_new_levels/new_room2/assets/box.tscn" id="1_80oj0"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bdqxo"]
+
+[node name="BoxCollision2" type="Node3D"]
+transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0, 0)
+
+[node name="box37" parent="." instance=ExtResource("1_80oj0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.49998, 0, 0)
+
+[node name="box38" parent="." instance=ExtResource("1_80oj0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.06866, 0, 0)
+
+[node name="box39" parent="." instance=ExtResource("1_80oj0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.63734, 0, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_bdqxo")

@@ -50,7 +50,7 @@ public partial class all_material_surfaces : Resource
             }
         }
 
-        GameMaster.GM.Log.WriteLog(GameMaster.GM, LogSystem.ELogMsgType.WARNING,
+        CGameMaster.GM.GetUniversal().GetMasterLog().WriteLog(CGameMaster.GM, CMasterLog.ELogMsgType.WARNING,
             "(AllMaterialSurfaces) audio - no surface find");
         return null;
     }
@@ -81,7 +81,7 @@ public partial class all_material_surfaces : Resource
             }
         }
 
-        GameMaster.GM.Log.WriteLog(GameMaster.GM, LogSystem.ELogMsgType.WARNING,
+        CGameMaster.GM.GetUniversal().GetMasterLog().WriteLog(CGameMaster.GM, CMasterLog.ELogMsgType.WARNING,
             "(AllMaterialSurfaces) pitch - no surface find");
         return 0.0f;
     }
@@ -112,7 +112,7 @@ public partial class all_material_surfaces : Resource
             }
         }
 
-        GameMaster.GM.Log.WriteLog(GameMaster.GM,LogSystem.ELogMsgType.WARNING,
+        CGameMaster.GM.GetUniversal().GetMasterLog().WriteLog(CGameMaster.GM,CMasterLog.ELogMsgType.WARNING,
             "(AllMaterialSurfaces) volumedb - no surface find");
         return 0.0f;
     }

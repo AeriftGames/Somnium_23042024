@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://71dxlpcvrjex"]
+
+[ext_resource type="PackedScene" uid="uid://cw1yssijmll10" path="res://testing_stuff_kaen/test_new_levels/3_wall_sloup.glb" id="1_n2m5f"]
+[ext_resource type="Material" uid="uid://btinqpm8usxre" path="res://testing_stuff_kaen/test_new_levels/NEW_TRIM/new_trim2.material" id="2_hkbv8"]
+
+[node name="3_wall_sloup" instance=ExtResource("1_n2m5f")]
+
+[node name="Cube_538" parent="." index="0"]
+transform = Transform3D(0.3, 0, 0, 0, -1.31134e-08, 0.3, 0, -0.3, -1.31134e-08, 0, 0, 0)
+material_override = ExtResource("2_hkbv8")

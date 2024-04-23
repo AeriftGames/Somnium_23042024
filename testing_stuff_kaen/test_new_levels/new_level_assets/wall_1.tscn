@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://drfqugpxvtr3q"]
+
+[ext_resource type="PackedScene" uid="uid://b25yfjst57my6" path="res://testing_stuff_kaen/test_new_levels/new_level_assets/wall_1.glb" id="1_kjbhn"]
+[ext_resource type="Material" uid="uid://btinqpm8usxre" path="res://testing_stuff_kaen/test_new_levels/NEW_TRIM/new_trim2.material" id="2_hhg5w"]
+
+[node name="wall_1" instance=ExtResource("1_kjbhn")]
+
+[node name="Cube_872" parent="." index="0"]
+transform = Transform3D(-1, 7.54978e-08, -7.54979e-08, -7.54978e-08, 1.19209e-06, 1, 7.54979e-08, 1, -1.19209e-06, 0, 0, 0)
+material_override = ExtResource("2_hhg5w")

@@ -203,23 +203,23 @@ public partial class LevelDataSettings : Node
         workingQuality = newLevelData;
         workingIsBenchmarkMode = newBenchmark;
 
-        GameMaster.GM.GetSettings().Apply_Scale3D(newLevelData.FSRScale, true, newSave);
-        GameMaster.GM.GetSettings().Apply_Ssao(newLevelData.SSAO, true, newSave);
-        GameMaster.GM.GetSettings().Apply_Ssil(newLevelData.SSIL,true, newSave);
+        CGameMaster.GM.GetSettings().Apply_Scale3D(newLevelData.FSRScale, true, newSave);
+        CGameMaster.GM.GetSettings().Apply_Ssao(newLevelData.SSAO, true, newSave);
+        CGameMaster.GM.GetSettings().Apply_Ssil(newLevelData.SSIL,true, newSave);
 
-        GameMaster.GM.GetLevelLoader().GetActualLevelScene().GetVoxelGI().Subdiv = newLevelData.VoxelSub;
+        CGameMaster.GM.GetGame().GetLevelLoader().GetActualLevelScene().GetVoxelGI().Subdiv = newLevelData.VoxelSub;
 
-        GameMaster.GM.GetLevelLoader().GetActualLevelScene().GetVoxelGI().Data.Energy = newLevelData.VoxelEnergy;
-        GameMaster.GM.GetLevelLoader().GetActualLevelScene().GetVoxelGI().Data.Propagation = newLevelData.VoxelPropag;
-        GameMaster.GM.GetLevelLoader().GetActualLevelScene().GetVoxelGI().Data.Bias = newLevelData.VoxelBias;
-        GameMaster.GM.GetLevelLoader().GetActualLevelScene().GetVoxelGI().Data.NormalBias = newLevelData.VoxelNormalBias;
+        CGameMaster.GM.GetGame().GetLevelLoader().GetActualLevelScene().GetVoxelGI().Data.Energy = newLevelData.VoxelEnergy;
+        CGameMaster.GM.GetGame().GetLevelLoader().GetActualLevelScene().GetVoxelGI().Data.Propagation = newLevelData.VoxelPropag;
+        CGameMaster.GM.GetGame().GetLevelLoader().GetActualLevelScene().GetVoxelGI().Data.Bias = newLevelData.VoxelBias;
+        CGameMaster.GM.GetGame().GetLevelLoader().GetActualLevelScene().GetVoxelGI().Data.NormalBias = newLevelData.VoxelNormalBias;
 
-        GameMaster.GM.GetLevelLoader().GetActualLevelScene().GetVoxelGI().CallDeferred("bake");
+        CGameMaster.GM.GetGame().GetLevelLoader().GetActualLevelScene().GetVoxelGI().CallDeferred("bake");
 
         await Task.Delay(500);
 
         first_change = true;
-        GameMaster.GM.GetLevelLoader().GetActualLevelScene().GetVoxelGI().Data.EmitChanged();
+        CGameMaster.GM.GetGame().GetLevelLoader().GetActualLevelScene().GetVoxelGI().Data.EmitChanged();
     }
 
     public override void _Process(double delta)
@@ -236,16 +236,6 @@ public partial class LevelDataSettings : Node
             ApplyNewLevelDataSettings(GetHighPresset());
         else if (Input.IsActionJustPressed("quality5"))
             ApplyNewLevelDataSettings(GetHighestPresset());
-        else if (Input.IsActionJustPressed("change_energy"))
-        {
-            GameMaster.GM.GetLevelLoader().GetActualLevelScene().GetVoxelGI().Data.Energy = 0.15f;
-            GameMaster.GM.GetLevelLoader().GetActualLevelScene().GetVoxelGI().Data.EmitChanged();
-        }
-        else if (Input.IsActionJustPressed("change_energy_plus"))
-        {
-            GameMaster.GM.GetLevelLoader().GetActualLevelScene().GetVoxelGI().Data.Energy = 1.8f;
-            GameMaster.GM.GetLevelLoader().GetActualLevelScene().GetVoxelGI().Data.EmitChanged();
-        }
 
     }
 
@@ -255,11 +245,11 @@ public partial class LevelDataSettings : Node
 
         //GD.Print("AHOJ");
 
-        GameMaster.GM.GetLevelLoader().GetActualLevelScene().GetVoxelGI().Data.Energy = workingQuality.VoxelEnergy;
-        GameMaster.GM.GetLevelLoader().GetActualLevelScene().GetVoxelGI().Data.Propagation = workingQuality.VoxelPropag;
+        CGameMaster.GM.GetGame().GetLevelLoader().GetActualLevelScene().GetVoxelGI().Data.Energy = workingQuality.VoxelEnergy;
+        CGameMaster.GM.GetGame().GetLevelLoader().GetActualLevelScene().GetVoxelGI().Data.Propagation = workingQuality.VoxelPropag;
 
         first_change = false;
-        GameMaster.GM.GetLevelLoader().GetActualLevelScene().GetVoxelGI().Data.EmitChanged();
+        CGameMaster.GM.GetGame().GetLevelLoader().GetActualLevelScene().GetVoxelGI().Data.EmitChanged();
 
         ProjectSettings.SetSetting("rendering/lights_and_shadows/positional_shadow/soft_shadow_filter_quality",
             (int)workingQuality.ShadowFilterQuality);
@@ -267,14 +257,14 @@ public partial class LevelDataSettings : Node
         ProjectSettings.SetSetting("rendering/lights_and_shadows/positional_shadow/atlas_size", workingQuality.ShadowAtlasSize);
 
         if (workingIsBenchmarkMode)
-            GameMaster.GM.GetBenchmarkSystem().BenchmarkStart(true);
+            CGameMaster.GM.GetBenchmark().BenchmarkStart(true);
     }
 
     public override void _Ready()
     {
         base._Ready();
 
-        GameMaster.GM.GetLevelLoader().GetActualLevelScene().GetVoxelGI().Data.Changed += AfterVoxelGIUpdate;
+        CGameMaster.GM.GetGame().GetLevelLoader().GetActualLevelScene().GetVoxelGI().Data.Changed += AfterVoxelGIUpdate;
 
         if (ForceQualityOnLevelStart)
             SetQualityPresset();

@@ -1,17 +1,52 @@
-[gd_scene load_steps=13 format=3 uid="uid://bnb3blo4rl83s"]
+[gd_scene load_steps=26 format=3 uid="uid://bnb3blo4rl83s"]
 
 [ext_resource type="PackedScene" uid="uid://0g1u2jvnfbpy" path="res://player/FPSCharacter_Interaction.tscn" id="1_ywg5i"]
 [ext_resource type="Script" path="res://player/FPSCharacter_Inventory.cs" id="2_k43co"]
 [ext_resource type="AudioStream" uid="uid://d1h0024d0d7i3" path="res://audio/audio_streams/hurts_test/413178__micahlg__male_hurt2.ogg" id="3_51q7g"]
+[ext_resource type="Script" path="res://player/character_components/CharacterHealthComponent.cs" id="3_aggcm"]
+[ext_resource type="Script" path="res://player/character_components/CharacterComponents.cs" id="3_myxdn"]
 [ext_resource type="Script" path="res://player/character_systems/CharacterInfoHud.cs" id="4_nvx4w"]
+[ext_resource type="Script" path="res://player/character_components/CharacterInventoryComponent.cs" id="5_8thmx"]
 [ext_resource type="PackedScene" uid="uid://dhhnra4i7t74r" path="res://player/character_systems/damage_hud.tscn" id="5_dhy04"]
-[ext_resource type="Script" path="res://player/character_systems/CharacterStairSystem.cs" id="5_kvnk0"]
-[ext_resource type="Script" path="res://player/character_systems/inventory_menu/InventorySystem.cs" id="8_1wcpl"]
+[ext_resource type="Script" path="res://player/character_components/CharacterStairsComponent.cs" id="6_wo4bu"]
+[ext_resource type="Script" path="res://player/character_components/CharacterShootBallComponet.cs" id="7_1fieu"]
+[ext_resource type="AudioStream" uid="uid://dxie2xuqywf7d" path="res://audio/audio_streams/downloads/impact_ice.wav" id="8_oiliq"]
+[ext_resource type="Script" path="res://player/character_components/CharacterUseLadderComponent.cs" id="9_3t5qx"]
 [ext_resource type="PackedScene" uid="uid://dxumv4dw6y6ps" path="res://player/character_systems/inventory_menu/inventory_menu_number_two.tscn" id="9_bfvnj"]
-[ext_resource type="Script" path="res://player/character_systems/StaminaSystem.cs" id="9_ogpi2"]
+[ext_resource type="Script" path="res://player/character_components/CharacterStaminaComponent.cs" id="9_ogpi2"]
+[ext_resource type="AudioStream" uid="uid://rwntiaix8s3r" path="res://audio/audio_streams/ladder/clim_ladder.wav" id="10_fohp5"]
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_wsteg"]
-radius = 0.6
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0a8eu"]
+radius = 0.4
+height = 1.8
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_e5kct"]
+radius = 0.4
+height = 0.9
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rvyrt"]
+radius = 0.4
+height = 1.8
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_h50ca"]
+radius = 0.4
+height = 0.9
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ybfn6"]
+radius = 0.4
+height = 1.8
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_cj1of"]
+radius = 0.4
+height = 0.9
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ee8cu"]
+radius = 0.4
+height = 1.8
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_741di"]
+radius = 0.4
+height = 0.9
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7bbwt"]
 bg_color = Color(0.913319, 0.285158, 0, 0.392157)
@@ -28,88 +63,501 @@ corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
 [node name="FPSCharacter_Inventory" instance=ExtResource("1_ywg5i")]
+collision_mask = 33
+floor_constant_speed = true
+floor_max_angle = 0.872665
 script = ExtResource("2_k43co")
-StartActualHealth = 100.0
-StartMaxHealth = 100.0
-StartHealthRegenVal = 1.0
-StartHealthRegenTick = 0.5
-StartHealthRegenEnable = false
-HurtAudios = null
-DeathAudios = null
-BodyFallAudios = null
-CanShootProjectile = true
-PowerImpulseShoot = 10.0
-MassProjectile = 5.0
-EnableAutoDestroyProjectile = true
-MSecToDestroyProjectile = 5000
-AudioFlashlight_On = null
-AudioFlashlight_Off = null
+HurtAudios = Array[AudioStream]([])
+DeathAudios = Array[AudioStream]([])
+BodyFallAudios = Array[AudioStream]([])
 FootStepLengthInSprint = 1.25
 FootStepLengthInCrouch = 0.85
-FootstepSounds = null
 FootstepsVolumeDBInWalk = -2.0
 FootstepsVolumeDBInSprint = 1.0
 FootstepsVolumeDBInCrouch = -7.0
+FootstepsAudioPitch = 0.0
 MiniHeightForLandingEffect = 0.35
-miniHeightLandingSounds = null
-smallHeightLandingSounds = null
-mediumHeightLandingSounds = null
-highHeightLandingSounds = null
-deathHeightLandingSounds = null
-JumpingSounds = null
-JumpingAudioPitch = 1.0
-JumpingAudioPitchOffset = 0.2
-CrouchingSounds = null
-CrouchingAudioPitch = 0.65
-CrouchingAudioPitchRandomOffset = 0.05
-CrouchingVolumeDB = -5.0
-UncrouchingSounds = null
-UncrouchingAudioPitch = 0.5
-UncrouchingVolumeDB = -5.0
 CrunchLerpSpeed = 5.0
 
-[node name="InventorySystem" type="Node" parent="." index="0"]
-script = ExtResource("8_1wcpl")
-MaxInventoryCapacity = 10
+[node name="CharacterComponents2" type="Node3D" parent="." index="0"]
+script = ExtResource("3_myxdn")
 
-[node name="StaminaSystem" type="Node" parent="." index="1"]
-script = ExtResource("9_ogpi2")
-initStaminaRegenVal = 1.0
-initStaminaRegenTick = 0.2
-initStaminaRegenEnable = true
-
-[node name="StairSystem" type="Node3D" parent="." index="2"]
-script = ExtResource("5_kvnk0")
+[node name="CharacterCollisionStand2" type="CollisionShape3D" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+shape = SubResource("CapsuleShape3D_0a8eu")
 metadata/_edit_lock_ = true
 
-[node name="ShapeCast3D" type="ShapeCast3D" parent="StairSystem" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.09073, -0.451133)
-shape = SubResource("SphereShape3D_wsteg")
-margin = 0.05
+[node name="CharacterCollisionCrunch2" type="CollisionShape3D" parent="." index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0)
+shape = SubResource("CapsuleShape3D_e5kct")
+disabled = true
+metadata/_edit_lock_ = true
 
-[node name="AudioStreamPlayer_Footsteps" parent="." index="8"]
-max_polyphony = 3
+[node name="HeadMain2" type="Node3D" parent="." index="3"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+metadata/_edit_lock_ = true
 
-[node name="AudioStreamPlayer_JumpLand" parent="." index="9"]
-max_polyphony = 3
+[node name="HeadStandPos2" type="Node3D" parent="." index="4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+metadata/_edit_lock_ = true
 
-[node name="AudioStreamPlayer_Hurts" type="AudioStreamPlayer" parent="." index="11"]
+[node name="CharacterComponents3" type="Node3D" parent="." index="5"]
+script = ExtResource("3_myxdn")
+
+[node name="CharacterCollisionStand3" type="CollisionShape3D" parent="." index="6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+shape = SubResource("CapsuleShape3D_rvyrt")
+metadata/_edit_lock_ = true
+
+[node name="CharacterCollisionCrunch3" type="CollisionShape3D" parent="." index="7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0)
+shape = SubResource("CapsuleShape3D_h50ca")
+disabled = true
+metadata/_edit_lock_ = true
+
+[node name="AudioStreamPlayer_Hurts" type="AudioStreamPlayer" parent="." index="8"]
 stream = ExtResource("3_51q7g")
 max_polyphony = 4
 bus = &"Sfx"
 
-[node name="AudioStreamPlayer_Universal" type="AudioStreamPlayer" parent="." index="12"]
+[node name="AudioStreamPlayer_Universal" type="AudioStreamPlayer" parent="." index="9"]
 max_polyphony = 4
 bus = &"Sfx"
 
-[node name="Item_inspect" parent="." index="14"]
+[node name="HeadMain3" type="Node3D" parent="." index="10"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 metadata/_edit_lock_ = true
 
-[node name="report_bug" parent="." index="15"]
+[node name="HeadStandPos3" type="Node3D" parent="." index="11"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 metadata/_edit_lock_ = true
 
-[node name="DebugHud" parent="." index="16"]
+[node name="CharacterComponents4" type="Node3D" parent="." index="12"]
+script = ExtResource("3_myxdn")
+
+[node name="CharacterCollisionStand4" type="CollisionShape3D" parent="." index="13"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+shape = SubResource("CapsuleShape3D_ybfn6")
 metadata/_edit_lock_ = true
+
+[node name="AllHuds2" type="Control" parent="." index="14"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+metadata/_edit_lock_ = true
+
+[node name="CharacterCollisionCrunch4" type="CollisionShape3D" parent="." index="15"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0)
+shape = SubResource("CapsuleShape3D_cj1of")
+disabled = true
+metadata/_edit_lock_ = true
+
+[node name="HeadMain4" type="Node3D" parent="." index="16"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+metadata/_edit_lock_ = true
+
+[node name="HeadStandPos4" type="Node3D" parent="." index="17"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+metadata/_edit_lock_ = true
+
+[node name="CharacterHealthComponent" type="Node" parent="CharacterComponents" index="0"]
+script = ExtResource("3_aggcm")
+
+[node name="CharacterStaminaComponent" type="Node" parent="CharacterComponents" index="1"]
+script = ExtResource("9_ogpi2")
+InitMaxStamina = 150.0
+
+[node name="CharacterInventoryComponent" type="Node" parent="CharacterComponents" index="2"]
+script = ExtResource("5_8thmx")
+
+[node name="CharacterStairsComponent" type="Node3D" parent="CharacterComponents" index="3"]
+script = ExtResource("6_wo4bu")
+MoveSpeedStandPercent = 90.0
+MoveSpeedSprintPercent = 90.0
+metadata/_edit_lock_ = true
+
+[node name="RayCast3D" type="RayCast3D" parent="CharacterComponents/CharacterStairsComponent" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+collision_mask = 9
+metadata/_edit_lock_ = true
+
+[node name="CharacterShootBallComponet" type="Node" parent="CharacterComponents" index="4"]
+script = ExtResource("7_1fieu")
+
+[node name="AudioStreamPlayer_ShootBall" type="AudioStreamPlayer" parent="CharacterComponents/CharacterShootBallComponet" index="0"]
+stream = ExtResource("8_oiliq")
+volume_db = -10.0
+pitch_scale = 0.5
+mix_target = 1
+max_polyphony = 4
+bus = &"Sfx"
+
+[node name="CharacterUseLadderComponent" type="Node" parent="CharacterComponents" index="5"]
+script = ExtResource("9_3t5qx")
+
+[node name="UseLadderControl" type="Control" parent="CharacterComponents/CharacterUseLadderComponent" index="0"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="LadderSymbol" type="Control" parent="CharacterComponents/CharacterUseLadderComponent/UseLadderControl" index="0"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="ColorRect" type="ColorRect" parent="CharacterComponents/CharacterUseLadderComponent/UseLadderControl/LadderSymbol" index="0"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -9.0
+offset_top = -21.0
+offset_right = -7.0
+offset_bottom = 19.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect3" type="ColorRect" parent="CharacterComponents/CharacterUseLadderComponent/UseLadderControl/LadderSymbol" index="1"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -7.0
+offset_top = 12.0
+offset_right = 7.0
+offset_bottom = 14.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect4" type="ColorRect" parent="CharacterComponents/CharacterUseLadderComponent/UseLadderControl/LadderSymbol" index="2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -7.0
+offset_top = 5.0
+offset_right = 7.0
+offset_bottom = 7.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect5" type="ColorRect" parent="CharacterComponents/CharacterUseLadderComponent/UseLadderControl/LadderSymbol" index="3"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -7.0
+offset_top = -2.0
+offset_right = 7.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect6" type="ColorRect" parent="CharacterComponents/CharacterUseLadderComponent/UseLadderControl/LadderSymbol" index="4"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -7.0
+offset_top = -9.0
+offset_right = 7.0
+offset_bottom = -7.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect7" type="ColorRect" parent="CharacterComponents/CharacterUseLadderComponent/UseLadderControl/LadderSymbol" index="5"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -7.0
+offset_top = -16.0
+offset_right = 7.0
+offset_bottom = -14.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect2" type="ColorRect" parent="CharacterComponents/CharacterUseLadderComponent/UseLadderControl/LadderSymbol" index="6"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 7.0
+offset_top = -21.0
+offset_right = 9.0
+offset_bottom = 19.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="CharacterComponents/CharacterUseLadderComponent/UseLadderControl" index="1"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.0
+offset_top = 23.0
+offset_right = 50.0
+offset_bottom = 41.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 13
+text = "Použít žebřík"
+horizontal_alignment = 1
+
+[node name="AudioStreamPlayer_Ladder" type="AudioStreamPlayer" parent="CharacterComponents/CharacterUseLadderComponent" index="1"]
+stream = ExtResource("10_fohp5")
+mix_target = 1
+max_polyphony = 4
+bus = &"Sfx"
+
+[node name="CharacterCollisionStand" parent="." index="19"]
+shape = SubResource("CapsuleShape3D_ee8cu")
+
+[node name="AllHuds3" type="Control" parent="." index="20"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+metadata/_edit_lock_ = true
+
+[node name="CharacterCollisionCrunch" parent="." index="21"]
+shape = SubResource("CapsuleShape3D_741di")
+
+[node name="HeadGimbalA2" type="Node3D" parent="HeadMain" index="0"]
+unique_name_in_owner = true
+metadata/_edit_lock_ = true
+
+[node name="HeadGimbalA3" type="Node3D" parent="HeadMain" index="1"]
+unique_name_in_owner = true
+metadata/_edit_lock_ = true
+
+[node name="HeadGimbalA4" type="Node3D" parent="HeadMain" index="2"]
+unique_name_in_owner = true
+metadata/_edit_lock_ = true
+
+[node name="HeadGimbalB2" type="Node3D" parent="HeadMain/HeadGimbalA" index="0"]
+unique_name_in_owner = true
+metadata/_edit_lock_ = true
+
+[node name="HeadGimbalB3" type="Node3D" parent="HeadMain/HeadGimbalA" index="1"]
+unique_name_in_owner = true
+metadata/_edit_lock_ = true
+
+[node name="HeadGimbalB4" type="Node3D" parent="HeadMain/HeadGimbalA" index="2"]
+unique_name_in_owner = true
+metadata/_edit_lock_ = true
+
+[node name="HeadHolderCamera2" type="Node3D" parent="HeadMain/HeadGimbalA/HeadGimbalB" index="0"]
+unique_name_in_owner = true
+metadata/_edit_lock_ = true
+
+[node name="HeadHolderCamera3" type="Node3D" parent="HeadMain/HeadGimbalA/HeadGimbalB" index="1"]
+unique_name_in_owner = true
+metadata/_edit_lock_ = true
+
+[node name="HeadHolderCamera4" type="Node3D" parent="HeadMain/HeadGimbalA/HeadGimbalB" index="2"]
+unique_name_in_owner = true
+metadata/_edit_lock_ = true
+
+[node name="AudioStreamPlayer_Footsteps" parent="." index="24"]
+max_polyphony = 3
+
+[node name="AudioStreamPlayer_JumpLand" parent="." index="25"]
+max_polyphony = 3
+
+[node name="AllHuds4" type="Control" parent="." index="26"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+metadata/_edit_lock_ = true
+
+[node name="Item_inspect" parent="." index="28"]
+metadata/_edit_lock_ = true
+
+[node name="report_bug" parent="." index="29"]
+metadata/_edit_lock_ = true
+
+[node name="BasicHud" parent="AllHuds" index="0"]
+mouse_filter = 2
+
+[node name="Crosshair3" type="ColorRect" parent="AllHuds/BasicHud/Crosshair" index="0"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = 3.0
+offset_right = -5.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.803922, 0.803922, 0.803922, 0.117647)
+
+[node name="Crosshair4" type="ColorRect" parent="AllHuds/BasicHud/Crosshair" index="1"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = 1.0
+offset_right = -7.0
+offset_bottom = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.803922, 0.803922, 0.803922, 0.117647)
+
+[node name="Crosshair5" type="ColorRect" parent="AllHuds/BasicHud/Crosshair" index="2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 5.0
+offset_top = 3.0
+offset_right = 8.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.803922, 0.803922, 0.803922, 0.117647)
+
+[node name="Crosshair6" type="ColorRect" parent="AllHuds/BasicHud/Crosshair" index="3"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 7.0
+offset_top = 1.0
+offset_right = 8.0
+offset_bottom = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.803922, 0.803922, 0.803922, 0.117647)
+
+[node name="Crosshair7" type="ColorRect" parent="AllHuds/BasicHud/Crosshair" index="4"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -4.0
+offset_right = -5.0
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.803922, 0.803922, 0.803922, 0.117647)
+
+[node name="Crosshair8" type="ColorRect" parent="AllHuds/BasicHud/Crosshair" index="5"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -3.0
+offset_right = -7.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.803922, 0.803922, 0.803922, 0.117647)
+
+[node name="Crosshair9" type="ColorRect" parent="AllHuds/BasicHud/Crosshair" index="6"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 5.0
+offset_top = -4.0
+offset_right = 8.0
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.803922, 0.803922, 0.803922, 0.117647)
+
+[node name="Crosshair10" type="ColorRect" parent="AllHuds/BasicHud/Crosshair" index="7"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 7.0
+offset_top = -3.0
+offset_right = 8.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.803922, 0.803922, 0.803922, 0.117647)
+
+[node name="Crosshair2" type="ColorRect" parent="AllHuds/BasicHud" index="1"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1.0
+offset_top = -1.0
+offset_right = 1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0.32549)
 
 [node name="InventoryMenu" parent="AllHuds" index="1" instance=ExtResource("9_bfvnj")]
 layout_mode = 1

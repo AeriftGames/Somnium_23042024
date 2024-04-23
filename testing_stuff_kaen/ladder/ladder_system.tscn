@@ -1,0 +1,74 @@
+[gd_scene load_steps=6 format=3 uid="uid://c75lvvyxc34b1"]
+
+[ext_resource type="PackedScene" uid="uid://clb4262elhn64" path="res://testing_stuff_kaen/ladder/ladder1.glb" id="1_q7bt5"]
+[ext_resource type="Script" path="res://testing_stuff_kaen/ladder/ladder_system.cs" id="2_i3302"]
+[ext_resource type="Material" uid="uid://c7w2kwibxd03b" path="res://placeholders/modular_level_builds/my_trim1/trim_floor_lesk_mat.tres" id="2_x30kq"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5wpub"]
+size = Vector3(1, 1.5, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qbkbs"]
+size = Vector3(0.2, 4, 0.8)
+
+[node name="ladder_1_system" instance=ExtResource("1_q7bt5")]
+script = ExtResource("2_i3302")
+
+[node name="StartPos" type="Node3D" parent="." index="0"]
+
+[node name="Top" type="Node3D" parent="StartPos" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 4.3, 0)
+
+[node name="TopLook" type="Node3D" parent="StartPos" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 5, 0)
+
+[node name="Down" type="Node3D" parent="StartPos" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8, 0.3, 0)
+
+[node name="DownLook" type="Node3D" parent="StartPos" index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1, 1.1, 0)
+
+[node name="Cube" parent="." index="1"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+material_override = ExtResource("2_x30kq")
+
+[node name="AreaLadderDown" type="Area3D" parent="." index="2"]
+collision_layer = 2
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AreaLadderDown" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.59962, 0.808716, 0)
+shape = SubResource("BoxShape3D_5wpub")
+
+[node name="AreaLadderUp" type="Area3D" parent="." index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1, 4, 0)
+collision_layer = 2
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AreaLadderUp" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.501142, 0.773856, 0)
+shape = SubResource("BoxShape3D_5wpub")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." index="4"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.98023e-08, 2, 2.98023e-08)
+shape = SubResource("BoxShape3D_qbkbs")
+
+[node name="VisibleOnScreenNotifierFromDown" type="VisibleOnScreenNotifier3D" parent="." index="5"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -3, 2, 0)
+aabb = AABB(-1, -22, -1, 2, 44, 2)
+
+[node name="VisibleOnScreenNotifierFromUp" type="VisibleOnScreenNotifier3D" parent="." index="6"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 3, 2, 0)
+aabb = AABB(-1, -22, -1, 2, 44, 2)
+
+[connection signal="body_entered" from="AreaLadderDown" to="." method="_on_area_ladder_down_body_entered"]
+[connection signal="body_exited" from="AreaLadderDown" to="." method="_on_area_ladder_down_body_exited"]
+[connection signal="body_entered" from="AreaLadderUp" to="." method="_on_area_ladder_up_body_entered"]
+[connection signal="body_exited" from="AreaLadderUp" to="." method="_on_area_ladder_up_body_exited"]
+[connection signal="screen_entered" from="VisibleOnScreenNotifierFromDown" to="." method="_on_visible_on_screen_notifier_3d_screen_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifierFromDown" to="." method="_on_visible_on_screen_notifier_3d_screen_exited"]
+[connection signal="screen_entered" from="VisibleOnScreenNotifierFromUp" to="." method="_on_visible_on_screen_notifier_from_up_screen_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifierFromUp" to="." method="_on_visible_on_screen_notifier_from_up_screen_exited"]

@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://vq8bq6waer1l"]
+
+[ext_resource type="PackedScene" uid="uid://ts5r4r3yig78" path="res://testing_stuff_kaen/elevator/window/window1.glb" id="1_q1xop"]
+[ext_resource type="Material" uid="uid://n303wu2f8je2" path="res://testing_stuff_kaen/elevator/elevator_mat.tres" id="2_ir3ti"]
+[ext_resource type="Material" uid="uid://byf67dqwcjny6" path="res://testing_stuff_kaen/elevator/elevator_glass_mat.tres" id="3_xlngy"]
+[ext_resource type="Texture2D" uid="uid://bjnr023kfdrgb" path="res://testing_stuff_kaen/level_decals/TexturesCom_DecalsSubtle0031_2_masked_L.png" id="4_87wof"]
+
+[node name="window1" instance=ExtResource("1_q1xop")]
+
+[node name="ram_005" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.7, 0)
+material_override = ExtResource("2_ir3ti")
+
+[node name="Cube" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+layers = 513
+material_override = ExtResource("3_xlngy")
+cast_shadow = 0
+
+[node name="Decal" type="Decal" parent="Cube" index="0"]
+transform = Transform3D(-4.37114e-08, 1, 0, 1, 4.37114e-08, 8.74228e-08, 8.74228e-08, 7.10543e-15, -1, 0, -0.0499995, -0.25)
+size = Vector3(6, 1, 8)
+texture_albedo = ExtResource("4_87wof")
+modulate = Color(0.682353, 0.682353, 0.682353, 1)
+albedo_mix = 0.75
+cull_mask = 512

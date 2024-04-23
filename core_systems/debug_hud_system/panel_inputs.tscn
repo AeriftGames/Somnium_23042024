@@ -1,0 +1,129 @@
+[gd_scene load_steps=3 format=3 uid="uid://bu81igen4awb5"]
+
+[ext_resource type="PackedScene" uid="uid://dqx75mfvna1rx" path="res://core_systems/debug_hud_system/base/panel_base.tscn" id="1_oxv5x"]
+[ext_resource type="Script" path="res://core_systems/debug_hud_system/CPanelInputs.cs" id="2_o3wjm"]
+
+[node name="PanelInputs" node_paths=PackedStringArray("FirstElementInBox") instance=ExtResource("1_oxv5x")]
+script = ExtResource("2_o3wjm")
+FirstElementInBox = NodePath("VBoxBase/ScrollContainerElements/VBoxElements/MarginElements/VBoxElements/input_HBoxContainer/mouseSmooth_HSlider")
+
+[node name="input_HBoxContainer" type="HBoxContainer" parent="VBoxBase/ScrollContainerElements/VBoxElements/MarginElements/VBoxElements" index="0"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxBase/ScrollContainerElements/VBoxElements/MarginElements/VBoxElements/input_HBoxContainer" index="0"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 15
+text = "MOUSE SMOOTH"
+
+[node name="mouseSmooth_HSlider" type="HSlider" parent="VBoxBase/ScrollContainerElements/VBoxElements/MarginElements/VBoxElements/input_HBoxContainer" index="1"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 50.0
+
+[node name="mouseSmooth_Label" type="Label" parent="VBoxBase/ScrollContainerElements/VBoxElements/MarginElements/VBoxElements/input_HBoxContainer" index="2"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(45, 0)
+layout_mode = 2
+text = "0"
+horizontal_alignment = 1
+
+[node name="input_HBoxContainer2" type="HBoxContainer" parent="VBoxBase/ScrollContainerElements/VBoxElements/MarginElements/VBoxElements" index="1"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxBase/ScrollContainerElements/VBoxElements/MarginElements/VBoxElements/input_HBoxContainer2" index="0"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 15
+text = "MOUSE SENSITIVE"
+
+[node name="mouseSensitivity_HSlider" type="HSlider" parent="VBoxBase/ScrollContainerElements/VBoxElements/MarginElements/VBoxElements/input_HBoxContainer2" index="1"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.01
+
+[node name="mouseSensitivity_Label" type="Label" parent="VBoxBase/ScrollContainerElements/VBoxElements/MarginElements/VBoxElements/input_HBoxContainer2" index="2"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(45, 0)
+layout_mode = 2
+text = "0"
+horizontal_alignment = 1
+
+[node name="input_HBoxContainer3" type="HBoxContainer" parent="VBoxBase/ScrollContainerElements/VBoxElements/MarginElements/VBoxElements" index="2"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxBase/ScrollContainerElements/VBoxElements/MarginElements/VBoxElements/input_HBoxContainer3" index="0"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 15
+text = "GAMEPAD SMOOTH"
+
+[node name="gamepadSmooth_HSlider" type="HSlider" parent="VBoxBase/ScrollContainerElements/VBoxElements/MarginElements/VBoxElements/input_HBoxContainer3" index="1"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 50.0
+
+[node name="gamepadSmooth_Label" type="Label" parent="VBoxBase/ScrollContainerElements/VBoxElements/MarginElements/VBoxElements/input_HBoxContainer3" index="2"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(45, 0)
+layout_mode = 2
+text = "0"
+horizontal_alignment = 1
+
+[node name="input_HBoxContainer4" type="HBoxContainer" parent="VBoxBase/ScrollContainerElements/VBoxElements/MarginElements/VBoxElements" index="3"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxBase/ScrollContainerElements/VBoxElements/MarginElements/VBoxElements/input_HBoxContainer4" index="0"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 15
+text = "GAMEPAD SENSITIVE"
+
+[node name="gamepadSensitivity_HSlider" type="HSlider" parent="VBoxBase/ScrollContainerElements/VBoxElements/MarginElements/VBoxElements/input_HBoxContainer4" index="1"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.01
+
+[node name="gamepadSensitivity_Label" type="Label" parent="VBoxBase/ScrollContainerElements/VBoxElements/MarginElements/VBoxElements/input_HBoxContainer4" index="2"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(45, 0)
+layout_mode = 2
+text = "0"
+horizontal_alignment = 1
+
+[node name="input_HBoxContainer5" type="HBoxContainer" parent="VBoxBase/ScrollContainerElements/VBoxElements/MarginElements/VBoxElements" index="4"]
+layout_mode = 2
+
+[node name="inverseVerticalLook_CheckButton" type="CheckButton" parent="VBoxBase/ScrollContainerElements/VBoxElements/MarginElements/VBoxElements/input_HBoxContainer5" index="0"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+size_flags_horizontal = 3
+text = " INVERSE VERTICAL LOOK"
+
+[connection signal="value_changed" from="VBoxBase/ScrollContainerElements/VBoxElements/MarginElements/VBoxElements/input_HBoxContainer/mouseSmooth_HSlider" to="." method="_on_mouse_smooth_h_slider_value_changed"]
+[connection signal="value_changed" from="VBoxBase/ScrollContainerElements/VBoxElements/MarginElements/VBoxElements/input_HBoxContainer2/mouseSensitivity_HSlider" to="." method="_on_mouse_sensitivity_h_slider_value_changed"]
+[connection signal="value_changed" from="VBoxBase/ScrollContainerElements/VBoxElements/MarginElements/VBoxElements/input_HBoxContainer3/gamepadSmooth_HSlider" to="." method="_on_gamepad_smooth_h_slider_value_changed"]
+[connection signal="value_changed" from="VBoxBase/ScrollContainerElements/VBoxElements/MarginElements/VBoxElements/input_HBoxContainer4/gamepadSensitivity_HSlider" to="." method="_on_gamepad_sensitivity_h_slider_value_changed"]
+[connection signal="toggled" from="VBoxBase/ScrollContainerElements/VBoxElements/MarginElements/VBoxElements/input_HBoxContainer5/inverseVerticalLook_CheckButton" to="." method="_on_inverse_vertical_look_check_button_toggled"]

@@ -16,6 +16,7 @@ public partial class lis_anim : Node3D
 
     InventoryObjectCamera invObjectCamera = null;
     BenchmarkCameraBody benchmarkCamBody = null;
+    FPSCharacterAction charAction = null;
 
     private bool isInDetectRange = false;
     public float DistanceFromPlayer = 100.0f;   //0-20
@@ -34,7 +35,7 @@ public partial class lis_anim : Node3D
 
     public async void StartGame()
     {
-        await ToSignal(GameMaster.GM.GetMasterSignals(), MasterSignals.SignalName.GameStart);
+        await ToSignal(CGameMaster.GM.GetMasterSignals(), CMasterSignals.SignalName.GameStart);
 
         await ToSignal(GetTree().CreateTimer(DelayMsStartAnim), "timeout");
         if(Enable)
@@ -61,7 +62,7 @@ public partial class lis_anim : Node3D
             // calculate Distance
             if (invObjectCamera != null)
             {
-                if (GameMaster.GM.GetFPSCharacter() == null) return;
+                if (CGameMaster.GM.GetGame().GetFPSCharacterOld() == null) return;
 
                 // cam shake
                 DistanceFromPlayer =
@@ -71,6 +72,11 @@ public partial class lis_anim : Node3D
             {
                 DistanceFromPlayer =
                     GlobalPosition.DistanceTo(benchmarkCamBody.GlobalPosition);
+            }
+            else if (charAction != null)
+            {
+                DistanceFromPlayer =
+                    GlobalPosition.DistanceTo(charAction.GlobalPosition);
             }
 
             //GD.Print(DistanceFromPlayer);
@@ -84,6 +90,8 @@ public partial class lis_anim : Node3D
                 invObjectCamera.GetHeadDangerShakeSystem().ApplyUserParamShake(final, Rng.RandfRange(ShakeFadeMin, ShakeFadeMax));
             else if (benchmarkCamBody != null)
                 benchmarkCamBody.ApplyUserParamShake(final, Rng.RandfRange(ShakeFadeMin, ShakeFadeMax));
+            else if (charAction != null)
+                charAction.GetCharacterCameraShakeComponent().ApplyUserParamShake(final, Rng.RandfRange(ShakeFadeMin, ShakeFadeMax));
         }
     }
 
@@ -106,6 +114,14 @@ public partial class lis_anim : Node3D
             isInDetectRange = true;
             return;
         }
+
+        FPSCharacterAction chAction = body as FPSCharacterAction;
+        if (chAction != null)
+        {
+            charAction = chAction;
+            isInDetectRange = true;
+            return;
+        }
     }
 
     public void _on_detect_player_area_body_exited(Node3D body)
@@ -123,6 +139,14 @@ public partial class lis_anim : Node3D
         if (benchCam != null)
         {
             benchmarkCamBody = null;
+            isInDetectRange = false;
+            return;
+        }
+
+        FPSCharacterAction chAction = body as FPSCharacterAction;
+        if (chAction != null)
+        {
+            charAction = null;
             isInDetectRange = false;
             return;
         }

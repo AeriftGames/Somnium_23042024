@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://tbk1ajh7pe10"]
+
+[ext_resource type="PackedScene" uid="uid://5etlwnthvxxr" path="res://testing_stuff_kaen/test_new_levels/new_room2/assets/test_room_v2glb.glb" id="1_38cf1"]
+
+[node name="test_room_v2glb" instance=ExtResource("1_38cf1")]
+
+[node name="Cube_2040" parent="." index="0"]
+transform = Transform3D(-1, 0, -1.81993e-06, 0, 1, 0, 1.81993e-06, 0, -1, 0, 0, 0)

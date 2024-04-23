@@ -1,6 +1,7 @@
-[gd_scene load_steps=24 format=3 uid="uid://bciuduucar7md"]
+[gd_scene load_steps=25 format=3 uid="uid://bciuduucar7md"]
 
 [ext_resource type="Script" path="res://levels/worldlevel_base/WorldLevel.cs" id="1_hstvh"]
+[ext_resource type="Script" path="res://levels/worldlevel_base/LevelDataSettings.cs" id="2_2auhn"]
 [ext_resource type="VoxelGIData" uid="uid://jhu83uwvcu5x" path="res://levels/worldlevel_testing_physics_room/worldlevel_testing_physics_room.VoxelGI_data.res" id="2_fmxpg"]
 [ext_resource type="PackedScene" uid="uid://ck8mt4y4gfqmk" path="res://placeholders/modular_walls/ground_large.tscn" id="2_nsr8b"]
 [ext_resource type="Script" path="res://levels/worldlevel_base/LevelScene.cs" id="2_rtxag"]
@@ -43,13 +44,16 @@ volumetric_fog_ambient_inject = 1.0
 [node name="WorldLevel" type="Node"]
 script = ExtResource("1_hstvh")
 
+[node name="LevelDataSettings" type="Node" parent="."]
+script = ExtResource("2_2auhn")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_p3qlj")
+
 [node name="VoxelGI" type="VoxelGI" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.49585, 1.41904, -2.27692)
 size = Vector3(10.6011, 5.38873, 15.4462)
 data = ExtResource("2_fmxpg")
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_p3qlj")
 
 [node name="LevelScene" type="Node" parent="."]
 script = ExtResource("2_rtxag")
@@ -189,6 +193,7 @@ transform = Transform3D(1, 0, 0, 0, 0.575933, -0.817497, 0, 0.817497, 0.575933, 
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.49007, 0, 0.33338)
 mass = 5.0
 inertia = Vector3(0, 0, 0)
+continuous_cd = false
 
 [node name="PhysicItem_test4" parent="LevelScene/Rooms/Room1/TestingStuff" instance=ExtResource("10_18ehc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.20824, 0.44683, 1.33327)

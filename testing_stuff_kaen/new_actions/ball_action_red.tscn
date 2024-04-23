@@ -1,0 +1,98 @@
+[gd_scene load_steps=10 format=3 uid="uid://dox78ea6kifn"]
+
+[ext_resource type="Script" path="res://testing_stuff_kaen/new_actions/ball_action.cs" id="1_vd4sy"]
+[ext_resource type="Script" path="res://testing_stuff_kaen/test_new_levels/CInteractiveObject.cs" id="2_jr2qt"]
+[ext_resource type="Script" path="res://testing_stuff_kaen/new_actions/CBilboardObject.cs" id="4_n4tvi"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dvhcp"]
+size = Vector3(0.210187, 0.215063, 0.211694)
+
+[sub_resource type="SphereMesh" id="SphereMesh_1ql00"]
+radius = 0.05
+height = 0.1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_awwv7"]
+albedo_color = Color(1, 0.396078, 0.254902, 1)
+metallic = 0.74
+roughness = 0.46
+emission_enabled = true
+emission = Color(0.333333, 0, 0.0117647, 1)
+emission_energy_multiplier = 0.5
+
+[sub_resource type="SphereMesh" id="SphereMesh_edawe"]
+radius = 0.1
+height = 0.2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e3ycw"]
+albedo_color = Color(0.160784, 0.843137, 1, 1)
+metallic = 0.74
+roughness = 0.46
+emission = Color(0.333333, 0, 0.0117647, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_g0e1b"]
+size = Vector3(0.02, 0.05, 0.02)
+
+[node name="BallAction" type="Node3D"]
+script = ExtResource("1_vd4sy")
+
+[node name="InteractiveObject" type="Node3D" parent="." node_paths=PackedStringArray("CallUseObject") groups=["interactive_object"]]
+transform = Transform3D(1.78814e-07, -1, -1.69407e-21, 1, 1.78814e-07, 1.42109e-14, -1.42109e-14, 7.05861e-21, 1, 0, 0, 0)
+script = ExtResource("2_jr2qt")
+CallUseObject = NodePath("..")
+ObjectName = "Red Apple"
+metadata/_edit_lock_ = true
+
+[node name="StaticBody3D" type="StaticBody3D" parent="InteractiveObject" groups=["interactive_object"]]
+transform = Transform3D(4.96704e-08, 1, -1.50996e-07, -1, 4.96705e-08, -1.50996e-07, -1.50996e-07, 1.50996e-07, 1, -0.0966343, 0, -1.45914e-08)
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractiveObject/StaticBody3D"]
+transform = Transform3D(1, 5.62192e-15, -1.42109e-14, 5.62192e-15, 1, 0, 1.42109e-14, 0, 1, -0.000937875, 0.0946839, -0.000109799)
+shape = SubResource("BoxShape3D_dvhcp")
+
+[node name="BilboardObject" type="Node3D" parent="."]
+visible = false
+script = ExtResource("4_n4tvi")
+metadata/_edit_lock_ = true
+
+[node name="NodeLeftUp" type="Node3D" parent="BilboardObject"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.105121, 0.105121, -0.10747)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="BilboardObject/NodeLeftUp"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+mesh = SubResource("SphereMesh_1ql00")
+metadata/_edit_lock_ = true
+
+[node name="NodeRightDown" type="Node3D" parent="BilboardObject"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.107923, -0.110725, -0.10747)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="BilboardObject/NodeRightDown"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+mesh = SubResource("SphereMesh_1ql00")
+metadata/_edit_lock_ = true
+
+[node name="NodeLeftDown" type="Node3D" parent="BilboardObject"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.108, -0.111, -0.107)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="BilboardObject/NodeLeftDown"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+mesh = SubResource("SphereMesh_1ql00")
+metadata/_edit_lock_ = true
+
+[node name="NodeRightUp" type="Node3D" parent="BilboardObject"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.105, 0.105, -0.107)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="BilboardObject/NodeRightUp"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+mesh = SubResource("SphereMesh_1ql00")
+metadata/_edit_lock_ = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_awwv7")
+mesh = SubResource("SphereMesh_edawe")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.865458, 0.5, -0.0313568, -0.499672, 0.866025, 0.0181038, 0.0362077, 0, 0.999344, 0.0316774, 0.0936761, 0)
+material_override = SubResource("StandardMaterial3D_e3ycw")
+mesh = SubResource("BoxMesh_g0e1b")

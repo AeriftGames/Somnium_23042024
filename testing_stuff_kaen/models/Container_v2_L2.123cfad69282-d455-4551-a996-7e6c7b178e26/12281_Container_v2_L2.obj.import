@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://yc3vl1y2lj8o"
+path="res://.godot/imported/12281_Container_v2_L2.obj-38abe6d2f5a49418f961219054518a7e.mesh"
+
+[deps]
+
+files=["res://.godot/imported/12281_Container_v2_L2.obj-38abe6d2f5a49418f961219054518a7e.mesh"]
+
+source_file="res://testing_stuff_kaen/models/Container_v2_L2.123cfad69282-d455-4551-a996-7e6c7b178e26/12281_Container_v2_L2.obj"
+dest_files=["res://.godot/imported/12281_Container_v2_L2.obj-38abe6d2f5a49418f961219054518a7e.mesh", "res://.godot/imported/12281_Container_v2_L2.obj-38abe6d2f5a49418f961219054518a7e.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

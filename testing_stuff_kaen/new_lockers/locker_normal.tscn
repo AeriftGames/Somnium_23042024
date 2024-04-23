@@ -1,0 +1,93 @@
+[gd_scene load_steps=9 format=3 uid="uid://vf06hwxc3mje"]
+
+[ext_resource type="PackedScene" uid="uid://b87vninn1p141" path="res://testing_stuff_kaen/new_lockers/locker_normal.glb" id="1_1y0lt"]
+[ext_resource type="Script" path="res://testing_stuff_kaen/test_new_levels/CInteractiveObject.cs" id="2_0qeoc"]
+[ext_resource type="Material" uid="uid://b82lonmh1r8dp" path="res://testing_stuff_kaen/new_lockers/locker_big_new_mat.tres" id="2_danul"]
+[ext_resource type="Script" path="res://testing_stuff_kaen/new_actions/CBilboardObject.cs" id="5_mxb3u"]
+[ext_resource type="Texture2D" uid="uid://2vnn5as8tp5i" path="res://testing_stuff_kaen/level_decals/TexturesCom_DecalsRusted0004_1_masked_S.png" id="9_rs33i"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jjjqf"]
+size = Vector3(0.155, 0.221758, 0.0779526)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dyxa6"]
+size = Vector3(0.421814, 1.65925, 0.5)
+
+[sub_resource type="SphereMesh" id="SphereMesh_xvb2i"]
+radius = 0.05
+height = 0.1
+
+[node name="locker_normal" instance=ExtResource("1_1y0lt")]
+
+[node name="InteractiveObject" type="Node3D" parent="." index="0" node_paths=PackedStringArray("CallUseObject") groups=["interactive_object"]]
+transform = Transform3D(1.78814e-07, -1, -1.69407e-21, 1, 1.78814e-07, 1.42109e-14, -1.42109e-14, 7.05861e-21, 1, 0, 0, 0)
+script = ExtResource("2_0qeoc")
+CallUseObject = NodePath("..")
+ObjectName = "Locker"
+metadata/_edit_lock_ = true
+
+[node name="StaticBody3D" type="StaticBody3D" parent="InteractiveObject" index="0" groups=["interactive_object"]]
+transform = Transform3D(4.96704e-08, 1, -1.50996e-07, -1, 4.96705e-08, -1.50996e-07, -1.50996e-07, 1.50996e-07, 1, -0.0966343, 0, -1.45914e-08)
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractiveObject/StaticBody3D" index="0"]
+transform = Transform3D(1, 5.62192e-15, -1.42109e-14, 5.62192e-15, 1, 0, 1.42109e-14, 0, 1, 0.199062, 0.906166, 0.17458)
+shape = SubResource("BoxShape3D_jjjqf")
+
+[node name="locker_body_normal" parent="." index="1"]
+transform = Transform3D(-1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 0, 0, 0)
+material_override = ExtResource("2_danul")
+
+[node name="locker_body_normal_door" parent="." index="2"]
+transform = Transform3D(-1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, -0.372298, 0, 0)
+material_override = ExtResource("2_danul")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." index="3"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00692748, 0.757361, -1.49012e-08)
+shape = SubResource("BoxShape3D_dyxa6")
+
+[node name="Decal" type="Decal" parent="." index="4"]
+transform = Transform3D(1.91069e-15, 1, -4.37114e-08, 4.37114e-08, -4.37114e-08, -1, -1, 0, -4.37114e-08, -1.69023e-08, 1.10032, 0.70813)
+visible = false
+size = Vector3(2.31626, 0.5, 2.46312)
+texture_albedo = ExtResource("9_rs33i")
+normal_fade = 0.916
+
+[node name="BilboardObject" type="Node3D" parent="." index="5"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.219861, 0.812322, 0.17121)
+visible = false
+script = ExtResource("5_mxb3u")
+
+[node name="NodeLeftUp" type="Node3D" parent="BilboardObject" index="0"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.052, 0.105, -0.002)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="BilboardObject/NodeLeftUp" index="0"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+mesh = SubResource("SphereMesh_xvb2i")
+metadata/_edit_lock_ = true
+
+[node name="NodeRightDown" type="Node3D" parent="BilboardObject" index="1"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.058, -0.111, -0.002)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="BilboardObject/NodeRightDown" index="0"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+mesh = SubResource("SphereMesh_xvb2i")
+metadata/_edit_lock_ = true
+
+[node name="NodeLeftDown" type="Node3D" parent="BilboardObject" index="2"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.052, -0.111, -0.002)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="BilboardObject/NodeLeftDown" index="0"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+mesh = SubResource("SphereMesh_xvb2i")
+metadata/_edit_lock_ = true
+
+[node name="NodeRightUp" type="Node3D" parent="BilboardObject" index="3"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.058, 0.105, -0.002)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="BilboardObject/NodeRightUp" index="0"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+mesh = SubResource("SphereMesh_xvb2i")
+metadata/_edit_lock_ = true

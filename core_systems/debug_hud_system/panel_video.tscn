@@ -1,0 +1,181 @@
+[gd_scene load_steps=3 format=3 uid="uid://dkr7cbtsrsnsg"]
+
+[ext_resource type="PackedScene" uid="uid://dqx75mfvna1rx" path="res://core_systems/debug_hud_system/base/panel_base.tscn" id="1_6ehus"]
+[ext_resource type="Script" path="res://core_systems/debug_hud_system/CPanelVideo.cs" id="2_ww05d"]
+
+[node name="PanelVideo" node_paths=PackedStringArray("FirstElementInBox") instance=ExtResource("1_6ehus")]
+script = ExtResource("2_ww05d")
+FirstElementInBox = NodePath("VBoxBase/ScrollContainerElements/VBoxElements/MarginElements/VBoxElements/ScreenMode_HBoxContainer/ScreenMode_OptionButton")
+
+[node name="ScreenMode_HBoxContainer" type="HBoxContainer" parent="VBoxBase/ScrollContainerElements/VBoxElements/MarginElements/VBoxElements" index="0"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxBase/ScrollContainerElements/VBoxElements/MarginElements/VBoxElements/ScreenMode_HBoxContainer" index="0"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "SCREEN MODE"
+
+[node name="ScreenMode_OptionButton" type="OptionButton" parent="VBoxBase/ScrollContainerElements/VBoxElements/MarginElements/VBoxElements/ScreenMode_HBoxContainer" index="1"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+item_count = 3
+popup/item_0/text = "windowed"
+popup/item_0/id = 0
+popup/item_1/text = "fullscreen normal"
+popup/item_1/id = 1
+popup/item_2/text = "fullscreen wide"
+popup/item_2/id = 2
+
+[node name="WindowSize_HBoxContainer" type="HBoxContainer" parent="VBoxBase/ScrollContainerElements/VBoxElements/MarginElements/VBoxElements" index="1"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxBase/ScrollContainerElements/VBoxElements/MarginElements/VBoxElements/WindowSize_HBoxContainer" index="0"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "WINDOW SIZE"
+
+[node name="WindowSize_OptionButton" type="OptionButton" parent="VBoxBase/ScrollContainerElements/VBoxElements/MarginElements/VBoxElements/WindowSize_HBoxContainer" index="1"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+item_count = 3
+popup/item_0/text = "1280x720"
+popup/item_0/id = 0
+popup/item_1/text = "1920x1080"
+popup/item_1/id = 1
+popup/item_2/text = "screen size"
+popup/item_2/id = 2
+
+[node name="Antialias_HBoxContainer" type="HBoxContainer" parent="VBoxBase/ScrollContainerElements/VBoxElements/MarginElements/VBoxElements" index="2"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxBase/ScrollContainerElements/VBoxElements/MarginElements/VBoxElements/Antialias_HBoxContainer" index="0"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+size_flags_horizontal = 2
+text = "ANTIALIAS"
+
+[node name="Antialias_OptionButton" type="OptionButton" parent="VBoxBase/ScrollContainerElements/VBoxElements/MarginElements/VBoxElements/Antialias_HBoxContainer" index="1"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+item_count = 5
+popup/item_0/text = "disable"
+popup/item_0/id = 0
+popup/item_1/text = "only SS_AA"
+popup/item_1/id = 1
+popup/item_2/text = "SS_AA+TAA"
+popup/item_2/id = 2
+popup/item_3/text = "only MSAA3D_2X"
+popup/item_3/id = 3
+popup/item_4/text = "SS_AA+TAA+MSAA3D_2X"
+popup/item_4/id = 4
+
+[node name="GI_HBoxContainer" type="HBoxContainer" parent="VBoxBase/ScrollContainerElements/VBoxElements/MarginElements/VBoxElements" index="3"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxBase/ScrollContainerElements/VBoxElements/MarginElements/VBoxElements/GI_HBoxContainer" index="0"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+text = "GI MODE"
+
+[node name="GI_OptionButton" type="OptionButton" parent="VBoxBase/ScrollContainerElements/VBoxElements/MarginElements/VBoxElements/GI_HBoxContainer" index="1"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+item_count = 3
+popup/item_0/text = "Disable GI"
+popup/item_0/id = 0
+popup/item_1/text = "Voxel GI"
+popup/item_1/id = 1
+popup/item_2/text = "SDFGI"
+popup/item_2/id = 2
+
+[node name="Scale3d_HBoxContainer" type="HBoxContainer" parent="VBoxBase/ScrollContainerElements/VBoxElements/MarginElements/VBoxElements" index="4"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxBase/ScrollContainerElements/VBoxElements/MarginElements/VBoxElements/Scale3d_HBoxContainer" index="0"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+text = "SCALE 3D"
+
+[node name="Scale3d_HSlider" type="HSlider" parent="VBoxBase/ScrollContainerElements/VBoxElements/MarginElements/VBoxElements/Scale3d_HBoxContainer" index="1"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 130.0
+value = 100.0
+
+[node name="Scale3dvalue_Label" type="Label" parent="VBoxBase/ScrollContainerElements/VBoxElements/MarginElements/VBoxElements/Scale3d_HBoxContainer" index="2"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(75, 0)
+layout_mode = 2
+text = "100%"
+horizontal_alignment = 1
+
+[node name="HalfResGI_CheckBox" type="CheckBox" parent="VBoxBase/ScrollContainerElements/VBoxElements/MarginElements/VBoxElements" index="5"]
+unique_name_in_owner = true
+layout_direction = 3
+layout_mode = 2
+text = " HALF RESOLUTION GI"
+alignment = 2
+icon_alignment = 1
+
+[node name="Ssao_CheckBox" type="CheckBox" parent="VBoxBase/ScrollContainerElements/VBoxElements/MarginElements/VBoxElements" index="6"]
+unique_name_in_owner = true
+layout_direction = 3
+layout_mode = 2
+text = " ENABLE SSAO"
+alignment = 2
+icon_alignment = 1
+
+[node name="Ssil_CheckBox" type="CheckBox" parent="VBoxBase/ScrollContainerElements/VBoxElements/MarginElements/VBoxElements" index="7"]
+unique_name_in_owner = true
+layout_direction = 3
+layout_mode = 2
+text = " ENABLE SSIL"
+alignment = 2
+icon_alignment = 1
+
+[node name="UnlockMaxFps_CheckBox" type="CheckBox" parent="VBoxBase/ScrollContainerElements/VBoxElements/MarginElements/VBoxElements" index="8"]
+unique_name_in_owner = true
+layout_direction = 3
+layout_mode = 2
+text = " UNLOCK MAX FPS"
+alignment = 2
+icon_alignment = 1
+
+[node name="DisableVsync_CheckBox" type="CheckBox" parent="VBoxBase/ScrollContainerElements/VBoxElements/MarginElements/VBoxElements" index="9"]
+unique_name_in_owner = true
+layout_direction = 3
+layout_mode = 2
+text = " DISABLE V-SYNC"
+alignment = 2
+icon_alignment = 1
+
+[node name="Button_QuitGame" parent="VBoxBase/VBoxBottom/MarginContainer/VBoxButtons" index="1"]
+visible = false
+
+[connection signal="item_selected" from="VBoxBase/ScrollContainerElements/VBoxElements/MarginElements/VBoxElements/ScreenMode_HBoxContainer/ScreenMode_OptionButton" to="." method="_on_screen_mode_option_button_item_selected"]
+[connection signal="item_selected" from="VBoxBase/ScrollContainerElements/VBoxElements/MarginElements/VBoxElements/WindowSize_HBoxContainer/WindowSize_OptionButton" to="." method="_on_window_size_option_button_item_selected"]
+[connection signal="item_selected" from="VBoxBase/ScrollContainerElements/VBoxElements/MarginElements/VBoxElements/Antialias_HBoxContainer/Antialias_OptionButton" to="." method="_on_antialias_option_button_item_selected"]
+[connection signal="item_selected" from="VBoxBase/ScrollContainerElements/VBoxElements/MarginElements/VBoxElements/GI_HBoxContainer/GI_OptionButton" to="." method="_on_gi_option_button_item_selected"]
+[connection signal="value_changed" from="VBoxBase/ScrollContainerElements/VBoxElements/MarginElements/VBoxElements/Scale3d_HBoxContainer/Scale3d_HSlider" to="." method="_on_scale_3d_h_slider_value_changed"]
+[connection signal="toggled" from="VBoxBase/ScrollContainerElements/VBoxElements/MarginElements/VBoxElements/HalfResGI_CheckBox" to="." method="_on_half_res_gi_check_box_toggled"]
+[connection signal="toggled" from="VBoxBase/ScrollContainerElements/VBoxElements/MarginElements/VBoxElements/Ssao_CheckBox" to="." method="_on_ssao_check_box_toggled"]
+[connection signal="toggled" from="VBoxBase/ScrollContainerElements/VBoxElements/MarginElements/VBoxElements/Ssil_CheckBox" to="." method="_on_ssil_check_box_toggled"]
+[connection signal="toggled" from="VBoxBase/ScrollContainerElements/VBoxElements/MarginElements/VBoxElements/UnlockMaxFps_CheckBox" to="." method="_on_unlock_max_fps_check_box_toggled"]
+[connection signal="toggled" from="VBoxBase/ScrollContainerElements/VBoxElements/MarginElements/VBoxElements/DisableVsync_CheckBox" to="." method="_on_disable_vsync_check_box_toggled"]

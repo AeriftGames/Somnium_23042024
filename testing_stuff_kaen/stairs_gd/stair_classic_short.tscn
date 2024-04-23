@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://cfw5ieeqmr1ut"]
+
+[ext_resource type="PackedScene" uid="uid://qeam3vktj2j1" path="res://testing_stuff_kaen/stairs/stair_classic_1.glb" id="1_0seov"]
+[ext_resource type="Script" path="res://testing_stuff_kaen/stairs_gd/stair_classic1.gd" id="2_aqt0s"]
+[ext_resource type="Material" uid="uid://daufacvfln14l" path="res://placeholders/modular_level_builds/placeholder/floor_2x_2m_variant_4.tres" id="3_wdn1j"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1blgm"]
+size = Vector3(0.6, 0.12002, 4)
+
+[node name="stair_classic_1" instance=ExtResource("1_0seov")]
+script = ExtResource("2_aqt0s")
+
+[node name="Cube" parent="." index="0"]
+transform = Transform3D(0.3, 0, 0, 0, 0.4, 0, 0, 0, 1, -0.3, 0.060692, 0)
+material_override = ExtResource("3_wdn1j")
+
+[node name="StairEnd" type="Node3D" parent="Cube" index="0"]
+transform = Transform3D(3.33333, 0, 0, 0, 1.66667, 0, 0, 0, 1, -1, 0.149827, 0)
+
+[node name="StaticBody3D_WorldPhysics" type="StaticBody3D" parent="." index="1" groups=["material_surface_wood", "tag_stairs"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0.0896051, 0)
+collision_layer = 9
+collision_mask = 9
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D_WorldPhysics" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0302247, 0)
+shape = SubResource("BoxShape3D_1blgm")
+disabled = true
+
+[node name="StaticBody3D_PlayerPhysics" type="StaticBody3D" parent="." index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0.0896051, 0)
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionPolygon3D" type="CollisionPolygon3D" parent="StaticBody3D_PlayerPhysics" index="0"]
+depth = 4.0
+disabled = true
+polygon = PackedVector2Array(0.297887, -0.0890035, -0.300326, 0.0310476, -0.300858, -0.0905231)

@@ -1,0 +1,345 @@
+[gd_scene load_steps=11 format=3 uid="uid://c04geamyk5qwa"]
+
+[ext_resource type="Theme" uid="uid://cd3yvqcy8bus4" path="res://core_systems/debug_hud_system/debug_theme.theme" id="1_gnxtd"]
+[ext_resource type="Script" path="res://core_systems/debug_hud_system/CDebugPanel.cs" id="1_yf4lg"]
+[ext_resource type="Script" path="res://core_systems/debug_hud_system/CDebugLabels.cs" id="2_6iq3f"]
+[ext_resource type="PackedScene" uid="uid://dmia1x8tn4ra1" path="res://core_systems/debug_hud_system/debug_panel_tab_bar.tscn" id="3_a211v"]
+[ext_resource type="PackedScene" uid="uid://cnq5i33i5bka6" path="res://core_systems/debug_hud_system/panel_main.tscn" id="3_l2qsh"]
+[ext_resource type="PackedScene" uid="uid://cg3jm0pyxxw5d" path="res://core_systems/debug_hud_system/panel_levels.tscn" id="4_1a5qt"]
+[ext_resource type="PackedScene" uid="uid://da5d4wxm4dqnm" path="res://core_systems/debug_hud_system/panel_spawns.tscn" id="5_orbp0"]
+[ext_resource type="PackedScene" uid="uid://dkr7cbtsrsnsg" path="res://core_systems/debug_hud_system/panel_video.tscn" id="6_vygrg"]
+[ext_resource type="PackedScene" uid="uid://c80witbt6rqms" path="res://core_systems/debug_hud_system/panel_audio.tscn" id="7_5llum"]
+[ext_resource type="PackedScene" uid="uid://bu81igen4awb5" path="res://core_systems/debug_hud_system/panel_inputs.tscn" id="8_wyvum"]
+
+[node name="DebugPanel" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_yf4lg")
+metadata/_edit_lock_ = true
+
+[node name="Background" type="ColorRect" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.705882)
+metadata/_edit_lock_ = true
+
+[node name="DebugTabs" type="MarginContainer" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(280, 600)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -391.0
+offset_top = -305.0
+offset_bottom = 305.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="MainDebugPanel" type="PanelContainer" parent="DebugTabs"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(330, 0)
+layout_mode = 2
+theme = ExtResource("1_gnxtd")
+metadata/_edit_lock_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="DebugTabs/MainDebugPanel"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+theme = ExtResource("1_gnxtd")
+metadata/_edit_lock_ = true
+
+[node name="TabContainer" type="TabContainer" parent="DebugTabs/MainDebugPanel/MarginContainer"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+focus_mode = 2
+theme = ExtResource("1_gnxtd")
+tab_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="MAIN" parent="DebugTabs/MainDebugPanel/MarginContainer/TabContainer" instance=ExtResource("3_a211v")]
+layout_mode = 2
+max_tab_width = 377
+
+[node name="MarginContainer" type="MarginContainer" parent="DebugTabs/MainDebugPanel/MarginContainer/TabContainer/MAIN"]
+custom_minimum_size = Vector2(0, 500)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 510.0
+grow_horizontal = 2
+metadata/_edit_lock_ = true
+
+[node name="PanelMain" parent="DebugTabs/MainDebugPanel/MarginContainer/TabContainer/MAIN/MarginContainer" instance=ExtResource("3_l2qsh")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="LEVEL" parent="DebugTabs/MainDebugPanel/MarginContainer/TabContainer" instance=ExtResource("3_a211v")]
+visible = false
+layout_mode = 2
+max_tab_width = 377
+
+[node name="MarginContainer" type="MarginContainer" parent="DebugTabs/MainDebugPanel/MarginContainer/TabContainer/LEVEL"]
+custom_minimum_size = Vector2(0, 500)
+layout_mode = 1
+offset_right = 377.0
+offset_bottom = 510.0
+metadata/_edit_lock_ = true
+
+[node name="PanelLevels" parent="DebugTabs/MainDebugPanel/MarginContainer/TabContainer/LEVEL/MarginContainer" instance=ExtResource("4_1a5qt")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="SPAWN" parent="DebugTabs/MainDebugPanel/MarginContainer/TabContainer" instance=ExtResource("3_a211v")]
+visible = false
+layout_mode = 2
+max_tab_width = 377
+
+[node name="MarginContainer" type="MarginContainer" parent="DebugTabs/MainDebugPanel/MarginContainer/TabContainer/SPAWN"]
+custom_minimum_size = Vector2(0, 500)
+layout_mode = 1
+offset_right = 377.0
+offset_bottom = 510.0
+metadata/_edit_lock_ = true
+
+[node name="PanelSpawns" parent="DebugTabs/MainDebugPanel/MarginContainer/TabContainer/SPAWN/MarginContainer" instance=ExtResource("5_orbp0")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="VIDEO" parent="DebugTabs/MainDebugPanel/MarginContainer/TabContainer" instance=ExtResource("3_a211v")]
+visible = false
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="DebugTabs/MainDebugPanel/MarginContainer/TabContainer/VIDEO"]
+custom_minimum_size = Vector2(0, 500)
+layout_mode = 1
+offset_right = 377.0
+offset_bottom = 510.0
+metadata/_edit_lock_ = true
+
+[node name="PanelVideo" parent="DebugTabs/MainDebugPanel/MarginContainer/TabContainer/VIDEO/MarginContainer" instance=ExtResource("6_vygrg")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="AUDIO" parent="DebugTabs/MainDebugPanel/MarginContainer/TabContainer" instance=ExtResource("3_a211v")]
+visible = false
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="DebugTabs/MainDebugPanel/MarginContainer/TabContainer/AUDIO"]
+custom_minimum_size = Vector2(0, 500)
+layout_mode = 1
+offset_right = 377.0
+offset_bottom = 510.0
+metadata/_edit_lock_ = true
+
+[node name="PanelAudio" parent="DebugTabs/MainDebugPanel/MarginContainer/TabContainer/AUDIO/MarginContainer" instance=ExtResource("7_5llum")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="INPUTS" parent="DebugTabs/MainDebugPanel/MarginContainer/TabContainer" instance=ExtResource("3_a211v")]
+visible = false
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="DebugTabs/MainDebugPanel/MarginContainer/TabContainer/INPUTS"]
+custom_minimum_size = Vector2(0, 500)
+layout_mode = 1
+offset_right = 377.0
+offset_bottom = 510.0
+metadata/_edit_lock_ = true
+
+[node name="PanelInputs" parent="DebugTabs/MainDebugPanel/MarginContainer/TabContainer/INPUTS/MarginContainer" instance=ExtResource("8_wyvum")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+metadata/_edit_lock_ = true
+
+[node name="MarginFps" type="MarginContainer" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("1_gnxtd")
+metadata/_edit_lock_ = true
+
+[node name="PanelContainerFps" type="PanelContainer" parent="VBoxContainer/MarginFps"]
+layout_mode = 2
+theme = ExtResource("1_gnxtd")
+metadata/_edit_lock_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/MarginFps/PanelContainerFps"]
+custom_minimum_size = Vector2(50, 30)
+layout_mode = 2
+theme = ExtResource("1_gnxtd")
+metadata/_edit_lock_ = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/MarginFps/PanelContainerFps/MarginContainer"]
+layout_mode = 2
+alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="Label" type="Label" parent="VBoxContainer/MarginFps/PanelContainerFps/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "FPS:"
+metadata/_edit_lock_ = true
+
+[node name="Label_FPS" type="Label" parent="VBoxContainer/MarginFps/PanelContainerFps/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(38, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+text = "120"
+horizontal_alignment = 2
+metadata/_edit_lock_ = true
+
+[node name="MarginPerformance" type="MarginContainer" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("1_gnxtd")
+metadata/_edit_lock_ = true
+
+[node name="PanelContainerFps" type="PanelContainer" parent="VBoxContainer/MarginPerformance"]
+layout_mode = 2
+theme = ExtResource("1_gnxtd")
+metadata/_edit_lock_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/MarginPerformance/PanelContainerFps"]
+custom_minimum_size = Vector2(50, 30)
+layout_mode = 2
+theme = ExtResource("1_gnxtd")
+metadata/_edit_lock_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/MarginPerformance/PanelContainerFps/MarginContainer"]
+layout_mode = 2
+
+[node name="HBox1" type="HBoxContainer" parent="VBoxContainer/MarginPerformance/PanelContainerFps/MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="Label" type="Label" parent="VBoxContainer/MarginPerformance/PanelContainerFps/MarginContainer/VBoxContainer/HBox1"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 15
+text = "DRAW CALLS:"
+metadata/_edit_lock_ = true
+
+[node name="Label_DrawCalls" type="Label" parent="VBoxContainer/MarginPerformance/PanelContainerFps/MarginContainer/VBoxContainer/HBox1"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(38, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_font_sizes/font_size = 15
+text = "120"
+horizontal_alignment = 2
+metadata/_edit_lock_ = true
+
+[node name="HBox2" type="HBoxContainer" parent="VBoxContainer/MarginPerformance/PanelContainerFps/MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="Label" type="Label" parent="VBoxContainer/MarginPerformance/PanelContainerFps/MarginContainer/VBoxContainer/HBox2"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 15
+text = "OBJECTS:"
+metadata/_edit_lock_ = true
+
+[node name="Label_Objects" type="Label" parent="VBoxContainer/MarginPerformance/PanelContainerFps/MarginContainer/VBoxContainer/HBox2"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(38, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_font_sizes/font_size = 15
+text = "120"
+horizontal_alignment = 2
+metadata/_edit_lock_ = true
+
+[node name="HBox3" type="HBoxContainer" parent="VBoxContainer/MarginPerformance/PanelContainerFps/MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="Label" type="Label" parent="VBoxContainer/MarginPerformance/PanelContainerFps/MarginContainer/VBoxContainer/HBox3"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 15
+text = "VRAM:"
+metadata/_edit_lock_ = true
+
+[node name="Label_VRam" type="Label" parent="VBoxContainer/MarginPerformance/PanelContainerFps/MarginContainer/VBoxContainer/HBox3"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(38, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_font_sizes/font_size = 15
+text = "0"
+horizontal_alignment = 2
+metadata/_edit_lock_ = true
+
+[node name="HBox4" type="HBoxContainer" parent="VBoxContainer/MarginPerformance/PanelContainerFps/MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="Label" type="Label" parent="VBoxContainer/MarginPerformance/PanelContainerFps/MarginContainer/VBoxContainer/HBox4"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 15
+text = "RAM:"
+metadata/_edit_lock_ = true
+
+[node name="Label_Ram" type="Label" parent="VBoxContainer/MarginPerformance/PanelContainerFps/MarginContainer/VBoxContainer/HBox4"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(38, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_font_sizes/font_size = 15
+text = "0"
+horizontal_alignment = 2
+metadata/_edit_lock_ = true
+
+[node name="MarginDebugLabels" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_gnxtd")
+metadata/_edit_lock_ = true
+
+[node name="DebugLabels" type="PanelContainer" parent="VBoxContainer/MarginDebugLabels"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme = ExtResource("1_gnxtd")
+script = ExtResource("2_6iq3f")
+metadata/_edit_lock_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/MarginDebugLabels/DebugLabels"]
+custom_minimum_size = Vector2(150, 30)
+layout_mode = 2
+theme = ExtResource("1_gnxtd")
+metadata/_edit_lock_ = true
+
+[node name="PropertyContainer" type="VBoxContainer" parent="VBoxContainer/MarginDebugLabels/DebugLabels/MarginContainer"]
+layout_mode = 2
+metadata/_edit_lock_ = true

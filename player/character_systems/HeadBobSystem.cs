@@ -8,6 +8,22 @@ public partial class HeadBobSystem : Node
     InventoryObjectCamera invCam = null;
     FPSCharacter_Inventory invChar = null;
 
+    [ExportGroupAttribute("DefaultBobMoving")]
+    [Export] public float DefaultheadBobbingWalkValue = 0.12f;
+    [Export] public float DefaultheadBobbingSprintValue = 0.2f;
+    [Export] public float DefaultheadBobbingCrouchValue = 0.1f;
+    [Export] public float DefaultheadBobbingDeltaToMove = 1.0f;
+    [Export] public float DefaultheadBobbingDeltaToStop = 3.0f;
+    [Export] public float DefaultheadBobRotDegWalkValue = 1.5f;
+    [Export] public float DefaultheadBobRotDegSprintValue = 3.0f;
+    [Export] public float DefaultheadBobRotDegCrouchValue = 1.0f;
+    [Export] public float DefaultheadBobRotDeltaToMove = 1.0f;
+    [Export] public float DefaultheadBobRotDeltaToStop = 3.0f;
+    [Export] public float DefaultWalkCameraLerpHeight = 0.15f;
+    [Export] public float DefaultRunCameraLerpHeight = 0.3f;
+    [Export] public float DefaultCrouchCameraLerpHeight = 0.1f;
+    [Export] public float DefaultheadBobMovingXDelta = 1.0f;
+    [Export] public float DefaultheadBobMovingYDelta = 2.0f;
     [ExportGroupAttribute("HeadBobMovingPos")]
     [Export] public float headBobbingWalkValue = 0.2f;
     [Export] public float headBobbingSprintValue = 0.3f;
@@ -39,14 +55,13 @@ public partial class HeadBobSystem : Node
 
     private bool isActualStopMovement = false;
 
-    public void Init(InventoryObjectCamera ownerCharacter) 
+    public void StartInit(InventoryObjectCamera ownerCharacter) 
     { 
         invCam = ownerCharacter;
     }
     public void Update(float delta)
     {
         UpdateWalkHeadBobbing(delta);
-
 
         Vector3 pos = invCam.headWalkBobNode.Position;
         pos.X = Mathf.Lerp(pos.X, headBobMovingX, headBobMovingXDelta * delta);

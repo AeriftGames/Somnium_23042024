@@ -5,7 +5,7 @@ using System.Net.Sockets;
 
 public partial class inventory_menu : Control
 {
-    private InventorySystem inventorySystem = null;
+    private CharacterInventoryComponent inventorySystem = null;
 
     public enum EActiveTypeEffect { instant, anim }
     private bool _active = false;
@@ -148,7 +148,7 @@ public partial class inventory_menu : Control
         }
     }
     
-    public void Init(InventorySystem newInventorySystem)
+    public void Init(CharacterInventoryComponent newInventorySystem)
     {
         inventorySystem = newInventorySystem;
 
@@ -176,7 +176,7 @@ public partial class inventory_menu : Control
         Visible = newActive;
 
         // ziskame interact charactera
-        FPSCharacter_Interaction interChar = (FPSCharacter_Interaction)GameMaster.GM.GetFPSCharacter();
+        FPSCharacter_Interaction interChar = (FPSCharacter_Interaction)CGameMaster.GM.GetGame().GetFPSCharacterOld();
         if (interChar == null) return;
 
         // ostatni akce pri zmene
@@ -203,7 +203,7 @@ public partial class inventory_menu : Control
         _active = newActive;
 
         // ziskame interact charactera
-        FPSCharacter_Interaction interChar = (FPSCharacter_Interaction)GameMaster.GM.GetFPSCharacter();
+        FPSCharacter_Interaction interChar = (FPSCharacter_Interaction)CGameMaster.GM.GetGame().GetFPSCharacterOld();
         if (interChar == null) return;
 
         // ostatni akce pri zmene
@@ -269,7 +269,7 @@ public partial class inventory_menu : Control
 
     /* ITEMS */
 
-    public InventorySystem GetInventorySystem() { return inventorySystem; }
+    public CharacterInventoryComponent GetInventorySystem() { return inventorySystem; }
 
     public void CreateAllSlotsWithItems()
     {

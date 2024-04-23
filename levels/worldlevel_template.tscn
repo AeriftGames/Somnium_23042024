@@ -65,3 +65,4 @@ metadata/_edit_lock_ = true
 
 [node name="PlayerStart" parent="." instance=ExtResource("2_lxoha")]
 visible = false
+SpawnCharacterType = 3

@@ -68,7 +68,7 @@ disable_receive_shadows = true
 material = SubResource("StandardMaterial3D_1562q")
 height = 0.15
 
-[node name="PlayerStart" type="Node3D"]
+[node name="PlayerStart" type="Node3D" groups=["PlayerStart"]]
 script = ExtResource("1_dsteg")
 
 [node name="EditorMesh" type="Node3D" parent="."]

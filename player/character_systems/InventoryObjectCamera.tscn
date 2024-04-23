@@ -1,15 +1,20 @@
-[gd_scene load_steps=5 format=3 uid="uid://clqk3l37h2fvt"]
+[gd_scene load_steps=6 format=3 uid="uid://clqk3l37h2fvt"]
 
 [ext_resource type="PackedScene" uid="uid://c6ki47gved626" path="res://player/character_systems/ObjectCamera.tscn" id="1_awg8g"]
 [ext_resource type="Script" path="res://player/character_systems/InventoryObjectCamera.cs" id="2_ppf8y"]
 [ext_resource type="Script" path="res://player/character_systems/HeadBobSystem.cs" id="3_7px6r"]
+[ext_resource type="Script" path="res://player/camera_components/HeadStairsBobComponent.cs" id="3_vjmgg"]
 [ext_resource type="Script" path="res://player/character_systems/HeadDangerShakeSystem.cs" id="4_vt8g5"]
 
 [node name="InventoryObjectCamera" instance=ExtResource("1_awg8g")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.03591, -3.18117, 2.38353)
 script = ExtResource("2_ppf8y")
 
-[node name="HeadBobSystem" type="Node" parent="." index="0"]
+[node name="HeadStairsBobComponent" type="Node" parent="." index="0"]
+unique_name_in_owner = true
+script = ExtResource("3_vjmgg")
+
+[node name="HeadBobSystem" type="Node" parent="." index="1"]
 unique_name_in_owner = true
 script = ExtResource("3_7px6r")
 headBobbingWalkValue = 0.12
@@ -19,11 +24,9 @@ headBobRotDegWalkValue = 1.5
 headBobRotDegSprintValue = 3.0
 headBobRotDegCrouchValue = 1.0
 
-[node name="HeadDangerShakeSystem" type="Node" parent="." index="1"]
+[node name="HeadDangerShakeSystem" type="Node" parent="." index="2"]
 unique_name_in_owner = true
 script = ExtResource("4_vt8g5")
 
-[node name="InventoryPutItemPoint" type="Node3D" parent="NodeRotY/GimbalLand/NodeRotX/NodeLean/ShakeNode/HeadWalkBob/HeadBobBreathing/HeadDangerShake/CameraLookPoint" index="0"]
-unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.498721)
-metadata/_edit_lock_ = true
+[node name="Camera" parent="NodeRotY/GimbalLand/NodeRotX/NodeLean/ShakeNode/HeadStairsBob/HeadWalkBob/HeadBobBreathing/HeadDangerShake" index="0"]
+cull_mask = 519
